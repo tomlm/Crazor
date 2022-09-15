@@ -252,7 +252,8 @@ In the Teams folder there is a manifest which is already set up for
 * Universal action handling
 * Link unfurling
 * messaging (if you send a message with your card app name it will return with the card app)
-Edit the manifest.json to have your botId.
+
+> Edit the manifest.json to insert your botId!
 	
 Zip **all 3 files** up into a .zip file and import into teams and you can chat with your bot/link unfurl, etc.
 
