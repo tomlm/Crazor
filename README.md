@@ -6,7 +6,7 @@
 coding environment focused 100% on building the card.
 
 All of the bot logic is implemented for you, all you do is make templates bound to your data and write
-the code behind.  Really.
+the code behind.  Really. (See https://opcardbot.azurewebsites.net/ for samples in the cloud)
 
 # Conceptual model 
 Conceptually the web services hosts mutiple apps.
