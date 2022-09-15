@@ -22,7 +22,7 @@ Each card represents a screen of information bound to data.
 # Programming Model
 The programming model is the classes available to program against the conceptual model.
 
-## App => derive frrom CardApp
+## App => derive from CardApp
 To define an application you derive a class from CardApp and put it in the Cards/{AppName} folder.
 
 ### Memory Scope attributes
