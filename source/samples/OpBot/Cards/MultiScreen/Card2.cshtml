@@ -1,16 +1,10 @@
-﻿@using OpBot.Cards.MultiScreen
-@inherits CardView<Card2Model>
+﻿@inherits CardView
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Version Major="1" Minor="4" />
     <TextBlock Size="ExtraLarge" Weight="Bolder">Screen Two</TextBlock>
-    <TextBlock Size="Large">Counter: @Model.Counter</TextBlock>
-
-    <Action.Execute Title="Close" Verb="Close" />
-    <Action.Execute Title="Increment" Verb="OnIncrementCounter" />
+    <Image Url="https://th.bing.com/th/id/OIP.RQmtKrmklA7kuJ2idPhDGAHaJ5?pid=ImgDet" />
+    <Action.Execute Title="Cancel()" Verb="Cancel" />
+    <Action.Execute Title="Close()" Verb="Close" />
 </Card>
 
-@functions {
-    public void OnIncrementCounter() => Model.Counter++;
-
-}
