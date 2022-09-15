@@ -14,8 +14,7 @@ Each **App** is made up of multiple cards, the logic and data binding defined in
 
 ## App
 The CardApp class represents a mini card application or applet.  It is responsible for managing application state for
-the application.  Any properties on the CardApp application with **SharedMemory** or **SessionMemory** are 
-automatically saved in the KeyValue IStorage provider.
+the application.  
 
 ## Cards
 Each card represents a screen of information bound to data. 
@@ -25,6 +24,21 @@ The programming model is the classes available to program against the conceptual
 
 ## App => derive frrom CardApp
 To define an application you derive a class from CardApp and put it in the Cards/{AppName} folder.
+
+### Memory Scope attributes
+App contains state which is shared for all cards in the application. 
+
+Any property you add to the CardApp that has **[SessionMemory]** or **[SharedMemory]** will automatically be persisted in the KeyValue IStorage provider.
+
+* **SharedMemory** - The values for these properties are accessible and shared for all users interacting with the card.
+* **SessionMemory** - The values for these properties are scoped only to the user interacting with a card. Each user will get their own session property values.
+
+On the App you can override **OnLoadAppStateAsync()** and **OnSaveAppStateAsync()** to manage data from additional data sources.
+
+> See [Counters ](https://opcardbot.azurewebsites.net/cards/Counters/39983982398) for an example of state attributes
+ 
+> See [Counters source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Counters) for source code
+
 
 ## Cards => CardView&lt;ModelT&gt;
 Each card is a view for the application. The view is defined as a razor template via .cshtml.cs file. Just like all razor templates
