@@ -17,11 +17,6 @@ The CardApp class represents a mini card application or applet.  It is responsib
 the application.  Any properties on the CardApp application with **SharedMemory** or **SessionMemory** are 
 automatically saved in the KeyValue IStorage provider.
 
-## Memory model
-There are 2 memory scopes:
-* **Shared** - all properties in the shared scope are tracked and shared with all users interacting with cards of the app.
-* **Session** - all properties in the session scope are trackied per user interacting with cards of the app.
-
 ## Cards
 Each card represents a screen of information bound to data. 
 
