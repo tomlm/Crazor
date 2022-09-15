@@ -69,6 +69,7 @@ Multiple conventions for method names will be attempted:
 * Task OnDoSomeStuffAsync()
 
 > See [Counters ](https://opcardbot.azurewebsites.net/cards/Counters/39983982398) for an example of action handler binding
+> 
 > See [Counters source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Counters) for source code
 
 
@@ -97,6 +98,7 @@ Parameters are bound from
 * action.data for the action clicked on
 
 > See [Quiz card](https://opcardbot.azurewebsites.net/cards/Quiz/39983982398) for an example of parameter binding.
+> 
 > See [Quiz source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Quiz) for source code
 
 ### Two-way Property binding
@@ -114,6 +116,7 @@ bind the value of an input to the value that's passed in and have two-way bindin
 In any action handler the Name property will have the value of the input field.
 
 > See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/dfd398) for an example of property binding
+> 
 > See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
 
 ### Validation attributes
@@ -130,6 +133,7 @@ With property binding you can apply validation attributes to get validation auto
 * **ValidationErrors** will contain a map of property name to an array of error messages for that property.
 
 > See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/dfd398) for an example of validation 
+> 
 > See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
 
 ### Navigation functions
@@ -142,8 +146,11 @@ Each CardView has 3 methods for controlling that call stack.
 * **Close(result)** This will pop the current card off the stack and the calling cards OnXXXCompleted() will be called with the result of the card.
 
 > See [MultiScreen Card](https://opcardbot.azurewebsites.net/cards/MultiScreen/ddfdfda8) for an example of property binding
+> 
 > See [MultiScreen Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/MultiScreen) for source code
+> 
 > See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/ddergegdfda8) for an example of property binding
+> 
 > See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
 
 ## Other helper functions
@@ -162,6 +169,7 @@ Creating a RazorTagHelper
 
 You should now be able to use a tag helper as a new tag in templates.
 > See [TagHelper Card](https://opcardbot.azurewebsites.net/cards/TagHelper/ddeeqhjc8) for an example source
+> 
 > See [TagHelper Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/TagHelper) for taghelpers source
 
 # Creating a new CardApp
