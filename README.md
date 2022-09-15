@@ -145,11 +145,11 @@ Each CardView has 3 methods for controlling that call stack.
 * **Cancel(message)** This will pop the current card off the stack, and the calling card OnXXXXCanceled() will be called with "message" telling you why it was canceled.
 * **Close(result)** This will pop the current card off the stack and the calling cards OnXXXCompleted() will be called with the result of the card.
 
-> See [MultiScreen Card](https://opcardbot.azurewebsites.net/cards/MultiScreen/ddfdfda8) for an example of property binding
+> See [MultiScreen Card](https://opcardbot.azurewebsites.net/cards/MultiScreen/ddfdfda8) for an example of navigation
 > 
 > See [MultiScreen Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/MultiScreen) for source code
 > 
-> See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/ddergegdfda8) for an example of property binding
+> See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/ddergegdfda8) for an example of of navigation with model passing between cards.
 > 
 > See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
 
