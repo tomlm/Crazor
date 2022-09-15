@@ -1,0 +1,21 @@
+﻿@using OpBot.Cards.MultiScreen
+@inherits CardView<DefaultModel>
+
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Version Major="1" Minor="4" />
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Screen One</TextBlock>
+    <TextBlock Size="Large">Counter: @Model.Counter</TextBlock>
+
+    <Action.Execute Title="Card2" Verb="OnCard2" />
+    <Action.Execute Title="Increment" Verb="OnIncrementCounter" />
+</Card>
+
+@functions {
+    public void OnIncrementCounter() => Model.Counter++;
+
+    // Action "OnScreen2"
+    public void OnCard2()
+    {
+        ShowCard("Card2");
+    }
+}

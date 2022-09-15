@@ -1,0 +1,23 @@
+﻿@page
+@using Microsoft.Bot.Cards
+@using System.Reflection
+@using Neleus.DependencyInjection.Extensions
+@using OpBot.Cards.HelloWorld
+@inject IServiceByNameFactory<CardApp> serviceByName
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<h2>Cards</h2>
+<ul>
+    @foreach (var cardAppType in serviceByName.GetNames().OrderBy(n => n))
+    {
+        var appName = cardAppType.Replace("App", String.Empty);
+        <li><a href="/Cards/@appName/@Utils.GetNewId()">@appName Card</a></li>
+    }
+</ul>

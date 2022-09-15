@@ -1,0 +1,39 @@
+﻿@using OpBot.Cards.Counters
+@inherits CardView<CountersApp>
+
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Version Major="1" Minor="4" />
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
+    <TextBlock Size="Large">Shared Counter:@Model.SharedCounter</TextBlock>
+
+    <ActionSet>
+        <Action.Execute Title="+ Shared" Verb="OnIncrementShared" />
+        <Action.Execute Title="- Shared" Verb="OnDecrementShared" />
+    </ActionSet>
+
+    <TextBlock Size="Large">Session Counter:@Model.SessionCounter</TextBlock>
+    <ActionSet>
+        <Action.Execute Title="+ Session" Verb="OnIncrementSession" />
+        <Action.Execute Title="- Session" Verb="OnDecrementSession" />
+    </ActionSet>
+
+</Card>
+
+@functions {
+
+    public void OnIncrementSession()
+        => Model.SessionCounter++;
+
+    public void OnDecrementSession()
+        => Model.SessionCounter--;
+
+    public void OnIncrementShared()
+        => Model.SharedCounter++;
+
+    public async Task OnDecrementSharedAsync()
+    {
+        await Task.Delay(0);
+        Model.SharedCounter--;
+    }
+}
+

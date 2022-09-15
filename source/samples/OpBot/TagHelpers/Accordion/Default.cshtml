@@ -1,0 +1,41 @@
+﻿@using Microsoft.Bot.Cards
+@using OpBot.TagHelpers.Accordion
+@model AccordionTagHelper
+@{
+    var id = Utils.GetNewId(); ;
+    var showButtonId = $"{id}Show";
+    var hideButtonId = $"{id}Hide";
+    var contentId = $"{id}Content";
+}
+
+<Container Separator="true" @Html.Raw(String.IsNullOrEmpty(Model.Id) ? String.Empty : $"Id=\"{Model.Id}\"")>
+    <ColumnSet Spacing="None">
+        <Column Width="Stretch">
+            <SelectAction xsi:type="Action.ToggleVisibility">
+                <TargetElements ElementId="@showButtonId" />
+                <TargetElements ElementId="@hideButtonId" />
+                <TargetElements ElementId="@contentId" />
+            </SelectAction>
+            <TextBlock Wrap="true" Size="Large">@Model.Title</TextBlock>
+        </Column>
+        <Column Width="Auto">
+            <Image Id="@showButtonId" IsVisible="@((!Model.IsExpanded).ToString().ToLower())" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Collaps_menu-32.png" Size="Auto">
+                <SelectAction xsi:type="Action.ToggleVisibility">
+                    <TargetElements ElementId="@showButtonId" />
+                    <TargetElements ElementId="@hideButtonId" />
+                    <TargetElements ElementId="@contentId" />
+                </SelectAction>
+            </Image>
+            <Image Id="@hideButtonId" IsVisible="@Model.IsExpanded.ToString().ToLower()" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Expand_menu-32.png" Size="Auto">
+                <SelectAction xsi:type="Action.ToggleVisibility">
+                    <TargetElements ElementId="@showButtonId" />
+                    <TargetElements ElementId="@hideButtonId" />
+                    <TargetElements ElementId="@contentId" />
+                </SelectAction>
+            </Image>
+        </Column>
+    </ColumnSet>
+    <Container Id="@contentId" IsVisible="@Model.IsExpanded.ToString().ToLower()" Style="Emphasis" Spacing="None">
+        @Model.ChildContent
+    </Container>
+</Container>

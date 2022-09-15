@@ -1,0 +1,439 @@
+﻿@page "{app}/{resourceId?}/{screen?}"
+
+@using System.Net
+@using System.Web
+@using Newtonsoft.Json
+@model OpBot.Pages.Cards.CardHostModel
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>            
+    @if (Model.CardApp!.CurrentCard != "Default")
+    {
+        @($"{Model.CardApp.Name}-{@Model.CardApp.CurrentCard}")
+    }
+    else
+    {
+        @Model.CardApp.Name 
+    }
+    </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
+    <script src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
+</head>
+
+<body class="container">
+    <br />
+    <br />
+    <div id='cardDiv'
+         style="width:640px;padding:10px; width:600px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);text-align: center;">
+    </div>
+    <br />
+    <br />
+
+    <script type="text/javascript">
+        function getCookie(cookieName) {
+            var name = cookieName + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if ((c.indexOf(name)) == 0) {
+                    return c.substr(name.length);
+                }
+
+            }
+            return null;
+        }
+        const name = new URLSearchParams(window.location.search).get("name");
+        const hostConfig = new AdaptiveCards.HostConfig({
+            "choiceSetInputValueSeparator": ",",
+            "supportsInteractivity": true,
+            "spacing": {
+                "small": 8,
+                "default": 12,
+                "medium": 16,
+                "large": 20,
+                "extraLarge": 24,
+                "padding": 16
+            },
+            "separator": {
+                "lineThickness": 1,
+                "lineColor": "#EEEEEE"
+            },
+            "imageSizes": {
+                "small": 32,
+                "medium": 52,
+                "large": 100
+            },
+            "fontTypes": {
+                "default": {
+                    "fontFamily": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                    "fontSizes": {
+                        "small": 12,
+                        "default": 14,
+                        "medium": 14,
+                        "large": 18,
+                        "extraLarge": 24
+                    },
+                    "fontWeights": {
+                        "lighter": 200,
+                        "default": 400,
+                        "bolder": 600
+                    }
+                },
+                "monospace": {
+                    "fontFamily": "'Courier New', Courier, monospace",
+                    "fontSizes": {
+                        "small": 12,
+                        "default": 14,
+                        "medium": 14,
+                        "large": 18,
+                        "extraLarge": 24
+                    },
+                    "fontWeights": {
+                        "lighter": 200,
+                        "default": 400,
+                        "bolder": 600
+                    }
+                }
+            },
+            "textStyles": {
+                "heading": {
+                    "fontType": "default",
+                    "size": "large",
+                    "weight": "bolder",
+                    "color": "default",
+                    "isSubtle": false
+                }
+            },
+            "textBlock": {
+                "headingLevel": 2
+            },
+            "containerStyles": {
+                "default": {
+                    "foregroundColors": {
+                        "default": {
+                            "default": "#ff252424",
+                            "subtle": "#bf252424"
+                        },
+                        "dark": {
+                            "default": "#252424",
+                            "subtle": "#bf252424"
+                        },
+                        "light": {
+                            "default": "#ffffff",
+                            "subtle": "#fff3f2f1"
+                        },
+                        "accent": {
+                            "default": "#6264a7",
+                            "subtle": "#8b8cc7"
+                        },
+                        "good": {
+                            "default": "#92c353",
+                            "subtle": "#e592c353"
+                        },
+                        "warning": {
+                            "default": "#f8d22a",
+                            "subtle": "#e5f8d22a"
+                        },
+                        "attention": {
+                            "default": "#c4314b",
+                            "subtle": "#e5c4314b"
+                        }
+                    },
+                    "borderColor": "#CCCCCC",
+                    "backgroundColor": "#ffffff"
+                },
+                "emphasis": {
+                    "foregroundColors": {
+                        "default": {
+                            "default": "#ff252424",
+                            "subtle": "#bf252424"
+                        },
+                        "dark": {
+                            "default": "#252424",
+                            "subtle": "#bf252424"
+                        },
+                        "light": {
+                            "default": "#ffffff",
+                            "subtle": "#fff3f2f1"
+                        },
+                        "accent": {
+                            "default": "#6264a7",
+                            "subtle": "#8b8cc7"
+                        },
+                        "good": {
+                            "default": "#92c353",
+                            "subtle": "#e592c353"
+                        },
+                        "warning": {
+                            "default": "#f8d22a",
+                            "subtle": "#e5f8d22a"
+                        },
+                        "attention": {
+                            "default": "#c4314b",
+                            "subtle": "#e5c4314b"
+                        }
+                    },
+                    "borderColor": "#666666",
+                    "backgroundColor": "#fff9f8f7"
+                },
+                "accent": {
+                    "borderColor": "#62A8F7",
+                    "backgroundColor": "#C7DEF9",
+                    "foregroundColors": {
+                        "default": {
+                            "default": "#ff252424",
+                            "subtle": "#bf252424"
+                        },
+                        "dark": {
+                            "default": "#252424",
+                            "subtle": "#bf252424"
+                        },
+                        "light": {
+                            "default": "#ffffff",
+                            "subtle": "#fff3f2f1"
+                        },
+                        "accent": {
+                            "default": "#6264a7",
+                            "subtle": "#8b8cc7"
+                        },
+                        "good": {
+                            "default": "#92c353",
+                            "subtle": "#e592c353"
+                        },
+                        "warning": {
+                            "default": "#f8d22a",
+                            "subtle": "#e5f8d22a"
+                        },
+                        "attention": {
+                            "default": "#c4314b",
+                            "subtle": "#e5c4314b"
+                        }
+                    }
+                },
+                "good": {
+                    "borderColor": "#69E569",
+                    "backgroundColor": "#CCFFCC",
+                    "foregroundColors": {
+                        "default": {
+                            "default": "#ff252424",
+                            "subtle": "#bf252424"
+                        },
+                        "dark": {
+                            "default": "#252424",
+                            "subtle": "#bf252424"
+                        },
+                        "light": {
+                            "default": "#ffffff",
+                            "subtle": "#fff3f2f1"
+                        },
+                        "accent": {
+                            "default": "#6264a7",
+                            "subtle": "#8b8cc7"
+                        },
+                        "good": {
+                            "default": "#92c353",
+                            "subtle": "#e592c353"
+                        },
+                        "warning": {
+                            "default": "#f8d22a",
+                            "subtle": "#e5f8d22a"
+                        },
+                        "attention": {
+                            "default": "#c4314b",
+                            "subtle": "#e5c4314b"
+                        }
+                    }
+                },
+                "attention": {
+                    "borderColor": "#FF764C",
+                    "backgroundColor": "#FFC5B2",
+                    "foregroundColors": {
+                        "default": {
+                            "default": "#ff252424",
+                            "subtle": "#bf252424"
+                        },
+                        "dark": {
+                            "default": "#252424",
+                            "subtle": "#bf252424"
+                        },
+                        "light": {
+                            "default": "#ffffff",
+                            "subtle": "#fff3f2f1"
+                        },
+                        "accent": {
+                            "default": "#6264a7",
+                            "subtle": "#8b8cc7"
+                        },
+                        "good": {
+                            "default": "#92c353",
+                            "subtle": "#e592c353"
+                        },
+                        "warning": {
+                            "default": "#f8d22a",
+                            "subtle": "#e5f8d22a"
+                        },
+                        "attention": {
+                            "default": "#c4314b",
+                            "subtle": "#e5c4314b"
+                        }
+                    }
+                },
+                "warning": {
+                    "borderColor": "#FFBC51",
+                    "backgroundColor": "#FFE2B2",
+                    "foregroundColors": {
+                        "default": {
+                            "default": "#ff252424",
+                            "subtle": "#bf252424"
+                        },
+                        "dark": {
+                            "default": "#252424",
+                            "subtle": "#bf252424"
+                        },
+                        "light": {
+                            "default": "#ffffff",
+                            "subtle": "#fff3f2f1"
+                        },
+                        "accent": {
+                            "default": "#6264a7",
+                            "subtle": "#8b8cc7"
+                        },
+                        "good": {
+                            "default": "#92c353",
+                            "subtle": "#e592c353"
+                        },
+                        "warning": {
+                            "default": "#f8d22a",
+                            "subtle": "#e5f8d22a"
+                        },
+                        "attention": {
+                            "default": "#c4314b",
+                            "subtle": "#e5c4314b"
+                        }
+                    }
+                }
+            },
+            "actions": {
+                "maxActions": 6,
+                "spacing": "Default",
+                "buttonSpacing": 8,
+                "showCard": {
+                    "actionMode": "Inline",
+                    "inlineTopMargin": 16,
+                    "style": "emphasis"
+                },
+                "preExpandSingleShowCardAction": false,
+                "actionsOrientation": "Horizontal",
+                "actionAlignment": "stretch"
+            },
+            "adaptiveCard": {
+                "allowCustomStyle": false
+            },
+            "imageSet": {
+                "imageSize": "Medium",
+                "maxImageHeight": 100
+            },
+            "factSet": {
+                "title": {
+                    "size": "Default",
+                    "color": "Default",
+                    "isSubtle": false,
+                    "weight": "Bolder",
+                    "warp": true
+                },
+                "value": {
+                    "size": "Default",
+                    "color": "Default",
+                    "isSubtle": false,
+                    "weight": "Default",
+                    "warp": true
+                },
+                "spacing": 16
+            }
+        });
+        var card = @Html.Raw(JsonConvert.SerializeObject(Model.AdaptiveCard, Formatting.Indented));
+        let cardDiv = document.getElementById('cardDiv');
+        let adaptiveCard = new AdaptiveCards.AdaptiveCard();
+        adaptiveCard.hostConfig = hostConfig;
+
+        const invokeBot = (invokeName, invokeValue) =>
+            new Promise((resolve, reject) => {
+
+                $("#cardDiv").hover(function () {
+                    $(this).css("cursor", "progress");
+                }, function () {
+                    $(this).css("cursor", "default");
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '@HttpUtility.JavaScriptStringEncode(Model.BotUri)',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        serviceUrl: 'http://blank',
+                        id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.Activity?.Id)',
+                        type: 'invoke',
+                        channelId: 'emulator',
+                        from: { id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.SessionId)', name: name },
+                        to: { id: 'bot id' },
+                        name: invokeName,
+                        value: invokeValue
+                    }, null, 2),
+                    beforeSend: function (xhr) {
+                        var token = "@Model.Token";
+                        if (token.length > 0)
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                    },
+                    error: function (invokeResponse, status, xhr) {
+                        $("#cardDiv").unbind('mouseenter mouseleave');
+                        reject(status);
+                    },
+                    success: function (invokeResponse, status, xhr) {   // success callback function
+                        adaptiveCard.parse(invokeResponse.value);
+                        if (invokeResponse.value.url != null && window.location.pathname != invokeResponse.value.url) {
+                            window.history.replaceState({ }, null, invokeResponse.value["url"]);
+                            document.title = invokeResponse.value.title;
+                        }
+                        cardDiv.replaceChild(adaptiveCard.render(), cardDiv.children[0]);
+                        $("#cardDiv").unbind('mouseenter mouseleave');
+                        resolve(status);
+                    }
+                });
+            });
+
+        const tryGetToken = () => {
+            const input = document.getElementById('token');
+            const token = input.value.trim();
+            return token;
+        }
+
+        adaptiveCard.onExecuteAction = function (actionIn) {
+            var action = actionIn.toJSON();
+            action.data = actionIn.data;
+            switch (action.type) {
+                case 'Action.OpenUrl':
+                    window.open(action.url, "_blank");
+                    break;
+                case 'Action.Execute':
+                    invokeBot('adaptiveCard/action', { action: action });
+                    break;
+            }
+
+        };
+        adaptiveCard.parse(card);
+        cardDiv.appendChild(adaptiveCard.render());
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.14",
+  "id": "aa584ff7-bd92-4903-b702-9a79c1f70be1",
+  "packageName": "com.package.name",
+  "name": {
+    "short": "OpsCardBot",
+    "full": "OpsCardBot - Test Ops Cards"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "mpnId": "",
+    "websiteUrl": "https://opcardbot.azurewebsites.net/",
+    "privacyUrl": "https://opcardbot.azurewebsites.net/",
+    "termsOfUseUrl": "https://opcardbot.azurewebsites.net/"
+  },
+  "description": {
+    "short": "OpsCardBot",
+    "full": "this is the description"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "541f3bfd-741b-48fd-a86b-ad58e7f5e478",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "541f3bfd-741b-48fd-a86b-ad58e7f5e478",
+      "commands": [
+        {
+          "id": "exampleCmd3",
+          "title": "Example Command 3",
+          "type": "action",
+          "context": [
+            "compose",
+            "commandBox",
+            "message"
+          ],
+          "description": "Command Description; e.g., Add a customer",
+          "fetchTask": false,
+          "taskInfo": {
+            "title": "Initial dialog title"
+          }
+        }
+      ],
+      "canUpdateConfiguration": true,
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "opcardbot.azurewebsites.net"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validDomains": [
+    "opcardbot.azurewebsites.net",
+    "*.ngrok.io"
+  ]
+}

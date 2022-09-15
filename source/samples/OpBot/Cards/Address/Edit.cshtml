@@ -1,0 +1,108 @@
+﻿@using OpBot.Cards.Address
+@inherits CardView<EditAddressModel>
+
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Version Major="1" Minor="4" />
+
+    @if (Model.IsEdit)
+    {
+        <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
+    }
+    else
+    {
+        <TextBlock Size="ExtraLarge">Add Address</TextBlock>
+    }
+    <Input.Text Id="Street" Label="Street" Style="Text" ErrorMessage="Street is required" Value="@Street" />
+    <FieldErrors Id="Street" Errors="@ValidationErrors" />
+    
+    <Input.Text Id="City" Label="City" Style="Text" ErrorMessage="City is required" Value="@City" />
+    <FieldErrors Id="City" Errors="@ValidationErrors" />
+    
+    <Input.ChoiceSet Id="State" Label="State" ErrorMessage="State is required" Value="@State">
+        <Choices>
+            <Choice Title="Alabama" Value="AL" />
+            <Choice Title="Arkansas" Value="AR" />
+            <Choice Title="Alaska" Value="AK" />
+            <Choice Title="California" Value="CA" />
+            <Choice Title="Idaho" Value="ID" />
+            <Choice Title="Washington" Value="WA" />
+            <Choice Title="Iowa" Value="IA" />
+            <Choice Title="Oregon" Value="OR" />
+        </Choices>
+    </Input.ChoiceSet>
+    <FieldErrors Id="State" Errors="@ValidationErrors" />
+    
+    <Input.Text Id="PostalCode" Label="Zip" Style="Text" ErrorMessage="Zip is required" Value="@PostalCode" />
+    <FieldErrors Id="PostalCode" Errors="@ValidationErrors" />
+    
+    <Input.ChoiceSet Id="Country" Label="Country" ErrorMessage="Country is required" Value="@Country">
+        <Choices>
+            <Choice Title="U.S.A." Value="USA" />
+            <Choice Title="Canada" Value="CA" />
+        </Choices>
+    </Input.ChoiceSet>
+    <FieldErrors Id="Country" Errors="@ValidationErrors" />
+
+    <Action.Execute Title="Cancel" Verb="OnCancel" />
+    <Action.Execute Title="Save" Verb="OnSave" />
+</Card>
+
+@functions {
+
+    [BindProperty]
+    [Required]
+    [MaxLength(100)]
+    public string? Street { get; set; }
+
+    [BindProperty]
+    [Required]
+    [MaxLength(100)]
+    public string? City { get; set; }
+
+    [BindProperty]
+    [Required]
+    [MaxLength(30)]
+    public string? State { get; set; }
+
+    [BindProperty]
+    [Required]
+    [MaxLength(20)]
+    public string? PostalCode { get; set; }
+
+    [BindProperty]
+    [Required]
+    [MaxLength(50)]
+    public string? Country { get; set; }
+
+    public void OnInitialize()
+    {
+        if (Model.Address != null)
+        {
+            Street = Model.Address.Street;
+            City = Model.Address.City;
+            State = Model.Address.State;
+            PostalCode = Model.Address.PostalCode;
+            Country = Model.Address.Country;
+        }
+    }
+
+    public void OnSave()
+    {
+        if (this.IsModelValid)
+        {
+            ArgumentNullException.ThrowIfNull(Model.Address);
+            Model.Address.Street = Street;
+            Model.Address.City = City;
+            Model.Address.State = State;
+            Model.Address.PostalCode = PostalCode;
+            Model.Address.Country = Country;
+
+            this.Close(Model);
+        }
+    }
+
+    public void OnCancel()
+    {
+        this.Cancel("No changes made.");
+    }
+}

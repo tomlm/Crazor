@@ -1,0 +1,19 @@
+﻿@using SampleWebApp.Cards.HelloWorld
+@inherits CardView<HelloWorldModel>
+<!--   the Model   ^^^^^^^^^^^^^^^ -->
+
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Hello world!</TextBlock>
+    <TextBlock>The counter is: @Model.Counter</TextBlock>
+    <Action.Execute Verb="OnIncrement" Title="Increment"/>
+</Card>
+
+@functions {
+    // NOTE: verb handlers can be async by signature matching like this
+    //    public Task OnIncrementAsync()
+
+    public void OnIncrement()
+    {
+        Model.Counter++;
+    }
+}

@@ -1,0 +1,99 @@
+﻿@using OpBot.Cards.Address
+@inherits CardView<AddressApp>
+
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Version Major="1" Minor="4" />
+
+    <TextBlock Size="ExtraLarge">Addresses</TextBlock>
+    @if (Model.Addresses.Any())
+    {
+        @foreach (var address in Model.Addresses)
+        {
+            <Container Separator="true">
+                <ColumnSet Padding="None">
+                    <Column Width="Stretch" >
+                        <TextBlock>@address.Street</TextBlock>
+                        <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
+                    </Column>
+                    <Column Width="Auto" >
+                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="Small">
+                            <SelectAction xsi:type="Action.Execute" Id="@address.Id" Tooltip="Edit Address" Verb="OnEdit" />
+                        </Image> 
+                    </Column>
+                    <Column Width="Auto" >
+                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="Small">
+                            <SelectAction xsi:type="Action.Execute" Id="@address.Id" Tooltip="Delete Address" Verb="OnDelete" />
+                        </Image> 
+                    </Column>
+                </ColumnSet>
+            </Container>
+        }
+    }
+    else
+    {
+        <TextBlock>No addresses.</TextBlock>
+    }
+    <Action.Execute Title="Add Address" Verb="OnAdd" />
+</Card>
+
+@functions {
+
+    public void OnAdd()
+    {
+        var address = new Address();
+        ShowCard("Edit", new EditAddressModel() { IsEdit = false, Address = address });
+    }
+
+    public void OnEdit(string id)
+    {
+        var address = Model.Addresses.SingleOrDefault(a => a.Id == id);
+        if (address != null)
+        {
+            ShowCard("Edit", new EditAddressModel() { IsEdit = true, Address = address });
+        }
+    }
+
+    public void OnDelete(string id)
+    {
+        Model.Addresses = Model.Addresses.Where(a => a.Id != id).ToList();
+    }
+
+    public void OnEditCompleted(EditAddressModel editAddress)
+    {
+        ArgumentNullException.ThrowIfNull(editAddress.Address);
+        if (editAddress.IsEdit)
+        {
+            var address = Model.Addresses.Where(a => a.Id == editAddress.Address.Id).SingleOrDefault();
+            if (address != null)
+            {
+                address.Street = editAddress.Address.Street;
+                address.City = editAddress.Address.City;
+                address.State = editAddress.Address.State;
+                address.PostalCode = editAddress.Address.PostalCode;
+                address.Country = editAddress.Address.Country;
+                AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
+            }
+            else
+            {
+                AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
+            }
+        }
+        else
+        {
+            Model.Addresses.Add(editAddress.Address);
+            AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
+        }
+    }
+
+    public void OnEditCanceled(string? message)
+    {
+        if (!String.IsNullOrWhiteSpace(message))
+        {
+            AddBannerMessage(message, AdaptiveContainerStyle.Accent);
+        }
+        else
+        {
+            AddBannerMessage("Canceled", AdaptiveContainerStyle.Accent);
+        }
+    }
+}

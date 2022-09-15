@@ -1,0 +1,11 @@
+﻿@using Microsoft.Bot.Cards
+@using SampleWebApp.TagHelpers.FieldErrors
+@model FieldErrorsTagHelper
+
+@if (Model.Errors != null && Model.Errors.TryGetValue(Model.Id, out var messages))
+{
+    foreach(var message in messages)
+    {
+        <TextBlock Spacing="None" Color="Attention">@message</TextBlock>
+    }
+}
