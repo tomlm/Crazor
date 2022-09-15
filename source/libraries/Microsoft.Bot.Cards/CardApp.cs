@@ -4,7 +4,6 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
-using System.Xml.Serialization;
 using Diag = System.Diagnostics;
 using Microsoft.Bot.Cards.Attributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,8 +16,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using Microsoft.Bot.Cards.Interfaces;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
 using System.Xml;
 
 namespace Microsoft.Bot.Cards
@@ -276,8 +273,10 @@ namespace Microsoft.Bot.Cards
         /// <returns>true or false</returns>
         public bool HasView(string viewName)
         {
-            bool exists = File.Exists($"./Cards/{this.Name}/{viewName}.cshtml");
-            return exists;
+            var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
+            var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
+            var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+            return (viewResult?.View != null);
         }
 
 
