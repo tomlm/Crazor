@@ -6,7 +6,8 @@ All of the bot logic is implemented for you, all you do is make templates bound 
 the code behind.  Really.
 
 # Conceptual model 
-Conceptually this is an App made up of multiple cards, the logic and data binding.
+Conceptually the web services hosts mutiple apps.
+Each **App** is made up of multiple cards, the logic and data binding defined in razor templates using AspNetCore concepts.
 
 ## App
 The CardApp class represents a mini card application or applet.  It is responsible for managing application state for
