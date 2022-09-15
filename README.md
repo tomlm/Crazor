@@ -26,7 +26,7 @@ The programming model is the classes available to program against the conceptual
 ## App => derive frrom CardApp
 To define an application you derive a class from CardApp and put it in the Cards/{AppName} folder.
 
-## Cards => CardView<ModelT>
+## Cards => CardView&lt;ModelT&gt;
 Each card is a view for the application. The view is defined as a razor template via .cshtml.cs file. Just like all razor templates
 you can define the model for the view by using a generic.
 
@@ -42,7 +42,7 @@ Example razor template binding to the model and app properties.
 <TextBlock>The @App.Name Counter is: @Model.Counter</TextBlock>
 ```
 
-$## Action handlers
+### Action handlers
 ![image](https://user-images.githubusercontent.com/17789481/190311953-6cdb8a4d-eebf-4833-af58-915220a4d838.png)
 
 Adaptive cards have a *verb* property which is a unique string identifying the action to take.  Crazor automatically hooks 
@@ -94,7 +94,7 @@ Parameters are bound from
 
 > See **QuizCard** for an example of parameter binding.
 
-### Property binding
+### Two-way Property binding
 ![image](https://user-images.githubusercontent.com/17789481/190312063-0de73827-cd0d-4236-98bc-4ab829802a73.png)
 
 Similarly you can define properties two-way bind property between input fields and properties.  This allows you to 
