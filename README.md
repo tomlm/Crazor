@@ -170,6 +170,9 @@ Each CardView has 3 methods for controlling that call stack.
 ## Other helper functions
 * **AddBannerMessage(message, style)** - gives you ability to add a banner message with background style.  
 
+![image](https://user-images.githubusercontent.com/17789481/190333148-9cebaef6-978c-4b13-b964-d1092df8bd95.png)
+
+
 ## TagHelpers
 TagHelpers allow you to bundle up a bunch of complex adaptive card layout and replace it with a new tag.
 Tag helpers are defined the TagHelper folder by
