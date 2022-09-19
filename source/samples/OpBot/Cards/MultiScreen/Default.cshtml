@@ -1,21 +1,27 @@
-﻿@using OpBot.Cards.MultiScreen
-@inherits CardView<DefaultModel>
+﻿@inherits CardView
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Version Major="1" Minor="4" />
     <TextBlock Size="ExtraLarge" Weight="Bolder">Screen One</TextBlock>
-    <TextBlock Size="Large">Counter: @Model.Counter</TextBlock>
+    <Image Url="https://cdn2.iconfinder.com/data/icons/animal-vivid-volume-3/256/Tortoise-512.png" />
 
-    <Action.Execute Title="Card2" Verb="OnCard2" />
-    <Action.Execute Title="Increment" Verb="OnIncrementCounter" />
+    <Action.Execute Title="explicte Navigate(Card2)" Verb="OnCard2" />
+    <Action.Execute Title="Implicit navigate to 'Card2'" Verb="Card2" />
 </Card>
 
 @functions {
-    public void OnIncrementCounter() => Model.Counter++;
-
-    // Action "OnScreen2"
     public void OnCard2()
     {
         ShowCard("Card2");
+    }
+
+    public void OnCard2Completed(object result)
+    {
+        AddBannerMessage("Card2 completed!", AdaptiveContainerStyle.Good);
+    }
+    
+    public void OnCard2Canceled(string message)
+    {
+        AddBannerMessage("Card2 canceled!", AdaptiveContainerStyle.Warning);
     }
 }
