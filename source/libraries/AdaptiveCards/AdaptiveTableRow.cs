@@ -80,7 +80,7 @@ namespace AdaptiveCards
         /// </summary>
         // The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
         [JsonIgnore]
-        [XmlAttribute("Style")]
+        [XmlAttribute(nameof(Style))]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public AdaptiveContainerStyle StyleXml { get { return (Style.HasValue) ? Style.Value : AdaptiveContainerStyle.Default; } set { Style = value; } }
 
@@ -89,21 +89,6 @@ namespace AdaptiveCards
         /// </summary>
         public bool ShouldSerializeStyleXml() => this.Style.HasValue;
 #endif
-
-        /// <summary>
-        /// The amount of space the element should be separated from the previous element. Default value is <see cref="AdaptiveHeight.Auto"/>.
-        /// </summary>
-        [JsonConverter(typeof(StringSizeWithUnitConverter), true)]
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-#if !NETSTANDARD1_3
-        [XmlElement]
-#endif
-        public AdaptiveHeight Height { get; set; } = new AdaptiveHeight(AdaptiveHeightType.Auto);
-
-        /// <summary>
-        /// Determines whether the height property should be serialized or not.
-        /// </summary>
-        public bool ShouldSerializeHeight() => this.Height?.ShouldSerializeAdaptiveHeight() == true;
 
         /// <summary>
         /// Indicates whether the element should be visible when the card has been rendered.

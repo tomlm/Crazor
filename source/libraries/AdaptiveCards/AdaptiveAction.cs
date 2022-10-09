@@ -85,7 +85,7 @@ namespace AdaptiveCards
         /// The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
         /// </summary>
         [JsonIgnore]
-        [XmlAttribute("Mode")]
+        [XmlAttribute(nameof(Mode))]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public AdaptiveActionMode ModeXml { get { return (Mode.HasValue) ? Mode.Value : AdaptiveActionMode.Primary; } set { Mode = value; } }
 

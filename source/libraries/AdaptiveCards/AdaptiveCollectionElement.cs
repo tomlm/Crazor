@@ -28,7 +28,7 @@ namespace AdaptiveCards
         /// </summary>
         // The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
         [JsonIgnore]
-        [XmlAttribute("Style")]
+        [XmlAttribute(nameof(Style))]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public AdaptiveContainerStyle StyleXml { get { return (Style.HasValue) ? Style.Value : AdaptiveContainerStyle.Default; } set { Style = value; } }
 
@@ -71,12 +71,11 @@ namespace AdaptiveCards
         /// <summary>
         /// Explicit container element minimum height.
         /// </summary>
-        [JsonConverter(typeof(StringSizeWithUnitConverter), false)]
         [JsonProperty("minHeight", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(0)]
-        public int PixelMinHeight { get; set; }
+        [DefaultValue(null)]
+        public string MinHeight { get; set; }
     }
 }

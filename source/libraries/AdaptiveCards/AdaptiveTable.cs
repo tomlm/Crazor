@@ -99,14 +99,14 @@ namespace AdaptiveCards
         /// </summary>
         // The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
         [JsonIgnore]
-        [XmlAttribute("Style")]
+        [XmlAttribute(nameof(GridStyle))]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public AdaptiveContainerStyle StyleXml { get { return (GridStyle.HasValue) ? GridStyle.Value : AdaptiveContainerStyle.Default; } set { GridStyle = value; } }
+        public AdaptiveContainerStyle GridStyleXml { get { return (GridStyle.HasValue) ? GridStyle.Value : AdaptiveContainerStyle.Default; } set { GridStyle = value; } }
 
         /// <summary>
         /// Determines whether to serialize the style for XML.
         /// </summary>
-        public bool ShouldSerializeStyleXml() => this.GridStyle.HasValue;
+        public bool ShouldSerializeGridStyleXml() => this.GridStyle.HasValue;
 #endif
     }
 }

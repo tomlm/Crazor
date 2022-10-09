@@ -41,7 +41,7 @@ namespace AdaptiveCards
         /// This is necessary for XML serialization. You should use the <see cref="F:Url" /> property directly.
         /// </summary>
 #if !NETSTANDARD1_3
-        [XmlAttribute("Url")]
+        [XmlAttribute(nameof(Url))]
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         [JsonIgnore]

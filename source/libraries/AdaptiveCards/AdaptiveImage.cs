@@ -84,7 +84,7 @@ namespace AdaptiveCards
         /// This is necessary for XML serialization. You should use the <see cref="F:Url" /> property directly.
         /// </summary>
 #if !NETSTANDARD1_3
-        [XmlAttribute("Url")]
+        [XmlAttribute(nameof(Url))]
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         [JsonIgnore]
@@ -138,33 +138,25 @@ namespace AdaptiveCards
         /// <summary>
         /// Explicit image width.
         /// </summary>
-        [JsonConverter(typeof(StringSizeWithUnitConverter), false)]
-        [JsonProperty("width", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-#if !NETSTANDARD1_3
-        [XmlAttribute]
-#endif
-        [DefaultValue(0)]
-        public int PixelWidth { get; set; }
-
-        /// <summary>
-        /// Explicit image height.
-        /// </summary>
-        [JsonIgnore]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        public int PixelHeight
-        {
-            get
-            {
-                if (Height.Unit != null)
-                {
-                    return Height.Unit.Value;
-                }
-                return 0;
-            }
-            set { Height = new AdaptiveHeight(value); }
-        }
+        [DefaultValue(null)]
+        public AdaptiveDimension Width { get; set; }
+
+        /// <summary>
+        /// XmlProperty for serialization of width
+        /// </summary>
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlAttribute(nameof(Width))]
+#endif
+        public string WidthXml { get => Width?.ToString(); set => this.Width = (value != null) ? new AdaptiveDimension(value) : null; }
+
+        public bool ShouldSerializeWidthXml() => Width != null;
+
+
     }
 
 }

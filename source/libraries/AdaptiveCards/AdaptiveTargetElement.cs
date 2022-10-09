@@ -62,7 +62,7 @@ namespace AdaptiveCards
         /// Helper to do custom serialization of <see cref="AdaptiveTargetElement.IsVisible"/> property for XML.
         /// </summary>
         [JsonIgnore]
-        [XmlAttribute("IsVisible")]
+        [XmlAttribute(nameof(IsVisible))]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IsVisibleXml { get { return IsVisible.HasValue ? IsVisible.Value : true; } set { IsVisible = value; } }
 

@@ -42,17 +42,28 @@ namespace AdaptiveCards
         /// <summary>
         /// The amount of space the element should be separated from the previous element. Default value is <see cref="AdaptiveHeight.Auto"/>.
         /// </summary>
-        [JsonConverter(typeof(StringSizeWithUnitConverter), true)]
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
-        [XmlElement]
+        [XmlIgnore]
 #endif
-        public AdaptiveHeight Height { get; set; } = new AdaptiveHeight(AdaptiveHeightType.Auto);
+        [DefaultValue(null)]
+        public AdaptiveDimension Height { get; set; }
 
         /// <summary>
-        /// Determines whether the height property should be serialized or not.
+        /// XmlProperty for serialization of height
         /// </summary>
-        public bool ShouldSerializeHeight() => this.Height?.ShouldSerializeAdaptiveHeight() == true;
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlAttribute(nameof(Height))]
+#endif
+        [DefaultValue(null)]
+        public string HeightXml { get => Height?.ToString(); set => this.Height = (value != null) ? new AdaptiveDimension(value) : null; }
+        
+        /// <summary>
+        /// Control serialization of empty height values
+        /// </summary>
+        /// <returns></returns>
+        public bool ShouldSerializeHeightXml() => Height != null;
 
         /// <summary>
         /// Indicates whether the element should be visible when the card has been rendered.

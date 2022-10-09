@@ -37,10 +37,22 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
-        [DefaultValue(typeof(AdaptiveColumnWidth), "stretch")]
-        public AdaptiveColumnWidth Width { get; set; } 
-       
+        public AdaptiveColumnWidth Width { get; set; }
+        
+        /// <summary>
+        /// Xml Serialization for complex type of AdaptiveColumnWidth
+        /// </summary>
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlAttribute(nameof(Width))]
+#endif
+        public string WidthXml { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
+
+        /// <summary>
+        /// Ignore Xml Serialization for complex type of AdaptiveColumnWidth when null
+        /// </summary>
+        public bool ShouldSerializeWidthXml() => Width != null;
     }
 }

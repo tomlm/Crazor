@@ -65,10 +65,19 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(Order = -10, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate, NullValueHandling = NullValueHandling.Include)]
 #if !NETSTANDARD1_3
-        [XmlElement]
+        [XmlIgnore]
 #endif
         [DefaultValue(null)]
         public AdaptiveSchemaVersion Version { get; set; }
+
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlAttribute(nameof(Version))]
+#endif
+        [DefaultValue(null)]
+        public string VersionXml { get => Version.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
+
+        public bool ShouldSerializeVersionXml() => Version != null;
 
         /// <summary>
         /// This is obsolete. Use the <see cref="Version"/> property instead.
@@ -126,25 +135,43 @@ namespace AdaptiveCards
         public AdaptiveBackgroundImage BackgroundImage { get; set; }
 
         /// <summary>
-        /// Value that denotes if the card must use all the vertical space that is set to it. Default value is <see cref="AdaptiveHeightType.Auto"/>.
+        /// Value that denotes if the card must use all the vertical space that is set to it. Default value is <see cref="AdaptiveDimensionType.Auto"/>.
         /// </summary>
-        [JsonConverter(typeof(StringSizeWithUnitConverter), true)]
-        [JsonProperty(Order = -4, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        /// <summary>
+        /// Explicit image Height.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
-        [XmlElement]
+        [XmlIgnore]
 #endif
-        public AdaptiveHeight Height { get; set; } = new AdaptiveHeight(AdaptiveHeightType.Auto);
+        [DefaultValue(null)]
+        public AdaptiveDimension Height { get; set; }
 
         /// <summary>
-        /// Explicit card minimum height in pixels.
+        /// XmlProperty for serialization of height
         /// </summary>
-        [JsonConverter(typeof(StringSizeWithUnitConverter), false)]
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlAttribute(nameof(Height))]
+#endif
+        [DefaultValue(null)]
+        public string HeightXml { get => Height?.ToString(); set => this.Height = (value != null) ? new AdaptiveDimension(value) : null; }
+
+        /// <summary>
+        /// Control serialization of empty values
+        /// </summary>
+        /// <returns></returns>
+        public bool ShouldSerializeHeightXml() => Height != null;
+
+        /// <summary>
+        /// Explicit card minimum height with 'px'. (100px, 200px)
+        /// </summary>
         [JsonProperty("minHeight", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(0)]
-        public int PixelMinHeight { get; set; }
+        [DefaultValue(null)]
+        public string MinHeight { get; set; }
 
         /// <summary>
         /// The Body elements for this card.
@@ -256,12 +283,6 @@ namespace AdaptiveCards
 #endif
         [DefaultValue(null)]
         public AdaptiveAuthentication Authentication { get; set; }
-
-        /// <summary>
-        /// Determines whether the height property of an AdaptiveCard should be serialized.
-        /// </summary>
-        /// <returns>true iff the height property should be serialized.</returns>
-        public bool ShouldSerializeHeight() => this.Height?.ShouldSerializeAdaptiveHeight() == true;
 
         /// <summary>
         /// Callback that will be invoked should a null or empty version string is encountered. The callback may return an alternate version to use for parsing.
