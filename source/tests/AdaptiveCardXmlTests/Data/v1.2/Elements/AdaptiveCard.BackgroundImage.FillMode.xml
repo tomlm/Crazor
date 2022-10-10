@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <BackgroundImage BackgroundImage="https://picsum.photos/60/60?image=101" FillMode="Repeat" />
-  <TextBlock>Text in body</TextBlock>
+  <TextBlock Text="Text in body" />
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock>Text in Column 1</TextBlock>
+      <TextBlock Text="Text in Column 1" />
     </Column>
     <Column Width="auto">
-      <TextBlock>Text in Column 2</TextBlock>
+      <TextBlock Text="Text in Column 2" />
     </Column>
   </ColumnSet>
   <Container>
-    <TextBlock>Text 1 in Container</TextBlock>
-    <TextBlock>Text 2 in Container</TextBlock>
-    <TextBlock>Text 3 in Container</TextBlock>
+    <TextBlock Text="Text 1 in Container" />
+    <TextBlock Text="Text 2 in Container" />
+    <TextBlock Text="Text 3 in Container" />
   </Container>
 </Card>

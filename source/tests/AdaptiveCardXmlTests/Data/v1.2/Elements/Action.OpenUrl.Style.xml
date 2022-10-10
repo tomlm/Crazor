@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Wrap="true">This card has four OpenUrl actions. The styles from left to right are "Default", "Positive", "Destructive" and "Other".</TextBlock>
+  <TextBlock Text="This card has four OpenUrl actions. The styles from left to right are &quot;Default&quot;, &quot;Positive&quot;, &quot;Destructive&quot; and &quot;Other&quot;." Wrap="true" />
   <Action.OpenUrl Title="Default" Url="https://adaptivecards.io/" />
   <Action.OpenUrl Title="Pawsitive" Style="positive" Url="https://adaptivecards.io/" />
   <Action.OpenUrl Title="Destructive" Style="destructive" Url="https://adaptivecards.io/" />

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock>Sequential show cards:</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Text="Sequential show cards:" />
   <Action.ShowCard Title="Show Card One">
     <AdaptiveCard>
-      <TextBlock>Card 1</TextBlock>
+      <TextBlock Text="Card 1" />
       <Action.ShowCard Title="Show Card Two">
         <AdaptiveCard>
-          <TextBlock>Card 2</TextBlock>
+          <TextBlock Text="Card 2" />
         </AdaptiveCard>
       </Action.ShowCard>
     </AdaptiveCard>

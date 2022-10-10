@@ -6,7 +6,7 @@
       <Content xsi:type="Container">
         <Fallback>
           <Type>Content</Type>
-          <Content xsi:type="TextBlock">Hello World</Content>
+          <Content xsi:type="TextBlock" Text="Hello World" />
         </Fallback>
         <AdaptiveUnknownElement>
           <Type>notme</Type>

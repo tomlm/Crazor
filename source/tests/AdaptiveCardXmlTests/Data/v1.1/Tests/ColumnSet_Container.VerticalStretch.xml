@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
   <ColumnSet>
     <Column Width="1">
-      <TextBlock Wrap="true">The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**. The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**.</TextBlock>
+      <TextBlock Text="The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**. The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**." Wrap="true" />
     </Column>
     <Column Spacing="Large" Separator="true" Width="1">
-      <TextBlock Wrap="true">First TextBlock displayed at the top</TextBlock>
+      <TextBlock Text="First TextBlock displayed at the top" Wrap="true" />
       <Container Height="AdaptiveCards.AdaptiveDimension">
-        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Wrap="true">One textblock</TextBlock>
-        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Wrap="true">Another textblock</TextBlock>
-        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Wrap="true">A third one</TextBlock>
-        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Wrap="true">One last textblock</TextBlock>
+        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Text="One textblock" Wrap="true" />
+        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Text="Another textblock" Wrap="true" />
+        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Text="A third one" Wrap="true" />
+        <TextBlock Height="AdaptiveCards.AdaptiveDimension" Text="One last textblock" Wrap="true" />
       </Container>
     </Column>
   </ColumnSet>

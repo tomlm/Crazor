@@ -6,14 +6,14 @@
         <Image Size="Small" Url="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date/calendar1600.png" AltText="Calendar" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Weight="Bolder" Wrap="true">Image buttons</TextBlock>
-        <TextBlock Spacing="None" IsSubtle="true" Wrap="true">Adaptive Cards</TextBlock>
-        <TextBlock Spacing="None" IsSubtle="true" Wrap="true">{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}</TextBlock>
+        <TextBlock Weight="Bolder" Text="Image buttons" Wrap="true" />
+        <TextBlock Spacing="None" IsSubtle="true" Text="Adaptive Cards" Wrap="true" />
+        <TextBlock Spacing="None" IsSubtle="true" Text="{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}" Wrap="true" />
       </Column>
     </ColumnSet>
   </Container>
   <Container>
-    <TextBlock Wrap="true">Snooze for</TextBlock>
+    <TextBlock Text="Snooze for" Wrap="true" />
     <Input.ChoiceSet Id="snoozeFor" Value="1">
       <Choices>
         <Choice Title="5 minutes" Value="1" />

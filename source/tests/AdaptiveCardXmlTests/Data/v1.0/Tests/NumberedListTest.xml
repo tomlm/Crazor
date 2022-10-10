@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Medium" Wrap="true">Test scenarios around numbered lists with max values.</TextBlock>
-  <TextBlock>Numbered List:</TextBlock>
-  <TextBlock>1. One
-2. Two</TextBlock>
-  <TextBlock>
-Numbered List starting at 3:</TextBlock>
-  <TextBlock>3. One
-2. Two.</TextBlock>
-  <TextBlock Wrap="true">
-Numbered List starting at a number bigger than max unsigned int (4294967295).</TextBlock>
-  <TextBlock>4294967296. One
-2. Two</TextBlock>
-  <TextBlock Wrap="true">
-Numbered List where second element would be bigger than max unsigned int (4294967295).</TextBlock>
-  <TextBlock>4294967295. One
-2. Two</TextBlock>
-  <TextBlock Wrap="true">
-Numbered List where second element equals max unsigned int (4294967295).</TextBlock>
-  <TextBlock>4294967294. One
-2. Two</TextBlock>
+  <TextBlock Size="Medium" Text="Test scenarios around numbered lists with max values." Wrap="true" />
+  <TextBlock Text="Numbered List:" />
+  <TextBlock Text="1. One&#xA;2. Two" />
+  <TextBlock Text="&#xA;Numbered List starting at 3:" />
+  <TextBlock Text="3. One&#xA;2. Two." />
+  <TextBlock Text="&#xA;Numbered List starting at a number bigger than max unsigned int (4294967295)." Wrap="true" />
+  <TextBlock Text="4294967296. One&#xA;2. Two" />
+  <TextBlock Text="&#xA;Numbered List where second element would be bigger than max unsigned int (4294967295)." Wrap="true" />
+  <TextBlock Text="4294967295. One&#xA;2. Two" />
+  <TextBlock Text="&#xA;Numbered List where second element equals max unsigned int (4294967295)." Wrap="true" />
+  <TextBlock Text="4294967294. One&#xA;2. Two" />
 </Card>

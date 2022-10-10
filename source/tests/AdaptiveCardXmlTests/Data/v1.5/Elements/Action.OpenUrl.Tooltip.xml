@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Wrap="true">Check out our website!</TextBlock>
+  <TextBlock Text="Check out our website!" Wrap="true" />
   <Action.OpenUrl Title="Click Here!" Tooltip="Adaptive Cards website" Url="https://adaptivecards.io/" />
 </Card>

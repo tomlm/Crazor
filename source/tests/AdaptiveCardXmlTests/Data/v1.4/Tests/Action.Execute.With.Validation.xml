@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock>Present a form and submit it back to the originator (with validation!)</TextBlock>
+  <TextBlock Text="Present a form and submit it back to the originator (with validation!)" />
   <ActionSet>
     <Action.Execute Title="ActionSet Execute" IconUrl="https://adaptivecards.io/content/Closed%20bug%2092x92.png" AssociatedInputs="None" Verb="doActionSetStuff">{
   "y": -1

@@ -27,7 +27,7 @@
       "style": "emphasis",
       "selectAction": {
         "type": "Action.OpenUrl",
-        "url": "https://msn.com",
+        "url": "https://msn.com/",
         "tooltip": "Go to a different url"
       }
     },

@@ -40,7 +40,7 @@
                 <Type>Content</Type>
                 <Content xsi:type="Action.ShowCard" Title="Action.ShowCard">
                   <AdaptiveCard Version="1.2">
-                    <TextBlock>What do you think?</TextBlock>
+                    <TextBlock Text="What do you think?" />
                     <Action.Submit Title="Neat!" />
                   </AdaptiveCard>
                 </Content>
@@ -69,7 +69,7 @@
       <Type>NoExist</Type>
     </AdaptiveUnknownAction>
   </ActionSet>
-  <TextBlock>This card tests action fallback</TextBlock>
+  <TextBlock Text="This card tests action fallback" />
   <AdaptiveUnknownAction>
     <Fallback>
       <Type>Content</Type>
@@ -109,7 +109,7 @@
               <Type>Content</Type>
               <Content xsi:type="Action.ShowCard" Title="Action.ShowCard">
                 <AdaptiveCard Version="1.2">
-                  <TextBlock>What do you think?</TextBlock>
+                  <TextBlock Text="What do you think?" />
                   <Action.Submit Title="Neat!" />
                 </AdaptiveCard>
               </Content>

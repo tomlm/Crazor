@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Container>
-    <TextBlock Size="Medium" Weight="Bolder">Publish Adaptive Card schema</TextBlock>
+    <TextBlock Size="Medium" Weight="Bolder" Text="Publish Adaptive Card schema" />
     <ColumnSet>
       <Column Width="auto">
         <Image Size="Small" Style="Person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Weight="Bolder" Wrap="true">Matt Hidinger</TextBlock>
-        <TextBlock Spacing="None" IsSubtle="true" Wrap="true">Created {{DATE(2017-02-14T06:08:39Z, SHORT)}}</TextBlock>
+        <TextBlock Weight="Bolder" Text="Matt Hidinger" Wrap="true" />
+        <TextBlock Spacing="None" IsSubtle="true" Text="Created {{DATE(2017-02-14T06:08:39Z, SHORT)}}" Wrap="true" />
       </Column>
     </ColumnSet>
   </Container>
   <Container>
-    <TextBlock Wrap="true">Hi Team,
-
-2 things: 
-
-1) @Micheal gave me some great feedback to start sharing my research trips more broadly to the desktop folks. I will be sharing research trips and insights to everyone and not just the team I travel with. So get ready to learn more about our users 🙂
-
-2) I recently visited customers in London with @Meghan Stockdale to research Somethings+SomeOtherThing+something. I wanted to share some insights from the trip that Meghan put together! For context this information is based off 4 companies and 85 customers. (full deck here: Modern Collaboration_ Content and Comms System feedback.pptx)</TextBlock>
+    <TextBlock Text="Hi Team,&#xA;&#xA;2 things: &#xA;&#xA;1) @Micheal gave me some great feedback to start sharing my research trips more broadly to the desktop folks. I will be sharing research trips and insights to everyone and not just the team I travel with. So get ready to learn more about our users 🙂&#xA;&#xA;2) I recently visited customers in London with @Meghan Stockdale to research Somethings+SomeOtherThing+something. I wanted to share some insights from the trip that Meghan put together! For context this information is based off 4 companies and 85 customers. (full deck here: Modern Collaboration_ Content and Comms System feedback.pptx)" Wrap="true" />
     <FactSet>
       <Fact Title="Board:" Value="Adaptive Card" />
       <Fact Title="List:" Value="Backlog" />
@@ -28,13 +22,13 @@
     </FactSet>
   </Container>
   <Action.ShowCard Title="Set due date">
-    <AdaptiveCard Version="1.0">
+    <AdaptiveCard Version="1.2">
       <Input.Date Id="dueDate" />
       <Action.Submit Title="OK" />
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="Comment">
-    <AdaptiveCard Version="1.0">
+    <AdaptiveCard Version="1.2">
       <Input.Text Id="comment" Placeholder="Enter your comment" IsMultiline="true" />
       <Action.Submit Title="OK" />
     </AdaptiveCard>

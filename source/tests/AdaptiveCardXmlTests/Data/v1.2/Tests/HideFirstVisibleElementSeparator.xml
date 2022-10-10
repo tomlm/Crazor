@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Image Id="id1" IsVisible="false" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
     <SelectAction xsi:type="Action.ToggleVisibility">
       <TargetElements ElementId="id2" />
@@ -9,7 +9,7 @@
     <SelectAction xsi:type="Action.ToggleVisibility">
       <TargetElements ElementId="id3" />
     </SelectAction>
-    <TextBlock Wrap="true">There's an image above this but the visibility is set to false. There shouldn't be a spacing above</TextBlock>
+    <TextBlock Text="There's an image above this but the visibility is set to false. There shouldn't be a spacing above" Wrap="true" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
   </Container>
   <ColumnSet Id="id3" Height="AdaptiveCards.AdaptiveDimension">
@@ -17,10 +17,10 @@
       <TargetElements ElementId="id1" />
     </SelectAction>
     <Column IsVisible="false">
-      <TextBlock>Column 1</TextBlock>
+      <TextBlock Text="Column 1" />
     </Column>
     <Column Spacing="Large">
-      <TextBlock Wrap="true">This is the second column. There shouldn't be spacing before this</TextBlock>
+      <TextBlock Text="This is the second column. There shouldn't be spacing before this" Wrap="true" />
     </Column>
   </ColumnSet>
 </Card>

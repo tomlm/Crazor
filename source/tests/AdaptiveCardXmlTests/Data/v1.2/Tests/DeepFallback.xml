@@ -7,7 +7,7 @@
     <Container>
       <ColumnSet>
         <Column Width="auto">
-          <TextBlock Weight="Bolder" Color="Attention">You should never see this (fallback: drop)!</TextBlock>
+          <TextBlock Weight="Bolder" Color="Attention" Text="You should never see this (fallback: drop)!" />
           <AdaptiveUnknownElement Id="firstGraph">
             <AdditionalProperties>
               <item>
@@ -25,17 +25,17 @@
       </ColumnSet>
     </Container>
   </Container>
-  <TextBlock Weight="Lighter">Nothing above this! ↑</TextBlock>
-  <TextBlock Weight="Lighter">Message just below ↓</TextBlock>
+  <TextBlock Weight="Lighter" Text="Nothing above this! ↑" />
+  <TextBlock Weight="Lighter" Text="Message just below ↓" />
   <Container>
     <Fallback>
       <Type>Content</Type>
-      <Content xsi:type="TextBlock" Weight="Bolder" Color="Good">If you see this, things are working great!</Content>
+      <Content xsi:type="TextBlock" Weight="Bolder" Color="Good" Text="If you see this, things are working great!" />
     </Fallback>
     <Container>
       <ColumnSet>
         <Column Width="auto">
-          <TextBlock Weight="Bolder" Color="Attention">You should never see this (fallback: textblock)!</TextBlock>
+          <TextBlock Weight="Bolder" Color="Attention" Text="You should never see this (fallback: textblock)!" />
           <AdaptiveUnknownElement Id="secondGraph">
             <AdditionalProperties>
               <item>
@@ -53,14 +53,14 @@
       </ColumnSet>
     </Container>
   </Container>
-  <TextBlock Weight="Lighter">There should be another message below ↓</TextBlock>
+  <TextBlock Weight="Lighter" Text="There should be another message below ↓" />
   <AdaptiveUnknownElement Id="firstGraphVTwo">
     <Fallback>
       <Type>Content</Type>
       <Content xsi:type="AdaptiveUnknownElement" Id="thirdGraph">
         <Fallback>
           <Type>Content</Type>
-          <Content xsi:type="TextBlock" Weight="Bolder" Color="Good">Multiply-nested fallback works!</Content>
+          <Content xsi:type="TextBlock" Weight="Bolder" Color="Good" Text="Multiply-nested fallback works!" />
         </Fallback>
         <Type>Graph</Type>
       </Content>
@@ -68,7 +68,7 @@
     <Type>GraphV2</Type>
   </AdaptiveUnknownElement>
   <Container Style="Emphasis">
-    <TextBlock Weight="Lighter" Wrap="true">There should be nothing between here...</TextBlock>
+    <TextBlock Weight="Lighter" Text="There should be nothing between here..." Wrap="true" />
     <AdaptiveUnknownElement Id="secondGraphVTwo">
       <Fallback>
         <Type>Content</Type>
@@ -102,7 +102,7 @@
       </Fallback>
       <Type>GraphV2</Type>
     </AdaptiveUnknownElement>
-    <TextBlock Weight="Lighter" Wrap="true">...and here</TextBlock>
+    <TextBlock Weight="Lighter" Text="...and here" Wrap="true" />
   </Container>
   <AdaptiveUnknownAction Title="Be Cool">
     <AdditionalProperties>

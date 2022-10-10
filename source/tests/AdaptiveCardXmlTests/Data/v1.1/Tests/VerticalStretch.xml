@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1" Speak="The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees">
   <Container>
-    <TextBlock Wrap="true">This is the top container.</TextBlock>
+    <TextBlock Text="This is the top container." Wrap="true" />
   </Container>
   <Container Spacing="Large" Separator="true">
-    <TextBlock Wrap="true">This is the middle container. Its **height** property is **stretch** so it uses all the remaining vertical space.</TextBlock>
+    <TextBlock Text="This is the middle container. Its **height** property is **stretch** so it uses all the remaining vertical space." Wrap="true" />
   </Container>
   <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
     <Column Width="auto">
       <Image Size="Small" Style="Person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" />
     </Column>
     <Column Spacing="Large" Separator="true" Width="stretch">
-      <TextBlock Height="AdaptiveCards.AdaptiveDimension" Wrap="true">It also works within a ColumnSet</TextBlock>
-      <TextBlock Wrap="true">This text aligns with the bottom of the column</TextBlock>
+      <TextBlock Height="AdaptiveCards.AdaptiveDimension" Text="It also works within a ColumnSet" Wrap="true" />
+      <TextBlock Text="This text aligns with the bottom of the column" Wrap="true" />
     </Column>
   </ColumnSet>
   <Container Spacing="Large" Separator="true">
-    <TextBlock Wrap="true">This is the bottom container.</TextBlock>
+    <TextBlock Text="This is the bottom container." Wrap="true" />
   </Container>
 </Card>

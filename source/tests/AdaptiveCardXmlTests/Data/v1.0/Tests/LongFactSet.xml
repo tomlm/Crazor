@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Large" Weight="Bolder">Nutrition facts</TextBlock>
-  <TextBlock>Per 3 cookies (36 g)</TextBlock>
-  <TextBlock Weight="Bolder">Calories 180</TextBlock>
+  <TextBlock Size="Large" Weight="Bolder" Text="Nutrition facts" />
+  <TextBlock Text="Per 3 cookies (36 g)" />
+  <TextBlock Weight="Bolder" Text="Calories 180" />
   <FactSet>
     <Fact Title="Fat" Value="10 g" />
     <Fact Title="Saturated" Value="4 g" />

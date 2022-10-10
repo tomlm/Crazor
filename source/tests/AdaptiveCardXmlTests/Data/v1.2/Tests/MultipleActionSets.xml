@@ -5,21 +5,21 @@
       <ActionSet Height="AdaptiveCards.AdaptiveDimension">
         <Action.ShowCard Title="ShowCard1">
           <AdaptiveCard>
-            <TextBlock>Card1</TextBlock>
+            <TextBlock Text="Card1" />
           </AdaptiveCard>
         </Action.ShowCard>
       </ActionSet>
       <ActionSet Height="AdaptiveCards.AdaptiveDimension">
         <Action.ShowCard Title="ShowCard2">
           <AdaptiveCard>
-            <TextBlock>Card2</TextBlock>
+            <TextBlock Text="Card2" />
           </AdaptiveCard>
         </Action.ShowCard>
       </ActionSet>
-      <TextBlock>A lil bit of text!</TextBlock>
+      <TextBlock Text="A lil bit of text!" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Wrap="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
+      <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." Wrap="true" />
     </Column>
   </ColumnSet>
 </Card>

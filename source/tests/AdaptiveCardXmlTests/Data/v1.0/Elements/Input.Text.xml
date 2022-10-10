@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock>Default text input</TextBlock>
+  <TextBlock Text="Default text input" />
   <Input.Text Id="defaultInputId" Placeholder="enter comment" MaxLength="500" />
-  <TextBlock>Multiline text input</TextBlock>
+  <TextBlock Text="Multiline text input" />
   <Input.Text Id="multilineInputId" Placeholder="enter comment" IsMultiline="true" MaxLength="500" />
-  <TextBlock>Pre-filled value</TextBlock>
+  <TextBlock Text="Pre-filled value" />
   <Input.Text Id="prefilledInputId" Placeholder="enter comment" Value="This value was pre-filled" IsMultiline="true" MaxLength="500" />
   <Action.Submit Title="OK" />
 </Card>

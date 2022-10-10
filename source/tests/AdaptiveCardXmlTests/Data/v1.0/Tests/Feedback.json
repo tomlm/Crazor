@@ -53,7 +53,8 @@
     {
       "type": "TextBlock",
       "text": " ",
-      "spacing": "small"
+      "spacing": "small",
+      "space": "preserve"
     }
   ],
   "actions": [

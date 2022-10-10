@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Su vuelo esta confirmado para usted y 3 pasajeros mas de San Francisco a Amsterdam para el dia {{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}&lt;/s&gt;" Lang="espa">
-  <TextBlock Weight="Bolder">Pasajeros</TextBlock>
-  <TextBlock Separator="true">Sarah Hum</TextBlock>
-  <TextBlock Spacing="None">Jeremy Goldberg</TextBlock>
-  <TextBlock Spacing="None">Evan Litvak</TextBlock>
-  <TextBlock Spacing="Medium" Weight="Bolder">2 Escalas</TextBlock>
-  <TextBlock Spacing="None" Weight="Bolder">{{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}</TextBlock>
+  <TextBlock Weight="Bolder" Text="Pasajeros" />
+  <TextBlock Separator="true" Text="Sarah Hum" />
+  <TextBlock Spacing="None" Text="Jeremy Goldberg" />
+  <TextBlock Spacing="None" Text="Evan Litvak" />
+  <TextBlock Spacing="Medium" Weight="Bolder" Text="2 Escalas" />
+  <TextBlock Spacing="None" Weight="Bolder" Text="{{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}" />
   <ColumnSet Separator="true">
     <Column Width="1">
-      <TextBlock IsSubtle="true">San Francisco</TextBlock>
-      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent">SFO</TextBlock>
+      <TextBlock IsSubtle="true" Text="San Francisco" />
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="SFO" />
     </Column>
     <Column Width="auto">
-      <TextBlock>&amp;nbsp;</TextBlock>
+      <TextBlock Text="&amp;nbsp;" />
       <Image Spacing="None" Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Vuelo a" />
     </Column>
     <Column Width="1">
-      <TextBlock IsSubtle="true" HorizontalAlignment="Right">Amsterdam</TextBlock>
-      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" HorizontalAlignment="Right">AMS</TextBlock>
+      <TextBlock IsSubtle="true" Text="Amsterdam" HorizontalAlignment="Right" />
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="AMS" HorizontalAlignment="Right" />
     </Column>
   </ColumnSet>
-  <TextBlock Spacing="Medium" Weight="Bolder">Sin-Escalas</TextBlock>
-  <TextBlock Spacing="None" Weight="Bolder">{{DATE(2017-10-18T21:50:00Z, LONG)}} {{TIME(2017-10-18T21:50:00Z)}}</TextBlock>
+  <TextBlock Spacing="Medium" Weight="Bolder" Text="Sin-Escalas" />
+  <TextBlock Spacing="None" Weight="Bolder" Text="{{DATE(2017-10-18T21:50:00Z, LONG)}} {{TIME(2017-10-18T21:50:00Z)}}" />
   <ColumnSet Separator="true">
     <Column Width="1">
-      <TextBlock IsSubtle="true">Amsterdam</TextBlock>
-      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent">AMS</TextBlock>
+      <TextBlock IsSubtle="true" Text="Amsterdam" />
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="AMS" />
     </Column>
     <Column Width="auto">
-      <TextBlock>&amp;nbsp;</TextBlock>
+      <TextBlock Text="&amp;nbsp;" />
       <Image Spacing="None" Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Vuelo a" />
     </Column>
     <Column Width="1">
-      <TextBlock IsSubtle="true" HorizontalAlignment="Right">San Francisco</TextBlock>
-      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" HorizontalAlignment="Right">SFO</TextBlock>
+      <TextBlock IsSubtle="true" Text="San Francisco" HorizontalAlignment="Right" />
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="SFO" HorizontalAlignment="Right" />
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="Medium">
     <Column Width="1">
-      <TextBlock Size="Medium" IsSubtle="true">Total</TextBlock>
+      <TextBlock Size="Medium" IsSubtle="true" Text="Total" />
     </Column>
     <Column Width="1">
-      <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Right">$4,032.54</TextBlock>
+      <TextBlock Size="Medium" Weight="Bolder" Text="$4,032.54" HorizontalAlignment="Right" />
     </Column>
   </ColumnSet>
 </Card>

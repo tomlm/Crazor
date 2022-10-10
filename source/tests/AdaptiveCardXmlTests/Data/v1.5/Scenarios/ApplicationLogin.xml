@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center" Wrap="true" Style="Heading">Application Login</TextBlock>
-  <TextBlock Wrap="true">Username</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
+  <TextBlock Size="Medium" Weight="Bolder" Text="Application Login" HorizontalAlignment="Center" Wrap="true" Style="Heading" />
+  <TextBlock Text="Username" Wrap="true" />
   <Input.Text Id="UserVal" IsRequired="true" />
-  <TextBlock Wrap="true">Password</TextBlock>
+  <TextBlock Text="Password" Wrap="true" />
   <Input.Text Id="PassVal" />
   <Action.Submit Title="Login">{
   "id": "LoginVal"

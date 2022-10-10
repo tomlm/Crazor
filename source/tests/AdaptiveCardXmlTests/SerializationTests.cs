@@ -19,30 +19,10 @@ namespace AdaptiveCardXmlTests
         };
 
 
-        public static IEnumerable<object> GetFiles()
+        public static IEnumerable<object> GetTestFiles()
         {
             var dataFolder = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "Data"));
             var files = Directory.EnumerateFiles(dataFolder, "*.json", SearchOption.AllDirectories);
-            foreach (var jsonFile in files)
-            {
-                try
-                {
-                    string xmlFile = jsonFile.Replace(".json", ".xml");
-                    if (!File.Exists(Path.Combine(Environment.CurrentDirectory, xmlFile)))
-                    {
-                        var json = File.ReadAllText(jsonFile);
-                        var card = JsonConvert.DeserializeObject<AdaptiveCard>(json);
-                        json = JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented);
-                        File.WriteAllText(jsonFile, json);
-
-                        File.WriteAllText(xmlFile, ToXml(card));
-                    }
-                }
-                catch (Exception err)
-                {
-                    Debug.WriteLine($"{jsonFile} {err.Message}", err);
-                }
-            }
             return files.Select(s => new object[] { Path.GetRelativePath(dataFolder, s), s });
         }
 
@@ -59,22 +39,37 @@ namespace AdaptiveCardXmlTests
         }
 
         [Theory]
-        [MemberData(nameof(GetFiles))]
+        [MemberData(nameof(GetTestFiles))]
         public void Do(string name, string jsonFile)
         {
-            Debug.WriteLine($"---- {name} -----");
             string xmlFile = jsonFile.Replace(".json", ".xml");
+            try
+            {
+                if (!File.Exists(Path.Combine(Environment.CurrentDirectory, xmlFile)))
+                {
+                    var card = JsonConvert.DeserializeObject<AdaptiveCard>(File.ReadAllText(jsonFile));
+                    File.WriteAllText(jsonFile, JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
+                    File.WriteAllText(xmlFile, ToXml(card));
+                }
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine($"{jsonFile} {err.Message}", err);
+            }
+
+            Debug.WriteLine($"---- {name} -----");
             var json = File.ReadAllText(jsonFile);
             var xml = File.ReadAllText(xmlFile);
             var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json);
-            var xmlCard = serializer.Deserialize(new StringReader(xml));
+            var reader = XmlReader.Create(new StringReader(xml));
+            var xmlCard = serializer.Deserialize(reader);
             var json2 = JsonConvert.SerializeObject(xmlCard, Newtonsoft.Json.Formatting.Indented);
             if (json != json2)
             {
                 Debug.WriteLine(json);
                 Debug.WriteLine(json2);
             }
-            Assert.Equal(json, json2, ignoreLineEndingDifferences:true, ignoreWhiteSpaceDifferences: true);
+            Assert.Equal(json, json2, ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
 
 
         }

@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Size="Medium" Weight="Bolder" Wrap="true">This column set has some columns RTL and some LTR</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
+  <TextBlock Size="Medium" Weight="Bolder" Text="This column set has some columns RTL and some LTR" Wrap="true" />
   <ColumnSet>
     <Column Rtl="true" Width="stretch">
-      <TextBlock Wrap="true">العمود الأول باللغة العربية</TextBlock>
+      <TextBlock Text="العمود الأول باللغة العربية" Wrap="true" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Wrap="true">Column two is in English</TextBlock>
+      <TextBlock Text="Column two is in English" Wrap="true" />
     </Column>
     <Column Rtl="true" Width="stretch">
-      <TextBlock Wrap="true">עמודה 3 בעברית</TextBlock>
+      <TextBlock Text="עמודה 3 בעברית" Wrap="true" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Wrap="true">La columna cuatro está en español</TextBlock>
+      <TextBlock Text="La columna cuatro está en español" Wrap="true" />
     </Column>
   </ColumnSet>
-  <TextBlock Spacing="Large" Size="Medium" Weight="Bolder" Wrap="true">This Column Set is in a container that is entirely RTL</TextBlock>
+  <TextBlock Spacing="Large" Size="Medium" Weight="Bolder" Text="This Column Set is in a container that is entirely RTL" Wrap="true" />
   <Container Rtl="true">
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Wrap="true">يتم تعيين هذا العمود بأكمله باللغة العربية ويتم عرضه من اليمين إلى اليسار.</TextBlock>
+        <TextBlock Text="يتم تعيين هذا العمود بأكمله باللغة العربية ويتم عرضه من اليمين إلى اليسار." Wrap="true" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Wrap="true">هذا قط</TextBlock>
+        <TextBlock Text="هذا قط" Wrap="true" />
         <Image Size="Small" Url="https://adaptivecards.io/content/cats/1.png" AltText="صورة قطة" />
       </Column>
     </ColumnSet>
   </Container>
-  <TextBlock Spacing="Large" Size="Medium" Weight="Bolder" Wrap="true">This Container is RTL, with a single Container inside it that is LTR. The English text and the second cat should display left to right.</TextBlock>
+  <TextBlock Spacing="Large" Size="Medium" Weight="Bolder" Text="This Container is RTL, with a single Container inside it that is LTR. The English text and the second cat should display left to right." Wrap="true" />
   <Container Rtl="true">
-    <TextBlock Wrap="true">كتلة النص واحد</TextBlock>
+    <TextBlock Text="كتلة النص واحد" Wrap="true" />
     <Image Size="Small" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat with red bandana" />
     <Container>
-      <TextBlock Wrap="true">Text Block two</TextBlock>
+      <TextBlock Text="Text Block two" Wrap="true" />
       <Image Size="Small" Url="https://adaptivecards.io/content/cats/3.png" AltText="Cat with shades" />
     </Container>
-    <TextBlock Wrap="true">كتلة النص ثلاثة</TextBlock>
+    <TextBlock Text="كتلة النص ثلاثة" Wrap="true" />
   </Container>
-  <TextBlock Spacing="Large" Size="Medium" Weight="Bolder" Wrap="true">This Container is RTL, Alignments should be reversed</TextBlock>
+  <TextBlock Spacing="Large" Size="Medium" Weight="Bolder" Text="This Container is RTL, Alignments should be reversed" Wrap="true" />
   <Container Rtl="true">
-    <TextBlock Wrap="true">This text box is left aligned</TextBlock>
-    <TextBlock HorizontalAlignment="Right" Wrap="true">This text block is right aligned</TextBlock>
+    <TextBlock Text="This text box is left aligned" Wrap="true" />
+    <TextBlock Text="This text block is right aligned" HorizontalAlignment="Right" Wrap="true" />
     <Image Size="Small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     <Image Size="Small" Url="https://adaptivecards.io/content/cats/1.png" HorizontalAlignment="Right" AltText="Cat" />
   </Container>

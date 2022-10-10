@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
   <Input.Number Id="numberLabelId" Label="Default Input.Number label" Value="NaN" Min="NaN" Max="NaN" />
   <Input.Number Id="requiredNumberLabelId" IsRequired="true" Label="Require Input.Number label" ErrorMessage="Required input" Value="NaN" Min="NaN" Max="NaN" />
   <Action.Submit Title="Submit" />

@@ -5,50 +5,50 @@
       <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Airplane" />
     </Column>
     <Column Width="stretch">
-      <TextBlock IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Flight Status</TextBlock>
-      <TextBlock Spacing="None" Size="Large" Color="Attention" HorizontalAlignment="Right" Wrap="true">DELAYED</TextBlock>
+      <TextBlock IsSubtle="true" Text="Flight Status" HorizontalAlignment="Right" Wrap="true" />
+      <TextBlock Spacing="None" Size="Large" Color="Attention" Text="DELAYED" HorizontalAlignment="Right" Wrap="true" />
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="Medium" Separator="true">
     <Column Width="stretch">
-      <TextBlock Weight="Bolder" IsSubtle="true" Wrap="true">Passengers</TextBlock>
-      <TextBlock Spacing="Small" Wrap="true">Sarah Hum</TextBlock>
-      <TextBlock Spacing="Small" Wrap="true">Jeremy Goldberg</TextBlock>
-      <TextBlock Spacing="Small" Wrap="true">Evan Litvak</TextBlock>
+      <TextBlock Weight="Bolder" IsSubtle="true" Text="Passengers" Wrap="true" />
+      <TextBlock Spacing="Small" Text="Sarah Hum" Wrap="true" />
+      <TextBlock Spacing="Small" Text="Jeremy Goldberg" Wrap="true" />
+      <TextBlock Spacing="Small" Text="Evan Litvak" Wrap="true" />
     </Column>
     <Column Width="auto">
-      <TextBlock Weight="Bolder" IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Seat</TextBlock>
-      <TextBlock Spacing="Small" HorizontalAlignment="Right" Wrap="true">14A</TextBlock>
-      <TextBlock Spacing="Small" HorizontalAlignment="Right" Wrap="true">14B</TextBlock>
-      <TextBlock Spacing="Small" HorizontalAlignment="Right" Wrap="true">14C</TextBlock>
+      <TextBlock Weight="Bolder" IsSubtle="true" Text="Seat" HorizontalAlignment="Right" Wrap="true" />
+      <TextBlock Spacing="Small" Text="14A" HorizontalAlignment="Right" Wrap="true" />
+      <TextBlock Spacing="Small" Text="14B" HorizontalAlignment="Right" Wrap="true" />
+      <TextBlock Spacing="Small" Text="14C" HorizontalAlignment="Right" Wrap="true" />
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="Medium" Separator="true">
     <Column Width="1">
-      <TextBlock Weight="Bolder" IsSubtle="true" Wrap="true">Flight</TextBlock>
-      <TextBlock Spacing="Small" Wrap="true">KL605</TextBlock>
+      <TextBlock Weight="Bolder" IsSubtle="true" Text="Flight" Wrap="true" />
+      <TextBlock Spacing="Small" Text="KL605" Wrap="true" />
     </Column>
     <Column Width="1">
-      <TextBlock Weight="Bolder" IsSubtle="true" HorizontalAlignment="Center" Wrap="true">Departs</TextBlock>
-      <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" HorizontalAlignment="Center" Wrap="true">2:20 AM</TextBlock>
+      <TextBlock Weight="Bolder" IsSubtle="true" Text="Departs" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" Text="2:20 AM" HorizontalAlignment="Center" Wrap="true" />
     </Column>
     <Column Width="1">
-      <TextBlock Weight="Bolder" IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Arrives</TextBlock>
-      <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" HorizontalAlignment="Right" Wrap="true">8:20 PM</TextBlock>
+      <TextBlock Weight="Bolder" IsSubtle="true" Text="Arrives" HorizontalAlignment="Right" Wrap="true" />
+      <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" Text="8:20 PM" HorizontalAlignment="Right" Wrap="true" />
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="Medium" Separator="true">
     <Column Width="1">
-      <TextBlock IsSubtle="true" Wrap="true">Amsterdam Airport</TextBlock>
-      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Wrap="true">AMS</TextBlock>
+      <TextBlock IsSubtle="true" Text="Amsterdam Airport" Wrap="true" />
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="AMS" Wrap="true" />
     </Column>
     <Column Width="auto">
-      <TextBlock Wrap="true"> </TextBlock>
+      <TextBlock Text="%20" Wrap="true" />
       <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Flight to" />
     </Column>
     <Column Width="1">
-      <TextBlock IsSubtle="true" HorizontalAlignment="Right" Wrap="true">San Francisco Airport</TextBlock>
-      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" HorizontalAlignment="Right" Wrap="true">SFO</TextBlock>
+      <TextBlock IsSubtle="true" Text="San Francisco Airport" HorizontalAlignment="Right" Wrap="true" />
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="SFO" HorizontalAlignment="Right" Wrap="true" />
     </Column>
   </ColumnSet>
 </Card>

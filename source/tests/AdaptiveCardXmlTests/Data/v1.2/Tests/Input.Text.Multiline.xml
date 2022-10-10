@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center">Input.Text elements</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Size="Medium" Weight="Bolder" Text="Input.Text elements" HorizontalAlignment="Center" />
   <Input.Text Id="SimpleVal" Placeholder="Name" />
   <Input.Text Id="UrlVal" Placeholder="Homepage" Style="Url" />
   <Input.Text Id="EmailVal" Placeholder="Email" Style="Email" />
@@ -9,8 +9,8 @@
   <Input.Number Id="NumVal" Placeholder="Quantity" Value="1" Min="-5" Max="5" />
   <Input.Date Id="DateVal" Placeholder="Due Date" Value="2017-09-20" />
   <Input.Time Id="TimeVal" Placeholder="Start time" Value="16:59" />
-  <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center">Input.ChoiceSet</TextBlock>
-  <TextBlock>What color do you want? (compact)</TextBlock>
+  <TextBlock Size="Medium" Weight="Bolder" Text="Input.ChoiceSet" HorizontalAlignment="Center" />
+  <TextBlock Text="What color do you want? (compact)" />
   <Input.ChoiceSet Id="CompactSelectVal" Value="1">
     <Choices>
       <Choice Title="Red" Value="1" />
@@ -18,7 +18,7 @@
       <Choice Title="Blue" Value="3" />
     </Choices>
   </Input.ChoiceSet>
-  <TextBlock>What color do you want? (expanded)</TextBlock>
+  <TextBlock Text="What color do you want? (expanded)" />
   <Input.ChoiceSet Id="SingleSelectVal" Value="1" Style="Expanded">
     <Choices>
       <Choice Title="Red" Value="1" />
@@ -26,7 +26,7 @@
       <Choice Title="Blue" Value="3" />
     </Choices>
   </Input.ChoiceSet>
-  <TextBlock>What colors do you want? (multiselect)</TextBlock>
+  <TextBlock Text="What colors do you want? (multiselect)" />
   <Input.ChoiceSet Id="MultiSelectVal" Value="1,3" IsMultiSelect="true">
     <Choices>
       <Choice Title="Red" Value="1" />
@@ -34,7 +34,7 @@
       <Choice Title="Blue" Value="3" />
     </Choices>
   </Input.ChoiceSet>
-  <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center">Input.Toggle</TextBlock>
+  <TextBlock Size="Medium" Weight="Bolder" Text="Input.Toggle" HorizontalAlignment="Center" />
   <Input.Toggle Id="AcceptsTerms" Title="I accept the terms and conditions (True/False)" ValueOn="true" ValueOff="false" />
   <Input.Toggle Id="ColorPreference" Title="Red cars are better than other cars" ValueOn="RedCars" ValueOff="NotRedCars" />
   <Action.Submit Title="Submit">{

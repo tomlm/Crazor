@@ -75,7 +75,7 @@ namespace AdaptiveCards
         [XmlAttribute(nameof(Version))]
 #endif
         [DefaultValue(null)]
-        public string VersionXml { get => Version.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
+        public string VersionXml { get => Version?.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
 
         public bool ShouldSerializeVersionXml() => Version != null;
 

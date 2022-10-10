@@ -47,7 +47,7 @@ namespace AdaptiveCards
         [JsonIgnore]
         public string UrlString
         {
-            get { return Url?.ToString(); }
+            get { return Url?.AbsoluteUri; }
             set { Url = new Uri(value); }
         }
     }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="Microsoft stock is trading at $62.30 a share, which is down .32%">
   <Container>
-    <TextBlock Size="Medium" Wrap="true">Microsoft Corporation</TextBlock>
-    <TextBlock Spacing="None" IsSubtle="true" Wrap="true">Nasdaq Global Select: MSFT</TextBlock>
-    <TextBlock Wrap="true">Fri, May 3, 2019 1:00 PM</TextBlock>
+    <TextBlock Size="Medium" Text="Microsoft Corporation" Wrap="true" />
+    <TextBlock Spacing="None" IsSubtle="true" Text="Nasdaq Global Select: MSFT" Wrap="true" />
+    <TextBlock Text="Fri, May 3, 2019 1:00 PM" Wrap="true" />
   </Container>
   <Container Spacing="None">
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Size="ExtraLarge" Wrap="true">128.90</TextBlock>
-        <TextBlock Spacing="None" Color="Good" Wrap="true">▲ 2.69 USD (2.13%)</TextBlock>
+        <TextBlock Size="ExtraLarge" Text="128.90" Wrap="true" />
+        <TextBlock Spacing="None" Color="Good" Text="▲ 2.69 USD (2.13%)" Wrap="true" />
       </Column>
       <Column Width="auto">
         <FactSet>

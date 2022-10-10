@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock>This is some **bold** text</TextBlock>
-  <TextBlock>This is some _italic_ text</TextBlock>
-  <TextBlock Wrap="true">- Bullet 
-- List 
-</TextBlock>
-  <TextBlock Wrap="true">1. Numbered
-2. List
-</TextBlock>
-  <TextBlock>Check out [Adaptive Cards](https://adaptivecards.io)</TextBlock>
+  <TextBlock Text="This is some **bold** text" />
+  <TextBlock Text="This is some _italic_ text" />
+  <TextBlock Text="- Bullet &#xA;- List &#xA;" Wrap="true" />
+  <TextBlock Text="1. Numbered&#xA;2. List&#xA;" Wrap="true" />
+  <TextBlock Text="Check out [Adaptive Cards](https://adaptivecards.io)" />
 </Card>

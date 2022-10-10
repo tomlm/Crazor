@@ -10,7 +10,7 @@
       </value>
     </item>
   </AdditionalProperties>
-  <TextBlock Wrap="true">هذه كتلة نص</TextBlock>
-  <TextBlock Wrap="true">זהו בלוק טקסט</TextBlock>
-  <TextBlock Wrap="true">This is a text block</TextBlock>
+  <TextBlock Text="هذه كتلة نص" Wrap="true" />
+  <TextBlock Text="זהו בלוק טקסט" Wrap="true" />
+  <TextBlock Text="This is a text block" Wrap="true" />
 </Card>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1" VerticalContentAlignment="Center">
-  <TextBlock>Hi,</TextBlock>
-  <TextBlock IsSubtle="true">MasterHip</TextBlock>
+  <TextBlock Text="Hi," />
+  <TextBlock IsSubtle="true" Text="MasterHip" />
   <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
     <Column Width="1">
-      <TextBlock Wrap="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet...</TextBlock>
+      <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet..." Wrap="true" />
     </Column>
     <Column Width="1">
-      <TextBlock Wrap="true">This text should be at the top</TextBlock>
+      <TextBlock Text="This text should be at the top" Wrap="true" />
     </Column>
     <Column VerticalContentAlignment="Center" Width="1">
-      <TextBlock Wrap="true">This text should be at the vertical center</TextBlock>
+      <TextBlock Text="This text should be at the vertical center" Wrap="true" />
     </Column>
     <Column VerticalContentAlignment="Bottom" Width="1">
-      <TextBlock Wrap="true">This text should be at the bottom</TextBlock>
+      <TextBlock Text="This text should be at the bottom" Wrap="true" />
     </Column>
   </ColumnSet>
 </Card>

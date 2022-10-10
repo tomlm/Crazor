@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**weight = lighter**</TextBlock>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge" Text="**weight = lighter**" />
   <Container>
-    <TextBlock Size="Small" Weight="Lighter">The quick brown fox jumps over the lazy dog. (size = small)</TextBlock>
-    <TextBlock Weight="Lighter">The quick brown fox jumps over the lazy dog. (size = default)</TextBlock>
-    <TextBlock Size="Medium" Weight="Lighter">The quick brown fox jumps over the lazy dog. (size = medium)</TextBlock>
-    <TextBlock Size="Large" Weight="Lighter">The quick brown fox jumps over the lazy dog. (size = large)</TextBlock>
-    <TextBlock Size="ExtraLarge" Weight="Lighter">The quick brown fox jumps over the lazy dog. (size = extraLarge)</TextBlock>
+    <TextBlock Size="Small" Weight="Lighter" Text="The quick brown fox jumps over the lazy dog. (size = small)" />
+    <TextBlock Weight="Lighter" Text="The quick brown fox jumps over the lazy dog. (size = default)" />
+    <TextBlock Size="Medium" Weight="Lighter" Text="The quick brown fox jumps over the lazy dog. (size = medium)" />
+    <TextBlock Size="Large" Weight="Lighter" Text="The quick brown fox jumps over the lazy dog. (size = large)" />
+    <TextBlock Size="ExtraLarge" Weight="Lighter" Text="The quick brown fox jumps over the lazy dog. (size = extraLarge)" />
   </Container>
-  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**weight = default**</TextBlock>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge" Text="**weight = default**" />
   <Container>
-    <TextBlock Size="Small">The quick brown fox jumps over the lazy dog. (size = small)</TextBlock>
-    <TextBlock>The quick brown fox jumps over the lazy dog. (size = default)</TextBlock>
-    <TextBlock Size="Medium">The quick brown fox jumps over the lazy dog. (size = medium)</TextBlock>
-    <TextBlock Size="Large">The quick brown fox jumps over the lazy dog. (size = large)</TextBlock>
-    <TextBlock Size="ExtraLarge">The quick brown fox jumps over the lazy dog. (size = extraLarge)</TextBlock>
+    <TextBlock Size="Small" Text="The quick brown fox jumps over the lazy dog. (size = small)" />
+    <TextBlock Text="The quick brown fox jumps over the lazy dog. (size = default)" />
+    <TextBlock Size="Medium" Text="The quick brown fox jumps over the lazy dog. (size = medium)" />
+    <TextBlock Size="Large" Text="The quick brown fox jumps over the lazy dog. (size = large)" />
+    <TextBlock Size="ExtraLarge" Text="The quick brown fox jumps over the lazy dog. (size = extraLarge)" />
   </Container>
-  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**weight = bolder**</TextBlock>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge" Text="**weight = bolder**" />
   <Container>
-    <TextBlock Size="Small" Weight="Bolder">The quick brown fox jumps over the lazy dog. (size = small)</TextBlock>
-    <TextBlock Weight="Bolder">The quick brown fox jumps over the lazy dog. (size = default)</TextBlock>
-    <TextBlock Size="Medium" Weight="Bolder">The quick brown fox jumps over the lazy dog. (size = medium)</TextBlock>
-    <TextBlock Size="Large" Weight="Bolder">The quick brown fox jumps over the lazy dog. (size = large)</TextBlock>
-    <TextBlock Size="ExtraLarge" Weight="Bolder">The quick brown fox jumps over the lazy dog. (size = extraLarge)</TextBlock>
+    <TextBlock Size="Small" Weight="Bolder" Text="The quick brown fox jumps over the lazy dog. (size = small)" />
+    <TextBlock Weight="Bolder" Text="The quick brown fox jumps over the lazy dog. (size = default)" />
+    <TextBlock Size="Medium" Weight="Bolder" Text="The quick brown fox jumps over the lazy dog. (size = medium)" />
+    <TextBlock Size="Large" Weight="Bolder" Text="The quick brown fox jumps over the lazy dog. (size = large)" />
+    <TextBlock Size="ExtraLarge" Weight="Bolder" Text="The quick brown fox jumps over the lazy dog. (size = extraLarge)" />
   </Container>
-  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**Text colors**</TextBlock>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge" Text="**Text colors**" />
   <Container>
-    <TextBlock Size="Medium">The quick brown fox jumps over the lazy dog. (color = default)</TextBlock>
-    <TextBlock Size="Medium" IsSubtle="true">The quick brown fox jumps over the lazy dog. (color = default, isSubtle = true)</TextBlock>
-    <TextBlock Size="Medium" Color="Accent">The quick brown fox jumps over the lazy dog. (color = accent)</TextBlock>
-    <TextBlock Size="Medium" Color="Accent" IsSubtle="true">The quick brown fox jumps over the lazy dog. (color = accent, isSubtle = true)</TextBlock>
+    <TextBlock Size="Medium" Text="The quick brown fox jumps over the lazy dog. (color = default)" />
+    <TextBlock Size="Medium" IsSubtle="true" Text="The quick brown fox jumps over the lazy dog. (color = default, isSubtle = true)" />
+    <TextBlock Size="Medium" Color="Accent" Text="The quick brown fox jumps over the lazy dog. (color = accent)" />
+    <TextBlock Size="Medium" Color="Accent" IsSubtle="true" Text="The quick brown fox jumps over the lazy dog. (color = accent, isSubtle = true)" />
   </Container>
 </Card>

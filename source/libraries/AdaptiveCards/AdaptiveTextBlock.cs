@@ -90,9 +90,19 @@ namespace AdaptiveCards
         /// <inheritdoc />
         [JsonRequired]
 #if !NETSTANDARD1_3
-        [XmlText]
+        [XmlIgnore]
 #endif
         public string Text { get; set; } = "";
+
+#if !NETSTANDARD1_3
+        [JsonIgnore]
+        [XmlAttribute(nameof(Text))]
+        public string TextXml
+        {
+            get => (Text != null && string.IsNullOrWhiteSpace(Text)) ? Text.Replace(" ", "%20") : Text;
+            set => Text = string.IsNullOrWhiteSpace(value?.Replace("%20", " ")) ? value?.Replace("%20", " ") : value;
+        }
+#endif
 
         /// <inheritdoc />
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
   <ColumnSet>
     <Column Width="2">
-      <TextBlock Size="Medium" Weight="Bolder">Tell us about yourself</TextBlock>
-      <TextBlock IsSubtle="true" Wrap="true">We just need a few more details to get you booked for the trip of a lifetime!</TextBlock>
-      <TextBlock Size="Small" IsSubtle="true" Wrap="true">Don't worry, we'll never share or sell your information.</TextBlock>
-      <TextBlock Wrap="true">Your name</TextBlock>
+      <TextBlock Size="Medium" Weight="Bolder" Text="Tell us about yourself" />
+      <TextBlock IsSubtle="true" Text="We just need a few more details to get you booked for the trip of a lifetime!" Wrap="true" />
+      <TextBlock Size="Small" IsSubtle="true" Text="Don't worry, we'll never share or sell your information." Wrap="true" />
+      <TextBlock Text="Your name" Wrap="true" />
       <Input.Text Id="myName" Placeholder="Last, First" />
-      <TextBlock Wrap="true">Your email</TextBlock>
+      <TextBlock Text="Your email" Wrap="true" />
       <Input.Text Id="myEmail" Placeholder="youremail@example.com" Style="Email" />
-      <TextBlock>Phone Number</TextBlock>
+      <TextBlock Text="Phone Number" />
       <Input.Text Id="myTel" Placeholder="xxx.xxx.xxxx" Style="Tel" />
     </Column>
     <Column Width="1">

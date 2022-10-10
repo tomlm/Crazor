@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Wrap="true">Disabled Show Card</TextBlock>
+  <TextBlock Text="Disabled Show Card" Wrap="true" />
   <Action.ShowCard Title="Enabled">
     <AdaptiveCard>
-      <TextBlock Wrap="true">You can see this show card!</TextBlock>
+      <TextBlock Text="You can see this show card!" Wrap="true" />
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="Disabled">
     <AdaptiveCard>
-      <TextBlock Wrap="true">You cannot see this show card.</TextBlock>
+      <TextBlock Text="You cannot see this show card." Wrap="true" />
     </AdaptiveCard>
   </Action.ShowCard>
 </Card>

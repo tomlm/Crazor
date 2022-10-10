@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ColumnSet>
     <Column Width="stretch">
       <BackgroundImage BackgroundImage="https://i.picsum.photos/id/741/375/132.jpg?hmac=ERFnNR0i8FOAhUzgI--BoJ6Bvr5aWWb03TltW7R5U8E" HorizontalAlignment="Center" VerticalAlignment="Center" />
-      <TextBlock Size="ExtraLarge" Wrap="true">Trip to UAE</TextBlock>
-      <TextBlock Spacing="Small" Size="Small" Weight="Bolder" Color="Accent">ER-13052</TextBlock>
+      <TextBlock Size="ExtraLarge" Text="Trip to UAE" Wrap="true" />
+      <TextBlock Spacing="Small" Size="Small" Weight="Bolder" Color="Accent" Text="ER-13052" />
     </Column>
   </ColumnSet>
   <Container Height="AdaptiveCards.AdaptiveDimension">
-    <TextBlock Wrap="true">Every elements below this has to be convered by background images</TextBlock>
+    <TextBlock Text="Every elements below this has to be convered by background images" Wrap="true" />
     <Container>
       <BackgroundImage BackgroundImage="https://picsum.photos/50" />
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
-      <TextBlock>New TextBlock</TextBlock>
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
+      <TextBlock Text="New TextBlock" />
       <FactSet>
         <Fact Title="Fact 1" Value="Value 1" />
         <Fact Title="Fact 2" Value="Value 2" />
@@ -35,9 +35,9 @@
   </Container>
   <Container>
     <BackgroundImage BackgroundImage="https://picsum.photos/50" />
-    <TextBlock Id="txtid">Test Card.</TextBlock>
+    <TextBlock Id="txtid" Text="Test Card." />
     <Input.Text Id="newtxt" Placeholder="Enter your text" Value="default text" />
-    <TextBlock Id="resd">My new textblock</TextBlock>
+    <TextBlock Id="resd" Text="My new textblock" />
     <Input.Date Id="dateid" Value="" />
     <Input.ChoiceSet Id="idchoice" Value="mychoice">
       <Choices>
@@ -45,8 +45,8 @@
         <Choice Title="Choice 2" Value="Choice 2" />
       </Choices>
     </Input.ChoiceSet>
-    <TextBlock>text3</TextBlock>
-    <TextBlock>Text4</TextBlock>
-    <TextBlock>Text5</TextBlock>
+    <TextBlock Text="text3" />
+    <TextBlock Text="Text4" />
+    <TextBlock Text="Text5" />
   </Container>
 </Card>

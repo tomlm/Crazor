@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Size="Medium" Wrap="true">The middle column is set to rtl</TextBlock>
+  <TextBlock Size="Medium" Text="The middle column is set to rtl" Wrap="true" />
   <ColumnSet Spacing="Medium">
     <Column>
-      <TextBlock Wrap="true">Column One</TextBlock>
+      <TextBlock Text="Column One" Wrap="true" />
     </Column>
     <Column Rtl="true">
-      <TextBlock Wrap="true">العمود الثاني</TextBlock>
+      <TextBlock Text="العمود الثاني" Wrap="true" />
     </Column>
     <Column>
-      <TextBlock Wrap="true">Column three</TextBlock>
+      <TextBlock Text="Column three" Wrap="true" />
     </Column>
   </ColumnSet>
 </Card>

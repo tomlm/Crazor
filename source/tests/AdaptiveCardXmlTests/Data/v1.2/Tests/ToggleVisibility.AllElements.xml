@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Image Id="id1" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
     <SelectAction xsi:type="Action.ToggleVisibility">
       <TargetElements ElementId="id2" />
@@ -13,7 +13,7 @@
     <SelectAction xsi:type="Action.ToggleVisibility">
       <TargetElements ElementId="id3" />
     </SelectAction>
-    <TextBlock>This is some text</TextBlock>
+    <TextBlock Text="This is some text" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
   </Container>
   <ColumnSet Id="id3" Height="AdaptiveCards.AdaptiveDimension">
@@ -21,10 +21,10 @@
       <TargetElements ElementId="id1" />
     </SelectAction>
     <Column>
-      <TextBlock>Column 1</TextBlock>
+      <TextBlock Text="Column 1" />
     </Column>
     <Column>
-      <TextBlock>Column 2</TextBlock>
+      <TextBlock Text="Column 2" />
     </Column>
   </ColumnSet>
   <ColumnSet>
@@ -32,16 +32,16 @@
       <SelectAction xsi:type="Action.ToggleVisibility">
         <TargetElements ElementId="id5" />
       </SelectAction>
-      <TextBlock>Column 1</TextBlock>
+      <TextBlock Text="Column 1" />
     </Column>
     <Column Id="id5">
       <SelectAction xsi:type="Action.ToggleVisibility">
         <TargetElements ElementId="id4" />
       </SelectAction>
-      <TextBlock>Column 2</TextBlock>
+      <TextBlock Text="Column 2" />
     </Column>
   </ColumnSet>
-  <TextBlock Id="id6" IsVisible="false" Size="Large">This is some text</TextBlock>
+  <TextBlock Id="id6" IsVisible="false" Size="Large" Text="This is some text" />
   <Media Id="id7" IsVisible="false" Poster="https://adaptivecards.io/content/poster-video.png">
     <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
   </Media>

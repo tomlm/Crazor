@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
     <Column Width="45">
       <Container Style="Emphasis" Bleed="true">
@@ -7,17 +7,17 @@
         <Image Url="https://messagecardplayground.azurewebsites.net/assets/TxP_Flight.png" HorizontalAlignment="Center" AltText="Departing airplane" />
       </Container>
       <Container Spacing="None" Height="AdaptiveCards.AdaptiveDimension" Style="Emphasis" Bleed="true">
-        <TextBlock Size="ExtraLarge" Weight="Lighter" Color="Accent" Wrap="true">Flight to JFK</TextBlock>
-        <TextBlock Spacing="Small" Wrap="true">Continental Air Lines flight UA110</TextBlock>
-        <TextBlock Spacing="None" Wrap="true">Confirmation code: RXJ34P</TextBlock>
-        <TextBlock Spacing="None" Wrap="true">4 hours 15 minutes</TextBlock>
+        <TextBlock Size="ExtraLarge" Weight="Lighter" Color="Accent" Text="Flight to JFK" Wrap="true" />
+        <TextBlock Spacing="Small" Text="Continental Air Lines flight UA110" Wrap="true" />
+        <TextBlock Spacing="None" Text="Confirmation code: RXJ34P" Wrap="true" />
+        <TextBlock Spacing="None" Text="4 hours 15 minutes" Wrap="true" />
       </Container>
     </Column>
     <Column Width="55">
       <Container Height="AdaptiveCards.AdaptiveDimension">
         <ColumnSet>
           <Column Width="auto">
-            <TextBlock Size="ExtraLarge" Weight="Lighter" Wrap="true">SFO</TextBlock>
+            <TextBlock Size="ExtraLarge" Weight="Lighter" Text="SFO" Wrap="true" />
           </Column>
           <Column VerticalContentAlignment="Center" Width="stretch">
             <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://messagecardplayground.azurewebsites.net/assets/graydot2x2.png" Width="AdaptiveCards.AdaptiveDimension" />
@@ -26,7 +26,7 @@
             <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://messagecardplayground.azurewebsites.net/assets/smallairplane.png" AltText="Flight to" />
           </Column>
           <Column Width="auto">
-            <TextBlock Size="ExtraLarge" Weight="Lighter" HorizontalAlignment="Right" Wrap="true">JFK</TextBlock>
+            <TextBlock Size="ExtraLarge" Weight="Lighter" Text="JFK" HorizontalAlignment="Right" Wrap="true" />
           </Column>
         </ColumnSet>
         <ColumnSet>

@@ -2,9 +2,9 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Container MinHeight="150px">
     <BackgroundImage BackgroundImage="https://adaptivecards.io/content/AlkiBeach.jpg" />
-    <TextBlock>What a beautiful background</TextBlock>
+    <TextBlock Text="What a beautiful background" />
   </Container>
-  <TextBlock>They can even repeat a bunch of different ways...</TextBlock>
+  <TextBlock Text="They can even repeat a bunch of different ways..." />
   <Container MinHeight="100px">
     <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="Repeat" />
   </Container>

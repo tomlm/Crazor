@@ -2,7 +2,7 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ColumnSet Style="Emphasis" MinHeight="100px">
     <Column Style="Default" MinHeight="200px">
-      <TextBlock Wrap="true">The columnset has a minHeight of 100px while this column has a minHeight of 200px so it should override</TextBlock>
+      <TextBlock Text="The columnset has a minHeight of 100px while this column has a minHeight of 200px so it should override" Wrap="true" />
     </Column>
     <Column Style="Default" MinHeight="50px">
       <FactSet>

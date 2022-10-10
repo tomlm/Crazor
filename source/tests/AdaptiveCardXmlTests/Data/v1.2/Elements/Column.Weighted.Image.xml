@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ColumnSet>
     <Column Width="1">
-      <TextBlock>Weight 1</TextBlock>
+      <TextBlock Text="Weight 1" />
       <Image Size="Large" Url="https://cdn-01.independent.ie/migration_catalog/Non-Staff/article25331906.ece/fea85/AUTOCROP/w620/No%20name" AltText="David Hasselhoff" />
     </Column>
     <Column Width="3">
-      <TextBlock>Weight 3</TextBlock>
+      <TextBlock Text="Weight 3" />
     </Column>
   </ColumnSet>
 </Card>

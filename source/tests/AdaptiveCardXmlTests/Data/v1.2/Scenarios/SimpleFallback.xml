@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Wrap="true">Fallback test:</TextBlock>
+  <TextBlock Text="Fallback test:" Wrap="true" />
   <AdaptiveUnknownElement>
     <AdditionalProperties>
       <item>
@@ -30,7 +30,7 @@
     </AdditionalProperties>
     <Fallback>
       <Type>Content</Type>
-      <Content xsi:type="TextBlock" Wrap="true">No graph support. Guess we'll just use this textblock instead.</Content>
+      <Content xsi:type="TextBlock" Text="No graph support. Guess we'll just use this textblock instead." Wrap="true" />
     </Fallback>
     <Type>Graph</Type>
   </AdaptiveUnknownElement>

@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
-  <TextBlock Weight="Bolder" Wrap="true">Card (rtl: unset)</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
+  <TextBlock Weight="Bolder" Text="Card (rtl: unset)" Wrap="true" />
   <ColumnSet>
     <Column Width="stretch">
-      <TextBlock Wrap="true">Column 1</TextBlock>
+      <TextBlock Text="Column 1" Wrap="true" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Wrap="true">Column 2</TextBlock>
+      <TextBlock Text="Column 2" Wrap="true" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Wrap="true">Column 3</TextBlock>
+      <TextBlock Text="Column 3" Wrap="true" />
     </Column>
   </ColumnSet>
   <Input.Text Id="0" Label="Input w/ Inline Action">
     <Action.Submit />
   </Input.Text>
-  <TextBlock Wrap="true">Lorem ipsum dolor sit amet.</TextBlock>
-  <TextBlock Wrap="true">لكن لا بد أن أوضح لك أن كل هذه الأفكار.</TextBlock>
+  <TextBlock Text="Lorem ipsum dolor sit amet." Wrap="true" />
+  <TextBlock Text="لكن لا بد أن أوضح لك أن كل هذه الأفكار." Wrap="true" />
   <Container Style="Emphasis" Rtl="true">
-    <TextBlock Weight="Bolder" Wrap="true">Container (rtl: true)</TextBlock>
+    <TextBlock Weight="Bolder" Text="Container (rtl: true)" Wrap="true" />
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Wrap="true">Column 1</TextBlock>
+        <TextBlock Text="Column 1" Wrap="true" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Wrap="true">Column 2</TextBlock>
+        <TextBlock Text="Column 2" Wrap="true" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Wrap="true">Column 3</TextBlock>
+        <TextBlock Text="Column 3" Wrap="true" />
       </Column>
     </ColumnSet>
     <Input.Text Id="1" Label="Input w/ Inline Action">
       <Action.Submit />
     </Input.Text>
-    <TextBlock Wrap="true">Lorem ipsum dolor sit amet.</TextBlock>
-    <TextBlock Wrap="true">لكن لا بد أن أوضح لك أن كل هذه الأفكار.</TextBlock>
+    <TextBlock Text="Lorem ipsum dolor sit amet." Wrap="true" />
+    <TextBlock Text="لكن لا بد أن أوضح لك أن كل هذه الأفكار." Wrap="true" />
   </Container>
   <Container Style="Emphasis">
-    <TextBlock Weight="Bolder" Wrap="true">Container (rtl: false)</TextBlock>
+    <TextBlock Weight="Bolder" Text="Container (rtl: false)" Wrap="true" />
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Wrap="true">Column 1</TextBlock>
+        <TextBlock Text="Column 1" Wrap="true" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Wrap="true">Column 2</TextBlock>
+        <TextBlock Text="Column 2" Wrap="true" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Wrap="true">Column 3</TextBlock>
+        <TextBlock Text="Column 3" Wrap="true" />
       </Column>
     </ColumnSet>
     <Input.Text Id="2" Label="Input w/ Inline Action">
       <Action.Submit />
     </Input.Text>
-    <TextBlock Wrap="true">Lorem ipsum dolor sit amet.</TextBlock>
-    <TextBlock Wrap="true">لكن لا بد أن أوضح لك أن كل هذه الأفكار.</TextBlock>
+    <TextBlock Text="Lorem ipsum dolor sit amet." Wrap="true" />
+    <TextBlock Text="لكن لا بد أن أوضح لك أن كل هذه الأفكار." Wrap="true" />
   </Container>
 </Card>

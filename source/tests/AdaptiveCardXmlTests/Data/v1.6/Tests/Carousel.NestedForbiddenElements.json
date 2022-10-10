@@ -1,6 +1,5 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.0",
   "speak": "We're sorry, this card couldn't be displayed",
   "lang": "en",
   "body": [

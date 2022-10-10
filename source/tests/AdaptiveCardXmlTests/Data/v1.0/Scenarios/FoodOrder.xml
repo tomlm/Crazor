@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Medium" Weight="Bolder" Wrap="true">Your registration is almost complete</TextBlock>
-  <TextBlock Wrap="true">What type of food do you prefer?</TextBlock>
+  <TextBlock Size="Medium" Weight="Bolder" Text="Your registration is almost complete" Wrap="true" />
+  <TextBlock Text="What type of food do you prefer?" Wrap="true" />
   <ImageSet ImageSize="Medium">
     <Image Url="https://adaptivecards.io/content/steak.jpeg" AltText="Steak cut with fries" />
     <Image Url="https://adaptivecards.io/content/chicken.jpeg" AltText="Fried chicken with lettuce" />
@@ -9,7 +9,7 @@
   </ImageSet>
   <Action.ShowCard Title="Steak">
     <AdaptiveCard Version="1.0">
-      <TextBlock Size="Medium" Wrap="true">How would you like your steak prepared?</TextBlock>
+      <TextBlock Size="Medium" Text="How would you like your steak prepared?" Wrap="true" />
       <Input.ChoiceSet Id="SteakTemp" Style="Expanded">
         <Choices>
           <Choice Title="Rare" Value="rare" />
@@ -25,7 +25,7 @@
   </Action.ShowCard>
   <Action.ShowCard Title="Chicken">
     <AdaptiveCard Version="1.0">
-      <TextBlock Size="Medium" Wrap="true">Do you have any allergies?</TextBlock>
+      <TextBlock Size="Medium" Text="Do you have any allergies?" Wrap="true" />
       <Input.ChoiceSet Id="ChickenAllergy" Style="Expanded" IsMultiSelect="true">
         <Choices>
           <Choice Title="I'm allergic to peanuts" Value="peanut" />
@@ -39,7 +39,7 @@
   </Action.ShowCard>
   <Action.ShowCard Title="Tofu">
     <AdaptiveCard Version="1.0">
-      <TextBlock Size="Medium" Wrap="true">Would you like it prepared vegan?</TextBlock>
+      <TextBlock Size="Medium" Text="Would you like it prepared vegan?" Wrap="true" />
       <Input.Toggle Id="Vegetarian" Title="Please prepare it vegan" ValueOn="vegan" ValueOff="notVegan" />
       <Input.Text Id="VegOther" Placeholder="Any other preparation requests?" IsMultiline="true" />
       <Action.Submit Title="OK">{

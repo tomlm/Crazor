@@ -2,7 +2,7 @@
   "type": "AdaptiveCard",
   "version": "1.0",
   "speak": "<s>Weather forecast for Monday is high of 62 and low of 42 degrees with a 20% chance of rain</s><s>Winds will be 5 mph from the northeast</s>",
-  "backgroundImage": "https://messagecardplayground.azurewebsites.net/assets/Mostly Cloudy-Background.jpg",
+  "backgroundImage": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Background.jpg",
   "body": [
     {
       "type": "ColumnSet",
@@ -92,7 +92,7 @@
           ],
           "selectAction": {
             "type": "Action.OpenUrl",
-            "url": "https://www.microsoft.com",
+            "url": "https://www.microsoft.com/",
             "title": "View Wednesday"
           }
         },
@@ -128,7 +128,7 @@
           ],
           "selectAction": {
             "type": "Action.OpenUrl",
-            "url": "https://www.microsoft.com",
+            "url": "https://www.microsoft.com/",
             "title": "View Thursday"
           }
         },
@@ -164,7 +164,7 @@
           ],
           "selectAction": {
             "type": "Action.OpenUrl",
-            "url": "https://www.microsoft.com",
+            "url": "https://www.microsoft.com/",
             "title": "View Friday"
           }
         },
@@ -200,7 +200,7 @@
           ],
           "selectAction": {
             "type": "Action.OpenUrl",
-            "url": "https://www.microsoft.com",
+            "url": "https://www.microsoft.com/",
             "title": "View Saturday"
           }
         }

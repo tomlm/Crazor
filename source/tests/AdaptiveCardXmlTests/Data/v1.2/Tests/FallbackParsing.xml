@@ -5,7 +5,7 @@
       <Fallback>
         <Type>Content</Type>
         <Content xsi:type="Container" Id="B">
-          <TextBlock Id="C">B Container fallback textblock</TextBlock>
+          <TextBlock Id="C" Text="B Container fallback textblock" />
           <Image Id="Z" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
         </Content>
       </Fallback>
@@ -26,7 +26,7 @@
               <Type>Content</Type>
               <Content xsi:type="Container" Id="E">
                 <Image Id="I" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
-                <TextBlock Id="J">C ColumnSet fallback textblock</TextBlock>
+                <TextBlock Id="J" Text="C ColumnSet fallback textblock" />
               </Content>
             </Fallback>
             <Type>Graph</Type>
@@ -35,7 +35,7 @@
       </ColumnSet>
     </Container>
   </Container>
-  <TextBlock Id="F">F TextBlock</TextBlock>
+  <TextBlock Id="F" Text="F TextBlock" />
   <Input.Text Id="G" Placeholder="G Input.Text" />
   <AdaptiveUnknownElement Id="H">
     <AdditionalProperties>
@@ -51,7 +51,7 @@
     <Fallback>
       <Type>Content</Type>
       <Content xsi:type="Container" Id="L">
-        <TextBlock Id="K">H Graph fallback TextBlock</TextBlock>
+        <TextBlock Id="K" Text="H Graph fallback TextBlock" />
       </Content>
     </Fallback>
     <Type>Graph</Type>

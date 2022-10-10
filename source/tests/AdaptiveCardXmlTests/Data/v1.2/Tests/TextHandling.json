@@ -55,7 +55,8 @@
     {
       "type": "TextBlock",
       "text": "",
-      "separator": true
+      "separator": true,
+      "space": "preserve"
     },
     {
       "type": "TextBlock",

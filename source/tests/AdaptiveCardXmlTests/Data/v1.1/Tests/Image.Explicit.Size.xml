@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Small" Weight="Bolder">width:50px height:50px</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
+  <TextBlock Size="Small" Weight="Bolder" Text="width:50px height:50px" />
   <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" Width="AdaptiveCards.AdaptiveDimension" />
-  <TextBlock Size="Small" Weight="Bolder">width:25px height:50px</TextBlock>
+  <TextBlock Size="Small" Weight="Bolder" Text="width:25px height:50px" />
   <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" Width="AdaptiveCards.AdaptiveDimension" />
-  <TextBlock Size="Small" Weight="Bolder">width:80px height:not set</TextBlock>
+  <TextBlock Size="Small" Weight="Bolder" Text="width:80px height:not set" />
   <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" Width="AdaptiveCards.AdaptiveDimension" />
-  <TextBlock Size="Small" Weight="Bolder">width:80px height:not set, style:person</TextBlock>
+  <TextBlock Size="Small" Weight="Bolder" Text="width:80px height:not set, style:person" />
   <Image Style="Person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" Width="AdaptiveCards.AdaptiveDimension" />
-  <TextBlock Size="Small" Weight="Bolder">width:40px height:80px, style:person</TextBlock>
+  <TextBlock Size="Small" Weight="Bolder" Text="width:40px height:80px, style:person" />
   <Image Height="AdaptiveCards.AdaptiveDimension" Style="Person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" Width="AdaptiveCards.AdaptiveDimension" />
 </Card>

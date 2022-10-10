@@ -2,16 +2,16 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Container>
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="Go to a url" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
-    <TextBlock>Cool link</TextBlock>
+    <TextBlock Text="Cool link" />
   </Container>
   <Container Style="Emphasis">
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="Go to a different url" Url="https://msn.com/" />
-    <TextBlock>Emphasis link</TextBlock>
+    <TextBlock Text="Emphasis link" />
   </Container>
   <Container>
     <SelectAction xsi:type="Action.Submit" Tooltip="Submit action">{
   "info": "My submit action data"
 }</SelectAction>
-    <TextBlock>Submit action</TextBlock>
+    <TextBlock Text="Submit action" />
   </Container>
 </Card>

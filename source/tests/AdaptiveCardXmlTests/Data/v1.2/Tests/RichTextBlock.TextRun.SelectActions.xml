@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Id="textToToggle" IsVisible="false">Here are some images:</TextBlock>
+  <TextBlock Id="textToToggle" IsVisible="false" Text="Here are some images:" />
   <ColumnSet>
     <Column>
       <Image Id="imageToToggle" IsVisible="false" Size="Medium" Style="Person" Url="https://picsum.photos/100/100?image=112" AltText="Wheat field" />

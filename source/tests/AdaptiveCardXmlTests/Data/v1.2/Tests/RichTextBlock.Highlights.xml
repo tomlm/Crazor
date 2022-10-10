@@ -32,9 +32,9 @@
     <Inlines Highlight="true">
       <Type>TextRun</Type>Submit!<SelectAction xsi:type="Action.Submit" /></Inlines>
   </RichTextBlock>
-  <TextBlock Size="Large" Wrap="true">Highlights with colors and containers:</TextBlock>
+  <TextBlock Size="Large" Text="Highlights with colors and containers:" Wrap="true" />
   <Container Style="Default">
-    <TextBlock>**Default Container:** </TextBlock>
+    <TextBlock Text="**Default Container:** " />
     <RichTextBlock>
       <Inlines Highlight="true">
         <Type>TextRun</Type>Default </Inlines>
@@ -67,7 +67,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="Emphasis">
-    <TextBlock>**Emphasis Container:** </TextBlock>
+    <TextBlock Text="**Emphasis Container:** " />
     <RichTextBlock>
       <Inlines Highlight="true">
         <Type>TextRun</Type>Default </Inlines>
@@ -100,7 +100,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="Good">
-    <TextBlock>**Good Container:** </TextBlock>
+    <TextBlock Text="**Good Container:** " />
     <RichTextBlock>
       <Inlines Highlight="true">
         <Type>TextRun</Type>Default </Inlines>
@@ -133,7 +133,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="Attention">
-    <TextBlock>**Attention Container:** </TextBlock>
+    <TextBlock Text="**Attention Container:** " />
     <RichTextBlock>
       <Inlines Highlight="true">
         <Type>TextRun</Type>Default </Inlines>
@@ -166,7 +166,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="Warning">
-    <TextBlock>**Warning Container:** </TextBlock>
+    <TextBlock Text="**Warning Container:** " />
     <RichTextBlock>
       <Inlines Highlight="true">
         <Type>TextRun</Type>Default </Inlines>
@@ -199,7 +199,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="Accent">
-    <TextBlock>**Accent Container:** </TextBlock>
+    <TextBlock Text="**Accent Container:** " />
     <RichTextBlock>
       <Inlines Highlight="true">
         <Type>TextRun</Type>Default </Inlines>
