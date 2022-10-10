@@ -5,8 +5,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "input1",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",
@@ -17,13 +15,12 @@
           "value": "2"
         }
       ],
-      "label": "Default Input.ChoiceSet label (compact)"
+      "label": "Default Input.ChoiceSet label (compact)",
+      "style": "compact"
     },
     {
       "type": "Input.ChoiceSet",
       "id": "input2",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",
@@ -36,13 +33,13 @@
       ],
       "isRequired": true,
       "label": "Required Input.ChoiceSet label (compact)",
-      "errorMessage": "Required input"
+      "errorMessage": "Required input",
+      "style": "compact"
     },
     {
       "type": "Input.ChoiceSet",
       "id": "input3",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",
@@ -59,7 +56,6 @@
       "type": "Input.ChoiceSet",
       "id": "input4",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",

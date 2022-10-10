@@ -46,7 +46,6 @@
             "type": "Input.ChoiceSet",
             "id": "SteakTemp",
             "style": "expanded",
-            "isMultiSelect": false,
             "choices": [
               {
                 "title": "Rare",

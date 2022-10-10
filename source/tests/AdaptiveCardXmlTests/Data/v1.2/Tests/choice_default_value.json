@@ -9,8 +9,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "myColor",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Red",
@@ -24,7 +22,8 @@
           "title": "Blue",
           "value": "3"
         }
-      ]
+      ],
+      "style": "compact"
     }
   ],
   "actions": [

@@ -11,6 +11,12 @@ namespace AdaptiveCardXmlTests
 {
     public class SerializationTests
     {
+        private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
+        {
+            Formatting = Newtonsoft.Json.Formatting.Indented,
+            NullValueHandling = NullValueHandling.Ignore,
+            DefaultValueHandling = DefaultValueHandling.Ignore,
+        };
         private static XmlSerializer serializer = new XmlSerializer(typeof(AdaptiveCard));
         private static XmlWriterSettings settings = new XmlWriterSettings()
         {
@@ -48,8 +54,8 @@ namespace AdaptiveCardXmlTests
             {
                 if (!File.Exists(Path.Combine(Environment.CurrentDirectory, xmlFile)))
                 {
-                    var card = JsonConvert.DeserializeObject<AdaptiveCard>(json);
-                    json = JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented);
+                    var card = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
+                    json = JsonConvert.SerializeObject(card, jsonSettings);
                     File.WriteAllText(jsonFile, json);
                     File.WriteAllText(xmlFile, ToXml(card));
                 }
@@ -61,10 +67,10 @@ namespace AdaptiveCardXmlTests
 
             Debug.WriteLine($"---- {name} -----");
             var xml = File.ReadAllText(xmlFile);
-            var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json);
+            var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
             var reader = XmlReader.Create(new StringReader(xml));
             var xmlCard = serializer.Deserialize(reader);
-            var json2 = JsonConvert.SerializeObject(xmlCard, Newtonsoft.Json.Formatting.Indented);
+            var json2 = JsonConvert.SerializeObject(xmlCard, jsonSettings);
             if (json != json2)
             {
                 Debug.WriteLine(json);

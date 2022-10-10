@@ -63,8 +63,6 @@
           "type": "Input.ChoiceSet",
           "id": "snoozeFor",
           "value": "1",
-          "style": "compact",
-          "isMultiSelect": false,
           "choices": [
             {
               "title": "5 minutes",
@@ -78,7 +76,8 @@
               "title": "1 hour",
               "value": "3"
             }
-          ]
+          ],
+          "style": "compact"
         }
       ]
     }

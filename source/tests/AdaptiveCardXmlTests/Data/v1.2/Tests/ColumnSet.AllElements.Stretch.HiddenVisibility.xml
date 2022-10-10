@@ -70,6 +70,16 @@
     <Column Spacing="Large" Separator="true" Width="1">
       <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
       <Input.ChoiceSet Id="id7" Height="AdaptiveCards.AdaptiveDimension" IsVisible="false">
+        <AdditionalProperties>
+          <item>
+            <key>
+              <string>style</string>
+            </key>
+            <value>
+              <anyType xsi:type="xsd:string">compact</anyType>
+            </value>
+          </item>
+        </AdditionalProperties>
         <Choices>
           <Choice Title="Red" Value="1" />
           <Choice Title="Green" Value="2" />
@@ -88,6 +98,16 @@
     <Column Spacing="Large" Separator="true" Width="1">
       <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
       <Input.ChoiceSet Id="id9" Height="AdaptiveCards.AdaptiveDimension" IsVisible="false" Value="1,3" IsMultiSelect="true">
+        <AdditionalProperties>
+          <item>
+            <key>
+              <string>style</string>
+            </key>
+            <value>
+              <anyType xsi:type="xsd:string">compact</anyType>
+            </value>
+          </item>
+        </AdditionalProperties>
         <Choices>
           <Choice Title="Red" Value="1" />
           <Choice Title="Green" Value="2" />

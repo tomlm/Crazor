@@ -48,8 +48,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "input6",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Choice 1",
@@ -63,7 +61,8 @@
       "placeholder": "Placeholder text",
       "isRequired": true,
       "label": "This is a required ChoiceSet input",
-      "errorMessage": "The input value is invalid. This error message is intentionally long to show that it wraps."
+      "errorMessage": "The input value is invalid. This error message is intentionally long to show that it wraps.",
+      "style": "compact"
     },
     {
       "type": "Input.Toggle",

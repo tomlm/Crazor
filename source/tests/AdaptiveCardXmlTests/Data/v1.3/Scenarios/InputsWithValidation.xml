@@ -11,6 +11,16 @@
   <Input.Time Id="TimeVal" Label="Start time" Value="16:59" />
   <TextBlock Size="Medium" Weight="Bolder" Text="Input.ChoiceSet" HorizontalAlignment="Center" Wrap="true" Style="Heading" />
   <Input.ChoiceSet Id="CompactSelectVal" Label="What color do you want? (compact)" Value="1">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />
@@ -25,6 +35,16 @@
     </Choices>
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="MultiSelectVal" Label="What colors do you want? (multiselect)" Value="1,3" IsMultiSelect="true">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />

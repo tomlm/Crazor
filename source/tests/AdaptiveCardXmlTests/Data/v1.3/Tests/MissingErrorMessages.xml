@@ -14,6 +14,16 @@
   <Input.Number Id="minNumber" Label="Min Input.Number" Value="NaN" Min="4" Max="NaN" />
   <Input.Number Id="maxNumber" Label="Max Input.Number" Value="NaN" Min="NaN" Max="8" />
   <Input.ChoiceSet Id="compact" IsRequired="true" Label="Required Compact Input.ChoiceSet">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="Thing 1" Value="Thing 1" />
       <Choice Title="Thing 2" Value="Thing 2" />

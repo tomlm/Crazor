@@ -14,7 +14,6 @@
       "id": "filament",
       "value": "1",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "HATCHBOX 1.75mm White PLA 3D Printer Filament - 1kg Spool (2.2 lbs) - Dimensional Accuracy +/- 0.03mm",
@@ -35,8 +34,6 @@
       "type": "Input.ChoiceSet",
       "id": "filamentCompact",
       "value": "1",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "HATCHBOX 1.75mm White PLA 3D Printer Filament - 1kg Spool (2.2 lbs) - Dimensional Accuracy +/- 0.03mm",
@@ -51,7 +48,8 @@
           "value": "3"
         }
       ],
-      "wrap": true
+      "wrap": true,
+      "style": "compact"
     },
     {
       "type": "TextBlock",

@@ -2,6 +2,16 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Size="Large" Weight="Bolder" Text="Please rate your experience" />
   <Input.ChoiceSet Id="Rating" Spacing="Medium" Value="5">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="Excellent" Value="5" />
       <Choice Title="Good" Value="4" />

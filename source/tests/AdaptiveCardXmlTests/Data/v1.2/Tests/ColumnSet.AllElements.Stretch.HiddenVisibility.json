@@ -302,8 +302,6 @@
             {
               "type": "Input.ChoiceSet",
               "id": "id7",
-              "style": "compact",
-              "isMultiSelect": false,
               "choices": [
                 {
                   "title": "Red",
@@ -319,14 +317,14 @@
                 }
               ],
               "height": "AdaptiveCards.AdaptiveDimension",
-              "isVisible": false
+              "isVisible": false,
+              "style": "compact"
             },
             {
               "type": "Input.ChoiceSet",
               "id": "id8",
               "value": "1",
               "style": "expanded",
-              "isMultiSelect": false,
               "choices": [
                 {
                   "title": "Red",
@@ -366,7 +364,6 @@
               "type": "Input.ChoiceSet",
               "id": "id9",
               "value": "1,3",
-              "style": "compact",
               "isMultiSelect": true,
               "choices": [
                 {
@@ -383,7 +380,8 @@
                 }
               ],
               "height": "AdaptiveCards.AdaptiveDimension",
-              "isVisible": false
+              "isVisible": false,
+              "style": "compact"
             },
             {
               "type": "Input.ChoiceSet",

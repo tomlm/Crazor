@@ -61,8 +61,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "choiceSet1",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Choice 1",
@@ -76,13 +74,13 @@
       "placeholder": "Select a Choice",
       "isRequired": true,
       "label": "Please select from the following choices:",
-      "errorMessage": "You must select a choice"
+      "errorMessage": "You must select a choice",
+      "style": "compact"
     },
     {
       "type": "Input.ChoiceSet",
       "id": "choiceSet2",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Choice 1",

@@ -12,8 +12,6 @@
       "type": "Input.ChoiceSet",
       "id": "Rating",
       "value": "5",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Excellent",
@@ -36,7 +34,8 @@
           "value": "1"
         }
       ],
-      "spacing": "medium"
+      "spacing": "medium",
+      "style": "compact"
     },
     {
       "type": "TextBlock",

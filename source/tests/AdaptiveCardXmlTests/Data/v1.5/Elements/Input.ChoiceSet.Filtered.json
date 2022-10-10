@@ -7,7 +7,6 @@
       "id": "chosenAnimal",
       "value": "Alligator gar",
       "style": "filtered",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Abyssal whiptail",

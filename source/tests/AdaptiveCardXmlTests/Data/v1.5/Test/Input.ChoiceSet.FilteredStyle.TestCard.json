@@ -6,8 +6,6 @@
       "type": "Input.ChoiceSet",
       "id": "1",
       "value": "Banana Smoothie",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Apple Cider",
@@ -27,7 +25,8 @@
         }
       ],
       "placeholder": "Click On Expand",
-      "label": "1.0 Compact Style"
+      "label": "1.0 Compact Style",
+      "style": "compact"
     },
     {
       "type": "Container",
@@ -36,7 +35,6 @@
           "type": "Input.ChoiceSet",
           "id": "2",
           "style": "filtered",
-          "isMultiSelect": false,
           "choices": [
             {
               "title": "Apple Cider",

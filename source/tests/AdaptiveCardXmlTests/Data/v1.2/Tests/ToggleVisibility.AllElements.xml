@@ -59,6 +59,16 @@
   <Input.Time Id="input4" IsVisible="false" Value="15:30" Min="09:00" Max="17:00" />
   <Input.Toggle Id="input5" IsVisible="false" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="true" />
   <Input.ChoiceSet Id="input6" IsVisible="false" Value="1">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />
@@ -77,6 +87,16 @@
     </Choices>
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="input9" IsVisible="false" Value="1" Wrap="true">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />

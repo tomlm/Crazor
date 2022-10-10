@@ -13,7 +13,6 @@
       "type": "Input.ChoiceSet",
       "id": "EntreeSelectVal",
       "style": "filtered",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Steak",
@@ -37,7 +36,6 @@
       "type": "Input.ChoiceSet",
       "id": "SideVal",
       "style": "filtered",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Baked Potato",
@@ -69,7 +67,6 @@
       "type": "Input.ChoiceSet",
       "id": "DrinkVal",
       "style": "filtered",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Water",

@@ -211,8 +211,6 @@
       "type": "Input.ChoiceSet",
       "id": "input6",
       "value": "1",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Red",
@@ -223,14 +221,14 @@
           "value": "2"
         }
       ],
-      "isVisible": false
+      "isVisible": false,
+      "style": "compact"
     },
     {
       "type": "Input.ChoiceSet",
       "id": "input7",
       "value": "1",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Red",
@@ -265,8 +263,6 @@
       "type": "Input.ChoiceSet",
       "id": "input9",
       "value": "1",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Red",
@@ -278,7 +274,8 @@
         }
       ],
       "wrap": true,
-      "isVisible": false
+      "isVisible": false,
+      "style": "compact"
     }
   ],
   "actions": [

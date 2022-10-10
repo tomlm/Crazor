@@ -5,6 +5,16 @@
   <TextBlock Spacing="None" IsSubtle="true" Text="12:30 PM - 1:30 PM" Wrap="true" />
   <TextBlock Text="Snooze for" Wrap="true" />
   <Input.ChoiceSet Id="snooze" Value="5">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>style</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">compact</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
     <Choices>
       <Choice Title="5 minutes" Value="5" />
       <Choice Title="15 minutes" Value="15" />

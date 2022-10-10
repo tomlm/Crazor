@@ -155,8 +155,6 @@
           "type": "Input.ChoiceSet",
           "id": "idchoice",
           "value": "mychoice",
-          "style": "compact",
-          "isMultiSelect": false,
           "choices": [
             {
               "title": "Choice 1",
@@ -166,7 +164,8 @@
               "title": "Choice 2",
               "value": "Choice 2"
             }
-          ]
+          ],
+          "style": "compact"
         },
         {
           "type": "TextBlock",

@@ -40,6 +40,16 @@
     <TextBlock Id="resd" Text="My new textblock" />
     <Input.Date Id="dateid" Value="" />
     <Input.ChoiceSet Id="idchoice" Value="mychoice">
+      <AdditionalProperties>
+        <item>
+          <key>
+            <string>style</string>
+          </key>
+          <value>
+            <anyType xsi:type="xsd:string">compact</anyType>
+          </value>
+        </item>
+      </AdditionalProperties>
       <Choices>
         <Choice Title="Choice 1" Value="Choice 1" />
         <Choice Title="Choice 2" Value="Choice 2" />

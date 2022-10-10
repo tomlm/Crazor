@@ -5,8 +5,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "CompactSelectVal",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Red",
@@ -24,7 +22,8 @@
       "placeholder": "Please choose",
       "isRequired": true,
       "label": "What color do you want? (compact)",
-      "errorMessage": "This is a required input"
+      "errorMessage": "This is a required input",
+      "style": "compact"
     }
   ],
   "actions": [

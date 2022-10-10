@@ -5,8 +5,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "choiceSet",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",
@@ -17,7 +15,8 @@
           "value": "2"
         }
       ],
-      "label": "Longer label to verify label wrapping for an Input.ChoiceSet. If that was not long enough, then this should make it long enough. Did you know that honeybees can flap their wings 200 times every second?"
+      "label": "Longer label to verify label wrapping for an Input.ChoiceSet. If that was not long enough, then this should make it long enough. Did you know that honeybees can flap their wings 200 times every second?",
+      "style": "compact"
     },
     {
       "type": "Input.Toggle",

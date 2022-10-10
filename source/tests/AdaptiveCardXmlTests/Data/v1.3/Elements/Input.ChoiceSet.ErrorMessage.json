@@ -5,8 +5,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "requiredCompactId",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",
@@ -20,13 +18,13 @@
       "placeholder": "Please make selection",
       "isRequired": true,
       "label": "Required Input.ChoiceSet label (compact)",
-      "errorMessage": "This is a required input"
+      "errorMessage": "This is a required input",
+      "style": "compact"
     },
     {
       "type": "Input.ChoiceSet",
       "id": "requiredExpandedId",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Option 1",

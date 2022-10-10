@@ -82,8 +82,6 @@
     {
       "type": "Input.ChoiceSet",
       "id": "compact",
-      "style": "compact",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Thing 1",
@@ -95,13 +93,13 @@
         }
       ],
       "isRequired": true,
-      "label": "Required Compact Input.ChoiceSet"
+      "label": "Required Compact Input.ChoiceSet",
+      "style": "compact"
     },
     {
       "type": "Input.ChoiceSet",
       "id": "expanded",
       "style": "expanded",
-      "isMultiSelect": false,
       "choices": [
         {
           "title": "Thing 1",

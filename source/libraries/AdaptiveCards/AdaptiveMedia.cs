@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
@@ -56,10 +57,13 @@ namespace AdaptiveCards
         /// <summary>
         /// A collection of captions.
         /// </summary>
-        [JsonRequired]
+        [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlElement(Type = typeof(AdaptiveCaptionSource), ElementName = "CaptionSource")]
 #endif
+        [DefaultValue(null)]
         public List<AdaptiveCaptionSource> CaptionSources { get; set; } = new List<AdaptiveCaptionSource>();
+
+        public bool ShouldSerializeCaptionSources() => CaptionSources.Any();
     }
 }

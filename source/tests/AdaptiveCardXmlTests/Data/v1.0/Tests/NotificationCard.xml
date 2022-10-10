@@ -15,6 +15,16 @@
   <Container>
     <TextBlock Text="Snooze for" Wrap="true" />
     <Input.ChoiceSet Id="snoozeFor" Value="1">
+      <AdditionalProperties>
+        <item>
+          <key>
+            <string>style</string>
+          </key>
+          <value>
+            <anyType xsi:type="xsd:string">compact</anyType>
+          </value>
+        </item>
+      </AdditionalProperties>
       <Choices>
         <Choice Title="5 minutes" Value="1" />
         <Choice Title="30 minutes" Value="2" />
