@@ -2,7 +2,7 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
   <TextBlock Size="ExtraLarge" Text="Our new product is awesome!" Wrap="true" />
   <Action.ShowCard Title="Terms and Conditions" Tooltip="Click here to view the details of our terms and conditions.">
-    <AdaptiveCard>
+    <AdaptiveCard Version="1.5">
       <TextBlock Size="Small" Text="Here's some fine print for you to read. Don't break any laws! We will also not break any laws!" Wrap="true" />
     </AdaptiveCard>
   </Action.ShowCard>

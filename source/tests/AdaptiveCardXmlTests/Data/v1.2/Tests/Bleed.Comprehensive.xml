@@ -184,7 +184,7 @@
   <TextBlock Size="ExtraLarge" Weight="Bolder" Text="REMOVED TEXT" Wrap="true" />
   <ActionSet>
     <Action.ShowCard Title="Results">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.2">
         <Container Style="Emphasis" Bleed="true">
           <Container Style="Default">
             <TextBlock Spacing="None" Size="ExtraLarge" Weight="Bolder" Text="REMOVED TEXT" Wrap="true" />

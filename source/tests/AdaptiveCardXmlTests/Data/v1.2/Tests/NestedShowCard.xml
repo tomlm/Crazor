@@ -2,10 +2,10 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <TextBlock Text="Sequential show cards:" />
   <Action.ShowCard Title="Show Card One">
-    <AdaptiveCard>
+    <AdaptiveCard Version="1.2">
       <TextBlock Text="Card 1" />
       <Action.ShowCard Title="Show Card Two">
-        <AdaptiveCard>
+        <AdaptiveCard Version="1.2">
           <TextBlock Text="Card 2" />
         </AdaptiveCard>
       </Action.ShowCard>

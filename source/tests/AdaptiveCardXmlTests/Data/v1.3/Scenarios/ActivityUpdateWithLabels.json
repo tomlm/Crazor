@@ -79,6 +79,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
+        "version": "1.3",
         "body": [
           {
             "type": "Input.Date",
@@ -99,6 +100,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
+        "version": "1.3",
         "body": [
           {
             "type": "Input.Text",

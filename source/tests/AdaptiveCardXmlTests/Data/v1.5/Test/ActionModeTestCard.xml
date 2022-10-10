@@ -9,7 +9,7 @@
 }</Action.Submit>
     <Action.OpenUrl Title="OpenUrl" IconUrl="https://www.clipartmax.com/png/full/211-2118815_file-novosel-mushroom-svg-mario-mushroom-icon.png" Mode="secondary" Url="https://github.com/Microsoft/AdaptiveCards" />
     <Action.ShowCard Title="Action ShowCard" Mode="secondary">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.4">
         <TextBlock Text="Secondary action show card" Wrap="true" />
       </AdaptiveCard>
     </Action.ShowCard>
@@ -41,22 +41,22 @@
   <TextBlock Text="Show Card Tests" Wrap="true" />
   <ActionSet>
     <Action.ShowCard Title="Primary 1">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.4">
         <TextBlock Text="Show Card for Primary 1" Wrap="true" />
       </AdaptiveCard>
     </Action.ShowCard>
     <Action.ShowCard Title="Primary 2">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.4">
         <TextBlock Text="Show Card for Primary 2" Wrap="true" />
       </AdaptiveCard>
     </Action.ShowCard>
     <Action.ShowCard Title="Secondary 1" Mode="secondary">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.4">
         <TextBlock Text="Show Card for Secondary 1" Wrap="true" />
       </AdaptiveCard>
     </Action.ShowCard>
     <Action.ShowCard Title="Secondary 2" Mode="secondary">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.4">
         <TextBlock Text="Show card for secondary 2" Wrap="true" />
       </AdaptiveCard>
     </Action.ShowCard>
@@ -68,7 +68,7 @@
 }</Action.Submit>
   <Action.OpenUrl Title="Secondary OpenUrl" IconUrl="https://adaptivecards.io/content/cats/2.png" Mode="secondary" Url="https://adaptivecards.io/" />
   <Action.ShowCard Title="Secondary ShowCard" Mode="secondary">
-    <AdaptiveCard>
+    <AdaptiveCard Version="1.4">
       <TextBlock Text="What do you think?" />
       <Action.Submit Title="Neat!" />
     </AdaptiveCard>

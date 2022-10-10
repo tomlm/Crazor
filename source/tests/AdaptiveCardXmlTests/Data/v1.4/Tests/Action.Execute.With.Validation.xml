@@ -6,7 +6,7 @@
   "y": -1
 }</Action.Execute>
     <Action.ShowCard Title="ShowCard">
-      <AdaptiveCard>
+      <AdaptiveCard Version="1.4">
         <Action.Execute Title="Neat!" AssociatedInputs="None" Verb="" />
       </AdaptiveCard>
     </Action.ShowCard>

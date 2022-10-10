@@ -13,6 +13,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
+        "version": "1.3",
         "body": [
           {
             "type": "Container",
@@ -45,6 +46,7 @@
             "type": "Action.ShowCard",
             "card": {
               "type": "AdaptiveCard",
+              "version": "1.3",
               "body": [
                 {
                   "type": "Container",
@@ -106,6 +108,7 @@
                   "type": "Action.ShowCard",
                   "card": {
                     "type": "AdaptiveCard",
+                    "version": "1.3",
                     "body": [
                       {
                         "type": "Input.Text",

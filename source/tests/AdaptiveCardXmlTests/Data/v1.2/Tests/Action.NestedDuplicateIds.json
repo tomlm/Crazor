@@ -1,7 +1,7 @@
 {
 	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
 	"type": "AdaptiveCard",
-	"version": "1.0",
+	"version": "1.2",
 	"body": [
 		{
 			"type": "Input.Text",
@@ -24,6 +24,7 @@
 			"title": "Show Card",
 			"card": {
 				"type": "AdaptiveCard",
+				"version": "1.2",
 				"body": [
 					{
 						"type": "Input.Text",

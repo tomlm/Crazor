@@ -2,7 +2,7 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <TextBlock Text="Please select your language:" />
   <Action.ShowCard Title="English">
-    <AdaptiveCard>
+    <AdaptiveCard Version="1.4">
       <TextBlock Size="Medium" Weight="Bolder" Text="Registration Form" HorizontalAlignment="Center" Wrap="true" Style="Heading" />
       <Input.Text Id="SimpleValENG" IsRequired="true" Label="Name" ErrorMessage="Name is required" />
       <Input.Text Id="EmailValENG" Label="Email" Style="Email" />
@@ -12,7 +12,7 @@
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="عربي">
-    <AdaptiveCard>
+    <AdaptiveCard Version="1.4">
       <AdditionalProperties>
         <item>
           <key>

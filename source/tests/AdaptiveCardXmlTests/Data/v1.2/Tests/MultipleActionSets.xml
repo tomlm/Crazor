@@ -4,14 +4,14 @@
     <Column Width="stretch">
       <ActionSet Height="AdaptiveCards.AdaptiveDimension">
         <Action.ShowCard Title="ShowCard1">
-          <AdaptiveCard>
+          <AdaptiveCard Version="1.2">
             <TextBlock Text="Card1" />
           </AdaptiveCard>
         </Action.ShowCard>
       </ActionSet>
       <ActionSet Height="AdaptiveCards.AdaptiveDimension">
         <Action.ShowCard Title="ShowCard2">
-          <AdaptiveCard>
+          <AdaptiveCard Version="1.2">
             <TextBlock Text="Card2" />
           </AdaptiveCard>
         </Action.ShowCard>

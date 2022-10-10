@@ -72,7 +72,7 @@
           {
             "type": "TextBlock",
             "size": "extraLarge",
-            "text": "Card C"
+            "text": "Card C";
           },
           {
             "type": "TextBlock",

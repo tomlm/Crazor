@@ -213,7 +213,7 @@
   "action": "approve"
 }</Action.Submit>
       <Action.ShowCard Title="Reject" Style="destructive">
-        <AdaptiveCard>
+        <AdaptiveCard Version="1.2">
           <Input.Text Id="RejectCommentID" Placeholder="Please specify an appropriate reason for rejection." IsMultiline="true" />
           <Action.Submit Title="Send">{
   "id": "_qkQW8dJlUeLVi7ZMEzYVw",

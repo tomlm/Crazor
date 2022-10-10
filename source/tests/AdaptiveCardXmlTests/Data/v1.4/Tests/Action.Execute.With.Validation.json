@@ -23,6 +23,7 @@
           "type": "Action.ShowCard",
           "card": {
             "type": "AdaptiveCard",
+            "version": "1.4",
             "actions": [
               {
                 "type": "Action.Execute",

@@ -10,7 +10,7 @@
   <Action.Execute Title="Edit data" Mode="secondary" Verb="">"edit"</Action.Execute>
   <Action.Execute Title="Delete data" Mode="secondary" Verb="">"delete"</Action.Execute>
   <Action.ShowCard Title="More information" Mode="secondary">
-    <AdaptiveCard>
+    <AdaptiveCard Version="1.5">
       <TextBlock Text="The data shown above is what we have on file for you. Please confirm whether this data is correct." Wrap="true" />
     </AdaptiveCard>
   </Action.ShowCard>
