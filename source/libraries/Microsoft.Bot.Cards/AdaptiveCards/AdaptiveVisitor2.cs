@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 
 using AdaptiveCards;
+using System.ComponentModel;
 
 namespace Microsoft.Bot.Cards.AdaptiveCards
 {
@@ -67,6 +68,8 @@ namespace Microsoft.Bot.Cards.AdaptiveCards
             else if (adaptiveElement is AdaptiveRichTextBlock rtb)
                 Visit(rtb);
 
+            else if (adaptiveElement is AdaptiveTable table)
+                Visit(table);
         }
 
         protected virtual void Visit(AdaptiveCard card)
@@ -293,6 +296,31 @@ namespace Microsoft.Bot.Cards.AdaptiveCards
             {
                 Visit(refresh.Action);
             }
+        }
+
+        protected virtual void Visit(AdaptiveTable table)
+        {
+            Elements.Add(table);
+
+            foreach (var col in table.Columns)
+            {
+                Visit(col);
+            }
+
+            foreach (var row in table.Rows)
+            {
+                Visit(row);
+            }
+        }
+
+        protected virtual void Visit(AdaptiveTableRow row)
+        {
+            Elements.Add(row);
+            foreach(var x in row.)
+        }
+
+        protected virtual void Visit(AdaptiveTableColumn col)
+        {
         }
     }
 }

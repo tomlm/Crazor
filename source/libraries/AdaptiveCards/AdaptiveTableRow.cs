@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
@@ -130,5 +131,10 @@ namespace AdaptiveCards
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "top")]
         public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
 
+        [JsonProperty]
+#if !NETSTANDARD1_3
+        [XmlElement]
+#endif
+        public List<AdaptiveTableCell> Cells { get; set; } = new List<AdaptiveTableCell>();
     }
 }

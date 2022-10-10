@@ -9,17 +9,17 @@
     },
     {
       "type": "TextBlock",
-      "text": "\\r:\rnext line\r\rtwo lines down",
+      "text": "\\n:\nnext line\n\ntwo lines down",
       "separator": true
     },
     {
       "type": "TextBlock",
-      "text": "\\r\\n:\r\nnext line\r\n\r\ntwo lines down",
+      "text": "\\n\\n:\n\nnext line\n\n\n\ntwo lines down",
       "separator": true
     },
     {
       "type": "TextBlock",
-      "text": "\\r\\r\\n:\r\r\nshould be two lines down\r\r\ntwo lines down",
+      "text": "\\n\\n\\n:\n\n\nshould be two lines down\n\n\ntwo lines down",
       "separator": true
     },
     {
@@ -29,7 +29,7 @@
     },
     {
       "type": "TextBlock",
-      "text": "Some legal escape chars after newline:\n\b\f\t\"\\/",
+      "text": "Some legal escape chars after newline:\n\"\\/",
       "separator": true
     },
     {
@@ -71,13 +71,13 @@
     },
     {
       "type": "TextBlock",
-      "text": "0123456789012345678901234567890123456789-->\r<--0123456789012345678901234567890123456789",
+      "text": "0123456789012345678901234567890123456789-->\n<--0123456789012345678901234567890123456789",
       "wrap": true,
       "separator": true
     },
     {
       "type": "TextBlock",
-      "text": "0123456789012345678901234567890123456789-->\r\n<--0123456789012345678901234567890123456789",
+      "text": "0123456789012345678901234567890123456789-->\n\n<--0123456789012345678901234567890123456789",
       "wrap": true,
       "separator": true
     }

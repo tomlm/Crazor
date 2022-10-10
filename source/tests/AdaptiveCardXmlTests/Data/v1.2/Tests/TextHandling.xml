@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Separator="true" Text="\n:&#xA;next line&#xA;&#xA;two lines down" />
+  <TextBlock Separator="true" Text="\n:&#xA;next line&#xA;&#xA;two lines down" />
+  <TextBlock Separator="true" Text="\n\n:&#xA;&#xA;next line&#xA;&#xA;&#xA;&#xA;two lines down" />
+  <TextBlock Separator="true" Text="\n\n\n:&#xA;&#xA;&#xA;should be two lines down&#xA;&#xA;&#xA;two lines down" />
+  <TextBlock Separator="true" Text="\no newlines, \just backslashes\" />
+  <TextBlock Separator="true" Text="Some legal escape chars after newline:&#xA;&quot;\/" />
+  <TextBlock Separator="true" Text="This should be the letter 'A': A" />
+  <TextBlock Separator="true" Text="HTML entities ahoy: &quot;Foo &amp;amp; Bar&quot; &amp;lt;admin@example.com&amp;gt;" />
+  <TextBlock Separator="true" Text="&amp;amp**;** &amp;am&amp;nbsp;p;" />
+  <TextBlock Separator="true" Text="↓ Empty TextBlock below ↓" />
+  <TextBlock Separator="true" Text="">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>space</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">preserve</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+  </TextBlock>
+  <TextBlock Separator="true" Text="↑ Empty TextBlock above ↑" />
+  <TextBlock Separator="true" Text="0123456789012345678901234567890123456789--&gt;&#xA;&lt;--0123456789012345678901234567890123456789" Wrap="true" />
+  <TextBlock Separator="true" Text="0123456789012345678901234567890123456789--&gt;&#xA;&lt;--0123456789012345678901234567890123456789" Wrap="true" />
+  <TextBlock Separator="true" Text="0123456789012345678901234567890123456789--&gt;&#xA;&#xA;&lt;--0123456789012345678901234567890123456789" Wrap="true" />
+</Card>

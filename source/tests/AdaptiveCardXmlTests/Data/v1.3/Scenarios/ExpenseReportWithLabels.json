@@ -1,5 +1,6 @@
 {
 	"type": "AdaptiveCard",
+	"version": "1.5",
 	"body": [
 		{
 			"type": "Container",
@@ -551,7 +552,7 @@
 			"type": "Table",
 			"spacing": "large",
 			"separator": true,
-			"firstRowAsHeaders": false,
+			"firstRowAsHeader": false,
 			"showGridLines": false,
 			"columns": [
 				{
