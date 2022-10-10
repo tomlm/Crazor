@@ -1,0 +1,81 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "The Seattle Seahawks beat the Carolina Panthers 40-7",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "size": "medium",
+                  "url": "https://adaptivecards.io/content/cats/3.png",
+                  "altText": "Shades cat team emblem"
+                },
+                {
+                  "type": "TextBlock",
+                  "weight": "bolder",
+                  "text": "SHADES",
+                  "horizontalAlignment": "center"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Dec 4",
+                  "horizontalAlignment": "center"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Final",
+                  "horizontalAlignment": "center",
+                  "spacing": "none"
+                },
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "text": "7 - 40",
+                  "horizontalAlignment": "center"
+                }
+              ],
+              "spacing": "medium",
+              "separator": true
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "size": "medium",
+                  "url": "https://adaptivecards.io/content/cats/2.png",
+                  "horizontalAlignment": "center",
+                  "altText": "Skins cat team emblem"
+                },
+                {
+                  "type": "TextBlock",
+                  "weight": "bolder",
+                  "text": "SKINS",
+                  "horizontalAlignment": "center"
+                }
+              ],
+              "spacing": "medium",
+              "separator": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

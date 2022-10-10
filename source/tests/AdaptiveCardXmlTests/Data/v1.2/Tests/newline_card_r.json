@@ -1,0 +1,129 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "weight": "bolder",
+          "text": "Publish Adaptive Card schema"
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "size": "small",
+                  "style": "person",
+                  "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+                  "altText": "Matt Hidinger"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "weight": "bolder",
+                  "text": "Matt Hidinger",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "isSubtle": true,
+                  "text": "Created {{DATE(2017-02-14T06:08:39Z, SHORT)}}",
+                  "wrap": true,
+                  "spacing": "none"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Hi Team,\r\r2 things: \r\r1) @Micheal gave me some great feedback to start sharing my research trips more broadly to the desktop folks. I will be sharing research trips and insights to everyone and not just the team I travel with. So get ready to learn more about our users 🙂\r\r2) I recently visited customers in London with @Meghan Stockdale to research Somethings+SomeOtherThing+something. I wanted to share some insights from the trip that Meghan put together! For context this information is based off 4 companies and 85 customers. (full deck here: Modern Collaboration_ Content and Comms System feedback.pptx)",
+          "wrap": true
+        },
+        {
+          "type": "FactSet",
+          "facts": [
+            {
+              "title": "Board:",
+              "value": "Adaptive Card"
+            },
+            {
+              "title": "List:",
+              "value": "Backlog"
+            },
+            {
+              "title": "Assigned to:",
+              "value": "Matt Hidinger"
+            },
+            {
+              "title": "Due date:",
+              "value": "Not set"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "Input.Date",
+            "id": "dueDate"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Set due date"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "Input.Text",
+            "id": "comment",
+            "placeholder": "Enter your comment",
+            "isMultiline": true
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Comment"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Disabled Execute Button",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "verb": "",
+      "title": "Enabled"
+    },
+    {
+      "type": "Action.Execute",
+      "verb": "",
+      "title": "Disabled"
+    }
+  ]
+}

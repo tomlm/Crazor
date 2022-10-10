@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees&lt;/s&gt;">
+  <TextBlock Size="Large" IsSubtle="true" Wrap="true">Redmond, WA</TextBlock>
+  <TextBlock Spacing="None" Wrap="true">Mon, Nov 4, 2019 6:21 PM</TextBlock>
+  <ColumnSet>
+    <Column Width="auto">
+      <Image Size="Small" Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
+    </Column>
+    <Column Width="auto">
+      <TextBlock Spacing="None" Size="ExtraLarge" Wrap="true">46</TextBlock>
+    </Column>
+    <Column Width="stretch">
+      <TextBlock Spacing="Small" Weight="Bolder" Wrap="true">°F</TextBlock>
+    </Column>
+    <Column Width="stretch">
+      <TextBlock Wrap="true">Hi 50</TextBlock>
+      <TextBlock Spacing="None" Wrap="true">Lo 41</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

@@ -1,0 +1,126 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "1",
+      "value": "Banana Smoothie",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Apple Cider",
+          "value": "1"
+        },
+        {
+          "title": "Grape Juice",
+          "value": "2"
+        },
+        {
+          "title": "Banana Smoothie",
+          "value": "3"
+        },
+        {
+          "title": "Orange Juice",
+          "value": "4"
+        }
+      ],
+      "placeholder": "Click On Expand",
+      "label": "1.0 Compact Style"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Input.ChoiceSet",
+          "id": "2",
+          "style": "filtered",
+          "isMultiSelect": false,
+          "choices": [
+            {
+              "title": "Apple Cider",
+              "value": "1"
+            },
+            {
+              "title": "Grape Juice",
+              "value": "2"
+            },
+            {
+              "title": "Banana Smoothie",
+              "value": "3"
+            },
+            {
+              "title": "Orange Juice",
+              "value": "4"
+            }
+          ],
+          "placeholder": "Type Some To Expand",
+          "label": "1.5 Filtered Style"
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "7",
+          "style": "expanded",
+          "isMultiSelect": true,
+          "choices": [
+            {
+              "title": "Should be able to type anything",
+              "value": "1"
+            },
+            {
+              "title": "Validation should fail if typed input doesn't match choices",
+              "value": "2"
+            },
+            {
+              "title": "Typing 'O' should show Banana Smoothie and Orange Juice.",
+              "value": "3"
+            }
+          ],
+          "wrap": true,
+          "placeholder": "Placeholder text",
+          "isRequired": true,
+          "label": "Check Lists"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "id": "4",
+      "text": "Setting both filtered style and multiline will ignore the style as this example",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "3",
+      "style": "filtered",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Apple Cider",
+          "value": "1"
+        },
+        {
+          "title": "Grape Juice",
+          "value": "2"
+        },
+        {
+          "title": "Banana Smoothie",
+          "value": "3"
+        },
+        {
+          "title": "Orange Juice",
+          "value": "4"
+        }
+      ],
+      "placeholder": "Placeholder text"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "6",
+      "title": "Check"
+    }
+  ]
+}

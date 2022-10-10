@@ -1,0 +1,19 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.1",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card has an action with an icon. Icon placement and size depend on host.",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "url": "https://adaptivecards.io/",
+      "title": "With Icon",
+      "iconUrl": "https://adaptivecards.io/content/cats/1.png"
+    }
+  ]
+}

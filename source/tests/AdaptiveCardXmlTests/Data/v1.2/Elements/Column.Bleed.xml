@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock>Bleed left</TextBlock>
+  <ColumnSet Style="Emphasis">
+    <Column Style="Good" Bleed="true" Width="stretch">
+      <TextBlock>Column 1</TextBlock>
+    </Column>
+    <Column Style="Attention" Width="stretch">
+      <TextBlock>Column 2</TextBlock>
+    </Column>
+    <Column Style="Warning" Width="stretch">
+      <TextBlock>Column 3</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock>Bleed center</TextBlock>
+  <ColumnSet Style="Emphasis">
+    <Column Style="Good" Width="stretch">
+      <TextBlock>Column 1</TextBlock>
+    </Column>
+    <Column Style="Attention" Bleed="true" Width="stretch">
+      <TextBlock>Column 2</TextBlock>
+    </Column>
+    <Column Style="Warning" Width="stretch">
+      <TextBlock>Column 3</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock>Bleed right</TextBlock>
+  <ColumnSet Style="Emphasis">
+    <Column Style="Good" Width="stretch">
+      <TextBlock>Column 1</TextBlock>
+    </Column>
+    <Column Style="Attention" Width="stretch">
+      <TextBlock>Column 2</TextBlock>
+    </Column>
+    <Column Style="Warning" Bleed="true" Width="stretch">
+      <TextBlock>Column 3</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock>Bleed all</TextBlock>
+  <ColumnSet Style="Emphasis">
+    <Column Style="Good" Bleed="true" Width="stretch">
+      <TextBlock>Column 1</TextBlock>
+    </Column>
+    <Column Style="Attention" Bleed="true" Width="stretch">
+      <TextBlock>Column 2</TextBlock>
+    </Column>
+    <Column Style="Warning" Bleed="true" Width="stretch">
+      <TextBlock>Column 3</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

@@ -1,0 +1,28 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Style set to heading",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "color": "good",
+      "text": "Style set to heading, color set to good",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Style set to default"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Style unset",
+      "wrap": true
+    }
+  ]
+}

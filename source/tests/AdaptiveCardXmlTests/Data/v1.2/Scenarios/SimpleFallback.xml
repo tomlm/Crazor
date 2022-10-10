@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Wrap="true">Fallback test:</TextBlock>
+  <AdaptiveUnknownElement>
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>egg</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">her?</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Drop</Type>
+    </Fallback>
+    <Type>Steve Holt!</Type>
+  </AdaptiveUnknownElement>
+  <AdaptiveUnknownElement>
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>someProperty</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">foo</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="TextBlock" Wrap="true">No graph support. Guess we'll just use this textblock instead.</Content>
+    </Fallback>
+    <Type>Graph</Type>
+  </AdaptiveUnknownElement>
+</Card>

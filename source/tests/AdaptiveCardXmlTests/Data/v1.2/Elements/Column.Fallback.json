@@ -1,0 +1,48 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Graph"
+            }
+          ],
+          "fallback": {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "Fallback"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Graph"
+            }
+          ],
+          "fallback": "drop"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is a column",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

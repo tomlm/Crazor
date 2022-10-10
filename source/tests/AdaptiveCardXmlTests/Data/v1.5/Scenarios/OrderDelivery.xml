@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <ColumnSet>
+    <Column Width="2">
+      <TextBlock Wrap="true">Redmond, WA</TextBlock>
+      <TextBlock Spacing="None" Size="ExtraLarge" Weight="Bolder" Wrap="true">Malt &amp; Vine</TextBlock>
+      <TextBlock Spacing="None" IsSubtle="true" Wrap="true">4.5 stars (176 reviews) · mid-priced</TextBlock>
+      <TextBlock Size="Small" Wrap="true" MaxLines="3">**Blaire S.** said "Great concept and a wide selection of beers both on tap and bottled! Smaller wine selection than I wanted, but the variety of beers certainly made up for that. Although I didn't order anything, my boyfriend got a beer and he loved it. Their prices are fair too. 
+
+The concept is really awesome. It's a bar/store that you can bring outside food into. The place was pretty packed tonight. I wish we had stayed for more than one drink. I would have loved to sample everything!"</TextBlock>
+    </Column>
+    <Column Width="1">
+      <Image Url="https://picsum.photos/300?image=882" AltText="Seated guest drinking a cup of coffee" />
+    </Column>
+  </ColumnSet>
+  <Action.Submit Title="Pickup" Tooltip="Schedule order for pickup" />
+  <Action.Submit Title="Delivery" Tooltip="Your location is too far for delivery" />
+</Card>

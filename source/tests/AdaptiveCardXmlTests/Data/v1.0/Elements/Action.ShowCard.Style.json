@@ -1,0 +1,56 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card's action will show another card"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "This card has no style"
+          }
+        ]
+      },
+      "title": "No Style"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "This card has default style"
+          }
+        ],
+        "style": "default"
+      },
+      "title": "Default Style"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "This card has emphasis style"
+          }
+        ],
+        "style": "emphasis"
+      },
+      "title": "Emphasis Style"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock>ImageSet: ImageSize: small</TextBlock>
+  <ImageSet ImageSize="Small">
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  </ImageSet>
+  <TextBlock Separator="true">ImageSet: ImageSize: medium</TextBlock>
+  <ImageSet ImageSize="Medium">
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  </ImageSet>
+  <TextBlock Separator="true">ImageSet: ImageSize: large</TextBlock>
+  <ImageSet ImageSize="Large">
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  </ImageSet>
+  <TextBlock Separator="true">ImageSet: ImageSize: auto</TextBlock>
+  <ImageSet>
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  </ImageSet>
+  <TextBlock Separator="true">ImageSet: ImageSize: stretch</TextBlock>
+  <ImageSet ImageSize="Stretch">
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  </ImageSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id1" Height="AdaptiveCards.AdaptiveDimension" ImageSize="Small">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: small - Height: stretch</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id11" Height="AdaptiveCards.AdaptiveDimension" ImageSize="Medium">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: medium - Height: stretch</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha jkhjf j d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id111" Height="AdaptiveCards.AdaptiveDimension" ImageSize="Large">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: large - Height: stretch</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id1111" Height="AdaptiveCards.AdaptiveDimension">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: auto - Height: stretch</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">hsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjjkasjkfhueqiwfkmsdjan ksadnfkjsjfsdjjakfhjkhakdfjhfjdf hjfhlhahfjhjhdf jhdfsjhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf jd jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id11111" Height="AdaptiveCards.AdaptiveDimension" ImageSize="Stretch">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: stretch - Height: stretch</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">dfhkjhsafdkjhjas fdjfsdha jkhfjdjsdfn kjfjkjkjjk fnnnsfdnskakdfjhfjjfhlhahfjhjhdf jhdfsjh hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id2" ImageSize="Small">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: small - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">jkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfhcjdkn kjcnjd kdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id22" ImageSize="Medium">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: medium - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id222" ImageSize="Large">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: large - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id2222">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: auto - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id22222" ImageSize="Stretch">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: stretch - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id3" ImageSize="Small">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: small - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id33" ImageSize="Medium">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: medium - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id333" ImageSize="Large">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: large - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id3333">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: auto - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Separator="true">
+    <Column Height="AdaptiveCards.AdaptiveDimension">
+      <ImageSet Id="id33333" ImageSize="Stretch">
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+        <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+      </ImageSet>
+      <TextBlock>ImageSet above: ImageSize: stretch - Height: auto</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
+    </Column>
+  </ColumnSet>
+  <Action.ToggleVisibility Title="Hide">
+    <TargetElements ElementId="id1" />
+    <TargetElements ElementId="id11" />
+    <TargetElements ElementId="id111" />
+    <TargetElements ElementId="id1111" />
+    <TargetElements ElementId="id11111" />
+    <TargetElements ElementId="id2" />
+    <TargetElements ElementId="id22" />
+    <TargetElements ElementId="id222" />
+    <TargetElements ElementId="id2222" />
+    <TargetElements ElementId="id22222" />
+    <TargetElements ElementId="id3" />
+    <TargetElements ElementId="id33" />
+    <TargetElements ElementId="id333" />
+    <TargetElements ElementId="id3333" />
+    <TargetElements ElementId="id33333" />
+  </Action.ToggleVisibility>
+</Card>

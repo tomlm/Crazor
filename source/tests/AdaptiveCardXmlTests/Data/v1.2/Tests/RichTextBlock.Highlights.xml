@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <RichTextBlock>
+    <Inlines Size="Large">
+      <Type>TextRun</Type>Highlights:</Inlines>
+  </RichTextBlock>
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>Here is some text! </Inlines>
+    <Inlines Highlight="true">
+      <Type>TextRun</Type>Part of it is highlighted!</Inlines>
+    <Inlines>
+      <Type>TextRun</Type> </Inlines>
+    <Inlines IsSubtle="true" Highlight="true">
+      <Type>TextRun</Type>Subtle highlight!</Inlines>
+    <Inlines>
+      <Type>TextRun</Type> </Inlines>
+    <Inlines Color="Good" Highlight="true">
+      <Type>TextRun</Type>Good highlight!</Inlines>
+  </RichTextBlock>
+  <RichTextBlock>
+    <Inlines Size="Large">
+      <Type>TextRun</Type>Highlights on links: </Inlines>
+  </RichTextBlock>
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>Here's an inline action: </Inlines>
+    <Inlines>
+      <Type>TextRun</Type>Submit<SelectAction xsi:type="Action.Submit" /></Inlines>
+    <Inlines>
+      <Type>TextRun</Type>! Here's one that's highlighted: </Inlines>
+    <Inlines Highlight="true">
+      <Type>TextRun</Type>Submit!<SelectAction xsi:type="Action.Submit" /></Inlines>
+  </RichTextBlock>
+  <TextBlock Size="Large" Wrap="true">Highlights with colors and containers:</TextBlock>
+  <Container Style="Default">
+    <TextBlock>**Default Container:** </TextBlock>
+    <RichTextBlock>
+      <Inlines Highlight="true">
+        <Type>TextRun</Type>Default </Inlines>
+      <Inlines IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Accent" Highlight="true">
+        <Type>TextRun</Type>Accent </Inlines>
+      <Inlines Color="Accent" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Good" Highlight="true">
+        <Type>TextRun</Type>Good </Inlines>
+      <Inlines Color="Good" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Warning" Highlight="true">
+        <Type>TextRun</Type>Warning </Inlines>
+      <Inlines Color="Warning" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Attention" Highlight="true">
+        <Type>TextRun</Type>Attention </Inlines>
+      <Inlines Color="Attention" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Dark" Highlight="true">
+        <Type>TextRun</Type>Dark </Inlines>
+      <Inlines Color="Dark" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Light" Highlight="true">
+        <Type>TextRun</Type>Light </Inlines>
+      <Inlines Color="Light" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+    </RichTextBlock>
+  </Container>
+  <Container Style="Emphasis">
+    <TextBlock>**Emphasis Container:** </TextBlock>
+    <RichTextBlock>
+      <Inlines Highlight="true">
+        <Type>TextRun</Type>Default </Inlines>
+      <Inlines IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Accent" Highlight="true">
+        <Type>TextRun</Type>Accent </Inlines>
+      <Inlines Color="Accent" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Good" Highlight="true">
+        <Type>TextRun</Type>Good </Inlines>
+      <Inlines Color="Good" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Warning" Highlight="true">
+        <Type>TextRun</Type>Warning </Inlines>
+      <Inlines Color="Warning" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Attention" Highlight="true">
+        <Type>TextRun</Type>Attention </Inlines>
+      <Inlines Color="Attention" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Dark" Highlight="true">
+        <Type>TextRun</Type>Dark </Inlines>
+      <Inlines Color="Dark" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Light" Highlight="true">
+        <Type>TextRun</Type>Light </Inlines>
+      <Inlines Color="Light" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+    </RichTextBlock>
+  </Container>
+  <Container Style="Good">
+    <TextBlock>**Good Container:** </TextBlock>
+    <RichTextBlock>
+      <Inlines Highlight="true">
+        <Type>TextRun</Type>Default </Inlines>
+      <Inlines IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Accent" Highlight="true">
+        <Type>TextRun</Type>Accent </Inlines>
+      <Inlines Color="Accent" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Good" Highlight="true">
+        <Type>TextRun</Type>Good </Inlines>
+      <Inlines Color="Good" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Warning" Highlight="true">
+        <Type>TextRun</Type>Warning </Inlines>
+      <Inlines Color="Warning" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Attention" Highlight="true">
+        <Type>TextRun</Type>Attention </Inlines>
+      <Inlines Color="Attention" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Dark" Highlight="true">
+        <Type>TextRun</Type>Dark </Inlines>
+      <Inlines Color="Dark" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Light" Highlight="true">
+        <Type>TextRun</Type>Light </Inlines>
+      <Inlines Color="Light" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+    </RichTextBlock>
+  </Container>
+  <Container Style="Attention">
+    <TextBlock>**Attention Container:** </TextBlock>
+    <RichTextBlock>
+      <Inlines Highlight="true">
+        <Type>TextRun</Type>Default </Inlines>
+      <Inlines IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Accent" Highlight="true">
+        <Type>TextRun</Type>Accent </Inlines>
+      <Inlines Color="Accent" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Good" Highlight="true">
+        <Type>TextRun</Type>Good </Inlines>
+      <Inlines Color="Good" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Warning" Highlight="true">
+        <Type>TextRun</Type>Warning </Inlines>
+      <Inlines Color="Warning" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Attention" Highlight="true">
+        <Type>TextRun</Type>Attention </Inlines>
+      <Inlines Color="Attention" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Dark" Highlight="true">
+        <Type>TextRun</Type>Dark </Inlines>
+      <Inlines Color="Dark" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Light" Highlight="true">
+        <Type>TextRun</Type>Light </Inlines>
+      <Inlines Color="Light" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+    </RichTextBlock>
+  </Container>
+  <Container Style="Warning">
+    <TextBlock>**Warning Container:** </TextBlock>
+    <RichTextBlock>
+      <Inlines Highlight="true">
+        <Type>TextRun</Type>Default </Inlines>
+      <Inlines IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Accent" Highlight="true">
+        <Type>TextRun</Type>Accent </Inlines>
+      <Inlines Color="Accent" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Good" Highlight="true">
+        <Type>TextRun</Type>Good </Inlines>
+      <Inlines Color="Good" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Warning" Highlight="true">
+        <Type>TextRun</Type>Warning </Inlines>
+      <Inlines Color="Warning" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Attention" Highlight="true">
+        <Type>TextRun</Type>Attention </Inlines>
+      <Inlines Color="Attention" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Dark" Highlight="true">
+        <Type>TextRun</Type>Dark </Inlines>
+      <Inlines Color="Dark" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Light" Highlight="true">
+        <Type>TextRun</Type>Light </Inlines>
+      <Inlines Color="Light" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+    </RichTextBlock>
+  </Container>
+  <Container Style="Accent">
+    <TextBlock>**Accent Container:** </TextBlock>
+    <RichTextBlock>
+      <Inlines Highlight="true">
+        <Type>TextRun</Type>Default </Inlines>
+      <Inlines IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Accent" Highlight="true">
+        <Type>TextRun</Type>Accent </Inlines>
+      <Inlines Color="Accent" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Good" Highlight="true">
+        <Type>TextRun</Type>Good </Inlines>
+      <Inlines Color="Good" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Warning" Highlight="true">
+        <Type>TextRun</Type>Warning </Inlines>
+      <Inlines Color="Warning" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Attention" Highlight="true">
+        <Type>TextRun</Type>Attention </Inlines>
+      <Inlines Color="Attention" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Dark" Highlight="true">
+        <Type>TextRun</Type>Dark </Inlines>
+      <Inlines Color="Dark" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+      <Inlines Color="Light" Highlight="true">
+        <Type>TextRun</Type>Light </Inlines>
+      <Inlines Color="Light" IsSubtle="true" Highlight="true">
+        <Type>TextRun</Type>(Subtle) </Inlines>
+    </RichTextBlock>
+  </Container>
+</Card>

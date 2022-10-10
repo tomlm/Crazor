@@ -1,0 +1,80 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "<s>The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees</s>",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "isSubtle": true,
+      "text": "Redmond, WA",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Mon, Nov 4, 2019 6:21 PM",
+      "wrap": true,
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "small",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+              "altText": "Mostly cloudy weather"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "text": "46",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "bolder",
+              "text": "°F",
+              "wrap": true,
+              "spacing": "small"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Hi 50",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Lo 41",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

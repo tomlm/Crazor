@@ -1,0 +1,96 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Press the buttons to toggle the images!",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "id": "textToToggle",
+      "text": "Here are some images:",
+      "isVisible": false
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "imageToToggle",
+              "type": "Image",
+              "size": "medium",
+              "style": "person",
+              "url": "https://picsum.photos/100/100?image=112",
+              "altText": "sample image 1",
+              "isVisible": false
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "imageToToggle2",
+              "type": "Image",
+              "size": "medium",
+              "url": "https://picsum.photos/100/100?image=123",
+              "altText": "sample image 2",
+              "isVisible": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        "textToToggle",
+        "imageToToggle",
+        "imageToToggle2"
+      ],
+      "title": "Toggle!"
+    },
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        {
+          "elementId": "textToToggle",
+          "isVisible": true
+        },
+        {
+          "elementId": "imageToToggle",
+          "isVisible": true
+        },
+        {
+          "elementId": "imageToToggle2",
+          "isVisible": true
+        }
+      ],
+      "title": "Show!"
+    },
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        {
+          "elementId": "textToToggle",
+          "isVisible": false
+        },
+        {
+          "elementId": "imageToToggle",
+          "isVisible": false
+        },
+        {
+          "elementId": "imageToToggle2",
+          "isVisible": false
+        }
+      ],
+      "title": "Hide!"
+    }
+  ]
+}

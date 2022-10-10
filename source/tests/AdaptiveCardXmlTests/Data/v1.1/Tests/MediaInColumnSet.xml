@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet>
+    <Column>
+      <TextBlock Wrap="true">This is a media element which specifies a poster:</TextBlock>
+      <Media Poster="http://adaptivecards.io/content/cats/1.png">
+        <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+      </Media>
+    </Column>
+    <Column>
+      <TextBlock Wrap="true">This is a media element which doesn't specify a poster. It will use the poster from the host config if present:</TextBlock>
+      <Media>
+        <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+      </Media>
+    </Column>
+  </ColumnSet>
+</Card>

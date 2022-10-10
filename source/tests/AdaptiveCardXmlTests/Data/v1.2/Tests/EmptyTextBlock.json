@@ -1,0 +1,23 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "before",
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "",
+      "spacing": "extraLarge",
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "after",
+      "spacing": "extraLarge",
+      "separator": true
+    }
+  ]
+}

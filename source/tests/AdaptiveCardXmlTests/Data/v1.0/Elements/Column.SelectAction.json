@@ -1,0 +1,73 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Try clicking a column!"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "tooltip": "cool link"
+          }
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 2"
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "tooltip": "another cool link"
+          }
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 3"
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "tooltip": "a third cool link"
+          }
+        }
+      ]
+    }
+  ]
+}

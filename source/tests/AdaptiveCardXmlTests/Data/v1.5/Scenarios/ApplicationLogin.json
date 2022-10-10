@@ -1,0 +1,43 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Application Login",
+      "horizontalAlignment": "center",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Username",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "UserVal",
+      "isRequired": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Password",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "PassVal"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "data": {
+        "id": "LoginVal"
+      },
+      "title": "Login"
+    }
+  ]
+}

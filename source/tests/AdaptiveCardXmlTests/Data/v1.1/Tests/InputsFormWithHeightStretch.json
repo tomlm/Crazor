@@ -1,0 +1,85 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 2.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "weight": "bolder",
+              "text": "Tell us about yourself"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "We just need a few more details to get you booked for the trip of a lifetime!",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "small",
+              "isSubtle": true,
+              "text": "Don't worry, we'll never share or sell your information.",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Your name",
+              "wrap": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "myName",
+              "placeholder": "Last, First"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Your email",
+              "wrap": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "myEmail",
+              "placeholder": "youremail@example.com",
+              "style": "email"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Phone Number"
+            },
+            {
+              "type": "Input.Text",
+              "id": "myTel",
+              "placeholder": "xxx.xxx.xxxx",
+              "style": "tel"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg",
+              "altText": "Great Barrier Reef",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

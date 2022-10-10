@@ -1,0 +1,83 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "Microsoft stock is trading at $62.30 a share, which is down .32%",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "text": "Microsoft Corporation",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "isSubtle": true,
+          "text": "Nasdaq Global Select: MSFT",
+          "wrap": true,
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Fri, May 3, 2019 1:00 PM",
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "text": "128.90",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "color": "good",
+                  "text": "▲ 2.69 USD (2.13%)",
+                  "wrap": true,
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "FactSet",
+                  "facts": [
+                    {
+                      "title": "Open",
+                      "value": "127.42"
+                    },
+                    {
+                      "title": "High",
+                      "value": "129.43"
+                    },
+                    {
+                      "title": "Low",
+                      "value": "127.25"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "spacing": "none"
+    }
+  ]
+}

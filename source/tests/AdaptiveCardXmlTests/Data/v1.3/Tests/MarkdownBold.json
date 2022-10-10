@@ -1,0 +1,10 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "**test1** **test2**"
+    }
+  ]
+}

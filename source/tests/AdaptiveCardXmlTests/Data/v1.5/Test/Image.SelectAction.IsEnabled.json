@@ -1,0 +1,16 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "Image",
+      "size": "large",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://adaptivecards.io/",
+        "tooltip": "This cat button is disabled :("
+      }
+    }
+  ]
+}

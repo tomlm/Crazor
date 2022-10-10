@@ -1,0 +1,19 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Font type not set."
+    },
+    {
+      "type": "TextBlock",
+      "text": "Font type set to *default*."
+    },
+    {
+      "type": "TextBlock",
+      "text": "Font type set to *monospace*.",
+      "fontType": "monospace"
+    }
+  ]
+}

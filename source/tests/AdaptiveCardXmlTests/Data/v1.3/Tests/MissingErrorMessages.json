@@ -1,0 +1,152 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card contains 16 inputs that use input validation properties, but do not contain error messages. The renderer should return a warning for each input whose validation is enforced by input validation.",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "requiredText",
+      "isRequired": true,
+      "label": "Required Input.Text"
+    },
+    {
+      "type": "Input.Text",
+      "id": "maxLength",
+      "maxLength": 5,
+      "label": "MaxLength Input.Text"
+    },
+    {
+      "type": "Input.Text",
+      "id": "regExText",
+      "regex": "([A-Z])\\w+",
+      "label": "RegEx Input.Text"
+    },
+    {
+      "type": "Input.Date",
+      "id": "requiredDate",
+      "isRequired": true,
+      "label": "Required Input.Date"
+    },
+    {
+      "type": "Input.Date",
+      "id": "minDate",
+      "min": "2012-07-04",
+      "label": "Min Input.Date"
+    },
+    {
+      "type": "Input.Date",
+      "id": "maxDate",
+      "max": "2015-09-16",
+      "label": "Max Input.Date"
+    },
+    {
+      "type": "Input.Time",
+      "id": "requiredTime",
+      "isRequired": true,
+      "label": "Required Input.Time"
+    },
+    {
+      "type": "Input.Time",
+      "id": "minTime",
+      "min": "08:00",
+      "label": "Min Input.Time"
+    },
+    {
+      "type": "Input.Time",
+      "id": "maxTime",
+      "max": "20:00",
+      "label": "Max Input.Time"
+    },
+    {
+      "type": "Input.Number",
+      "id": "requiredNumber",
+      "isRequired": true,
+      "label": "Required Input.Number"
+    },
+    {
+      "type": "Input.Number",
+      "id": "minNumber",
+      "min": 4.0,
+      "label": "Min Input.Number"
+    },
+    {
+      "type": "Input.Number",
+      "id": "maxNumber",
+      "max": 8.0,
+      "label": "Max Input.Number"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "compact",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Thing 1",
+          "value": "Thing 1"
+        },
+        {
+          "title": "Thing 2",
+          "value": "Thing 2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Compact Input.ChoiceSet"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "expanded",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Thing 1",
+          "value": "Thing 1"
+        },
+        {
+          "title": "Thing 2",
+          "value": "Thing 2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Expanded Input.ChoiceSet"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "multiselect",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Thing 1",
+          "value": "Thing 1"
+        },
+        {
+          "title": "Thing 2",
+          "value": "Thing 2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Multiselect Input.ChoiceSet"
+    },
+    {
+      "type": "Input.Toggle",
+      "id": "toggle",
+      "title": "Required Input.Toggle",
+      "valueOn": "True",
+      "valueOff": "False",
+      "isRequired": true,
+      "label": "Required Input.Toggle"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Action.Submit"
+    }
+  ]
+}

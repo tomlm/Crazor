@@ -1,0 +1,49 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "text": "The middle column is set to rtl",
+      "wrap": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column One",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "العمود الثاني",
+              "wrap": true
+            }
+          ],
+          "rtl": true
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column three",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "spacing": "medium"
+    }
+  ]
+}

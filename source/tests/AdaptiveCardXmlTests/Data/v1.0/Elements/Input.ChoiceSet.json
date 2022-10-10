@@ -1,0 +1,100 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "myColor",
+      "value": "1",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What color do you want? (isMultiSelect:false, style:compact)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "myColor2",
+      "value": "1",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What color do you want? (isMultiSelect:false, style:expanded)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "myColor3",
+      "value": "1,3",
+      "style": "compact",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What colors do you want? (isMultiSelect:true, style:compact)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "myColor4",
+      "value": "1",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What colors do you want? (isMultiSelect:true, style:expanded)"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

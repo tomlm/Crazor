@@ -1,0 +1,33 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "id1",
+      "isRequired": true,
+      "label": "Required Input.Text",
+      "errorMessage": "This is a required input"
+    },
+    {
+      "type": "Input.Text",
+      "id": "id2",
+      "regex": "([A-Z])\\w+",
+      "label": "Input.Text with regex: ([A-Z])\\w+",
+      "errorMessage": "This input must begin with a capital letter and contain only alphanumeric characters."
+    },
+    {
+      "type": "Input.Text",
+      "id": "id3",
+      "maxLength": 6,
+      "label": "Input.Text with maxLength of 6",
+      "errorMessage": "This input must contain 6 characters or less."
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

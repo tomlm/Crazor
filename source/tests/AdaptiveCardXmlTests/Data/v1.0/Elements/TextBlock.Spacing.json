@@ -1,0 +1,52 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "text": "Spacing controls the amount of space between this element and the one before it",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "spacing: none",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "spacing: small",
+      "spacing": "small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "spacing: default"
+    },
+    {
+      "type": "TextBlock",
+      "text": "spacing: medium",
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "spacing: large",
+      "spacing": "large"
+    },
+    {
+      "type": "TextBlock",
+      "text": "spacing: extraLarge",
+      "spacing": "extraLarge"
+    },
+    {
+      "type": "TextBlock",
+      "text": "separator: true",
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "separator: true, spacing: extraLarge",
+      "spacing": "extraLarge",
+      "separator": true
+    }
+  ]
+}

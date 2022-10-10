@@ -1,0 +1,25 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Fallback test:",
+      "wrap": true
+    },
+    {
+      "type": "Steve Holt!",
+      "fallback": "drop",
+      "egg": "her?"
+    },
+    {
+      "type": "Graph",
+      "fallback": {
+        "type": "TextBlock",
+        "text": "No graph support. Guess we'll just use this textblock instead.",
+        "wrap": true
+      },
+      "someProperty": "foo"
+    }
+  ]
+}

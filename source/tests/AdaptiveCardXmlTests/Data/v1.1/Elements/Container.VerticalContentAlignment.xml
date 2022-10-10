@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1" MinHeight="150px">
+  <TextBlock>I'm a regular TextBlock...</TextBlock>
+  <Container Height="AdaptiveCards.AdaptiveDimension" VerticalContentAlignment="Center">
+    <TextBlock>But I'm centered...</TextBlock>
+  </Container>
+  <Container VerticalContentAlignment="Bottom">
+    <TextBlock>And I'm like a footer!</TextBlock>
+  </Container>
+</Card>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
+    <Column Width="45">
+      <Container Style="Emphasis" Bleed="true">
+        <BackgroundImage BackgroundImage="https://messagecardplayground.azurewebsites.net/assets/TxP_Background.png" />
+        <Image Url="https://messagecardplayground.azurewebsites.net/assets/TxP_Flight.png" HorizontalAlignment="Center" AltText="Departing airplane" />
+      </Container>
+      <Container Spacing="None" Height="AdaptiveCards.AdaptiveDimension" Style="Emphasis" Bleed="true">
+        <TextBlock Size="ExtraLarge" Weight="Lighter" Color="Accent" Wrap="true">Flight to JFK</TextBlock>
+        <TextBlock Spacing="Small" Wrap="true">Continental Air Lines flight UA110</TextBlock>
+        <TextBlock Spacing="None" Wrap="true">Confirmation code: RXJ34P</TextBlock>
+        <TextBlock Spacing="None" Wrap="true">4 hours 15 minutes</TextBlock>
+      </Container>
+    </Column>
+    <Column Width="55">
+      <Container Height="AdaptiveCards.AdaptiveDimension">
+        <ColumnSet>
+          <Column Width="auto">
+            <TextBlock Size="ExtraLarge" Weight="Lighter" Wrap="true">SFO</TextBlock>
+          </Column>
+          <Column VerticalContentAlignment="Center" Width="stretch">
+            <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://messagecardplayground.azurewebsites.net/assets/graydot2x2.png" Width="AdaptiveCards.AdaptiveDimension" />
+          </Column>
+          <Column Spacing="Small" VerticalContentAlignment="Center" Width="auto">
+            <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://messagecardplayground.azurewebsites.net/assets/smallairplane.png" AltText="Flight to" />
+          </Column>
+          <Column Width="auto">
+            <TextBlock Size="ExtraLarge" Weight="Lighter" HorizontalAlignment="Right" Wrap="true">JFK</TextBlock>
+          </Column>
+        </ColumnSet>
+        <ColumnSet>
+          <Column Width="1">
+            <RichTextBlock>
+              <Inlines Size="Medium">
+                <Type>TextRun</Type>8:15 PM
+</Inlines>
+              <Inlines IsSubtle="true">
+                <Type>TextRun</Type>Sat, Mar 4, 2017
+</Inlines>
+              <Inlines IsSubtle="true">
+                <Type>TextRun</Type>San Francisco</Inlines>
+            </RichTextBlock>
+          </Column>
+          <Column Width="1">
+            <RichTextBlock HorizontalAlignment="Right">
+              <Inlines Size="Medium">
+                <Type>TextRun</Type>3:30 AM
+</Inlines>
+              <Inlines IsSubtle="true">
+                <Type>TextRun</Type>Sat, Mar 4, 2017
+</Inlines>
+              <Inlines IsSubtle="true">
+                <Type>TextRun</Type>New York</Inlines>
+            </RichTextBlock>
+          </Column>
+        </ColumnSet>
+        <ActionSet Spacing="Medium" Separator="true">
+          <Action.Submit Title="Check in" Style="positive" />
+          <Action.Submit Title="View" />
+        </ActionSet>
+      </Container>
+    </Column>
+  </ColumnSet>
+</Card>

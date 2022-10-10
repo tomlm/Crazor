@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock>Present a form and submit it back to the originator</TextBlock>
+  <Input.Text Id="firstName" Placeholder="What is your first name?" />
+  <Input.Text Id="lastName" Placeholder="What is your last name?" />
+  <Action.Submit Title="Action.Submit">{
+  "x": 13
+}</Action.Submit>
+</Card>

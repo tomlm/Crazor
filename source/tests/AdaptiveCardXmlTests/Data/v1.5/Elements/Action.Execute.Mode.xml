@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Wrap="true" Style="Heading">Please confirm your data:</TextBlock>
+  <FactSet>
+    <Fact Title="First Name" Value="John" />
+    <Fact Title="Last Name" Value="Smith" />
+    <Fact Title="Phone number " Value="(555) 555-5555" />
+  </FactSet>
+  <Action.Execute Title="Confirm data" Verb="" />
+  <Action.Execute Title="Edit data" Mode="secondary" Verb="">"edit"</Action.Execute>
+  <Action.Execute Title="Delete data" Mode="secondary" Verb="">"delete"</Action.Execute>
+</Card>

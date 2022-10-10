@@ -1,0 +1,34 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "myColor4",
+      "value": "1",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

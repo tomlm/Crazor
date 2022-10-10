@@ -87,7 +87,7 @@ namespace AdaptiveCards
         [JsonIgnore]
         [XmlAttribute(nameof(Mode))]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public AdaptiveActionMode ModeXml { get { return (Mode.HasValue) ? Mode.Value : AdaptiveActionMode.Primary; } set { Mode = value; } }
+        public string ModeXml { get { return (Mode.HasValue) ? Mode.Value.ToString().ToLower() : null; } set { Mode = (value != null) ? Mode = (AdaptiveActionMode)Enum.Parse(typeof(AdaptiveActionMode), value, ignoreCase: true) : null; } }
 
         /// <summary>
         /// Determines whether to serialize the style for XML.
@@ -101,6 +101,7 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [XmlAttribute]
+        [DefaultValue(true)]
         public bool IsEnabled{ get; set; } = true;
     }
 }

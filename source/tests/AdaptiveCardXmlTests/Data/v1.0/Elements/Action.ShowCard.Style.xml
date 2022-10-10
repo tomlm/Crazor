@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock>This card's action will show another card</TextBlock>
+  <Action.ShowCard Title="No Style">
+    <AdaptiveCard Version="1.0">
+      <TextBlock>This card has no style</TextBlock>
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Default Style">
+    <AdaptiveCard Version="1.0">
+      <AdditionalProperties>
+        <item>
+          <key>
+            <string>style</string>
+          </key>
+          <value>
+            <anyType xsi:type="xsd:string">default</anyType>
+          </value>
+        </item>
+      </AdditionalProperties>
+      <TextBlock>This card has default style</TextBlock>
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Emphasis Style">
+    <AdaptiveCard Version="1.0">
+      <AdditionalProperties>
+        <item>
+          <key>
+            <string>style</string>
+          </key>
+          <value>
+            <anyType xsi:type="xsd:string">emphasis</anyType>
+          </value>
+        </item>
+      </AdditionalProperties>
+      <TextBlock>This card has emphasis style</TextBlock>
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

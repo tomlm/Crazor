@@ -1,0 +1,170 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This container has the default style"
+        },
+        {
+          "type": "TextBlock",
+          "text": "color: default"
+        },
+        {
+          "type": "TextBlock",
+          "color": "accent",
+          "text": "color: accent"
+        },
+        {
+          "type": "TextBlock",
+          "color": "good",
+          "text": "color: good"
+        },
+        {
+          "type": "TextBlock",
+          "color": "warning",
+          "text": "color: warning"
+        },
+        {
+          "type": "TextBlock",
+          "color": "attention",
+          "text": "color: attention"
+        },
+        {
+          "type": "TextBlock",
+          "color": "light",
+          "text": "color: light"
+        },
+        {
+          "type": "TextBlock",
+          "color": "dark",
+          "text": "color: dark"
+        }
+      ],
+      "style": "default"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This container has the accent style"
+        },
+        {
+          "type": "TextBlock",
+          "text": "color: default"
+        },
+        {
+          "type": "TextBlock",
+          "color": "accent",
+          "text": "color: accent"
+        },
+        {
+          "type": "TextBlock",
+          "color": "good",
+          "text": "color: good"
+        },
+        {
+          "type": "TextBlock",
+          "color": "warning",
+          "text": "color: warning"
+        },
+        {
+          "type": "TextBlock",
+          "color": "attention",
+          "text": "color: attention"
+        },
+        {
+          "type": "TextBlock",
+          "color": "light",
+          "text": "color: light"
+        },
+        {
+          "type": "TextBlock",
+          "color": "dark",
+          "text": "color: dark"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - no style"
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - emphasis"
+            }
+          ],
+          "style": "emphasis"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - default"
+            }
+          ],
+          "style": "default"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - good"
+            }
+          ],
+          "style": "good"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - warning"
+            }
+          ],
+          "style": "warning"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - attention"
+            }
+          ],
+          "style": "attention"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - accent"
+            }
+          ],
+          "style": "accent"
+        }
+      ],
+      "style": "accent"
+    }
+  ]
+}

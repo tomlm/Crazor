@@ -1,0 +1,34 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "size:default"
+    },
+    {
+      "type": "TextBlock",
+      "size": "small",
+      "text": "size:small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "size:default"
+    },
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "text": "size:medium"
+    },
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "text": "size:large"
+    },
+    {
+      "type": "TextBlock",
+      "size": "extraLarge",
+      "text": "size:extraLarge"
+    }
+  ]
+}

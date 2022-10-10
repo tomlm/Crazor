@@ -1,0 +1,30 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Validate that associatedInputs 'auto' and 'none' are handled case-insensitively",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "ID",
+      "placeholder": "Placeholder text",
+      "isRequired": true,
+      "label": "Text Box:"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "associatedInputs": "none",
+      "title": "NONE"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "AUTO"
+    }
+  ]
+}

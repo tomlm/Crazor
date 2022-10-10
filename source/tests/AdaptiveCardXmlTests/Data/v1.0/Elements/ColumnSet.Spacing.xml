@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Size="ExtraLarge">ColumnSet Spacing</TextBlock>
+  <ColumnSet Spacing="None">
+    <Column>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(none)</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="Large" Separator="true">
+    <Column>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(large)</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+  </ColumnSet>
+</Card>

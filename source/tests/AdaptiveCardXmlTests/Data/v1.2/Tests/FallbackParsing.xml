@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <Container Id="A">
+    <Container Id="B">
+      <Fallback>
+        <Type>Content</Type>
+        <Content xsi:type="Container" Id="B">
+          <TextBlock Id="C">B Container fallback textblock</TextBlock>
+          <Image Id="Z" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+        </Content>
+      </Fallback>
+      <ColumnSet Id="C">
+        <Column Id="D" Width="auto">
+          <AdaptiveUnknownElement Id="E">
+            <AdditionalProperties>
+              <item>
+                <key>
+                  <string>someProperty</string>
+                </key>
+                <value>
+                  <anyType xsi:type="xsd:string">blah</anyType>
+                </value>
+              </item>
+            </AdditionalProperties>
+            <Fallback>
+              <Type>Content</Type>
+              <Content xsi:type="Container" Id="E">
+                <Image Id="I" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
+                <TextBlock Id="J">C ColumnSet fallback textblock</TextBlock>
+              </Content>
+            </Fallback>
+            <Type>Graph</Type>
+          </AdaptiveUnknownElement>
+        </Column>
+      </ColumnSet>
+    </Container>
+  </Container>
+  <TextBlock Id="F">F TextBlock</TextBlock>
+  <Input.Text Id="G" Placeholder="G Input.Text" />
+  <AdaptiveUnknownElement Id="H">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>someProperty</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">foo</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="Container" Id="L">
+        <TextBlock Id="K">H Graph fallback TextBlock</TextBlock>
+      </Content>
+    </Fallback>
+    <Type>Graph</Type>
+  </AdaptiveUnknownElement>
+  <AdaptiveUnknownAction>
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>coolnessLevel</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">toTheMax</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="AdaptiveUnknownElement">
+        <AdditionalProperties>
+          <item>
+            <key>
+              <string>coolnessLevel</string>
+            </key>
+            <value>
+              <anyType xsi:type="xsd:string">prettyCool</anyType>
+            </value>
+          </item>
+        </AdditionalProperties>
+        <Fallback>
+          <Type>Content</Type>
+          <Content xsi:type="Action.Submit" Title="Boring fallback action" />
+        </Fallback>
+        <Type>MyCoolAction</Type>
+      </Content>
+    </Fallback>
+    <Type>MyCoolAction2</Type>
+  </AdaptiveUnknownAction>
+</Card>

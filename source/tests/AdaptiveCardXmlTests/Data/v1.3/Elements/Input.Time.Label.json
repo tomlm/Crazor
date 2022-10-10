@@ -1,0 +1,24 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Time",
+      "id": "timeLabelId",
+      "label": "Default Input.Time label"
+    },
+    {
+      "type": "Input.Time",
+      "id": "requiredTimeLabelId",
+      "isRequired": true,
+      "label": "Required Input.Time label",
+      "errorMessage": "Required input"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

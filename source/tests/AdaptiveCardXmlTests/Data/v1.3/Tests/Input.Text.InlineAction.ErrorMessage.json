@@ -1,0 +1,48 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "input1",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Inline Action",
+        "iconUrl": "http://adaptivecards.io/content/cats/1.png"
+      },
+      "isRequired": true,
+      "label": "Required Input.Text with inline action",
+      "errorMessage": "This is a required input"
+    },
+    {
+      "type": "Input.Text",
+      "id": "input2",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Inline Action",
+        "iconUrl": "http://adaptivecards.io/content/cats/1.png"
+      },
+      "regex": "^\\w{5,50}$",
+      "label": "Input.Text with regex: ^\\w{5,10}$ and inline action",
+      "errorMessage": "Input must contain between 5 and 10 characters long."
+    },
+    {
+      "type": "Input.Text",
+      "id": "input3",
+      "maxLength": 6,
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Inline Action",
+        "iconUrl": "http://adaptivecards.io/content/cats/1.png"
+      },
+      "label": "Input.Text with maxLength of 6 and inline action",
+      "errorMessage": "Input must contain 6 characters or less."
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

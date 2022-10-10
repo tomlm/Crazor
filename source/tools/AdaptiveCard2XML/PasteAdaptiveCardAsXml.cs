@@ -1,16 +1,12 @@
 ﻿using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using AdaptiveCards;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using Newtonsoft.Json;
 using Task = System.Threading.Tasks.Task;
 

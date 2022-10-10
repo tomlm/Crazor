@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <AdaptiveUnknownElement Id="id1">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>label</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">Please enter a csharp keyword</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>isRequired</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:boolean">true</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>errorMessage</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">This has to be a csharp keyword!</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Type>CSharpKeywordInput</Type>
+  </AdaptiveUnknownElement>
+  <Input.Text Id="id2" IsRequired="true" Label="Please enter some text" ErrorMessage="This input is required." />
+  <Action.Submit Title="Submit" />
+</Card>

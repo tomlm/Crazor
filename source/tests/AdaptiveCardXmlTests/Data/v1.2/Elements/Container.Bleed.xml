@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Container Style="Good" Bleed="true">
+    <TextBlock Wrap="true">This Container bleeds into its parent padding for a nice visual appearance!</TextBlock>
+  </Container>
+  <Container Style="Warning">
+    <TextBlock Wrap="true">This Container is just a plain ol' container, it looks nice too though!</TextBlock>
+  </Container>
+</Card>

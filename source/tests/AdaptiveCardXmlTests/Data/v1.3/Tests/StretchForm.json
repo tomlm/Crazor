@@ -1,0 +1,28 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This is a stretched textblock",
+      "wrap": true,
+      "height": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "Input.Text",
+      "id": "input1",
+      "height": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "TextBlock",
+      "text": "This is a non-stretched textblock",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "input2",
+      "height": "AdaptiveCards.AdaptiveDimension"
+    }
+  ],
+  "minHeight": "300px"
+}

@@ -1,0 +1,29 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This Container bleeds into its parent padding for a nice visual appearance!",
+          "wrap": true
+        }
+      ],
+      "style": "good",
+      "bleed": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This Container is just a plain ol' container, it looks nice too though!",
+          "wrap": true
+        }
+      ],
+      "style": "warning"
+    }
+  ]
+}

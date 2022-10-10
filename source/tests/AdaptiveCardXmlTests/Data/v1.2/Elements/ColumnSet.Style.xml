@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <ColumnSet Style="Default">
+    <Column>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(none)</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+  </ColumnSet>
+  <ColumnSet Style="Emphasis">
+    <Column>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(none)</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+    <Column>
+      <TextBlock> </TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+  </ColumnSet>
+  <ColumnSet Style="Emphasis">
+    <Column Style="Default">
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(none)</TextBlock>
+    </Column>
+    <Column Style="Emphasis">
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(none)</TextBlock>
+    </Column>
+    <Column>
+      <Container>
+        <TextBlock Color="Dark">Contained container - no style</TextBlock>
+      </Container>
+      <Container Style="Emphasis">
+        <TextBlock Color="Dark">Contained container - emphasis</TextBlock>
+      </Container>
+      <Container Style="Default">
+        <TextBlock Color="Dark">Contained container - default</TextBlock>
+      </Container>
+    </Column>
+  </ColumnSet>
+</Card>

@@ -90,9 +90,11 @@ namespace AdaptiveCards
         [JsonIgnore]
         public string UrlString
         {
-            get { return Url?.ToString(); }
+            get { return Url?.AbsoluteUri; }
             set { Url = new Uri(value); }
         }
+
+        public bool ShouldSerializeUrl() => Url != null;
 
         /// <summary>
         /// Horizontal alignment (<see cref="AdaptiveHorizontalAlignment"/>) to use.

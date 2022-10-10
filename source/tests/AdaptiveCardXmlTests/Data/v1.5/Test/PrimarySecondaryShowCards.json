@@ -1,0 +1,35 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "Primary Show Card",
+            "wrap": true
+          }
+        ]
+      },
+      "title": "Primary Show Card Action"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "Secondary Show Card",
+            "wrap": true
+          }
+        ]
+      },
+      "title": "Secondary Show Card Action",
+      "mode": "secondary"
+    }
+  ]
+}

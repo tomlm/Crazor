@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <ColumnSet>
+    <Column MinHeight="50px" Width="auto">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/AlkiBeach.jpg" />
+    </Column>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/GoldenGardensPark.jpg" VerticalAlignment="Center" />
+    </Column>
+    <Column MinHeight="50px" Width="auto">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/BainbridgeIsland.jpg" />
+    </Column>
+  </ColumnSet>
+  <TextBlock>You can even repeat the background image...</TextBlock>
+  <ColumnSet>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="Repeat" />
+    </Column>
+    <Column VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="stretch">
+      <TextBlock HorizontalAlignment="Center" Wrap="true">Those are some neat arrows</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock>Horizontal repeat...</TextBlock>
+  <ColumnSet>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/downarrow.png" FillMode="RepeatHorizontally" />
+    </Column>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="RepeatHorizontally" VerticalAlignment="Center" />
+    </Column>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="RepeatHorizontally" VerticalAlignment="Bottom" />
+    </Column>
+  </ColumnSet>
+  <TextBlock>Vertical repeat...</TextBlock>
+  <ColumnSet>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="RepeatVertically" />
+    </Column>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/downarrow.png" FillMode="RepeatVertically" HorizontalAlignment="Center" />
+    </Column>
+    <Column MinHeight="50px" Width="stretch">
+      <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="RepeatVertically" HorizontalAlignment="Right" />
+    </Column>
+  </ColumnSet>
+</Card>

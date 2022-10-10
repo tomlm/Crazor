@@ -1,0 +1,184 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Bleed left"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            }
+          ],
+          "style": "good",
+          "bleed": true
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 2"
+            }
+          ],
+          "style": "attention"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 3"
+            }
+          ],
+          "style": "warning"
+        }
+      ],
+      "style": "emphasis"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Bleed center"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            }
+          ],
+          "style": "good"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 2"
+            }
+          ],
+          "style": "attention",
+          "bleed": true
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 3"
+            }
+          ],
+          "style": "warning"
+        }
+      ],
+      "style": "emphasis"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Bleed right"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            }
+          ],
+          "style": "good"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 2"
+            }
+          ],
+          "style": "attention"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 3"
+            }
+          ],
+          "style": "warning",
+          "bleed": true
+        }
+      ],
+      "style": "emphasis"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Bleed all"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            }
+          ],
+          "style": "good",
+          "bleed": true
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 2"
+            }
+          ],
+          "style": "attention",
+          "bleed": true
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 3"
+            }
+          ],
+          "style": "warning",
+          "bleed": true
+        }
+      ],
+      "style": "emphasis"
+    }
+  ]
+}

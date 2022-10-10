@@ -1,0 +1,48 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "style": "person",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "backgroundColor": "#FF982374",
+              "altText": "Cat"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "backgroundColor": "#FF128192",
+              "altText": "Cat"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "backgroundColor": "#FF183774",
+              "altText": "Cat"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

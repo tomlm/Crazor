@@ -1,0 +1,30 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Custom parsing allows a custom type",
+      "horizontalAlignment": "center",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Progress Bar**",
+      "horizontalAlignment": "center"
+    },
+    {
+      "type": "ProgressBar",
+      "payload": [
+        {
+          "red": 168,
+          "green": 123,
+          "blue": 180,
+          "alpha": 1,
+          "progress": 0.95,
+          "thickness": 1
+        }
+      ]
+    }
+  ]
+}

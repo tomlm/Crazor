@@ -1,0 +1,78 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "weight": "bolder",
+      "text": "3 results for 3d printer filament",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "filament",
+      "value": "1",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "HATCHBOX 1.75mm White PLA 3D Printer Filament - 1kg Spool (2.2 lbs) - Dimensional Accuracy +/- 0.03mm",
+          "value": "1"
+        },
+        {
+          "title": "HATCHBOX PLA 3D Printer Filament, Dimensional Accuracy +/- 0.03 mm, 1 kg Spool, 1.75 mm, Blue",
+          "value": "2"
+        },
+        {
+          "title": "3D Solutech Silver Metal 3D Printer PLA Filament 1.75MM Filament, Dimensional Accuracy +/- 0.03 mm, 2.2 LBS (1.0KG) - PLA175TCMS",
+          "value": "3"
+        }
+      ],
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "filamentCompact",
+      "value": "1",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "HATCHBOX 1.75mm White PLA 3D Printer Filament - 1kg Spool (2.2 lbs) - Dimensional Accuracy +/- 0.03mm",
+          "value": "1"
+        },
+        {
+          "title": "HATCHBOX PLA 3D Printer Filament, Dimensional Accuracy +/- 0.03 mm, 1 kg Spool, 1.75 mm, Blue",
+          "value": "2"
+        },
+        {
+          "title": "3D Solutech Silver Metal 3D Printer PLA Filament 1.75MM Filament, Dimensional Accuracy +/- 0.03 mm, 2.2 LBS (1.0KG) - PLA175TCMS",
+          "value": "3"
+        }
+      ],
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Specify Filament Type to ABS"
+    },
+    {
+      "type": "Input.Toggle",
+      "id": "filamenttype",
+      "title": "Get PLA(Poly Lactic Acid) filament by tommorrow if order in next 2 hours",
+      "valueOn": "true",
+      "valueOff": "false",
+      "wrap": true,
+      "value": "true"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Order"
+    }
+  ]
+}

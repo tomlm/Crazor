@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet>
+    <Column>
+      <TextBlock>No Style</TextBlock>
+    </Column>
+    <Column Style="Default">
+      <TextBlock>Default Style</TextBlock>
+    </Column>
+    <Column Style="Emphasis">
+      <TextBlock>Emphasis Style</TextBlock>
+      <Container>
+        <TextBlock>Container no style</TextBlock>
+      </Container>
+      <Container Style="Default">
+        <TextBlock>Container default style</TextBlock>
+      </Container>
+      <Container Style="Emphasis">
+        <TextBlock>Container emphasis style</TextBlock>
+      </Container>
+    </Column>
+  </ColumnSet>
+</Card>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
+  <TextBlock>Present a form and submit it back to the originator (with validation!)</TextBlock>
+  <ActionSet>
+    <Action.Execute Title="ActionSet Execute" IconUrl="https://adaptivecards.io/content/Closed%20bug%2092x92.png" AssociatedInputs="None" Verb="doActionSetStuff">{
+  "y": -1
+}</Action.Execute>
+    <Action.ShowCard Title="ShowCard">
+      <AdaptiveCard>
+        <Action.Execute Title="Neat!" AssociatedInputs="None" Verb="" />
+      </AdaptiveCard>
+    </Action.ShowCard>
+  </ActionSet>
+  <Input.Text Id="firstName" IsRequired="true" Label="What is your first name?" Regex="^[A-Z]{1}.*" />
+  <Input.Text Id="lastName" Label="What is your last name?" />
+  <Action.Execute Title="Action.Execute" IconUrl="https://adaptivecards.io/content/Closed%20bug%2092x92.png" Verb="doStuff">{
+  "x": 13
+}</Action.Execute>
+</Card>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Size="Large" Weight="Bolder">Please rate your experience</TextBlock>
+  <Input.ChoiceSet Id="Rating" Spacing="Medium" Value="5">
+    <Choices>
+      <Choice Title="Excellent" Value="5" />
+      <Choice Title="Good" Value="4" />
+      <Choice Title="Average" Value="3" />
+      <Choice Title="Poor" Value="2" />
+      <Choice Title="Very poor" Value="1" />
+    </Choices>
+  </Input.ChoiceSet>
+  <TextBlock Spacing="Large">Leave a comment</TextBlock>
+  <Input.Text Id="FeedbackText" Spacing="Medium" IsMultiline="true" MaxLength="500" />
+  <TextBlock Spacing="Small"> </TextBlock>
+  <Action.Submit Title="Send">{
+  "CardType": "FeedbackCard",
+  "DialogId": "Feedback",
+  "Command": "SendFeedback",
+  "ActionAvailability": "GlobalInterrupt"
+}</Action.Submit>
+</Card>

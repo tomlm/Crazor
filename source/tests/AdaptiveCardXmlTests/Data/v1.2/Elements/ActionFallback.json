@@ -1,0 +1,141 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "NoExist",
+          "fallback": {
+            "type": "NeitherExist",
+            "fallback": {
+              "type": "Action.Submit",
+              "data": {
+                "x": 13
+              },
+              "title": "Action.Submit"
+            }
+          }
+        },
+        {
+          "type": "NoExist",
+          "fallback": {
+            "type": "NeitherExist",
+            "fallback": {
+              "type": "Action.OpenUrl",
+              "url": "https://adaptivecards.io/",
+              "title": "Action.OpenUrl"
+            }
+          }
+        },
+        {
+          "type": "NoExist",
+          "fallback": {
+            "type": "NeitherExist",
+            "fallback": {
+              "type": "NopeNotThis",
+              "fallback": {
+                "type": "Action.ShowCard",
+                "card": {
+                  "type": "AdaptiveCard",
+                  "version": "1.2",
+                  "body": [
+                    {
+                      "type": "TextBlock",
+                      "text": "What do you think?"
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "Action.Submit",
+                      "title": "Neat!"
+                    }
+                  ]
+                },
+                "title": "Action.ShowCard"
+              }
+            }
+          }
+        },
+        {
+          "type": "NoExist",
+          "fallback": {
+            "type": "NeitherExist",
+            "fallback": {
+              "type": "HaHaNope"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "This card tests action fallback"
+    }
+  ],
+  "actions": [
+    {
+      "type": "NoExist",
+      "fallback": {
+        "type": "NeitherExist",
+        "fallback": {
+          "type": "Action.Submit",
+          "data": {
+            "x": 13
+          },
+          "title": "Action.Submit"
+        }
+      }
+    },
+    {
+      "type": "NoExist",
+      "fallback": {
+        "type": "NeitherExist",
+        "fallback": {
+          "type": "Action.OpenUrl",
+          "url": "https://adaptivecards.io/",
+          "title": "Action.OpenUrl"
+        }
+      }
+    },
+    {
+      "type": "NoExist",
+      "fallback": {
+        "type": "NeitherExist",
+        "fallback": {
+          "type": "NopeNotThis",
+          "fallback": {
+            "type": "Action.ShowCard",
+            "card": {
+              "type": "AdaptiveCard",
+              "version": "1.2",
+              "body": [
+                {
+                  "type": "TextBlock",
+                  "text": "What do you think?"
+                }
+              ],
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Neat!"
+                }
+              ]
+            },
+            "title": "Action.ShowCard"
+          }
+        }
+      }
+    },
+    {
+      "type": "NoExist",
+      "fallback": {
+        "type": "NeitherExist",
+        "fallback": {
+          "type": "HaHaNope"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "extraLarge",
+      "text": "Card A"
+    },
+    {
+      "type": "TextBlock",
+      "text": "If you click the Sumit button in this card you'll retrieve **input1** and **input2**",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "input1",
+      "label": "Input1"
+    },
+    {
+      "type": "Input.Text",
+      "id": "input2",
+      "label": "Input2"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.2",
+        "body": [
+          {
+            "type": "TextBlock",
+            "size": "extraLarge",
+            "text": "Card B"
+          },
+          {
+            "type": "TextBlock",
+            "text": "If you click the Sumit button in this card you'll retrieve **input3**, **input4**, **input1** and **input2**",
+            "wrap": true
+          },
+          {
+            "type": "Input.Text",
+            "id": "input3",
+            "label": "Input3"
+          },
+          {
+            "type": "Input.Text",
+            "id": "input4",
+            "label": "Input4"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "Submit"
+          }
+        ]
+      },
+      "title": "Show Card B"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.2",
+        "body": [
+          {
+            "type": "TextBlock",
+            "size": "extraLarge",
+            "text": "Card C"
+          },
+          {
+            "type": "TextBlock",
+            "text": "If you click the Sumit button in this card you'll retrieve **input5**, **input6**, **input1** and **input2**",
+            "wrap": true
+          },
+          {
+            "type": "Input.Text",
+            "id": "input5",
+            "label": "Input5"
+          },
+          {
+            "type": "Input.Text",
+            "id": "input6",
+            "label": "Input6"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "Submit"
+          },
+          {
+            "type": "Action.ShowCard",
+            "card": {
+              "type": "AdaptiveCard",
+              "version": "1.2",
+              "body": [
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "text": "Card D"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "If you click the Sumit button in this card you'll retrieve **input7**, **input8**, **input5**, **input6**, **input1** and **input2**",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "input7",
+                  "label": "Input7"
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "input8",
+                  "label": "Input8"
+                }
+              ],
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Submit"
+                }
+              ]
+            },
+            "title": "Show Card D"
+          }
+        ]
+      },
+      "title": "Show Card C"
+    }
+  ]
+}

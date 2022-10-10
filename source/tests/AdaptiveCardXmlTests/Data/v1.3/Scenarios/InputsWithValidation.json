@@ -1,0 +1,198 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Input.Text elements",
+      "horizontalAlignment": "center",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "Input.Text",
+      "id": "SimpleVal",
+      "isRequired": true,
+      "label": "Name",
+      "errorMessage": "Name is required"
+    },
+    {
+      "type": "Input.Text",
+      "id": "UrlVal",
+      "style": "url",
+      "label": "Homepage"
+    },
+    {
+      "type": "Input.Text",
+      "id": "EmailVal",
+      "style": "email",
+      "label": "Email"
+    },
+    {
+      "type": "Input.Text",
+      "id": "TelVal",
+      "style": "tel",
+      "label": "Phone"
+    },
+    {
+      "type": "Input.Text",
+      "id": "MultiLineVal",
+      "isMultiline": true,
+      "label": "Comments"
+    },
+    {
+      "type": "Input.Number",
+      "id": "NumVal",
+      "value": 1.0,
+      "min": -5.0,
+      "max": 5.0,
+      "label": "Quantity",
+      "errorMessage": "The quantity must be between -5 and 5"
+    },
+    {
+      "type": "Input.Date",
+      "id": "DateVal",
+      "value": "2017-09-20",
+      "label": "Due Date"
+    },
+    {
+      "type": "Input.Time",
+      "id": "TimeVal",
+      "value": "16:59",
+      "label": "Start time"
+    },
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Input.ChoiceSet",
+      "horizontalAlignment": "center",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "CompactSelectVal",
+      "value": "1",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What color do you want? (compact)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "SingleSelectVal",
+      "value": "1",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What color do you want? (expanded)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "MultiSelectVal",
+      "value": "1,3",
+      "style": "compact",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Red",
+          "value": "1"
+        },
+        {
+          "title": "Green",
+          "value": "2"
+        },
+        {
+          "title": "Blue",
+          "value": "3"
+        }
+      ],
+      "label": "What colors do you want? (multiselect)"
+    },
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Input.Toggle",
+      "horizontalAlignment": "center",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "Input.Toggle",
+      "id": "AcceptsTerms",
+      "title": "I accept the terms and conditions (True/False)",
+      "valueOn": "true",
+      "valueOff": "false",
+      "isRequired": true,
+      "label": "Please accept the terms and conditions:",
+      "errorMessage": "Accepting the terms and conditions is required"
+    },
+    {
+      "type": "Input.Toggle",
+      "id": "ColorPreference",
+      "title": "Red cars are better than other cars",
+      "valueOn": "RedCars",
+      "valueOff": "NotRedCars",
+      "label": "How do you feel about red cars?"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "data": {
+        "id": "1234567890"
+      },
+      "title": "Submit"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Text",
+            "id": "CommentVal",
+            "label": "enter comment"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Show Card"
+    }
+  ]
+}

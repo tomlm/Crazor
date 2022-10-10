@@ -1,0 +1,168 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "weight": "bolder",
+                      "color": "attention",
+                      "text": "You should never see this (fallback: drop)!"
+                    },
+                    {
+                      "type": "Graph",
+                      "id": "firstGraph",
+                      "someProperty": "blah"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "fallback": "drop"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "lighter",
+      "text": "Nothing above this! ↑"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "lighter",
+      "text": "Message just below ↓"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "weight": "bolder",
+                      "color": "attention",
+                      "text": "You should never see this (fallback: textblock)!"
+                    },
+                    {
+                      "type": "Graph",
+                      "id": "secondGraph",
+                      "someOtherProperty": "blah"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "fallback": {
+        "type": "TextBlock",
+        "weight": "bolder",
+        "color": "good",
+        "text": "If you see this, things are working great!"
+      }
+    },
+    {
+      "type": "TextBlock",
+      "weight": "lighter",
+      "text": "There should be another message below ↓"
+    },
+    {
+      "type": "GraphV2",
+      "id": "firstGraphVTwo",
+      "fallback": {
+        "type": "Graph",
+        "id": "thirdGraph",
+        "fallback": {
+          "type": "TextBlock",
+          "weight": "bolder",
+          "color": "good",
+          "text": "Multiply-nested fallback works!"
+        }
+      }
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "weight": "lighter",
+          "text": "There should be nothing between here...",
+          "wrap": true
+        },
+        {
+          "type": "GraphV2",
+          "id": "secondGraphVTwo",
+          "fallback": {
+            "type": "Graph",
+            "id": "fourthGraph",
+            "fallback": {
+              "type": "MakeSomethingUp"
+            }
+          }
+        },
+        {
+          "type": "GraphV2",
+          "id": "thirdGraphVTwo",
+          "fallback": {
+            "type": "Graph",
+            "id": "fifthGraph",
+            "fallback": {
+              "type": "MakeSomethingElseUp",
+              "fallback": "drop"
+            }
+          }
+        },
+        {
+          "type": "TextBlock",
+          "weight": "lighter",
+          "text": "...and here",
+          "wrap": true
+        }
+      ],
+      "style": "emphasis"
+    }
+  ],
+  "actions": [
+    {
+      "type": "MyCoolAction2",
+      "title": "Be Cool",
+      "fallback": {
+        "type": "MyCoolAction",
+        "fallback": {
+          "type": "Action.Submit",
+          "title": "Correct"
+        },
+        "coolness": "pretty cool",
+        "title": "Pretty cool"
+      },
+      "coolness": "to the max"
+    },
+    {
+      "type": "Unnecessary",
+      "title": "This is a bug!",
+      "fallback": "drop"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "lighter",
+      "text": "weight: lighter"
+    },
+    {
+      "type": "TextBlock",
+      "text": "weight: default"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "weight: bolder"
+    }
+  ]
+}

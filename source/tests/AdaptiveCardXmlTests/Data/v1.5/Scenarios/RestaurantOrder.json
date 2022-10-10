@@ -1,0 +1,107 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "weight": "bolder",
+      "text": "Malt & Vine Order Form",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "EntreeSelectVal",
+      "style": "filtered",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Steak",
+          "value": "1"
+        },
+        {
+          "title": "Chicken",
+          "value": "2"
+        },
+        {
+          "title": "Tofu",
+          "value": "3"
+        }
+      ],
+      "placeholder": "Please choose",
+      "isRequired": true,
+      "label": "Which entree would you like?",
+      "errorMessage": "This is a required input"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "SideVal",
+      "style": "filtered",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Baked Potato",
+          "value": "1"
+        },
+        {
+          "title": "Rice",
+          "value": "2"
+        },
+        {
+          "title": "Vegetables",
+          "value": "3"
+        },
+        {
+          "title": "Noodles",
+          "value": "4"
+        },
+        {
+          "title": "No Side",
+          "value": "5"
+        }
+      ],
+      "placeholder": "Please choose",
+      "isRequired": true,
+      "label": "Which side would you like?",
+      "errorMessage": "This is a required input"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "DrinkVal",
+      "style": "filtered",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Water",
+          "value": "1"
+        },
+        {
+          "title": "Soft Drink",
+          "value": "2"
+        },
+        {
+          "title": "Coffee",
+          "value": "3"
+        },
+        {
+          "title": "Natural Juice",
+          "value": "4"
+        },
+        {
+          "title": "No Drink",
+          "value": "5"
+        }
+      ],
+      "placeholder": "Please choose",
+      "isRequired": true,
+      "label": "Which drink would you like?",
+      "errorMessage": "This is a required input"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Place Order"
+    }
+  ]
+}

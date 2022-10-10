@@ -1,0 +1,212 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 45.0,
+          "items": [
+            {
+              "type": "Container",
+              "backgroundImage": "https://messagecardplayground.azurewebsites.net/assets/TxP_Background.png",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/TxP_Flight.png",
+                  "horizontalAlignment": "center",
+                  "altText": "Departing airplane"
+                }
+              ],
+              "style": "emphasis",
+              "bleed": true
+            },
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "weight": "lighter",
+                  "color": "accent",
+                  "text": "Flight to JFK",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Continental Air Lines flight UA110",
+                  "wrap": true,
+                  "spacing": "small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Confirmation code: RXJ34P",
+                  "wrap": true,
+                  "spacing": "none"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "4 hours 15 minutes",
+                  "wrap": true,
+                  "spacing": "none"
+                }
+              ],
+              "style": "emphasis",
+              "bleed": true,
+              "spacing": "none",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 55.0,
+          "items": [
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "size": "extraLarge",
+                          "weight": "lighter",
+                          "text": "SFO",
+                          "wrap": true
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": "stretch",
+                      "items": [
+                        {
+                          "type": "Image",
+                          "url": "https://messagecardplayground.azurewebsites.net/assets/graydot2x2.png",
+                          "width": "AdaptiveCards.AdaptiveDimension",
+                          "height": "AdaptiveCards.AdaptiveDimension"
+                        }
+                      ],
+                      "verticalContentAlignment": "center"
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "Image",
+                          "url": "https://messagecardplayground.azurewebsites.net/assets/smallairplane.png",
+                          "altText": "Flight to",
+                          "height": "AdaptiveCards.AdaptiveDimension"
+                        }
+                      ],
+                      "verticalContentAlignment": "center",
+                      "spacing": "small"
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "size": "extraLarge",
+                          "weight": "lighter",
+                          "text": "JFK",
+                          "horizontalAlignment": "right",
+                          "wrap": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": 1.0,
+                      "items": [
+                        {
+                          "type": "RichTextBlock",
+                          "inlines": [
+                            {
+                              "type": "TextRun",
+                              "size": "medium",
+                              "text": "8:15 PM\n"
+                            },
+                            {
+                              "type": "TextRun",
+                              "isSubtle": true,
+                              "text": "Sat, Mar 4, 2017\n"
+                            },
+                            {
+                              "type": "TextRun",
+                              "isSubtle": true,
+                              "text": "San Francisco"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": 1.0,
+                      "items": [
+                        {
+                          "type": "RichTextBlock",
+                          "horizontalAlignment": "right",
+                          "inlines": [
+                            {
+                              "type": "TextRun",
+                              "size": "medium",
+                              "text": "3:30 AM\n"
+                            },
+                            {
+                              "type": "TextRun",
+                              "isSubtle": true,
+                              "text": "Sat, Mar 4, 2017\n"
+                            },
+                            {
+                              "type": "TextRun",
+                              "isSubtle": true,
+                              "text": "New York"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "ActionSet",
+                  "actions": [
+                    {
+                      "type": "Action.Submit",
+                      "title": "Check in",
+                      "style": "positive"
+                    },
+                    {
+                      "type": "Action.Submit",
+                      "title": "View"
+                    }
+                  ],
+                  "spacing": "medium",
+                  "separator": true
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            }
+          ]
+        }
+      ],
+      "height": "AdaptiveCards.AdaptiveDimension"
+    }
+  ]
+}

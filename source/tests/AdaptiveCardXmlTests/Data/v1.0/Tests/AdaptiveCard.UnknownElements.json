@@ -1,0 +1,15 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "isSubtle": true,
+      "text": "This tests that unknown elements are OK"
+    },
+    {
+      "type": "AmazingFeature",
+      "isAwesome": true
+    }
+  ]
+}

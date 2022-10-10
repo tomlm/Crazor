@@ -1,0 +1,722 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id4",
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: small - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id214",
+              "type": "Image",
+              "size": "medium",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: medium - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id24",
+              "type": "Image",
+              "size": "large",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: large - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id2114",
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: auto - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id21114",
+              "type": "Image",
+              "size": "stretch",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: stretch - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id111111114",
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: small - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id111114",
+              "type": "Image",
+              "size": "medium",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: medium - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id14",
+              "type": "Image",
+              "size": "large",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: large - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id1114",
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: auto - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id11114",
+              "type": "Image",
+              "size": "stretch",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: stretch - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id45",
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: small - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id2145",
+              "type": "Image",
+              "size": "medium",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: medium - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id245",
+              "type": "Image",
+              "size": "large",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: large - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id21145",
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: auto - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id211145",
+              "type": "Image",
+              "size": "stretch",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: stretch - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id1111111145",
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: small - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id1111145",
+              "type": "Image",
+              "size": "medium",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: medium - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id145",
+              "type": "Image",
+              "size": "large",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: large - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id11145",
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: auto - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "id": "id111145",
+              "type": "Image",
+              "size": "stretch",
+              "url": "https://adaptivecards.io/content/cats/2.png",
+              "backgroundColor": "#FF0000FF",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image above: Size: stretch - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        "id4",
+        "id3",
+        "id24",
+        "id214",
+        "id2114",
+        "id21114",
+        "id111111114",
+        "id111114",
+        "id14",
+        "id1114",
+        "id11114",
+        "id45",
+        "id35",
+        "id245",
+        "id2145",
+        "id21145",
+        "id211145",
+        "id1111111145",
+        "id1111145",
+        "id145",
+        "id11145",
+        "id111145"
+      ],
+      "title": "Hide"
+    }
+  ]
+}

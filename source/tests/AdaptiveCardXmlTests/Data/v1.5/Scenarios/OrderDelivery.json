@@ -1,0 +1,67 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 2.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Redmond, WA",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "weight": "bolder",
+              "text": "Malt & Vine",
+              "wrap": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "4.5 stars (176 reviews) · mid-priced",
+              "wrap": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "size": "small",
+              "text": "**Blaire S.** said \"Great concept and a wide selection of beers both on tap and bottled! Smaller wine selection than I wanted, but the variety of beers certainly made up for that. Although I didn't order anything, my boyfriend got a beer and he loved it. Their prices are fair too. \n\nThe concept is really awesome. It's a bar/store that you can bring outside food into. The place was pretty packed tonight. I wish we had stayed for more than one drink. I would have loved to sample everything!\"",
+              "wrap": true,
+              "maxLines": 3
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://picsum.photos/300?image=882",
+              "altText": "Seated guest drinking a cup of coffee"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Pickup",
+      "tooltip": "Schedule order for pickup"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Delivery",
+      "tooltip": "Your location is too far for delivery"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Size="Large" Wrap="true">Here are some cool photos</TextBlock>
+  <TextBlock Size="Medium" Weight="Lighter" Wrap="true">Sorry some of them are repeats</TextBlock>
+  <ImageSet ImageSize="Medium">
+    <Image Url="https://picsum.photos/200/200?image=100" AltText="White beach panorama" />
+    <Image Url="https://picsum.photos/300/200?image=200" AltText="Cow on a grassy field" />
+    <Image Url="https://picsum.photos/300/200?image=301" AltText="Orange leaves on the sidewalk of a park" />
+    <Image Url="https://picsum.photos/200/200?image=400" AltText="Green leaves" />
+    <Image Url="https://picsum.photos/300/200?image=500" AltText="Top of a sky scrapper" />
+    <Image Url="https://picsum.photos/200/200?image=600" AltText="Foggy forest" />
+    <Image Url="https://picsum.photos/300/200?image=700" AltText="Picure of the blue ocean" />
+    <Image Url="https://picsum.photos/300/200?image=800" AltText="Crowded train station" />
+    <Image Url="https://picsum.photos/300/200?image=900" AltText="Sunset under a dock" />
+  </ImageSet>
+</Card>

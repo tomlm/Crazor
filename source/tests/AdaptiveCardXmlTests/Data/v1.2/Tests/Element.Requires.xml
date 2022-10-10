@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Size="Large" Weight="Bolder">Requires Test</TextBlock>
+  <ColumnSet>
+    <Column>
+      <TextBlock Color="Good" Wrap="true">✓: This textblock requires adaptiveCards 1.2</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Color="Good" Wrap="true">✓: This textblock requires adaptiveCards 1.2 and acTest 1.0</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Color="Attention" Wrap="true">
+        <Fallback>
+          <Type>Content</Type>
+          <Content xsi:type="TextBlock" Color="Good" Wrap="true">✓:We don't support acTest 2.0</Content>
+        </Fallback>✗: This textblock requires acTest 2.0</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Color="Good" Wrap="true">✓: This textblock requires any version of acTest</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock Color="Attention" Wrap="true">
+        <Fallback>
+          <Type>Content</Type>
+          <Content xsi:type="TextBlock" Color="Good" Wrap="true">✓:We don't support adaptiveCards 5.0</Content>
+        </Fallback>✗: This textblock requires adaptiveCards 5.0</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

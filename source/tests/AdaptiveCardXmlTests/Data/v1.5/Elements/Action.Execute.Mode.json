@@ -1,0 +1,50 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Please confirm your data:",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "First Name",
+          "value": "John"
+        },
+        {
+          "title": "Last Name",
+          "value": "Smith"
+        },
+        {
+          "title": "Phone number ",
+          "value": "(555) 555-5555"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "verb": "",
+      "title": "Confirm data"
+    },
+    {
+      "type": "Action.Execute",
+      "data": "edit",
+      "verb": "",
+      "title": "Edit data",
+      "mode": "secondary"
+    },
+    {
+      "type": "Action.Execute",
+      "data": "delete",
+      "verb": "",
+      "title": "Delete data",
+      "mode": "secondary"
+    }
+  ]
+}

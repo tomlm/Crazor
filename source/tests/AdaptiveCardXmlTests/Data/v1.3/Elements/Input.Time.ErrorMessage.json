@@ -1,0 +1,42 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Time",
+      "id": "input1",
+      "isRequired": true,
+      "label": "Required Input.Time",
+      "errorMessage": "This time is required"
+    },
+    {
+      "type": "Input.Time",
+      "id": "input2",
+      "min": "06:00",
+      "label": "Input.Time with valid min time of 6:00 am",
+      "errorMessage": "This time must be after 6:00 am"
+    },
+    {
+      "type": "Input.Time",
+      "id": "input3",
+      "max": "20:00",
+      "label": "Input.Time with valid max time of 8:00 pm",
+      "errorMessage": "This time must be before 8:00 pm"
+    },
+    {
+      "type": "Input.Time",
+      "id": "input4",
+      "min": "09:00",
+      "max": "17:00",
+      "isRequired": true,
+      "label": "Required Input.Time with valid value between 9:00 am and 5:00 pm",
+      "errorMessage": "This time is required and must be between 9:00 am and 5:00 pm"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

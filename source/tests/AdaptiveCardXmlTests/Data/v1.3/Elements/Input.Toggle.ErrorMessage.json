@@ -1,0 +1,23 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Toggle",
+      "id": "input2",
+      "title": "I accept the terms and agreements",
+      "valueOn": "true",
+      "valueOff": "false",
+      "value": "false",
+      "isRequired": true,
+      "label": "Required Input.Toggle",
+      "errorMessage": "You must accept the terms and conditions"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "<s>Your  meeting about \"Adaptive Card design session\"<break strength='weak'/> is starting at 12:30pm</s><s>Do you want to snooze <break strength='weak'/> or do you want to send a late notification to the attendees?</s>",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "weight": "bolder",
+      "text": "Adaptive Card design session",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "isSubtle": true,
+      "text": "Conf Room 112/3377 (10)",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "isSubtle": true,
+      "text": "12:30 PM - 1:30 PM",
+      "wrap": true,
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Snooze for",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "snooze",
+      "value": "5",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "5 minutes",
+          "value": "5"
+        },
+        {
+          "title": "15 minutes",
+          "value": "15"
+        },
+        {
+          "title": "30 minutes",
+          "value": "30"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "data": {
+        "x": "snooze"
+      },
+      "title": "Snooze"
+    },
+    {
+      "type": "Action.Submit",
+      "data": {
+        "x": "late"
+      },
+      "title": "I'll be late"
+    }
+  ]
+}

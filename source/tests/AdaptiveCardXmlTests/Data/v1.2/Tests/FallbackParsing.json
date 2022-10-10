@@ -1,0 +1,122 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Container",
+      "id": "A",
+      "items": [
+        {
+          "type": "Container",
+          "id": "B",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "id": "C",
+              "columns": [
+                {
+                  "id": "D",
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Graph",
+                      "id": "E",
+                      "fallback": {
+                        "type": "Container",
+                        "id": "E",
+                        "items": [
+                          {
+                            "id": "I",
+                            "type": "Image",
+                            "url": "https://adaptivecards.io/content/cats/2.png",
+                            "altText": "Cat"
+                          },
+                          {
+                            "type": "TextBlock",
+                            "id": "J",
+                            "text": "C ColumnSet fallback textblock"
+                          }
+                        ]
+                      },
+                      "requires": {
+                        "adaptiveCards": "1.2"
+                      },
+                      "someProperty": "blah"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "fallback": {
+            "type": "Container",
+            "id": "B",
+            "items": [
+              {
+                "type": "TextBlock",
+                "id": "C",
+                "text": "B Container fallback textblock"
+              },
+              {
+                "id": "Z",
+                "type": "Image",
+                "url": "https://adaptivecards.io/content/cats/1.png",
+                "altText": "Cat"
+              }
+            ]
+          }
+        }
+      ],
+      "requires": {
+        "adaptiveCards": "1.2"
+      }
+    },
+    {
+      "type": "TextBlock",
+      "id": "F",
+      "text": "F TextBlock"
+    },
+    {
+      "type": "Input.Text",
+      "id": "G",
+      "placeholder": "G Input.Text"
+    },
+    {
+      "type": "Graph",
+      "id": "H",
+      "fallback": {
+        "type": "Container",
+        "id": "L",
+        "items": [
+          {
+            "type": "TextBlock",
+            "id": "K",
+            "text": "H Graph fallback TextBlock"
+          }
+        ],
+        "requires": {
+          "adaptiveCards": "1.2"
+        }
+      },
+      "someProperty": "foo"
+    }
+  ],
+  "actions": [
+    {
+      "type": "MyCoolAction2",
+      "fallback": {
+        "type": "MyCoolAction",
+        "fallback": {
+          "type": "Action.Submit",
+          "title": "Boring fallback action"
+        },
+        "coolnessLevel": "prettyCool"
+      },
+      "requires": {
+        "adaptiveCards": "1.2"
+      },
+      "coolnessLevel": "toTheMax"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "backgroundImage": {
+            "url": "https://i.picsum.photos/id/741/375/132.jpg?hmac=ERFnNR0i8FOAhUzgI--BoJ6Bvr5aWWb03TltW7R5U8E",
+            "horizontalAlignment": "center",
+            "verticalAlignment": "center"
+          },
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "text": "Trip to UAE",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "small",
+              "weight": "bolder",
+              "color": "accent",
+              "text": "ER-13052",
+              "spacing": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Every elements below this has to be convered by background images",
+          "wrap": true
+        },
+        {
+          "type": "Container",
+          "backgroundImage": "https://picsum.photos/50",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "TextBlock",
+              "text": "New TextBlock"
+            },
+            {
+              "type": "FactSet",
+              "facts": [
+                {
+                  "title": "Fact 1",
+                  "value": "Value 1"
+                },
+                {
+                  "title": "Fact 2",
+                  "value": "Value 2"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "height": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "Container",
+      "backgroundImage": "https://picsum.photos/50",
+      "items": [
+        {
+          "type": "TextBlock",
+          "id": "txtid",
+          "text": "Test Card."
+        },
+        {
+          "type": "Input.Text",
+          "id": "newtxt",
+          "placeholder": "Enter your text",
+          "value": "default text"
+        },
+        {
+          "type": "TextBlock",
+          "id": "resd",
+          "text": "My new textblock"
+        },
+        {
+          "type": "Input.Date",
+          "id": "dateid",
+          "value": ""
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "idchoice",
+          "value": "mychoice",
+          "style": "compact",
+          "isMultiSelect": false,
+          "choices": [
+            {
+              "title": "Choice 1",
+              "value": "Choice 1"
+            },
+            {
+              "title": "Choice 2",
+              "value": "Choice 2"
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "text3"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Text4"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Text5"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "color: default"
+    },
+    {
+      "type": "TextBlock",
+      "color": "accent",
+      "text": "color: accent"
+    },
+    {
+      "type": "TextBlock",
+      "color": "good",
+      "text": "color: good"
+    },
+    {
+      "type": "TextBlock",
+      "color": "warning",
+      "text": "color: warning"
+    },
+    {
+      "type": "TextBlock",
+      "color": "attention",
+      "text": "color: attention"
+    },
+    {
+      "type": "TextBlock",
+      "color": "light",
+      "text": "color: light"
+    },
+    {
+      "type": "TextBlock",
+      "color": "dark",
+      "text": "color: dark"
+    }
+  ]
+}

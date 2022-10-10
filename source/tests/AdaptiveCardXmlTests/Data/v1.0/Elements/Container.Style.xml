@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <AdditionalProperties>
+    <item>
+      <key>
+        <string>style</string>
+      </key>
+      <value>
+        <anyType xsi:type="xsd:string">emphasis</anyType>
+      </value>
+    </item>
+  </AdditionalProperties>
+  <TextBlock>The card has the emphasis style</TextBlock>
+  <Container Style="Default">
+    <TextBlock>This container has the default style</TextBlock>
+    <TextBlock>color: default</TextBlock>
+    <TextBlock Color="Accent">color: accent</TextBlock>
+    <TextBlock Color="Good">color: good</TextBlock>
+    <TextBlock Color="Warning">color: warning</TextBlock>
+    <TextBlock Color="Attention">color: attention</TextBlock>
+    <TextBlock Color="Light">color: light</TextBlock>
+    <TextBlock Color="Dark">color: dark</TextBlock>
+  </Container>
+  <Container Style="Emphasis">
+    <TextBlock>This container has the emphasis style</TextBlock>
+    <TextBlock>color: default</TextBlock>
+    <TextBlock Color="Accent">color: accent</TextBlock>
+    <TextBlock Color="Good">color: good</TextBlock>
+    <TextBlock Color="Warning">color: warning</TextBlock>
+    <TextBlock Color="Attention">color: attention</TextBlock>
+    <TextBlock Color="Light">color: light</TextBlock>
+    <TextBlock Color="Dark">color: dark</TextBlock>
+    <Container>
+      <TextBlock Color="Dark">Contained container - no style</TextBlock>
+    </Container>
+    <Container Style="Emphasis">
+      <TextBlock Color="Dark">Contained container - emphasis</TextBlock>
+    </Container>
+    <Container Style="Default">
+      <TextBlock Color="Dark">Contained container - default</TextBlock>
+    </Container>
+  </Container>
+</Card>

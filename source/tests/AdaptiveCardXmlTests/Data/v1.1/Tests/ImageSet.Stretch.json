@@ -1,0 +1,1041 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "ImageSet: ImageSize: small"
+    },
+    {
+      "type": "ImageSet",
+      "images": [
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        }
+      ],
+      "imageSize": "small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "ImageSet: ImageSize: medium",
+      "separator": true
+    },
+    {
+      "type": "ImageSet",
+      "images": [
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        }
+      ],
+      "imageSize": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "ImageSet: ImageSize: large",
+      "separator": true
+    },
+    {
+      "type": "ImageSet",
+      "images": [
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        }
+      ],
+      "imageSize": "large"
+    },
+    {
+      "type": "TextBlock",
+      "text": "ImageSet: ImageSize: auto",
+      "separator": true
+    },
+    {
+      "type": "ImageSet",
+      "images": [
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "ImageSet: ImageSize: stretch",
+      "separator": true
+    },
+    {
+      "type": "ImageSet",
+      "images": [
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "backgroundColor": "#FF0000FF",
+          "altText": "Cat"
+        }
+      ],
+      "imageSize": "stretch"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id1",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "small",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: small - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id11",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "medium",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: medium - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jdsn kjdjdhcjhd fjha jkhjf j d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id111",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "large",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: large - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id1111",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: auto - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "hsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjjkasjkfhueqiwfkmsdjan ksadnfkjsjfsdjjakfhjkhakdfjhfjdf hjfhlhahfjhjhdf jhdfsjhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf jd jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id11111",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "stretch",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: stretch - Height: stretch"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "dfhkjhsafdkjhjas fdjfsdha jkhfjdjsdfn kjfjkjkjjk fnnnsfdnskakdfjhfjjfhlhahfjhjhdf jhdfsjh hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id2",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "small"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: small - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfhcjdkn kjcnjd kdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id22",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "medium"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: medium - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id222",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "large"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: large - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id2222",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: auto - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id22222",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "stretch"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: stretch - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id3",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "small"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: small - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "lsdfksdklls dkjsdljk sdaasdlkj",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id33",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "medium"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: medium - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "lsdfksdklls dkjsdljk sdaasdlkj",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id333",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "large"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: large - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "lsdfksdklls dkjsdljk sdaasdlkj",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id3333",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: auto - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "lsdfksdklls dkjsdljk sdaasdlkj",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "ImageSet",
+              "id": "id33333",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "backgroundColor": "#FF0000FF",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "stretch"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet above: ImageSize: stretch - Height: auto"
+            }
+          ],
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "lsdfksdklls dkjsdljk sdaasdlkj",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        "id1",
+        "id11",
+        "id111",
+        "id1111",
+        "id11111",
+        "id2",
+        "id22",
+        "id222",
+        "id2222",
+        "id22222",
+        "id3",
+        "id33",
+        "id333",
+        "id3333",
+        "id33333"
+      ],
+      "title": "Hide"
+    }
+  ]
+}

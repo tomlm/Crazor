@@ -1,0 +1,23 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Disabled OpenUrl Button",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "url": "https://adaptivecards.io/",
+      "title": "Enabled"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "url": "https://adaptivecards.io/",
+      "title": "Disabled"
+    }
+  ]
+}

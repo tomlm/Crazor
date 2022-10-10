@@ -1,0 +1,120 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Publish Adaptive Card schema",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "small",
+              "style": "person",
+              "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+              "altText": "Matt Hidinger"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "bolder",
+              "text": "Matt Hidinger",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Created {{DATE(2017-02-14T06:08:39Z, SHORT)}}",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Now that we have defined the main rules and features of the format, we need to produce a schema and publish it to GitHub. The schema will be the starting point of our reference documentation.",
+      "wrap": true
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Board:",
+          "value": "Adaptive Card"
+        },
+        {
+          "title": "List:",
+          "value": "Backlog"
+        },
+        {
+          "title": "Assigned to:",
+          "value": "Matt Hidinger"
+        },
+        {
+          "title": "Due date:",
+          "value": "Not set"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Date",
+            "id": "dueDate",
+            "label": "Enter the due date"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Set due date"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Text",
+            "id": "comment",
+            "isMultiline": true,
+            "label": "Add a comment"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Comment"
+    }
+  ]
+}

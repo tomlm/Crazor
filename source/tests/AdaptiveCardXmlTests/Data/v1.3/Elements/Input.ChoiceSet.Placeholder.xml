@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+  <Input.ChoiceSet Id="CompactSelectVal" IsRequired="true" Label="What color do you want? (compact)" ErrorMessage="This is a required input" Placeholder="Please choose">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+      <Choice Title="Blue" Value="3" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Action.Submit Title="OK" />
+</Card>

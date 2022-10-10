@@ -1,0 +1,139 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Pick up where you left off?"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "medium",
+              "url": "https://unsplash.it/80?image=1083",
+              "altText": "Silver Star Mountain"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 4.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Silver Star Mountain"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Maps",
+              "spacing": "none"
+            }
+          ]
+        }
+      ],
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://www.msn.com/",
+        "tooltip": "View a map of Silver Star Mountain"
+      },
+      "spacing": "medium"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "medium",
+              "url": "https://unsplash.it/80?image=1082",
+              "altText": "Kitchen Remodel"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 4.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Kitchen Remodel"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "With EMPHASIS",
+              "spacing": "none"
+            }
+          ],
+          "style": "emphasis"
+        }
+      ],
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://www.adaptivecards.io/",
+        "tooltip": "Remodel your kitchen with our new cabinet styles!"
+      }
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "medium",
+              "url": "https://unsplash.it/80?image=1080",
+              "altText": "The Witcher"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 4.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "The Witcher"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Netflix",
+              "spacing": "none"
+            }
+          ]
+        }
+      ],
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://www.outlook.com/",
+        "tooltip": "Watch the newest episode today!"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "url": "ms-cortana:resume-all",
+      "title": "Resume all"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "url": "ms-cortana:more-activities",
+      "title": "More activities"
+    }
+  ]
+}

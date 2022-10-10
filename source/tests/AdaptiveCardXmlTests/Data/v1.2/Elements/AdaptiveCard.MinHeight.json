@@ -1,0 +1,12 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card has a minHeight of 100px",
+      "wrap": true
+    }
+  ],
+  "minHeight": "100px"
+}

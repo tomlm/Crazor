@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptiveCard2Xml", "tools\A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{058D5B6C-56D5-4FB8-8141-08C829581193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptiveCardXmlTests", "tests\AdaptiveCardXmlTests\AdaptiveCardXmlTests.csproj", "{16AEE6A2-0D16-424A-8845-D29AA9494474}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCardXmlTests", "tests\AdaptiveCardXmlTests\AdaptiveCardXmlTests.csproj", "{16AEE6A2-0D16-424A-8845-D29AA9494474}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

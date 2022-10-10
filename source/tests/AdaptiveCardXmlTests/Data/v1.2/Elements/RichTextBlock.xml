@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>This is the first inline. </Inlines>
+    <Inlines Color="Good">
+      <Type>TextRun</Type>We support colors,</Inlines>
+    <Inlines IsSubtle="true">
+      <Type>TextRun</Type> both regular and subtle. </Inlines>
+    <Inlines Size="Small">
+      <Type>TextRun</Type>Text </Inlines>
+    <Inlines Size="Medium">
+      <Type>TextRun</Type>of </Inlines>
+    <Inlines Size="Large">
+      <Type>TextRun</Type>all </Inlines>
+    <Inlines Size="ExtraLarge">
+      <Type>TextRun</Type>sizes! </Inlines>
+    <Inlines Weight="Lighter">
+      <Type>TextRun</Type>Light weight text. </Inlines>
+    <Inlines Weight="Bolder">
+      <Type>TextRun</Type>Bold weight text. </Inlines>
+    <Inlines Highlight="true">
+      <Type>TextRun</Type>Highlights. </Inlines>
+    <Inlines Italic="true">
+      <Type>TextRun</Type>Italics. </Inlines>
+    <Inlines Strikethrough="true">
+      <Type>TextRun</Type>Strikethrough. </Inlines>
+    <Inlines FontType="Monospace">
+      <Type>TextRun</Type>Monospace too!</Inlines>
+  </RichTextBlock>
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>Date-Time parsing: {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}</Inlines>
+  </RichTextBlock>
+  <RichTextBlock HorizontalAlignment="Center">
+    <Inlines>
+      <Type>TextRun</Type>Rich text blocks also support center alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </Inlines>
+  </RichTextBlock>
+  <RichTextBlock HorizontalAlignment="Right">
+    <Inlines>
+      <Type>TextRun</Type>Rich text blocks also support right alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </Inlines>
+  </RichTextBlock>
+  <RichTextBlock />
+</Card>

@@ -1,0 +1,15 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "isSubtle:false"
+    },
+    {
+      "type": "TextBlock",
+      "isSubtle": true,
+      "text": "isSubtle:true"
+    }
+  ]
+}

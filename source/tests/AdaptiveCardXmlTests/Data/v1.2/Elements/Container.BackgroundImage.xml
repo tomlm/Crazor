@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <Container MinHeight="150px">
+    <BackgroundImage BackgroundImage="https://adaptivecards.io/content/AlkiBeach.jpg" />
+    <TextBlock>What a beautiful background</TextBlock>
+  </Container>
+  <TextBlock>They can even repeat a bunch of different ways...</TextBlock>
+  <Container MinHeight="100px">
+    <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="Repeat" />
+  </Container>
+  <Container>
+    <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="RepeatHorizontally" VerticalAlignment="Center" />
+  </Container>
+  <Container MinHeight="100px">
+    <BackgroundImage BackgroundImage="https://adaptivecards.io/content/uparrow.png" FillMode="RepeatVertically" HorizontalAlignment="Center" />
+  </Container>
+</Card>

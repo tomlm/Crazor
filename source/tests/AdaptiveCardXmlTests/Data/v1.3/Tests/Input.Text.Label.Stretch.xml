@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Container MinHeight="200px">
+    <Input.Text Id="input1" Height="AdaptiveCards.AdaptiveDimension" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" />
+    <TextBlock>Bottom text</TextBlock>
+  </Container>
+  <Container Style="Emphasis" VerticalContentAlignment="Center" Bleed="true" MinHeight="200px">
+    <Input.Text Id="input2" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" />
+    <TextBlock>Bottom text</TextBlock>
+  </Container>
+  <Container VerticalContentAlignment="Bottom" Bleed="true" MinHeight="200px">
+    <Input.Text Id="input3" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" />
+    <TextBlock>Bottom text</TextBlock>
+  </Container>
+  <Action.Submit Title="Submit" />
+</Card>

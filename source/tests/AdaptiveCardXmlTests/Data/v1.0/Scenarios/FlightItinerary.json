@@ -1,0 +1,250 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "<s>Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM</s>",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Passengers",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Sarah Hum",
+      "wrap": true,
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Jeremy Goldberg",
+      "wrap": true,
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Evan Litvak",
+      "wrap": true,
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "2 Stops",
+      "wrap": true,
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Tue, May 30, 2017 12:25 PM",
+      "wrap": true,
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "San Francisco",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Amsterdam",
+              "horizontalAlignment": "right",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "SFO",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/airplane.png",
+              "altText": "Flight to",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "AMS",
+              "horizontalAlignment": "right",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        }
+      ],
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Non-Stop",
+      "wrap": true,
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Fri, Jun 2, 2017 1:55 PM",
+      "wrap": true,
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Amsterdam",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "San Francisco",
+              "horizontalAlignment": "right",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "AMS",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/airplane.png",
+              "altText": "Flight to",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "SFO",
+              "horizontalAlignment": "right",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        }
+      ],
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "isSubtle": true,
+              "text": "Total",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "weight": "bolder",
+              "text": "$4,032.54",
+              "horizontalAlignment": "right",
+              "wrap": true
+            }
+          ]
+        }
+      ],
+      "spacing": "medium"
+    }
+  ]
+}

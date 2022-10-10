@@ -1,0 +1,205 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "<s>Su vuelo esta confirmado para usted y 3 pasajeros mas de San Francisco a Amsterdam para el dia {{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}</s>",
+  "lang": "es",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Pasajeros"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Sarah Hum",
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Jeremy Goldberg",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Evan Litvak",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "2 Escalas",
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "{{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}",
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "San Francisco"
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "SFO",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "&nbsp;"
+            },
+            {
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/airplane.png",
+              "altText": "Vuelo a",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Amsterdam",
+              "horizontalAlignment": "right"
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "AMS",
+              "horizontalAlignment": "right",
+              "spacing": "none"
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Sin-Escalas",
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "{{DATE(2017-10-18T21:50:00Z, LONG)}} {{TIME(2017-10-18T21:50:00Z)}}",
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "Amsterdam"
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "AMS",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "&nbsp;"
+            },
+            {
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/airplane.png",
+              "altText": "Vuelo a",
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "San Francisco",
+              "horizontalAlignment": "right"
+            },
+            {
+              "type": "TextBlock",
+              "size": "extraLarge",
+              "color": "accent",
+              "text": "SFO",
+              "horizontalAlignment": "right",
+              "spacing": "none"
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "isSubtle": true,
+              "text": "Total"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "weight": "bolder",
+              "text": "$4,032.54",
+              "horizontalAlignment": "right"
+            }
+          ]
+        }
+      ],
+      "spacing": "medium"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Default text input"
+    },
+    {
+      "type": "Input.Text",
+      "id": "defaultInputId",
+      "placeholder": "enter comment",
+      "maxLength": 500
+    },
+    {
+      "type": "TextBlock",
+      "text": "Multiline text input"
+    },
+    {
+      "type": "Input.Text",
+      "id": "multilineInputId",
+      "placeholder": "enter comment",
+      "isMultiline": true,
+      "maxLength": 500
+    },
+    {
+      "type": "TextBlock",
+      "text": "Pre-filled value"
+    },
+    {
+      "type": "Input.Text",
+      "id": "prefilledInputId",
+      "placeholder": "enter comment",
+      "value": "This value was pre-filled",
+      "isMultiline": true,
+      "maxLength": 500
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

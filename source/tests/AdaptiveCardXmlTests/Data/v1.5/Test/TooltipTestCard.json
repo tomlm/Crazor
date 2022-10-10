@@ -1,0 +1,325 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Button with no title or tooltip",
+      "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "iconUrl": "https://adaptivecards.io/content/cats/1.png"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Button with a title",
+      "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Title",
+          "iconUrl": "https://adaptivecards.io/content/cats/1.png"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Button with a tooltip",
+      "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "iconUrl": "https://adaptivecards.io/content/cats/1.png",
+          "tooltip": "Tooltip"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Button with a title and a tooltip",
+      "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Title",
+          "iconUrl": "https://adaptivecards.io/content/cats/1.png",
+          "tooltip": "Tooltip"
+        }
+      ]
+    },
+    {
+      "type": "Input.Text",
+      "id": "tooltiptest1",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Title"
+      },
+      "label": "Inline Action with a title (title should show on button, no tooltip)"
+    },
+    {
+      "type": "Input.Text",
+      "id": "tooltiptest2",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Title",
+        "tooltip": "Tooltip"
+      },
+      "label": "Inline Action with a title and a tooltip (title should show on button, tooltip in tooltip)"
+    },
+    {
+      "type": "Input.Text",
+      "id": "tooltiptest3",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "iconUrl": "https://adaptivecards.io/content/cats/1.png",
+        "tooltip": "Tooltip"
+      },
+      "label": "Inline Action with an icon and a tooltip (icon should show on button, tooltip in tooltip)"
+    },
+    {
+      "type": "Input.Text",
+      "id": "tooltiptest4",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Title",
+        "iconUrl": "https://adaptivecards.io/content/cats/1.png"
+      },
+      "label": "Inline Action with an icon and a title (icon should show on button, title in tooltip)"
+    },
+    {
+      "type": "Input.Text",
+      "id": "tooltiptest5",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Title",
+        "iconUrl": "https://adaptivecards.io/content/cats/1.png",
+        "tooltip": "Tooltip"
+      },
+      "label": "Inline Action with an icon and a title and a tooltip (icon should show on button, tooltip in tooltip)"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "A container with a text block and an image. No title or tooltip. (no tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Text block content.",
+          "wrap": true
+        },
+        {
+          "type": "Image",
+          "size": "medium",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "altText": "Image Alt Text."
+        }
+      ],
+      "selectAction": {
+        "type": "Action.Submit"
+      }
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "A container with a text block and an image. Action has title. (title should be used as tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Text block content.",
+          "wrap": true
+        },
+        {
+          "type": "Image",
+          "size": "medium",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "altText": "Image Alt Text."
+        }
+      ],
+      "selectAction": {
+        "type": "Action.Submit",
+        "title": "Title"
+      }
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "A container with a text block and an image. Action has tooltip. (tooltip should be used as tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Text block content.",
+          "wrap": true
+        },
+        {
+          "type": "Image",
+          "size": "medium",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "altText": "Image Alt Text."
+        }
+      ],
+      "selectAction": {
+        "type": "Action.Submit",
+        "tooltip": "Tooltip"
+      }
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "A container with a text block and an image. Action has title and tooltip. (tooltip should be used as tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Text block content.",
+          "wrap": true
+        },
+        {
+          "type": "Image",
+          "size": "medium",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "altText": "Image Alt Text."
+        }
+      ],
+      "selectAction": {
+        "type": "Action.Submit",
+        "title": "Title",
+        "tooltip": "Tooltip"
+      }
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "color": "good",
+          "text": "RichTextBlock with SelectAction, Action has title and tooltip (tooltip should be used as tooltip).",
+          "selectAction": {
+            "type": "Action.Submit",
+            "title": "Title",
+            "tooltip": "Tooltip"
+          }
+        },
+        {
+          "type": "TextRun",
+          "weight": "bolder",
+          "text": " -Should not trigger any actions- "
+        },
+        {
+          "type": "TextRun",
+          "color": "warning",
+          "text": "RichTextBlock with SelectAction, Action has title and no tooltip (title should be used as tooltip).",
+          "selectAction": {
+            "type": "Action.Submit",
+            "data": {
+              "x": "hello world!"
+            },
+            "title": "title"
+          }
+        },
+        {
+          "type": "TextRun",
+          "weight": "bolder",
+          "text": " -Should not trigger any actions- "
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Image has SelectAction. No title or tooltip (no tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Image",
+      "size": "large",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.Submit"
+      },
+      "altText": "Image Alt Text.",
+      "tooltip": "tooltip"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Image",
+      "size": "large",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.Submit",
+        "title": "title",
+        "tooltip": "tooltip"
+      },
+      "altText": "Image Alt Text.",
+      "tooltip": "tooltip"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Image has SelectAction. Action has title. (title should be used as tooltip)",
+      "wrap": true
+    },
+    {
+      "type": "Image",
+      "size": "large",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.Submit",
+        "title": "title"
+      },
+      "altText": "Image Alt Text."
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Adaptive Card has SelectAction Action has tooltip. (tooltip should appear)",
+      "wrap": true
+    }
+  ],
+  "selectAction": {
+    "type": "Action.Submit",
+    "data": {
+      "Card Level Action?": "Yes"
+    },
+    "title": "title",
+    "tooltip": "Card Level Tooltip"
+  }
+}

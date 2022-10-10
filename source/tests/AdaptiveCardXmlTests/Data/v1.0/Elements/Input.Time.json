@@ -1,0 +1,23 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "What time do you want to meet?"
+    },
+    {
+      "type": "Input.Time",
+      "id": "time",
+      "value": "15:30",
+      "min": "09:00",
+      "max": "17:00"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

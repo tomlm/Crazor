@@ -1,0 +1,37 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Weight 1"
+            },
+            {
+              "type": "Image",
+              "size": "large",
+              "url": "https://cdn-01.independent.ie/migration_catalog/Non-Staff/article25331906.ece/fea85/AUTOCROP/w620/No%20name",
+              "altText": "David Hasselhoff"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 3.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Weight 3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

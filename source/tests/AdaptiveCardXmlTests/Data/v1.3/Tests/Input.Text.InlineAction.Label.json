@@ -1,0 +1,34 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "input1",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Inline Action",
+        "iconUrl": "http://adaptivecards.io/content/cats/1.png"
+      },
+      "label": "Input.Text with inline action label"
+    },
+    {
+      "type": "Input.Text",
+      "id": "input2",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Inline Action",
+        "iconUrl": "http://adaptivecards.io/content/cats/1.png"
+      },
+      "isRequired": true,
+      "label": "Required Input.Text with inline action label",
+      "errorMessage": "Required input"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

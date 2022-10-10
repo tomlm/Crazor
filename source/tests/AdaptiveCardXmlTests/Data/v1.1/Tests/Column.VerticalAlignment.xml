@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Container Style="Emphasis" Bleed="true">
+    <TextBlock HorizontalAlignment="Center">**Columns Vertical Alignment Test**</TextBlock>
+  </Container>
+  <ColumnSet>
+    <Column Width="stretch">
+      <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" HorizontalAlignment="Center" AltText="Adaptive Cards logo" />
+    </Column>
+    <Column Width="stretch">
+      <TextBlock HorizontalAlignment="Center" Wrap="true">Top</TextBlock>
+    </Column>
+    <Column VerticalContentAlignment="Center" Width="stretch">
+      <TextBlock>Center</TextBlock>
+    </Column>
+    <Column VerticalContentAlignment="Bottom" Width="stretch">
+      <TextBlock>Bottom</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

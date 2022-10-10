@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Wrap="true">InlineActions of type ShowCard won't render if show card actionMode is inline.</TextBlock>
+  <Input.Text Id="input2">
+    <Action.ShowCard Title="Reply">
+      <AdaptiveCard>
+        <TextBlock>This ShowCard will only show in popup mode!</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+  </Input.Text>
+</Card>

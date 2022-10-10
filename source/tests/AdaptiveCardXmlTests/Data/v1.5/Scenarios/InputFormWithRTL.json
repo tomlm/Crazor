@@ -1,0 +1,111 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Please select your language:"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "size": "medium",
+            "weight": "bolder",
+            "text": "Registration Form",
+            "horizontalAlignment": "center",
+            "wrap": true,
+            "style": "heading"
+          },
+          {
+            "type": "Input.Text",
+            "id": "SimpleValENG",
+            "isRequired": true,
+            "label": "Name",
+            "errorMessage": "Name is required"
+          },
+          {
+            "type": "Input.Text",
+            "id": "EmailValENG",
+            "style": "email",
+            "label": "Email"
+          },
+          {
+            "type": "Input.Text",
+            "id": "TelValENG",
+            "style": "tel",
+            "label": "Phone"
+          },
+          {
+            "type": "Input.Text",
+            "id": "MultiLineValENG",
+            "isMultiline": true,
+            "label": "Comments"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "Submit"
+          }
+        ]
+      },
+      "title": "English"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "size": "medium",
+            "weight": "bolder",
+            "text": "إستمارة تسجيل",
+            "horizontalAlignment": "center",
+            "wrap": true,
+            "style": "heading"
+          },
+          {
+            "type": "Input.Text",
+            "id": "SimpleValARA",
+            "isRequired": true,
+            "label": "اسم",
+            "errorMessage": "مطلوب اسم"
+          },
+          {
+            "type": "Input.Text",
+            "id": "EmailValARA",
+            "style": "email",
+            "label": "بريد الالكتروني"
+          },
+          {
+            "type": "Input.Text",
+            "id": "TelValARA",
+            "style": "tel",
+            "label": "هاتف"
+          },
+          {
+            "type": "Input.Text",
+            "id": "MultiLineValARA",
+            "isMultiline": true,
+            "label": "تعليقات"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "يقدم"
+          }
+        ],
+        "rtl": true
+      },
+      "title": "عربي"
+    }
+  ]
+}

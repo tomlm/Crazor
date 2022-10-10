@@ -1,0 +1,210 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "<s>Weather forecast for Monday is high of 62 and low of 42 degrees with a 20% chance of rain</s><s>Winds will be 5 mph from the northeast</s>",
+  "backgroundImage": "https://messagecardplayground.azurewebsites.net/assets/Mostly Cloudy-Background.jpg",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 35.0,
+          "items": [
+            {
+              "type": "Image",
+              "size": "stretch",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+              "altText": "Mostly cloudy weather"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 65.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "large",
+              "weight": "bolder",
+              "color": "dark",
+              "text": "Tue, Nov 5, 2019",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "color": "dark",
+              "text": "32 / 50",
+              "wrap": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "31% chance of rain",
+              "wrap": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Winds 4.4 mph SSE",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 20.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Wednesday",
+              "horizontalAlignment": "center",
+              "wrap": true
+            },
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Drizzle-Square.png",
+              "altText": "Drizzly weather"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**High**\t50",
+              "horizontalAlignment": "center"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**Low**\t32",
+              "horizontalAlignment": "center",
+              "spacing": "none"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.microsoft.com",
+            "title": "View Wednesday"
+          }
+        },
+        {
+          "type": "Column",
+          "width": 20.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Thursday",
+              "horizontalAlignment": "center",
+              "wrap": true
+            },
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+              "altText": "Mostly cloudy weather"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**High**\t50",
+              "horizontalAlignment": "center"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**Low**\t32",
+              "horizontalAlignment": "center",
+              "spacing": "none"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.microsoft.com",
+            "title": "View Thursday"
+          }
+        },
+        {
+          "type": "Column",
+          "width": 20.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Friday",
+              "horizontalAlignment": "center",
+              "wrap": true
+            },
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+              "altText": "Mostly cloudy weather"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**High**\t59",
+              "horizontalAlignment": "center"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**Low**\t32",
+              "horizontalAlignment": "center",
+              "spacing": "none"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.microsoft.com",
+            "title": "View Friday"
+          }
+        },
+        {
+          "type": "Column",
+          "width": 20.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Saturday",
+              "horizontalAlignment": "center",
+              "wrap": true
+            },
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+              "altText": "Mostly cloudy weather"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**High**\t50",
+              "horizontalAlignment": "center"
+            },
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "**Low**\t32",
+              "horizontalAlignment": "center",
+              "spacing": "none"
+            }
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.microsoft.com",
+            "title": "View Saturday"
+          }
+        }
+      ]
+    }
+  ]
+}

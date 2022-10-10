@@ -1,0 +1,80 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 2.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "size": "medium",
+              "weight": "bolder",
+              "text": "Tell us about yourself",
+              "wrap": true,
+              "style": "heading"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "We just need a few more details to get you booked for the trip of a lifetime!",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "small",
+              "isSubtle": true,
+              "text": "Don't worry, we'll never share or sell your information.",
+              "wrap": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "myName",
+              "regex": "^[A-Z][a-z]+, [A-Z][a-z]+$",
+              "isRequired": true,
+              "label": "Your name (Last, First)",
+              "errorMessage": "Please enter your name in the specified format"
+            },
+            {
+              "type": "Input.Text",
+              "id": "myEmail",
+              "style": "email",
+              "regex": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.][A-Za-z0-9-]{2,4}$",
+              "isRequired": true,
+              "label": "Your email",
+              "errorMessage": "Please enter a valid email address"
+            },
+            {
+              "type": "Input.Text",
+              "id": "myTel",
+              "style": "tel",
+              "regex": "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$",
+              "label": "Phone Number (xxx xxx xxxx)",
+              "errorMessage": "Invalid phone number. Please enter a 10 digit phone number"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg",
+              "altText": "Diver in the Great Barrier Reef"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

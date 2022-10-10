@@ -1,0 +1,120 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "input1",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "label": "Default Input.ChoiceSet label (compact)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "input2",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Input.ChoiceSet label (compact)",
+      "errorMessage": "Required input"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "input3",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "label": "Default Input.ChoiceSet label (expanded)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "input4",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Input.ChoiceSet label (expanded)",
+      "errorMessage": "Required input"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "input5",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "label": "Default Input.ChoiceSet label (expanded, multiselect)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "input6",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Input.ChoiceSet label (expanded, multiselect)",
+      "errorMessage": "Required input"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

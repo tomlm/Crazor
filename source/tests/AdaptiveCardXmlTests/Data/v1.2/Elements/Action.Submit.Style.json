@@ -1,0 +1,32 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card has four Submit actions. The styles from left to right are \"Default\", \"Positive\", \"Destructive\" and \"Other\".",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Default"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Pawsitive",
+      "style": "positive"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Destructive",
+      "style": "destructive"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Other",
+      "style": "other"
+    }
+  ]
+}

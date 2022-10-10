@@ -1,0 +1,443 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/LocationGreen_A.png",
+                      "altText": "Location A"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "**Redmond**",
+                      "wrap": true
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "8a - 12:30p",
+                      "wrap": true,
+                      "spacing": "none"
+                    }
+                  ]
+                }
+              ],
+              "horizontalAlignment": "center"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/LocationBlue_B.png",
+                      "altText": "Location B"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "**Bellevue**",
+                      "wrap": true
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "12:30p - 3p",
+                      "wrap": true,
+                      "spacing": "none"
+                    }
+                  ]
+                }
+              ],
+              "horizontalAlignment": "center"
+            }
+          ],
+          "spacing": "large",
+          "separator": true
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/LocationRed_C.png",
+                      "altText": "Location C"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "**Seattle**",
+                      "wrap": true
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "8p",
+                      "wrap": true,
+                      "spacing": "none"
+                    }
+                  ]
+                }
+              ],
+              "horizontalAlignment": "center"
+            }
+          ],
+          "spacing": "large",
+          "separator": true
+        }
+      ],
+      "horizontalAlignment": "center"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 110.0,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/Conflict.png",
+                      "altText": "Calendar conflict"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "2:00 PM",
+                      "wrap": true
+                    }
+                  ],
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "1hr",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "backgroundImage": {
+            "url": "https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png",
+            "fillMode": "repeatVertically",
+            "horizontalAlignment": "center"
+          },
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/CircleGreen_coffee.png",
+              "horizontalAlignment": "center",
+              "altText": "Location A: Coffee"
+            }
+          ],
+          "spacing": "none"
+        },
+        {
+          "type": "Column",
+          "width": 40.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "**Contoso Campaign Status Meeting**",
+              "wrap": true
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/location_gray.png",
+                      "altText": "Location"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Conf Room Bravern-2/9050",
+                      "wrap": true
+                    }
+                  ]
+                }
+              ],
+              "spacing": "none"
+            },
+            {
+              "type": "ImageSet",
+              "images": [
+                {
+                  "type": "Image",
+                  "size": "small",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/person_w1.png",
+                  "altText": "Person with bangs"
+                },
+                {
+                  "type": "Image",
+                  "size": "small",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/person_m1.png",
+                  "altText": "Person with glasses and short hair"
+                },
+                {
+                  "type": "Image",
+                  "size": "small",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/person_w2.png",
+                  "altText": "Person smiling"
+                }
+              ],
+              "imageSize": "small",
+              "spacing": "small"
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/power_point.png",
+                      "altText": "Powerpoint presentation"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "**Contoso Brand Guidelines** shared by **Susan Metters**",
+                      "wrap": true
+                    }
+                  ]
+                }
+              ],
+              "spacing": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 110.0,
+          "items": []
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "backgroundImage": {
+            "url": "https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png",
+            "fillMode": "repeatVertically",
+            "horizontalAlignment": "center"
+          },
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/Gray_Dot.png",
+              "horizontalAlignment": "center",
+              "altText": "In transit"
+            }
+          ],
+          "spacing": "none"
+        },
+        {
+          "type": "Column",
+          "width": 40.0,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/car.png",
+                      "altText": "Travel by car"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "isSubtle": true,
+                      "text": "about 45 minutes",
+                      "wrap": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "spacing": "none"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 110.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "8:00 PM",
+              "wrap": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "isSubtle": true,
+              "text": "1hr",
+              "wrap": true,
+              "spacing": "none"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "backgroundImage": {
+            "url": "https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png",
+            "fillMode": "repeatVertically",
+            "horizontalAlignment": "center"
+          },
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/CircleBlue_flight.png",
+              "horizontalAlignment": "center",
+              "altText": "Location B: Flight"
+            }
+          ],
+          "spacing": "none"
+        },
+        {
+          "type": "Column",
+          "width": 40.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "**Alaska Airlines AS1021 flight to Chicago**",
+              "wrap": true
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://messagecardplayground.azurewebsites.net/assets/location_gray.png",
+                      "altText": "Location"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Seattle Tacoma International Airport (17801 International Blvd, Seattle, WA, United States)",
+                      "wrap": true
+                    }
+                  ]
+                }
+              ],
+              "spacing": "none"
+            },
+            {
+              "type": "Image",
+              "size": "stretch",
+              "url": "https://messagecardplayground.azurewebsites.net/assets/SeaTacMap.png",
+              "altText": "Map of the Seattle-Tacoma airport"
+            }
+          ]
+        }
+      ],
+      "spacing": "none"
+    }
+  ]
+}

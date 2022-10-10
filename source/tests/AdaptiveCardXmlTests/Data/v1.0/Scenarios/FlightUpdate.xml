@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Flight KL0605 to San Fransisco has been delayed.&lt;/s&gt;&lt;s&gt;It will not leave until 10:10 AM.&lt;/s&gt;">
+  <ColumnSet>
+    <Column Width="auto">
+      <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Airplane" />
+    </Column>
+    <Column Width="stretch">
+      <TextBlock IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Flight Status</TextBlock>
+      <TextBlock Spacing="None" Size="Large" Color="Attention" HorizontalAlignment="Right" Wrap="true">DELAYED</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="Medium" Separator="true">
+    <Column Width="stretch">
+      <TextBlock Weight="Bolder" IsSubtle="true" Wrap="true">Passengers</TextBlock>
+      <TextBlock Spacing="Small" Wrap="true">Sarah Hum</TextBlock>
+      <TextBlock Spacing="Small" Wrap="true">Jeremy Goldberg</TextBlock>
+      <TextBlock Spacing="Small" Wrap="true">Evan Litvak</TextBlock>
+    </Column>
+    <Column Width="auto">
+      <TextBlock Weight="Bolder" IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Seat</TextBlock>
+      <TextBlock Spacing="Small" HorizontalAlignment="Right" Wrap="true">14A</TextBlock>
+      <TextBlock Spacing="Small" HorizontalAlignment="Right" Wrap="true">14B</TextBlock>
+      <TextBlock Spacing="Small" HorizontalAlignment="Right" Wrap="true">14C</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="Medium" Separator="true">
+    <Column Width="1">
+      <TextBlock Weight="Bolder" IsSubtle="true" Wrap="true">Flight</TextBlock>
+      <TextBlock Spacing="Small" Wrap="true">KL605</TextBlock>
+    </Column>
+    <Column Width="1">
+      <TextBlock Weight="Bolder" IsSubtle="true" HorizontalAlignment="Center" Wrap="true">Departs</TextBlock>
+      <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" HorizontalAlignment="Center" Wrap="true">2:20 AM</TextBlock>
+    </Column>
+    <Column Width="1">
+      <TextBlock Weight="Bolder" IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Arrives</TextBlock>
+      <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" HorizontalAlignment="Right" Wrap="true">8:20 PM</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="Medium" Separator="true">
+    <Column Width="1">
+      <TextBlock IsSubtle="true" Wrap="true">Amsterdam Airport</TextBlock>
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Wrap="true">AMS</TextBlock>
+    </Column>
+    <Column Width="auto">
+      <TextBlock Wrap="true"> </TextBlock>
+      <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Flight to" />
+    </Column>
+    <Column Width="1">
+      <TextBlock IsSubtle="true" HorizontalAlignment="Right" Wrap="true">San Francisco Airport</TextBlock>
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" HorizontalAlignment="Right" Wrap="true">SFO</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

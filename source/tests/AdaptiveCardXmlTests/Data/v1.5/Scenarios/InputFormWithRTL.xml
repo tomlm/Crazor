@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock>Please select your language:</TextBlock>
+  <Action.ShowCard Title="English">
+    <AdaptiveCard>
+      <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center" Wrap="true" Style="Heading">Registration Form</TextBlock>
+      <Input.Text Id="SimpleValENG" IsRequired="true" Label="Name" ErrorMessage="Name is required" />
+      <Input.Text Id="EmailValENG" Label="Email" Style="Email" />
+      <Input.Text Id="TelValENG" Label="Phone" Style="Tel" />
+      <Input.Text Id="MultiLineValENG" Label="Comments" IsMultiline="true" />
+      <Action.Submit Title="Submit" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="عربي">
+    <AdaptiveCard>
+      <AdditionalProperties>
+        <item>
+          <key>
+            <string>rtl</string>
+          </key>
+          <value>
+            <anyType xsi:type="xsd:boolean">true</anyType>
+          </value>
+        </item>
+      </AdditionalProperties>
+      <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center" Wrap="true" Style="Heading">إستمارة تسجيل</TextBlock>
+      <Input.Text Id="SimpleValARA" IsRequired="true" Label="اسم" ErrorMessage="مطلوب اسم" />
+      <Input.Text Id="EmailValARA" Label="بريد الالكتروني" Style="Email" />
+      <Input.Text Id="TelValARA" Label="هاتف" Style="Tel" />
+      <Input.Text Id="MultiLineValARA" Label="تعليقات" IsMultiline="true" />
+      <Action.Submit Title="يقدم" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

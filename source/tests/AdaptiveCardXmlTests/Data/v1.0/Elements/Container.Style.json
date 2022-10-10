@@ -1,0 +1,131 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "The card has the emphasis style"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This container has the default style"
+        },
+        {
+          "type": "TextBlock",
+          "text": "color: default"
+        },
+        {
+          "type": "TextBlock",
+          "color": "accent",
+          "text": "color: accent"
+        },
+        {
+          "type": "TextBlock",
+          "color": "good",
+          "text": "color: good"
+        },
+        {
+          "type": "TextBlock",
+          "color": "warning",
+          "text": "color: warning"
+        },
+        {
+          "type": "TextBlock",
+          "color": "attention",
+          "text": "color: attention"
+        },
+        {
+          "type": "TextBlock",
+          "color": "light",
+          "text": "color: light"
+        },
+        {
+          "type": "TextBlock",
+          "color": "dark",
+          "text": "color: dark"
+        }
+      ],
+      "style": "default"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This container has the emphasis style"
+        },
+        {
+          "type": "TextBlock",
+          "text": "color: default"
+        },
+        {
+          "type": "TextBlock",
+          "color": "accent",
+          "text": "color: accent"
+        },
+        {
+          "type": "TextBlock",
+          "color": "good",
+          "text": "color: good"
+        },
+        {
+          "type": "TextBlock",
+          "color": "warning",
+          "text": "color: warning"
+        },
+        {
+          "type": "TextBlock",
+          "color": "attention",
+          "text": "color: attention"
+        },
+        {
+          "type": "TextBlock",
+          "color": "light",
+          "text": "color: light"
+        },
+        {
+          "type": "TextBlock",
+          "color": "dark",
+          "text": "color: dark"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - no style"
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - emphasis"
+            }
+          ],
+          "style": "emphasis"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "dark",
+              "text": "Contained container - default"
+            }
+          ],
+          "style": "default"
+        }
+      ],
+      "style": "emphasis"
+    }
+  ],
+  "style": "emphasis"
+}

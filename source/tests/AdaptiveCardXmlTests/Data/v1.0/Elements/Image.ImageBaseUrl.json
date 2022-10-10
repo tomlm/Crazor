@@ -1,0 +1,38 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "backgroundImage": "Assets/background.png",
+  "body": [
+    {
+      "type": "Image",
+      "url": "Assets/Adaptive10.png",
+      "altText": "Adaptive cards 1.0 logo"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "Input.Text",
+            "id": "comment",
+            "placeholder": "Enter your comment",
+            "isMultiline": true
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK",
+            "iconUrl": "Assets/Adaptive10.png"
+          }
+        ]
+      },
+      "title": "Open Card",
+      "iconUrl": "Assets/Adaptive10.png"
+    }
+  ]
+}

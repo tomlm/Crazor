@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Weight="Bolder">Pick up where you left off?</TextBlock>
+  <ColumnSet Spacing="Medium">
+    <SelectAction xsi:type="Action.OpenUrl" Tooltip="View a map of Silver Star Mountain" Url="https://www.msn.com/" />
+    <Column Width="auto">
+      <Image Size="Medium" Url="https://unsplash.it/80?image=1083" AltText="Silver Star Mountain" />
+    </Column>
+    <Column Width="4">
+      <TextBlock>Silver Star Mountain</TextBlock>
+      <TextBlock Spacing="None" IsSubtle="true">Maps</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet>
+    <SelectAction xsi:type="Action.OpenUrl" Tooltip="Remodel your kitchen with our new cabinet styles!" Url="https://www.adaptivecards.io/" />
+    <Column Width="auto">
+      <Image Size="Medium" Url="https://unsplash.it/80?image=1082" AltText="Kitchen Remodel" />
+    </Column>
+    <Column Style="Emphasis" Width="4">
+      <TextBlock>Kitchen Remodel</TextBlock>
+      <TextBlock Spacing="None" IsSubtle="true">With EMPHASIS</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet>
+    <SelectAction xsi:type="Action.OpenUrl" Tooltip="Watch the newest episode today!" Url="https://www.outlook.com/" />
+    <Column Width="auto">
+      <Image Size="Medium" Url="https://unsplash.it/80?image=1080" AltText="The Witcher" />
+    </Column>
+    <Column Width="4">
+      <TextBlock>The Witcher</TextBlock>
+      <TextBlock Spacing="None" IsSubtle="true">Netflix</TextBlock>
+    </Column>
+  </ColumnSet>
+  <Action.OpenUrl Title="Resume all" Url="ms-cortana:resume-all" />
+  <Action.OpenUrl Title="More activities" Url="ms-cortana:more-activities" />
+</Card>

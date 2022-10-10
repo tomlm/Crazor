@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock Id="textToToggle" IsVisible="false">Here are some images:</TextBlock>
+  <ColumnSet>
+    <Column>
+      <Image Id="imageToToggle" IsVisible="false" Size="Medium" Style="Person" Url="https://picsum.photos/100/100?image=112" AltText="Wheat field" />
+    </Column>
+    <Column>
+      <Image Id="imageToToggle2" IsVisible="false" Size="Medium" Url="https://picsum.photos/100/100?image=123" AltText="Gravel road" />
+    </Column>
+  </ColumnSet>
+  <RichTextBlock>
+    <Inlines Color="Good">
+      <Type>TextRun</Type>Interacting with the text in the good color will open a web page. <SelectAction xsi:type="Action.OpenUrl" Tooltip="Default" Url="https://adaptivecards.io/" /></Inlines>
+    <Inlines Weight="Bolder">
+      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
+    <Inlines Color="Warning">
+      <Type>TextRun</Type> Interacting with the text in the warning color will submit. <SelectAction xsi:type="Action.Submit" Tooltip="Action.Submit">{
+  "x": "hello world!"
+}</SelectAction></Inlines>
+    <Inlines Weight="Bolder">
+      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
+    <Inlines Color="Accent">
+      <Type>TextRun</Type>Interacting with the text in the accent color will toggle visibility <SelectAction xsi:type="Action.ToggleVisibility" Tooltip="Toggle!"><TargetElements ElementId="textToToggle" /><TargetElements ElementId="imageToToggle" /><TargetElements ElementId="imageToToggle2" /></SelectAction></Inlines>
+  </RichTextBlock>
+</Card>

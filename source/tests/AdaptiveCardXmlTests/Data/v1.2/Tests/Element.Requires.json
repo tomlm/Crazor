@@ -1,0 +1,100 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "weight": "bolder",
+      "text": "Requires Test"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "good",
+              "text": "✓: This textblock requires adaptiveCards 1.2",
+              "wrap": true,
+              "requires": {
+                "adaptiveCards": "1.2"
+              }
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "good",
+              "text": "✓: This textblock requires adaptiveCards 1.2 and acTest 1.0",
+              "wrap": true,
+              "requires": {
+                "adaptiveCards": "1.2",
+                "acTest": "1.0"
+              }
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "attention",
+              "text": "✗: This textblock requires acTest 2.0",
+              "wrap": true,
+              "fallback": {
+                "type": "TextBlock",
+                "color": "good",
+                "text": "✓:We don't support acTest 2.0",
+                "wrap": true
+              },
+              "requires": {
+                "acTest": "2.0"
+              }
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "good",
+              "text": "✓: This textblock requires any version of acTest",
+              "wrap": true,
+              "requires": {
+                "acTest": "*"
+              }
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "color": "attention",
+              "text": "✗: This textblock requires adaptiveCards 5.0",
+              "wrap": true,
+              "fallback": {
+                "type": "TextBlock",
+                "color": "good",
+                "text": "✓:We don't support adaptiveCards 5.0",
+                "wrap": true
+              },
+              "requires": {
+                "adaptiveCards": "5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

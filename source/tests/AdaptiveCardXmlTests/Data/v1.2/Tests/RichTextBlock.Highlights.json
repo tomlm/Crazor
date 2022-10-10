@@ -1,0 +1,718 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "size": "large",
+          "text": "Highlights:"
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Here is some text! "
+        },
+        {
+          "type": "TextRun",
+          "highlight": true,
+          "text": "Part of it is highlighted!"
+        },
+        {
+          "type": "TextRun",
+          "text": " "
+        },
+        {
+          "type": "TextRun",
+          "isSubtle": true,
+          "highlight": true,
+          "text": "Subtle highlight!"
+        },
+        {
+          "type": "TextRun",
+          "text": " "
+        },
+        {
+          "type": "TextRun",
+          "color": "good",
+          "highlight": true,
+          "text": "Good highlight!"
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "size": "large",
+          "text": "Highlights on links: "
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Here's an inline action: "
+        },
+        {
+          "type": "TextRun",
+          "text": "Submit",
+          "selectAction": {
+            "type": "Action.Submit"
+          }
+        },
+        {
+          "type": "TextRun",
+          "text": "! Here's one that's highlighted: "
+        },
+        {
+          "type": "TextRun",
+          "highlight": true,
+          "text": "Submit!",
+          "selectAction": {
+            "type": "Action.Submit"
+          }
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "text": "Highlights with colors and containers:",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Default Container:** "
+        },
+        {
+          "type": "RichTextBlock",
+          "inlines": [
+            {
+              "type": "TextRun",
+              "highlight": true,
+              "text": "Default "
+            },
+            {
+              "type": "TextRun",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "highlight": true,
+              "text": "Accent "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "highlight": true,
+              "text": "Good "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "highlight": true,
+              "text": "Warning "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "highlight": true,
+              "text": "Attention "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "highlight": true,
+              "text": "Dark "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "highlight": true,
+              "text": "Light "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            }
+          ]
+        }
+      ],
+      "style": "default"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Emphasis Container:** "
+        },
+        {
+          "type": "RichTextBlock",
+          "inlines": [
+            {
+              "type": "TextRun",
+              "highlight": true,
+              "text": "Default "
+            },
+            {
+              "type": "TextRun",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "highlight": true,
+              "text": "Accent "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "highlight": true,
+              "text": "Good "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "highlight": true,
+              "text": "Warning "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "highlight": true,
+              "text": "Attention "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "highlight": true,
+              "text": "Dark "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "highlight": true,
+              "text": "Light "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            }
+          ]
+        }
+      ],
+      "style": "emphasis"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Good Container:** "
+        },
+        {
+          "type": "RichTextBlock",
+          "inlines": [
+            {
+              "type": "TextRun",
+              "highlight": true,
+              "text": "Default "
+            },
+            {
+              "type": "TextRun",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "highlight": true,
+              "text": "Accent "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "highlight": true,
+              "text": "Good "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "highlight": true,
+              "text": "Warning "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "highlight": true,
+              "text": "Attention "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "highlight": true,
+              "text": "Dark "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "highlight": true,
+              "text": "Light "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            }
+          ]
+        }
+      ],
+      "style": "good"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Attention Container:** "
+        },
+        {
+          "type": "RichTextBlock",
+          "inlines": [
+            {
+              "type": "TextRun",
+              "highlight": true,
+              "text": "Default "
+            },
+            {
+              "type": "TextRun",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "highlight": true,
+              "text": "Accent "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "highlight": true,
+              "text": "Good "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "highlight": true,
+              "text": "Warning "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "highlight": true,
+              "text": "Attention "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "highlight": true,
+              "text": "Dark "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "highlight": true,
+              "text": "Light "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            }
+          ]
+        }
+      ],
+      "style": "attention"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Warning Container:** "
+        },
+        {
+          "type": "RichTextBlock",
+          "inlines": [
+            {
+              "type": "TextRun",
+              "highlight": true,
+              "text": "Default "
+            },
+            {
+              "type": "TextRun",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "highlight": true,
+              "text": "Accent "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "highlight": true,
+              "text": "Good "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "highlight": true,
+              "text": "Warning "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "highlight": true,
+              "text": "Attention "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "highlight": true,
+              "text": "Dark "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "highlight": true,
+              "text": "Light "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            }
+          ]
+        }
+      ],
+      "style": "warning"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Accent Container:** "
+        },
+        {
+          "type": "RichTextBlock",
+          "inlines": [
+            {
+              "type": "TextRun",
+              "highlight": true,
+              "text": "Default "
+            },
+            {
+              "type": "TextRun",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "highlight": true,
+              "text": "Accent "
+            },
+            {
+              "type": "TextRun",
+              "color": "accent",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "highlight": true,
+              "text": "Good "
+            },
+            {
+              "type": "TextRun",
+              "color": "good",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "highlight": true,
+              "text": "Warning "
+            },
+            {
+              "type": "TextRun",
+              "color": "warning",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "highlight": true,
+              "text": "Attention "
+            },
+            {
+              "type": "TextRun",
+              "color": "attention",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "highlight": true,
+              "text": "Dark "
+            },
+            {
+              "type": "TextRun",
+              "color": "dark",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "highlight": true,
+              "text": "Light "
+            },
+            {
+              "type": "TextRun",
+              "color": "light",
+              "isSubtle": true,
+              "highlight": true,
+              "text": "(Subtle) "
+            }
+          ]
+        }
+      ],
+      "style": "accent"
+    }
+  ]
+}

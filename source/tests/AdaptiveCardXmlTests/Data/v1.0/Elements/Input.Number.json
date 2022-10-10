@@ -1,0 +1,20 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Number",
+      "id": "number",
+      "placeholder": "Enter a number",
+      "value": 3.0,
+      "min": 1.0,
+      "max": 10.0
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

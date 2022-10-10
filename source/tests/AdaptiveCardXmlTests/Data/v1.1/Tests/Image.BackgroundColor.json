@@ -1,0 +1,20 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Image",
+      "size": "small",
+      "url": "https://adaptivecards.io/content/cats/2.png",
+      "backgroundColor": "#FF0000FF",
+      "altText": "Cat"
+    },
+    {
+      "type": "Image",
+      "style": "person",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "backgroundColor": "#FFFF0000",
+      "altText": "Cat"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This textblock is inside a container with a min height of 100px",
+          "wrap": true
+        }
+      ],
+      "style": "emphasis",
+      "minHeight": "100px"
+    }
+  ]
+}

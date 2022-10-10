@@ -1,0 +1,30 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "extraLarge",
+      "text": "Our new product is awesome!",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "size": "small",
+            "text": "Here's some fine print for you to read. Don't break any laws! We will also not break any laws!",
+            "wrap": true
+          }
+        ]
+      },
+      "title": "Terms and Conditions",
+      "tooltip": "Click here to view the details of our terms and conditions."
+    }
+  ]
+}

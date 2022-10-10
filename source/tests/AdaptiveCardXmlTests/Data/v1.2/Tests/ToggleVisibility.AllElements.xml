@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Image Id="id1" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
+    <SelectAction xsi:type="Action.ToggleVisibility">
+      <TargetElements ElementId="id2" />
+      <TargetElements ElementId="id10" />
+    </SelectAction>
+  </Image>
+  <ActionSet Id="id10" IsVisible="false">
+    <Action.Submit Title="ActionSet Toggle Test" />
+  </ActionSet>
+  <Container Id="id2" Spacing="Medium">
+    <SelectAction xsi:type="Action.ToggleVisibility">
+      <TargetElements ElementId="id3" />
+    </SelectAction>
+    <TextBlock>This is some text</TextBlock>
+    <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+  </Container>
+  <ColumnSet Id="id3" Height="AdaptiveCards.AdaptiveDimension">
+    <SelectAction xsi:type="Action.ToggleVisibility">
+      <TargetElements ElementId="id1" />
+    </SelectAction>
+    <Column>
+      <TextBlock>Column 1</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock>Column 2</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet>
+    <Column Id="id4">
+      <SelectAction xsi:type="Action.ToggleVisibility">
+        <TargetElements ElementId="id5" />
+      </SelectAction>
+      <TextBlock>Column 1</TextBlock>
+    </Column>
+    <Column Id="id5">
+      <SelectAction xsi:type="Action.ToggleVisibility">
+        <TargetElements ElementId="id4" />
+      </SelectAction>
+      <TextBlock>Column 2</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock Id="id6" IsVisible="false" Size="Large">This is some text</TextBlock>
+  <Media Id="id7" IsVisible="false" Poster="https://adaptivecards.io/content/poster-video.png">
+    <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+  </Media>
+  <FactSet Id="id8" IsVisible="false">
+    <Fact Title="Fact 1" Value="Value 1" />
+    <Fact Title="Fact 2" Value="Value 2" />
+  </FactSet>
+  <ImageSet Id="id9" IsVisible="false">
+    <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+  </ImageSet>
+  <Input.Text Id="input1" IsVisible="false" Placeholder="enter comment" MaxLength="500" />
+  <Input.Number Id="input2" IsVisible="false" Placeholder="Enter a number" Value="3" Min="1" Max="10" />
+  <Input.Date Id="input3" IsVisible="false" Placeholder="Enter a date" Value="2017-10-12" />
+  <Input.Time Id="input4" IsVisible="false" Value="15:30" Min="09:00" Max="17:00" />
+  <Input.Toggle Id="input5" IsVisible="false" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="true" />
+  <Input.ChoiceSet Id="input6" IsVisible="false" Value="1">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="input7" IsVisible="false" Value="1" Style="Expanded">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="input8" IsVisible="false" Value="1" Style="Expanded" IsMultiSelect="true">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="input9" IsVisible="false" Value="1" Wrap="true">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Action.ToggleVisibility Title="Toggle!">
+    <TargetElements ElementId="id6" />
+    <TargetElements ElementId="id7" />
+    <TargetElements ElementId="id8" />
+    <TargetElements ElementId="id9" />
+    <TargetElements ElementId="input1" />
+    <TargetElements ElementId="input2" />
+    <TargetElements ElementId="input3" />
+    <TargetElements ElementId="input4" />
+    <TargetElements ElementId="input5" />
+    <TargetElements ElementId="input6" />
+    <TargetElements ElementId="input7" />
+    <TargetElements ElementId="input8" />
+    <TargetElements ElementId="input9" />
+  </Action.ToggleVisibility>
+  <Action.ToggleVisibility Title="Test new first!">
+    <TargetElements ElementId="id1" IsVisible="false" />
+    <TargetElements ElementId="id4" IsVisible="false" />
+  </Action.ToggleVisibility>
+  <Action.ToggleVisibility Title="Show everything!">
+    <TargetElements ElementId="id1" IsVisible="true" />
+    <TargetElements ElementId="id2" IsVisible="true" />
+    <TargetElements ElementId="id3" IsVisible="true" />
+    <TargetElements ElementId="id4" IsVisible="true" />
+    <TargetElements ElementId="id5" IsVisible="true" />
+    <TargetElements ElementId="id6" IsVisible="true" />
+    <TargetElements ElementId="id7" IsVisible="true" />
+    <TargetElements ElementId="id8" IsVisible="true" />
+    <TargetElements ElementId="id9" IsVisible="true" />
+    <TargetElements ElementId="input1" IsVisible="true" />
+    <TargetElements ElementId="input2" IsVisible="true" />
+    <TargetElements ElementId="input3" IsVisible="true" />
+    <TargetElements ElementId="input4" IsVisible="true" />
+    <TargetElements ElementId="input5" IsVisible="true" />
+    <TargetElements ElementId="input6" IsVisible="true" />
+    <TargetElements ElementId="input7" IsVisible="true" />
+    <TargetElements ElementId="input8" IsVisible="true" />
+    <TargetElements ElementId="input9" IsVisible="true" />
+  </Action.ToggleVisibility>
+</Card>

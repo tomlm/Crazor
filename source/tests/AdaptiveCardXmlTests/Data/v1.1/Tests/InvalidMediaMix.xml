@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Wrap="true">This card contains a media element with a mix of audio and video sources. The media element should be dropped.</TextBlock>
+  <Media Poster="http://adaptivecards.io/content/cats/1.png">
+    <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+    <MediaSource MimeType="audio/mpeg" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+  </Media>
+</Card>

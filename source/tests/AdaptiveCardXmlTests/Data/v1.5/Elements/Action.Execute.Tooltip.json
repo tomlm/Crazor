@@ -1,0 +1,19 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "name",
+      "label": "Please enter your name below:"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "verb": "",
+      "title": "Submit",
+      "tooltip": "Click here to add your name to the waiting list."
+    }
+  ]
+}

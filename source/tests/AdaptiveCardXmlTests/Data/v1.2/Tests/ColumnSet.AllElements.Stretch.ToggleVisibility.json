@@ -1,0 +1,441 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "FactSet (id1)",
+              "wrap": true
+            },
+            {
+              "type": "FactSet",
+              "id": "id1",
+              "facts": [
+                {
+                  "title": "Fact 1",
+                  "value": "Value 1"
+                },
+                {
+                  "title": "Fact 2",
+                  "value": "Value 2"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Image (id2)",
+              "wrap": true
+            },
+            {
+              "id": "id2",
+              "type": "Image",
+              "size": "small",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ImageSet (id3)",
+              "wrap": true
+            },
+            {
+              "type": "ImageSet",
+              "id": "id3",
+              "images": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/1.png",
+                  "altText": "Cat"
+                },
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/cats/2.png",
+                  "altText": "Cat"
+                }
+              ],
+              "imageSize": "small",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Input.Date (id4)",
+              "wrap": true
+            },
+            {
+              "type": "Input.Date",
+              "id": "id4",
+              "placeholder": "enter date",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Input.Number (id5)",
+              "wrap": true
+            },
+            {
+              "type": "Input.Number",
+              "id": "id5",
+              "placeholder": "enter number",
+              "max": 500.0,
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Input.Text with inlineAction (id6)",
+              "wrap": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "id6",
+              "placeholder": "enter comment",
+              "maxLength": 500,
+              "inlineAction": {
+                "type": "Action.OpenUrl",
+                "url": "https://adaptivecards.io/",
+                "title": "Reply"
+              },
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Input.Text (id7)",
+              "wrap": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "id7",
+              "placeholder": "enter comment",
+              "maxLength": 500,
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Input.Time (id8)",
+              "wrap": true
+            },
+            {
+              "type": "Input.Time",
+              "id": "id8",
+              "placeholder": "enter time",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Input.Toggle (id9)",
+              "wrap": true
+            },
+            {
+              "type": "Input.Toggle",
+              "id": "id9",
+              "title": "Placeholder title",
+              "valueOn": "True",
+              "valueOff": "False",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "TextBlock (id10)",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "id": "id10",
+              "text": "Regular textblock",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Container (id11)",
+              "wrap": true
+            },
+            {
+              "type": "Container",
+              "id": "id11",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "TextBlock inside a container"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "ColumnSet (id12)",
+              "wrap": true
+            },
+            {
+              "type": "ColumnSet",
+              "id": "id12",
+              "columns": [
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "This is for testing columnset"
+                    }
+                  ]
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Column (id13)",
+              "wrap": true
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "id": "id13",
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "This is for testing column"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "Media (id14)",
+              "wrap": true
+            },
+            {
+              "type": "Media",
+              "id": "id14",
+              "sources": [
+                {
+                  "mimeType": "video/mp4",
+                  "url": "https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4"
+                }
+              ],
+              "poster": "https://adaptivecards.io/content/poster-video.png",
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "RichTextBlock (id15)",
+              "wrap": true
+            },
+            {
+              "type": "RichTextBlock",
+              "id": "id15",
+              "inlines": [
+                {
+                  "type": "TextRun",
+                  "text": "This is the first inline. "
+                },
+                {
+                  "type": "TextRun",
+                  "color": "good",
+                  "text": "We support colors, "
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "TextBlock at the bottom",
+              "wrap": true
+            }
+          ],
+          "spacing": "large",
+          "separator": true
+        }
+      ],
+      "height": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is a textblock that doesn't stretch, but the input text does",
+              "wrap": true
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "id16",
+              "style": "compact",
+              "isMultiSelect": false,
+              "choices": [
+                {
+                  "title": "Red",
+                  "value": "1"
+                },
+                {
+                  "title": "Green",
+                  "value": "2"
+                },
+                {
+                  "title": "Blue",
+                  "value": "3"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "id17",
+              "value": "1",
+              "style": "expanded",
+              "isMultiSelect": false,
+              "choices": [
+                {
+                  "title": "Red",
+                  "value": "1"
+                },
+                {
+                  "title": "Green",
+                  "value": "2"
+                },
+                {
+                  "title": "Blue",
+                  "value": "3"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "One last text block at the bottom",
+              "wrap": true
+            }
+          ],
+          "spacing": "large",
+          "separator": true
+        },
+        {
+          "type": "Column",
+          "width": 1.0,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is a textblock that doesn't stretch, but the input text does",
+              "wrap": true
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "id18",
+              "value": "1,3",
+              "style": "compact",
+              "isMultiSelect": true,
+              "choices": [
+                {
+                  "title": "Red",
+                  "value": "1"
+                },
+                {
+                  "title": "Green",
+                  "value": "2"
+                },
+                {
+                  "title": "Blue",
+                  "value": "3"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "Input.ChoiceSet",
+              "id": "id19",
+              "value": "1",
+              "style": "expanded",
+              "isMultiSelect": true,
+              "choices": [
+                {
+                  "title": "Red",
+                  "value": "1"
+                },
+                {
+                  "title": "Green",
+                  "value": "2"
+                },
+                {
+                  "title": "Blue",
+                  "value": "3"
+                }
+              ],
+              "height": "AdaptiveCards.AdaptiveDimension"
+            },
+            {
+              "type": "TextBlock",
+              "text": "One last text block at the bottom",
+              "wrap": true
+            }
+          ],
+          "spacing": "large",
+          "separator": true
+        }
+      ],
+      "height": "AdaptiveCards.AdaptiveDimension"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        "id1",
+        "id2",
+        "id3",
+        "id4",
+        "id5",
+        "id6",
+        "id7",
+        "id8",
+        "id9",
+        "id10",
+        "id11",
+        "id12",
+        "id13",
+        "id14",
+        "id15",
+        "id16",
+        "id17",
+        "id18",
+        "id19"
+      ],
+      "title": "Toggle!"
+    }
+  ]
+}

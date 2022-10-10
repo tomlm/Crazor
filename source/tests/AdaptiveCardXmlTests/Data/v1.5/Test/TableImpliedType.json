@@ -1,0 +1,28 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Table",
+      "columns": [
+        {
+          "width": 1
+        }
+      ],
+      "rows": [
+        {
+          "cells": [
+            {
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Text goes here."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

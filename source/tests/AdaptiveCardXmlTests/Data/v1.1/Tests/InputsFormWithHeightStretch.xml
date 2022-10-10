@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet>
+    <Column Width="2">
+      <TextBlock Size="Medium" Weight="Bolder">Tell us about yourself</TextBlock>
+      <TextBlock IsSubtle="true" Wrap="true">We just need a few more details to get you booked for the trip of a lifetime!</TextBlock>
+      <TextBlock Size="Small" IsSubtle="true" Wrap="true">Don't worry, we'll never share or sell your information.</TextBlock>
+      <TextBlock Wrap="true">Your name</TextBlock>
+      <Input.Text Id="myName" Placeholder="Last, First" />
+      <TextBlock Wrap="true">Your email</TextBlock>
+      <Input.Text Id="myEmail" Placeholder="youremail@example.com" Style="Email" />
+      <TextBlock>Phone Number</TextBlock>
+      <Input.Text Id="myTel" Placeholder="xxx.xxx.xxxx" Style="Tel" />
+    </Column>
+    <Column Width="1">
+      <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg" AltText="Great Barrier Reef" />
+    </Column>
+  </ColumnSet>
+  <Action.Submit Title="Submit" />
+</Card>

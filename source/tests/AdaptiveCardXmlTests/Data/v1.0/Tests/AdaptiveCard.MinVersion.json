@@ -1,0 +1,12 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "This card requires Adaptive Cards version 99.0, which probably doesn't exist",
+  "lang": "en",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card requires Adaptive Cards version 99.0, which probably doesn't exist"
+    }
+  ]
+}

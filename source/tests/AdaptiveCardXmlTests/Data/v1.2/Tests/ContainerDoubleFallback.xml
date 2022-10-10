@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <AdaptiveUnknownElement>
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="Container">
+        <Fallback>
+          <Type>Content</Type>
+          <Content xsi:type="TextBlock">Hello World</Content>
+        </Fallback>
+        <AdaptiveUnknownElement>
+          <Type>notme</Type>
+        </AdaptiveUnknownElement>
+      </Content>
+    </Fallback>
+    <Type>whoknows</Type>
+  </AdaptiveUnknownElement>
+</Card>

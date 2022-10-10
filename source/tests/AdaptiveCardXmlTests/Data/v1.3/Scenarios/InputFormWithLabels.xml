@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet>
+    <Column Width="2">
+      <TextBlock Size="Medium" Weight="Bolder" Wrap="true" Style="Heading">Tell us about yourself</TextBlock>
+      <TextBlock IsSubtle="true" Wrap="true">We just need a few more details to get you booked for the trip of a lifetime!</TextBlock>
+      <TextBlock Size="Small" IsSubtle="true" Wrap="true">Don't worry, we'll never share or sell your information.</TextBlock>
+      <Input.Text Id="myName" IsRequired="true" Label="Your name (Last, First)" ErrorMessage="Please enter your name in the specified format" Regex="^[A-Z][a-z]+, [A-Z][a-z]+$" />
+      <Input.Text Id="myEmail" IsRequired="true" Label="Your email" ErrorMessage="Please enter a valid email address" Style="Email" Regex="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.][A-Za-z0-9-]{2,4}$" />
+      <Input.Text Id="myTel" Label="Phone Number (xxx xxx xxxx)" ErrorMessage="Invalid phone number. Please enter a 10 digit phone number" Style="Tel" Regex="^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$" />
+    </Column>
+    <Column Width="1">
+      <Image Url="https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg" AltText="Diver in the Great Barrier Reef" />
+    </Column>
+  </ColumnSet>
+  <Action.Submit Title="Submit" />
+</Card>

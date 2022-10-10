@@ -1,0 +1,36 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "extraLarge",
+      "text": "Container Spacing"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "weight": "bolder",
+          "text": "spacing: none"
+        }
+      ],
+      "spacing": "none"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "weight": "bolder",
+          "text": "spacing: extraLarge, separator: true"
+        }
+      ],
+      "spacing": "extraLarge",
+      "separator": true
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Weight="Bolder">horizontalAlignment:left</TextBlock>
+  <Image Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+  <TextBlock Weight="Bolder" HorizontalAlignment="Center">horizontalAlignment:center</TextBlock>
+  <Image Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" HorizontalAlignment="Center" AltText="Cat" />
+  <TextBlock Weight="Bolder" HorizontalAlignment="Right">horizontalAlignment:right</TextBlock>
+  <Image Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" HorizontalAlignment="Right" AltText="Cat" />
+</Card>

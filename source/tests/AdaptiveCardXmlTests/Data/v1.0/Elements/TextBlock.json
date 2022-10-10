@@ -1,0 +1,33 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "text": "This is some text"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "It doesn't wrap by default"
+    },
+    {
+      "type": "TextBlock",
+      "text": "So set **wrap** to true if you plan on showing a paragraph of text",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "You can also use **maxLines** to prevent it from getting out of hand",
+      "wrap": true,
+      "maxLines": 2
+    },
+    {
+      "type": "TextBlock",
+      "color": "attention",
+      "text": "You can even draw attention to certain text with color",
+      "wrap": true
+    }
+  ]
+}

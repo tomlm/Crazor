@@ -1,0 +1,58 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Image",
+      "size": "medium",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.Submit"
+      },
+      "altText": "Cat"
+    },
+    {
+      "type": "Input.Text",
+      "id": "IsEnabledInputId",
+      "placeholder": "Placeholder text",
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Disabled"
+      }
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Do not click "
+        },
+        {
+          "type": "TextRun",
+          "text": "here",
+          "selectAction": {
+            "type": "Action.Submit"
+          }
+        },
+        {
+          "type": "TextRun",
+          "text": ", as it is disabled."
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Disabled"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Enabled (explicit)"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Enabled (by default)"
+    }
+  ]
+}

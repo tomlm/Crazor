@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Wrap="true">Please provide the following information:</TextBlock>
+  <Action.ShowCard Title="1. Name">
+    <AdaptiveCard>
+      <Container Id="nameProperties">
+        <Input.Text Id="FirstName" IsRequired="true" Label="First Name" ErrorMessage="First Name is required" />
+        <Input.Text Id="MiddleName" Label="Middle Name" />
+        <Input.Text Id="LastName" IsRequired="true" Label="Last Name" ErrorMessage="Last Name is required" />
+      </Container>
+      <Action.ShowCard Title="2. Address">
+        <AdaptiveCard>
+          <Container Id="addressProperties">
+            <Input.Text Id="AddressLine1" Label="Address line 1" />
+            <Input.Text Id="AddressLine2" Label="Address line 2" />
+            <ColumnSet>
+              <Column Width="stretch">
+                <Input.Text Id="City" Label="City" />
+              </Column>
+              <Column Width="stretch">
+                <Input.Text Id="State" Label="State" />
+              </Column>
+              <Column Width="stretch">
+                <Input.Text Id="Zip" Label="Zip Code" />
+              </Column>
+            </ColumnSet>
+          </Container>
+          <Action.ShowCard Title="3. Phone/Email">
+            <AdaptiveCard>
+              <Input.Text Id="CellPhone" Label="Cell Number" />
+              <Input.Text Id="HomePhone" Label="Home Number" />
+              <Input.Text Id="Email" Label="Email Address" />
+              <Action.Submit Title="Submit" />
+            </AdaptiveCard>
+          </Action.ShowCard>
+        </AdaptiveCard>
+      </Action.ShowCard>
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

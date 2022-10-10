@@ -1,0 +1,35 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card's action will show another card"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "What do you think?"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "data": {
+              "neat": "true"
+            },
+            "title": "Neat!"
+          }
+        ]
+      },
+      "title": "Action.ShowCard"
+    }
+  ]
+}

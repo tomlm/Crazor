@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" AltText="Adaptive cards logo" />
+  <TextBlock Size="Large" Weight="Bolder">Overflow Action Test Card!</TextBlock>
+  <TextBlock>ActionSet **all secondary actions**</TextBlock>
+  <ActionSet>
+    <Action.Submit Title="Action Submit" Mode="secondary">{
+  "key": "Submit from overflow menu"
+}</Action.Submit>
+    <Action.OpenUrl Title="OpenUrl" IconUrl="https://www.clipartmax.com/png/full/211-2118815_file-novosel-mushroom-svg-mario-mushroom-icon.png" Mode="secondary" Url="https://github.com/Microsoft/AdaptiveCards" />
+    <Action.ShowCard Title="Action ShowCard" Mode="secondary">
+      <AdaptiveCard>
+        <TextBlock Wrap="true">Secondary action show card</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+  </ActionSet>
+  <TextBlock>ActionSet **primary + secondary actions**</TextBlock>
+  <ActionSet>
+    <Action.Submit Title="Submit" Tooltip="Tooltip">{
+  "key": "Submit from primary action"
+}</Action.Submit>
+    <Action.Submit Title="Edit" Tooltip="Tooltip" Mode="secondary">{
+  "key": "Edit from overflow menu"
+}</Action.Submit>
+    <Action.Submit Title="Delete" Mode="secondary">{
+  "key": "Delete"
+}</Action.Submit>
+  </ActionSet>
+  <TextBlock>Check actions.length &gt; maxActions</TextBlock>
+  <ActionSet>
+    <Action.Submit Title="Action 1" />
+    <Action.Submit Title="Action 2" />
+    <Action.Submit Title="Action 3" />
+    <Action.Submit Title="Action 4" />
+    <Action.Submit Title="Action 5" />
+    <Action.Submit Title="Action 6" />
+    <Action.Submit Title="Action 7" />
+    <Action.Submit Title="Action 8" />
+    <Action.Submit Title="Action 9" />
+  </ActionSet>
+  <TextBlock Wrap="true">Show Card Tests</TextBlock>
+  <ActionSet>
+    <Action.ShowCard Title="Primary 1">
+      <AdaptiveCard>
+        <TextBlock Wrap="true">Show Card for Primary 1</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+    <Action.ShowCard Title="Primary 2">
+      <AdaptiveCard>
+        <TextBlock Wrap="true">Show Card for Primary 2</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+    <Action.ShowCard Title="Secondary 1" Mode="secondary">
+      <AdaptiveCard>
+        <TextBlock Wrap="true">Show Card for Secondary 1</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+    <Action.ShowCard Title="Secondary 2" Mode="secondary">
+      <AdaptiveCard>
+        <TextBlock Wrap="true">Show card for secondary 2</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+  </ActionSet>
+  <TextBlock>========= I am bottom line of body =========</TextBlock>
+  <Action.OpenUrl Title="Primary OpenUrl" Url="https://adaptivecards.io/" />
+  <Action.Submit Title="Secondary Submit" Mode="secondary">{
+  "key": "Submit from overflow menu"
+}</Action.Submit>
+  <Action.OpenUrl Title="Secondary OpenUrl" IconUrl="https://adaptivecards.io/content/cats/2.png" Mode="secondary" Url="https://adaptivecards.io/" />
+  <Action.ShowCard Title="Secondary ShowCard" Mode="secondary">
+    <AdaptiveCard>
+      <TextBlock>What do you think?</TextBlock>
+      <Action.Submit Title="Neat!" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

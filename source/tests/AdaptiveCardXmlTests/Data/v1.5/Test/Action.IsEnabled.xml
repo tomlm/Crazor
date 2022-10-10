@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <Image Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
+    <SelectAction xsi:type="Action.Submit" />
+  </Image>
+  <Input.Text Id="IsEnabledInputId" Placeholder="Placeholder text">
+    <Action.Submit Title="Disabled" />
+  </Input.Text>
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>Do not click </Inlines>
+    <Inlines>
+      <Type>TextRun</Type>here<SelectAction xsi:type="Action.Submit" /></Inlines>
+    <Inlines>
+      <Type>TextRun</Type>, as it is disabled.</Inlines>
+  </RichTextBlock>
+  <Action.Submit Title="Disabled" />
+  <Action.Submit Title="Enabled (explicit)" />
+  <Action.Submit Title="Enabled (by default)" />
+</Card>

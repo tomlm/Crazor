@@ -1,0 +1,32 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.1",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Hi,"
+    },
+    {
+      "type": "TextBlock",
+      "isSubtle": true,
+      "text": "MasterHip"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            }
+          ],
+          "verticalContentAlignment": "bottom"
+        }
+      ],
+      "height": "AdaptiveCards.AdaptiveDimension"
+    }
+  ],
+  "verticalContentAlignment": "center"
+}

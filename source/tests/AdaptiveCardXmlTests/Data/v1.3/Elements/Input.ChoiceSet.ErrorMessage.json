@@ -1,0 +1,70 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "requiredCompactId",
+      "style": "compact",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "placeholder": "Please make selection",
+      "isRequired": true,
+      "label": "Required Input.ChoiceSet label (compact)",
+      "errorMessage": "This is a required input"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "requiredExpandedId",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Input.ChoiceSet label (expanded)",
+      "errorMessage": "This is a required input"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "requiredMultiselectId",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "isRequired": true,
+      "label": "Required Input.ChoiceSet label (expanded, multiselect)",
+      "errorMessage": "This is a required input"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

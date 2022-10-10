@@ -1,0 +1,51 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Cool link"
+        }
+      ],
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "tooltip": "Go to a url"
+      }
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Emphasis link"
+        }
+      ],
+      "style": "emphasis",
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://msn.com",
+        "tooltip": "Go to a different url"
+      }
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Submit action"
+        }
+      ],
+      "selectAction": {
+        "type": "Action.Submit",
+        "data": {
+          "info": "My submit action data"
+        },
+        "tooltip": "Submit action"
+      }
+    }
+  ]
+}

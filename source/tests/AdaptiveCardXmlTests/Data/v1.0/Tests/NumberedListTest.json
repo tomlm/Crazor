@@ -1,0 +1,55 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "text": "Test scenarios around numbered lists with max values.",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Numbered List:"
+    },
+    {
+      "type": "TextBlock",
+      "text": "1. One\n2. Two"
+    },
+    {
+      "type": "TextBlock",
+      "text": "\nNumbered List starting at 3:"
+    },
+    {
+      "type": "TextBlock",
+      "text": "3. One\n2. Two."
+    },
+    {
+      "type": "TextBlock",
+      "text": "\nNumbered List starting at a number bigger than max unsigned int (4294967295).",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "4294967296. One\n2. Two"
+    },
+    {
+      "type": "TextBlock",
+      "text": "\nNumbered List where second element would be bigger than max unsigned int (4294967295).",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "4294967295. One\n2. Two"
+    },
+    {
+      "type": "TextBlock",
+      "text": "\nNumbered List where second element equals max unsigned int (4294967295).",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "4294967294. One\n2. Two"
+    }
+  ]
+}

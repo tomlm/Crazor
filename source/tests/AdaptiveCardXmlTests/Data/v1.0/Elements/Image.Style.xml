@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet>
+    <Column>
+      <TextBlock Weight="Bolder">style: default</TextBlock>
+      <Image Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" />
+    </Column>
+    <Column>
+      <TextBlock Weight="Bolder">style: person</TextBlock>
+      <Image Style="Person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" />
+    </Column>
+  </ColumnSet>
+</Card>

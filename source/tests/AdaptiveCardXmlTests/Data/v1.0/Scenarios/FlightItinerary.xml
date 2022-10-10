@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM&lt;/s&gt;">
+  <TextBlock Weight="Bolder" Wrap="true">Passengers</TextBlock>
+  <TextBlock Separator="true" Wrap="true">Sarah Hum</TextBlock>
+  <TextBlock Spacing="None" Wrap="true">Jeremy Goldberg</TextBlock>
+  <TextBlock Spacing="None" Wrap="true">Evan Litvak</TextBlock>
+  <TextBlock Spacing="Medium" Weight="Bolder" Wrap="true">2 Stops</TextBlock>
+  <TextBlock Spacing="None" Weight="Bolder" Wrap="true">Tue, May 30, 2017 12:25 PM</TextBlock>
+  <ColumnSet Separator="true">
+    <Column Width="1">
+      <TextBlock IsSubtle="true" Wrap="true">San Francisco</TextBlock>
+    </Column>
+    <Column Width="1">
+      <TextBlock IsSubtle="true" HorizontalAlignment="Right" Wrap="true">Amsterdam</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="None">
+    <Column Width="1">
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Wrap="true">SFO</TextBlock>
+    </Column>
+    <Column Width="auto">
+      <Image Spacing="None" Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Flight to" />
+    </Column>
+    <Column Width="1">
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" HorizontalAlignment="Right" Wrap="true">AMS</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock Spacing="Medium" Weight="Bolder" Wrap="true">Non-Stop</TextBlock>
+  <TextBlock Spacing="None" Weight="Bolder" Wrap="true">Fri, Jun 2, 2017 1:55 PM</TextBlock>
+  <ColumnSet Separator="true">
+    <Column Width="1">
+      <TextBlock IsSubtle="true" Wrap="true">Amsterdam</TextBlock>
+    </Column>
+    <Column Width="1">
+      <TextBlock IsSubtle="true" HorizontalAlignment="Right" Wrap="true">San Francisco</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="None">
+    <Column Width="1">
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Wrap="true">AMS</TextBlock>
+    </Column>
+    <Column Width="auto">
+      <Image Spacing="None" Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Flight to" />
+    </Column>
+    <Column Width="1">
+      <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" HorizontalAlignment="Right" Wrap="true">SFO</TextBlock>
+    </Column>
+  </ColumnSet>
+  <ColumnSet Spacing="Medium">
+    <Column Width="1">
+      <TextBlock Size="Medium" IsSubtle="true" Wrap="true">Total</TextBlock>
+    </Column>
+    <Column Width="1">
+      <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Right" Wrap="true">$4,032.54</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

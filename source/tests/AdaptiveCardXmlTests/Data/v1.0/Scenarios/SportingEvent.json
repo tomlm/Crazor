@@ -1,0 +1,86 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "speak": "The Seattle Seahawks beat the Carolina Panthers 40-7",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "size": "small",
+                  "url": "https://adaptivecards.io/content/cats/3.png",
+                  "altText": "Shades cat team emblem"
+                },
+                {
+                  "type": "TextBlock",
+                  "weight": "bolder",
+                  "text": "SHADES",
+                  "horizontalAlignment": "center",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Sat, Aug 31, 2019",
+                  "horizontalAlignment": "center",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Final",
+                  "horizontalAlignment": "center",
+                  "wrap": true,
+                  "spacing": "none"
+                },
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "text": "45 - 7",
+                  "horizontalAlignment": "center",
+                  "wrap": true
+                }
+              ],
+              "spacing": "medium",
+              "separator": true
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "size": "small",
+                  "url": "https://adaptivecards.io/content/cats/2.png",
+                  "horizontalAlignment": "center",
+                  "altText": "Skins cat team emblem"
+                },
+                {
+                  "type": "TextBlock",
+                  "weight": "bolder",
+                  "text": "SKINS",
+                  "horizontalAlignment": "center",
+                  "wrap": true
+                }
+              ],
+              "spacing": "medium",
+              "separator": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

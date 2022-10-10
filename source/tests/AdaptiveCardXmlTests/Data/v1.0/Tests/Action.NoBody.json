@@ -1,0 +1,38 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "Input.Date",
+            "id": "dueDate"
+          },
+          {
+            "type": "Input.Text",
+            "id": "comment",
+            "placeholder": "Add a comment",
+            "isMultiline": true
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.OpenUrl",
+            "url": "https://adaptivecards.io/",
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Set due date"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "url": "https://adaptivecards.io/",
+      "title": "View"
+    }
+  ]
+}

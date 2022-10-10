@@ -1,0 +1,69 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Input.Text",
+          "id": "input1",
+          "isRequired": true,
+          "label": "Required Input.Text label",
+          "errorMessage": "Required input",
+          "height": "AdaptiveCards.AdaptiveDimension"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Bottom text"
+        }
+      ],
+      "minHeight": "200px"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Input.Text",
+          "id": "input2",
+          "isRequired": true,
+          "label": "Required Input.Text label",
+          "errorMessage": "Required input"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Bottom text"
+        }
+      ],
+      "style": "emphasis",
+      "verticalContentAlignment": "center",
+      "bleed": true,
+      "minHeight": "200px"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Input.Text",
+          "id": "input3",
+          "isRequired": true,
+          "label": "Required Input.Text label",
+          "errorMessage": "Required input"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Bottom text"
+        }
+      ],
+      "verticalContentAlignment": "bottom",
+      "bleed": true,
+      "minHeight": "200px"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

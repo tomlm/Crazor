@@ -1,0 +1,71 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "small",
+      "weight": "bolder",
+      "text": "width:50px height:50px"
+    },
+    {
+      "type": "Image",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "altText": "Cat",
+      "width": "AdaptiveCards.AdaptiveDimension",
+      "height": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "TextBlock",
+      "size": "small",
+      "weight": "bolder",
+      "text": "width:25px height:50px"
+    },
+    {
+      "type": "Image",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "altText": "Cat",
+      "width": "AdaptiveCards.AdaptiveDimension",
+      "height": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "TextBlock",
+      "size": "small",
+      "weight": "bolder",
+      "text": "width:80px height:not set"
+    },
+    {
+      "type": "Image",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "altText": "Cat",
+      "width": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "TextBlock",
+      "size": "small",
+      "weight": "bolder",
+      "text": "width:80px height:not set, style:person"
+    },
+    {
+      "type": "Image",
+      "style": "person",
+      "url": "https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg",
+      "altText": "Person",
+      "width": "AdaptiveCards.AdaptiveDimension"
+    },
+    {
+      "type": "TextBlock",
+      "size": "small",
+      "weight": "bolder",
+      "text": "width:40px height:80px, style:person"
+    },
+    {
+      "type": "Image",
+      "style": "person",
+      "url": "https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg",
+      "altText": "Person",
+      "width": "AdaptiveCards.AdaptiveDimension",
+      "height": "AdaptiveCards.AdaptiveDimension"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Disabled Show Card",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "You can see this show card!",
+            "wrap": true
+          }
+        ]
+      },
+      "title": "Enabled"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "You cannot see this show card.",
+            "wrap": true
+          }
+        ]
+      },
+      "title": "Disabled"
+    }
+  ]
+}

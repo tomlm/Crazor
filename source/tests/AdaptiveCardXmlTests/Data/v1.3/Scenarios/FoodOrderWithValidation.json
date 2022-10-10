@@ -1,0 +1,152 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "medium",
+      "weight": "bolder",
+      "text": "Your registration is almost complete",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "What type of food do you prefer?",
+      "wrap": true
+    },
+    {
+      "type": "ImageSet",
+      "images": [
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/steak.jpeg",
+          "altText": "Steak cut with fries"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/chicken.jpeg",
+          "altText": "Fried chicken with lettuce"
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/tofu.jpeg",
+          "altText": "Tofu topped with red sauce"
+        }
+      ],
+      "imageSize": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.ChoiceSet",
+            "id": "SteakTemp",
+            "style": "expanded",
+            "isMultiSelect": false,
+            "choices": [
+              {
+                "title": "Rare",
+                "value": "rare"
+              },
+              {
+                "title": "Medium-Rare",
+                "value": "medium-rare"
+              },
+              {
+                "title": "Well-done",
+                "value": "well-done"
+              }
+            ],
+            "isRequired": true,
+            "label": "How would you like your steak prepared?",
+            "errorMessage": "Please select one of the above options"
+          },
+          {
+            "type": "Input.Text",
+            "id": "SteakOther",
+            "isMultiline": true,
+            "label": "Any other preparation requests?"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "data": {
+              "FoodChoice": "Steak"
+            },
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Steak"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Toggle",
+            "id": "ChickenAllergy",
+            "title": "I'm allergic to peanuts",
+            "valueOn": "noPeanuts",
+            "valueOff": "peanuts",
+            "label": "Do you have any allergies?"
+          },
+          {
+            "type": "Input.Text",
+            "id": "ChickenOther",
+            "isMultiline": true,
+            "label": "Any other preparation requests?"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "data": {
+              "FoodChoice": "Chicken"
+            },
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Chicken"
+    },
+    {
+      "type": "Action.ShowCard",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Toggle",
+            "id": "Vegetarian",
+            "title": "Please prepare it vegan",
+            "valueOn": "vegan",
+            "valueOff": "notVegan",
+            "label": "Would you like it prepared vegan?"
+          },
+          {
+            "type": "Input.Text",
+            "id": "VegOther",
+            "isMultiline": true,
+            "label": "Any other preparation requests?"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "data": {
+              "FoodChoice": "Vegetarian"
+            },
+            "title": "OK"
+          }
+        ]
+      },
+      "title": "Tofu"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Wrap="true">This card has a custom action. If renderer can render the custom type, it will render a button. try clicking the button.</TextBlock>
+  <AdaptiveUnknownAction Title="New Button Type ">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>Red</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:long">150</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>Green</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:long">100</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>Blue</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:long">100</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>CornerRadius</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:long">10</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>alertMessage</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">Add Custom Message Here</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Type>NewStyle</Type>
+  </AdaptiveUnknownAction>
+</Card>

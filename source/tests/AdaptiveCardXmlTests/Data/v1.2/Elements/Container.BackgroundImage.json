@@ -1,0 +1,49 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Container",
+      "backgroundImage": "https://adaptivecards.io/content/AlkiBeach.jpg",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "What a beautiful background"
+        }
+      ],
+      "minHeight": "150px"
+    },
+    {
+      "type": "TextBlock",
+      "text": "They can even repeat a bunch of different ways..."
+    },
+    {
+      "type": "Container",
+      "backgroundImage": {
+        "url": "https://adaptivecards.io/content/uparrow.png",
+        "fillMode": "repeat"
+      },
+      "items": [],
+      "minHeight": "100px"
+    },
+    {
+      "type": "Container",
+      "backgroundImage": {
+        "url": "https://adaptivecards.io/content/uparrow.png",
+        "fillMode": "repeatHorizontally",
+        "verticalAlignment": "center"
+      },
+      "items": []
+    },
+    {
+      "type": "Container",
+      "backgroundImage": {
+        "url": "https://adaptivecards.io/content/uparrow.png",
+        "fillMode": "repeatVertically",
+        "horizontalAlignment": "center"
+      },
+      "items": [],
+      "minHeight": "100px"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "bolder",
+              "text": "style: default"
+            },
+            {
+              "type": "Image",
+              "url": "https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg",
+              "altText": "Person"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "bolder",
+              "text": "style: person"
+            },
+            {
+              "type": "Image",
+              "style": "person",
+              "url": "https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg",
+              "altText": "Person"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

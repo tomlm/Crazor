@@ -1,0 +1,121 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This test checks if showing an element inside a container that is hiding, will behave correctly by not showing the container",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Container (id1)",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "id": "id1",
+      "items": [
+        {
+          "type": "TextBlock",
+          "id": "id2",
+          "text": "TextBlock (id2) inside a container",
+          "wrap": true
+        }
+      ],
+      "style": "emphasis"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Column (id3)",
+      "wrap": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "id": "id3",
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "id": "id4",
+              "text": "TextBlock (id4) inside a columnSet",
+              "wrap": true
+            }
+          ],
+          "style": "emphasis",
+          "spacing": "large"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        {
+          "elementId": "id1",
+          "isVisible": false
+        },
+        {
+          "elementId": "id2",
+          "isVisible": true
+        },
+        {
+          "elementId": "id3",
+          "isVisible": false
+        },
+        {
+          "elementId": "id4",
+          "isVisible": true
+        }
+      ],
+      "title": "Hide containers, show element"
+    },
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        {
+          "elementId": "id2",
+          "isVisible": true
+        },
+        {
+          "elementId": "id1",
+          "isVisible": false
+        },
+        {
+          "elementId": "id4",
+          "isVisible": true
+        },
+        {
+          "elementId": "id3",
+          "isVisible": false
+        }
+      ],
+      "title": "Show element, hide containers"
+    },
+    {
+      "type": "Action.ToggleVisibility",
+      "targetElements": [
+        {
+          "elementId": "id1",
+          "isVisible": true
+        },
+        {
+          "elementId": "id2",
+          "isVisible": true
+        },
+        {
+          "elementId": "id3",
+          "isVisible": true
+        },
+        {
+          "elementId": "id4",
+          "isVisible": true
+        }
+      ],
+      "title": "Show everything"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <TextBlock>(default)</TextBlock>
+  <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Size: Small</TextBlock>
+  <Image Size="Small" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Size: Small, Align: Center</TextBlock>
+  <Image Size="Small" Url="https://picsum.photos/id/133/300/200" HorizontalAlignment="Center" AltText="Two cars" />
+  <TextBlock>Size: Small, Align: Right</TextBlock>
+  <Image Size="Small" Url="https://picsum.photos/id/133/300/200" HorizontalAlignment="Right" AltText="Two cars" />
+  <TextBlock>Size: Medium</TextBlock>
+  <Image Size="Medium" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Size: Large</TextBlock>
+  <Image Size="Large" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Size: Auto</TextBlock>
+  <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Size: Stretch</TextBlock>
+  <Image Size="Stretch" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Width: 250px</TextBlock>
+  <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" Width="AdaptiveCards.AdaptiveDimension" />
+  <TextBlock>Height: 100px</TextBlock>
+  <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  <TextBlock>Width: 250px, Height: 100px</TextBlock>
+  <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" Width="AdaptiveCards.AdaptiveDimension" />
+  <TextBlock Wrap="true">Col 1 - Width: 50px; Col 2 - Width: Stretch</TextBlock>
+  <ColumnSet>
+    <Column Width="50">
+      <TextBlock Wrap="true">Width: 10px</TextBlock>
+      <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" Width="AdaptiveCards.AdaptiveDimension" />
+      <TextBlock Wrap="true">Size: Large</TextBlock>
+      <Image Size="Large" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+      <TextBlock Wrap="true">Height: Stretch</TextBlock>
+      <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+      <TextBlock Wrap="true">Size: Stretch</TextBlock>
+      <Image Size="Stretch" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    </Column>
+    <Column Width="stretch">
+      <TextBlock>Size: Small</TextBlock>
+      <Image Size="Small" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+      <TextBlock>Size: Large</TextBlock>
+      <Image Size="Large" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+      <TextBlock>(default)</TextBlock>
+      <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+      <TextBlock>Size: Stretch</TextBlock>
+      <Image Size="Stretch" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    </Column>
+  </ColumnSet>
+  <TextBlock>Col 1 - Width: Auto; Image - Size: Small</TextBlock>
+  <ColumnSet>
+    <Column Width="auto">
+      <Image Size="Small" Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    </Column>
+    <Column Width="stretch">
+      <TextBlock>Hellooo!</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock>Col 1 - Width: Auto; Image - Size: Auto</TextBlock>
+  <ColumnSet>
+    <Column Width="auto">
+      <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    </Column>
+    <Column Width="stretch">
+      <TextBlock>Hellooo!</TextBlock>
+    </Column>
+  </ColumnSet>
+  <TextBlock>ImageSet[1] - ImageSize: Small</TextBlock>
+  <ImageSet ImageSize="Small">
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  </ImageSet>
+  <TextBlock>ImageSet[1] - (default)</TextBlock>
+  <ImageSet>
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  </ImageSet>
+  <TextBlock>ImageSet[1] - ImageSize: Large</TextBlock>
+  <ImageSet ImageSize="Large">
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  </ImageSet>
+  <TextBlock>ImageSet[6] - ImageSize: Medium</TextBlock>
+  <ImageSet ImageSize="Medium">
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+    <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
+  </ImageSet>
+</Card>

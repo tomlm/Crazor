@@ -1,0 +1,24 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "textLabelId",
+      "label": "Default Input.Text label"
+    },
+    {
+      "type": "Input.Text",
+      "id": "requiredTextLabelId",
+      "isRequired": true,
+      "label": "Required Input.Text label",
+      "errorMessage": "Required input"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}

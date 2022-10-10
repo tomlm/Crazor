@@ -1,0 +1,22 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "هذه كتلة نص",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "זהו בלוק טקסט",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "This is a text block",
+      "wrap": true
+    }
+  ],
+  "rtl": true
+}

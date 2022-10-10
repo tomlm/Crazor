@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <Container>
+    <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" />
+    <TextBlock Wrap="true">This container has a background with a verticalAlignment of top</TextBlock>
+    <TextBlock>Container 1 - Text 2 - Stretch</TextBlock>
+    <TextBlock>Container 1 - Text 3 - Stretch</TextBlock>
+  </Container>
+  <Container>
+    <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" VerticalAlignment="Center" />
+    <TextBlock Wrap="true">This container has a background with a verticalAlignment of center</TextBlock>
+    <TextBlock>Container 1 - Text 2 - Stretch</TextBlock>
+    <TextBlock>Container 1 - Text 3 - Stretch</TextBlock>
+  </Container>
+  <Container>
+    <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" VerticalAlignment="Bottom" />
+    <TextBlock Wrap="true">This container has a background with a verticalAlignment of bottom</TextBlock>
+    <TextBlock>Container 1 - Text 2 - Stretch</TextBlock>
+    <TextBlock>Container 1 - Text 3 - Stretch</TextBlock>
+  </Container>
+  <ColumnSet>
+    <Column Width="stretch">
+      <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" />
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+    </Column>
+    <Column Width="stretch">
+      <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" HorizontalAlignment="Center" />
+      <TextBlock Wrap="true">Background is center aligned</TextBlock>
+    </Column>
+    <Column Width="stretch">
+      <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" HorizontalAlignment="Right" />
+      <TextBlock Wrap="true">Background is right aligned</TextBlock>
+    </Column>
+  </ColumnSet>
+</Card>

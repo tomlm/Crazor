@@ -1,0 +1,76 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "id": "id1",
+      "type": "Image",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.ToggleVisibility",
+        "targetElements": [
+          "id2"
+        ]
+      },
+      "altText": "Cat",
+      "isVisible": false
+    },
+    {
+      "type": "Container",
+      "id": "id2",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "There's an image above this but the visibility is set to false. There shouldn't be a spacing above",
+          "wrap": true
+        },
+        {
+          "type": "Image",
+          "url": "https://adaptivecards.io/content/cats/1.png",
+          "altText": "Cat"
+        }
+      ],
+      "selectAction": {
+        "type": "Action.ToggleVisibility",
+        "targetElements": [
+          "id3"
+        ]
+      },
+      "spacing": "large"
+    },
+    {
+      "type": "ColumnSet",
+      "id": "id3",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Column 1"
+            }
+          ],
+          "isVisible": false
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is the second column. There shouldn't be spacing before this",
+              "wrap": true
+            }
+          ],
+          "spacing": "large"
+        }
+      ],
+      "selectAction": {
+        "type": "Action.ToggleVisibility",
+        "targetElements": [
+          "id1"
+        ]
+      },
+      "height": "AdaptiveCards.AdaptiveDimension"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+  <AdditionalProperties>
+    <item>
+      <key>
+        <string>rtl</string>
+      </key>
+      <value>
+        <anyType xsi:type="xsd:boolean">false</anyType>
+      </value>
+    </item>
+  </AdditionalProperties>
+  <TextBlock Weight="Bolder" Wrap="true">Card (rtl: false)</TextBlock>
+  <ColumnSet>
+    <Column Width="stretch">
+      <TextBlock Wrap="true">Column 1</TextBlock>
+    </Column>
+    <Column Width="stretch">
+      <TextBlock Wrap="true">Column 2</TextBlock>
+    </Column>
+    <Column Width="stretch">
+      <TextBlock Wrap="true">Column 3</TextBlock>
+    </Column>
+  </ColumnSet>
+  <Input.Text Id="0" Label="Input w/ Inline Action">
+    <Action.Submit />
+  </Input.Text>
+  <TextBlock Wrap="true">Lorem ipsum dolor sit amet.</TextBlock>
+  <TextBlock Wrap="true">لكن لا بد أن أوضح لك أن كل هذه الأفكار.</TextBlock>
+  <Container Style="Emphasis" Rtl="true">
+    <TextBlock Weight="Bolder" Wrap="true">Container (rtl: true)</TextBlock>
+    <ColumnSet>
+      <Column Width="stretch">
+        <TextBlock Wrap="true">Column 1</TextBlock>
+      </Column>
+      <Column Width="stretch">
+        <TextBlock Wrap="true">Column 2</TextBlock>
+      </Column>
+      <Column Width="stretch">
+        <TextBlock Wrap="true">Column 3</TextBlock>
+      </Column>
+    </ColumnSet>
+    <Input.Text Id="1" Label="Input w/ Inline Action">
+      <Action.Submit />
+    </Input.Text>
+    <TextBlock Wrap="true">Lorem ipsum dolor sit amet.</TextBlock>
+    <TextBlock Wrap="true">لكن لا بد أن أوضح لك أن كل هذه الأفكار.</TextBlock>
+  </Container>
+  <Container Style="Emphasis">
+    <TextBlock Weight="Bolder" Wrap="true">Container (rtl: false)</TextBlock>
+    <ColumnSet>
+      <Column Width="stretch">
+        <TextBlock Wrap="true">Column 1</TextBlock>
+      </Column>
+      <Column Width="stretch">
+        <TextBlock Wrap="true">Column 2</TextBlock>
+      </Column>
+      <Column Width="stretch">
+        <TextBlock Wrap="true">Column 3</TextBlock>
+      </Column>
+    </ColumnSet>
+    <Input.Text Id="2" Label="Input w/ Inline Action">
+      <Action.Submit />
+    </Input.Text>
+    <TextBlock Wrap="true">Lorem ipsum dolor sit amet.</TextBlock>
+    <TextBlock Wrap="true">لكن لا بد أن أوضح لك أن كل هذه الأفكار.</TextBlock>
+  </Container>
+</Card>

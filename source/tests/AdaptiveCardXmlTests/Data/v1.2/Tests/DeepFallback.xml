@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+  <Container>
+    <Fallback>
+      <Type>Drop</Type>
+    </Fallback>
+    <Container>
+      <ColumnSet>
+        <Column Width="auto">
+          <TextBlock Weight="Bolder" Color="Attention">You should never see this (fallback: drop)!</TextBlock>
+          <AdaptiveUnknownElement Id="firstGraph">
+            <AdditionalProperties>
+              <item>
+                <key>
+                  <string>someProperty</string>
+                </key>
+                <value>
+                  <anyType xsi:type="xsd:string">blah</anyType>
+                </value>
+              </item>
+            </AdditionalProperties>
+            <Type>Graph</Type>
+          </AdaptiveUnknownElement>
+        </Column>
+      </ColumnSet>
+    </Container>
+  </Container>
+  <TextBlock Weight="Lighter">Nothing above this! ↑</TextBlock>
+  <TextBlock Weight="Lighter">Message just below ↓</TextBlock>
+  <Container>
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="TextBlock" Weight="Bolder" Color="Good">If you see this, things are working great!</Content>
+    </Fallback>
+    <Container>
+      <ColumnSet>
+        <Column Width="auto">
+          <TextBlock Weight="Bolder" Color="Attention">You should never see this (fallback: textblock)!</TextBlock>
+          <AdaptiveUnknownElement Id="secondGraph">
+            <AdditionalProperties>
+              <item>
+                <key>
+                  <string>someOtherProperty</string>
+                </key>
+                <value>
+                  <anyType xsi:type="xsd:string">blah</anyType>
+                </value>
+              </item>
+            </AdditionalProperties>
+            <Type>Graph</Type>
+          </AdaptiveUnknownElement>
+        </Column>
+      </ColumnSet>
+    </Container>
+  </Container>
+  <TextBlock Weight="Lighter">There should be another message below ↓</TextBlock>
+  <AdaptiveUnknownElement Id="firstGraphVTwo">
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="AdaptiveUnknownElement" Id="thirdGraph">
+        <Fallback>
+          <Type>Content</Type>
+          <Content xsi:type="TextBlock" Weight="Bolder" Color="Good">Multiply-nested fallback works!</Content>
+        </Fallback>
+        <Type>Graph</Type>
+      </Content>
+    </Fallback>
+    <Type>GraphV2</Type>
+  </AdaptiveUnknownElement>
+  <Container Style="Emphasis">
+    <TextBlock Weight="Lighter" Wrap="true">There should be nothing between here...</TextBlock>
+    <AdaptiveUnknownElement Id="secondGraphVTwo">
+      <Fallback>
+        <Type>Content</Type>
+        <Content xsi:type="AdaptiveUnknownElement" Id="fourthGraph">
+          <Fallback>
+            <Type>Content</Type>
+            <Content xsi:type="AdaptiveUnknownElement">
+              <Type>MakeSomethingUp</Type>
+            </Content>
+          </Fallback>
+          <Type>Graph</Type>
+        </Content>
+      </Fallback>
+      <Type>GraphV2</Type>
+    </AdaptiveUnknownElement>
+    <AdaptiveUnknownElement Id="thirdGraphVTwo">
+      <Fallback>
+        <Type>Content</Type>
+        <Content xsi:type="AdaptiveUnknownElement" Id="fifthGraph">
+          <Fallback>
+            <Type>Content</Type>
+            <Content xsi:type="AdaptiveUnknownElement">
+              <Fallback>
+                <Type>Drop</Type>
+              </Fallback>
+              <Type>MakeSomethingElseUp</Type>
+            </Content>
+          </Fallback>
+          <Type>Graph</Type>
+        </Content>
+      </Fallback>
+      <Type>GraphV2</Type>
+    </AdaptiveUnknownElement>
+    <TextBlock Weight="Lighter" Wrap="true">...and here</TextBlock>
+  </Container>
+  <AdaptiveUnknownAction Title="Be Cool">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string>coolness</string>
+        </key>
+        <value>
+          <anyType xsi:type="xsd:string">to the max</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Content</Type>
+      <Content xsi:type="AdaptiveUnknownElement">
+        <AdditionalProperties>
+          <item>
+            <key>
+              <string>coolness</string>
+            </key>
+            <value>
+              <anyType xsi:type="xsd:string">pretty cool</anyType>
+            </value>
+          </item>
+          <item>
+            <key>
+              <string>title</string>
+            </key>
+            <value>
+              <anyType xsi:type="xsd:string">Pretty cool</anyType>
+            </value>
+          </item>
+        </AdditionalProperties>
+        <Fallback>
+          <Type>Content</Type>
+          <Content xsi:type="Action.Submit" Title="Correct" />
+        </Fallback>
+        <Type>MyCoolAction</Type>
+      </Content>
+    </Fallback>
+    <Type>MyCoolAction2</Type>
+  </AdaptiveUnknownAction>
+  <AdaptiveUnknownAction Title="This is a bug!">
+    <Fallback>
+      <Type>Drop</Type>
+    </Fallback>
+    <Type>Unnecessary</Type>
+  </AdaptiveUnknownAction>
+</Card>

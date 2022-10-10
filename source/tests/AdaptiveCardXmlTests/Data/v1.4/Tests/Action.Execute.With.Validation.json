@@ -1,0 +1,63 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Present a form and submit it back to the originator (with validation!)"
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "data": {
+            "y": -1
+          },
+          "associatedInputs": "none",
+          "verb": "doActionSetStuff",
+          "title": "ActionSet Execute",
+          "iconUrl": "https://adaptivecards.io/content/Closed%20bug%2092x92.png"
+        },
+        {
+          "type": "Action.ShowCard",
+          "card": {
+            "type": "AdaptiveCard",
+            "actions": [
+              {
+                "type": "Action.Execute",
+                "associatedInputs": "none",
+                "verb": "",
+                "title": "Neat!"
+              }
+            ]
+          },
+          "title": "ShowCard"
+        }
+      ]
+    },
+    {
+      "type": "Input.Text",
+      "id": "firstName",
+      "regex": "^[A-Z]{1}.*",
+      "isRequired": true,
+      "label": "What is your first name?"
+    },
+    {
+      "type": "Input.Text",
+      "id": "lastName",
+      "label": "What is your last name?"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "data": {
+        "x": 13
+      },
+      "verb": "doStuff",
+      "title": "Action.Execute",
+      "iconUrl": "https://adaptivecards.io/content/Closed%20bug%2092x92.png"
+    }
+  ]
+}

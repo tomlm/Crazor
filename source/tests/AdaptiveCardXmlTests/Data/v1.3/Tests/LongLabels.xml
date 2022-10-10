@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Input.ChoiceSet Id="choiceSet" Label="Longer label to verify label wrapping for an Input.ChoiceSet. If that was not long enough, then this should make it long enough. Did you know that honeybees can flap their wings 200 times every second?">
+    <Choices>
+      <Choice Title="Option 1" Value="1" />
+      <Choice Title="Option 2" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.Toggle Id="toggle" Label="Longer label to verify label wrapping for an Input.Toggle. If that was not long enough, then this should make it long enough. Did you know octopuses have three hearts?" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="false" />
+  <Input.Time Id="time" Label="Longer label to verify label wrapping for an Input.Time. If that was not long enough, then this should make it long enough. Did you know bats always turn left when leaving a cave?" />
+  <Input.Text Id="text" Label="Longer label to verify label wrapping for an Input.Text. If that was not long enough, then this should make it long enough. Did you know that elephants are the only animal that cannot jump?" />
+  <Input.Text Id="textWithInline" Label="Longer label to verify label wrapping for an Input.Text. If that was not long enough, then this should make it long enough. Did you know that wild dolphins call each other by name?">
+    <Action.Submit Title="Inline Action" IconUrl="http://adaptivecards.io/content/cats/1.png" />
+  </Input.Text>
+  <Input.Number Id="number" Label="Longer label to verify label wrapping for an Input.Number. If that was not long enough, then this should make it long enough. Did you know that slugs have four noses?" Value="NaN" Min="NaN" Max="NaN" />
+  <Input.Date Id="date" Label="Longer label to verify label wrapping for an Input.Date. If that was not long enough, then this should make it long enough. Did you know a snail can sleep for three years?" />
+  <Action.Submit Title="OK" />
+</Card>

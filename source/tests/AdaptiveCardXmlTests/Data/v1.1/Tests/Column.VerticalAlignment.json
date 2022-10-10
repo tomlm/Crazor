@@ -1,0 +1,69 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**Columns Vertical Alignment Test**",
+          "horizontalAlignment": "center"
+        }
+      ],
+      "style": "emphasis",
+      "bleed": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/adaptive-card-50.png",
+              "horizontalAlignment": "center",
+              "altText": "Adaptive Cards logo"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Top",
+              "horizontalAlignment": "center",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Center"
+            }
+          ],
+          "verticalContentAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Bottom"
+            }
+          ],
+          "verticalContentAlignment": "bottom"
+        }
+      ]
+    }
+  ]
+}

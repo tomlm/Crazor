@@ -1,0 +1,17 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "SomeCustomElement",
+      "fallback": "drop"
+    }
+  ],
+  "actions": [
+    {
+      "type": "SomeCustomAction",
+      "title": "This is a bug!",
+      "fallback": "drop"
+    }
+  ]
+}

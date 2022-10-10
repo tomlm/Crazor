@@ -1,0 +1,175 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "(none)"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " "
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " "
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ]
+        }
+      ],
+      "style": "default"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "(none)"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " "
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": " "
+            },
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            }
+          ]
+        }
+      ],
+      "style": "emphasis"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "(none)"
+            }
+          ],
+          "style": "default"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://adaptivecards.io/content/cats/1.png",
+              "altText": "Cat"
+            },
+            {
+              "type": "TextBlock",
+              "text": "(none)"
+            }
+          ],
+          "style": "emphasis"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "color": "dark",
+                  "text": "Contained container - no style"
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "color": "dark",
+                  "text": "Contained container - emphasis"
+                }
+              ],
+              "style": "emphasis"
+            },
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "color": "dark",
+                  "text": "Contained container - default"
+                }
+              ],
+              "style": "default"
+            }
+          ]
+        }
+      ],
+      "style": "emphasis"
+    }
+  ]
+}

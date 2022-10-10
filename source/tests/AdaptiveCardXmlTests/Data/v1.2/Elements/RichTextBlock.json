@@ -1,0 +1,108 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "This is the first inline. "
+        },
+        {
+          "type": "TextRun",
+          "color": "good",
+          "text": "We support colors,"
+        },
+        {
+          "type": "TextRun",
+          "isSubtle": true,
+          "text": " both regular and subtle. "
+        },
+        {
+          "type": "TextRun",
+          "size": "small",
+          "text": "Text "
+        },
+        {
+          "type": "TextRun",
+          "size": "medium",
+          "text": "of "
+        },
+        {
+          "type": "TextRun",
+          "size": "large",
+          "text": "all "
+        },
+        {
+          "type": "TextRun",
+          "size": "extraLarge",
+          "text": "sizes! "
+        },
+        {
+          "type": "TextRun",
+          "weight": "lighter",
+          "text": "Light weight text. "
+        },
+        {
+          "type": "TextRun",
+          "weight": "bolder",
+          "text": "Bold weight text. "
+        },
+        {
+          "type": "TextRun",
+          "highlight": true,
+          "text": "Highlights. "
+        },
+        {
+          "type": "TextRun",
+          "italic": true,
+          "text": "Italics. "
+        },
+        {
+          "type": "TextRun",
+          "strikethrough": true,
+          "text": "Strikethrough. "
+        },
+        {
+          "type": "TextRun",
+          "text": "Monospace too!",
+          "fontType": "monospace"
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Date-Time parsing: {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}"
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "horizontalAlignment": "center",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Rich text blocks also support center alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor "
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "horizontalAlignment": "right",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Rich text blocks also support right alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor "
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "text": "Click the cat!"
+    },
+    {
+      "type": "Image",
+      "url": "https://adaptivecards.io/content/cats/1.png",
+      "selectAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "tooltip": "cool link"
+      },
+      "altText": "Cat"
+    }
+  ]
+}

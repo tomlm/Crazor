@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="The Seattle Seahawks beat the Carolina Panthers 40-7">
+  <Container>
+    <ColumnSet>
+      <Column Width="auto">
+        <Image Size="Small" Url="https://adaptivecards.io/content/cats/3.png" AltText="Shades cat team emblem" />
+        <TextBlock Weight="Bolder" HorizontalAlignment="Center" Wrap="true">SHADES</TextBlock>
+      </Column>
+      <Column Spacing="Medium" Separator="true" Width="stretch">
+        <TextBlock HorizontalAlignment="Center" Wrap="true">Sat, Aug 31, 2019</TextBlock>
+        <TextBlock Spacing="None" HorizontalAlignment="Center" Wrap="true">Final</TextBlock>
+        <TextBlock Size="ExtraLarge" HorizontalAlignment="Center" Wrap="true">45 - 7</TextBlock>
+      </Column>
+      <Column Spacing="Medium" Separator="true" Width="auto">
+        <Image Size="Small" Url="https://adaptivecards.io/content/cats/2.png" HorizontalAlignment="Center" AltText="Skins cat team emblem" />
+        <TextBlock Weight="Bolder" HorizontalAlignment="Center" Wrap="true">SKINS</TextBlock>
+      </Column>
+    </ColumnSet>
+  </Container>
+</Card>
