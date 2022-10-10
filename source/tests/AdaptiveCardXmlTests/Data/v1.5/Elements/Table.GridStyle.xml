@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Weight="Bolder" Text="GridStyle sets the color of the gridlines to the corresponding border color defined in host config" Wrap="true" />
+  <Table VerticalCellContentAlignment="Center" ShowGridLines="false">
+    <TableColumn Width="1" />
+    <TableColumn Width="3" />
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="gridStyle Value" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="Sample table" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Good" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table FirstRowAsHeader="false" GridStyle="Good">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Warning" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table FirstRowAsHeader="false" GridStyle="Warning">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Attention" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table FirstRowAsHeader="false" GridStyle="Attention">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>

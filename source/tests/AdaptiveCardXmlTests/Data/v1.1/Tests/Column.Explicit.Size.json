@@ -7,7 +7,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 50.0,
+          "width": 50,
           "items": [
             {
               "type": "Image",
@@ -36,7 +36,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 50.0,
+          "width": 50,
           "items": []
         },
         {
@@ -70,7 +70,7 @@
         },
         {
           "type": "Column",
-          "width": -1.0,
+          "width": -1,
           "items": [
             {
               "type": "TextBlock",

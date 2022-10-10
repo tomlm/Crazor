@@ -9,7 +9,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 35.0,
+          "width": 35,
           "items": [
             {
               "type": "Image",
@@ -21,7 +21,7 @@
         },
         {
           "type": "Column",
-          "width": 65.0,
+          "width": 65,
           "items": [
             {
               "type": "TextBlock",
@@ -62,7 +62,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 20.0,
+          "width": 20,
           "items": [
             {
               "type": "TextBlock",
@@ -98,7 +98,7 @@
         },
         {
           "type": "Column",
-          "width": 20.0,
+          "width": 20,
           "items": [
             {
               "type": "TextBlock",
@@ -134,7 +134,7 @@
         },
         {
           "type": "Column",
-          "width": 20.0,
+          "width": 20,
           "items": [
             {
               "type": "TextBlock",
@@ -170,7 +170,7 @@
         },
         {
           "type": "Column",
-          "width": 20.0,
+          "width": 20,
           "items": [
             {
               "type": "TextBlock",

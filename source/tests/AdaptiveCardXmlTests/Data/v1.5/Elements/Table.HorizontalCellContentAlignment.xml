@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Weight="Bolder" Text="You can configure the horizontal alignment of table content with HorizontalCellContentAlignement" Wrap="true" />
+  <Table VerticalCellContentAlignment="Center" FirstRowAsHeader="false" ShowGridLines="false">
+    <TableColumn Width="1" />
+    <TableColumn Width="3" />
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Left" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table FirstRowAsHeader="false">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Center" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table HorizontalCellContentAlignment="Center" FirstRowAsHeader="false">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Right" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table HorizontalCellContentAlignment="Right" FirstRowAsHeader="false">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="Data" Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>

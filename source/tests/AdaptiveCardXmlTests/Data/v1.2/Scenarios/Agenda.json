@@ -7,7 +7,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 1.0,
+          "width": 1,
           "items": [
             {
               "type": "ColumnSet",
@@ -47,7 +47,7 @@
         },
         {
           "type": "Column",
-          "width": 1.0,
+          "width": 1,
           "items": [
             {
               "type": "ColumnSet",
@@ -89,7 +89,7 @@
         },
         {
           "type": "Column",
-          "width": 1.0,
+          "width": 1,
           "items": [
             {
               "type": "ColumnSet",
@@ -137,7 +137,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 110.0,
+          "width": 110,
           "items": [
             {
               "type": "ColumnSet",
@@ -196,7 +196,7 @@
         },
         {
           "type": "Column",
-          "width": 40.0,
+          "width": 40,
           "items": [
             {
               "type": "TextBlock",
@@ -293,7 +293,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 110.0,
+          "width": 110,
           "items": []
         },
         {
@@ -316,7 +316,7 @@
         },
         {
           "type": "Column",
-          "width": 40.0,
+          "width": 40,
           "items": [
             {
               "type": "ColumnSet",
@@ -356,7 +356,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 110.0,
+          "width": 110,
           "items": [
             {
               "type": "TextBlock",
@@ -393,7 +393,7 @@
         },
         {
           "type": "Column",
-          "width": 40.0,
+          "width": 40,
           "items": [
             {
               "type": "TextBlock",

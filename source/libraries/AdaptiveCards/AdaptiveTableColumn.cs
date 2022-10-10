@@ -36,13 +36,23 @@ namespace AdaptiveCards
         }
 
         /// <summary>
-        /// The width as a string
+        /// Width for the column (either ColumnWidth string or number which is relative size of the column).
         /// </summary>
-        [JsonRequired]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
-        public string Width { get; set; }
+        public AdaptiveColumnWidth Width { get; set; }
+
+        /// <summary>
+        /// Xml Serialization for complex type of AdaptiveColumnWidth
+        /// </summary>
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlAttribute(nameof(Width))]
+#endif
+        public string WidthXml { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
+
 
     }
 }

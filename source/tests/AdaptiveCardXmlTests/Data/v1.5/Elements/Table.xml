@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <Table GridStyle="Accent">
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableColumn Width="3" />
+    <TableRow Style="Accent">
+      <TableCell>
+        <TextBlock Weight="Bolder" Text="Name" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Weight="Bolder" Text="Type" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Weight="Bolder" Text="Description" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Good">
+        <TextBlock Text="columns" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Warning">
+        <TextBlock Text="ColumnDefinition[]" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Defines the table's columns (number of columns, and column sizes)." Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Good">
+        <TextBlock Text="rows" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="TableRow[]" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Attention">
+        <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+  <Table ShowGridLines="false" GridStyle="Accent">
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableColumn Width="3" />
+    <TableRow Style="Accent">
+      <TableCell>
+        <TextBlock Weight="Bolder" Text="Name" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Weight="Bolder" Text="Type" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Weight="Bolder" Text="Description" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Good">
+        <TextBlock Text="columns" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Warning">
+        <TextBlock Text="ColumnDefinition[]" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Defines the table's columns (number of columns, and column sizes)." Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Good">
+        <TextBlock Text="rows" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="TableRow[]" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Attention">
+        <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>

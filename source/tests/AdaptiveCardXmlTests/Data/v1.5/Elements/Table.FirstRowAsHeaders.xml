@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Text="This table has headers" Wrap="true" />
+  <Table>
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Header" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="Header" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+  <TextBlock Text="This table does not" Wrap="true" />
+  <Table FirstRowAsHeader="false">
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="data" Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>

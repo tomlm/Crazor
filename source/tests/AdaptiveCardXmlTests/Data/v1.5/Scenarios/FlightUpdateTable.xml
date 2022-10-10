@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
+  <Table ShowGridLines="false">
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableRow>
+      <TableCell>
+        <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Airplane" />
+      </TableCell>
+      <TableCell />
+      <TableCell>
+        <TextBlock IsSubtle="true" Text="Flight Status" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Spacing="None" Size="Large" Color="Attention" Text="DELAYED" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Spacing="None" Weight="Bolder" IsSubtle="true" Text="Passengers" Wrap="true" />
+        <TextBlock Spacing="Small" Text="Sarah Hum" Wrap="true" />
+        <TextBlock Spacing="Small" Text="Jeremy Goldberg" Wrap="true" />
+        <TextBlock Spacing="Small" Text="Evan Litvak" Wrap="true" />
+      </TableCell>
+      <TableCell />
+      <TableCell>
+        <TextBlock Weight="Bolder" IsSubtle="true" Text="Seat" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Spacing="Small" Text="14A" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Spacing="Small" Text="14B" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Spacing="Small" Text="14C" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Weight="Bolder" IsSubtle="true" Text="Flight" Wrap="true" />
+        <TextBlock Spacing="Small" Text="KL605" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Weight="Bolder" IsSubtle="true" Text="Departs" HorizontalAlignment="Center" Wrap="true" />
+        <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" Text="2:20 AM" HorizontalAlignment="Center" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Weight="Bolder" IsSubtle="true" Text="Arrives" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" Text="8:20 PM" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow Spacing="None">
+      <TableCell>
+        <TextBlock IsSubtle="true" Text="Amsterdam Airport" Wrap="true" />
+        <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="AMS" Wrap="true" />
+      </TableCell>
+      <TableCell VerticalContentAlignment="Center">
+        <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" HorizontalAlignment="Center" AltText="Airplane" />
+      </TableCell>
+      <TableCell>
+        <TextBlock IsSubtle="true" Text="San Francisco Airport" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="SFO" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>

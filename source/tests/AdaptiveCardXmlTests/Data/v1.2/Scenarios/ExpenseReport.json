@@ -652,7 +652,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 1.0,
+          "width": 1,
           "items": [
             {
               "type": "TextBlock",

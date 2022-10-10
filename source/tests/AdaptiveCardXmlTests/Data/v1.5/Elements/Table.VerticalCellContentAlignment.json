@@ -97,8 +97,7 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeaders": false,
-                  "verticalCellContentAlignment": "Top"
+                  "firstRowAsHeader": false
                 }
               ]
             }
@@ -182,8 +181,8 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeaders": false,
-                  "verticalCellContentAlignment": "Center"
+                  "verticalCellContentAlignment": "center",
+                  "firstRowAsHeader": false
                 }
               ]
             }
@@ -267,17 +266,17 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeaders": false,
-                  "verticalCellContentAlignment": "Bottom"
+                  "verticalCellContentAlignment": "bottom",
+                  "firstRowAsHeader": false
                 }
               ]
             }
           ]
         }
       ],
-      "showGridLines": false,
-      "firstRowAsHeaders": false,
-      "verticalCellContentAlignment": "Center"
+      "verticalCellContentAlignment": "center",
+      "firstRowAsHeader": false,
+      "showGridLines": false
     }
   ]
 }

@@ -316,11 +316,22 @@ namespace Microsoft.Bot.Cards.AdaptiveCards
         protected virtual void Visit(AdaptiveTableRow row)
         {
             Elements.Add(row);
-            foreach(var x in row.)
+            foreach(var cell  in row.Cells)
+            {
+                Visit(cell);
+            }
         }
 
         protected virtual void Visit(AdaptiveTableColumn col)
         {
+        }
+
+        protected virtual void Visit(AdaptiveTableCell cell)
+        {
+            foreach(var item in cell.Items)
+            {
+                Visit(item);
+            }
         }
     }
 }

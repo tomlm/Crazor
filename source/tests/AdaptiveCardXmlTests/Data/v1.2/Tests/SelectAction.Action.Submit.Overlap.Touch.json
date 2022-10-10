@@ -36,7 +36,7 @@
             },
             {
               "type": "Column",
-              "width": 125.0,
+              "width": 125,
               "items": [
                 {
                   "type": "ActionSet",

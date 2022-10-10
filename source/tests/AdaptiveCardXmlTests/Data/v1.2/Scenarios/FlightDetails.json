@@ -7,7 +7,7 @@
       "columns": [
         {
           "type": "Column",
-          "width": 45.0,
+          "width": 45,
           "items": [
             {
               "type": "Container",
@@ -62,7 +62,7 @@
         },
         {
           "type": "Column",
-          "width": 55.0,
+          "width": 55,
           "items": [
             {
               "type": "Container",
@@ -131,7 +131,7 @@
                   "columns": [
                     {
                       "type": "Column",
-                      "width": 1.0,
+                      "width": 1,
                       "items": [
                         {
                           "type": "RichTextBlock",
@@ -157,7 +157,7 @@
                     },
                     {
                       "type": "Column",
-                      "width": 1.0,
+                      "width": 1,
                       "items": [
                         {
                           "type": "RichTextBlock",

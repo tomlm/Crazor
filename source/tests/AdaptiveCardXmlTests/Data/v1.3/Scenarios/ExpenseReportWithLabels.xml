@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3" FallbackText="This card requires Adaptive Cards v1.2 support to be rendered properly.">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" FallbackText="This card requires Adaptive Cards v1.2 support to be rendered properly.">
   <Container Style="Emphasis" Bleed="true">
     <ColumnSet>
       <Column Width="stretch">
@@ -24,9 +24,9 @@
     <TextBlock Spacing="Small" Size="Small" Weight="Bolder" Text="[ER-13052](https://adaptivecards.io)" Wrap="true" />
     <FactSet Spacing="Large">
       <Fact Title="Submitted By" Value="**Matt Hidinger**  matt@contoso.com" />
-      <Fact Title="Duration" Value="2019-06-19 - 2019-06-21" />
-      <Fact Title="Submitted On" Value="2019-04-14" />
-      <Fact Title="Reimbursable Amount" Value="$ 400.00" />
+      <Fact Title="Duration" Value="2019/06/19 - 2019/06/25" />
+      <Fact Title="Submitted On" Value="2019/04/14" />
+      <Fact Title="Reimbursable Amount" Value="$ 404.30" />
       <Fact Title="Awaiting approval from" Value="**Thomas**  thomas@contoso.com" />
       <Fact Title="Submitted to" Value="**David**  david@contoso.com" />
     </FactSet>
@@ -46,30 +46,30 @@
   </Container>
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="06-19" Wrap="true" />
+      <TextBlock Text="06/19" Wrap="true" />
     </Column>
     <Column Spacing="Medium" Width="stretch">
       <TextBlock Text="Air Travel Expense" Wrap="true" />
     </Column>
     <Column Width="auto">
-      <TextBlock Text="$300.00" Wrap="true" />
+      <TextBlock Text="$ 300" Wrap="true" />
     </Column>
     <Column Spacing="Small" VerticalContentAlignment="Center" Width="auto">
       <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElements ElementId="airTravelExpenseDetails" />
-        <TargetElements ElementId="chevronDown1" />
+        <TargetElements ElementId="cardContent1" />
         <TargetElements ElementId="chevronUp1" />
+        <TargetElements ElementId="chevronDown1" />
       </SelectAction>
       <Image Id="chevronDown1" Url="https://adaptivecards.io/content/down.png" AltText="Air Travel Expense $300 collapsed" Width="AdaptiveCards.AdaptiveDimension" />
       <Image Id="chevronUp1" IsVisible="false" Url="https://adaptivecards.io/content/up.png" AltText="Air Travel Expense $300 expanded" Width="AdaptiveCards.AdaptiveDimension" />
     </Column>
   </ColumnSet>
-  <Container Id="airTravelExpenseDetails" IsVisible="false">
+  <Container Id="cardContent1" IsVisible="false">
     <Container>
       <TextBlock IsSubtle="true" Text="* Leg 1 on Tue, Jun 19th, 2019 at 6:00 AM." Wrap="true" />
-      <TextBlock IsSubtle="true" Text="* Leg 2 on Tue, Jun 19th, 2019 at 7:15 PM." Wrap="true" />
+      <TextBlock IsSubtle="true" Text="* Leg 2 on Tue,Jun 19th, 2019 at 7:15 PM." Wrap="true" />
       <Container>
-        <Input.Text Id="comment1" Placeholder="Add your comment here." />
+        <Input.Text Id="comment1" Label="Add your comment here" />
       </Container>
     </Container>
     <Container>
@@ -88,29 +88,29 @@
   </Container>
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="06-19" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Text="06/19" HorizontalAlignment="Center" Wrap="true" />
     </Column>
     <Column Spacing="Medium" Width="stretch">
       <TextBlock Text="Auto Mobile Expense" Wrap="true" />
     </Column>
     <Column Width="auto">
-      <TextBlock Text="$100.00" Wrap="true" />
+      <TextBlock Text="$ 100" Wrap="true" />
     </Column>
     <Column Spacing="Small" VerticalContentAlignment="Center" Width="auto">
       <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElements ElementId="autoMobileExpenseDetails" />
-        <TargetElements ElementId="chevronDown2" />
+        <TargetElements ElementId="cardContent2" />
         <TargetElements ElementId="chevronUp2" />
+        <TargetElements ElementId="chevronDown2" />
       </SelectAction>
       <Image Id="chevronDown2" Url="https://adaptivecards.io/content/down.png" AltText="Auto Mobile Expense $100 collapsed" Width="AdaptiveCards.AdaptiveDimension" />
       <Image Id="chevronUp2" IsVisible="false" Url="https://adaptivecards.io/content/up.png" AltText="Auto Mobile Expense $100 expanded" Width="AdaptiveCards.AdaptiveDimension" />
     </Column>
   </ColumnSet>
-  <Container Id="autoMobileExpenseDetails" IsVisible="false">
+  <Container Id="cardContent2" IsVisible="false">
     <Container>
       <TextBlock IsSubtle="true" Text="* Contoso Car Rentrals, Tues 6/19 at 7:00 AM" Wrap="true" />
       <Container>
-        <Input.Text Id="comment2" Placeholder="Add your comment here." />
+        <Input.Text Id="comment2" Label="Add your comment here" />
       </Container>
     </Container>
     <Container>
@@ -129,27 +129,27 @@
   </Container>
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="06-21" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Text="06/25" HorizontalAlignment="Center" Wrap="true" />
     </Column>
     <Column Spacing="Medium" Width="stretch">
       <TextBlock Text="Excess Baggage Cost" Wrap="true" />
     </Column>
     <Column Width="auto">
-      <TextBlock Text="$50.38" Wrap="true" />
+      <TextBlock Text="$ 4.30" Wrap="true" />
     </Column>
     <Column Spacing="Small" VerticalContentAlignment="Center" Width="auto">
       <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElements ElementId="excessBaggageCostDetails" />
-        <TargetElements ElementId="chevronDown3" />
+        <TargetElements ElementId="cardContent3" />
         <TargetElements ElementId="chevronUp3" />
+        <TargetElements ElementId="chevronDown3" />
       </SelectAction>
       <Image Id="chevronDown3" Url="https://adaptivecards.io/content/down.png" AltText="Excess Baggage Cost $50.38 collapsed" Width="AdaptiveCards.AdaptiveDimension" />
       <Image Id="chevronUp3" IsVisible="false" Url="https://adaptivecards.io/content/up.png" AltText="Excess Baggage Cost $50.38 expanded" Width="AdaptiveCards.AdaptiveDimension" />
     </Column>
   </ColumnSet>
-  <Container Id="excessBaggageCostDetails" IsVisible="false">
+  <Container Id="cardContent3" IsVisible="false">
     <Container>
-      <Input.Text Id="comment3" Placeholder="Add your comment here." />
+      <Input.Text Id="comment3" Label="Add your comment here" />
     </Container>
     <Container>
       <ColumnSet>
@@ -165,26 +165,41 @@
       </ColumnSet>
     </Container>
   </Container>
-  <ColumnSet Spacing="Large" Separator="true">
-    <Column Width="stretch">
-      <TextBlock Text="Total Expense Amount &#x9;" HorizontalAlignment="Right" Wrap="true" />
-      <TextBlock Text="Non-reimbursable Amount" HorizontalAlignment="Right" Wrap="true" />
-      <TextBlock Text="Advance Amount" HorizontalAlignment="Right" Wrap="true" />
-    </Column>
-    <Column Width="auto">
-      <TextBlock Text="$450.38" Wrap="true" />
-      <TextBlock Text="(-) 50.38 &#x9;" Wrap="true" />
-      <TextBlock Text="(-) 0.00 &#x9;" Wrap="true" />
-    </Column>
-    <Column Width="auto" />
-  </ColumnSet>
+  <Table Spacing="Large" Separator="true" FirstRowAsHeader="false" ShowGridLines="false">
+    <TableColumn Width="3" />
+    <TableColumn Width="1" />
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Total Expense Amount" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="404.30" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Non-reimbursable Amount" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="(-) 0.00" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Advance Amount" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <TextBlock Text="(-) 0.00" HorizontalAlignment="Right" Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
   <Container Style="Emphasis" Bleed="true">
     <ColumnSet>
       <Column Width="stretch">
         <TextBlock Text="Amount to be Reimbursed" HorizontalAlignment="Right" Wrap="true" />
       </Column>
       <Column Width="auto">
-        <TextBlock Weight="Bolder" Text="$ 400.00" Wrap="true" />
+        <TextBlock Weight="Bolder" Text="$ 404.30" Wrap="true" />
       </Column>
       <Column Width="auto" />
     </ColumnSet>
@@ -202,8 +217,8 @@
   </ColumnSet>
   <Container Id="cardContent4" IsVisible="false">
     <Container>
-      <TextBlock IsSubtle="true" Text="* Expense submitted by **Matt Hidinger** on Mon, Jul 15, 2019" Wrap="true" />
-      <TextBlock IsSubtle="true" Text="* Expense approved by **Thomas** on Mon, Jul 15, 2019" Wrap="true" />
+      <TextBlock IsSubtle="true" Text="* Expense submitted by **Matt** on Wed, Apr 14th, 2019" Wrap="true" />
+      <TextBlock IsSubtle="true" Text="* Expense approved by **Thomas** on Thu, Apr 15th, 2019" Wrap="true" />
     </Container>
   </Container>
   <Container>
@@ -213,8 +228,8 @@
   "action": "approve"
 }</Action.Submit>
       <Action.ShowCard Title="Reject" Style="destructive">
-        <AdaptiveCard Version="1.2">
-          <Input.Text Id="RejectCommentID" Placeholder="Please specify an appropriate reason for rejection." IsMultiline="true" />
+        <AdaptiveCard Version="1.6">
+          <Input.Text Id="RejectCommentID" IsRequired="true" Label="Please specify an appropriate reason for rejection" ErrorMessage="A reason for rejection is necessary" IsMultiline="true" />
           <Action.Submit Title="Send">{
   "id": "_qkQW8dJlUeLVi7ZMEzYVw",
   "action": "reject"

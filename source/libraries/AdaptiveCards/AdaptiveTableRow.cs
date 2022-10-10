@@ -133,7 +133,7 @@ namespace AdaptiveCards
 
         [JsonProperty]
 #if !NETSTANDARD1_3
-        [XmlElement]
+        [XmlElement("TableCell")]
 #endif
         public List<AdaptiveTableCell> Cells { get; set; } = new List<AdaptiveTableCell>();
     }

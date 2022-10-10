@@ -19,7 +19,11 @@ namespace AdaptiveCards
             }
             else
             {
-                writer.WriteValue(value.Unit);
+                var i = Convert.ToInt64(value.Unit.Value);
+                if (i == value.Unit.Value)
+                    writer.WriteValue(i);
+                else
+                    writer.WriteValue(value.Unit.Value);
             }
         }
 
@@ -105,6 +109,8 @@ namespace AdaptiveCards
         {
             this.Unit = (float)size;
         }
+
+        public static implicit operator AdaptiveColumnWidth(string val) => new AdaptiveColumnWidth(val);
 
         public bool IsPixel { get; set; }
 

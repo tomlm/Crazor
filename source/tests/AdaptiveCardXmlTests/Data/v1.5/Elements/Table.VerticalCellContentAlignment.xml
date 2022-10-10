@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Weight="Bolder" Text="You can configure the vertical alignment of table content with VerticalCellContentAlignement" Wrap="true" />
+  <Table VerticalCellContentAlignment="Center" FirstRowAsHeader="false" ShowGridLines="false">
+    <TableColumn Width="1" />
+    <TableColumn Width="3" />
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Top" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table FirstRowAsHeader="false">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="A little bit of text." Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="A little bit of text." Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Center" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table VerticalCellContentAlignment="Center" FirstRowAsHeader="false">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="A little bit of text." Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="A little bit of text." Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Text="Bottom" Wrap="true" />
+      </TableCell>
+      <TableCell>
+        <Table VerticalCellContentAlignment="Bottom" FirstRowAsHeader="false">
+          <TableColumn Width="1" />
+          <TableColumn Width="1" />
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="A little bit of text." Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <TextBlock Text="A little bit of text." Wrap="true" />
+            </TableCell>
+            <TableCell>
+              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Text="Table with gridlines" Wrap="true" Style="Heading" />
+  <Table>
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableRow>
+      <TableCell Style="Accent">
+        <TextBlock Text="showGridLines value" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Behavior" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Accent">
+        <TextBlock Text="true" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Cells are separated by 1px width gridlines" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Accent">
+        <TextBlock Text="false" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Cells are separated by the cell spacing value configued in hostconfig" Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+  <TextBlock Text="Table without gridlines" Wrap="true" Style="Heading" />
+  <Table ShowGridLines="false">
+    <TableColumn Width="1" />
+    <TableColumn Width="1" />
+    <TableRow>
+      <TableCell Style="Accent">
+        <TextBlock Text="showGridLines value" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Behavior" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Accent">
+        <TextBlock Text="true" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Cells are separated by 1px width gridlines" Wrap="true" />
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="Accent">
+        <TextBlock Text="false" Wrap="true" />
+      </TableCell>
+      <TableCell Style="Accent">
+        <TextBlock Text="Cells are separated by the cell spacing value configued in hostconfig" Wrap="true" />
+      </TableCell>
+    </TableRow>
+  </Table>
+</Card>
