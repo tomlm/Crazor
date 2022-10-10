@@ -43,12 +43,14 @@ namespace AdaptiveCardXmlTests
         public void Do(string name, string jsonFile)
         {
             string xmlFile = jsonFile.Replace(".json", ".xml");
+            var json = File.ReadAllText(jsonFile);
             try
             {
                 if (!File.Exists(Path.Combine(Environment.CurrentDirectory, xmlFile)))
                 {
-                    var card = JsonConvert.DeserializeObject<AdaptiveCard>(File.ReadAllText(jsonFile));
-                    File.WriteAllText(jsonFile, JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
+                    var card = JsonConvert.DeserializeObject<AdaptiveCard>(json);
+                    json = JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(jsonFile, json);
                     File.WriteAllText(xmlFile, ToXml(card));
                 }
             }
@@ -58,7 +60,6 @@ namespace AdaptiveCardXmlTests
             }
 
             Debug.WriteLine($"---- {name} -----");
-            var json = File.ReadAllText(jsonFile);
             var xml = File.ReadAllText(xmlFile);
             var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json);
             var reader = XmlReader.Create(new StringReader(xml));

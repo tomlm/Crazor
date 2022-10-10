@@ -52,5 +52,14 @@ namespace AdaptiveCards
 #endif
         [DefaultValue(null)]
         public string AltText { get; set; }
+
+        /// <summary>
+        /// A collection of captions.
+        /// </summary>
+        [JsonRequired]
+#if !NETSTANDARD1_3
+        [XmlElement(Type = typeof(AdaptiveCaptionSource), ElementName = "CaptionSource")]
+#endif
+        public List<AdaptiveCaptionSource> CaptionSources { get; set; } = new List<AdaptiveCaptionSource>();
     }
 }

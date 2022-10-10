@@ -77,6 +77,9 @@
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveBaseElement.cs">
       <Link>AdaptiveCards\AdaptiveBaseElement.cs</Link>
     </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveCaptionSource.cs">
+      <Link>AdaptiveCards\AdaptiveCaptionSource.cs</Link>
+    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveCard.cs">
       <Link>AdaptiveCards\AdaptiveCard.cs</Link>
     </Compile>

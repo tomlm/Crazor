@@ -1,11 +1,11 @@
 {
   "type": "AdaptiveCard",
   "version": "1.0",
-  "backgroundImage": "Assets/background.png",
+  "backgroundImage": "https://foo.com/sets/background.png",
   "body": [
     {
       "type": "Image",
-      "url": "Assets/Adaptive10.png",
+      "url": "https://foo.com/Assets/Adaptive10.png",
       "altText": "Adaptive cards 1.0 logo"
     }
   ],
@@ -27,12 +27,12 @@
           {
             "type": "Action.Submit",
             "title": "OK",
-            "iconUrl": "Assets/Adaptive10.png"
+            "iconUrl": "https://foo.com/Assets/Adaptive10.png"
           }
         ]
       },
       "title": "Open Card",
-      "iconUrl": "Assets/Adaptive10.png"
+      "iconUrl": "https://foo.com/Assets/Adaptive10.png"
     }
   ]
 }
