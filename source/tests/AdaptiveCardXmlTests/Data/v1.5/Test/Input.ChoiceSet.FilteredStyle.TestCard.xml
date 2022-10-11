@@ -19,7 +19,7 @@
     </Choices>
   </Input.ChoiceSet>
   <Container>
-    <Input.ChoiceSet Id="2" Label="1.5 Filtered Style" Style="Filtered" Placeholder="Type Some To Expand">
+    <Input.ChoiceSet Id="2" Label="1.5 Filtered Style" Style="none" Placeholder="Type Some To Expand">
       <Choices>
         <Choice Title="Apple Cider" Value="1" />
         <Choice Title="Grape Juice" Value="2" />
@@ -27,7 +27,7 @@
         <Choice Title="Orange Juice" Value="4" />
       </Choices>
     </Input.ChoiceSet>
-    <Input.ChoiceSet Id="7" IsRequired="true" Label="Check Lists" Style="Expanded" IsMultiSelect="true" Wrap="true" Placeholder="Placeholder text">
+    <Input.ChoiceSet Id="7" IsRequired="true" Label="Check Lists" Style="expanded" IsMultiSelect="true" Wrap="true" Placeholder="Placeholder text">
       <Choices>
         <Choice Title="Should be able to type anything" Value="1" />
         <Choice Title="Validation should fail if typed input doesn't match choices" Value="2" />
@@ -36,7 +36,7 @@
     </Input.ChoiceSet>
   </Container>
   <TextBlock Id="4" Text="Setting both filtered style and multiline will ignore the style as this example" Wrap="true" />
-  <Input.ChoiceSet Id="3" Style="Filtered" IsMultiSelect="true" Placeholder="Placeholder text">
+  <Input.ChoiceSet Id="3" Style="none" IsMultiSelect="true" Placeholder="Placeholder text">
     <Choices>
       <Choice Title="Apple Cider" Value="1" />
       <Choice Title="Grape Juice" Value="2" />

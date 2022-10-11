@@ -6,54 +6,54 @@
     <TableColumn Width="1" />
     <TableRow>
       <TableCell>
-        <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" AltText="Airplane" />
+        <Image Size="small" Url="https://adaptivecards.io/content/airplane.png" AltText="Airplane" />
       </TableCell>
       <TableCell />
       <TableCell>
-        <TextBlock IsSubtle="true" Text="Flight Status" HorizontalAlignment="Right" Wrap="true" />
-        <TextBlock Spacing="None" Size="Large" Color="Attention" Text="DELAYED" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock IsSubtle="true" Text="Flight Status" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Size="large" Color="attention" Text="DELAYED" HorizontalAlignment="right" Wrap="true" />
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Spacing="None" Weight="Bolder" IsSubtle="true" Text="Passengers" Wrap="true" />
-        <TextBlock Spacing="Small" Text="Sarah Hum" Wrap="true" />
-        <TextBlock Spacing="Small" Text="Jeremy Goldberg" Wrap="true" />
-        <TextBlock Spacing="Small" Text="Evan Litvak" Wrap="true" />
+        <TextBlock Spacing="none" Weight="bolder" IsSubtle="true" Text="Passengers" Wrap="true" />
+        <TextBlock Spacing="small" Text="Sarah Hum" Wrap="true" />
+        <TextBlock Spacing="small" Text="Jeremy Goldberg" Wrap="true" />
+        <TextBlock Spacing="small" Text="Evan Litvak" Wrap="true" />
       </TableCell>
       <TableCell />
       <TableCell>
-        <TextBlock Weight="Bolder" IsSubtle="true" Text="Seat" HorizontalAlignment="Right" Wrap="true" />
-        <TextBlock Spacing="Small" Text="14A" HorizontalAlignment="Right" Wrap="true" />
-        <TextBlock Spacing="Small" Text="14B" HorizontalAlignment="Right" Wrap="true" />
-        <TextBlock Spacing="Small" Text="14C" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Weight="bolder" IsSubtle="true" Text="Seat" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="small" Text="14A" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="small" Text="14B" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="small" Text="14C" HorizontalAlignment="right" Wrap="true" />
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Weight="Bolder" IsSubtle="true" Text="Flight" Wrap="true" />
-        <TextBlock Spacing="Small" Text="KL605" Wrap="true" />
+        <TextBlock Weight="bolder" IsSubtle="true" Text="Flight" Wrap="true" />
+        <TextBlock Spacing="small" Text="KL605" Wrap="true" />
       </TableCell>
       <TableCell>
-        <TextBlock Weight="Bolder" IsSubtle="true" Text="Departs" HorizontalAlignment="Center" Wrap="true" />
-        <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" Text="2:20 AM" HorizontalAlignment="Center" Wrap="true" />
+        <TextBlock Weight="bolder" IsSubtle="true" Text="Departs" HorizontalAlignment="center" Wrap="true" />
+        <TextBlock Spacing="small" Weight="bolder" Color="attention" Text="2:20 AM" HorizontalAlignment="center" Wrap="true" />
       </TableCell>
       <TableCell>
-        <TextBlock Weight="Bolder" IsSubtle="true" Text="Arrives" HorizontalAlignment="Right" Wrap="true" />
-        <TextBlock Spacing="Small" Weight="Bolder" Color="Attention" Text="8:20 PM" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock Weight="bolder" IsSubtle="true" Text="Arrives" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="small" Weight="bolder" Color="attention" Text="8:20 PM" HorizontalAlignment="right" Wrap="true" />
       </TableCell>
     </TableRow>
-    <TableRow Spacing="None">
+    <TableRow Spacing="none">
       <TableCell>
         <TextBlock IsSubtle="true" Text="Amsterdam Airport" Wrap="true" />
-        <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="AMS" Wrap="true" />
+        <TextBlock Spacing="none" Size="extraLarge" Color="accent" Text="AMS" Wrap="true" />
       </TableCell>
-      <TableCell VerticalContentAlignment="Center">
-        <Image Size="Small" Url="https://adaptivecards.io/content/airplane.png" HorizontalAlignment="Center" AltText="Airplane" />
+      <TableCell VerticalContentAlignment="center">
+        <Image Size="small" Url="https://adaptivecards.io/content/airplane.png" HorizontalAlignment="center" AltText="Airplane" />
       </TableCell>
       <TableCell>
-        <TextBlock IsSubtle="true" Text="San Francisco Airport" HorizontalAlignment="Right" Wrap="true" />
-        <TextBlock Spacing="None" Size="ExtraLarge" Color="Accent" Text="SFO" HorizontalAlignment="Right" Wrap="true" />
+        <TextBlock IsSubtle="true" Text="San Francisco Airport" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Size="extraLarge" Color="accent" Text="SFO" HorizontalAlignment="right" Wrap="true" />
       </TableCell>
     </TableRow>
   </Table>

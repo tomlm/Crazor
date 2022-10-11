@@ -1,12 +1,12 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.1",
+  "version": "1.0",
   "body": [
     {
       "type": "Image",
       "url": "https://adaptivecards.io/content/cats/1.png",
       "altText": "Cat",
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "50px"
     }
   ]
 }

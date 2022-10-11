@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Input.ChoiceSet Id="input1" Label="Default Input.ChoiceSet label (compact)">
     <AdditionalProperties>
       <item>
@@ -32,25 +32,25 @@
       <Choice Title="Option 2" Value="2" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="input3" Label="Default Input.ChoiceSet label (expanded)" Style="Expanded">
+  <Input.ChoiceSet Id="input3" Label="Default Input.ChoiceSet label (expanded)" Style="expanded">
     <Choices>
       <Choice Title="Option 1" Value="1" />
       <Choice Title="Option 2" Value="2" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="input4" IsRequired="true" Label="Required Input.ChoiceSet label (expanded)" ErrorMessage="Required input" Style="Expanded">
+  <Input.ChoiceSet Id="input4" IsRequired="true" Label="Required Input.ChoiceSet label (expanded)" ErrorMessage="Required input" Style="expanded">
     <Choices>
       <Choice Title="Option 1" Value="1" />
       <Choice Title="Option 2" Value="2" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="input5" Label="Default Input.ChoiceSet label (expanded, multiselect)" Style="Expanded" IsMultiSelect="true">
+  <Input.ChoiceSet Id="input5" Label="Default Input.ChoiceSet label (expanded, multiselect)" Style="expanded" IsMultiSelect="true">
     <Choices>
       <Choice Title="Option 1" Value="1" />
       <Choice Title="Option 2" Value="2" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="input6" IsRequired="true" Label="Required Input.ChoiceSet label (expanded, multiselect)" ErrorMessage="Required input" Style="Expanded" IsMultiSelect="true">
+  <Input.ChoiceSet Id="input6" IsRequired="true" Label="Required Input.ChoiceSet label (expanded, multiselect)" ErrorMessage="Required input" Style="expanded" IsMultiSelect="true">
     <Choices>
       <Choice Title="Option 1" Value="1" />
       <Choice Title="Option 2" Value="2" />

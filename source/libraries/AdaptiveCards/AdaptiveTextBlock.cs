@@ -44,7 +44,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(typeof(AdaptiveTextSize), "normal")]
+        [DefaultValue(typeof(AdaptiveTextSize), "default")]
         public AdaptiveTextSize Size { get; set; }
 
         /// <inheritdoc />
@@ -52,7 +52,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(typeof(AdaptiveTextWeight), "normal")]
+        [DefaultValue(typeof(AdaptiveTextWeight), "default")]
         public AdaptiveTextWeight Weight { get; set; }
 
         /// <inheritdoc />
@@ -99,6 +99,7 @@ namespace AdaptiveCards
         [XmlAttribute(nameof(Text))]
         public string TextXml
         {
+            // We use %20 to represent an whitespace only string in xml.
             get => (Text != null && string.IsNullOrWhiteSpace(Text)) ? Text.Replace(" ", "%20") : Text;
             set => Text = string.IsNullOrWhiteSpace(value?.Replace("%20", " ")) ? value?.Replace("%20", " ") : value;
         }

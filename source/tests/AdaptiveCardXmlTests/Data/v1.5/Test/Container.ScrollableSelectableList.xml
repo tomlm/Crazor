@@ -1,145 +1,145 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <Container Style="Default">
-    <TextBlock Size="Medium" Text="Recent Files" MaxLines="1" />
+  <Container>
+    <TextBlock Size="medium" Text="Recent Files" MaxLines="1" />
   </Container>
-  <Container Spacing="ExtraLarge" Style="Default">
+  <Container Spacing="extraLarge">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "1"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="OneNote File 1" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Documents &gt; Test" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="OneNote File 1" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Test" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "2"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="OneNote File 2" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Documents &gt; Test" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="OneNote File 2" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Test" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "3"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Lorem Ipsum" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Documents &gt; Test 2" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Lorem Ipsum" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Test 2" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "4"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Dolor Sit Amet" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Projects &gt; LoremIpsum" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Dolor Sit Amet" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Projects &gt; LoremIpsum" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "5"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Consectetur Adipiscing Elit" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Projects &gt; Presentations" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Consectetur Adipiscing Elit" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Projects &gt; Presentations" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "6"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Sed Do Eiusmod Tempor Incididunt" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Documents &gt; Random" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Sed Do Eiusmod Tempor Incididunt" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Random" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "7"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Ut Labore Et Dolore" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Shared &gt; Skills" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Ut Labore Et Dolore" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Shared &gt; Skills" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "8"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Magna Aliqua" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Documents &gt; MagnaAliqua{aParameter=true&amp;somethingElse=largeText&amp;redirect=true&amp;action=open}" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Magna Aliqua" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; MagnaAliqua{aParameter=true&amp;somethingElse=largeText&amp;redirect=true&amp;action=open}" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "9"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="UtEnimAdMinim" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Shared &gt; Architecture" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="UtEnimAdMinim" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Shared &gt; Architecture" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>
-  <Container Spacing="ExtraLarge" Separator="true" Style="Default">
+  <Container Spacing="extraLarge" Separator="true">
     <SelectAction xsi:type="Action.Submit" Title="">{
   "ux:position_ref": "10"
 }</SelectAction>
     <ColumnSet>
-      <Column Spacing="None" VerticalContentAlignment="Center" Width="auto">
-        <Image Size="Small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
+      <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
+        <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
       </Column>
-      <Column Spacing="Small" VerticalContentAlignment="Center" Width="stretch">
-        <TextBlock Size="Medium" Text="Veniam Quis Nostrud" MaxLines="1" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Documents &gt; Design" MaxLines="1" />
+      <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
+        <TextBlock Size="medium" Text="Veniam Quis Nostrud" MaxLines="1" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Design" MaxLines="1" />
       </Column>
     </ColumnSet>
   </Container>

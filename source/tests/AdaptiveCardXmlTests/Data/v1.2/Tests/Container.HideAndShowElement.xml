@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Text="This test checks if showing an element inside a container that is hiding, will behave correctly by not showing the container" Wrap="true" />
   <TextBlock Text="Container (id1)" Wrap="true" />
-  <Container Id="id1" Style="Emphasis">
+  <Container Id="id1" Style="emphasis">
     <TextBlock Id="id2" Text="TextBlock (id2) inside a container" Wrap="true" />
   </Container>
   <TextBlock Text="Column (id3)" Wrap="true" />
   <ColumnSet>
-    <Column Id="id3" Spacing="Large" Style="Emphasis">
+    <Column Id="id3" Spacing="large" Style="emphasis">
       <TextBlock Id="id4" Text="TextBlock (id4) inside a columnSet" Wrap="true" />
     </Column>
   </ColumnSet>
   <Action.ToggleVisibility Title="Hide containers, show element">
-    <TargetElements ElementId="id1" IsVisible="false" />
-    <TargetElements ElementId="id2" IsVisible="true" />
-    <TargetElements ElementId="id3" IsVisible="false" />
-    <TargetElements ElementId="id4" IsVisible="true" />
+    <TargetElement ElementId="id1" IsVisible="false" />
+    <TargetElement ElementId="id2" IsVisible="true" />
+    <TargetElement ElementId="id3" IsVisible="false" />
+    <TargetElement ElementId="id4" IsVisible="true" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Show element, hide containers">
-    <TargetElements ElementId="id2" IsVisible="true" />
-    <TargetElements ElementId="id1" IsVisible="false" />
-    <TargetElements ElementId="id4" IsVisible="true" />
-    <TargetElements ElementId="id3" IsVisible="false" />
+    <TargetElement ElementId="id2" IsVisible="true" />
+    <TargetElement ElementId="id1" IsVisible="false" />
+    <TargetElement ElementId="id4" IsVisible="true" />
+    <TargetElement ElementId="id3" IsVisible="false" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Show everything">
-    <TargetElements ElementId="id1" IsVisible="true" />
-    <TargetElements ElementId="id2" IsVisible="true" />
-    <TargetElements ElementId="id3" IsVisible="true" />
-    <TargetElements ElementId="id4" IsVisible="true" />
+    <TargetElement ElementId="id1" IsVisible="true" />
+    <TargetElement ElementId="id2" IsVisible="true" />
+    <TargetElement ElementId="id3" IsVisible="true" />
+    <TargetElement ElementId="id4" IsVisible="true" />
   </Action.ToggleVisibility>
 </Card>

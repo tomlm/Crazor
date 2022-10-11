@@ -13,7 +13,7 @@
       </item>
     </AdditionalProperties>
     <Fallback>
-      <Type>Drop</Type>
+      <Type>drop</Type>
     </Fallback>
     <Type>Steve Holt!</Type>
   </AdaptiveUnknownElement>
@@ -29,7 +29,7 @@
       </item>
     </AdditionalProperties>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="TextBlock" Text="No graph support. Guess we'll just use this textblock instead." Wrap="true" />
     </Fallback>
     <Type>Graph</Type>

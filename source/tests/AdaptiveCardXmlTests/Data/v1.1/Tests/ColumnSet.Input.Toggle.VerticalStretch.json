@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.1",
+  "version": "1.0",
   "body": [
     {
       "type": "ColumnSet",
@@ -31,7 +31,7 @@
               "title": "Placeholder title",
               "valueOn": "True",
               "valueOff": "False",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
@@ -43,7 +43,7 @@
           "separator": true
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ]
 }

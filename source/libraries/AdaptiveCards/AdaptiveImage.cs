@@ -28,7 +28,7 @@ namespace AdaptiveCards
         /// <param name="url">The URL of the image as a string.</param>
         public AdaptiveImage(string url)
         {
-            Url = new Uri(url);
+            Url = url;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace AdaptiveCards
         /// <param name="url">The URL of the image.</param>
         public AdaptiveImage(Uri url)
         {
-            Url = url;
+            Url = url.ToString();
         }
 
         /// <inheritdoc />
@@ -75,26 +75,10 @@ namespace AdaptiveCards
         /// </summary>
         [JsonRequired]
 #if !NETSTANDARD1_3
-        [XmlIgnore]
+        [XmlAttribute]
 #endif
         [DefaultValue(null)]
-        public Uri Url { get; set; }
-
-        /// <summary>
-        /// This is necessary for XML serialization. You should use the <see cref="F:Url" /> property directly.
-        /// </summary>
-#if !NETSTANDARD1_3
-        [XmlAttribute(nameof(Url))]
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-#endif
-        [JsonIgnore]
-        public string UrlString
-        {
-            get { return Url?.AbsoluteUri; }
-            set { Url = new Uri(value); }
-        }
-
-        public bool ShouldSerializeUrl() => Url != null;
+        public string Url { get; set; }
 
         /// <summary>
         /// Horizontal alignment (<see cref="AdaptiveHorizontalAlignment"/>) to use.
@@ -147,18 +131,16 @@ namespace AdaptiveCards
         [DefaultValue(null)]
         public AdaptiveDimension Width { get; set; }
 
+#if !NETSTANDARD1_3
         /// <summary>
         /// XmlProperty for serialization of width
         /// </summary>
         [JsonIgnore]
-#if !NETSTANDARD1_3
         [XmlAttribute(nameof(Width))]
-#endif
         public string WidthXml { get => Width?.ToString(); set => this.Width = (value != null) ? new AdaptiveDimension(value) : null; }
 
         public bool ShouldSerializeWidthXml() => Width != null;
-
-
+#endif
     }
 
 }

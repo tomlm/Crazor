@@ -12,13 +12,25 @@
         }
       ],
       "poster": "https://adaptivecards.io/content/poster-video.png",
-      "altText": "Adaptive Cards overview video"
+      "altText": "Adaptive Cards overview video",
+      "captionSources": [
+        {
+          "mimeType": "vtt",
+          "url": "https://raw.githubusercontent.com/microsoft/AdaptiveCards/5ac07e8adb8d7dcd7480973321e57d279d1f7d2c/assets/ProductVideoSubtitles.vtt",
+          "label": "English (vtt)"
+        },
+        {
+          "mimeType": "srt",
+          "url": "https://raw.githubusercontent.com/microsoft/AdaptiveCards/da2eb4ad4de60d14b37decc062d3952da9dbb790/assets/ProductVideoSubtitles.srt",
+          "label": "English (srt)"
+        }
+      ]
     }
   ],
   "actions": [
     {
       "type": "Action.OpenUrl",
-      "url": "https://adaptivecards.io/",
+      "url": "https://adaptivecards.io",
       "title": "Learn more"
     }
   ]

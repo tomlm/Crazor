@@ -43,7 +43,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(typeof(AdaptiveTextSize), "normal")]
+        [DefaultValue(typeof(AdaptiveTextSize), "default")]
         public AdaptiveTextSize Size { get; set; }
 
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(typeof(AdaptiveTextWeight), "normal")]
+        [DefaultValue(typeof(AdaptiveTextWeight), "default")]
         public AdaptiveTextWeight Weight { get; set; }
 
         /// <inheritdoc />

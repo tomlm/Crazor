@@ -90,7 +90,7 @@
       "type": "Image",
       "url": "https://picsum.photos/id/133/300/200",
       "altText": "Two cars",
-      "width": "AdaptiveCards.AdaptiveDimension"
+      "width": "250px"
     },
     {
       "type": "TextBlock",
@@ -100,7 +100,7 @@
       "type": "Image",
       "url": "https://picsum.photos/id/133/300/200",
       "altText": "Two cars",
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "100px"
     },
     {
       "type": "TextBlock",
@@ -110,8 +110,8 @@
       "type": "Image",
       "url": "https://picsum.photos/id/133/300/200",
       "altText": "Two cars",
-      "width": "AdaptiveCards.AdaptiveDimension",
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "width": "250px",
+      "height": "100px"
     },
     {
       "type": "TextBlock",
@@ -134,7 +134,7 @@
               "type": "Image",
               "url": "https://picsum.photos/id/133/300/200",
               "altText": "Two cars",
-              "width": "AdaptiveCards.AdaptiveDimension"
+              "width": "10px"
             },
             {
               "type": "TextBlock",
@@ -156,7 +156,7 @@
               "type": "Image",
               "url": "https://picsum.photos/id/133/300/200",
               "altText": "Two cars",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",

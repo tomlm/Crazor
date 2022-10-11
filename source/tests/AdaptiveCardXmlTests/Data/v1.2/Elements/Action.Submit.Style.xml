@@ -4,5 +4,5 @@
   <Action.Submit Title="Default" />
   <Action.Submit Title="Pawsitive" Style="positive" />
   <Action.Submit Title="Destructive" Style="destructive" />
-  <Action.Submit Title="Other" Style="other" />
+  <Action.Submit Title="Other" />
 </Card>

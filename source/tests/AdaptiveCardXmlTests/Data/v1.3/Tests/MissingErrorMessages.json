@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.3",
+  "version": "1.2",
   "body": [
     {
       "type": "TextBlock",
@@ -93,8 +93,7 @@
         }
       ],
       "isRequired": true,
-      "label": "Required Compact Input.ChoiceSet",
-      "style": "compact"
+      "label": "Required Compact Input.ChoiceSet"
     },
     {
       "type": "Input.ChoiceSet",

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="stretch">
-      <BackgroundImage BackgroundImage="https://i.picsum.photos/id/741/375/132.jpg?hmac=ERFnNR0i8FOAhUzgI--BoJ6Bvr5aWWb03TltW7R5U8E" HorizontalAlignment="Center" VerticalAlignment="Center" />
-      <TextBlock Size="ExtraLarge" Text="Trip to UAE" Wrap="true" />
-      <TextBlock Spacing="Small" Size="Small" Weight="Bolder" Color="Accent" Text="ER-13052" />
+      <BackgroundImage Url="https://i.picsum.photos/id/741/375/132.jpg?hmac=ERFnNR0i8FOAhUzgI--BoJ6Bvr5aWWb03TltW7R5U8E" HorizontalAlignment="center" VerticalAlignment="center" />
+      <TextBlock Size="extraLarge" Text="Trip to UAE" Wrap="true" />
+      <TextBlock Spacing="small" Size="small" Weight="bolder" Color="accent" Text="ER-13052" />
     </Column>
   </ColumnSet>
-  <Container Height="AdaptiveCards.AdaptiveDimension">
+  <Container Height="stretch">
     <TextBlock Text="Every elements below this has to be convered by background images" Wrap="true" />
     <Container>
-      <BackgroundImage BackgroundImage="https://picsum.photos/50" />
+      <BackgroundImage Url="https://picsum.photos/50" />
       <TextBlock Text="New TextBlock" />
       <TextBlock Text="New TextBlock" />
       <TextBlock Text="New TextBlock" />
@@ -34,22 +34,12 @@
     </Container>
   </Container>
   <Container>
-    <BackgroundImage BackgroundImage="https://picsum.photos/50" />
+    <BackgroundImage Url="https://picsum.photos/50" />
     <TextBlock Id="txtid" Text="Test Card." />
     <Input.Text Id="newtxt" Placeholder="Enter your text" Value="default text" />
     <TextBlock Id="resd" Text="My new textblock" />
     <Input.Date Id="dateid" Value="" />
     <Input.ChoiceSet Id="idchoice" Value="mychoice">
-      <AdditionalProperties>
-        <item>
-          <key>
-            <string>style</string>
-          </key>
-          <value>
-            <anyType xsi:type="xsd:string">compact</anyType>
-          </value>
-        </item>
-      </AdditionalProperties>
       <Choices>
         <Choice Title="Choice 1" Value="Choice 1" />
         <Choice Title="Choice 2" Value="Choice 2" />

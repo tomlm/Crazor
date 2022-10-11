@@ -49,13 +49,12 @@ namespace AdaptiveCards
         [DefaultValue(null)]
         public AdaptiveDimension Height { get; set; }
 
+#if !NETSTANDARD1_3
         /// <summary>
         /// XmlProperty for serialization of height
         /// </summary>
         [JsonIgnore]
-#if !NETSTANDARD1_3
         [XmlAttribute(nameof(Height))]
-#endif
         [DefaultValue(null)]
         public string HeightXml { get => Height?.ToString(); set => this.Height = (value != null) ? new AdaptiveDimension(value) : null; }
         
@@ -64,6 +63,7 @@ namespace AdaptiveCards
         /// </summary>
         /// <returns></returns>
         public bool ShouldSerializeHeightXml() => Height != null;
+#endif
 
         /// <summary>
         /// Indicates whether the element should be visible when the card has been rendered.

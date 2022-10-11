@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Container>
-    <TextBlock Size="Medium" Weight="Bolder" Text="Publish Adaptive Card schema" />
+    <TextBlock Size="medium" Weight="bolder" Text="Publish Adaptive Card schema" />
     <ColumnSet>
       <Column Width="auto">
-        <Image Size="Small" Style="Person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
+        <Image Size="small" Style="person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Weight="Bolder" Text="Matt Hidinger" Wrap="true" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Created {{DATE(2017-02-14T06:08:39Z, SHORT)}}" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Matt Hidinger" Wrap="true" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Created {{DATE(2017-02-14T06:08:39Z, SHORT)}}" Wrap="true" />
       </Column>
     </ColumnSet>
   </Container>

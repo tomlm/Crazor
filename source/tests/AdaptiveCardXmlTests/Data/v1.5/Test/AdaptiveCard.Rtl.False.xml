@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Weight="Bolder" Text="Card (rtl: unset)" Wrap="true" />
+  <TextBlock Weight="bolder" Text="Card (rtl: unset)" Wrap="true" />
   <ColumnSet>
     <Column Width="stretch">
       <TextBlock Text="Column 1" Wrap="true" />
@@ -17,8 +17,8 @@
   </Input.Text>
   <TextBlock Text="Lorem ipsum dolor sit amet." Wrap="true" />
   <TextBlock Text="لكن لا بد أن أوضح لك أن كل هذه الأفكار." Wrap="true" />
-  <Container Style="Emphasis" Rtl="true">
-    <TextBlock Weight="Bolder" Text="Container (rtl: true)" Wrap="true" />
+  <Container Style="emphasis" Rtl="true">
+    <TextBlock Weight="bolder" Text="Container (rtl: true)" Wrap="true" />
     <ColumnSet>
       <Column Width="stretch">
         <TextBlock Text="Column 1" Wrap="true" />
@@ -36,8 +36,8 @@
     <TextBlock Text="Lorem ipsum dolor sit amet." Wrap="true" />
     <TextBlock Text="لكن لا بد أن أوضح لك أن كل هذه الأفكار." Wrap="true" />
   </Container>
-  <Container Style="Emphasis">
-    <TextBlock Weight="Bolder" Text="Container (rtl: false)" Wrap="true" />
+  <Container Style="emphasis">
+    <TextBlock Weight="bolder" Text="Container (rtl: false)" Wrap="true" />
     <ColumnSet>
       <Column Width="stretch">
         <TextBlock Text="Column 1" Wrap="true" />

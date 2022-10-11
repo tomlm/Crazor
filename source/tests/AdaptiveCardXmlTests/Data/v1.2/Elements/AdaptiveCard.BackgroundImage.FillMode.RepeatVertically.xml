@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <BackgroundImage BackgroundImage="https://picsum.photos/60/60?image=101" FillMode="RepeatVertically" HorizontalAlignment="Center" />
+  <BackgroundImage Url="https://picsum.photos/60/60?image=101" FillMode="repeatVertically" HorizontalAlignment="center" />
   <TextBlock Text="Text in body" />
   <ColumnSet>
     <Column Width="auto">

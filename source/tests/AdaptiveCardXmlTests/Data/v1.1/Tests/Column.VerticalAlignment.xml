@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
-  <Container Style="Emphasis" Bleed="true">
-    <TextBlock Text="**Columns Vertical Alignment Test**" HorizontalAlignment="Center" />
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Container Style="emphasis" Bleed="true">
+    <TextBlock Text="**Columns Vertical Alignment Test**" HorizontalAlignment="center" />
   </Container>
   <ColumnSet>
     <Column Width="stretch">
-      <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" HorizontalAlignment="Center" AltText="Adaptive Cards logo" />
+      <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" HorizontalAlignment="center" AltText="Adaptive Cards logo" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Text="Top" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Text="Top" HorizontalAlignment="center" Wrap="true" />
     </Column>
-    <Column VerticalContentAlignment="Center" Width="stretch">
+    <Column VerticalContentAlignment="center" Width="stretch">
       <TextBlock Text="Center" />
     </Column>
-    <Column VerticalContentAlignment="Bottom" Width="stretch">
+    <Column VerticalContentAlignment="bottom" Width="stretch">
       <TextBlock Text="Bottom" />
     </Column>
   </ColumnSet>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <Container Style="Emphasis">
-    <Input.ChoiceSet Id="0" Style="Expanded" Wrap="true">
+  <Container Style="emphasis">
+    <Input.ChoiceSet Id="0" Style="expanded" Wrap="true">
       <Choices>
         <Choice Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. End." Value="0" />
         <Choice Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. End." Value="1" />

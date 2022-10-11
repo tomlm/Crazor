@@ -483,7 +483,7 @@ namespace Microsoft.Bot.Cards
                         {
                             new AdaptiveImage()
                             {
-                                Url = new Uri("https://powercardbot.azurewebsites.net/ellipsis.png"),
+                                Url = "https://powercardbot.azurewebsites.net/ellipsis.png",
                                 Width = "16px",
                                 SelectAction = new AdaptiveToggleVisibilityAction()
                                 {

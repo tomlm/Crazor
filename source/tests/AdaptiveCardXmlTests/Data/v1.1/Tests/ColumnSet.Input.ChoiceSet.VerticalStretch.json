@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.1",
+  "version": "1.0",
   "body": [
     {
       "type": "ColumnSet",
@@ -42,8 +42,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
-              "style": "compact"
+              "height": "stretch"
             },
             {
               "type": "Input.ChoiceSet",
@@ -64,7 +63,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
@@ -103,7 +102,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "style": "compact"
             },
             {
@@ -126,7 +125,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
@@ -138,7 +137,7 @@
           "separator": true
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ]
 }

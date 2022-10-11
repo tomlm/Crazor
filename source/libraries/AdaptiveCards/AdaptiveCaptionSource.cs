@@ -36,7 +36,7 @@ namespace AdaptiveCards
         /// <summary>
         /// The mime type of this media source.
         /// </summary>
-        [JsonRequired]
+        [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
@@ -45,12 +45,15 @@ namespace AdaptiveCards
         /// <summary>
         /// The URL of this media source.
         /// </summary>
-        [JsonRequired]
+        [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
         public string Url { get; set; }
 
+        /// <summary>
+        /// The caption label for the caption
+        /// </summary>
         [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlAttribute]

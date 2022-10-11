@@ -6,16 +6,6 @@
   <Input.Time Id="input4" IsRequired="true" Label="This is a required Time input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Min="08:00" Max="15:00" />
   <Input.Number Id="input5" IsRequired="true" Label="This is a required Number input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Placeholder="Placeholder text" Value="NaN" Min="4" Max="6" />
   <Input.ChoiceSet Id="input6" IsRequired="true" Label="This is a required ChoiceSet input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Placeholder="Placeholder text">
-    <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
-    </AdditionalProperties>
     <Choices>
       <Choice Title="Choice 1" Value="Choice 1" />
       <Choice Title="Choice 2" Value="Choice 2" />

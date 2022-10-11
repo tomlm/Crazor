@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Text="Please provide the following information:" Wrap="true" />
   <Action.ShowCard Title="1. Name">
-    <AdaptiveCard Version="1.3">
+    <AdaptiveCard Version="1.0">
       <Container Id="nameProperties">
         <Input.Text Id="FirstName" IsRequired="true" Label="First Name" ErrorMessage="First Name is required" />
         <Input.Text Id="MiddleName" Label="Middle Name" />
         <Input.Text Id="LastName" IsRequired="true" Label="Last Name" ErrorMessage="Last Name is required" />
       </Container>
       <Action.ShowCard Title="2. Address">
-        <AdaptiveCard Version="1.3">
+        <AdaptiveCard Version="1.0">
           <Container Id="addressProperties">
             <Input.Text Id="AddressLine1" Label="Address line 1" />
             <Input.Text Id="AddressLine2" Label="Address line 2" />
@@ -26,7 +26,7 @@
             </ColumnSet>
           </Container>
           <Action.ShowCard Title="3. Phone/Email">
-            <AdaptiveCard Version="1.3">
+            <AdaptiveCard Version="1.0">
               <Input.Text Id="CellPhone" Label="Cell Number" />
               <Input.Text Id="HomePhone" Label="Home Number" />
               <Input.Text Id="Email" Label="Email Address" />

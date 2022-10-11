@@ -15,7 +15,7 @@
         }
       ],
       "verticalContentAlignment": "center",
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     },
     {
       "type": "Container",

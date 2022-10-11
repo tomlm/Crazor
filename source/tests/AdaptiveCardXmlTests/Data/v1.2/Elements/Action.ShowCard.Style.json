@@ -13,7 +13,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.2"
+        "version": "1.0"
       },
       "title": "Default"
     },
@@ -21,7 +21,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.2"
+        "version": "1.0"
       },
       "title": "Pawsitive",
       "style": "positive"
@@ -30,7 +30,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.2"
+        "version": "1.0"
       },
       "title": "Destructive",
       "style": "destructive"
@@ -39,10 +39,9 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.2"
+        "version": "1.0"
       },
-      "title": "Other",
-      "style": "other"
+      "title": "Other"
     }
   ]
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id4" Height="AdaptiveCards.AdaptiveDimension" Size="Small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id4" Height="stretch" Size="small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: small - Height: stretch" />
     </Column>
     <Column>
@@ -10,8 +10,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id214" Height="AdaptiveCards.AdaptiveDimension" Size="Medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id214" Height="stretch" Size="medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: medium - Height: stretch" />
     </Column>
     <Column>
@@ -19,8 +19,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id24" Height="AdaptiveCards.AdaptiveDimension" Size="Large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id24" Height="stretch" Size="large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: large - Height: stretch" />
     </Column>
     <Column>
@@ -28,8 +28,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id2114" Height="AdaptiveCards.AdaptiveDimension" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id2114" Height="stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: auto - Height: stretch" />
     </Column>
     <Column>
@@ -37,8 +37,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id21114" Height="AdaptiveCards.AdaptiveDimension" Size="Stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id21114" Height="stretch" Size="stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: stretch - Height: stretch" />
     </Column>
     <Column>
@@ -46,8 +46,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id111111114" Size="Small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id111111114" Size="small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: small - Height: auto" />
     </Column>
     <Column>
@@ -55,8 +55,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id111114" Size="Medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id111114" Size="medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: medium - Height: auto" />
     </Column>
     <Column>
@@ -64,8 +64,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id14" Size="Large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id14" Size="large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: large - Height: auto" />
     </Column>
     <Column>
@@ -73,7 +73,7 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
+    <Column Height="stretch">
       <Image Id="id1114" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: auto - Height: auto" />
     </Column>
@@ -82,8 +82,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id11114" Size="Stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id11114" Size="stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: stretch - Height: auto" />
     </Column>
     <Column>
@@ -91,8 +91,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id45" Height="AdaptiveCards.AdaptiveDimension" Size="Small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id45" Height="stretch" Size="small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: small - Height: stretch" />
     </Column>
     <Column>
@@ -100,8 +100,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id2145" Height="AdaptiveCards.AdaptiveDimension" Size="Medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id2145" Height="stretch" Size="medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: medium - Height: stretch" />
     </Column>
     <Column>
@@ -109,8 +109,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id245" Height="AdaptiveCards.AdaptiveDimension" Size="Large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id245" Height="stretch" Size="large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: large - Height: stretch" />
     </Column>
     <Column>
@@ -118,8 +118,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id21145" Height="AdaptiveCards.AdaptiveDimension" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id21145" Height="stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: auto - Height: stretch" />
     </Column>
     <Column>
@@ -127,8 +127,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id211145" Height="AdaptiveCards.AdaptiveDimension" Size="Stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id211145" Height="stretch" Size="stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: stretch - Height: stretch" />
     </Column>
     <Column>
@@ -136,8 +136,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id1111111145" Size="Small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id1111111145" Size="small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: small - Height: auto" />
     </Column>
     <Column>
@@ -145,8 +145,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id1111145" Size="Medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id1111145" Size="medium" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: medium - Height: auto" />
     </Column>
     <Column>
@@ -154,8 +154,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id145" Size="Large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id145" Size="large" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: large - Height: auto" />
     </Column>
     <Column>
@@ -163,7 +163,7 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
+    <Column Height="stretch">
       <Image Id="id11145" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: auto - Height: auto" />
     </Column>
@@ -172,8 +172,8 @@
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
-    <Column Height="AdaptiveCards.AdaptiveDimension">
-      <Image Id="id111145" Size="Stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+    <Column Height="stretch">
+      <Image Id="id111145" Size="stretch" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       <TextBlock Text="Image above: Size: stretch - Height: auto" />
     </Column>
     <Column>
@@ -181,27 +181,27 @@
     </Column>
   </ColumnSet>
   <Action.ToggleVisibility Title="Hide">
-    <TargetElements ElementId="id4" />
-    <TargetElements ElementId="id3" />
-    <TargetElements ElementId="id24" />
-    <TargetElements ElementId="id214" />
-    <TargetElements ElementId="id2114" />
-    <TargetElements ElementId="id21114" />
-    <TargetElements ElementId="id111111114" />
-    <TargetElements ElementId="id111114" />
-    <TargetElements ElementId="id14" />
-    <TargetElements ElementId="id1114" />
-    <TargetElements ElementId="id11114" />
-    <TargetElements ElementId="id45" />
-    <TargetElements ElementId="id35" />
-    <TargetElements ElementId="id245" />
-    <TargetElements ElementId="id2145" />
-    <TargetElements ElementId="id21145" />
-    <TargetElements ElementId="id211145" />
-    <TargetElements ElementId="id1111111145" />
-    <TargetElements ElementId="id1111145" />
-    <TargetElements ElementId="id145" />
-    <TargetElements ElementId="id11145" />
-    <TargetElements ElementId="id111145" />
+    <TargetElement ElementId="id4" />
+    <TargetElement ElementId="id3" />
+    <TargetElement ElementId="id24" />
+    <TargetElement ElementId="id214" />
+    <TargetElement ElementId="id2114" />
+    <TargetElement ElementId="id21114" />
+    <TargetElement ElementId="id111111114" />
+    <TargetElement ElementId="id111114" />
+    <TargetElement ElementId="id14" />
+    <TargetElement ElementId="id1114" />
+    <TargetElement ElementId="id11114" />
+    <TargetElement ElementId="id45" />
+    <TargetElement ElementId="id35" />
+    <TargetElement ElementId="id245" />
+    <TargetElement ElementId="id2145" />
+    <TargetElement ElementId="id21145" />
+    <TargetElement ElementId="id211145" />
+    <TargetElement ElementId="id1111111145" />
+    <TargetElement ElementId="id1111145" />
+    <TargetElement ElementId="id145" />
+    <TargetElement ElementId="id11145" />
+    <TargetElement ElementId="id111145" />
   </Action.ToggleVisibility>
 </Card>

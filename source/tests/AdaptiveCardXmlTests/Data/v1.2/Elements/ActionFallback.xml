@@ -3,10 +3,10 @@
   <ActionSet>
     <AdaptiveUnknownAction>
       <Fallback>
-        <Type>Content</Type>
+        <Type>content</Type>
         <Content xsi:type="AdaptiveUnknownElement">
           <Fallback>
-            <Type>Content</Type>
+            <Type>content</Type>
             <Content xsi:type="Action.Submit" Title="Action.Submit">{
   "x": 13
 }</Content>
@@ -18,11 +18,11 @@
     </AdaptiveUnknownAction>
     <AdaptiveUnknownAction>
       <Fallback>
-        <Type>Content</Type>
+        <Type>content</Type>
         <Content xsi:type="AdaptiveUnknownElement">
           <Fallback>
-            <Type>Content</Type>
-            <Content xsi:type="Action.OpenUrl" Title="Action.OpenUrl" Url="https://adaptivecards.io/" />
+            <Type>content</Type>
+            <Content xsi:type="Action.OpenUrl" Title="Action.OpenUrl" Url="https://adaptivecards.io" />
           </Fallback>
           <Type>NeitherExist</Type>
         </Content>
@@ -31,15 +31,15 @@
     </AdaptiveUnknownAction>
     <AdaptiveUnknownAction>
       <Fallback>
-        <Type>Content</Type>
+        <Type>content</Type>
         <Content xsi:type="AdaptiveUnknownElement">
           <Fallback>
-            <Type>Content</Type>
+            <Type>content</Type>
             <Content xsi:type="AdaptiveUnknownElement">
               <Fallback>
-                <Type>Content</Type>
+                <Type>content</Type>
                 <Content xsi:type="Action.ShowCard" Title="Action.ShowCard">
-                  <AdaptiveCard Version="1.2">
+                  <AdaptiveCard Version="1.0">
                     <TextBlock Text="What do you think?" />
                     <Action.Submit Title="Neat!" />
                   </AdaptiveCard>
@@ -55,10 +55,10 @@
     </AdaptiveUnknownAction>
     <AdaptiveUnknownAction>
       <Fallback>
-        <Type>Content</Type>
+        <Type>content</Type>
         <Content xsi:type="AdaptiveUnknownElement">
           <Fallback>
-            <Type>Content</Type>
+            <Type>content</Type>
             <Content xsi:type="AdaptiveUnknownElement">
               <Type>HaHaNope</Type>
             </Content>
@@ -72,10 +72,10 @@
   <TextBlock Text="This card tests action fallback" />
   <AdaptiveUnknownAction>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="AdaptiveUnknownElement">
         <Fallback>
-          <Type>Content</Type>
+          <Type>content</Type>
           <Content xsi:type="Action.Submit" Title="Action.Submit">{
   "x": 13
 }</Content>
@@ -87,11 +87,11 @@
   </AdaptiveUnknownAction>
   <AdaptiveUnknownAction>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="AdaptiveUnknownElement">
         <Fallback>
-          <Type>Content</Type>
-          <Content xsi:type="Action.OpenUrl" Title="Action.OpenUrl" Url="https://adaptivecards.io/" />
+          <Type>content</Type>
+          <Content xsi:type="Action.OpenUrl" Title="Action.OpenUrl" Url="https://adaptivecards.io" />
         </Fallback>
         <Type>NeitherExist</Type>
       </Content>
@@ -100,15 +100,15 @@
   </AdaptiveUnknownAction>
   <AdaptiveUnknownAction>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="AdaptiveUnknownElement">
         <Fallback>
-          <Type>Content</Type>
+          <Type>content</Type>
           <Content xsi:type="AdaptiveUnknownElement">
             <Fallback>
-              <Type>Content</Type>
+              <Type>content</Type>
               <Content xsi:type="Action.ShowCard" Title="Action.ShowCard">
-                <AdaptiveCard Version="1.2">
+                <AdaptiveCard Version="1.0">
                   <TextBlock Text="What do you think?" />
                   <Action.Submit Title="Neat!" />
                 </AdaptiveCard>
@@ -124,10 +124,10 @@
   </AdaptiveUnknownAction>
   <AdaptiveUnknownAction>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="AdaptiveUnknownElement">
         <Fallback>
-          <Type>Content</Type>
+          <Type>content</Type>
           <Content xsi:type="AdaptiveUnknownElement">
             <Type>HaHaNope</Type>
           </Content>

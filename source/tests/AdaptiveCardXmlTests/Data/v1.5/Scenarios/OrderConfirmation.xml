@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Text="Please confirm your order:" Wrap="true" Style="Heading" />
+  <TextBlock Text="Please confirm your order:" Wrap="true" Style="heading" />
   <FactSet>
     <Fact Title="Name" Value="John Smith" />
     <Fact Title="Phone number" Value="(555) 555-5555" />
   </FactSet>
-  <Container Spacing="Small">
-    <FactSet Spacing="Small">
+  <Container Spacing="small">
+    <FactSet Spacing="small">
       <Fact Title="1x" Value="Steak" />
       <Fact Title="2x" Value="Side Rice" />
       <Fact Title="1x" Value="Soft Drink" />

@@ -1,18 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 namespace AdaptiveCards
 {
     /// <summary>
-    /// Represents a "fact" in a FactSet element.
+    /// Represents a Cell in a row in a table
     /// </summary>
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonConverter(typeof(ActivatorConverter<AdaptiveTableCell>))]
 #if !NETSTANDARD1_3
     [XmlType(TypeName = TypeName)]
 #endif
@@ -28,10 +29,14 @@ namespace AdaptiveCards
         {
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// We don't need to serialize type because it's implicit
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        public override string Type { get; set; } = TypeName;
+        [DefaultValue(TypeName)]
+        public override string Type { get; set; }
     }
 }

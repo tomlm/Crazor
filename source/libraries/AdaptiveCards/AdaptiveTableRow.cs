@@ -10,23 +10,23 @@ using Newtonsoft.Json.Serialization;
 namespace AdaptiveCards
 {
     /// <summary>
-    /// Represents a "fact" in a FactSet element.
+    /// Represents a TableRow structure in a table
     /// </summary>
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
 #if !NETSTANDARD1_3
     [XmlType(TypeName = TypeName)]
 #endif
-    public class AdaptiveTableRow : AdaptiveTypedElement
+    public class AdaptiveTableRow 
     {
-        /// <inheritdoc />
         public const string TypeName = "TableRow";
 
-        /// <inheritdoc />
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        public override string Type { get; set; } = TypeName;
-
+        [DefaultValue(TypeName)]
+        public string Type { get; set; }
 
         /// <summary>
         /// Initializes an empty Fact.
@@ -67,29 +67,12 @@ namespace AdaptiveCards
         /// <summary>
         /// The style used to display this element. See <see cref="AdaptiveContainerStyle" />.
         /// </summary>
-        [JsonConverter(typeof(IgnoreNullEnumConverter<AdaptiveContainerStyle>), true)]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
-        [XmlIgnore]
+        [XmlAttribute]
 #endif
-        [DefaultValue(null)]
-        public AdaptiveContainerStyle? Style { get; set; }
-
-#if !NETSTANDARD1_3
-        /// <summary>
-        /// Controls XML serialization of style.
-        /// </summary>
-        // The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
-        [JsonIgnore]
-        [XmlAttribute(nameof(Style))]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public AdaptiveContainerStyle StyleXml { get { return (Style.HasValue) ? Style.Value : AdaptiveContainerStyle.Default; } set { Style = value; } }
-
-        /// <summary>
-        /// Determines whether to serialize the style for XML.
-        /// </summary>
-        public bool ShouldSerializeStyleXml() => this.Style.HasValue;
-#endif
+        [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
+        public AdaptiveContainerStyle Style { get; set; }
 
         /// <summary>
         /// Indicates whether the element should be visible when the card has been rendered.

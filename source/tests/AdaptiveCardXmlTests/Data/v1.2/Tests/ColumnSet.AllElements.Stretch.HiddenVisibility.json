@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.2",
+  "version": "1.0",
   "body": [
     {
       "type": "ColumnSet",
@@ -37,7 +37,7 @@
                   "value": "Value 2"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -50,7 +50,7 @@
               "size": "small",
               "url": "https://adaptivecards.io/content/cats/1.png",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -73,7 +73,7 @@
                 }
               ],
               "imageSize": "small",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -85,7 +85,7 @@
               "type": "Input.Date",
               "id": "id1",
               "placeholder": "enter date",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -98,7 +98,7 @@
               "id": "id2",
               "placeholder": "enter comment",
               "max": 500.0,
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -113,10 +113,10 @@
               "maxLength": 500,
               "inlineAction": {
                 "type": "Action.OpenUrl",
-                "url": "https://adaptivecards.io/",
+                "url": "https://adaptivecards.io",
                 "title": "Reply"
               },
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -129,7 +129,7 @@
               "id": "id4",
               "placeholder": "enter comment",
               "maxLength": 500,
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -141,7 +141,7 @@
               "type": "Input.Time",
               "id": "id5",
               "placeholder": "enter time",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -155,7 +155,7 @@
               "title": "Placeholder title",
               "valueOn": "True",
               "valueOff": "False",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -166,7 +166,7 @@
             {
               "type": "TextBlock",
               "text": "Regular textblock",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -182,7 +182,7 @@
                   "text": "TextBlock inside a container"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -203,7 +203,7 @@
                   ]
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -240,7 +240,7 @@
                 }
               ],
               "poster": "https://adaptivecards.io/content/poster-video.png",
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -261,7 +261,7 @@
                   "text": "We support colors, "
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -274,7 +274,7 @@
           "separator": true
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     },
     {
       "type": "ColumnSet",
@@ -316,9 +316,8 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
-              "isVisible": false,
-              "style": "compact"
+              "height": "stretch",
+              "isVisible": false
             },
             {
               "type": "Input.ChoiceSet",
@@ -339,7 +338,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -379,7 +378,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false,
               "style": "compact"
             },
@@ -403,7 +402,7 @@
                   "value": "3"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension",
+              "height": "stretch",
               "isVisible": false
             },
             {
@@ -416,7 +415,7 @@
           "separator": true
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ]
 }

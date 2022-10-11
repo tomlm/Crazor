@@ -56,7 +56,7 @@ namespace AdaptiveCardXmlTests
                 {
                     var card = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
                     json = JsonConvert.SerializeObject(card, jsonSettings);
-                    File.WriteAllText(jsonFile, json);
+                    // File.WriteAllText(jsonFile, json);
                     File.WriteAllText(xmlFile, ToXml(card));
                 }
             }

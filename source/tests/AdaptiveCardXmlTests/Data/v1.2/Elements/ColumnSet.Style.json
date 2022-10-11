@@ -47,8 +47,7 @@
             }
           ]
         }
-      ],
-      "style": "default"
+      ]
     },
     {
       "type": "ColumnSet",
@@ -113,8 +112,7 @@
               "type": "TextBlock",
               "text": "(none)"
             }
-          ],
-          "style": "default"
+          ]
         },
         {
           "type": "Column",
@@ -163,8 +161,7 @@
                   "color": "dark",
                   "text": "Contained container - default"
                 }
-              ],
-              "style": "default"
+              ]
             }
           ]
         }

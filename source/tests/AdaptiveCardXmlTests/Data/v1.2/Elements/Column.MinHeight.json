@@ -14,7 +14,6 @@
               "wrap": true
             }
           ],
-          "style": "default",
           "minHeight": "200px"
         },
         {
@@ -38,7 +37,6 @@
               ]
             }
           ],
-          "style": "default",
           "minHeight": "50px"
         }
       ],

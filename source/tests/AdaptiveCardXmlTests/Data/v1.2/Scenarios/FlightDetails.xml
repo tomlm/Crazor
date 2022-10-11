@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet Height="stretch">
     <Column Width="45">
-      <Container Style="Emphasis" Bleed="true">
-        <BackgroundImage BackgroundImage="https://messagecardplayground.azurewebsites.net/assets/TxP_Background.png" />
-        <Image Url="https://messagecardplayground.azurewebsites.net/assets/TxP_Flight.png" HorizontalAlignment="Center" AltText="Departing airplane" />
+      <Container Style="emphasis" Bleed="true">
+        <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/TxP_Background.png" />
+        <Image Url="https://messagecardplayground.azurewebsites.net/assets/TxP_Flight.png" HorizontalAlignment="center" AltText="Departing airplane" />
       </Container>
-      <Container Spacing="None" Height="AdaptiveCards.AdaptiveDimension" Style="Emphasis" Bleed="true">
-        <TextBlock Size="ExtraLarge" Weight="Lighter" Color="Accent" Text="Flight to JFK" Wrap="true" />
-        <TextBlock Spacing="Small" Text="Continental Air Lines flight UA110" Wrap="true" />
-        <TextBlock Spacing="None" Text="Confirmation code: RXJ34P" Wrap="true" />
-        <TextBlock Spacing="None" Text="4 hours 15 minutes" Wrap="true" />
+      <Container Spacing="none" Height="stretch" Style="emphasis" Bleed="true">
+        <TextBlock Size="extraLarge" Weight="lighter" Color="accent" Text="Flight to JFK" Wrap="true" />
+        <TextBlock Spacing="small" Text="Continental Air Lines flight UA110" Wrap="true" />
+        <TextBlock Spacing="none" Text="Confirmation code: RXJ34P" Wrap="true" />
+        <TextBlock Spacing="none" Text="4 hours 15 minutes" Wrap="true" />
       </Container>
     </Column>
     <Column Width="55">
-      <Container Height="AdaptiveCards.AdaptiveDimension">
+      <Container Height="stretch">
         <ColumnSet>
           <Column Width="auto">
-            <TextBlock Size="ExtraLarge" Weight="Lighter" Text="SFO" Wrap="true" />
+            <TextBlock Size="extraLarge" Weight="lighter" Text="SFO" Wrap="true" />
           </Column>
-          <Column VerticalContentAlignment="Center" Width="stretch">
-            <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://messagecardplayground.azurewebsites.net/assets/graydot2x2.png" Width="AdaptiveCards.AdaptiveDimension" />
+          <Column VerticalContentAlignment="center" Width="stretch">
+            <Image Height="2px" Url="https://messagecardplayground.azurewebsites.net/assets/graydot2x2.png" Width="10000px" />
           </Column>
-          <Column Spacing="Small" VerticalContentAlignment="Center" Width="auto">
-            <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://messagecardplayground.azurewebsites.net/assets/smallairplane.png" AltText="Flight to" />
+          <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
+            <Image Height="16px" Url="https://messagecardplayground.azurewebsites.net/assets/smallairplane.png" AltText="Flight to" />
           </Column>
           <Column Width="auto">
-            <TextBlock Size="ExtraLarge" Weight="Lighter" Text="JFK" HorizontalAlignment="Right" Wrap="true" />
+            <TextBlock Size="extraLarge" Weight="lighter" Text="JFK" HorizontalAlignment="right" Wrap="true" />
           </Column>
         </ColumnSet>
         <ColumnSet>
           <Column Width="1">
             <RichTextBlock>
-              <Inlines Size="Medium">
+              <Inlines Size="medium">
                 <Type>TextRun</Type>8:15 PM
 </Inlines>
               <Inlines IsSubtle="true">
@@ -43,8 +43,8 @@
             </RichTextBlock>
           </Column>
           <Column Width="1">
-            <RichTextBlock HorizontalAlignment="Right">
-              <Inlines Size="Medium">
+            <RichTextBlock HorizontalAlignment="right">
+              <Inlines Size="medium">
                 <Type>TextRun</Type>3:30 AM
 </Inlines>
               <Inlines IsSubtle="true">
@@ -55,7 +55,7 @@
             </RichTextBlock>
           </Column>
         </ColumnSet>
-        <ActionSet Spacing="Medium" Separator="true">
+        <ActionSet Spacing="medium" Separator="true">
           <Action.Submit Title="Check in" Style="positive" />
           <Action.Submit Title="View" />
         </ActionSet>

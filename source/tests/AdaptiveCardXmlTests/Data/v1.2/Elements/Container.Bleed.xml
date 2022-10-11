@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <Container Style="Good" Bleed="true">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Container Style="good" Bleed="true">
     <TextBlock Text="This Container bleeds into its parent padding for a nice visual appearance!" Wrap="true" />
   </Container>
-  <Container Style="Warning">
+  <Container Style="warning">
     <TextBlock Text="This Container is just a plain ol' container, it looks nice too though!" Wrap="true" />
   </Container>
 </Card>

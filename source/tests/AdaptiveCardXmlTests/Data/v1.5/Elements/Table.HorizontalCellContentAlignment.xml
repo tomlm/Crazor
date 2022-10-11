@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Weight="Bolder" Text="You can configure the horizontal alignment of table content with HorizontalCellContentAlignement" Wrap="true" />
-  <Table VerticalCellContentAlignment="Center" FirstRowAsHeader="false" ShowGridLines="false">
+  <TextBlock Weight="bolder" Text="You can configure the horizontal alignment of table content with HorizontalCellContentAlignement" Wrap="true" />
+  <Table VerticalCellContentAlignment="center" FirstRowAsHeader="false" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>
@@ -36,7 +36,7 @@
         <TextBlock Text="Center" Wrap="true" />
       </TableCell>
       <TableCell>
-        <Table HorizontalCellContentAlignment="Center" FirstRowAsHeader="false">
+        <Table HorizontalCellContentAlignment="center" FirstRowAsHeader="false">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -63,7 +63,7 @@
         <TextBlock Text="Right" Wrap="true" />
       </TableCell>
       <TableCell>
-        <Table HorizontalCellContentAlignment="Right" FirstRowAsHeader="false">
+        <Table HorizontalCellContentAlignment="right" FirstRowAsHeader="false">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>

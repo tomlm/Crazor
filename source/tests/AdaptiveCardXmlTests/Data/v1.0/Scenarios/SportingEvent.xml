@@ -3,17 +3,17 @@
   <Container>
     <ColumnSet>
       <Column Width="auto">
-        <Image Size="Small" Url="https://adaptivecards.io/content/cats/3.png" AltText="Shades cat team emblem" />
-        <TextBlock Weight="Bolder" Text="SHADES" HorizontalAlignment="Center" Wrap="true" />
+        <Image Size="small" Url="https://adaptivecards.io/content/cats/3.png" AltText="Shades cat team emblem" />
+        <TextBlock Weight="bolder" Text="SHADES" HorizontalAlignment="center" Wrap="true" />
       </Column>
-      <Column Spacing="Medium" Separator="true" Width="stretch">
-        <TextBlock Text="Sat, Aug 31, 2019" HorizontalAlignment="Center" Wrap="true" />
-        <TextBlock Spacing="None" Text="Final" HorizontalAlignment="Center" Wrap="true" />
-        <TextBlock Size="ExtraLarge" Text="45 - 7" HorizontalAlignment="Center" Wrap="true" />
+      <Column Spacing="medium" Separator="true" Width="stretch">
+        <TextBlock Text="Sat, Aug 31, 2019" HorizontalAlignment="center" Wrap="true" />
+        <TextBlock Spacing="none" Text="Final" HorizontalAlignment="center" Wrap="true" />
+        <TextBlock Size="extraLarge" Text="45 - 7" HorizontalAlignment="center" Wrap="true" />
       </Column>
-      <Column Spacing="Medium" Separator="true" Width="auto">
-        <Image Size="Small" Url="https://adaptivecards.io/content/cats/2.png" HorizontalAlignment="Center" AltText="Skins cat team emblem" />
-        <TextBlock Weight="Bolder" Text="SKINS" HorizontalAlignment="Center" Wrap="true" />
+      <Column Spacing="medium" Separator="true" Width="auto">
+        <Image Size="small" Url="https://adaptivecards.io/content/cats/2.png" HorizontalAlignment="center" AltText="Skins cat team emblem" />
+        <TextBlock Weight="bolder" Text="SKINS" HorizontalAlignment="center" Wrap="true" />
       </Column>
     </ColumnSet>
   </Container>

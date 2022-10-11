@@ -60,6 +60,6 @@
   ],
   "selectAction": {
     "type": "Action.OpenUrl",
-    "url": "https://msn.com/"
+    "url": "https://msn.com"
   }
 }

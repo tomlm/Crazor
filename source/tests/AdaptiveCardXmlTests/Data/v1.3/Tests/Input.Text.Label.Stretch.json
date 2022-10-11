@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.3",
+  "version": "1.0",
   "body": [
     {
       "type": "Container",
@@ -11,7 +11,7 @@
           "isRequired": true,
           "label": "Required Input.Text label",
           "errorMessage": "Required input",
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "TextBlock",

@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.2",
+  "version": "1.0",
   "body": [
     {
       "id": "id1",
@@ -70,7 +70,7 @@
           "id1"
         ]
       },
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ]
 }

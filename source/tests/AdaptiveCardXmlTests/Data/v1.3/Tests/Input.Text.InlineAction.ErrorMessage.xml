@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Input.Text Id="input1" IsRequired="true" Label="Required Input.Text with inline action" ErrorMessage="This is a required input">
     <Action.Submit Title="Inline Action" IconUrl="http://adaptivecards.io/content/cats/1.png" />
   </Input.Text>

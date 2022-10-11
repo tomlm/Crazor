@@ -3,21 +3,21 @@
   <RichTextBlock>
     <Inlines>
       <Type>TextRun</Type>This is the first inline. </Inlines>
-    <Inlines Color="Good">
+    <Inlines Color="good">
       <Type>TextRun</Type>We support colors,</Inlines>
     <Inlines IsSubtle="true">
       <Type>TextRun</Type> both regular and subtle. </Inlines>
-    <Inlines Size="Small">
+    <Inlines Size="small">
       <Type>TextRun</Type>Text </Inlines>
-    <Inlines Size="Medium">
+    <Inlines Size="medium">
       <Type>TextRun</Type>of </Inlines>
-    <Inlines Size="Large">
+    <Inlines Size="large">
       <Type>TextRun</Type>all </Inlines>
-    <Inlines Size="ExtraLarge">
+    <Inlines Size="extraLarge">
       <Type>TextRun</Type>sizes! </Inlines>
-    <Inlines Weight="Lighter">
+    <Inlines Weight="lighter">
       <Type>TextRun</Type>Light weight text. </Inlines>
-    <Inlines Weight="Bolder">
+    <Inlines Weight="bolder">
       <Type>TextRun</Type>Bold weight text. </Inlines>
     <Inlines Highlight="true">
       <Type>TextRun</Type>Highlights. </Inlines>
@@ -25,18 +25,18 @@
       <Type>TextRun</Type>Italics. </Inlines>
     <Inlines Strikethrough="true">
       <Type>TextRun</Type>Strikethrough. </Inlines>
-    <Inlines FontType="Monospace">
+    <Inlines FontType="monospace">
       <Type>TextRun</Type>Monospace too!</Inlines>
   </RichTextBlock>
   <RichTextBlock>
     <Inlines>
       <Type>TextRun</Type>Date-Time parsing: {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}</Inlines>
   </RichTextBlock>
-  <RichTextBlock HorizontalAlignment="Center">
+  <RichTextBlock HorizontalAlignment="center">
     <Inlines>
       <Type>TextRun</Type>Rich text blocks also support center alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </Inlines>
   </RichTextBlock>
-  <RichTextBlock HorizontalAlignment="Right">
+  <RichTextBlock HorizontalAlignment="right">
     <Inlines>
       <Type>TextRun</Type>Rich text blocks also support right alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </Inlines>
   </RichTextBlock>

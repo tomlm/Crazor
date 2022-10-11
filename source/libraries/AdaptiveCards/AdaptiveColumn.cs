@@ -1,29 +1,36 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace AdaptiveCards
 {
+
     /// <summary>
     /// Represents the Column element.
     /// </summary>
 #if !NETSTANDARD1_3
     [XmlType(TypeName = AdaptiveColumn.TypeName)]
 #endif
+    [JsonConverter(typeof(ActivatorConverter<AdaptiveColumn>))]
     public class AdaptiveColumn : AdaptiveContainer
     {
         /// <inheritdoc />
         public new const string TypeName = "Column";
 
+        /// <summary>
+        /// We don't need to serialize type because it's implicit
+        /// </summary>
         /// <inheritdoc />
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        [JsonProperty(Required = Required.Default)]
-        public override string Type { get; set; } = TypeName;
+        [DefaultValue(TypeName)]
+        public override string Type { get; set; }
 
         /// <summary>
         /// Size for the column (either ColumnSize string or number which is relative size of the column).
@@ -40,19 +47,19 @@ namespace AdaptiveCards
         [XmlIgnore]
 #endif
         public AdaptiveColumnWidth Width { get; set; }
-        
+
+#if !NETSTANDARD1_3
         /// <summary>
         /// Xml Serialization for complex type of AdaptiveColumnWidth
         /// </summary>
         [JsonIgnore]
-#if !NETSTANDARD1_3
         [XmlAttribute(nameof(Width))]
-#endif
         public string WidthXml { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
 
         /// <summary>
         /// Ignore Xml Serialization for complex type of AdaptiveColumnWidth when null
         /// </summary>
         public bool ShouldSerializeWidthXml() => Width != null;
+#endif
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
-  <Image Size="Small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
-  <Image Style="Person" Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FFFF0000" AltText="Cat" />
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Image Size="small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  <Image Style="person" Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FFFF0000" AltText="Cat" />
 </Card>

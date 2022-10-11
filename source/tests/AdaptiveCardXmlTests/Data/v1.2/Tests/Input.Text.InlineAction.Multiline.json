@@ -22,7 +22,7 @@
       "isMultiline": true,
       "inlineAction": {
         "type": "Action.OpenUrl",
-        "url": "https://adaptivecards.io/",
+        "url": "https://adaptivecards.io",
         "title": "Reply"
       }
     }

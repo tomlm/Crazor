@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.2",
+  "version": "1.0",
   "body": [
     {
       "type": "TextBlock",
@@ -86,8 +86,7 @@
           "title": "Blue",
           "value": "3"
         }
-      ],
-      "style": "compact"
+      ]
     },
     {
       "type": "TextBlock",
@@ -135,8 +134,7 @@
           "title": "Blue",
           "value": "3"
         }
-      ],
-      "style": "compact"
+      ]
     },
     {
       "type": "TextBlock",
@@ -172,7 +170,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.2",
+        "version": "1.0",
         "body": [
           {
             "type": "Input.Text",

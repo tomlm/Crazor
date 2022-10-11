@@ -6,7 +6,6 @@
       "type": "ColumnSet",
       "columns": [
         {
-          "type": "Column",
           "items": [
             {
               "type": "TextBlock",
@@ -15,7 +14,6 @@
           ]
         },
         {
-          "type": "Column",
           "items": [
             {
               "type": "TextBlock",
@@ -24,7 +22,6 @@
           ]
         },
         {
-          "type": "Column",
           "items": [
             {
               "type": "TextBlock",

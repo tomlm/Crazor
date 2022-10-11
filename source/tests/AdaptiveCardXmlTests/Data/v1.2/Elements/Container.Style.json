@@ -43,8 +43,7 @@
           "color": "dark",
           "text": "color: dark"
         }
-      ],
-      "style": "default"
+      ]
     },
     {
       "type": "Container",
@@ -116,8 +115,7 @@
               "color": "dark",
               "text": "Contained container - default"
             }
-          ],
-          "style": "default"
+          ]
         },
         {
           "type": "Container",

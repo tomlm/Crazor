@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Weight="Bolder" Text="Pick up where you left off?" />
-  <ColumnSet Spacing="Medium">
+  <TextBlock Weight="bolder" Text="Pick up where you left off?" />
+  <ColumnSet Spacing="medium">
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="View a map of Silver Star Mountain" Url="https://www.msn.com/" />
     <Column Width="auto">
-      <Image Size="Medium" Url="https://unsplash.it/80?image=1083" AltText="Silver Star Mountain" />
+      <Image Size="medium" Url="https://unsplash.it/80?image=1083" AltText="Silver Star Mountain" />
     </Column>
     <Column Width="4">
       <TextBlock Text="Silver Star Mountain" />
-      <TextBlock Spacing="None" IsSubtle="true" Text="Maps" />
+      <TextBlock Spacing="none" IsSubtle="true" Text="Maps" />
     </Column>
   </ColumnSet>
   <ColumnSet>
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="Remodel your kitchen with our new cabinet styles!" Url="https://www.adaptivecards.io/" />
     <Column Width="auto">
-      <Image Size="Medium" Url="https://unsplash.it/80?image=1082" AltText="Kitchen Remodel" />
+      <Image Size="medium" Url="https://unsplash.it/80?image=1082" AltText="Kitchen Remodel" />
     </Column>
-    <Column Style="Emphasis" Width="4">
+    <Column Style="emphasis" Width="4">
       <TextBlock Text="Kitchen Remodel" />
-      <TextBlock Spacing="None" IsSubtle="true" Text="With EMPHASIS" />
+      <TextBlock Spacing="none" IsSubtle="true" Text="With EMPHASIS" />
     </Column>
   </ColumnSet>
   <ColumnSet>
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="Watch the newest episode today!" Url="https://www.outlook.com/" />
     <Column Width="auto">
-      <Image Size="Medium" Url="https://unsplash.it/80?image=1080" AltText="The Witcher" />
+      <Image Size="medium" Url="https://unsplash.it/80?image=1080" AltText="The Witcher" />
     </Column>
     <Column Width="4">
       <TextBlock Text="The Witcher" />
-      <TextBlock Spacing="None" IsSubtle="true" Text="Netflix" />
+      <TextBlock Spacing="none" IsSubtle="true" Text="Netflix" />
     </Column>
   </ColumnSet>
   <Action.OpenUrl Title="Resume all" Url="ms-cortana:resume-all" />

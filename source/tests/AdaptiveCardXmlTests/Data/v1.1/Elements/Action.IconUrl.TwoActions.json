@@ -11,13 +11,13 @@
   "actions": [
     {
       "type": "Action.OpenUrl",
-      "url": "https://adaptivecards.io/",
+      "url": "https://adaptivecards.io",
       "title": "With Icon",
       "iconUrl": "https://adaptivecards.io/content/cats/2.png"
     },
     {
       "type": "Action.OpenUrl",
-      "url": "https://adaptivecards.io/",
+      "url": "https://adaptivecards.io",
       "title": "Without Icon"
     }
   ]

@@ -35,6 +35,20 @@ namespace AdaptiveCards
 #endif
         public object Data { get; set; }
 
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Get or set the data as a JSON string.
+        /// </summary>
+        [JsonIgnore]
+        [XmlText]
+        [DefaultValue(null)]
+        public string DataXml
+        {
+            get => (Data != null) ? JsonConvert.SerializeObject(Data, Formatting.Indented) : null;
+            set => Data = (value != null) ? JsonConvert.DeserializeObject(value, new JsonSerializerSettings { Converters = { new StrictIntConverter() } }) : null;
+        }
+#endif
+
         /// <summary>
         ///     Controls which inputs are associated with the submit action
         /// </summary>
@@ -44,41 +58,5 @@ namespace AdaptiveCards
 #endif
         [DefaultValue(typeof(AdaptiveAssociatedInputs), "auto")]
         public AdaptiveAssociatedInputs AssociatedInputs { get; set; }
-
-        /// <summary>
-        /// Get or set the data as a JSON string.
-        /// </summary>
-        [JsonIgnore]
-#if !NETSTANDARD1_3
-        [XmlText]
-#endif
-        public string DataJson
-        {
-            get
-            {
-                if (Data != null)
-                {
-                    return JsonConvert.SerializeObject(Data, Formatting.Indented);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            set
-            {
-                if (value == null)
-                {
-                    Data = null;
-                }
-                else
-                {
-                    Data = JsonConvert.DeserializeObject(value, new JsonSerializerSettings
-                    {
-                        Converters = { new StrictIntConverter() }
-                    });
-                }
-            }
-        }
     }
 }

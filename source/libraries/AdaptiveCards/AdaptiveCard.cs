@@ -63,21 +63,18 @@ namespace AdaptiveCards
         /// <summary>
         /// Schema version that this card requires. If a client is lower than this version the fallbackText will be rendered.
         /// </summary>
-        [JsonProperty(Order = -10, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate, NullValueHandling = NullValueHandling.Include)]
+        [JsonProperty(Order = -10)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
         [DefaultValue(null)]
-        public AdaptiveSchemaVersion Version { get; set; }
+        public AdaptiveSchemaVersion Version { get; set; } = new AdaptiveSchemaVersion("1.0");
 
-        [JsonIgnore]
 #if !NETSTANDARD1_3
+        [JsonIgnore]
         [XmlAttribute(nameof(Version))]
+        public string VersionXml { get => Version.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
 #endif
-        [DefaultValue(null)]
-        public string VersionXml { get => Version?.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
-
-        public bool ShouldSerializeVersionXml() => Version != null;
 
         /// <summary>
         /// This is obsolete. Use the <see cref="Version"/> property instead.
@@ -126,11 +123,11 @@ namespace AdaptiveCards
         /// <summary>
         /// Background image for card.
         /// </summary>
+        [JsonProperty(Order = -5, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonConverter(typeof(AdaptiveBackgroundImageConverter))]
 #if !NETSTANDARD1_3
         [XmlElement]
 #endif
-        [JsonProperty(Order = -5, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [JsonConverter(typeof(AdaptiveBackgroundImageConverter))]
         [DefaultValue(null)]
         public AdaptiveBackgroundImage BackgroundImage { get; set; }
 
@@ -147,13 +144,12 @@ namespace AdaptiveCards
         [DefaultValue(null)]
         public AdaptiveDimension Height { get; set; }
 
+#if !NETSTANDARD1_3
         /// <summary>
         /// XmlProperty for serialization of height
         /// </summary>
         [JsonIgnore]
-#if !NETSTANDARD1_3
         [XmlAttribute(nameof(Height))]
-#endif
         [DefaultValue(null)]
         public string HeightXml { get => Height?.ToString(); set => this.Height = (value != null) ? new AdaptiveDimension(value) : null; }
 
@@ -162,6 +158,7 @@ namespace AdaptiveCards
         /// </summary>
         /// <returns></returns>
         public bool ShouldSerializeHeightXml() => Height != null;
+#endif
 
         /// <summary>
         /// Explicit card minimum height with 'px'. (100px, 200px)
@@ -239,10 +236,7 @@ namespace AdaptiveCards
         /// Determines whether the schema entry in an AdaptiveCard should be serialized.
         /// </summary>
         /// <returns>false</returns>
-        public bool ShouldSerializeJsonSchema()
-        {
-            return false;
-        }
+        public bool ShouldSerializeJsonSchema() => false;
 
         /// <summary>
         /// The content alignment for the element inside the container.
@@ -348,10 +342,10 @@ namespace AdaptiveCards
             List<RemoteResourceInformation> resourceInformationList = new List<RemoteResourceInformation>();
 
             // Get background image
-            if (!String.IsNullOrEmpty(card.BackgroundImage?.UrlString))
+            if (!String.IsNullOrEmpty(card.BackgroundImage?.Url))
             {
                 resourceInformationList.Add(new RemoteResourceInformation(
-                    card.BackgroundImage?.UrlString,
+                    card.BackgroundImage?.Url,
                     "image"
                 ));
             }
@@ -389,10 +383,10 @@ namespace AdaptiveCards
             List<RemoteResourceInformation> resourceInformationList = new List<RemoteResourceInformation>();
 
             // Base case
-            if (element is AdaptiveImage imageElement && !String.IsNullOrEmpty(imageElement.UrlString))
+            if (element is AdaptiveImage imageElement && !String.IsNullOrEmpty(imageElement.Url))
             {
                 resourceInformationList.Add(new RemoteResourceInformation(
-                    imageElement.UrlString,
+                    imageElement.Url,
                     "image"
                 ));
             }

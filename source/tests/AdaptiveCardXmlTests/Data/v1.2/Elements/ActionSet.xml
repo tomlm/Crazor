@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Text="Cards can have action sets in the middle of their body." Wrap="true" />
   <ActionSet>
     <Action.ShowCard Title="ShowCard">
-      <AdaptiveCard Version="1.2">
+      <AdaptiveCard Version="1.0">
         <TextBlock Text="This is a show card" />
       </AdaptiveCard>
     </Action.ShowCard>
-    <Action.OpenUrl Title="OpenUrl" Url="https://adaptivecards.io/" />
+    <Action.OpenUrl Title="OpenUrl" Url="https://adaptivecards.io" />
   </ActionSet>
   <TextBlock Text="There are also still &quot;actions&quot; at the bottom of the card" Wrap="true" />
   <Action.ShowCard Title="ShowCard">
-    <AdaptiveCard Version="1.2">
+    <AdaptiveCard Version="1.0">
       <TextBlock Text="This is a show card" />
     </AdaptiveCard>
   </Action.ShowCard>
-  <Action.OpenUrl Title="OpenUrl" Url="https://adaptivecards.io/" />
+  <Action.OpenUrl Title="OpenUrl" Url="https://adaptivecards.io" />
 </Card>

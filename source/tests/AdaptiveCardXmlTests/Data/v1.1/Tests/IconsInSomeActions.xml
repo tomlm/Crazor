@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1" Lang="en">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Lang="en">
   <Container>
     <ColumnSet>
       <Column Width="auto">
-        <Image Size="Small" Url="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date/calendar1600.png" AltText="Calendar" />
+        <Image Size="small" Url="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date/calendar1600.png" AltText="Calendar" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Weight="Bolder" Text="Image buttons" Wrap="true" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Adaptive Cards" Wrap="true" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Image buttons" Wrap="true" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Adaptive Cards" Wrap="true" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}" Wrap="true" />
       </Column>
     </ColumnSet>
   </Container>
@@ -42,7 +42,7 @@
   "no icon": "dismiss"
 }</Action.Submit>
   <Action.ShowCard Title="Dismiss" IconUrl="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/close-480.png">
-    <AdaptiveCard Version="1.1">
+    <AdaptiveCard Version="1.0">
       <TextBlock Text="Icons should appear above the title if the host config is set to Above Title" />
       <Action.Submit Title="Snooze" IconUrl="https://cdn1.iconfinder.com/data/icons/office-22/48/alarm-clock-512.png">{
   "x": "snooze"

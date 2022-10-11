@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="2">
-      <TextBlock Size="Medium" Weight="Bolder" Text="Tell us about yourself" />
+      <TextBlock Size="medium" Weight="bolder" Text="Tell us about yourself" />
       <TextBlock IsSubtle="true" Text="We just need a few more details to get you booked for the trip of a lifetime!" Wrap="true" />
-      <TextBlock Size="Small" IsSubtle="true" Text="Don't worry, we'll never share or sell your information." Wrap="true" />
+      <TextBlock Size="small" IsSubtle="true" Text="Don't worry, we'll never share or sell your information." Wrap="true" />
       <TextBlock Text="Your name" Wrap="true" />
       <Input.Text Id="myName" Placeholder="Last, First" />
       <TextBlock Text="Your email" Wrap="true" />
-      <Input.Text Id="myEmail" Placeholder="youremail@example.com" Style="Email" />
+      <Input.Text Id="myEmail" Placeholder="youremail@example.com" Style="email" />
       <TextBlock Text="Phone Number" />
-      <Input.Text Id="myTel" Placeholder="xxx.xxx.xxxx" Style="Tel" />
+      <Input.Text Id="myTel" Placeholder="xxx.xxx.xxxx" Style="tel" />
     </Column>
     <Column Width="1">
-      <Image Height="AdaptiveCards.AdaptiveDimension" Url="https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg" AltText="Great Barrier Reef" />
+      <Image Height="stretch" Url="https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg" AltText="Great Barrier Reef" />
     </Column>
   </ColumnSet>
   <Action.Submit Title="Submit" />

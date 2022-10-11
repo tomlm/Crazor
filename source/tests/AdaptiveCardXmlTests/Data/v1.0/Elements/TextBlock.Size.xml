@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Text="size:default" />
-  <TextBlock Size="Small" Text="size:small" />
+  <TextBlock Size="small" Text="size:small" />
   <TextBlock Text="size:default" />
-  <TextBlock Size="Medium" Text="size:medium" />
-  <TextBlock Size="Large" Text="size:large" />
-  <TextBlock Size="ExtraLarge" Text="size:extraLarge" />
+  <TextBlock Size="medium" Text="size:medium" />
+  <TextBlock Size="large" Text="size:large" />
+  <TextBlock Size="extraLarge" Text="size:extraLarge" />
 </Card>

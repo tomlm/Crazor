@@ -4,10 +4,10 @@
   <Container>
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Spacing="Medium" Size="Large" Text="Test meeting" Wrap="true" MaxLines="2" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Today,  9:30 PM - 10:00 PM" />
+        <TextBlock Spacing="medium" Size="large" Text="Test meeting" Wrap="true" MaxLines="2" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Today,  9:30 PM - 10:00 PM" />
       </Column>
-      <Column Spacing="None" Width="125">
+      <Column Spacing="none" Width="125">
         <ActionSet>
           <Action.Submit Title="Submit action">{
   "info": "My submit action data"
@@ -16,5 +16,5 @@
       </Column>
     </ColumnSet>
   </Container>
-  <SelectAction xsi:type="Action.OpenUrl" Url="https://msn.com/" />
+  <SelectAction xsi:type="Action.OpenUrl" Url="https://msn.com" />
 </Card>

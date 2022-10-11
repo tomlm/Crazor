@@ -4,7 +4,7 @@
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="Go to a url" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
     <TextBlock Text="Cool link" />
   </Container>
-  <Container Style="Emphasis">
+  <Container Style="emphasis">
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="Go to a different url" Url="https://msn.com/" />
     <TextBlock Text="Emphasis link" />
   </Container>

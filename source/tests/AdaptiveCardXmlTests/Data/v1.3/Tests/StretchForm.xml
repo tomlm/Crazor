@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3" MinHeight="300px">
-  <TextBlock Height="AdaptiveCards.AdaptiveDimension" Text="This is a stretched textblock" Wrap="true" />
-  <Input.Text Id="input1" Height="AdaptiveCards.AdaptiveDimension" />
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" MinHeight="300px">
+  <TextBlock Height="stretch" Text="This is a stretched textblock" Wrap="true" />
+  <Input.Text Id="input1" Height="stretch" />
   <TextBlock Text="This is a non-stretched textblock" Wrap="true" />
-  <Input.Text Id="input2" Height="AdaptiveCards.AdaptiveDimension" />
+  <Input.Text Id="input2" Height="stretch" />
 </Card>

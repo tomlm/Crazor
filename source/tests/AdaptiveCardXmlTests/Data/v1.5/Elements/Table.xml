@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <Table GridStyle="Accent">
+  <Table GridStyle="accent">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
-    <TableRow Style="Accent">
+    <TableRow Style="accent">
       <TableCell>
-        <TextBlock Weight="Bolder" Text="Name" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Name" Wrap="true" />
       </TableCell>
       <TableCell>
-        <TextBlock Weight="Bolder" Text="Type" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Type" Wrap="true" />
       </TableCell>
       <TableCell>
-        <TextBlock Weight="Bolder" Text="Description" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Description" Wrap="true" />
       </TableCell>
     </TableRow>
     <TableRow>
-      <TableCell Style="Good">
+      <TableCell Style="good">
         <TextBlock Text="columns" Wrap="true" />
       </TableCell>
-      <TableCell Style="Warning">
+      <TableCell Style="warning">
         <TextBlock Text="ColumnDefinition[]" Wrap="true" />
       </TableCell>
-      <TableCell Style="Accent">
+      <TableCell Style="accent">
         <TextBlock Text="Defines the table's columns (number of columns, and column sizes)." Wrap="true" />
       </TableCell>
     </TableRow>
     <TableRow>
-      <TableCell Style="Good">
+      <TableCell Style="good">
         <TextBlock Text="rows" Wrap="true" />
       </TableCell>
-      <TableCell Style="Accent">
+      <TableCell Style="accent">
         <TextBlock Text="TableRow[]" Wrap="true" />
       </TableCell>
-      <TableCell Style="Attention">
+      <TableCell Style="attention">
         <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
       </TableCell>
     </TableRow>
   </Table>
-  <Table ShowGridLines="false" GridStyle="Accent">
+  <Table ShowGridLines="false" GridStyle="accent">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
-    <TableRow Style="Accent">
+    <TableRow Style="accent">
       <TableCell>
-        <TextBlock Weight="Bolder" Text="Name" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Name" Wrap="true" />
       </TableCell>
       <TableCell>
-        <TextBlock Weight="Bolder" Text="Type" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Type" Wrap="true" />
       </TableCell>
       <TableCell>
-        <TextBlock Weight="Bolder" Text="Description" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Description" Wrap="true" />
       </TableCell>
     </TableRow>
     <TableRow>
-      <TableCell Style="Good">
+      <TableCell Style="good">
         <TextBlock Text="columns" Wrap="true" />
       </TableCell>
-      <TableCell Style="Warning">
+      <TableCell Style="warning">
         <TextBlock Text="ColumnDefinition[]" Wrap="true" />
       </TableCell>
-      <TableCell Style="Accent">
+      <TableCell Style="accent">
         <TextBlock Text="Defines the table's columns (number of columns, and column sizes)." Wrap="true" />
       </TableCell>
     </TableRow>
     <TableRow>
-      <TableCell Style="Good">
+      <TableCell Style="good">
         <TextBlock Text="rows" Wrap="true" />
       </TableCell>
-      <TableCell Style="Accent">
+      <TableCell Style="accent">
         <TextBlock Text="TableRow[]" Wrap="true" />
       </TableCell>
-      <TableCell Style="Attention">
+      <TableCell Style="attention">
         <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
       </TableCell>
     </TableRow>

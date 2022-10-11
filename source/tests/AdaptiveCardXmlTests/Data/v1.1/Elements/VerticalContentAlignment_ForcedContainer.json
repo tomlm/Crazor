@@ -29,7 +29,7 @@
                   "wrap": true
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             }
           ]
         },
@@ -47,7 +47,7 @@
                 }
               ],
               "verticalContentAlignment": "center",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             }
           ]
         },
@@ -65,12 +65,12 @@
                 }
               ],
               "verticalContentAlignment": "bottom",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             }
           ]
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ],
   "verticalContentAlignment": "center"

@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet Height="stretch">
     <Column Width="1">
       <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." Wrap="true" />
     </Column>
-    <Column Spacing="Large" Separator="true" Width="1">
+    <Column Spacing="large" Separator="true" Width="1">
       <TextBlock Text="FactSet (id1)" Wrap="true" />
-      <FactSet Id="id1" Height="AdaptiveCards.AdaptiveDimension">
+      <FactSet Id="id1" Height="stretch">
         <Fact Title="Fact 1" Value="Value 1" />
         <Fact Title="Fact 2" Value="Value 2" />
       </FactSet>
       <TextBlock Text="Image (id2)" Wrap="true" />
-      <Image Id="id2" Height="AdaptiveCards.AdaptiveDimension" Size="Small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <Image Id="id2" Height="stretch" Size="small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
       <TextBlock Text="ImageSet (id3)" Wrap="true" />
-      <ImageSet Id="id3" Height="AdaptiveCards.AdaptiveDimension" ImageSize="Small">
+      <ImageSet Id="id3" Height="stretch" ImageSize="small">
         <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
       </ImageSet>
       <TextBlock Text="Input.Date (id4)" Wrap="true" />
-      <Input.Date Id="id4" Height="AdaptiveCards.AdaptiveDimension" Placeholder="enter date" />
+      <Input.Date Id="id4" Height="stretch" Placeholder="enter date" />
       <TextBlock Text="Input.Number (id5)" Wrap="true" />
-      <Input.Number Id="id5" Height="AdaptiveCards.AdaptiveDimension" Placeholder="enter number" Value="NaN" Min="NaN" Max="500" />
+      <Input.Number Id="id5" Height="stretch" Placeholder="enter number" Value="NaN" Min="NaN" Max="500" />
       <TextBlock Text="Input.Text with inlineAction (id6)" Wrap="true" />
-      <Input.Text Id="id6" Height="AdaptiveCards.AdaptiveDimension" Placeholder="enter comment" MaxLength="500">
-        <Action.OpenUrl Title="Reply" Url="https://adaptivecards.io/" />
+      <Input.Text Id="id6" Height="stretch" Placeholder="enter comment" MaxLength="500">
+        <Action.OpenUrl Title="Reply" Url="https://adaptivecards.io" />
       </Input.Text>
       <TextBlock Text="Input.Text (id7)" Wrap="true" />
-      <Input.Text Id="id7" Height="AdaptiveCards.AdaptiveDimension" Placeholder="enter comment" MaxLength="500" />
+      <Input.Text Id="id7" Height="stretch" Placeholder="enter comment" MaxLength="500" />
       <TextBlock Text="Input.Time (id8)" Wrap="true" />
-      <Input.Time Id="id8" Height="AdaptiveCards.AdaptiveDimension" Placeholder="enter time" />
+      <Input.Time Id="id8" Height="stretch" Placeholder="enter time" />
       <TextBlock Text="Input.Toggle (id9)" Wrap="true" />
-      <Input.Toggle Id="id9" Height="AdaptiveCards.AdaptiveDimension" Title="Placeholder title" ValueOn="True" ValueOff="False" />
+      <Input.Toggle Id="id9" Height="stretch" Title="Placeholder title" ValueOn="True" ValueOff="False" />
       <TextBlock Text="TextBlock (id10)" Wrap="true" />
-      <TextBlock Id="id10" Height="AdaptiveCards.AdaptiveDimension" Text="Regular textblock" />
+      <TextBlock Id="id10" Height="stretch" Text="Regular textblock" />
       <TextBlock Text="Container (id11)" Wrap="true" />
-      <Container Id="id11" Height="AdaptiveCards.AdaptiveDimension">
+      <Container Id="id11" Height="stretch">
         <TextBlock Text="TextBlock inside a container" />
       </Container>
       <TextBlock Text="ColumnSet (id12)" Wrap="true" />
-      <ColumnSet Id="id12" Height="AdaptiveCards.AdaptiveDimension">
+      <ColumnSet Id="id12" Height="stretch">
         <Column>
           <TextBlock Text="This is for testing columnset" />
         </Column>
@@ -50,43 +50,33 @@
         </Column>
       </ColumnSet>
       <TextBlock Text="Media (id14)" Wrap="true" />
-      <Media Id="id14" Height="AdaptiveCards.AdaptiveDimension" Poster="https://adaptivecards.io/content/poster-video.png">
+      <Media Id="id14" Height="stretch" Poster="https://adaptivecards.io/content/poster-video.png">
         <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
       </Media>
       <TextBlock Text="RichTextBlock (id15)" Wrap="true" />
-      <RichTextBlock Id="id15" Height="AdaptiveCards.AdaptiveDimension">
+      <RichTextBlock Id="id15" Height="stretch">
         <Inlines>
           <Type>TextRun</Type>This is the first inline. </Inlines>
-        <Inlines Color="Good">
+        <Inlines Color="good">
           <Type>TextRun</Type>We support colors, </Inlines>
       </RichTextBlock>
       <TextBlock Text="TextBlock at the bottom" Wrap="true" />
     </Column>
   </ColumnSet>
-  <ColumnSet Height="AdaptiveCards.AdaptiveDimension">
+  <ColumnSet Height="stretch">
     <Column Width="1">
       <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." Wrap="true" />
     </Column>
-    <Column Spacing="Large" Separator="true" Width="1">
+    <Column Spacing="large" Separator="true" Width="1">
       <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
-      <Input.ChoiceSet Id="id16" Height="AdaptiveCards.AdaptiveDimension">
-        <AdditionalProperties>
-          <item>
-            <key>
-              <string>style</string>
-            </key>
-            <value>
-              <anyType xsi:type="xsd:string">compact</anyType>
-            </value>
-          </item>
-        </AdditionalProperties>
+      <Input.ChoiceSet Id="id16" Height="stretch">
         <Choices>
           <Choice Title="Red" Value="1" />
           <Choice Title="Green" Value="2" />
           <Choice Title="Blue" Value="3" />
         </Choices>
       </Input.ChoiceSet>
-      <Input.ChoiceSet Id="id17" Height="AdaptiveCards.AdaptiveDimension" Value="1" Style="Expanded">
+      <Input.ChoiceSet Id="id17" Height="stretch" Value="1" Style="expanded">
         <Choices>
           <Choice Title="Red" Value="1" />
           <Choice Title="Green" Value="2" />
@@ -95,9 +85,9 @@
       </Input.ChoiceSet>
       <TextBlock Text="One last text block at the bottom" Wrap="true" />
     </Column>
-    <Column Spacing="Large" Separator="true" Width="1">
+    <Column Spacing="large" Separator="true" Width="1">
       <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
-      <Input.ChoiceSet Id="id18" Height="AdaptiveCards.AdaptiveDimension" Value="1,3" IsMultiSelect="true">
+      <Input.ChoiceSet Id="id18" Height="stretch" Value="1,3" IsMultiSelect="true">
         <AdditionalProperties>
           <item>
             <key>
@@ -114,7 +104,7 @@
           <Choice Title="Blue" Value="3" />
         </Choices>
       </Input.ChoiceSet>
-      <Input.ChoiceSet Id="id19" Height="AdaptiveCards.AdaptiveDimension" Value="1" Style="Expanded" IsMultiSelect="true">
+      <Input.ChoiceSet Id="id19" Height="stretch" Value="1" Style="expanded" IsMultiSelect="true">
         <Choices>
           <Choice Title="Red" Value="1" />
           <Choice Title="Green" Value="2" />
@@ -125,24 +115,24 @@
     </Column>
   </ColumnSet>
   <Action.ToggleVisibility Title="Toggle!">
-    <TargetElements ElementId="id1" />
-    <TargetElements ElementId="id2" />
-    <TargetElements ElementId="id3" />
-    <TargetElements ElementId="id4" />
-    <TargetElements ElementId="id5" />
-    <TargetElements ElementId="id6" />
-    <TargetElements ElementId="id7" />
-    <TargetElements ElementId="id8" />
-    <TargetElements ElementId="id9" />
-    <TargetElements ElementId="id10" />
-    <TargetElements ElementId="id11" />
-    <TargetElements ElementId="id12" />
-    <TargetElements ElementId="id13" />
-    <TargetElements ElementId="id14" />
-    <TargetElements ElementId="id15" />
-    <TargetElements ElementId="id16" />
-    <TargetElements ElementId="id17" />
-    <TargetElements ElementId="id18" />
-    <TargetElements ElementId="id19" />
+    <TargetElement ElementId="id1" />
+    <TargetElement ElementId="id2" />
+    <TargetElement ElementId="id3" />
+    <TargetElement ElementId="id4" />
+    <TargetElement ElementId="id5" />
+    <TargetElement ElementId="id6" />
+    <TargetElement ElementId="id7" />
+    <TargetElement ElementId="id8" />
+    <TargetElement ElementId="id9" />
+    <TargetElement ElementId="id10" />
+    <TargetElement ElementId="id11" />
+    <TargetElement ElementId="id12" />
+    <TargetElement ElementId="id13" />
+    <TargetElement ElementId="id14" />
+    <TargetElement ElementId="id15" />
+    <TargetElement ElementId="id16" />
+    <TargetElement ElementId="id17" />
+    <TargetElement ElementId="id18" />
+    <TargetElement ElementId="id19" />
   </Action.ToggleVisibility>
 </Card>

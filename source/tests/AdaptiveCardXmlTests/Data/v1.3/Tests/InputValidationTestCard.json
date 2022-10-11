@@ -74,8 +74,7 @@
       "placeholder": "Select a Choice",
       "isRequired": true,
       "label": "Please select from the following choices:",
-      "errorMessage": "You must select a choice",
-      "style": "compact"
+      "errorMessage": "You must select a choice"
     },
     {
       "type": "Input.ChoiceSet",

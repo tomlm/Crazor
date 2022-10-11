@@ -26,9 +26,9 @@ namespace AdaptiveCards
         public override string Type { get; set; } = TypeName;
 
         /// <summary>
-        /// CDefines the number of columns in the table, their sizes, and more.
+        /// Defines the number of columns in the table, their sizes, and more.
         /// </summary>
-        [JsonRequired]
+        [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlElement(Type = typeof(AdaptiveTableColumn), ElementName = AdaptiveTableColumn.TypeName)]
 #endif
@@ -37,7 +37,7 @@ namespace AdaptiveCards
         /// <summary>
         /// CDefines the number of columns in the table, their sizes, and more.
         /// </summary>
-        [JsonRequired]
+        [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlElement(Type = typeof(AdaptiveTableRow), ElementName = AdaptiveTableRow.TypeName)]
 #endif
@@ -86,32 +86,11 @@ namespace AdaptiveCards
         /// <summary>
         /// Defines the style of the grid. This property currently only controls the grid's color.s
         /// </summary>
-        [JsonConverter(typeof(IgnoreNullEnumConverter<AdaptiveContainerStyle>), true)]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
-        [XmlIgnore]
+        [XmlAttribute]
 #endif
-        [DefaultValue(null)]
-        public AdaptiveContainerStyle? GridStyle { get; set; }
-
-#if !NETSTANDARD1_3
-        /// <summary>
-        /// Controls XML serialization of style.
-        /// </summary>
-        // The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
-        [JsonIgnore]
-        [XmlAttribute(nameof(GridStyle))]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public string GridStyleXml
-        {
-            get { return GridStyle?.ToString(); }
-            set { GridStyle = (AdaptiveContainerStyle?)Enum.Parse(typeof(AdaptiveContainerStyle), value, ignoreCase: true); }
-        }
-
-        /// <summary>
-        /// Determines whether to serialize the style for XML.
-        /// </summary>
-        public bool ShouldSerializeGridStyleXml() => this.GridStyle.HasValue;
-#endif
+        [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
+        public AdaptiveContainerStyle GridStyle { get; set; }
     }
 }

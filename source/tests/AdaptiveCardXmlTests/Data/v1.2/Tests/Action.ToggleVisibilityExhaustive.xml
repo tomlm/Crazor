@@ -4,40 +4,40 @@
   <TextBlock Id="textToToggle" IsVisible="false" Text="Here are some images:" />
   <ColumnSet>
     <Column>
-      <Image Id="imageToToggle" IsVisible="false" Size="Medium" Style="Person" Url="https://picsum.photos/100/100?image=112" AltText="sample image 1" />
+      <Image Id="imageToToggle" IsVisible="false" Size="medium" Style="person" Url="https://picsum.photos/100/100?image=112" AltText="sample image 1" />
     </Column>
     <Column>
-      <Image Id="imageToToggle2" IsVisible="false" Size="Medium" Url="https://picsum.photos/100/100?image=123" AltText="sample image 2" />
+      <Image Id="imageToToggle2" IsVisible="false" Size="medium" Url="https://picsum.photos/100/100?image=123" AltText="sample image 2" />
     </Column>
   </ColumnSet>
   <Action.ToggleVisibility Title="Toggle!">
-    <TargetElements ElementId="textToToggle" />
-    <TargetElements ElementId="imageToToggle" />
-    <TargetElements ElementId="imageToToggle2" />
+    <TargetElement ElementId="textToToggle" />
+    <TargetElement ElementId="imageToToggle" />
+    <TargetElement ElementId="imageToToggle2" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Also Toggle!">
-    <TargetElements ElementId="textToToggle" />
-    <TargetElements ElementId="imageToToggle" />
-    <TargetElements ElementId="imageToToggle2" />
+    <TargetElement ElementId="textToToggle" />
+    <TargetElement ElementId="imageToToggle" />
+    <TargetElement ElementId="imageToToggle2" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Show!">
-    <TargetElements ElementId="textToToggle" IsVisible="true" />
-    <TargetElements ElementId="imageToToggle" IsVisible="true" />
-    <TargetElements ElementId="imageToToggle2" IsVisible="true" />
+    <TargetElement ElementId="textToToggle" IsVisible="true" />
+    <TargetElement ElementId="imageToToggle" IsVisible="true" />
+    <TargetElement ElementId="imageToToggle2" IsVisible="true" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Hide!">
-    <TargetElements ElementId="textToToggle" IsVisible="false" />
-    <TargetElements ElementId="imageToToggle" IsVisible="false" />
-    <TargetElements ElementId="imageToToggle2" IsVisible="false" />
+    <TargetElement ElementId="textToToggle" IsVisible="false" />
+    <TargetElement ElementId="imageToToggle" IsVisible="false" />
+    <TargetElement ElementId="imageToToggle2" IsVisible="false" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Grain!">
-    <TargetElements ElementId="textToToggle" IsVisible="true" />
-    <TargetElements ElementId="imageToToggle" IsVisible="true" />
-    <TargetElements ElementId="imageToToggle2" IsVisible="false" />
+    <TargetElement ElementId="textToToggle" IsVisible="true" />
+    <TargetElement ElementId="imageToToggle" IsVisible="true" />
+    <TargetElement ElementId="imageToToggle2" IsVisible="false" />
   </Action.ToggleVisibility>
   <Action.ToggleVisibility Title="Water!">
-    <TargetElements ElementId="textToToggle" IsVisible="true" />
-    <TargetElements ElementId="imageToToggle" IsVisible="false" />
-    <TargetElements ElementId="imageToToggle2" IsVisible="true" />
+    <TargetElement ElementId="textToToggle" IsVisible="true" />
+    <TargetElement ElementId="imageToToggle" IsVisible="false" />
+    <TargetElement ElementId="imageToToggle2" IsVisible="true" />
   </Action.ToggleVisibility>
 </Card>

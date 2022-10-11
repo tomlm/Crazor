@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Text="Please confirm your data:" Wrap="true" Style="Heading" />
+  <TextBlock Text="Please confirm your data:" Wrap="true" Style="heading" />
   <FactSet>
     <Fact Title="First Name" Value="John" />
     <Fact Title="Last Name" Value="Smith" />

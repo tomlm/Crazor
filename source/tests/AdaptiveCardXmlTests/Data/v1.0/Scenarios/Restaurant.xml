@@ -3,9 +3,9 @@
   <ColumnSet>
     <Column Width="2">
       <TextBlock Text="Redmond, WA" Wrap="true" />
-      <TextBlock Spacing="None" Size="ExtraLarge" Weight="Bolder" Text="Malt &amp; Vine" Wrap="true" />
-      <TextBlock Spacing="None" IsSubtle="true" Text="4.5 stars (176 reviews) · mid-priced" Wrap="true" />
-      <TextBlock Size="Small" Text="**Blaire S.** said &quot;Great concept and a wide selection of beers both on tap and bottled! Smaller wine selection than I wanted, but the variety of beers certainly made up for that. Although I didn't order anything, my boyfriend got a beer and he loved it. Their prices are fair too. &#xA;&#xA;The concept is really awesome. It's a bar/store that you can bring outside food into. The place was pretty packed tonight. I wish we had stayed for more than one drink. I would have loved to sample everything!&quot;" Wrap="true" MaxLines="3" />
+      <TextBlock Spacing="none" Size="extraLarge" Weight="bolder" Text="Malt &amp; Vine" Wrap="true" />
+      <TextBlock Spacing="none" IsSubtle="true" Text="4.5 stars (176 reviews) · mid-priced" Wrap="true" />
+      <TextBlock Size="small" Text="**Blaire S.** said &quot;Great concept and a wide selection of beers both on tap and bottled! Smaller wine selection than I wanted, but the variety of beers certainly made up for that. Although I didn't order anything, my boyfriend got a beer and he loved it. Their prices are fair too. &#xA;&#xA;The concept is really awesome. It's a bar/store that you can bring outside food into. The place was pretty packed tonight. I wish we had stayed for more than one drink. I would have loved to sample everything!&quot;" Wrap="true" MaxLines="3" />
     </Column>
     <Column Width="1">
       <Image Url="https://picsum.photos/300?image=882" AltText="Seated guest drinking a cup of coffee" />

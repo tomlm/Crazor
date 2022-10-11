@@ -41,7 +41,7 @@ namespace AdaptiveCards
 
 
     /// <summary>
-    /// Represents the dimension property in Adaptive Cards.
+    /// Represents the dimension property in Adaptive Cards, which is either "auto","stretch" or 1.5px
     /// </summary>
     [JsonConverter(typeof(AdaptiveDimensionConverter))]
     public class AdaptiveDimension : IEquatable<AdaptiveDimension>
@@ -74,6 +74,18 @@ namespace AdaptiveCards
                 value = value.Substring(0, value.Length - 2);
                 this.Unit = int.Parse(value);
             }
+            else
+            {
+                switch(value)
+                {
+                    case AdaptiveDimensionType.Auto:
+                    case AdaptiveDimensionType.Stretch:
+                        this.DimensionType = value;
+                        break;
+                    default:
+                        throw new Exception($"Unknown dimension type: {value}");
+                }
+            }
         }
 
         public static implicit operator AdaptiveDimension(string val) => new AdaptiveDimension(val);
@@ -87,6 +99,9 @@ namespace AdaptiveCards
         /// Gets or sets the units 
         /// </summary>
         public int? Unit { get; set; }
+
+        public override string ToString()
+            => (DimensionType != null) ? DimensionType : $"{Unit}px";
 
         /// <summary>
         /// Returns true if this <see cref="AdaptiveDimension"/> instance represents a pixel 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Text="TextBlock with 4 &quot;space&quot; characters    1" />
   <TextBlock Text="TextBlock with 4 &quot;&amp;-nbsp;&quot; characters&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1" />
   <TextBlock Text="TextBlock with 4 &quot;&amp;-ensp;&quot; characters&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1" />

@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.2",
+  "version": "1.0",
   "body": [
     {
       "type": "TextBlock",
@@ -12,7 +12,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.2",
+        "version": "1.0",
         "body": [
           {
             "type": "TextBlock",
@@ -24,7 +24,7 @@
             "type": "Action.ShowCard",
             "card": {
               "type": "AdaptiveCard",
-              "version": "1.2",
+              "version": "1.0",
               "body": [
                 {
                   "type": "TextBlock",

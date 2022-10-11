@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Size="Medium" Text="The middle column is set to rtl" Wrap="true" />
-  <ColumnSet Spacing="Medium">
+  <TextBlock Size="medium" Text="The middle column is set to rtl" Wrap="true" />
+  <ColumnSet Spacing="medium">
     <Column>
       <TextBlock Text="Column One" Wrap="true" />
     </Column>

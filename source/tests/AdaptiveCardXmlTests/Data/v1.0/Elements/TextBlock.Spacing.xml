@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Medium" Text="Spacing controls the amount of space between this element and the one before it" Wrap="true" />
-  <TextBlock Spacing="None" Text="spacing: none" />
-  <TextBlock Spacing="Small" Text="spacing: small" />
+  <TextBlock Size="medium" Text="Spacing controls the amount of space between this element and the one before it" Wrap="true" />
+  <TextBlock Spacing="none" Text="spacing: none" />
+  <TextBlock Spacing="small" Text="spacing: small" />
   <TextBlock Text="spacing: default" />
-  <TextBlock Spacing="Medium" Text="spacing: medium" />
-  <TextBlock Spacing="Large" Text="spacing: large" />
-  <TextBlock Spacing="ExtraLarge" Text="spacing: extraLarge" />
+  <TextBlock Spacing="medium" Text="spacing: medium" />
+  <TextBlock Spacing="large" Text="spacing: large" />
+  <TextBlock Spacing="extraLarge" Text="spacing: extraLarge" />
   <TextBlock Separator="true" Text="separator: true" />
-  <TextBlock Spacing="ExtraLarge" Separator="true" Text="separator: true, spacing: extraLarge" />
+  <TextBlock Spacing="extraLarge" Separator="true" Text="separator: true, spacing: extraLarge" />
 </Card>

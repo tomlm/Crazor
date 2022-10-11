@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.1",
+  "version": "1.0",
   "body": [
     {
       "type": "ColumnSet",
@@ -15,14 +15,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: small - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -50,14 +50,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: medium - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -85,14 +85,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: large - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -119,14 +119,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: auto - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -154,14 +154,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: stretch - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -195,7 +195,7 @@
               "text": "Image above: Size: small - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -229,7 +229,7 @@
               "text": "Image above: Size: medium - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -263,7 +263,7 @@
               "text": "Image above: Size: large - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -296,7 +296,7 @@
               "text": "Image above: Size: auto - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -330,7 +330,7 @@
               "text": "Image above: Size: stretch - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -358,14 +358,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: small - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -393,14 +393,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: medium - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -428,14 +428,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: large - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -462,14 +462,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: auto - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -497,14 +497,14 @@
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
               "text": "Image above: Size: stretch - Height: stretch"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -538,7 +538,7 @@
               "text": "Image above: Size: small - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -572,7 +572,7 @@
               "text": "Image above: Size: medium - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -606,7 +606,7 @@
               "text": "Image above: Size: large - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -639,7 +639,7 @@
               "text": "Image above: Size: auto - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",
@@ -673,7 +673,7 @@
               "text": "Image above: Size: stretch - Height: auto"
             }
           ],
-          "height": "AdaptiveCards.AdaptiveDimension"
+          "height": "stretch"
         },
         {
           "type": "Column",

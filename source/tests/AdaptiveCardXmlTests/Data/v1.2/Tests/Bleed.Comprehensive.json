@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.2",
+  "version": "1.0",
   "body": [
     {
       "type": "Container",
@@ -51,7 +51,6 @@
               "wrap": true
             }
           ],
-          "style": "default",
           "bleed": true
         },
         {
@@ -62,8 +61,7 @@
               "text": "Non-bleeding sub-container with style explicitly set to default",
               "wrap": true
             }
-          ],
-          "style": "default"
+          ]
         },
         {
           "type": "Container",
@@ -160,7 +158,6 @@
               "altText": "Matt Hidinger"
             }
           ],
-          "style": "default",
           "bleed": true
         },
         {
@@ -200,7 +197,6 @@
               "spacing": "none"
             }
           ],
-          "style": "default",
           "verticalContentAlignment": "center"
         },
         {
@@ -214,7 +210,6 @@
               "wrap": true
             }
           ],
-          "style": "default",
           "verticalContentAlignment": "center",
           "bleed": true
         }
@@ -303,14 +298,12 @@
                       "style": "emphasis",
                       "bleed": true
                     }
-                  ],
-                  "style": "default"
+                  ]
                 }
               ],
               "style": "emphasis"
             }
-          ],
-          "style": "default"
+          ]
         }
       ],
       "style": "emphasis",
@@ -543,8 +536,7 @@
                 }
               ]
             }
-          ],
-          "style": "default"
+          ]
         }
       ],
       "style": "emphasis"
@@ -602,8 +594,7 @@
                 }
               ]
             }
-          ],
-          "style": "default"
+          ]
         },
         {
           "type": "Column",
@@ -670,8 +661,7 @@
                 }
               ]
             }
-          ],
-          "style": "default"
+          ]
         }
       ],
       "style": "emphasis"
@@ -706,7 +696,7 @@
           "type": "Action.ShowCard",
           "card": {
             "type": "AdaptiveCard",
-            "version": "1.2",
+            "version": "1.0",
             "body": [
               {
                 "type": "Container",
@@ -722,8 +712,7 @@
                         "wrap": true,
                         "spacing": "none"
                       }
-                    ],
-                    "style": "default"
+                    ]
                   }
                 ],
                 "style": "emphasis",

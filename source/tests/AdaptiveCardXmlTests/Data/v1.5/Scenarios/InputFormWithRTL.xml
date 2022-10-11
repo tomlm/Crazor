@@ -3,10 +3,10 @@
   <TextBlock Text="Please select your language:" />
   <Action.ShowCard Title="English">
     <AdaptiveCard Version="1.4">
-      <TextBlock Size="Medium" Weight="Bolder" Text="Registration Form" HorizontalAlignment="Center" Wrap="true" Style="Heading" />
+      <TextBlock Size="medium" Weight="bolder" Text="Registration Form" HorizontalAlignment="center" Wrap="true" Style="heading" />
       <Input.Text Id="SimpleValENG" IsRequired="true" Label="Name" ErrorMessage="Name is required" />
-      <Input.Text Id="EmailValENG" Label="Email" Style="Email" />
-      <Input.Text Id="TelValENG" Label="Phone" Style="Tel" />
+      <Input.Text Id="EmailValENG" Label="Email" Style="email" />
+      <Input.Text Id="TelValENG" Label="Phone" Style="tel" />
       <Input.Text Id="MultiLineValENG" Label="Comments" IsMultiline="true" />
       <Action.Submit Title="Submit" />
     </AdaptiveCard>
@@ -23,10 +23,10 @@
           </value>
         </item>
       </AdditionalProperties>
-      <TextBlock Size="Medium" Weight="Bolder" Text="إستمارة تسجيل" HorizontalAlignment="Center" Wrap="true" Style="Heading" />
+      <TextBlock Size="medium" Weight="bolder" Text="إستمارة تسجيل" HorizontalAlignment="center" Wrap="true" Style="heading" />
       <Input.Text Id="SimpleValARA" IsRequired="true" Label="اسم" ErrorMessage="مطلوب اسم" />
-      <Input.Text Id="EmailValARA" Label="بريد الالكتروني" Style="Email" />
-      <Input.Text Id="TelValARA" Label="هاتف" Style="Tel" />
+      <Input.Text Id="EmailValARA" Label="بريد الالكتروني" Style="email" />
+      <Input.Text Id="TelValARA" Label="هاتف" Style="tel" />
       <Input.Text Id="MultiLineValARA" Label="تعليقات" IsMultiline="true" />
       <Action.Submit Title="يقدم" />
     </AdaptiveCard>

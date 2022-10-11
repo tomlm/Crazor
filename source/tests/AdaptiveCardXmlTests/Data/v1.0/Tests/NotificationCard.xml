@@ -3,12 +3,12 @@
   <Container>
     <ColumnSet>
       <Column Width="auto">
-        <Image Size="Small" Url="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date/calendar1600.png" AltText="Calendar" />
+        <Image Size="small" Url="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date/calendar1600.png" AltText="Calendar" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Weight="Bolder" Text="Image buttons" Wrap="true" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="Adaptive Cards" Wrap="true" />
-        <TextBlock Spacing="None" IsSubtle="true" Text="{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}" Wrap="true" />
+        <TextBlock Weight="bolder" Text="Image buttons" Wrap="true" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="Adaptive Cards" Wrap="true" />
+        <TextBlock Spacing="none" IsSubtle="true" Text="{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}" Wrap="true" />
       </Column>
     </ColumnSet>
   </Container>

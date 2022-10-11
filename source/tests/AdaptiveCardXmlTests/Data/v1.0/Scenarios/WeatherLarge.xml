@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Weather forecast for Monday is high of 62 and low of 42 degrees with a 20% chance of rain&lt;/s&gt;&lt;s&gt;Winds will be 5 mph from the northeast&lt;/s&gt;">
-  <BackgroundImage BackgroundImage="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Background.jpg" />
+  <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Background.jpg" />
   <ColumnSet>
     <Column Width="35">
-      <Image Size="Stretch" Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
+      <Image Size="stretch" Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
     </Column>
     <Column Width="65">
-      <TextBlock Size="Large" Weight="Bolder" Color="Dark" Text="Tue, Nov 5, 2019" Wrap="true" />
-      <TextBlock Spacing="None" Size="Medium" Color="Dark" Text="32 / 50" Wrap="true" />
-      <TextBlock Spacing="None" Color="Dark" Text="31% chance of rain" Wrap="true" />
-      <TextBlock Spacing="None" Color="Dark" Text="Winds 4.4 mph SSE" Wrap="true" />
+      <TextBlock Size="large" Weight="bolder" Color="dark" Text="Tue, Nov 5, 2019" Wrap="true" />
+      <TextBlock Spacing="none" Size="medium" Color="dark" Text="32 / 50" Wrap="true" />
+      <TextBlock Spacing="none" Color="dark" Text="31% chance of rain" Wrap="true" />
+      <TextBlock Spacing="none" Color="dark" Text="Winds 4.4 mph SSE" Wrap="true" />
     </Column>
   </ColumnSet>
   <ColumnSet>
     <Column Width="20">
       <SelectAction xsi:type="Action.OpenUrl" Title="View Wednesday" Url="https://www.microsoft.com/" />
-      <TextBlock Color="Dark" Text="Wednesday" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Color="dark" Text="Wednesday" HorizontalAlignment="center" Wrap="true" />
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Drizzle-Square.png" AltText="Drizzly weather" />
-      <TextBlock Color="Dark" Text="**High**&#x9;50" HorizontalAlignment="Center" />
-      <TextBlock Spacing="None" Color="Dark" Text="**Low**&#x9;32" HorizontalAlignment="Center" />
+      <TextBlock Color="dark" Text="**High**&#x9;50" HorizontalAlignment="center" />
+      <TextBlock Spacing="none" Color="dark" Text="**Low**&#x9;32" HorizontalAlignment="center" />
     </Column>
     <Column Width="20">
       <SelectAction xsi:type="Action.OpenUrl" Title="View Thursday" Url="https://www.microsoft.com/" />
-      <TextBlock Color="Dark" Text="Thursday" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Color="dark" Text="Thursday" HorizontalAlignment="center" Wrap="true" />
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
-      <TextBlock Color="Dark" Text="**High**&#x9;50" HorizontalAlignment="Center" />
-      <TextBlock Spacing="None" Color="Dark" Text="**Low**&#x9;32" HorizontalAlignment="Center" />
+      <TextBlock Color="dark" Text="**High**&#x9;50" HorizontalAlignment="center" />
+      <TextBlock Spacing="none" Color="dark" Text="**Low**&#x9;32" HorizontalAlignment="center" />
     </Column>
     <Column Width="20">
       <SelectAction xsi:type="Action.OpenUrl" Title="View Friday" Url="https://www.microsoft.com/" />
-      <TextBlock Color="Dark" Text="Friday" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Color="dark" Text="Friday" HorizontalAlignment="center" Wrap="true" />
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
-      <TextBlock Color="Dark" Text="**High**&#x9;59" HorizontalAlignment="Center" />
-      <TextBlock Spacing="None" Color="Dark" Text="**Low**&#x9;32" HorizontalAlignment="Center" />
+      <TextBlock Color="dark" Text="**High**&#x9;59" HorizontalAlignment="center" />
+      <TextBlock Spacing="none" Color="dark" Text="**Low**&#x9;32" HorizontalAlignment="center" />
     </Column>
     <Column Width="20">
       <SelectAction xsi:type="Action.OpenUrl" Title="View Saturday" Url="https://www.microsoft.com/" />
-      <TextBlock Color="Dark" Text="Saturday" HorizontalAlignment="Center" Wrap="true" />
+      <TextBlock Color="dark" Text="Saturday" HorizontalAlignment="center" Wrap="true" />
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
-      <TextBlock Color="Dark" Text="**High**&#x9;50" HorizontalAlignment="Center" />
-      <TextBlock Spacing="None" Color="Dark" Text="**Low**&#x9;32" HorizontalAlignment="Center" />
+      <TextBlock Color="dark" Text="**High**&#x9;50" HorizontalAlignment="center" />
+      <TextBlock Spacing="none" Color="dark" Text="**Low**&#x9;32" HorizontalAlignment="center" />
     </Column>
   </ColumnSet>
 </Card>

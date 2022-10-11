@@ -5,6 +5,6 @@
     <Action.Submit Title="Reply" IconUrl="https://adaptivecards.io/content/send.png" />
   </Input.Text>
   <Input.Text Id="input4" IsMultiline="true">
-    <Action.OpenUrl Title="Reply" Url="https://adaptivecards.io/" />
+    <Action.OpenUrl Title="Reply" Url="https://adaptivecards.io" />
   </Input.Text>
 </Card>

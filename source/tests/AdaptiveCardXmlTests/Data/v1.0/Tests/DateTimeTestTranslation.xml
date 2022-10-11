@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Lang="es">
   <Container>
-    <TextBlock Size="Large" Color="Good" Text="VALID DATE / TIME FORMATS" />
+    <TextBlock Size="large" Color="good" Text="VALID DATE / TIME FORMATS" />
     <TextBlock Text="No offset {{DATE(2017-02-14T06:08:00Z)}} {{TIME(2017-02-14T06:08:00Z)}}" Wrap="true" />
     <TextBlock Text="Positive offset {{DATE(2017-02-14T06:08:00+04:00)}} {{TIME(2017-02-14T06:08:00+04:00)}}" Wrap="true" />
     <TextBlock Text="Negative offset {{DATE(2017-02-14T06:08:00-07:00)}} {{TIME(2017-02-14T06:08:00-07:00)}}" Wrap="true" />
   </Container>
-  <Container Spacing="Large">
-    <TextBlock Size="Large" Color="Good" Text="VALID DATE FORMAT OPTIONS" />
+  <Container Spacing="large">
+    <TextBlock Size="large" Color="good" Text="VALID DATE FORMAT OPTIONS" />
     <TextBlock Text="{{DATE(2017-02-14T06:08:00Z, COMPACT)}} (Default)" Wrap="true" />
     <TextBlock Text="{{DATE(2017-02-14T06:08:00Z, SHORT)}}" Wrap="true" />
     <TextBlock Text="{{DATE(2017-02-14T06:08:00Z, LONG)}}" Wrap="true" />
   </Container>
-  <Container Spacing="Large">
-    <TextBlock Size="Large" Color="Attention" Text="INVALID DATE / TIME FORMATS" />
+  <Container Spacing="large">
+    <TextBlock Size="large" Color="attention" Text="INVALID DATE / TIME FORMATS" />
     <TextBlock Text="Invalid Spaces {{ DATE(2017-02-14T06:08:00Z) }} {{ TIME(2017-02-14T06:08:00Z) }}" Wrap="true" />
     <TextBlock Text="Invalid Date {{DATE(2017-99-14T06:08:00Z)}} {{TIME(2017-99-14T06:08:00Z)}}" Wrap="true" />
     <TextBlock Text="Invalid casing {{date(2017-02-14T06:08:00Z)}} {{Time(2017-02-14T06:08:00Z)}}" Wrap="true" />

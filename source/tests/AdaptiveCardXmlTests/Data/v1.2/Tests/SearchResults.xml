@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Size="Large" Weight="Bolder" Text="3 results for 3d printer filament" Wrap="true" />
-  <Input.ChoiceSet Id="filament" Value="1" Style="Expanded" Wrap="true">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <TextBlock Size="large" Weight="bolder" Text="3 results for 3d printer filament" Wrap="true" />
+  <Input.ChoiceSet Id="filament" Value="1" Style="expanded" Wrap="true">
     <Choices>
       <Choice Title="HATCHBOX 1.75mm White PLA 3D Printer Filament - 1kg Spool (2.2 lbs) - Dimensional Accuracy +/- 0.03mm" Value="1" />
       <Choice Title="HATCHBOX PLA 3D Printer Filament, Dimensional Accuracy +/- 0.03 mm, 1 kg Spool, 1.75 mm, Blue" Value="2" />
@@ -25,7 +25,7 @@
       <Choice Title="3D Solutech Silver Metal 3D Printer PLA Filament 1.75MM Filament, Dimensional Accuracy +/- 0.03 mm, 2.2 LBS (1.0KG) - PLA175TCMS" Value="3" />
     </Choices>
   </Input.ChoiceSet>
-  <TextBlock Size="Medium" Weight="Bolder" Text="Specify Filament Type to ABS" />
+  <TextBlock Size="medium" Weight="bolder" Text="Specify Filament Type to ABS" />
   <Input.Toggle Id="filamenttype" Title="Get PLA(Poly Lactic Acid) filament by tommorrow if order in next 2 hours" ValueOn="true" ValueOff="false" Wrap="true" Value="true" />
   <Action.Submit Title="Order" />
 </Card>

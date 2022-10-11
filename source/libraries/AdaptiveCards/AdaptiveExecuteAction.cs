@@ -32,7 +32,22 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
+        [DefaultValue(null)]
         public object Data { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Get or set the data as a JSON string.
+        /// </summary>
+        [JsonIgnore]
+        [XmlText]
+        [DefaultValue(null)]
+        public string DataXml
+        {
+            get => (Data != null) ? JsonConvert.SerializeObject(Data, Formatting.Indented) : null;
+            set => Data = (value != null) ? JsonConvert.DeserializeObject(value, new JsonSerializerSettings { Converters = { new StrictIntConverter() } }) : null;
+        }
+#endif
 
         /// <summary>
         ///     Controls which inputs are associated with the execute action
@@ -44,7 +59,6 @@ namespace AdaptiveCards
         [DefaultValue(typeof(AdaptiveAssociatedInputs), "auto")]
         public AdaptiveAssociatedInputs AssociatedInputs { get; set; }
 
-
         /// <summary>
         ///     The card author-defined verb associated with this action.
         /// </summary>
@@ -52,42 +66,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        public string Verb { get; set; } = "";
-
-        /// <summary>
-        /// Get or set the data as a JSON string.
-        /// </summary>
-        [JsonIgnore]
-#if !NETSTANDARD1_3
-        [XmlText]
-#endif
-        public string DataJson
-        {
-            get
-            {
-                if (Data != null)
-                {
-                    return JsonConvert.SerializeObject(Data, Formatting.Indented);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            set
-            {
-                if (value == null)
-                {
-                    Data = null;
-                }
-                else
-                {
-                    Data = JsonConvert.DeserializeObject(value, new JsonSerializerSettings
-                    {
-                        Converters = { new StrictIntConverter() }
-                    });
-                }
-            }
-        }
+        [DefaultValue(null)]
+        public string Verb { get; set; }
     }
 }

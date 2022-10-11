@@ -16,7 +16,7 @@
                   "type": "Action.ShowCard",
                   "card": {
                     "type": "AdaptiveCard",
-                    "version": "1.2",
+                    "version": "1.0",
                     "body": [
                       {
                         "type": "TextBlock",
@@ -27,7 +27,7 @@
                   "title": "ShowCard1"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "ActionSet",
@@ -36,7 +36,7 @@
                   "type": "Action.ShowCard",
                   "card": {
                     "type": "AdaptiveCard",
-                    "version": "1.2",
+                    "version": "1.0",
                     "body": [
                       {
                         "type": "TextBlock",
@@ -47,7 +47,7 @@
                   "title": "ShowCard2"
                 }
               ],
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",

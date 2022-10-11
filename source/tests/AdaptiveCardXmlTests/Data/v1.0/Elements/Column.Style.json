@@ -21,8 +21,7 @@
               "type": "TextBlock",
               "text": "Default Style"
             }
-          ],
-          "style": "default"
+          ]
         },
         {
           "type": "Column",
@@ -47,8 +46,7 @@
                   "type": "TextBlock",
                   "text": "Container default style"
                 }
-              ],
-              "style": "default"
+              ]
             },
             {
               "type": "Container",

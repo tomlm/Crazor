@@ -57,7 +57,7 @@ namespace AdaptiveCards
         /// <summary>
         /// A collection of captions.
         /// </summary>
-        [JsonProperty]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlElement(Type = typeof(AdaptiveCaptionSource), ElementName = "CaptionSource")]
 #endif

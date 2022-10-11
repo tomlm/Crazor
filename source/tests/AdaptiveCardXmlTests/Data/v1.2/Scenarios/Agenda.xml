@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <ColumnSet HorizontalAlignment="Center">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <ColumnSet HorizontalAlignment="center">
     <Column Width="1">
-      <ColumnSet HorizontalAlignment="Center">
+      <ColumnSet HorizontalAlignment="center">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/LocationGreen_A.png" AltText="Location A" />
         </Column>
         <Column Width="auto">
           <TextBlock Text="**Redmond**" Wrap="true" />
-          <TextBlock Spacing="None" Text="8a - 12:30p" Wrap="true" />
+          <TextBlock Spacing="none" Text="8a - 12:30p" Wrap="true" />
         </Column>
       </ColumnSet>
     </Column>
-    <Column Spacing="Large" Separator="true" Width="1">
-      <ColumnSet HorizontalAlignment="Center">
+    <Column Spacing="large" Separator="true" Width="1">
+      <ColumnSet HorizontalAlignment="center">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/LocationBlue_B.png" AltText="Location B" />
         </Column>
         <Column Width="auto">
           <TextBlock Text="**Bellevue**" Wrap="true" />
-          <TextBlock Spacing="None" Text="12:30p - 3p" Wrap="true" />
+          <TextBlock Spacing="none" Text="12:30p - 3p" Wrap="true" />
         </Column>
       </ColumnSet>
     </Column>
-    <Column Spacing="Large" Separator="true" Width="1">
-      <ColumnSet HorizontalAlignment="Center">
+    <Column Spacing="large" Separator="true" Width="1">
+      <ColumnSet HorizontalAlignment="center">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/LocationRed_C.png" AltText="Location C" />
         </Column>
         <Column Width="auto">
           <TextBlock Text="**Seattle**" Wrap="true" />
-          <TextBlock Spacing="None" Text="8p" Wrap="true" />
+          <TextBlock Spacing="none" Text="8p" Wrap="true" />
         </Column>
       </ColumnSet>
     </Column>
@@ -41,19 +41,19 @@
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/Conflict.png" AltText="Calendar conflict" />
         </Column>
-        <Column Spacing="None" Width="stretch">
+        <Column Spacing="none" Width="stretch">
           <TextBlock Text="2:00 PM" Wrap="true" />
         </Column>
       </ColumnSet>
-      <TextBlock Spacing="None" IsSubtle="true" Text="1hr" Wrap="true" />
+      <TextBlock Spacing="none" IsSubtle="true" Text="1hr" Wrap="true" />
     </Column>
-    <Column Spacing="None" Width="auto">
-      <BackgroundImage BackgroundImage="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="RepeatVertically" HorizontalAlignment="Center" />
-      <Image Url="https://messagecardplayground.azurewebsites.net/assets/CircleGreen_coffee.png" HorizontalAlignment="Center" AltText="Location A: Coffee" />
+    <Column Spacing="none" Width="auto">
+      <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="repeatVertically" HorizontalAlignment="center" />
+      <Image Url="https://messagecardplayground.azurewebsites.net/assets/CircleGreen_coffee.png" HorizontalAlignment="center" AltText="Location A: Coffee" />
     </Column>
     <Column Width="40">
       <TextBlock Text="**Contoso Campaign Status Meeting**" Wrap="true" />
-      <ColumnSet Spacing="None">
+      <ColumnSet Spacing="none">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/location_gray.png" AltText="Location" />
         </Column>
@@ -61,12 +61,12 @@
           <TextBlock Text="Conf Room Bravern-2/9050" Wrap="true" />
         </Column>
       </ColumnSet>
-      <ImageSet Spacing="Small" ImageSize="Small">
-        <Image Size="Small" Url="https://messagecardplayground.azurewebsites.net/assets/person_w1.png" AltText="Person with bangs" />
-        <Image Size="Small" Url="https://messagecardplayground.azurewebsites.net/assets/person_m1.png" AltText="Person with glasses and short hair" />
-        <Image Size="Small" Url="https://messagecardplayground.azurewebsites.net/assets/person_w2.png" AltText="Person smiling" />
+      <ImageSet Spacing="small" ImageSize="small">
+        <Image Size="small" Url="https://messagecardplayground.azurewebsites.net/assets/person_w1.png" AltText="Person with bangs" />
+        <Image Size="small" Url="https://messagecardplayground.azurewebsites.net/assets/person_m1.png" AltText="Person with glasses and short hair" />
+        <Image Size="small" Url="https://messagecardplayground.azurewebsites.net/assets/person_w2.png" AltText="Person smiling" />
       </ImageSet>
-      <ColumnSet Spacing="Small">
+      <ColumnSet Spacing="small">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/power_point.png" AltText="Powerpoint presentation" />
         </Column>
@@ -76,11 +76,11 @@
       </ColumnSet>
     </Column>
   </ColumnSet>
-  <ColumnSet Spacing="None">
+  <ColumnSet Spacing="none">
     <Column Width="110" />
-    <Column Spacing="None" Width="auto">
-      <BackgroundImage BackgroundImage="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="RepeatVertically" HorizontalAlignment="Center" />
-      <Image Url="https://messagecardplayground.azurewebsites.net/assets/Gray_Dot.png" HorizontalAlignment="Center" AltText="In transit" />
+    <Column Spacing="none" Width="auto">
+      <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="repeatVertically" HorizontalAlignment="center" />
+      <Image Url="https://messagecardplayground.azurewebsites.net/assets/Gray_Dot.png" HorizontalAlignment="center" AltText="In transit" />
     </Column>
     <Column Width="40">
       <ColumnSet>
@@ -93,18 +93,18 @@
       </ColumnSet>
     </Column>
   </ColumnSet>
-  <ColumnSet Spacing="None">
+  <ColumnSet Spacing="none">
     <Column Width="110">
-      <TextBlock Spacing="None" Text="8:00 PM" Wrap="true" />
-      <TextBlock Spacing="None" IsSubtle="true" Text="1hr" Wrap="true" />
+      <TextBlock Spacing="none" Text="8:00 PM" Wrap="true" />
+      <TextBlock Spacing="none" IsSubtle="true" Text="1hr" Wrap="true" />
     </Column>
-    <Column Spacing="None" Width="auto">
-      <BackgroundImage BackgroundImage="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="RepeatVertically" HorizontalAlignment="Center" />
-      <Image Url="https://messagecardplayground.azurewebsites.net/assets/CircleBlue_flight.png" HorizontalAlignment="Center" AltText="Location B: Flight" />
+    <Column Spacing="none" Width="auto">
+      <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="repeatVertically" HorizontalAlignment="center" />
+      <Image Url="https://messagecardplayground.azurewebsites.net/assets/CircleBlue_flight.png" HorizontalAlignment="center" AltText="Location B: Flight" />
     </Column>
     <Column Width="40">
       <TextBlock Text="**Alaska Airlines AS1021 flight to Chicago**" Wrap="true" />
-      <ColumnSet Spacing="None">
+      <ColumnSet Spacing="none">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/location_gray.png" AltText="Location" />
         </Column>
@@ -112,7 +112,7 @@
           <TextBlock Text="Seattle Tacoma International Airport (17801 International Blvd, Seattle, WA, United States)" Wrap="true" />
         </Column>
       </ColumnSet>
-      <Image Size="Stretch" Url="https://messagecardplayground.azurewebsites.net/assets/SeaTacMap.png" AltText="Map of the Seattle-Tacoma airport" />
+      <Image Size="stretch" Url="https://messagecardplayground.azurewebsites.net/assets/SeaTacMap.png" AltText="Map of the Seattle-Tacoma airport" />
     </Column>
   </ColumnSet>
 </Card>

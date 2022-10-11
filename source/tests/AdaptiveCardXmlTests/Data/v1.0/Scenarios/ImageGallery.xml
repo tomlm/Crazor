@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Large" Text="Here are some cool photos" Wrap="true" />
-  <TextBlock Size="Medium" Weight="Lighter" Text="Sorry some of them are repeats" Wrap="true" />
-  <ImageSet ImageSize="Medium">
+  <TextBlock Size="large" Text="Here are some cool photos" Wrap="true" />
+  <TextBlock Size="medium" Weight="lighter" Text="Sorry some of them are repeats" Wrap="true" />
+  <ImageSet ImageSize="medium">
     <Image Url="https://picsum.photos/200/200?image=100" AltText="White beach panorama" />
     <Image Url="https://picsum.photos/300/200?image=200" AltText="Cow on a grassy field" />
     <Image Url="https://picsum.photos/300/200?image=301" AltText="Orange leaves on the sidewalk of a park" />

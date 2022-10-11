@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Size="Medium" Weight="Bolder" Text="Application Login" HorizontalAlignment="Center" Wrap="true" Style="Heading" />
+  <TextBlock Size="medium" Weight="bolder" Text="Application Login" HorizontalAlignment="center" Wrap="true" Style="heading" />
   <TextBlock Text="Username" Wrap="true" />
   <Input.Text Id="UserVal" IsRequired="true" />
   <TextBlock Text="Password" Wrap="true" />

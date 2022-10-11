@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\Libraries\AdaptiveCards\ActivatorConverter.cs">
+      <Link>AdaptiveCards\ActivatorConverter.cs</Link>
+    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveAction.cs">
       <Link>AdaptiveCards\AdaptiveAction.cs</Link>
     </Compile>

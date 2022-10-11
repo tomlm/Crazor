@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -44,15 +45,15 @@ namespace AdaptiveCards
 #endif
         public AdaptiveColumnWidth Width { get; set; }
 
+#if !NETSTANDARD1_3
         /// <summary>
         /// Xml Serialization for complex type of AdaptiveColumnWidth
         /// </summary>
         [JsonIgnore]
-#if !NETSTANDARD1_3
         [XmlAttribute(nameof(Width))]
-#endif
         public string WidthXml { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
 
-
+        public bool ShouldSerializeWidthXml() => Width != null;
+#endif
     }
 }

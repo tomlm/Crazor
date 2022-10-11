@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.3",
+  "version": "1.0",
   "body": [
     {
       "type": "TextBlock",
@@ -41,7 +41,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.3",
+        "version": "1.0",
         "body": [
           {
             "type": "Input.ChoiceSet",
@@ -88,7 +88,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.3",
+        "version": "1.0",
         "body": [
           {
             "type": "Input.Toggle",
@@ -121,7 +121,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.3",
+        "version": "1.0",
         "body": [
           {
             "type": "Input.Toggle",

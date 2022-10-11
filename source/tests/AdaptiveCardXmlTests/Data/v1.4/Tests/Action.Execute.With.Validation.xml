@@ -2,12 +2,12 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <TextBlock Text="Present a form and submit it back to the originator (with validation!)" />
   <ActionSet>
-    <Action.Execute Title="ActionSet Execute" IconUrl="https://adaptivecards.io/content/Closed%20bug%2092x92.png" AssociatedInputs="None" Verb="doActionSetStuff">{
+    <Action.Execute Title="ActionSet Execute" IconUrl="https://adaptivecards.io/content/Closed%20bug%2092x92.png" AssociatedInputs="none" Verb="doActionSetStuff">{
   "y": -1
 }</Action.Execute>
     <Action.ShowCard Title="ShowCard">
       <AdaptiveCard Version="1.4">
-        <Action.Execute Title="Neat!" AssociatedInputs="None" Verb="" />
+        <Action.Execute Title="Neat!" AssociatedInputs="none" Verb="" />
       </AdaptiveCard>
     </Action.ShowCard>
   </ActionSet>

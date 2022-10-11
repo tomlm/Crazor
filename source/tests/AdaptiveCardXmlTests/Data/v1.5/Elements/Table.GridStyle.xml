@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Weight="Bolder" Text="GridStyle sets the color of the gridlines to the corresponding border color defined in host config" Wrap="true" />
-  <Table VerticalCellContentAlignment="Center" ShowGridLines="false">
+  <TextBlock Weight="bolder" Text="GridStyle sets the color of the gridlines to the corresponding border color defined in host config" Wrap="true" />
+  <Table VerticalCellContentAlignment="center" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>
@@ -17,7 +17,7 @@
         <TextBlock Text="Good" Wrap="true" />
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false" GridStyle="Good">
+        <Table FirstRowAsHeader="false" GridStyle="good">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -44,7 +44,7 @@
         <TextBlock Text="Warning" Wrap="true" />
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false" GridStyle="Warning">
+        <Table FirstRowAsHeader="false" GridStyle="warning">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -71,7 +71,7 @@
         <TextBlock Text="Attention" Wrap="true" />
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false" GridStyle="Attention">
+        <Table FirstRowAsHeader="false" GridStyle="attention">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>

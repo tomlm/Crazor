@@ -25,8 +25,7 @@
     },
     {
       "type": "Action.Submit",
-      "title": "Other",
-      "style": "other"
+      "title": "Other"
     }
   ]
 }

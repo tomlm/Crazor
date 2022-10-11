@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
   <TextBlock Text="Media supports **audio** and **video** content!" Wrap="true" />
-  <TextBlock Spacing="Medium" Separator="true" Size="Large" Text="Video" HorizontalAlignment="Center" />
+  <TextBlock Spacing="medium" Separator="true" Size="large" Text="Video" HorizontalAlignment="center" />
   <Media Poster="https://adaptivecards.io/content/poster-video.png" AltText="Adaptive Cards overview video">
     <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
   </Media>
-  <TextBlock Separator="true" Size="Large" Text="Audio" HorizontalAlignment="Center" />
+  <TextBlock Separator="true" Size="large" Text="Audio" HorizontalAlignment="center" />
   <Media Poster="https://adaptivecards.io/content/poster-audio.jpg" AltText="Adaptive Cards overview audio">
     <MediaSource MimeType="audio/mpeg" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp3" />
   </Media>

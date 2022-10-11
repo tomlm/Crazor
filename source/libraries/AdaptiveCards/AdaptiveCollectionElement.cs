@@ -14,29 +14,12 @@ namespace AdaptiveCards
         /// <summary>
         /// The style used to display this element. See <see cref="AdaptiveContainerStyle" />.
         /// </summary>
-        [JsonConverter(typeof(IgnoreNullEnumConverter<AdaptiveContainerStyle>), true)]
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlIgnore]
+        [XmlAttribute]
 #endif
-        [DefaultValue(null)]
-        public AdaptiveContainerStyle? Style { get; set; }
-
-#if !NETSTANDARD1_3
-        /// <summary>
-        /// Controls XML serialization of style.
-        /// </summary>
-        // The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
-        [JsonIgnore]
-        [XmlAttribute(nameof(Style))]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public AdaptiveContainerStyle StyleXml { get { return (Style.HasValue) ? Style.Value : AdaptiveContainerStyle.Default; } set { Style = value; } }
-
-        /// <summary>
-        /// Determines whether to serialize the style for XML.
-        /// </summary>
-        public bool ShouldSerializeStyleXml() => this.Style.HasValue;
-#endif
+        [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
+        public AdaptiveContainerStyle Style { get; set; }
 
         /// <summary>
         /// The content alignment for the element inside the container.

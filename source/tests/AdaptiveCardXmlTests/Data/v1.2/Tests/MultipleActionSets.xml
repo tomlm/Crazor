@@ -2,16 +2,16 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ColumnSet>
     <Column Width="stretch">
-      <ActionSet Height="AdaptiveCards.AdaptiveDimension">
+      <ActionSet Height="stretch">
         <Action.ShowCard Title="ShowCard1">
-          <AdaptiveCard Version="1.2">
+          <AdaptiveCard Version="1.0">
             <TextBlock Text="Card1" />
           </AdaptiveCard>
         </Action.ShowCard>
       </ActionSet>
-      <ActionSet Height="AdaptiveCards.AdaptiveDimension">
+      <ActionSet Height="stretch">
         <Action.ShowCard Title="ShowCard2">
-          <AdaptiveCard Version="1.2">
+          <AdaptiveCard Version="1.0">
             <TextBlock Text="Card2" />
           </AdaptiveCard>
         </Action.ShowCard>

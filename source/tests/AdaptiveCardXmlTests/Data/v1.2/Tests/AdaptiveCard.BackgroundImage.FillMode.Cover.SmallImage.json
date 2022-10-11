@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.2",
+  "version": "1.0",
   "body": [
     {
       "type": "ColumnSet",
@@ -124,7 +124,7 @@
           ]
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     },
     {
       "type": "Container",
@@ -164,8 +164,7 @@
               "title": "Choice 2",
               "value": "Choice 2"
             }
-          ],
-          "style": "compact"
+          ]
         },
         {
           "type": "TextBlock",

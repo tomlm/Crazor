@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Container>
-    <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" />
+    <BackgroundImage Url="https://picsum.photos/id/237/200/200" />
     <TextBlock Text="This container has a background with a verticalAlignment of top" Wrap="true" />
     <TextBlock Text="Container 1 - Text 2 - Stretch" />
     <TextBlock Text="Container 1 - Text 3 - Stretch" />
   </Container>
   <Container>
-    <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" VerticalAlignment="Center" />
+    <BackgroundImage Url="https://picsum.photos/id/237/200/200" VerticalAlignment="center" />
     <TextBlock Text="This container has a background with a verticalAlignment of center" Wrap="true" />
     <TextBlock Text="Container 1 - Text 2 - Stretch" />
     <TextBlock Text="Container 1 - Text 3 - Stretch" />
   </Container>
   <Container>
-    <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" VerticalAlignment="Bottom" />
+    <BackgroundImage Url="https://picsum.photos/id/237/200/200" VerticalAlignment="bottom" />
     <TextBlock Text="This container has a background with a verticalAlignment of bottom" Wrap="true" />
     <TextBlock Text="Container 1 - Text 2 - Stretch" />
     <TextBlock Text="Container 1 - Text 3 - Stretch" />
   </Container>
   <ColumnSet>
     <Column Width="stretch">
-      <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" />
+      <BackgroundImage Url="https://picsum.photos/id/237/200/200" />
       <TextBlock Text="Background is left aligned" Wrap="true" />
       <TextBlock Text="Background is left aligned" Wrap="true" />
       <TextBlock Text="Background is left aligned" Wrap="true" />
@@ -29,11 +29,11 @@
       <TextBlock Text="Background is left aligned" Wrap="true" />
     </Column>
     <Column Width="stretch">
-      <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" HorizontalAlignment="Center" />
+      <BackgroundImage Url="https://picsum.photos/id/237/200/200" HorizontalAlignment="center" />
       <TextBlock Text="Background is center aligned" Wrap="true" />
     </Column>
     <Column Width="stretch">
-      <BackgroundImage BackgroundImage="https://picsum.photos/id/237/200/200" HorizontalAlignment="Right" />
+      <BackgroundImage Url="https://picsum.photos/id/237/200/200" HorizontalAlignment="right" />
       <TextBlock Text="Background is right aligned" Wrap="true" />
     </Column>
   </ColumnSet>

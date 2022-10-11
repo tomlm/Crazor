@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Large" Weight="Bolder" Text="Please rate your experience" />
-  <Input.ChoiceSet Id="Rating" Spacing="Medium" Value="5">
+  <TextBlock Size="large" Weight="bolder" Text="Please rate your experience" />
+  <Input.ChoiceSet Id="Rating" Spacing="medium" Value="5">
     <AdditionalProperties>
       <item>
         <key>
@@ -20,9 +20,9 @@
       <Choice Title="Very poor" Value="1" />
     </Choices>
   </Input.ChoiceSet>
-  <TextBlock Spacing="Large" Text="Leave a comment" />
-  <Input.Text Id="FeedbackText" Spacing="Medium" IsMultiline="true" MaxLength="500" />
-  <TextBlock Spacing="Small" Text="%20">
+  <TextBlock Spacing="large" Text="Leave a comment" />
+  <Input.Text Id="FeedbackText" Spacing="medium" IsMultiline="true" MaxLength="500" />
+  <TextBlock Spacing="small" Text="%20">
     <AdditionalProperties>
       <item>
         <key>

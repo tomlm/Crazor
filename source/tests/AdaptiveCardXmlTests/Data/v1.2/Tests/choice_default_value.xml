@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Text="What color do you want? *(isMultiSelect:false, style:compact)*" />
   <Input.ChoiceSet Id="myColor">
-    <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
-    </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />

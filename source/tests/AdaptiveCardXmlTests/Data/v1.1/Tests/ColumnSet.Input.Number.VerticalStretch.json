@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.1",
+  "version": "1.0",
   "body": [
     {
       "type": "ColumnSet",
@@ -30,7 +30,7 @@
               "id": "input1",
               "placeholder": "enter comment",
               "max": 500.0,
-              "height": "AdaptiveCards.AdaptiveDimension"
+              "height": "stretch"
             },
             {
               "type": "TextBlock",
@@ -42,7 +42,7 @@
           "separator": true
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ]
 }

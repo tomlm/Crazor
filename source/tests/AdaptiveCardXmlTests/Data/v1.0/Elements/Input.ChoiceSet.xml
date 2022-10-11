@@ -17,7 +17,7 @@
       <Choice Title="Blue" Value="3" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="myColor2" Label="What color do you want? (isMultiSelect:false, style:expanded)" Value="1" Style="Expanded">
+  <Input.ChoiceSet Id="myColor2" Label="What color do you want? (isMultiSelect:false, style:expanded)" Value="1" Style="expanded">
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />
@@ -41,7 +41,7 @@
       <Choice Title="Blue" Value="3" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="myColor4" Label="What colors do you want? (isMultiSelect:true, style:expanded)" Value="1" Style="Expanded" IsMultiSelect="true">
+  <Input.ChoiceSet Id="myColor4" Label="What colors do you want? (isMultiSelect:true, style:expanded)" Value="1" Style="expanded" IsMultiSelect="true">
     <Choices>
       <Choice Title="Red" Value="1" />
       <Choice Title="Green" Value="2" />

@@ -3,7 +3,6 @@
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
-using System.Reflection;
 using System.Xml.Serialization;
 
 namespace AdaptiveCards
@@ -54,8 +53,8 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue("default")]
-        public string Style { get; set; } = "default";
+        [DefaultValue(typeof(AdaptiveActionStyle), "default")]
+        public AdaptiveActionStyle Style { get; set; }
 
         /// <summary>
         /// Defines text that should be displayed to the end user as they hover the mouse over the action, and read when using narration software.
@@ -72,28 +71,12 @@ namespace AdaptiveCards
         /// <remarks>
         /// Values are: "primary" or "secondary"
         /// </remarks>
-        [JsonConverter(typeof(IgnoreNullEnumConverter<AdaptiveActionMode>), true)]
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlIgnore]
+        [XmlAttribute]
 #endif
-        [DefaultValue(null)]
-        public AdaptiveActionMode? Mode { get; set; } = null;
-
-#if !NETSTANDARD1_3
-        /// <summary>
-        /// The XML serializer doesn't handle nullable value types. This allows serialization if non-null.
-        /// </summary>
-        [JsonIgnore]
-        [XmlAttribute(nameof(Mode))]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public string ModeXml { get { return (Mode.HasValue) ? Mode.Value.ToString().ToLower() : null; } set { Mode = (value != null) ? Mode = (AdaptiveActionMode)Enum.Parse(typeof(AdaptiveActionMode), value, ignoreCase: true) : null; } }
-
-        /// <summary>
-        /// Determines whether to serialize the style for XML.
-        /// </summary>
-        public bool ShouldSerializeStyleXml() => this.Mode.HasValue;
-#endif
+        [DefaultValue(typeof(AdaptiveActionMode), "primary")]
+        public AdaptiveActionMode Mode { get; set; }
 
 
         /// <summary>
@@ -102,6 +85,6 @@ namespace AdaptiveCards
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [XmlAttribute]
         [DefaultValue(true)]
-        public bool IsEnabled{ get; set; } = true;
+        public bool IsEnabled { get; set; } = true;
     }
 }

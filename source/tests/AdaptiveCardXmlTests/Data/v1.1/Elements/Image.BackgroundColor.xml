@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="stretch">
-      <Image Style="Person" Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF982374" AltText="Cat" />
+      <Image Style="person" Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF982374" AltText="Cat" />
     </Column>
     <Column Width="stretch">
       <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF128192" AltText="Cat" />

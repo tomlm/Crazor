@@ -1,6 +1,6 @@
 {
   "type": "AdaptiveCard",
-  "version": "1.3",
+  "version": "1.0",
   "body": [
     {
       "type": "TextBlock",
@@ -133,8 +133,7 @@
           "value": "3"
         }
       ],
-      "label": "What colors do you want? (multiselect)",
-      "style": "compact"
+      "label": "What colors do you want? (multiselect)"
     },
     {
       "type": "TextBlock",
@@ -176,7 +175,7 @@
       "type": "Action.ShowCard",
       "card": {
         "type": "AdaptiveCard",
-        "version": "1.3",
+        "version": "1.0",
         "body": [
           {
             "type": "Input.Text",

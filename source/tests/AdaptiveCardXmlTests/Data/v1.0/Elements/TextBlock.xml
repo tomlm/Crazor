@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="Large" Text="This is some text" />
-  <TextBlock Weight="Bolder" Text="It doesn't wrap by default" />
+  <TextBlock Size="large" Text="This is some text" />
+  <TextBlock Weight="bolder" Text="It doesn't wrap by default" />
   <TextBlock Text="So set **wrap** to true if you plan on showing a paragraph of text" Wrap="true" />
   <TextBlock Text="You can also use **maxLines** to prevent it from getting out of hand" Wrap="true" MaxLines="2" />
-  <TextBlock Color="Attention" Text="You can even draw attention to certain text with color" Wrap="true" />
+  <TextBlock Color="attention" Text="You can even draw attention to certain text with color" Wrap="true" />
 </Card>

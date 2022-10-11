@@ -11,8 +11,7 @@
           "text": "Recent Files",
           "maxLines": 1
         }
-      ],
-      "style": "default"
+      ]
     },
     {
       "type": "Container",
@@ -58,7 +57,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -112,7 +110,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -167,7 +164,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -222,7 +218,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -277,7 +272,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -332,7 +326,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -387,7 +380,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -442,7 +434,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -497,7 +488,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {
@@ -552,7 +542,6 @@
           ]
         }
       ],
-      "style": "default",
       "selectAction": {
         "type": "Action.Submit",
         "data": {

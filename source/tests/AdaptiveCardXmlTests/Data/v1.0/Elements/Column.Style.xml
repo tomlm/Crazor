@@ -4,18 +4,18 @@
     <Column>
       <TextBlock Text="No Style" />
     </Column>
-    <Column Style="Default">
+    <Column>
       <TextBlock Text="Default Style" />
     </Column>
-    <Column Style="Emphasis">
+    <Column Style="emphasis">
       <TextBlock Text="Emphasis Style" />
       <Container>
         <TextBlock Text="Container no style" />
       </Container>
-      <Container Style="Default">
+      <Container>
         <TextBlock Text="Container default style" />
       </Container>
-      <Container Style="Emphasis">
+      <Container Style="emphasis">
         <TextBlock Text="Container emphasis style" />
       </Container>
     </Column>

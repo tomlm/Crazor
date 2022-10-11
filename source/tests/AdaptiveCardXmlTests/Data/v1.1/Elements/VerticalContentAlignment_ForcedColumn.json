@@ -61,7 +61,7 @@
           "verticalContentAlignment": "bottom"
         }
       ],
-      "height": "AdaptiveCards.AdaptiveDimension"
+      "height": "stretch"
     }
   ],
   "verticalContentAlignment": "center"

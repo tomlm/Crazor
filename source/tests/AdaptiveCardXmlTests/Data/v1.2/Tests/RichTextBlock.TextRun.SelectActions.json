@@ -49,7 +49,7 @@
           "text": "Interacting with the text in the good color will open a web page. ",
           "selectAction": {
             "type": "Action.OpenUrl",
-            "url": "https://adaptivecards.io/",
+            "url": "https://adaptivecards.io",
             "tooltip": "Default"
           }
         },

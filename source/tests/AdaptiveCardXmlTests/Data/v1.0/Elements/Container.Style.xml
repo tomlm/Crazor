@@ -11,33 +11,33 @@
     </item>
   </AdditionalProperties>
   <TextBlock Text="The card has the emphasis style" />
-  <Container Style="Default">
+  <Container>
     <TextBlock Text="This container has the default style" />
     <TextBlock Text="color: default" />
-    <TextBlock Color="Accent" Text="color: accent" />
-    <TextBlock Color="Good" Text="color: good" />
-    <TextBlock Color="Warning" Text="color: warning" />
-    <TextBlock Color="Attention" Text="color: attention" />
-    <TextBlock Color="Light" Text="color: light" />
-    <TextBlock Color="Dark" Text="color: dark" />
+    <TextBlock Color="accent" Text="color: accent" />
+    <TextBlock Color="good" Text="color: good" />
+    <TextBlock Color="warning" Text="color: warning" />
+    <TextBlock Color="attention" Text="color: attention" />
+    <TextBlock Color="light" Text="color: light" />
+    <TextBlock Color="dark" Text="color: dark" />
   </Container>
-  <Container Style="Emphasis">
+  <Container Style="emphasis">
     <TextBlock Text="This container has the emphasis style" />
     <TextBlock Text="color: default" />
-    <TextBlock Color="Accent" Text="color: accent" />
-    <TextBlock Color="Good" Text="color: good" />
-    <TextBlock Color="Warning" Text="color: warning" />
-    <TextBlock Color="Attention" Text="color: attention" />
-    <TextBlock Color="Light" Text="color: light" />
-    <TextBlock Color="Dark" Text="color: dark" />
+    <TextBlock Color="accent" Text="color: accent" />
+    <TextBlock Color="good" Text="color: good" />
+    <TextBlock Color="warning" Text="color: warning" />
+    <TextBlock Color="attention" Text="color: attention" />
+    <TextBlock Color="light" Text="color: light" />
+    <TextBlock Color="dark" Text="color: dark" />
     <Container>
-      <TextBlock Color="Dark" Text="Contained container - no style" />
+      <TextBlock Color="dark" Text="Contained container - no style" />
     </Container>
-    <Container Style="Emphasis">
-      <TextBlock Color="Dark" Text="Contained container - emphasis" />
+    <Container Style="emphasis">
+      <TextBlock Color="dark" Text="Contained container - emphasis" />
     </Container>
-    <Container Style="Default">
-      <TextBlock Color="Dark" Text="Contained container - default" />
+    <Container>
+      <TextBlock Color="dark" Text="Contained container - default" />
     </Container>
   </Container>
 </Card>

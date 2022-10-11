@@ -24,7 +24,7 @@
             "type": "NeitherExist",
             "fallback": {
               "type": "Action.OpenUrl",
-              "url": "https://adaptivecards.io/",
+              "url": "https://adaptivecards.io",
               "title": "Action.OpenUrl"
             }
           }
@@ -39,7 +39,7 @@
                 "type": "Action.ShowCard",
                 "card": {
                   "type": "AdaptiveCard",
-                  "version": "1.2",
+                  "version": "1.0",
                   "body": [
                     {
                       "type": "TextBlock",
@@ -94,7 +94,7 @@
         "type": "NeitherExist",
         "fallback": {
           "type": "Action.OpenUrl",
-          "url": "https://adaptivecards.io/",
+          "url": "https://adaptivecards.io",
           "title": "Action.OpenUrl"
         }
       }
@@ -109,7 +109,7 @@
             "type": "Action.ShowCard",
             "card": {
               "type": "AdaptiveCard",
-              "version": "1.2",
+              "version": "1.0",
               "body": [
                 {
                   "type": "TextBlock",

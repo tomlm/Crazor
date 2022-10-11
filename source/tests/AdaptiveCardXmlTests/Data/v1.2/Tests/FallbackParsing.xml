@@ -3,7 +3,7 @@
   <Container Id="A">
     <Container Id="B">
       <Fallback>
-        <Type>Content</Type>
+        <Type>content</Type>
         <Content xsi:type="Container" Id="B">
           <TextBlock Id="C" Text="B Container fallback textblock" />
           <Image Id="Z" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
@@ -23,7 +23,7 @@
               </item>
             </AdditionalProperties>
             <Fallback>
-              <Type>Content</Type>
+              <Type>content</Type>
               <Content xsi:type="Container" Id="E">
                 <Image Id="I" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
                 <TextBlock Id="J" Text="C ColumnSet fallback textblock" />
@@ -49,7 +49,7 @@
       </item>
     </AdditionalProperties>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="Container" Id="L">
         <TextBlock Id="K" Text="H Graph fallback TextBlock" />
       </Content>
@@ -68,7 +68,7 @@
       </item>
     </AdditionalProperties>
     <Fallback>
-      <Type>Content</Type>
+      <Type>content</Type>
       <Content xsi:type="AdaptiveUnknownElement">
         <AdditionalProperties>
           <item>
@@ -81,7 +81,7 @@
           </item>
         </AdditionalProperties>
         <Fallback>
-          <Type>Content</Type>
+          <Type>content</Type>
           <Content xsi:type="Action.Submit" Title="Boring fallback action" />
         </Fallback>
         <Type>MyCoolAction</Type>

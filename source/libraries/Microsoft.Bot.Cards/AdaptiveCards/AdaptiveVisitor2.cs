@@ -315,7 +315,6 @@ namespace Microsoft.Bot.Cards.AdaptiveCards
 
         protected virtual void Visit(AdaptiveTableRow row)
         {
-            Elements.Add(row);
             foreach(var cell  in row.Cells)
             {
                 Visit(cell);

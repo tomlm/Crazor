@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <TextBlock Text="This card contains 16 inputs that use input validation properties, but do not contain error messages. The renderer should return a warning for each input whose validation is enforced by input validation." Wrap="true" />
   <Input.Text Id="requiredText" IsRequired="true" Label="Required Input.Text" />
   <Input.Text Id="maxLength" Label="MaxLength Input.Text" MaxLength="5" />
@@ -14,28 +14,18 @@
   <Input.Number Id="minNumber" Label="Min Input.Number" Value="NaN" Min="4" Max="NaN" />
   <Input.Number Id="maxNumber" Label="Max Input.Number" Value="NaN" Min="NaN" Max="8" />
   <Input.ChoiceSet Id="compact" IsRequired="true" Label="Required Compact Input.ChoiceSet">
-    <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
-    </AdditionalProperties>
     <Choices>
       <Choice Title="Thing 1" Value="Thing 1" />
       <Choice Title="Thing 2" Value="Thing 2" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="expanded" IsRequired="true" Label="Required Expanded Input.ChoiceSet" Style="Expanded">
+  <Input.ChoiceSet Id="expanded" IsRequired="true" Label="Required Expanded Input.ChoiceSet" Style="expanded">
     <Choices>
       <Choice Title="Thing 1" Value="Thing 1" />
       <Choice Title="Thing 2" Value="Thing 2" />
     </Choices>
   </Input.ChoiceSet>
-  <Input.ChoiceSet Id="multiselect" IsRequired="true" Label="Required Multiselect Input.ChoiceSet" Style="Expanded" IsMultiSelect="true">
+  <Input.ChoiceSet Id="multiselect" IsRequired="true" Label="Required Multiselect Input.ChoiceSet" Style="expanded" IsMultiSelect="true">
     <Choices>
       <Choice Title="Thing 1" Value="Thing 1" />
       <Choice Title="Thing 2" Value="Thing 2" />
