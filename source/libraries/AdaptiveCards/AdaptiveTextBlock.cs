@@ -157,7 +157,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        [DefaultValue(typeof(AdaptiveTextBlockStyle), "paragraph")]
+        [DefaultValue(typeof(AdaptiveTextBlockStyle), "default")]
         public AdaptiveTextBlockStyle Style { get; set; }
     }
 }

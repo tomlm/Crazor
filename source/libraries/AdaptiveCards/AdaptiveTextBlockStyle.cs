@@ -14,11 +14,11 @@ namespace AdaptiveCards
         /// <summary>
         ///     The content is a paragraph (default).
         /// </summary>
-        Paragraph = 0,
+        Default,
 
         /// <summary>
         ///     The content is a heading.
         /// </summary>
-        Heading = 1,
+        Heading
     }
 }

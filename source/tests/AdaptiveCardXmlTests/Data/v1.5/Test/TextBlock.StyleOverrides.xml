@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
+  <TextBlock Text="Style: Heading" Wrap="true" Style="Heading" />
+  <TextBlock Text="Style: Default" Wrap="true" />
+  <TextBlock Text="Style: (unset)" Wrap="true" />
+  <TextBlock Text="Style: Heading, everything default" Wrap="true" Style="Heading" />
+  <TextBlock Size="ExtraLarge" Weight="Lighter" IsSubtle="true" Text="Style: Heading, isSubtle: true, weight: lighter, size: extraLarge, fontType: monospace" Wrap="true" FontType="Monospace" Style="Heading" />
+  <TextBlock Size="ExtraLarge" Weight="Lighter" IsSubtle="true" Text="Style: Default, isSubtle: true, weight: lighter, size: extraLarge, fontType: monospace" Wrap="true" FontType="Monospace" />
+</Card>
