@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -70,7 +71,7 @@ namespace AdaptiveCards
         [XmlAttribute]
 #endif
         [DefaultValue(true)]
-        public bool FirstRowAsHeader { get; set; }
+        public bool FirstRowAsHeader { get; set; } = true;
 
         /// <summary>
         /// Specifies whether grid lines should be displayed.
@@ -80,7 +81,7 @@ namespace AdaptiveCards
         [XmlAttribute]
 #endif
         [DefaultValue(true)]
-        public bool ShowGridLines { get; set; }
+        public bool ShowGridLines { get; set; } = true;
 
         /// <summary>
         /// Defines the style of the grid. This property currently only controls the grid's color.s
@@ -101,7 +102,11 @@ namespace AdaptiveCards
         [JsonIgnore]
         [XmlAttribute(nameof(GridStyle))]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public AdaptiveContainerStyle GridStyleXml { get { return (GridStyle.HasValue) ? GridStyle.Value : AdaptiveContainerStyle.Default; } set { GridStyle = value; } }
+        public string GridStyleXml
+        {
+            get { return GridStyle?.ToString(); }
+            set { GridStyle = (AdaptiveContainerStyle?)Enum.Parse(typeof(AdaptiveContainerStyle), value, ignoreCase: true); }
+        }
 
         /// <summary>
         /// Determines whether to serialize the style for XML.

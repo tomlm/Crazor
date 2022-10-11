@@ -287,7 +287,7 @@
     </Column>
   </ColumnSet>
   <Table ShowGridLines="false">
-    <TableColumn Width="50px" />
+    <TableColumn Width="50" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>

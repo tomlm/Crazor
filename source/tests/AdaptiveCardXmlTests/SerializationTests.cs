@@ -52,7 +52,7 @@ namespace AdaptiveCardXmlTests
             var json = File.ReadAllText(jsonFile);
             try
             {
-                if (!File.Exists(Path.Combine(Environment.CurrentDirectory, xmlFile)))
+                if (!File.Exists(xmlFile))
                 {
                     var card = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
                     json = JsonConvert.SerializeObject(card, jsonSettings);
@@ -63,6 +63,7 @@ namespace AdaptiveCardXmlTests
             catch (Exception err)
             {
                 Debug.WriteLine($"{jsonFile} {err.Message}", err);
+                throw;
             }
 
             Debug.WriteLine($"---- {name} -----");
