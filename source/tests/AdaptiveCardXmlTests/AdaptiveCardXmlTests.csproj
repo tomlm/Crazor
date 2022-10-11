@@ -25,6 +25,11 @@
     <ProjectReference Include="..\..\Libraries\AdaptiveCards\AdaptiveCards.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\v1.6\Elements\" />
+    <Folder Include="Data\v1.6\Tests\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>
