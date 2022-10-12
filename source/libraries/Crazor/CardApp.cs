@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using Crazor.Interfaces;
 using System.Xml;
+using static Crazor.CardActivityHandler;
 
 namespace Crazor
 {
@@ -171,6 +172,26 @@ namespace Crazor
             };
         }
 
+        /// <summary>
+        /// Handle search 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public virtual async Task<AdaptiveCardInvokeResponse> OnSearchInvokeAsync(SearchInvoke searchInvoke, CancellationToken cancellationToken)
+        {
+            ArgumentNullException.ThrowIfNull(CurrentView);
+            Diag.Trace.WriteLine($"------- OnSearch({searchInvoke.Dataset}, {searchInvoke.QueryText})-----");
+
+            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, Services);
+
+            return new AdaptiveCardInvokeResponse()
+            {
+                StatusCode = 200,
+                Type = "application/vnd.microsoft.search.searchResponse",
+                Value = JObject.FromObject(new { results = choices })
+            };
+        }
+
         public void ShowCard(string cardName, object? model = null)
         {
             this.CallStack.Insert(0, new CardViewState(cardName, model));
@@ -218,7 +239,6 @@ namespace Crazor
             this.Activity = activity;
             var invoke = JToken.FromObject(activity.Value).ToObject<AdaptiveCardInvokeValue>();
             ArgumentNullException.ThrowIfNull(invoke);
-            ArgumentNullException.ThrowIfNull(invoke.Action);
             this.Action = invoke.Action;
 
             var storage = this.Services.GetRequiredService<IStorage>();
@@ -382,6 +402,13 @@ namespace Crazor
                 data[Constants.IDDATA_KEY] = action.Id;
             }
 
+            foreach (var choiceSet in outboundCard.GetElements<AdaptiveChoiceSetInput>())
+            {
+                if (choiceSet.DataQuery != null)
+                {
+                    choiceSet.DataQuery.Dataset = $"{sessionDataToken}!{choiceSet.DataQuery.Dataset}";
+                }
+            }
             return sessionData;
         }
 

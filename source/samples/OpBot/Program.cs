@@ -14,7 +14,11 @@ if (!String.IsNullOrEmpty(storageKey))
 
 builder.Services.AddCardApps();
 
-var mvcBuilder = builder.Services.AddMvc();
+var mvcBuilder = builder.Services.AddMvc()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
+    }); 
 if (builder.Environment.IsDevelopment())
 {
     mvcBuilder.AddRazorRuntimeCompilation();

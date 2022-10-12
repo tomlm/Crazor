@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Xml.Serialization;
 
 namespace AdaptiveCards
@@ -6,6 +7,7 @@ namespace AdaptiveCards
     /// <summary>
     /// Data.Query data structure for filtered choicesets.
     /// </summary>
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class AdaptiveDataQuery
     {
         /// <summary>

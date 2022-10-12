@@ -1,5 +1,4 @@
 ﻿using AdaptiveCards;
-using DataAnnotationsValidator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
@@ -10,8 +9,6 @@ using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -117,7 +114,8 @@ namespace Crazor
                 MethodInfo? verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
                 if (verbMethod != null)
                 {
-                    return await InvokeMethodAsync(verbMethod, GetVerbArgs(verbMethod));
+                    await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
+                    return true;
                 }
 
                 if (App.HasView(verb))
@@ -182,15 +180,14 @@ namespace Crazor
             });
         }
 
-        private List<object?>? GetVerbArgs(MethodInfo? verbMethod)
+        private List<object?>? GetMethodArgs(MethodInfo? method, JObject? data)
         {
-            ArgumentNullException.ThrowIfNull(verbMethod);
+            ArgumentNullException.ThrowIfNull(method);
 
             List<object?> args = new List<object?>();
-            JObject? data = (JObject?)this.Action?.Data;
             if (data != null)
             {
-                foreach (var parm in verbMethod.GetParameters())
+                foreach (var parm in method.GetParameters())
                 {
                     if (parm.Name?.ToLower() == "id")
                     {
@@ -221,19 +218,25 @@ namespace Crazor
             return args;
         }
 
-        public async Task<bool> InvokeMethodAsync(MethodInfo? verbMethod, List<object?>? args = null)
+        public async Task<object?> InvokeMethodAsync(MethodInfo? verbMethod, List<object?>? args = null)
         {
             ArgumentNullException.ThrowIfNull(verbMethod);
 
-            if (verbMethod.ReturnType == typeof(Task))
+            if (verbMethod.ReturnType.Name == "Task")
             {
                 await ((Task?)verbMethod.Invoke(this, args?.ToArray()) ?? throw new Exception("Task not returned from async verb!"));
-                return true;
+                return null;
+            }
+            else if (verbMethod.ReturnType.Name == "Task`1")
+            {
+                var task = verbMethod.Invoke(this, args?.ToArray());
+                await (Task)task;
+                var result = task.GetType().GetProperty("Result", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance).GetValue(task);
+                return result;
             }
             else
             {
-                verbMethod.Invoke(this, args?.ToArray());
-                return true;
+                return verbMethod.Invoke(this, args?.ToArray());
             }
         }
 
@@ -288,7 +291,7 @@ namespace Crazor
                 var xerr = err as XmlException ?? err.InnerException as XmlException;
                 if (xerr != null)
                 {
-                    var line = String.Join("\n", xml.Trim()+"\n\n".Split("\n").Skip(xerr.LineNumber - 2).Take(2));
+                    var line = String.Join("\n", xml.Trim() + "\n\n".Split("\n").Skip(xerr.LineNumber - 2).Take(2));
                     throw new XmlException($"{xerr.Message}\n{line}", xerr.InnerException, xerr.LineNumber, xerr.LinePosition);
                 }
                 else
@@ -298,6 +301,25 @@ namespace Crazor
             }
         }
 
+        public async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services)
+        {
+            var searchMethod = GetMethod($"Get{search.Dataset}Choices");
+            if (searchMethod != null)
+            {
+                JObject data = JObject.FromObject(new 
+                {
+                    queryText = search.QueryText,
+                    top = search.QueryOptions.Top,
+                    skip = search.QueryOptions.Skip
+                });
+
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+                return (AdaptiveChoice[])await InvokeMethodAsync(searchMethod, GetMethodArgs(searchMethod, data));
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+            }
+
+            throw new Exception($"Get{search.Dataset}Choices or Get{search.Dataset}ChoicesAsync not found!");
+        }
 
         public MethodInfo? GetMethod(string methodPrefix)
         {

@@ -8,8 +8,8 @@
       "value": "John Smith",
       "style": "filtered",
       "choices.data": {
-        "Type": "Data.Query",
-        "Dataset": "graph.microsoft.com/users"
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
       }
     },
     {
@@ -18,11 +18,11 @@
       "value": "John Smith",
       "style": "filtered",
       "choices.data": {
-        "Type": "Data.Query",
-        "Dataset": "test",
-        "Value": "Jon",
-        "Count": 5,
-        "Skip": 5
+        "type": "Data.Query",
+        "dataset": "test",
+        "value": "Jon",
+        "count": 5,
+        "skip": 5
       }
     },
     {
@@ -41,11 +41,11 @@
         }
       ],
       "choices.data": {
-        "Type": "Data.Query",
-        "Dataset": "test",
-        "Value": "Jon",
-        "Count": 5,
-        "Skip": 5
+        "type": "Data.Query",
+        "dataset": "test",
+        "value": "Jon",
+        "count": 5,
+        "skip": 5
       }
     }
   ],
