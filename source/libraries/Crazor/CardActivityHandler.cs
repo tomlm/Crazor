@@ -77,7 +77,7 @@ namespace Crazor
         /// <param name="sessionId">instanceId</param>
         /// <param name="cancellationToken">ct</param>
         /// <returns>card with session data.</returns>
-        public async Task<AdaptiveCard> GetPreviewCard(ITurnContext turnContext, string app, string? resourceId, string? sessionId, CancellationToken cancellationToken)
+        public async Task<AdaptiveCard> GetPreviewCard(ITurnContext turnContext, string app, string? resourceId, string? sessionId, string? view, CancellationToken cancellationToken)
         {
             sessionId = sessionId ?? Utils.GetNewId();
 
@@ -86,7 +86,7 @@ namespace Crazor
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
-                    Verb = Constants.PREVIEW_VERB
+                    Verb = view ?? Constants.PREVIEW_VERB
                 }
             };
             activity!.Value = invokeValue;
