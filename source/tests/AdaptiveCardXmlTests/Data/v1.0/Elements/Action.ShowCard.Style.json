@@ -32,8 +32,7 @@
             "type": "TextBlock",
             "text": "This card has default style"
           }
-        ],
-        "style": "default"
+        ]
       },
       "title": "Default Style"
     },

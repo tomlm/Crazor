@@ -272,7 +272,7 @@ namespace AdaptiveCards
         /// <summary>
         /// The style used to display this element. See <see cref="AdaptiveContainerStyle" />.
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif

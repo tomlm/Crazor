@@ -8,9 +8,6 @@
   </Action.ShowCard>
   <Action.ShowCard Title="Default Style">
     <AdaptiveCard Version="1.0">
-      <AdditionalProperties>
-        <Property Name="style">default</Property>
-      </AdditionalProperties>
       <TextBlock Text="This card has default style" />
     </AdaptiveCard>
   </Action.ShowCard>
