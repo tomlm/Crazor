@@ -288,8 +288,7 @@
         "title": "title",
         "tooltip": "tooltip"
       },
-      "altText": "Image Alt Text.",
-      "tooltip": "tooltip"
+      "altText": "Image Alt Text."
     },
     {
       "type": "TextBlock",

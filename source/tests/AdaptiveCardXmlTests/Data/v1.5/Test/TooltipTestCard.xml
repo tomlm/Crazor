@@ -72,9 +72,6 @@
   </Image>
   <TextBlock Weight="bolder" Text="Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)" Wrap="true" />
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
-    <AdditionalProperties>
-      <Property Name="tooltip">tooltip</Property>
-    </AdditionalProperties>
     <SelectAction xsi:type="Action.Submit" Title="title" Tooltip="tooltip" />
   </Image>
   <TextBlock Weight="bolder" Text="Image has SelectAction. Action has title. (title should be used as tooltip)" Wrap="true" />
