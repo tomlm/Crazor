@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="This card's action will show another card" />
+  <TextBlock>This card's action will show another card</TextBlock>
   <Action.ShowCard Title="No Style">
     <AdaptiveCard Version="1.0">
-      <TextBlock Text="This card has no style" />
+      <TextBlock>This card has no style</TextBlock>
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="Default Style">
     <AdaptiveCard Version="1.0">
-      <TextBlock Text="This card has default style" />
+      <TextBlock>This card has default style</TextBlock>
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="Emphasis Style">
     <AdaptiveCard Version="1.0" Style="emphasis">
-      <TextBlock Text="This card has emphasis style" />
+      <TextBlock>This card has emphasis style</TextBlock>
     </AdaptiveCard>
   </Action.ShowCard>
 </Card>

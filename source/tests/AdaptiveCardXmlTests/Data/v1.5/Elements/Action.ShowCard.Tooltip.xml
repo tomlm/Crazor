@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Size="extraLarge" Text="Our new product is awesome!" Wrap="true" />
+  <TextBlock Size="extraLarge" Wrap="true">Our new product is awesome!</TextBlock>
   <Action.ShowCard Title="Terms and Conditions" Tooltip="Click here to view the details of our terms and conditions.">
     <AdaptiveCard Version="1.5">
-      <TextBlock Size="small" Text="Here's some fine print for you to read. Don't break any laws! We will also not break any laws!" Wrap="true" />
+      <TextBlock Size="small" Wrap="true">Here's some fine print for you to read. Don't break any laws! We will also not break any laws!</TextBlock>
     </AdaptiveCard>
   </Action.ShowCard>
 </Card>

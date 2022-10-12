@@ -3,7 +3,7 @@
   <Container Style="emphasis" Bleed="true">
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Size="large" Weight="bolder" Text="**EXPENSE APPROVAL**" Wrap="true" Style="heading" />
+        <TextBlock Size="large" Weight="bolder" Wrap="true" Style="heading">**EXPENSE APPROVAL**</TextBlock>
       </Column>
       <Column Width="auto">
         <Image Height="30px" Url="https://adaptivecards.io/content/pending.png" AltText="Pending" />
@@ -13,7 +13,7 @@
   <Container>
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Size="extraLarge" Text="Trip to UAE" Wrap="true" Style="heading" />
+        <TextBlock Size="extraLarge" Wrap="true" Style="heading">Trip to UAE</TextBlock>
       </Column>
       <Column Width="auto">
         <ActionSet>
@@ -21,7 +21,7 @@
         </ActionSet>
       </Column>
     </ColumnSet>
-    <TextBlock Spacing="small" Size="small" Weight="bolder" Text="[ER-13052](https://adaptivecards.io)" Wrap="true" />
+    <TextBlock Spacing="small" Size="small" Weight="bolder" Wrap="true">[ER-13052](https://adaptivecards.io)</TextBlock>
     <FactSet Spacing="large">
       <Fact Title="Submitted By" Value="**Matt Hidinger**  matt@contoso.com" />
       <Fact Title="Duration" Value="2019/06/19 - 2019/06/25" />
@@ -34,25 +34,25 @@
   <Container Spacing="large" Style="emphasis" Bleed="true">
     <ColumnSet>
       <Column Width="auto">
-        <TextBlock Weight="bolder" Text="DATE" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">DATE</TextBlock>
       </Column>
       <Column Spacing="large" Width="stretch">
-        <TextBlock Weight="bolder" Text="CATEGORY" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">CATEGORY</TextBlock>
       </Column>
       <Column Width="auto">
-        <TextBlock Weight="bolder" Text="AMOUNT" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">AMOUNT</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="06/19" Wrap="true" />
+      <TextBlock Wrap="true">06/19</TextBlock>
     </Column>
     <Column Spacing="medium" Width="stretch">
-      <TextBlock Text="Air Travel Expense" Wrap="true" />
+      <TextBlock Wrap="true">Air Travel Expense</TextBlock>
     </Column>
     <Column Width="auto">
-      <TextBlock Text="$ 300" Wrap="true" />
+      <TextBlock Wrap="true">$ 300</TextBlock>
     </Column>
     <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
       <SelectAction xsi:type="Action.ToggleVisibility">
@@ -66,8 +66,8 @@
   </ColumnSet>
   <Container Id="cardContent1" IsVisible="false">
     <Container>
-      <TextBlock IsSubtle="true" Text="* Leg 1 on Tue, Jun 19th, 2019 at 6:00 AM." Wrap="true" />
-      <TextBlock IsSubtle="true" Text="* Leg 2 on Tue,Jun 19th, 2019 at 7:15 PM." Wrap="true" />
+      <TextBlock IsSubtle="true" Wrap="true">* Leg 1 on Tue, Jun 19th, 2019 at 6:00 AM.</TextBlock>
+      <TextBlock IsSubtle="true" Wrap="true">* Leg 2 on Tue,Jun 19th, 2019 at 7:15 PM.</TextBlock>
       <Container>
         <Input.Text Id="comment1" Label="Add your comment here" />
       </Container>
@@ -88,13 +88,13 @@
   </Container>
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="06/19" HorizontalAlignment="center" Wrap="true" />
+      <TextBlock HorizontalAlignment="center" Wrap="true">06/19</TextBlock>
     </Column>
     <Column Spacing="medium" Width="stretch">
-      <TextBlock Text="Auto Mobile Expense" Wrap="true" />
+      <TextBlock Wrap="true">Auto Mobile Expense</TextBlock>
     </Column>
     <Column Width="auto">
-      <TextBlock Text="$ 100" Wrap="true" />
+      <TextBlock Wrap="true">$ 100</TextBlock>
     </Column>
     <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
       <SelectAction xsi:type="Action.ToggleVisibility">
@@ -108,7 +108,7 @@
   </ColumnSet>
   <Container Id="cardContent2" IsVisible="false">
     <Container>
-      <TextBlock IsSubtle="true" Text="* Contoso Car Rentrals, Tues 6/19 at 7:00 AM" Wrap="true" />
+      <TextBlock IsSubtle="true" Wrap="true">* Contoso Car Rentrals, Tues 6/19 at 7:00 AM</TextBlock>
       <Container>
         <Input.Text Id="comment2" Label="Add your comment here" />
       </Container>
@@ -129,13 +129,13 @@
   </Container>
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="06/25" HorizontalAlignment="center" Wrap="true" />
+      <TextBlock HorizontalAlignment="center" Wrap="true">06/25</TextBlock>
     </Column>
     <Column Spacing="medium" Width="stretch">
-      <TextBlock Text="Excess Baggage Cost" Wrap="true" />
+      <TextBlock Wrap="true">Excess Baggage Cost</TextBlock>
     </Column>
     <Column Width="auto">
-      <TextBlock Text="$ 4.30" Wrap="true" />
+      <TextBlock Wrap="true">$ 4.30</TextBlock>
     </Column>
     <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
       <SelectAction xsi:type="Action.ToggleVisibility">
@@ -170,36 +170,36 @@
     <TableColumn Width="1" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="Total Expense Amount" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock HorizontalAlignment="right" Wrap="true">Total Expense Amount</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="404.30" HorizontalAlignment="right" Wrap="true" />
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <TextBlock Text="Non-reimbursable Amount" HorizontalAlignment="right" Wrap="true" />
-      </TableCell>
-      <TableCell>
-        <TextBlock Text="(-) 0.00" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock HorizontalAlignment="right" Wrap="true">404.30</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Advance Amount" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock HorizontalAlignment="right" Wrap="true">Non-reimbursable Amount</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="(-) 0.00" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock HorizontalAlignment="right" Wrap="true">(-) 0.00</TextBlock>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock HorizontalAlignment="right" Wrap="true">Advance Amount</TextBlock>
+      </TableCell>
+      <TableCell>
+        <TextBlock HorizontalAlignment="right" Wrap="true">(-) 0.00</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
   <Container Style="emphasis" Bleed="true">
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Text="Amount to be Reimbursed" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock HorizontalAlignment="right" Wrap="true">Amount to be Reimbursed</TextBlock>
       </Column>
       <Column Width="auto">
-        <TextBlock Weight="bolder" Text="$ 404.30" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">$ 404.30</TextBlock>
       </Column>
       <Column Width="auto" />
     </ColumnSet>
@@ -211,14 +211,14 @@
         <TargetElement ElementId="showHistory" />
         <TargetElement ElementId="hideHistory" />
       </SelectAction>
-      <TextBlock Id="showHistory" Color="accent" Text="Show history" HorizontalAlignment="right" Wrap="true" />
-      <TextBlock Id="hideHistory" IsVisible="false" Color="accent" Text="Hide history" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Id="showHistory" Color="accent" HorizontalAlignment="right" Wrap="true">Show history</TextBlock>
+      <TextBlock Id="hideHistory" IsVisible="false" Color="accent" HorizontalAlignment="right" Wrap="true">Hide history</TextBlock>
     </Column>
   </ColumnSet>
   <Container Id="cardContent4" IsVisible="false">
     <Container>
-      <TextBlock IsSubtle="true" Text="* Expense submitted by **Matt** on Wed, Apr 14th, 2019" Wrap="true" />
-      <TextBlock IsSubtle="true" Text="* Expense approved by **Thomas** on Thu, Apr 15th, 2019" Wrap="true" />
+      <TextBlock IsSubtle="true" Wrap="true">* Expense submitted by **Matt** on Wed, Apr 14th, 2019</TextBlock>
+      <TextBlock IsSubtle="true" Wrap="true">* Expense approved by **Thomas** on Thu, Apr 15th, 2019</TextBlock>
     </Container>
   </Container>
   <Container>

@@ -1,27 +1,27 @@
 ﻿@using OpBot.Cards.Address
 @inherits CardView<AddressApp>
 
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Version Major="1" Minor="4" />
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
+    
 
-    <TextBlock Size="ExtraLarge">Addresses</TextBlock>
+    <TextBlock Size="extraLarge">Addresses</TextBlock>
     @if (Model.Addresses.Any())
     {
         @foreach (var address in Model.Addresses)
         {
             <Container Separator="true">
-                <ColumnSet Padding="None">
-                    <Column Width="Stretch" >
+                <ColumnSet Padding="none">
+                    <Column Width="stretch" >
                         <TextBlock>@address.Street</TextBlock>
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
                     </Column>
-                    <Column Width="Auto" >
-                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="Small">
+                    <Column Width="auto" >
+                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="small">
                             <SelectAction xsi:type="Action.Execute" Id="@address.Id" Tooltip="Edit Address" Verb="OnEdit" />
                         </Image> 
                     </Column>
-                    <Column Width="Auto" >
-                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="Small">
+                    <Column Width="auto" >
+                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="small">
                             <SelectAction xsi:type="Action.Execute" Id="@address.Id" Tooltip="Delete Address" Verb="OnDelete" />
                         </Image> 
                     </Column>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Text="1. First item in the list;" />
-  <TextBlock Text="2. Second item in the list;" />
-  <TextBlock Text="3. Third item in the list;" />
-  <TextBlock Text="10. The tenth thing&#xD;10. The list is still going!&#xD;10. Should be 12!" Wrap="true" />
+  <TextBlock>1. First item in the list;</TextBlock>
+  <TextBlock>2. Second item in the list;</TextBlock>
+  <TextBlock>3. Third item in the list;</TextBlock>
+  <TextBlock Wrap="true">10. The tenth thing
+10. The list is still going!
+10. Should be 12!</TextBlock>
 </Card>

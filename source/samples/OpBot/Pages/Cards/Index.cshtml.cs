@@ -1,7 +1,7 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Cards;
+using Crazor;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;

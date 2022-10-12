@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" Speak="Calendar">
-  <TextBlock Text="This whole card has an Action.OpenUrl select action, and has an ActionSet that has an Action.Submit. Both actions should work" Wrap="true" />
+  <TextBlock Wrap="true">This whole card has an Action.OpenUrl select action, and has an ActionSet that has an Action.Submit. Both actions should work</TextBlock>
   <Container>
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Spacing="medium" Size="large" Text="Test meeting" Wrap="true" MaxLines="2" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Today,  9:30 PM - 10:00 PM" />
+        <TextBlock Spacing="medium" Size="large" Wrap="true" MaxLines="2">Test meeting</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true">Today,  9:30 PM - 10:00 PM</TextBlock>
       </Column>
       <Column Spacing="none" Width="125">
         <ActionSet>

@@ -2,17 +2,17 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column>
-      <TextBlock Text="This is a media element which specifies a poster:" Wrap="true" />
+      <TextBlock Wrap="true">This is a media element which specifies a poster:</TextBlock>
       <Media Poster="http://adaptivecards.io/content/cats/1.png">
         <MediaSource MimeType="audio/mpeg" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp3" />
       </Media>
     </Column>
     <Column>
-      <TextBlock Text="This is a media element which doesn't specify a poster. It will use the poster from the host config if present:" Wrap="true" />
+      <TextBlock Wrap="true">This is a media element which doesn't specify a poster. It will use the poster from the host config if present:</TextBlock>
       <Media>
         <MediaSource MimeType="audio/mpeg" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp3" />
       </Media>
-      <TextBlock Text="This text is here to check that we are not blocking the text below" />
+      <TextBlock>This text is here to check that we are not blocking the text below</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

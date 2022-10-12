@@ -9,7 +9,7 @@
     <SelectAction xsi:type="Action.ToggleVisibility">
       <TargetElement ElementId="id3" />
     </SelectAction>
-    <TextBlock Text="There's an image above this but the visibility is set to false. There shouldn't be a spacing above" Wrap="true" />
+    <TextBlock Wrap="true">There's an image above this but the visibility is set to false. There shouldn't be a spacing above</TextBlock>
     <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
   </Container>
   <ColumnSet Id="id3" Height="stretch">
@@ -17,10 +17,10 @@
       <TargetElement ElementId="id1" />
     </SelectAction>
     <Column IsVisible="false">
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Spacing="large">
-      <TextBlock Text="This is the second column. There shouldn't be spacing before this" Wrap="true" />
+      <TextBlock Wrap="true">This is the second column. There shouldn't be spacing before this</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

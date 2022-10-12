@@ -2,11 +2,11 @@
 @model PersonTagHelper
 
 <ColumnSet @Html.Raw(String.IsNullOrEmpty(Model.Id) ? String.Empty : $"Id=\"{Model.Id}\"")>
-    <Column Width="Auto" HorizontalAlignment="Center">
-        <Image Style="Person" Url="@Model.Url" Size="@Model.Size" />
-        <TextBlock Weight="Bolder" Wrap="true">@Model.Name</TextBlock>
+    <Column Width="auto" HorizontalAlignment="center">
+        <Image Style="person" Url="@Model.Url" Size="@Model.Size.ToLower()" />
+        <TextBlock Weight="bolder" Wrap="true">@Model.Name</TextBlock>
     </Column>
-    <Column Width="Stretch" VerticalContentAlignment="Center" >
-        <TextBlock Wrap="true" HorizontalAlignment="Center">@Model.Text</TextBlock>
+    <Column Width="stretch" VerticalContentAlignment="center" >
+        <TextBlock Wrap="true" HorizontalAlignment="center">@Model.Text</TextBlock>
     </Column>
 </ColumnSet>

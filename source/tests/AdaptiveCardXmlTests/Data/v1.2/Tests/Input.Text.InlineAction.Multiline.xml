@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Text="Multiline Text Inputs with inline actions" />
+  <TextBlock>Multiline Text Inputs with inline actions</TextBlock>
   <Input.Text Id="input3" IsMultiline="true">
     <Action.Submit Title="Reply" IconUrl="https://adaptivecards.io/content/send.png" />
   </Input.Text>

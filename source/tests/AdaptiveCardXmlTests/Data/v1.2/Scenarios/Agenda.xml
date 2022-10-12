@@ -7,8 +7,8 @@
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/LocationGreen_A.png" AltText="Location A" />
         </Column>
         <Column Width="auto">
-          <TextBlock Text="**Redmond**" Wrap="true" />
-          <TextBlock Spacing="none" Text="8a - 12:30p" Wrap="true" />
+          <TextBlock Wrap="true">**Redmond**</TextBlock>
+          <TextBlock Spacing="none" Wrap="true">8a - 12:30p</TextBlock>
         </Column>
       </ColumnSet>
     </Column>
@@ -18,8 +18,8 @@
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/LocationBlue_B.png" AltText="Location B" />
         </Column>
         <Column Width="auto">
-          <TextBlock Text="**Bellevue**" Wrap="true" />
-          <TextBlock Spacing="none" Text="12:30p - 3p" Wrap="true" />
+          <TextBlock Wrap="true">**Bellevue**</TextBlock>
+          <TextBlock Spacing="none" Wrap="true">12:30p - 3p</TextBlock>
         </Column>
       </ColumnSet>
     </Column>
@@ -29,8 +29,8 @@
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/LocationRed_C.png" AltText="Location C" />
         </Column>
         <Column Width="auto">
-          <TextBlock Text="**Seattle**" Wrap="true" />
-          <TextBlock Spacing="none" Text="8p" Wrap="true" />
+          <TextBlock Wrap="true">**Seattle**</TextBlock>
+          <TextBlock Spacing="none" Wrap="true">8p</TextBlock>
         </Column>
       </ColumnSet>
     </Column>
@@ -42,23 +42,23 @@
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/Conflict.png" AltText="Calendar conflict" />
         </Column>
         <Column Spacing="none" Width="stretch">
-          <TextBlock Text="2:00 PM" Wrap="true" />
+          <TextBlock Wrap="true">2:00 PM</TextBlock>
         </Column>
       </ColumnSet>
-      <TextBlock Spacing="none" IsSubtle="true" Text="1hr" Wrap="true" />
+      <TextBlock Spacing="none" IsSubtle="true" Wrap="true">1hr</TextBlock>
     </Column>
     <Column Spacing="none" Width="auto">
       <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="repeatVertically" HorizontalAlignment="center" />
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/CircleGreen_coffee.png" HorizontalAlignment="center" AltText="Location A: Coffee" />
     </Column>
     <Column Width="40">
-      <TextBlock Text="**Contoso Campaign Status Meeting**" Wrap="true" />
+      <TextBlock Wrap="true">**Contoso Campaign Status Meeting**</TextBlock>
       <ColumnSet Spacing="none">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/location_gray.png" AltText="Location" />
         </Column>
         <Column Width="stretch">
-          <TextBlock Text="Conf Room Bravern-2/9050" Wrap="true" />
+          <TextBlock Wrap="true">Conf Room Bravern-2/9050</TextBlock>
         </Column>
       </ColumnSet>
       <ImageSet Spacing="small" ImageSize="small">
@@ -71,7 +71,7 @@
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/power_point.png" AltText="Powerpoint presentation" />
         </Column>
         <Column Width="stretch">
-          <TextBlock Text="**Contoso Brand Guidelines** shared by **Susan Metters**" Wrap="true" />
+          <TextBlock Wrap="true">**Contoso Brand Guidelines** shared by **Susan Metters**</TextBlock>
         </Column>
       </ColumnSet>
     </Column>
@@ -88,28 +88,28 @@
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/car.png" AltText="Travel by car" />
         </Column>
         <Column Width="stretch">
-          <TextBlock IsSubtle="true" Text="about 45 minutes" Wrap="true" />
+          <TextBlock IsSubtle="true" Wrap="true">about 45 minutes</TextBlock>
         </Column>
       </ColumnSet>
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="none">
     <Column Width="110">
-      <TextBlock Spacing="none" Text="8:00 PM" Wrap="true" />
-      <TextBlock Spacing="none" IsSubtle="true" Text="1hr" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">8:00 PM</TextBlock>
+      <TextBlock Spacing="none" IsSubtle="true" Wrap="true">1hr</TextBlock>
     </Column>
     <Column Spacing="none" Width="auto">
       <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/SmallVerticalLineGray.png" FillMode="repeatVertically" HorizontalAlignment="center" />
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/CircleBlue_flight.png" HorizontalAlignment="center" AltText="Location B: Flight" />
     </Column>
     <Column Width="40">
-      <TextBlock Text="**Alaska Airlines AS1021 flight to Chicago**" Wrap="true" />
+      <TextBlock Wrap="true">**Alaska Airlines AS1021 flight to Chicago**</TextBlock>
       <ColumnSet Spacing="none">
         <Column Width="auto">
           <Image Url="https://messagecardplayground.azurewebsites.net/assets/location_gray.png" AltText="Location" />
         </Column>
         <Column Width="stretch">
-          <TextBlock Text="Seattle Tacoma International Airport (17801 International Blvd, Seattle, WA, United States)" Wrap="true" />
+          <TextBlock Wrap="true">Seattle Tacoma International Airport (17801 International Blvd, Seattle, WA, United States)</TextBlock>
         </Column>
       </ColumnSet>
       <Image Size="stretch" Url="https://messagecardplayground.azurewebsites.net/assets/SeaTacMap.png" AltText="Map of the Seattle-Tacoma airport" />

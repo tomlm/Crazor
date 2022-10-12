@@ -4,7 +4,7 @@
     <Fallback>
       <Container>
         <Fallback>
-          <TextBlock Text="Hello World" />
+          <TextBlock>Hello World</TextBlock>
         </Fallback>
         <UnknownElement Type="notme" />
       </Container>

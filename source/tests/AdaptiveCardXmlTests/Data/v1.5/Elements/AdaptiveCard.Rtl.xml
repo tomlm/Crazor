@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5" Rtl="true">
-  <TextBlock Text="هذه كتلة نص" Wrap="true" />
-  <TextBlock Text="זהו בלוק טקסט" Wrap="true" />
-  <TextBlock Text="This is a text block" Wrap="true" />
+  <TextBlock Wrap="true">هذه كتلة نص</TextBlock>
+  <TextBlock Wrap="true">זהו בלוק טקסט</TextBlock>
+  <TextBlock Wrap="true">This is a text block</TextBlock>
 </Card>

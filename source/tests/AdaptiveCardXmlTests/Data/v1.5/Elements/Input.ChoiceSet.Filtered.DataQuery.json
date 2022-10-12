@@ -24,6 +24,29 @@
         "Count": 5,
         "Skip": 5
       }
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "compound",
+      "value": "John Smith",
+      "style": "filtered",
+      "choices": [
+        {
+          "title": "Option 1",
+          "value": "1"
+        },
+        {
+          "title": "Option 2",
+          "value": "2"
+        }
+      ],
+      "choices.data": {
+        "Type": "Data.Query",
+        "Dataset": "test",
+        "Value": "Jon",
+        "Count": 5,
+        "Skip": 5
+      }
     }
   ],
   "actions": [

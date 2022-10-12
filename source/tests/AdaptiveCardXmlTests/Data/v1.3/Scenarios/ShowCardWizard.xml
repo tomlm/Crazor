@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="Please provide the following information:" Wrap="true" />
+  <TextBlock Wrap="true">Please provide the following information:</TextBlock>
   <Action.ShowCard Title="1. Name">
     <AdaptiveCard Version="1.0">
       <Container Id="nameProperties">

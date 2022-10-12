@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Bot.Cards.Attributes
+﻿namespace Crazor.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class SharedMemoryAttribute : Attribute

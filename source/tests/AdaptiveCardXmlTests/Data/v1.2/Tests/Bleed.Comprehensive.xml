@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Container Style="emphasis" Bleed="true">
-    <TextBlock Text="Bleeding container at the top of the card" Wrap="true" />
+    <TextBlock Wrap="true">Bleeding container at the top of the card</TextBlock>
   </Container>
-  <TextBlock Text="Dummy TextBlock" />
+  <TextBlock>Dummy TextBlock</TextBlock>
   <Container Style="emphasis" Bleed="true">
-    <TextBlock Text="Bleeding container in the middle of the card" Wrap="true" />
+    <TextBlock Wrap="true">Bleeding container in the middle of the card</TextBlock>
   </Container>
-  <TextBlock Text="Dummy TextBlock" />
+  <TextBlock>Dummy TextBlock</TextBlock>
   <Container Style="emphasis">
-    <TextBlock Text="Non-bleeding container" Wrap="true" />
+    <TextBlock Wrap="true">Non-bleeding container</TextBlock>
     <Container Bleed="true">
-      <TextBlock Text="Bleeding sub-container with style explicitly set to default" Wrap="true" />
+      <TextBlock Wrap="true">Bleeding sub-container with style explicitly set to default</TextBlock>
     </Container>
     <Container>
-      <TextBlock Text="Non-bleeding sub-container with style explicitly set to default" Wrap="true" />
+      <TextBlock Wrap="true">Non-bleeding sub-container with style explicitly set to default</TextBlock>
     </Container>
     <Container Bleed="true">
-      <TextBlock Text="Bleeding sub-container with no explicit style" Wrap="true" />
+      <TextBlock Wrap="true">Bleeding sub-container with no explicit style</TextBlock>
     </Container>
     <Container Style="good" Bleed="true">
-      <TextBlock Text="Bleeding sub-container with explicit style" Wrap="true" />
+      <TextBlock Wrap="true">Bleeding sub-container with explicit style</TextBlock>
     </Container>
   </Container>
-  <TextBlock Text="Bleeding ColumnSet below" />
+  <TextBlock>Bleeding ColumnSet below</TextBlock>
   <ColumnSet Style="emphasis" Bleed="true">
     <Column Width="stretch">
       <Image Size="small" Style="person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
     </Column>
     <Column VerticalContentAlignment="center" Width="stretch">
-      <TextBlock Text="Middle column" HorizontalAlignment="center" Wrap="true" />
+      <TextBlock HorizontalAlignment="center" Wrap="true">Middle column</TextBlock>
     </Column>
     <Column VerticalContentAlignment="center" Width="stretch">
-      <TextBlock Text="Right column" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock HorizontalAlignment="right" Wrap="true">Right column</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Left and right column bleeding only" />
+  <TextBlock>Left and right column bleeding only</TextBlock>
   <ColumnSet Style="emphasis">
     <Column Bleed="true" Width="stretch">
       <Image Size="small" Style="person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
     </Column>
     <Column VerticalContentAlignment="center" Width="stretch">
-      <TextBlock Text="Middle column" HorizontalAlignment="center" Wrap="true" />
+      <TextBlock HorizontalAlignment="center" Wrap="true">Middle column</TextBlock>
       <Container Spacing="none" Style="emphasis" Bleed="true">
-        <TextBlock Text="Bleeding sub-container in center column" HorizontalAlignment="center" Wrap="true" />
+        <TextBlock HorizontalAlignment="center" Wrap="true">Bleeding sub-container in center column</TextBlock>
         <Container Style="good" Bleed="true">
-          <TextBlock Text="Bleeding sub-sub container in center column" Wrap="true" />
+          <TextBlock Wrap="true">Bleeding sub-sub container in center column</TextBlock>
         </Container>
       </Container>
     </Column>
     <Column VerticalContentAlignment="center" Bleed="true" Width="stretch">
-      <TextBlock Text="Right column" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock HorizontalAlignment="right" Wrap="true">Right column</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Dummy TextBlock" />
+  <TextBlock>Dummy TextBlock</TextBlock>
   <Container Style="emphasis" Bleed="true">
-    <TextBlock Text="Bleeding container" Wrap="true" />
+    <TextBlock Wrap="true">Bleeding container</TextBlock>
     <Container>
-      <TextBlock Text="Non-bleeding sub-container" Wrap="true" />
+      <TextBlock Wrap="true">Non-bleeding sub-container</TextBlock>
       <Container Style="emphasis">
-        <TextBlock Text="Non-bleeding sub-sub-container" Wrap="true" />
+        <TextBlock Wrap="true">Non-bleeding sub-sub-container</TextBlock>
         <Container>
-          <TextBlock Text="Non-bleeding sub-sub-sub-container containing bleeding ColumnSet" Wrap="true" />
+          <TextBlock Wrap="true">Non-bleeding sub-sub-sub-container containing bleeding ColumnSet</TextBlock>
           <ColumnSet Style="emphasis" Bleed="true">
             <Column Width="stretch">
               <Image Size="small" Style="person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
             </Column>
             <Column VerticalContentAlignment="center" Width="stretch">
-              <TextBlock Text="Middle column" HorizontalAlignment="center" Wrap="true" />
+              <TextBlock HorizontalAlignment="center" Wrap="true">Middle column</TextBlock>
             </Column>
             <Column VerticalContentAlignment="center" Width="stretch">
-              <TextBlock Text="Right column" HorizontalAlignment="right" Wrap="true" />
+              <TextBlock HorizontalAlignment="right" Wrap="true">Right column</TextBlock>
             </Column>
           </ColumnSet>
         </Container>
@@ -78,46 +78,46 @@
     </Container>
   </Container>
   <Container>
-    <TextBlock Text="Non-bleeding container" Wrap="true" />
+    <TextBlock Wrap="true">Non-bleeding container</TextBlock>
     <Container>
-      <TextBlock Text="Non-bleeding sub-container" Wrap="true" />
+      <TextBlock Wrap="true">Non-bleeding sub-container</TextBlock>
       <Container>
-        <TextBlock Text="Non-bleeding sub-sub-container" Wrap="true" />
+        <TextBlock Wrap="true">Non-bleeding sub-sub-container</TextBlock>
         <Container>
-          <TextBlock Text="Non-bleeding sub-sub-sub-container containing bleeding ColumnSet" Wrap="true" />
+          <TextBlock Wrap="true">Non-bleeding sub-sub-sub-container containing bleeding ColumnSet</TextBlock>
           <ColumnSet Style="emphasis" Bleed="true">
             <Column Width="stretch">
               <Image Size="small" Style="person" Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg" AltText="Matt Hidinger" />
             </Column>
             <Column VerticalContentAlignment="center" Width="stretch">
-              <TextBlock Text="Middle column" HorizontalAlignment="center" Wrap="true" />
+              <TextBlock HorizontalAlignment="center" Wrap="true">Middle column</TextBlock>
             </Column>
             <Column VerticalContentAlignment="center" Width="stretch">
-              <TextBlock Text="Right column" HorizontalAlignment="right" Wrap="true" />
+              <TextBlock HorizontalAlignment="right" Wrap="true">Right column</TextBlock>
             </Column>
           </ColumnSet>
         </Container>
       </Container>
     </Container>
   </Container>
-  <TextBlock Text="Nested containter and column set cases. Sub Columns marked with Y or N indicate whether they should bleed." Wrap="true" />
+  <TextBlock Wrap="true">Nested containter and column set cases. Sub Columns marked with Y or N indicate whether they should bleed.</TextBlock>
   <Container Style="emphasis">
     <ColumnSet>
       <Column Width="stretch">
         <ColumnSet>
           <Column Width="stretch">
             <Container Style="emphasis" Bleed="true">
-              <TextBlock Text="Y" HorizontalAlignment="center" />
+              <TextBlock HorizontalAlignment="center">Y</TextBlock>
             </Container>
           </Column>
           <Column Width="stretch">
             <Container Style="emphasis" Bleed="true">
-              <TextBlock Text="N" HorizontalAlignment="center" Wrap="true" />
+              <TextBlock HorizontalAlignment="center" Wrap="true">N</TextBlock>
             </Container>
           </Column>
           <Column Width="stretch">
             <Container Style="emphasis">
-              <TextBlock Text="N" HorizontalAlignment="center" />
+              <TextBlock HorizontalAlignment="center">N</TextBlock>
             </Container>
           </Column>
         </ColumnSet>
@@ -126,17 +126,17 @@
         <ColumnSet>
           <Column Width="stretch">
             <Container Style="emphasis" Bleed="true">
-              <TextBlock Text="N" HorizontalAlignment="center" />
+              <TextBlock HorizontalAlignment="center">N</TextBlock>
             </Container>
           </Column>
           <Column Width="stretch">
             <Container Style="emphasis" Bleed="true">
-              <TextBlock Text="N" HorizontalAlignment="center" />
+              <TextBlock HorizontalAlignment="center">N</TextBlock>
             </Container>
           </Column>
           <Column Width="stretch">
             <Container Style="emphasis" Bleed="true">
-              <TextBlock Text="Y" HorizontalAlignment="center" />
+              <TextBlock HorizontalAlignment="center">Y</TextBlock>
             </Container>
           </Column>
         </ColumnSet>
@@ -147,13 +147,13 @@
     <Column Width="stretch">
       <ColumnSet>
         <Column Style="emphasis" Bleed="true" Width="stretch">
-          <TextBlock Text="Y" HorizontalAlignment="center" Wrap="true" />
+          <TextBlock HorizontalAlignment="center" Wrap="true">Y</TextBlock>
         </Column>
         <Column Style="emphasis" Bleed="true" Width="stretch">
-          <TextBlock Text="N" HorizontalAlignment="center" Wrap="true" />
+          <TextBlock HorizontalAlignment="center" Wrap="true">N</TextBlock>
         </Column>
         <Column Style="emphasis" Bleed="true" Width="stretch">
-          <TextBlock Text="Y" HorizontalAlignment="center" />
+          <TextBlock HorizontalAlignment="center">Y</TextBlock>
         </Column>
       </ColumnSet>
     </Column>
@@ -161,33 +161,33 @@
       <ColumnSet>
         <Column Width="stretch">
           <Container Style="emphasis" Bleed="true">
-            <TextBlock Text="Y" HorizontalAlignment="center" Wrap="true" />
+            <TextBlock HorizontalAlignment="center" Wrap="true">Y</TextBlock>
           </Container>
         </Column>
         <Column Width="stretch">
           <Container Style="emphasis" Bleed="true">
-            <TextBlock Text="N" HorizontalAlignment="center" Wrap="true" />
+            <TextBlock HorizontalAlignment="center" Wrap="true">N</TextBlock>
           </Container>
         </Column>
         <Column Width="stretch">
           <Container Style="emphasis">
-            <TextBlock Text="N" HorizontalAlignment="center" Wrap="true" />
+            <TextBlock HorizontalAlignment="center" Wrap="true">N</TextBlock>
           </Container>
         </Column>
       </ColumnSet>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Dummy TextBlock" />
+  <TextBlock>Dummy TextBlock</TextBlock>
   <Container Style="emphasis" Bleed="true">
-    <TextBlock Text="Bleeding container at the bottom of the card" Wrap="true" />
+    <TextBlock Wrap="true">Bleeding container at the bottom of the card</TextBlock>
   </Container>
-  <TextBlock Size="extraLarge" Weight="bolder" Text="REMOVED TEXT" Wrap="true" />
+  <TextBlock Size="extraLarge" Weight="bolder" Wrap="true">REMOVED TEXT</TextBlock>
   <ActionSet>
     <Action.ShowCard Title="Results">
       <AdaptiveCard Version="1.0">
         <Container Style="emphasis" Bleed="true">
           <Container>
-            <TextBlock Spacing="none" Size="extraLarge" Weight="bolder" Text="REMOVED TEXT" Wrap="true" />
+            <TextBlock Spacing="none" Size="extraLarge" Weight="bolder" Wrap="true">REMOVED TEXT</TextBlock>
           </Container>
         </Container>
       </AdaptiveCard>

@@ -20,9 +20,9 @@
     <Inlines>! Here's one that's highlighted: </Inlines>
     <Inlines Highlight="true">Submit!<SelectAction xsi:type="Action.Submit" /></Inlines>
   </RichTextBlock>
-  <TextBlock Size="large" Text="Highlights with colors and containers:" Wrap="true" />
+  <TextBlock Size="large" Wrap="true">Highlights with colors and containers:</TextBlock>
   <Container>
-    <TextBlock Text="**Default Container:** " />
+    <TextBlock>**Default Container:** </TextBlock>
     <RichTextBlock>
       <Inlines Highlight="true">Default </Inlines>
       <Inlines IsSubtle="true" Highlight="true">(Subtle) </Inlines>
@@ -41,7 +41,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="emphasis">
-    <TextBlock Text="**Emphasis Container:** " />
+    <TextBlock>**Emphasis Container:** </TextBlock>
     <RichTextBlock>
       <Inlines Highlight="true">Default </Inlines>
       <Inlines IsSubtle="true" Highlight="true">(Subtle) </Inlines>
@@ -60,7 +60,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="good">
-    <TextBlock Text="**Good Container:** " />
+    <TextBlock>**Good Container:** </TextBlock>
     <RichTextBlock>
       <Inlines Highlight="true">Default </Inlines>
       <Inlines IsSubtle="true" Highlight="true">(Subtle) </Inlines>
@@ -79,7 +79,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="attention">
-    <TextBlock Text="**Attention Container:** " />
+    <TextBlock>**Attention Container:** </TextBlock>
     <RichTextBlock>
       <Inlines Highlight="true">Default </Inlines>
       <Inlines IsSubtle="true" Highlight="true">(Subtle) </Inlines>
@@ -98,7 +98,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="warning">
-    <TextBlock Text="**Warning Container:** " />
+    <TextBlock>**Warning Container:** </TextBlock>
     <RichTextBlock>
       <Inlines Highlight="true">Default </Inlines>
       <Inlines IsSubtle="true" Highlight="true">(Subtle) </Inlines>
@@ -117,7 +117,7 @@
     </RichTextBlock>
   </Container>
   <Container Style="accent">
-    <TextBlock Text="**Accent Container:** " />
+    <TextBlock>**Accent Container:** </TextBlock>
     <RichTextBlock>
       <Inlines Highlight="true">Default </Inlines>
       <Inlines IsSubtle="true" Highlight="true">(Subtle) </Inlines>

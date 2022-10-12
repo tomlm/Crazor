@@ -1,27 +1,27 @@
 ﻿@using OpBot.Cards.ProductCatalog
 @inherits CardView<CreateEditProductCatalogModel>
 
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Version Major="1" Minor="4" />
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
+    
 
     @if (Model.IsEdit)
     {
-        <TextBlock Size="ExtraLarge">Edit Catalog Item</TextBlock>
+        <TextBlock Size="extraLarge">Edit Catalog Item</TextBlock>
     }
     else
     {
-        <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
+        <TextBlock Size="extraLarge">Add Catalog Item</TextBlock>
     }
-    <Input.Text Id="ItemName" Label="Name" Style="Text" ErrorMessage="Name is required." Value="@ItemName" />
+    <Input.Text Id="ItemName" Label="Name" Style="text" ErrorMessage="Name is required." Value="@ItemName" />
     <FieldErrors Id="ItemName" Errors="@ValidationErrors" />
     
-    <Input.Text Id="Description" Label="Description" Style="Text" ErrorMessage="Description is required" Value="@Description" />
+    <Input.Text Id="Description" Label="Description" Style="text" ErrorMessage="Description is required" Value="@Description" />
     <FieldErrors Id="Description" Errors="@ValidationErrors" />
     
     <Input.Number Id="Price" Label="Price" ErrorMessage="Price is required." Value="@Price" />
     <FieldErrors Id="Price" Errors="@ValidationErrors" />
 
-    <Input.Text Id="PictureUri" Label="PictureUri" Style="Text" ErrorMessage="Picture Uri is required." Value="@PictureUri" />
+    <Input.Text Id="PictureUri" Label="PictureUri" Style="text" ErrorMessage="Picture Uri is required." Value="@PictureUri" />
     <FieldErrors Id="PictureUri" Errors="@ValidationErrors" />
 
     <Action.Execute Title="Cancel" Verb="OnCancel" />

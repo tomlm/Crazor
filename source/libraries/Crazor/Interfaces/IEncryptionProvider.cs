@@ -5,7 +5,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Bot.Cards.Interfaces
+namespace Crazor.Interfaces
 {
     public interface IEncryptionProvider
     {

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees&lt;/s&gt;">
-  <TextBlock Size="large" IsSubtle="true" Text="Redmond, WA" Wrap="true" />
-  <TextBlock Spacing="none" Text="Mon, Nov 4, 2019 6:21 PM" Wrap="true" />
+  <TextBlock Size="large" IsSubtle="true" Wrap="true">Redmond, WA</TextBlock>
+  <TextBlock Spacing="none" Wrap="true">Mon, Nov 4, 2019 6:21 PM</TextBlock>
   <ColumnSet>
     <Column Width="auto">
       <Image Size="small" Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
     </Column>
     <Column Width="auto">
-      <TextBlock Spacing="none" Size="extraLarge" Text="46" Wrap="true" />
+      <TextBlock Spacing="none" Size="extraLarge" Wrap="true">46</TextBlock>
     </Column>
     <Column Width="stretch">
-      <TextBlock Spacing="small" Weight="bolder" Text="°F" Wrap="true" />
+      <TextBlock Spacing="small" Weight="bolder" Wrap="true">°F</TextBlock>
     </Column>
     <Column Width="stretch">
-      <TextBlock Text="Hi 50" Wrap="true" />
-      <TextBlock Spacing="none" Text="Lo 41" Wrap="true" />
+      <TextBlock Wrap="true">Hi 50</TextBlock>
+      <TextBlock Spacing="none" Wrap="true">Lo 41</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

@@ -7,17 +7,17 @@
         <Image Url="https://messagecardplayground.azurewebsites.net/assets/TxP_Flight.png" HorizontalAlignment="center" AltText="Departing airplane" />
       </Container>
       <Container Spacing="none" Height="stretch" Style="emphasis" Bleed="true">
-        <TextBlock Size="extraLarge" Weight="lighter" Color="accent" Text="Flight to JFK" Wrap="true" />
-        <TextBlock Spacing="small" Text="Continental Air Lines flight UA110" Wrap="true" />
-        <TextBlock Spacing="none" Text="Confirmation code: RXJ34P" Wrap="true" />
-        <TextBlock Spacing="none" Text="4 hours 15 minutes" Wrap="true" />
+        <TextBlock Size="extraLarge" Weight="lighter" Color="accent" Wrap="true">Flight to JFK</TextBlock>
+        <TextBlock Spacing="small" Wrap="true">Continental Air Lines flight UA110</TextBlock>
+        <TextBlock Spacing="none" Wrap="true">Confirmation code: RXJ34P</TextBlock>
+        <TextBlock Spacing="none" Wrap="true">4 hours 15 minutes</TextBlock>
       </Container>
     </Column>
     <Column Width="55">
       <Container Height="stretch">
         <ColumnSet>
           <Column Width="auto">
-            <TextBlock Size="extraLarge" Weight="lighter" Text="SFO" Wrap="true" />
+            <TextBlock Size="extraLarge" Weight="lighter" Wrap="true">SFO</TextBlock>
           </Column>
           <Column VerticalContentAlignment="center" Width="stretch">
             <Image Height="2px" Url="https://messagecardplayground.azurewebsites.net/assets/graydot2x2.png" Width="10000px" />
@@ -26,7 +26,7 @@
             <Image Height="16px" Url="https://messagecardplayground.azurewebsites.net/assets/smallairplane.png" AltText="Flight to" />
           </Column>
           <Column Width="auto">
-            <TextBlock Size="extraLarge" Weight="lighter" Text="JFK" HorizontalAlignment="right" Wrap="true" />
+            <TextBlock Size="extraLarge" Weight="lighter" HorizontalAlignment="right" Wrap="true">JFK</TextBlock>
           </Column>
         </ColumnSet>
         <ColumnSet>

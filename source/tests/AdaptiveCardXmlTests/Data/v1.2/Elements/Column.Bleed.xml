@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="Bleed left" />
+  <TextBlock>Bleed left</TextBlock>
   <ColumnSet Style="emphasis">
     <Column Style="good" Bleed="true" Width="stretch">
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Style="attention" Width="stretch">
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
     </Column>
     <Column Style="warning" Width="stretch">
-      <TextBlock Text="Column 3" />
+      <TextBlock>Column 3</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Bleed center" />
+  <TextBlock>Bleed center</TextBlock>
   <ColumnSet Style="emphasis">
     <Column Style="good" Width="stretch">
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Style="attention" Bleed="true" Width="stretch">
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
     </Column>
     <Column Style="warning" Width="stretch">
-      <TextBlock Text="Column 3" />
+      <TextBlock>Column 3</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Bleed right" />
+  <TextBlock>Bleed right</TextBlock>
   <ColumnSet Style="emphasis">
     <Column Style="good" Width="stretch">
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Style="attention" Width="stretch">
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
     </Column>
     <Column Style="warning" Bleed="true" Width="stretch">
-      <TextBlock Text="Column 3" />
+      <TextBlock>Column 3</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Bleed all" />
+  <TextBlock>Bleed all</TextBlock>
   <ColumnSet Style="emphasis">
     <Column Style="good" Bleed="true" Width="stretch">
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Style="attention" Bleed="true" Width="stretch">
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
     </Column>
     <Column Style="warning" Bleed="true" Width="stretch">
-      <TextBlock Text="Column 3" />
+      <TextBlock>Column 3</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

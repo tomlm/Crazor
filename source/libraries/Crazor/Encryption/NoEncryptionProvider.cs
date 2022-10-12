@@ -4,9 +4,9 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Bot.Cards.Interfaces;
+using Crazor.Interfaces;
 
-namespace Microsoft.Bot.Cards.Encryption
+namespace Crazor.Encryption
 {
     /// <summary>
     /// EncryptionProvider which doesn't encrypt the data...

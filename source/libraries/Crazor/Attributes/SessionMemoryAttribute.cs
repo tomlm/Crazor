@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Bot.Cards.Attributes
+namespace Crazor.Attributes
 {
 
     [AttributeUsage(AttributeTargets.Property)]

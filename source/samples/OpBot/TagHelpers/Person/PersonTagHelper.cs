@@ -1,7 +1,7 @@
 ﻿using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Microsoft.Bot.Cards;
+using Crazor;
 
 namespace OpBot.TagHelpers.Person
 {

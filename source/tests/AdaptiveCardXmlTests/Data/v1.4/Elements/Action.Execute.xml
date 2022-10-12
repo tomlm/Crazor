@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Text="Present a form and submit it back to the originator" />
+  <TextBlock>Present a form and submit it back to the originator</TextBlock>
   <Input.Text Id="firstName" Label="What is your first name?" />
   <Input.Text Id="lastName" Label="What is your last name?" />
   <Action.Execute Title="Action.Execute" Verb="doStuff">{

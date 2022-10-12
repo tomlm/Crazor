@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Libraries\AdaptiveCards\AdaptiveCards.csproj" />
-		<ProjectReference Include="..\..\Libraries\Microsoft.Bot.Cards\Microsoft.Bot.Cards.csproj" />
+		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
 	</ItemGroup>
 
 </Project>

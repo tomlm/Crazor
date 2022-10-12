@@ -96,7 +96,7 @@ namespace AdaptiveCards
 
 #if !NETSTANDARD1_3
         [JsonIgnore]
-        [XmlAttribute(nameof(Text))]
+        [XmlText]
         public string TextXml
         {
             // We use %20 to represent an whitespace only string in xml.

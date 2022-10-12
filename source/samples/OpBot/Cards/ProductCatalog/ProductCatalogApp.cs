@@ -1,7 +1,7 @@
 ﻿using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Cards;
-using Microsoft.Bot.Cards.Attributes;
+using Crazor;
+using Crazor.Attributes;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using OpBot.Cards.HelloWorld;

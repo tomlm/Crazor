@@ -4,13 +4,13 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Cards.Interfaces;
+using Crazor.Interfaces;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public partial class CardActivityHandler
     {

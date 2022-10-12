@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public class Constants
     {

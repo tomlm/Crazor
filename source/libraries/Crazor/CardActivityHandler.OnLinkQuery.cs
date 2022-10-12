@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public partial class CardActivityHandler
     {

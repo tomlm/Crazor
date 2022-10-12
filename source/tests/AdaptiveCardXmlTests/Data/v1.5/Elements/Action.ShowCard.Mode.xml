@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Text="Please confirm your data:" Wrap="true" Style="heading" />
+  <TextBlock Wrap="true" Style="heading">Please confirm your data:</TextBlock>
   <FactSet>
     <Fact Title="First Name" Value="John" />
     <Fact Title="Last Name" Value="Smith" />
@@ -11,7 +11,7 @@
   <Action.Execute Title="Delete data" Mode="secondary" Verb="">"delete"</Action.Execute>
   <Action.ShowCard Title="More information" Mode="secondary">
     <AdaptiveCard Version="1.5">
-      <TextBlock Text="The data shown above is what we have on file for you. Please confirm whether this data is correct." Wrap="true" />
+      <TextBlock Wrap="true">The data shown above is what we have on file for you. Please confirm whether this data is correct.</TextBlock>
     </AdaptiveCard>
   </Action.ShowCard>
 </Card>

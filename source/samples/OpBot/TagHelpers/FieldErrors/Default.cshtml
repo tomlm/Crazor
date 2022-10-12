@@ -1,4 +1,4 @@
-﻿@using Microsoft.Bot.Cards
+﻿@using Crazor
 @using OpBot.TagHelpers.FieldErrors
 @model FieldErrorsTagHelper
 
@@ -6,6 +6,6 @@
 {
     foreach(var message in messages)
     {
-        <TextBlock Spacing="None" Color="Attention">@message</TextBlock>
+        <TextBlock Spacing="none" Color="attention">@message</TextBlock>
     }
 }

@@ -2,14 +2,14 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="2">
-      <TextBlock Size="medium" Weight="bolder" Text="Tell us about yourself" />
-      <TextBlock IsSubtle="true" Text="We just need a few more details to get you booked for the trip of a lifetime!" Wrap="true" />
-      <TextBlock Size="small" IsSubtle="true" Text="Don't worry, we'll never share or sell your information." Wrap="true" />
-      <TextBlock Text="Your name" Wrap="true" />
+      <TextBlock Size="medium" Weight="bolder">Tell us about yourself</TextBlock>
+      <TextBlock IsSubtle="true" Wrap="true">We just need a few more details to get you booked for the trip of a lifetime!</TextBlock>
+      <TextBlock Size="small" IsSubtle="true" Wrap="true">Don't worry, we'll never share or sell your information.</TextBlock>
+      <TextBlock Wrap="true">Your name</TextBlock>
       <Input.Text Id="myName" Placeholder="Last, First" />
-      <TextBlock Text="Your email" Wrap="true" />
+      <TextBlock Wrap="true">Your email</TextBlock>
       <Input.Text Id="myEmail" Placeholder="youremail@example.com" Style="email" />
-      <TextBlock Text="Phone Number" />
+      <TextBlock>Phone Number</TextBlock>
       <Input.Text Id="myTel" Placeholder="xxx.xxx.xxxx" Style="tel" />
     </Column>
     <Column Width="1">

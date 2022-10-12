@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Weight="bolder" Text="Pick up where you left off?" />
+  <TextBlock Weight="bolder">Pick up where you left off?</TextBlock>
   <ColumnSet Spacing="medium">
     <SelectAction xsi:type="Action.OpenUrl" Tooltip="View a map of Silver Star Mountain" Url="https://www.msn.com/" />
     <Column Width="auto">
       <Image Size="medium" Url="https://unsplash.it/80?image=1083" AltText="Silver Star Mountain" />
     </Column>
     <Column Width="4">
-      <TextBlock Text="Silver Star Mountain" />
-      <TextBlock Spacing="none" IsSubtle="true" Text="Maps" />
+      <TextBlock>Silver Star Mountain</TextBlock>
+      <TextBlock Spacing="none" IsSubtle="true">Maps</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet>
@@ -17,8 +17,8 @@
       <Image Size="medium" Url="https://unsplash.it/80?image=1082" AltText="Kitchen Remodel" />
     </Column>
     <Column Style="emphasis" Width="4">
-      <TextBlock Text="Kitchen Remodel" />
-      <TextBlock Spacing="none" IsSubtle="true" Text="With EMPHASIS" />
+      <TextBlock>Kitchen Remodel</TextBlock>
+      <TextBlock Spacing="none" IsSubtle="true">With EMPHASIS</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet>
@@ -27,8 +27,8 @@
       <Image Size="medium" Url="https://unsplash.it/80?image=1080" AltText="The Witcher" />
     </Column>
     <Column Width="4">
-      <TextBlock Text="The Witcher" />
-      <TextBlock Spacing="none" IsSubtle="true" Text="Netflix" />
+      <TextBlock>The Witcher</TextBlock>
+      <TextBlock Spacing="none" IsSubtle="true">Netflix</TextBlock>
     </Column>
   </ColumnSet>
   <Action.OpenUrl Title="Resume all" Url="ms-cortana:resume-all" />

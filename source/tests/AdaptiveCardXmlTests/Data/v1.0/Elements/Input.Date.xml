@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="Date Input" />
+  <TextBlock>Date Input</TextBlock>
   <Input.Date Id="date" Placeholder="Enter a date" Value="2017-10-12" />
   <Action.Submit Title="OK" />
 </Card>

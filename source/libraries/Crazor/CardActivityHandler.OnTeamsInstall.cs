@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     // install status of a bot in a chat
     public enum TeamsInstallStatus { Installed, NotInstalled, Exception };

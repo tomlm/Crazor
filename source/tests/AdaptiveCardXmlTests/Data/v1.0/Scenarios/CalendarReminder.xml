@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Your  meeting about &quot;Adaptive Card design session&quot;&lt;break strength='weak'/&gt; is starting at 12:30pm&lt;/s&gt;&lt;s&gt;Do you want to snooze &lt;break strength='weak'/&gt; or do you want to send a late notification to the attendees?&lt;/s&gt;">
-  <TextBlock Size="large" Weight="bolder" Text="Adaptive Card design session" Wrap="true" Style="heading" />
-  <TextBlock IsSubtle="true" Text="Conf Room 112/3377 (10)" Wrap="true" />
-  <TextBlock Spacing="none" IsSubtle="true" Text="12:30 PM - 1:30 PM" Wrap="true" />
-  <TextBlock Text="Snooze for" Wrap="true" />
+  <TextBlock Size="large" Weight="bolder" Wrap="true" Style="heading">Adaptive Card design session</TextBlock>
+  <TextBlock IsSubtle="true" Wrap="true">Conf Room 112/3377 (10)</TextBlock>
+  <TextBlock Spacing="none" IsSubtle="true" Wrap="true">12:30 PM - 1:30 PM</TextBlock>
+  <TextBlock Wrap="true">Snooze for</TextBlock>
   <Input.ChoiceSet Id="snooze" Value="5">
     <Choice Title="5 minutes" Value="5" />
     <Choice Title="15 minutes" Value="15" />

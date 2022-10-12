@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public class CardViewState
     {

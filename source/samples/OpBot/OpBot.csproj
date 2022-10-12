@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Libraries\Microsoft.Bot.Cards\Microsoft.Bot.Cards.csproj" />
+		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
 		<ProjectReference Include="..\..\Libraries\AdaptiveCards\AdaptiveCards.csproj" />
 	</ItemGroup>
 

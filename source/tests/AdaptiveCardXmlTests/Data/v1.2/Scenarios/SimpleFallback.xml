@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Text="Fallback test:" Wrap="true" />
+  <TextBlock Wrap="true">Fallback test:</TextBlock>
   <UnknownElement Type="Steve Holt!">
     <AdditionalProperties>
       <Property Name="egg">her?</Property>
@@ -12,7 +12,7 @@
       <Property Name="someProperty">foo</Property>
     </AdditionalProperties>
     <Fallback>
-      <TextBlock Text="No graph support. Guess we'll just use this textblock instead." Wrap="true" />
+      <TextBlock Wrap="true">No graph support. Guess we'll just use this textblock instead.</TextBlock>
     </Fallback>
   </UnknownElement>
 </Card>

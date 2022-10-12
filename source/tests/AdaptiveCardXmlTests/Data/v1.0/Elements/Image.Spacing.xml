@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="medium" Weight="bolder" Text="spacing: none" />
+  <TextBlock Size="medium" Weight="bolder">spacing: none</TextBlock>
   <Image Spacing="none" Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-  <TextBlock Size="medium" Weight="bolder" Text="spacing: large, separator: true" />
+  <TextBlock Size="medium" Weight="bolder">spacing: large, separator: true</TextBlock>
   <Image Spacing="large" Separator="true" Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
 </Card>

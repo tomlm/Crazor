@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="ImageSet: ImageSize: small" />
+  <TextBlock>ImageSet: ImageSize: small</TextBlock>
   <ImageSet ImageSize="small">
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
   </ImageSet>
-  <TextBlock Separator="true" Text="ImageSet: ImageSize: medium" />
+  <TextBlock Separator="true">ImageSet: ImageSize: medium</TextBlock>
   <ImageSet ImageSize="medium">
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
   </ImageSet>
-  <TextBlock Separator="true" Text="ImageSet: ImageSize: large" />
+  <TextBlock Separator="true">ImageSet: ImageSize: large</TextBlock>
   <ImageSet ImageSize="large">
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
   </ImageSet>
-  <TextBlock Separator="true" Text="ImageSet: ImageSize: auto" />
+  <TextBlock Separator="true">ImageSet: ImageSize: auto</TextBlock>
   <ImageSet>
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
   </ImageSet>
-  <TextBlock Separator="true" Text="ImageSet: ImageSize: stretch" />
+  <TextBlock Separator="true">ImageSet: ImageSize: stretch</TextBlock>
   <ImageSet ImageSize="stretch">
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
     <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
@@ -43,10 +43,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: small - Height: stretch" />
+      <TextBlock>ImageSet above: ImageSize: small - Height: stretch</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk" Wrap="true" />
+      <TextBlock Wrap="true">hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -57,10 +57,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: medium - Height: stretch" />
+      <TextBlock>ImageSet above: ImageSize: medium - Height: stretch</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="jdsn kjdjdhcjhd fjha jkhjf j d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf" Wrap="true" />
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha jkhjf j d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk nkjncjanscbnlk jakjshckjcjk ksadnfkjsdfn kjfjkjkjjk jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -70,10 +70,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: large - Height: stretch" />
+      <TextBlock>ImageSet above: ImageSize: large - Height: stretch</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf" Wrap="true" />
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -84,10 +84,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: auto - Height: stretch" />
+      <TextBlock>ImageSet above: ImageSize: auto - Height: stretch</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="hsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjjkasjkfhueqiwfkmsdjan ksadnfkjsjfsdjjakfhjkhakdfjhfjdf hjfhlhahfjhjhdf jhdfsjhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf jd jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf" Wrap="true" />
+      <TextBlock Wrap="true">hsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjjkasjkfhueqiwfkmsdjan ksadnfkjsjfsdjjakfhjkhakdfjhfjdf hjfhlhahfjhjhdf jhdfsjhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf jd jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -98,10 +98,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: stretch - Height: stretch" />
+      <TextBlock>ImageSet above: ImageSize: stretch - Height: stretch</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="dfhkjhsafdkjhjas fdjfsdha jkhfjdjsdfn kjfjkjkjjk fnnnsfdnskakdfjhfjjfhlhahfjhjhdf jhdfsjh hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan" Wrap="true" />
+      <TextBlock Wrap="true">dfhkjhsafdkjhjas fdjfsdha jkhfjdjsdfn kjfjkjkjjk fnnnsfdnskakdfjhfjjfhlhahfjhjhdf jhdfsjh hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -112,10 +112,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: small - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: small - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="jkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfhcjdkn kjcnjd kdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh" Wrap="true" />
+      <TextBlock Wrap="true">jkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfhcjdkn kjcnjd kdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -126,10 +126,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: medium - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: medium - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf" Wrap="true" />
+      <TextBlock Wrap="true">fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -139,10 +139,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: large - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: large - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk" Wrap="true" />
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsf dnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -153,10 +153,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: auto - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: auto - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk" Wrap="true" />
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -167,10 +167,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: stretch - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: stretch - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn" Wrap="true" />
+      <TextBlock Wrap="true">jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn kjfjkjkjjk fnnnsfdnskjhdjfhhfdjkhjfkjhdsfhjfsdjjakfhjkhakdfjhfjdfajjfkhjfhlhahfjhjhdf jhdfsjhsafdk hsjhfjk j hfdjkhkasfjh jjhfj hasjdkhsk hfdjhdfhajhj jdncjnd jch dhcjhcjdkn kjcnjd jdsn kjdjdhcjhd fjha kjfhjdfkjlhfhfkljfjkasfh jkhjf j jhsafkjhfdshjdhfkjfkjhfasdlhf d jkdfsjkfhdsjh kdfjksfdajkhsdfhlash kjhdsf jk sdfhkjhsafdkjhjas fdjfsdha jkhfjd jfhjhfjhk akukhfuhajdsknfjkdas nkjncjanscbnlk jakjshckjcjk cjkasjkfhueqiwfkmsdjan ksadnfkjsdfn</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -181,10 +181,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: small - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: small - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="lsdfksdklls dkjsdljk sdaasdlkj" Wrap="true" />
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -195,10 +195,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: medium - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: medium - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="lsdfksdklls dkjsdljk sdaasdlkj" Wrap="true" />
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -208,10 +208,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: large - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: large - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="lsdfksdklls dkjsdljk sdaasdlkj" Wrap="true" />
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -222,10 +222,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: auto - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: auto - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="lsdfksdklls dkjsdljk sdaasdlkj" Wrap="true" />
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Separator="true">
@@ -236,10 +236,10 @@
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FF0000FF" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="ImageSet above: ImageSize: stretch - Height: auto" />
+      <TextBlock>ImageSet above: ImageSize: stretch - Height: auto</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="lsdfksdklls dkjsdljk sdaasdlkj" Wrap="true" />
+      <TextBlock Wrap="true">lsdfksdklls dkjsdljk sdaasdlkj</TextBlock>
     </Column>
   </ColumnSet>
   <Action.ToggleVisibility Title="Hide">

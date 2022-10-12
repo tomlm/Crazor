@@ -6,35 +6,35 @@
     <TableColumn Width="3" />
     <TableRow Style="accent">
       <TableCell>
-        <TextBlock Weight="bolder" Text="Name" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Name</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Weight="bolder" Text="Type" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Type</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Weight="bolder" Text="Description" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Description</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="good">
-        <TextBlock Text="columns" Wrap="true" />
+        <TextBlock Wrap="true">columns</TextBlock>
       </TableCell>
       <TableCell Style="warning">
-        <TextBlock Text="ColumnDefinition[]" Wrap="true" />
+        <TextBlock Wrap="true">ColumnDefinition[]</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="Defines the table's columns (number of columns, and column sizes)." Wrap="true" />
+        <TextBlock Wrap="true">Defines the table's columns (number of columns, and column sizes).</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="good">
-        <TextBlock Text="rows" Wrap="true" />
+        <TextBlock Wrap="true">rows</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="TableRow[]" Wrap="true" />
+        <TextBlock Wrap="true">TableRow[]</TextBlock>
       </TableCell>
       <TableCell Style="attention">
-        <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
+        <TextBlock Wrap="true">Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
@@ -44,35 +44,35 @@
     <TableColumn Width="3" />
     <TableRow Style="accent">
       <TableCell>
-        <TextBlock Weight="bolder" Text="Name" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Name</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Weight="bolder" Text="Type" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Type</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Weight="bolder" Text="Description" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Description</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="good">
-        <TextBlock Text="columns" Wrap="true" />
+        <TextBlock Wrap="true">columns</TextBlock>
       </TableCell>
       <TableCell Style="warning">
-        <TextBlock Text="ColumnDefinition[]" Wrap="true" />
+        <TextBlock Wrap="true">ColumnDefinition[]</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="Defines the table's columns (number of columns, and column sizes)." Wrap="true" />
+        <TextBlock Wrap="true">Defines the table's columns (number of columns, and column sizes).</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="good">
-        <TextBlock Text="rows" Wrap="true" />
+        <TextBlock Wrap="true">rows</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="TableRow[]" Wrap="true" />
+        <TextBlock Wrap="true">TableRow[]</TextBlock>
       </TableCell>
       <TableCell Style="attention">
-        <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
+        <TextBlock Wrap="true">Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.</TextBlock>
       </TableCell>
     </TableRow>
   </Table>

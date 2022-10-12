@@ -4,7 +4,7 @@
     <TableColumn Width="1" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="Text goes here." />
+        <TextBlock>Text goes here.</TextBlock>
       </TableCell>
     </TableRow>
   </Table>

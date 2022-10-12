@@ -5,7 +5,7 @@
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Cards.Interfaces;
+using Crazor.Interfaces;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     /// <summary>
     /// CardActivityHandler logic.

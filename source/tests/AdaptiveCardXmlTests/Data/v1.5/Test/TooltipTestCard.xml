@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Weight="bolder" Text="Button with no title or tooltip" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Button with no title or tooltip</TextBlock>
   <ActionSet>
     <Action.Submit IconUrl="https://adaptivecards.io/content/cats/1.png" />
   </ActionSet>
-  <TextBlock Weight="bolder" Text="Button with a title" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Button with a title</TextBlock>
   <ActionSet>
     <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" />
   </ActionSet>
-  <TextBlock Weight="bolder" Text="Button with a tooltip" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Button with a tooltip</TextBlock>
   <ActionSet>
     <Action.Submit IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
   </ActionSet>
-  <TextBlock Weight="bolder" Text="Button with a title and a tooltip" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Button with a title and a tooltip</TextBlock>
   <ActionSet>
     <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
   </ActionSet>
@@ -31,28 +31,28 @@
   <Input.Text Id="tooltiptest5" Label="Inline Action with an icon and a title and a tooltip (icon should show on button, tooltip in tooltip)">
     <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
   </Input.Text>
-  <TextBlock Weight="bolder" Text="A container with a text block and an image. No title or tooltip. (no tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">A container with a text block and an image. No title or tooltip. (no tooltip)</TextBlock>
   <Container>
     <SelectAction xsi:type="Action.Submit" />
-    <TextBlock Text="Text block content." Wrap="true" />
+    <TextBlock Wrap="true">Text block content.</TextBlock>
     <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." />
   </Container>
-  <TextBlock Weight="bolder" Text="A container with a text block and an image. Action has title. (title should be used as tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">A container with a text block and an image. Action has title. (title should be used as tooltip)</TextBlock>
   <Container>
     <SelectAction xsi:type="Action.Submit" Title="Title" />
-    <TextBlock Text="Text block content." Wrap="true" />
+    <TextBlock Wrap="true">Text block content.</TextBlock>
     <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." />
   </Container>
-  <TextBlock Weight="bolder" Text="A container with a text block and an image. Action has tooltip. (tooltip should be used as tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">A container with a text block and an image. Action has tooltip. (tooltip should be used as tooltip)</TextBlock>
   <Container>
     <SelectAction xsi:type="Action.Submit" Tooltip="Tooltip" />
-    <TextBlock Text="Text block content." Wrap="true" />
+    <TextBlock Wrap="true">Text block content.</TextBlock>
     <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." />
   </Container>
-  <TextBlock Weight="bolder" Text="A container with a text block and an image. Action has title and tooltip. (tooltip should be used as tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">A container with a text block and an image. Action has title and tooltip. (tooltip should be used as tooltip)</TextBlock>
   <Container>
     <SelectAction xsi:type="Action.Submit" Title="Title" Tooltip="Tooltip" />
-    <TextBlock Text="Text block content." Wrap="true" />
+    <TextBlock Wrap="true">Text block content.</TextBlock>
     <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." />
   </Container>
   <RichTextBlock>
@@ -63,22 +63,22 @@
 }</SelectAction></Inlines>
     <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
   </RichTextBlock>
-  <TextBlock Weight="bolder" Text="Image has SelectAction. No title or tooltip (no tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Image has SelectAction. No title or tooltip (no tooltip)</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
     <AdditionalProperties>
       <Property Name="tooltip">tooltip</Property>
     </AdditionalProperties>
     <SelectAction xsi:type="Action.Submit" />
   </Image>
-  <TextBlock Weight="bolder" Text="Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
     <SelectAction xsi:type="Action.Submit" Title="title" Tooltip="tooltip" />
   </Image>
-  <TextBlock Weight="bolder" Text="Image has SelectAction. Action has title. (title should be used as tooltip)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Image has SelectAction. Action has title. (title should be used as tooltip)</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
     <SelectAction xsi:type="Action.Submit" Title="title" />
   </Image>
-  <TextBlock Weight="bolder" Text="Adaptive Card has SelectAction Action has tooltip. (tooltip should appear)" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Adaptive Card has SelectAction Action has tooltip. (tooltip should appear)</TextBlock>
   <SelectAction xsi:type="Action.Submit" Title="title" Tooltip="Card Level Tooltip">{
   "Card Level Action?": "Yes"
 }</SelectAction>

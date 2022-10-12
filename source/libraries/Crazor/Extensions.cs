@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Cards.Encryption;
-using Microsoft.Bot.Cards.Interfaces;
+using Crazor.Encryption;
+using Crazor.Interfaces;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +12,7 @@ using Neleus.DependencyInjection.Extensions;
 using OpBot;
 using System.Reflection;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public static class Extensions
     {

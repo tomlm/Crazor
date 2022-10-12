@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM&lt;/s&gt;">
-  <TextBlock Weight="bolder" Text="Passengers" Wrap="true" />
-  <TextBlock Separator="true" Text="Sarah Hum" Wrap="true" />
-  <TextBlock Spacing="none" Text="Jeremy Goldberg" Wrap="true" />
-  <TextBlock Spacing="none" Text="Evan Litvak" Wrap="true" />
-  <TextBlock Spacing="medium" Weight="bolder" Text="2 Stops" Wrap="true" />
-  <TextBlock Spacing="none" Weight="bolder" Text="Tue, May 30, 2017 12:25 PM" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Passengers</TextBlock>
+  <TextBlock Separator="true" Wrap="true">Sarah Hum</TextBlock>
+  <TextBlock Spacing="none" Wrap="true">Jeremy Goldberg</TextBlock>
+  <TextBlock Spacing="none" Wrap="true">Evan Litvak</TextBlock>
+  <TextBlock Spacing="medium" Weight="bolder" Wrap="true">2 Stops</TextBlock>
+  <TextBlock Spacing="none" Weight="bolder" Wrap="true">Tue, May 30, 2017 12:25 PM</TextBlock>
   <ColumnSet Separator="true">
     <Column Width="1">
-      <TextBlock IsSubtle="true" Text="San Francisco" Wrap="true" />
+      <TextBlock IsSubtle="true" Wrap="true">San Francisco</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock IsSubtle="true" Text="Amsterdam" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock IsSubtle="true" HorizontalAlignment="right" Wrap="true">Amsterdam</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="none">
     <Column Width="1">
-      <TextBlock Spacing="none" Size="extraLarge" Color="accent" Text="SFO" Wrap="true" />
+      <TextBlock Spacing="none" Size="extraLarge" Color="accent" Wrap="true">SFO</TextBlock>
     </Column>
     <Column Width="auto">
       <Image Spacing="none" Size="small" Url="https://adaptivecards.io/content/airplane.png" AltText="Flight to" />
     </Column>
     <Column Width="1">
-      <TextBlock Spacing="none" Size="extraLarge" Color="accent" Text="AMS" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Size="extraLarge" Color="accent" HorizontalAlignment="right" Wrap="true">AMS</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Spacing="medium" Weight="bolder" Text="Non-Stop" Wrap="true" />
-  <TextBlock Spacing="none" Weight="bolder" Text="Fri, Jun 2, 2017 1:55 PM" Wrap="true" />
+  <TextBlock Spacing="medium" Weight="bolder" Wrap="true">Non-Stop</TextBlock>
+  <TextBlock Spacing="none" Weight="bolder" Wrap="true">Fri, Jun 2, 2017 1:55 PM</TextBlock>
   <ColumnSet Separator="true">
     <Column Width="1">
-      <TextBlock IsSubtle="true" Text="Amsterdam" Wrap="true" />
+      <TextBlock IsSubtle="true" Wrap="true">Amsterdam</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock IsSubtle="true" Text="San Francisco" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock IsSubtle="true" HorizontalAlignment="right" Wrap="true">San Francisco</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="none">
     <Column Width="1">
-      <TextBlock Spacing="none" Size="extraLarge" Color="accent" Text="AMS" Wrap="true" />
+      <TextBlock Spacing="none" Size="extraLarge" Color="accent" Wrap="true">AMS</TextBlock>
     </Column>
     <Column Width="auto">
       <Image Spacing="none" Size="small" Url="https://adaptivecards.io/content/airplane.png" AltText="Flight to" />
     </Column>
     <Column Width="1">
-      <TextBlock Spacing="none" Size="extraLarge" Color="accent" Text="SFO" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Size="extraLarge" Color="accent" HorizontalAlignment="right" Wrap="true">SFO</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Spacing="medium">
     <Column Width="1">
-      <TextBlock Size="medium" IsSubtle="true" Text="Total" Wrap="true" />
+      <TextBlock Size="medium" IsSubtle="true" Wrap="true">Total</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock Size="medium" Weight="bolder" Text="$4,032.54" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Size="medium" Weight="bolder" HorizontalAlignment="right" Wrap="true">$4,032.54</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

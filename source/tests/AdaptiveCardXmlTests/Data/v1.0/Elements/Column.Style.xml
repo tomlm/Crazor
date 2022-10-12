@@ -2,21 +2,21 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column>
-      <TextBlock Text="No Style" />
+      <TextBlock>No Style</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="Default Style" />
+      <TextBlock>Default Style</TextBlock>
     </Column>
     <Column Style="emphasis">
-      <TextBlock Text="Emphasis Style" />
+      <TextBlock>Emphasis Style</TextBlock>
       <Container>
-        <TextBlock Text="Container no style" />
+        <TextBlock>Container no style</TextBlock>
       </Container>
       <Container>
-        <TextBlock Text="Container default style" />
+        <TextBlock>Container default style</TextBlock>
       </Container>
       <Container Style="emphasis">
-        <TextBlock Text="Container emphasis style" />
+        <TextBlock>Container emphasis style</TextBlock>
       </Container>
     </Column>
   </ColumnSet>

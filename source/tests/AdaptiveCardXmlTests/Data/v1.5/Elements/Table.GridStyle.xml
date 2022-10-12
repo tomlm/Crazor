@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Weight="bolder" Text="GridStyle sets the color of the gridlines to the corresponding border color defined in host config" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">GridStyle sets the color of the gridlines to the corresponding border color defined in host config</TextBlock>
   <Table VerticalCellContentAlignment="center" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="gridStyle Value" Wrap="true" />
+        <TextBlock Wrap="true">gridStyle Value</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="Sample table" Wrap="true" />
+        <TextBlock Wrap="true">Sample table</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Good" Wrap="true" />
+        <TextBlock Wrap="true">Good</TextBlock>
       </TableCell>
       <TableCell>
         <Table FirstRowAsHeader="false" GridStyle="good">
@@ -22,18 +22,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
         </Table>
@@ -41,7 +41,7 @@
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Warning" Wrap="true" />
+        <TextBlock Wrap="true">Warning</TextBlock>
       </TableCell>
       <TableCell>
         <Table FirstRowAsHeader="false" GridStyle="warning">
@@ -49,18 +49,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
         </Table>
@@ -68,7 +68,7 @@
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Attention" Wrap="true" />
+        <TextBlock Wrap="true">Attention</TextBlock>
       </TableCell>
       <TableCell>
         <Table FirstRowAsHeader="false" GridStyle="attention">
@@ -76,18 +76,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
         </Table>

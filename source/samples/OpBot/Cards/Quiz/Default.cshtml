@@ -1,16 +1,16 @@
 ﻿@using OpBot.Cards.Quiz
 @inherits CardView<DefaultModel>
 
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Version Major="1" Minor="4" />
-    <TextBlock Size="ExtraLarge" Weight="Bolder">Math Quiz</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
+    
+    <TextBlock Size="extraLarge" Weight="bolder">Math Quiz</TextBlock>
     @if (Model.TotalGuesses > 0)
     {
-        <Container Style="Emphasis">
+        <Container Style="emphasis">
             <TextBlock>You have guessed correct @(((float)Model.CorrectGuesses / (float)Model.TotalGuesses).ToString("0.0%"))% of the time.</TextBlock>
         </Container>
     }
-    <TextBlock Size="Medium" Wdith="Bolder">What is @Model.Number1 + @Model.Number2?</TextBlock>
+    <TextBlock Size="medium" Wdith="Bolder">What is @Model.Number1 + @Model.Number2?</TextBlock>
     <Input.Text Id="answer" Label="Your answer?" Placeholder="Enter in your answer as a number."/>
 
     <Action.Execute Title="Submit" Verb="OnSubmit" />

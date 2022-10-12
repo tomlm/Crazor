@@ -2,7 +2,7 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ColumnSet Style="emphasis" MinHeight="200px">
     <Column>
-      <TextBlock Text="This column set has a minimum height of 200px" Wrap="true" />
+      <TextBlock Wrap="true">This column set has a minimum height of 200px</TextBlock>
     </Column>
     <Column>
       <FactSet>

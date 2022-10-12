@@ -2,11 +2,11 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column>
-      <TextBlock Weight="bolder" Text="style: default" />
+      <TextBlock Weight="bolder">style: default</TextBlock>
       <Image Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" />
     </Column>
     <Column>
-      <TextBlock Weight="bolder" Text="style: person" />
+      <TextBlock Weight="bolder">style: person</TextBlock>
       <Image Style="person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" />
     </Column>
   </ColumnSet>

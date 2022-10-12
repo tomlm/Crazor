@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Text="This table has headers" Wrap="true" />
+  <TextBlock Wrap="true">This table has headers</TextBlock>
   <Table>
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="Header" Wrap="true" />
+        <TextBlock Wrap="true">Header</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="Header" Wrap="true" />
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <TextBlock Text="data" Wrap="true" />
-      </TableCell>
-      <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">Header</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">data</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">data</TextBlock>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Wrap="true">data</TextBlock>
+      </TableCell>
+      <TableCell>
+        <TextBlock Wrap="true">data</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
-  <TextBlock Text="This table does not" Wrap="true" />
+  <TextBlock Wrap="true">This table does not</TextBlock>
   <Table FirstRowAsHeader="false">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">data</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="data" Wrap="true" />
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <TextBlock Text="data" Wrap="true" />
-      </TableCell>
-      <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">data</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">data</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="data" Wrap="true" />
+        <TextBlock Wrap="true">data</TextBlock>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Wrap="true">data</TextBlock>
+      </TableCell>
+      <TableCell>
+        <TextBlock Wrap="true">data</TextBlock>
       </TableCell>
     </TableRow>
   </Table>

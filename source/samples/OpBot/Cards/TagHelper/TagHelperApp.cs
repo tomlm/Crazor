@@ -1,6 +1,6 @@
 ﻿using AdaptiveCards;
-using Microsoft.Bot.Cards;
-using Microsoft.Bot.Cards.Attributes;
+using Crazor;
+using Crazor.Attributes;
 using Microsoft.Bot.Schema;
 
 namespace OpBot.Cards.TagHelper

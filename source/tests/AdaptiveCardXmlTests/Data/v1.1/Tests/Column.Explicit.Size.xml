@@ -5,21 +5,21 @@
       <Image Size="stretch" Url="https://3.bp.blogspot.com/-Xo0EuTNYNQg/UEI1zqGDUTI/AAAAAAAAAYE/PLYx5H4J4-k/s1600/smiley+face+super+happy.jpg" AltText="Smiley face" />
     </Column>
     <Column VerticalContentAlignment="center" Width="stretch">
-      <TextBlock Text="This card has two ColumnSets on top of each other. In each, the left column is explicitly sized to be 50 pixels wide." Wrap="true" />
+      <TextBlock Wrap="true">This card has two ColumnSets on top of each other. In each, the left column is explicitly sized to be 50 pixels wide.</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet>
     <Column Width="50" />
     <Column VerticalContentAlignment="center" Width="stretch">
-      <TextBlock Text="In this second ColumnSet, columns align perfectly even though there is nothing in the left column." Wrap="true" />
+      <TextBlock Wrap="true">In this second ColumnSet, columns align perfectly even though there is nothing in the left column.</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet>
     <Column VerticalContentAlignment="center" Width="stretch">
-      <TextBlock Text="In this ColumnSet, left column" Wrap="true" />
+      <TextBlock Wrap="true">In this ColumnSet, left column</TextBlock>
     </Column>
     <Column Width="-1">
-      <TextBlock Text="In this ColumnSet, right column." Wrap="true" />
+      <TextBlock Wrap="true">In this ColumnSet, right column.</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

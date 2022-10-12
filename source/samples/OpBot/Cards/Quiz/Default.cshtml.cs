@@ -1,4 +1,4 @@
-﻿using Microsoft.Bot.Cards.Attributes;
+﻿using Crazor.Attributes;
 using System.Reflection;
 
 namespace OpBot.Cards.Quiz

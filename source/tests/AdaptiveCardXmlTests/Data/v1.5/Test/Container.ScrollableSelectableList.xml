@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <Container>
-    <TextBlock Size="medium" Text="Recent Files" MaxLines="1" />
+    <TextBlock Size="medium" MaxLines="1">Recent Files</TextBlock>
   </Container>
   <Container Spacing="extraLarge">
     <SelectAction xsi:type="Action.Submit" Title="">{
@@ -12,8 +12,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="OneNote File 1" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Test" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">OneNote File 1</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Documents &gt; Test</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -26,8 +26,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="OneNote File 2" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Test" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">OneNote File 2</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Documents &gt; Test</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -40,8 +40,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Lorem Ipsum" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Test 2" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Lorem Ipsum</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Documents &gt; Test 2</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -54,8 +54,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Dolor Sit Amet" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Projects &gt; LoremIpsum" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Dolor Sit Amet</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Projects &gt; LoremIpsum</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -68,8 +68,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Consectetur Adipiscing Elit" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Projects &gt; Presentations" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Consectetur Adipiscing Elit</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Projects &gt; Presentations</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -82,8 +82,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Sed Do Eiusmod Tempor Incididunt" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Random" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Sed Do Eiusmod Tempor Incididunt</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Documents &gt; Random</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -96,8 +96,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Ut Labore Et Dolore" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Shared &gt; Skills" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Ut Labore Et Dolore</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Shared &gt; Skills</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -110,8 +110,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Magna Aliqua" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; MagnaAliqua{aParameter=true&amp;somethingElse=largeText&amp;redirect=true&amp;action=open}" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Magna Aliqua</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Documents &gt; MagnaAliqua{aParameter=true&amp;somethingElse=largeText&amp;redirect=true&amp;action=open}</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -124,8 +124,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="UtEnimAdMinim" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Shared &gt; Architecture" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">UtEnimAdMinim</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Shared &gt; Architecture</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
@@ -138,8 +138,8 @@
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
       </Column>
       <Column Spacing="small" VerticalContentAlignment="center" Width="stretch">
-        <TextBlock Size="medium" Text="Veniam Quis Nostrud" MaxLines="1" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Documents &gt; Design" MaxLines="1" />
+        <TextBlock Size="medium" MaxLines="1">Veniam Quis Nostrud</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" MaxLines="1">Documents &gt; Design</TextBlock>
       </Column>
     </ColumnSet>
   </Container>

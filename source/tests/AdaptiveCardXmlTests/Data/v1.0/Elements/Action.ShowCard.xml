@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="This card's action will show another card" />
+  <TextBlock>This card's action will show another card</TextBlock>
   <Action.ShowCard Title="Action.ShowCard">
     <AdaptiveCard Version="1.0">
-      <TextBlock Text="What do you think?" />
+      <TextBlock>What do you think?</TextBlock>
       <Action.Submit Title="Neat!">{
   "neat": "true"
 }</Action.Submit>

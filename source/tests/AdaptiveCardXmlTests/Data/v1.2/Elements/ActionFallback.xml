@@ -29,7 +29,7 @@
               <Fallback>
                 <Action.ShowCard Title="Action.ShowCard">
                   <AdaptiveCard Version="1.0">
-                    <TextBlock Text="What do you think?" />
+                    <TextBlock>What do you think?</TextBlock>
                     <Action.Submit Title="Neat!" />
                   </AdaptiveCard>
                 </Action.ShowCard>
@@ -49,7 +49,7 @@
       </Fallback>
     </AdaptiveUnknownAction>
   </ActionSet>
-  <TextBlock Text="This card tests action fallback" />
+  <TextBlock>This card tests action fallback</TextBlock>
   <AdaptiveUnknownAction Type="NoExist">
     <Fallback>
       <UnknownElement Type="NeitherExist">
@@ -78,7 +78,7 @@
             <Fallback>
               <Action.ShowCard Title="Action.ShowCard">
                 <AdaptiveCard Version="1.0">
-                  <TextBlock Text="What do you think?" />
+                  <TextBlock>What do you think?</TextBlock>
                   <Action.Submit Title="Neat!" />
                 </AdaptiveCard>
               </Action.ShowCard>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="large" Weight="bolder" Text="size:small" />
+  <TextBlock Size="large" Weight="bolder">size:small</TextBlock>
   <Image Size="small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Small cat" />
-  <TextBlock Size="large" Weight="bolder" Text="size:medium" />
+  <TextBlock Size="large" Weight="bolder">size:medium</TextBlock>
   <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Medium cat" />
-  <TextBlock Size="large" Weight="bolder" Text="size:large" />
+  <TextBlock Size="large" Weight="bolder">size:large</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Large cat" />
 </Card>

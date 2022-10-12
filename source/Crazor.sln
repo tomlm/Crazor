@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpBot", "Samples\OpBot\OpBot.csproj", "{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bot.Cards", "Libraries\Microsoft.Bot.Cards\Microsoft.Bot.Cards.csproj", "{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor", "Libraries\Crazor\Crazor.csproj", "{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCards", "Libraries\AdaptiveCards\AdaptiveCards.csproj", "{D4643763-0BBF-4729-8F46-837E968940D9}"
 EndProject

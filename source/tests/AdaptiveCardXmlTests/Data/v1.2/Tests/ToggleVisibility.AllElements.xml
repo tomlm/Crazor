@@ -13,7 +13,7 @@
     <SelectAction xsi:type="Action.ToggleVisibility">
       <TargetElement ElementId="id3" />
     </SelectAction>
-    <TextBlock Text="This is some text" />
+    <TextBlock>This is some text</TextBlock>
     <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
   </Container>
   <ColumnSet Id="id3" Height="stretch">
@@ -21,10 +21,10 @@
       <TargetElement ElementId="id1" />
     </SelectAction>
     <Column>
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet>
@@ -32,16 +32,16 @@
       <SelectAction xsi:type="Action.ToggleVisibility">
         <TargetElement ElementId="id5" />
       </SelectAction>
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Id="id5">
       <SelectAction xsi:type="Action.ToggleVisibility">
         <TargetElement ElementId="id4" />
       </SelectAction>
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Id="id6" IsVisible="false" Size="large" Text="This is some text" />
+  <TextBlock Id="id6" IsVisible="false" Size="large">This is some text</TextBlock>
   <Media Id="id7" IsVisible="false" Poster="https://adaptivecards.io/content/poster-video.png">
     <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
   </Media>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Text="Font type not set." />
-  <TextBlock Text="Font type set to *default*." />
-  <TextBlock Text="Font type set to *monospace*." FontType="monospace" />
+  <TextBlock>Font type not set.</TextBlock>
+  <TextBlock>Font type set to *default*.</TextBlock>
+  <TextBlock FontType="monospace">Font type set to *monospace*.</TextBlock>
 </Card>

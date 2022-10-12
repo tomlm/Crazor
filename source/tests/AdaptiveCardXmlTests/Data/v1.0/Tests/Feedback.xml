@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="large" Weight="bolder" Text="Please rate your experience" />
+  <TextBlock Size="large" Weight="bolder">Please rate your experience</TextBlock>
   <Input.ChoiceSet Id="Rating" Spacing="medium" Value="5">
     <Choice Title="Excellent" Value="5" />
     <Choice Title="Good" Value="4" />
@@ -8,13 +8,12 @@
     <Choice Title="Poor" Value="2" />
     <Choice Title="Very poor" Value="1" />
   </Input.ChoiceSet>
-  <TextBlock Spacing="large" Text="Leave a comment" />
+  <TextBlock Spacing="large">Leave a comment</TextBlock>
   <Input.Text Id="FeedbackText" Spacing="medium" IsMultiline="true" MaxLength="500" />
-  <TextBlock Spacing="small" Text="%20">
+  <TextBlock Spacing="small">
     <AdditionalProperties>
       <Property Name="space">preserve</Property>
-    </AdditionalProperties>
-  </TextBlock>
+    </AdditionalProperties>%20</TextBlock>
   <Action.Submit Title="Send">{
   "CardType": "FeedbackCard",
   "DialogId": "Feedback",

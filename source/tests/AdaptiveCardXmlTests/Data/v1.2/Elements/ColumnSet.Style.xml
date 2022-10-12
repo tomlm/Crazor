@@ -3,49 +3,49 @@
   <ColumnSet>
     <Column>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-      <TextBlock Text="(none)" />
+      <TextBlock>(none)</TextBlock>
     </Column>
     <Column>
-      <TextBlock Text="%20" />
+      <TextBlock>%20</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
     <Column>
-      <TextBlock Text="%20" />
-      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-    </Column>
-  </ColumnSet>
-  <ColumnSet Style="emphasis">
-    <Column>
-      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-      <TextBlock Text="(none)" />
-    </Column>
-    <Column>
-      <TextBlock Text="%20" />
-      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-    </Column>
-    <Column>
-      <TextBlock Text="%20" />
+      <TextBlock>%20</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
   </ColumnSet>
   <ColumnSet Style="emphasis">
     <Column>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-      <TextBlock Text="(none)" />
+      <TextBlock>(none)</TextBlock>
+    </Column>
+    <Column>
+      <TextBlock>%20</TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+    <Column>
+      <TextBlock>%20</TextBlock>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+    </Column>
+  </ColumnSet>
+  <ColumnSet Style="emphasis">
+    <Column>
+      <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
+      <TextBlock>(none)</TextBlock>
     </Column>
     <Column Style="emphasis">
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-      <TextBlock Text="(none)" />
+      <TextBlock>(none)</TextBlock>
     </Column>
     <Column>
       <Container>
-        <TextBlock Color="dark" Text="Contained container - no style" />
+        <TextBlock Color="dark">Contained container - no style</TextBlock>
       </Container>
       <Container Style="emphasis">
-        <TextBlock Color="dark" Text="Contained container - emphasis" />
+        <TextBlock Color="dark">Contained container - emphasis</TextBlock>
       </Container>
       <Container>
-        <TextBlock Color="dark" Text="Contained container - default" />
+        <TextBlock Color="dark">Contained container - default</TextBlock>
       </Container>
     </Column>
   </ColumnSet>

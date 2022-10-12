@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Text="Please select your language:" />
+  <TextBlock>Please select your language:</TextBlock>
   <Action.ShowCard Title="English">
     <AdaptiveCard Version="1.4">
-      <TextBlock Size="medium" Weight="bolder" Text="Registration Form" HorizontalAlignment="center" Wrap="true" Style="heading" />
+      <TextBlock Size="medium" Weight="bolder" HorizontalAlignment="center" Wrap="true" Style="heading">Registration Form</TextBlock>
       <Input.Text Id="SimpleValENG" IsRequired="true" Label="Name" ErrorMessage="Name is required" />
       <Input.Text Id="EmailValENG" Label="Email" Style="email" />
       <Input.Text Id="TelValENG" Label="Phone" Style="tel" />
@@ -13,7 +13,7 @@
   </Action.ShowCard>
   <Action.ShowCard Title="عربي">
     <AdaptiveCard Version="1.4" Rtl="true">
-      <TextBlock Size="medium" Weight="bolder" Text="إستمارة تسجيل" HorizontalAlignment="center" Wrap="true" Style="heading" />
+      <TextBlock Size="medium" Weight="bolder" HorizontalAlignment="center" Wrap="true" Style="heading">إستمارة تسجيل</TextBlock>
       <Input.Text Id="SimpleValARA" IsRequired="true" Label="اسم" ErrorMessage="مطلوب اسم" />
       <Input.Text Id="EmailValARA" Label="بريد الالكتروني" Style="email" />
       <Input.Text Id="TelValARA" Label="هاتف" Style="tel" />

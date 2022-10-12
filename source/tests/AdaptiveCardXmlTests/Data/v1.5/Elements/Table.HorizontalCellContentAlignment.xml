@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Weight="bolder" Text="You can configure the horizontal alignment of table content with HorizontalCellContentAlignement" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">You can configure the horizontal alignment of table content with HorizontalCellContentAlignement</TextBlock>
   <Table VerticalCellContentAlignment="center" FirstRowAsHeader="false" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="Left" Wrap="true" />
+        <TextBlock Wrap="true">Left</TextBlock>
       </TableCell>
       <TableCell>
         <Table FirstRowAsHeader="false">
@@ -14,18 +14,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
         </Table>
@@ -33,7 +33,7 @@
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Center" Wrap="true" />
+        <TextBlock Wrap="true">Center</TextBlock>
       </TableCell>
       <TableCell>
         <Table HorizontalCellContentAlignment="center" FirstRowAsHeader="false">
@@ -41,18 +41,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
         </Table>
@@ -60,7 +60,7 @@
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Right" Wrap="true" />
+        <TextBlock Wrap="true">Right</TextBlock>
       </TableCell>
       <TableCell>
         <Table HorizontalCellContentAlignment="right" FirstRowAsHeader="false">
@@ -68,18 +68,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="Data" Wrap="true" />
+              <TextBlock Wrap="true">Data</TextBlock>
             </TableCell>
           </TableRow>
         </Table>

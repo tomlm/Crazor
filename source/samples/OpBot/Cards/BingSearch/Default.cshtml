@@ -4,14 +4,13 @@
 @using OpBot.Cards.BingSearch
 @inherits CardView<DefaultModel>
 
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Version Major="1" Minor="4" />
-    <TextBlock Size="ExtraLarge" Weight="Bolder">Bing Search</TextBlock>
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
+    <TextBlock Size="extraLarge" Weight="bolder">Bing Search</TextBlock>
     <ColumnSet>
-        <Column Width="Stretch">
+        <Column Width="stretch">
             <Input.Text Id="Query" Value="@Query" />
         </Column>
-        <Column Width="Auto">
+        <Column Width="auto">
             <ActionSet>
                 <Action.Execute Title="Search" Verb="OnSearch" />
             </ActionSet>
@@ -23,15 +22,15 @@
     {
         <Container Separator="true">
             <ColumnSet>
-                <Column Width="Stretch">
-                    <TextBlock Weight="Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
-                    <TextBlock Spacing="None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
-                    <TextBlock Spacing="Small">@result.Snippet</TextBlock>
+                <Column Width="stretch">
+                    <TextBlock Weight="bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
+                    <TextBlock Spacing="none">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
+                    <TextBlock Spacing="small">@result.Snippet</TextBlock>
                 </Column>
-                <Column Width="Auto">
+                <Column Width="auto">
                     @if (!String.IsNullOrEmpty(result.ThumbnailUrl))
                     {
-                        <Image Url="@result.ThumbnailUrl" Size="Large" />
+                        <Image Url="@result.ThumbnailUrl" Size="large" />
                     }
                 </Column>
             </ColumnSet>
@@ -39,7 +38,7 @@
     }
     }
     <ColumnSet>
-        <Column Width="Auto">
+        <Column Width="auto">
             @if (Model.HasPrev)
             {
                 <ActionSet>
@@ -47,8 +46,8 @@
                 </ActionSet>
             }
         </Column>
-        <Column Width="Stretch" />
-        <Column Width="Auto">
+        <Column Width="stretch" />
+        <Column Width="auto">
             @if (Model.HasNext)
             {
                 <ActionSet>

@@ -10,17 +10,24 @@ using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Diag = System.Diagnostics;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public class CardView : RazorPage
     {
-        protected static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
+        private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
+        private static XmlWriterSettings _settings = new XmlWriterSettings()
+        {
+            Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
+            Indent = true,
+        };
 
         public CardView()
         {
@@ -272,8 +279,8 @@ namespace Microsoft.Bot.Cards
                 //    xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
                 //}
                 Diag.Debug.WriteLine(xml);
-                var card = (AdaptiveCard?)_cardSerializer.Deserialize(new StringReader(xml));
-                var json = JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented);
+                var reader = XmlReader.Create(new StringReader(xml));
+                var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
                 return card;
             }
             catch (Exception err)

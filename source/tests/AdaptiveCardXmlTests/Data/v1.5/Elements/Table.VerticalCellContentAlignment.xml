@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Weight="bolder" Text="You can configure the vertical alignment of table content with VerticalCellContentAlignement" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">You can configure the vertical alignment of table content with VerticalCellContentAlignement</TextBlock>
   <Table VerticalCellContentAlignment="center" FirstRowAsHeader="false" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>
       <TableCell>
-        <TextBlock Text="Top" Wrap="true" />
+        <TextBlock Wrap="true">Top</TextBlock>
       </TableCell>
       <TableCell>
         <Table FirstRowAsHeader="false">
@@ -14,18 +14,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="A little bit of text." Wrap="true" />
+              <TextBlock Wrap="true">A little bit of text.</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+              <TextBlock Wrap="true">A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. </TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="A little bit of text." Wrap="true" />
+              <TextBlock Wrap="true">A little bit of text.</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+              <TextBlock Wrap="true">A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. </TextBlock>
             </TableCell>
           </TableRow>
         </Table>
@@ -33,7 +33,7 @@
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Center" Wrap="true" />
+        <TextBlock Wrap="true">Center</TextBlock>
       </TableCell>
       <TableCell>
         <Table VerticalCellContentAlignment="center" FirstRowAsHeader="false">
@@ -41,18 +41,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="A little bit of text." Wrap="true" />
+              <TextBlock Wrap="true">A little bit of text.</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+              <TextBlock Wrap="true">A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. </TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="A little bit of text." Wrap="true" />
+              <TextBlock Wrap="true">A little bit of text.</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+              <TextBlock Wrap="true">A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. </TextBlock>
             </TableCell>
           </TableRow>
         </Table>
@@ -60,7 +60,7 @@
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="Bottom" Wrap="true" />
+        <TextBlock Wrap="true">Bottom</TextBlock>
       </TableCell>
       <TableCell>
         <Table VerticalCellContentAlignment="bottom" FirstRowAsHeader="false">
@@ -68,18 +68,18 @@
           <TableColumn Width="1" />
           <TableRow>
             <TableCell>
-              <TextBlock Text="A little bit of text." Wrap="true" />
+              <TextBlock Wrap="true">A little bit of text.</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+              <TextBlock Wrap="true">A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. </TextBlock>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <TextBlock Text="A little bit of text." Wrap="true" />
+              <TextBlock Wrap="true">A little bit of text.</TextBlock>
             </TableCell>
             <TableCell>
-              <TextBlock Text="A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. " Wrap="true" />
+              <TextBlock Wrap="true">A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. A lot of text. </TextBlock>
             </TableCell>
           </TableRow>
         </Table>

@@ -1,15 +1,15 @@
 ﻿@using OpBot.Cards.ProductCatalog
 @inherits CardView<DetailProductCatalogModel>
 
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Version Major="1" Minor="4" />
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
+    
 
-    <TextBlock Size="ExtraLarge" Weight="Bolder">@ItemName</TextBlock>
+    <TextBlock Size="extraLarge" Weight="bolder">@ItemName</TextBlock>
 
-    <TextBlock Size="Medium" Id="DescriptionHeading" Label="Description" />
+    <TextBlock Size="medium" Id="DescriptionHeading" Label="Description" />
     <TextBlock Id="Description" Label="DescriptionLabel">@Description</TextBlock>
 
-    <TextBlock Size="Medium" Id="PriceHeading" Label="Price" />
+    <TextBlock Size="medium" Id="PriceHeading" Label="Price" />
     <TextBlock Id="Price" Label="PriceLabel">@Price</TextBlock>
 
     <Image Url="@PictureUri" />

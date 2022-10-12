@@ -1,5 +1,5 @@
-﻿using Microsoft.Bot.Cards;
-using Microsoft.Bot.Cards.Attributes;
+﻿using Crazor;
+using Crazor.Attributes;
 
 namespace SampleWebApp.Cards.HelloWorld
 {

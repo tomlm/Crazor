@@ -5,7 +5,7 @@
     <Container>
       <ColumnSet>
         <Column Width="auto">
-          <TextBlock Weight="bolder" Color="attention" Text="You should never see this (fallback: drop)!" />
+          <TextBlock Weight="bolder" Color="attention">You should never see this (fallback: drop)!</TextBlock>
           <UnknownElement Id="firstGraph" Type="Graph">
             <AdditionalProperties>
               <Property Name="someProperty">blah</Property>
@@ -15,16 +15,16 @@
       </ColumnSet>
     </Container>
   </Container>
-  <TextBlock Weight="lighter" Text="Nothing above this! ↑" />
-  <TextBlock Weight="lighter" Text="Message just below ↓" />
+  <TextBlock Weight="lighter">Nothing above this! ↑</TextBlock>
+  <TextBlock Weight="lighter">Message just below ↓</TextBlock>
   <Container>
     <Fallback>
-      <TextBlock Weight="bolder" Color="good" Text="If you see this, things are working great!" />
+      <TextBlock Weight="bolder" Color="good">If you see this, things are working great!</TextBlock>
     </Fallback>
     <Container>
       <ColumnSet>
         <Column Width="auto">
-          <TextBlock Weight="bolder" Color="attention" Text="You should never see this (fallback: textblock)!" />
+          <TextBlock Weight="bolder" Color="attention">You should never see this (fallback: textblock)!</TextBlock>
           <UnknownElement Id="secondGraph" Type="Graph">
             <AdditionalProperties>
               <Property Name="someOtherProperty">blah</Property>
@@ -34,18 +34,18 @@
       </ColumnSet>
     </Container>
   </Container>
-  <TextBlock Weight="lighter" Text="There should be another message below ↓" />
+  <TextBlock Weight="lighter">There should be another message below ↓</TextBlock>
   <UnknownElement Id="firstGraphVTwo" Type="GraphV2">
     <Fallback>
       <UnknownElement Id="thirdGraph" Type="Graph">
         <Fallback>
-          <TextBlock Weight="bolder" Color="good" Text="Multiply-nested fallback works!" />
+          <TextBlock Weight="bolder" Color="good">Multiply-nested fallback works!</TextBlock>
         </Fallback>
       </UnknownElement>
     </Fallback>
   </UnknownElement>
   <Container Style="emphasis">
-    <TextBlock Weight="lighter" Text="There should be nothing between here..." Wrap="true" />
+    <TextBlock Weight="lighter" Wrap="true">There should be nothing between here...</TextBlock>
     <UnknownElement Id="secondGraphVTwo" Type="GraphV2">
       <Fallback>
         <UnknownElement Id="fourthGraph" Type="Graph">
@@ -66,7 +66,7 @@
         </UnknownElement>
       </Fallback>
     </UnknownElement>
-    <TextBlock Weight="lighter" Text="...and here" Wrap="true" />
+    <TextBlock Weight="lighter" Wrap="true">...and here</TextBlock>
   </Container>
   <AdaptiveUnknownAction Title="Be Cool" Type="MyCoolAction2">
     <AdditionalProperties>

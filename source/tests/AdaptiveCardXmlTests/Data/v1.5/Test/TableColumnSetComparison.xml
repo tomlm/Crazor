@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Text="ColumnSet vs Table - width weights: 1, 1, 3" Wrap="true" Style="heading" />
+  <TextBlock Wrap="true" Style="heading">ColumnSet vs Table - width weights: 1, 1, 3</TextBlock>
   <ColumnSet>
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 1.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 1.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 1.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 1.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 1.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 1.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table FirstRowAsHeader="false" ShowGridLines="false">
@@ -24,37 +24,37 @@
     <TableColumn Width="3" />
     <TableRow>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 2.1" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 2.1</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 2.2" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 2.2</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 2.3" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 2.3</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
   <ColumnSet Style="accent" Bleed="true">
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 3.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 3.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 3.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 3.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 3.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 3.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table FirstRowAsHeader="false" ShowGridLines="false">
@@ -63,37 +63,37 @@
     <TableColumn Width="3" />
     <TableRow Style="accent">
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 4.1" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 4.1</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 4.2" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 4.2</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 4.3" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 4.3</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
   <ColumnSet Style="accent">
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 5.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 5.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 5.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 5.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 5.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 5.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table FirstRowAsHeader="false" GridStyle="accent">
@@ -102,37 +102,37 @@
     <TableColumn Width="3" />
     <TableRow Style="accent">
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 6.1" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 6.1</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 6.2" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 6.2</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 6.3" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 6.3</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
   <ColumnSet Style="accent">
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 7.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 7.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Separator="true" Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 7.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 7.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Separator="true" Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 7.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 7.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table FirstRowAsHeader="false" ShowGridLines="false" GridStyle="accent">
@@ -141,37 +141,37 @@
     <TableColumn Width="3" />
     <TableRow>
       <TableCell Style="accent">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 8.1" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 8.1</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell Style="warning">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 8.2" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 8.2</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell Style="attention">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 8.3" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 8.3</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
   <ColumnSet>
     <Column Style="accent" Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 9.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 9.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Style="warning" Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 9.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 9.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Style="attention" Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 9.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 9.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table FirstRowAsHeader="false" ShowGridLines="false" GridStyle="accent">
@@ -180,54 +180,54 @@
     <TableColumn Width="3" />
     <TableRow>
       <TableCell Style="accent" Bleed="true">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 10.1" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 10.1</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell Style="warning" Bleed="true">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 10.2" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 10.2</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell Style="attention" Bleed="true">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 10.3" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 10.3</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="accent">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 10.4" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 10.4</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell Style="warning" Bleed="true">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 10.5" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 10.5</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell Style="attention" Bleed="true">
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 10.6" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 10.6</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
   <ColumnSet>
     <Column Style="accent" Bleed="true" Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 11.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 11.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Style="warning" Bleed="true" Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 11.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 11.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Style="attention" Bleed="true" Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 11.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 11.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table ShowGridLines="false" GridStyle="accent">
@@ -236,54 +236,54 @@
     <TableColumn Width="3" />
     <TableRow Style="accent">
       <TableCell Style="accent">
-        <TextBlock Weight="bolder" Text="Name" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Name</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Weight="bolder" Text="Type" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Type</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Weight="bolder" Text="Description" Wrap="true" />
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <TextBlock Text="columns" Wrap="true" />
-      </TableCell>
-      <TableCell>
-        <TextBlock Text="ColumnDefinition[]" Wrap="true" />
-      </TableCell>
-      <TableCell>
-        <TextBlock Text="Defines ddsdsdsdsdsdsdasdasdthe table's columns (number of columns, and column sizes)." Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Description</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
-        <TextBlock Text="rows" Wrap="true" />
+        <TextBlock Wrap="true">columns</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="TableRow[]" Wrap="true" />
+        <TextBlock Wrap="true">ColumnDefinition[]</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card." Wrap="true" />
+        <TextBlock Wrap="true">Defines ddsdsdsdsdsdsdasdasdthe table's columns (number of columns, and column sizes).</TextBlock>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>
+        <TextBlock Wrap="true">rows</TextBlock>
+      </TableCell>
+      <TableCell>
+        <TextBlock Wrap="true">TableRow[]</TextBlock>
+      </TableCell>
+      <TableCell>
+        <TextBlock Wrap="true">Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
-  <TextBlock Text="ColumnSet vs Table - widths: 50px, weight 1, weight 3" Wrap="true" Style="heading" />
+  <TextBlock Wrap="true" Style="heading">ColumnSet vs Table - widths: 50px, weight 1, weight 3</TextBlock>
   <ColumnSet>
     <Column Width="50">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 1.1" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 1.1</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="1">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 1.2" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 1.2</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
     <Column Width="3">
-      <TextBlock Spacing="none" Text="H left" Wrap="true" />
-      <TextBlock Spacing="none" Text="Col 1.3" HorizontalAlignment="center" Wrap="true" />
-      <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+      <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Col 1.3</TextBlock>
+      <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
   <Table ShowGridLines="false">
@@ -292,19 +292,19 @@
     <TableColumn Width="3" />
     <TableRow>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 2.1" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 2.1</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 2.2" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 2.2</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
       <TableCell>
-        <TextBlock Spacing="none" Text="H left" Wrap="true" />
-        <TextBlock Spacing="none" Text="Cell 2.3" HorizontalAlignment="center" Wrap="true" />
-        <TextBlock Spacing="none" Text="right H" HorizontalAlignment="right" Wrap="true" />
+        <TextBlock Spacing="none" Wrap="true">H left</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center" Wrap="true">Cell 2.3</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
       </TableCell>
     </TableRow>
   </Table>

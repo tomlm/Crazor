@@ -7,7 +7,7 @@
     <Container Id="B">
       <Fallback>
         <Container Id="B">
-          <TextBlock Id="C" Text="B Container fallback textblock" />
+          <TextBlock Id="C">B Container fallback textblock</TextBlock>
           <Image Id="Z" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
         </Container>
       </Fallback>
@@ -20,7 +20,7 @@
             <Fallback>
               <Container Id="E">
                 <Image Id="I" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
-                <TextBlock Id="J" Text="C ColumnSet fallback textblock" />
+                <TextBlock Id="J">C ColumnSet fallback textblock</TextBlock>
               </Container>
             </Fallback>
             <Requires>
@@ -31,7 +31,7 @@
       </ColumnSet>
     </Container>
   </Container>
-  <TextBlock Id="F" Text="F TextBlock" />
+  <TextBlock Id="F">F TextBlock</TextBlock>
   <Input.Text Id="G" Placeholder="G Input.Text" />
   <UnknownElement Id="H" Type="Graph">
     <AdditionalProperties>
@@ -42,7 +42,7 @@
         <Requires>
           <Property Name="adaptiveCards">1.2</Property>
         </Requires>
-        <TextBlock Id="K" Text="H Graph fallback TextBlock" />
+        <TextBlock Id="K">H Graph fallback TextBlock</TextBlock>
       </Container>
     </Fallback>
   </UnknownElement>

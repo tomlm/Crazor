@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="TextBlock with 4 &quot;space&quot; characters    1" />
-  <TextBlock Text="TextBlock with 4 &quot;&amp;-nbsp;&quot; characters&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1" />
-  <TextBlock Text="TextBlock with 4 &quot;&amp;-ensp;&quot; characters&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1" />
-  <TextBlock Text="TextBlock with 4 &quot;&amp;-emsp;&quot; characters&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;1" />
+  <TextBlock>TextBlock with 4 "space" characters    1</TextBlock>
+  <TextBlock>TextBlock with 4 "&amp;-nbsp;" characters&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1</TextBlock>
+  <TextBlock>TextBlock with 4 "&amp;-ensp;" characters&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1</TextBlock>
+  <TextBlock>TextBlock with 4 "&amp;-emsp;" characters&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;1</TextBlock>
 </Card>

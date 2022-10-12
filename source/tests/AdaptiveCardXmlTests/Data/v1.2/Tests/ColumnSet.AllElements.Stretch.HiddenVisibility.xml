@@ -2,71 +2,71 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet Height="stretch">
     <Column Width="1">
-      <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." Wrap="true" />
+      <TextBlock Wrap="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
     </Column>
     <Column Spacing="large" Separator="true" Width="1">
-      <TextBlock Text="FactSet" Wrap="true" />
+      <TextBlock Wrap="true">FactSet</TextBlock>
       <FactSet Height="stretch" IsVisible="false">
         <Fact Title="Fact 1" Value="Value 1" />
         <Fact Title="Fact 2" Value="Value 2" />
       </FactSet>
-      <TextBlock Text="Image" Wrap="true" />
+      <TextBlock Wrap="true">Image</TextBlock>
       <Image Height="stretch" IsVisible="false" Size="small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-      <TextBlock Text="ImageSet" Wrap="true" />
+      <TextBlock Wrap="true">ImageSet</TextBlock>
       <ImageSet Height="stretch" IsVisible="false" ImageSize="small">
         <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
         <Image Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
       </ImageSet>
-      <TextBlock Text="Input.Date" Wrap="true" />
+      <TextBlock Wrap="true">Input.Date</TextBlock>
       <Input.Date Id="id1" Height="stretch" IsVisible="false" Placeholder="enter date" />
-      <TextBlock Text="Input.Number" Wrap="true" />
+      <TextBlock Wrap="true">Input.Number</TextBlock>
       <Input.Number Id="id2" Height="stretch" IsVisible="false" Placeholder="enter comment" Value="NaN" Min="NaN" Max="500" />
-      <TextBlock Text="Input.Text with inlineAction" Wrap="true" />
+      <TextBlock Wrap="true">Input.Text with inlineAction</TextBlock>
       <Input.Text Id="id3" Height="stretch" IsVisible="false" Placeholder="enter comment" MaxLength="500">
         <Action.OpenUrl Title="Reply" Url="https://adaptivecards.io" />
       </Input.Text>
-      <TextBlock Text="Input.Text" Wrap="true" />
+      <TextBlock Wrap="true">Input.Text</TextBlock>
       <Input.Text Id="id4" Height="stretch" IsVisible="false" Placeholder="enter comment" MaxLength="500" />
-      <TextBlock Text="Input.Time" Wrap="true" />
+      <TextBlock Wrap="true">Input.Time</TextBlock>
       <Input.Time Id="id5" Height="stretch" IsVisible="false" Placeholder="enter time" />
-      <TextBlock Text="Input.Toggle" Wrap="true" />
+      <TextBlock Wrap="true">Input.Toggle</TextBlock>
       <Input.Toggle Id="id6" Height="stretch" IsVisible="false" Title="Placeholder title" ValueOn="True" ValueOff="False" />
-      <TextBlock Text="TextBlock" Wrap="true" />
-      <TextBlock Height="stretch" IsVisible="false" Text="Regular textblock" />
-      <TextBlock Text="Container" Wrap="true" />
+      <TextBlock Wrap="true">TextBlock</TextBlock>
+      <TextBlock Height="stretch" IsVisible="false">Regular textblock</TextBlock>
+      <TextBlock Wrap="true">Container</TextBlock>
       <Container Height="stretch" IsVisible="false">
-        <TextBlock Text="TextBlock inside a container" />
+        <TextBlock>TextBlock inside a container</TextBlock>
       </Container>
-      <TextBlock Text="ColumnSet" Wrap="true" />
+      <TextBlock Wrap="true">ColumnSet</TextBlock>
       <ColumnSet Height="stretch" IsVisible="false">
         <Column>
-          <TextBlock Text="This is for testing columnset" />
+          <TextBlock>This is for testing columnset</TextBlock>
         </Column>
       </ColumnSet>
-      <TextBlock Text="Column" Wrap="true" />
+      <TextBlock Wrap="true">Column</TextBlock>
       <ColumnSet>
         <Column IsVisible="false">
-          <TextBlock Text="This is for testing column" />
+          <TextBlock>This is for testing column</TextBlock>
         </Column>
       </ColumnSet>
-      <TextBlock Text="Media" Wrap="true" />
+      <TextBlock Wrap="true">Media</TextBlock>
       <Media Height="stretch" IsVisible="false" Poster="https://adaptivecards.io/content/poster-video.png">
         <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
       </Media>
-      <TextBlock Text="RichTextBlock" Wrap="true" />
+      <TextBlock Wrap="true">RichTextBlock</TextBlock>
       <RichTextBlock Height="stretch" IsVisible="false">
         <Inlines>This is the first inline. </Inlines>
         <Inlines Color="good">We support colors, </Inlines>
       </RichTextBlock>
-      <TextBlock Text="TextBlock at the bottom" Wrap="true" />
+      <TextBlock Wrap="true">TextBlock at the bottom</TextBlock>
     </Column>
   </ColumnSet>
   <ColumnSet Height="stretch">
     <Column Width="1">
-      <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." Wrap="true" />
+      <TextBlock Wrap="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
     </Column>
     <Column Spacing="large" Separator="true" Width="1">
-      <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
+      <TextBlock Wrap="true">This is a textblock that doesn't stretch, but the input text does</TextBlock>
       <Input.ChoiceSet Id="id7" Height="stretch" IsVisible="false">
         <Choice Title="Red" Value="1" />
         <Choice Title="Green" Value="2" />
@@ -77,10 +77,10 @@
         <Choice Title="Green" Value="2" />
         <Choice Title="Blue" Value="3" />
       </Input.ChoiceSet>
-      <TextBlock Text="One last text block at the bottom" Wrap="true" />
+      <TextBlock Wrap="true">One last text block at the bottom</TextBlock>
     </Column>
     <Column Spacing="large" Separator="true" Width="1">
-      <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
+      <TextBlock Wrap="true">This is a textblock that doesn't stretch, but the input text does</TextBlock>
       <Input.ChoiceSet Id="id9" Height="stretch" IsVisible="false" Value="1,3" IsMultiSelect="true">
         <Choice Title="Red" Value="1" />
         <Choice Title="Green" Value="2" />
@@ -91,7 +91,7 @@
         <Choice Title="Green" Value="2" />
         <Choice Title="Blue" Value="3" />
       </Input.ChoiceSet>
-      <TextBlock Text="One last text block at the bottom" Wrap="true" />
+      <TextBlock Wrap="true">One last text block at the bottom</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

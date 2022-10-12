@@ -2,39 +2,39 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Container>
     <BackgroundImage Url="https://picsum.photos/id/237/200/200" />
-    <TextBlock Text="This container has a background with a verticalAlignment of top" Wrap="true" />
-    <TextBlock Text="Container 1 - Text 2 - Stretch" />
-    <TextBlock Text="Container 1 - Text 3 - Stretch" />
+    <TextBlock Wrap="true">This container has a background with a verticalAlignment of top</TextBlock>
+    <TextBlock>Container 1 - Text 2 - Stretch</TextBlock>
+    <TextBlock>Container 1 - Text 3 - Stretch</TextBlock>
   </Container>
   <Container>
     <BackgroundImage Url="https://picsum.photos/id/237/200/200" VerticalAlignment="center" />
-    <TextBlock Text="This container has a background with a verticalAlignment of center" Wrap="true" />
-    <TextBlock Text="Container 1 - Text 2 - Stretch" />
-    <TextBlock Text="Container 1 - Text 3 - Stretch" />
+    <TextBlock Wrap="true">This container has a background with a verticalAlignment of center</TextBlock>
+    <TextBlock>Container 1 - Text 2 - Stretch</TextBlock>
+    <TextBlock>Container 1 - Text 3 - Stretch</TextBlock>
   </Container>
   <Container>
     <BackgroundImage Url="https://picsum.photos/id/237/200/200" VerticalAlignment="bottom" />
-    <TextBlock Text="This container has a background with a verticalAlignment of bottom" Wrap="true" />
-    <TextBlock Text="Container 1 - Text 2 - Stretch" />
-    <TextBlock Text="Container 1 - Text 3 - Stretch" />
+    <TextBlock Wrap="true">This container has a background with a verticalAlignment of bottom</TextBlock>
+    <TextBlock>Container 1 - Text 2 - Stretch</TextBlock>
+    <TextBlock>Container 1 - Text 3 - Stretch</TextBlock>
   </Container>
   <ColumnSet>
     <Column Width="stretch">
       <BackgroundImage Url="https://picsum.photos/id/237/200/200" />
-      <TextBlock Text="Background is left aligned" Wrap="true" />
-      <TextBlock Text="Background is left aligned" Wrap="true" />
-      <TextBlock Text="Background is left aligned" Wrap="true" />
-      <TextBlock Text="Background is left aligned" Wrap="true" />
-      <TextBlock Text="Background is left aligned" Wrap="true" />
-      <TextBlock Text="Background is left aligned" Wrap="true" />
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
+      <TextBlock Wrap="true">Background is left aligned</TextBlock>
     </Column>
     <Column Width="stretch">
       <BackgroundImage Url="https://picsum.photos/id/237/200/200" HorizontalAlignment="center" />
-      <TextBlock Text="Background is center aligned" Wrap="true" />
+      <TextBlock Wrap="true">Background is center aligned</TextBlock>
     </Column>
     <Column Width="stretch">
       <BackgroundImage Url="https://picsum.photos/id/237/200/200" HorizontalAlignment="right" />
-      <TextBlock Text="Background is right aligned" Wrap="true" />
+      <TextBlock Wrap="true">Background is right aligned</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

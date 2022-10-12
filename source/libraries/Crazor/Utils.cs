@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 
 using AdaptiveCards;
-using Microsoft.Bot.Cards.AdaptiveCards;
-using Microsoft.Bot.Cards.Interfaces;
+using Crazor.AdaptiveCards;
+using Crazor.Interfaces;
 using Microsoft.Bot.Schema;
 using System.Text;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public static class Utils
     {

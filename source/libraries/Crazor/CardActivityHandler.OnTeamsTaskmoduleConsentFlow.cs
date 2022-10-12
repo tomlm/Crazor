@@ -14,7 +14,7 @@
 //using System.Threading.Tasks;
 
 
-//namespace Microsoft.Bot.Cards
+//namespace Crazor
 //{
 //    // this is the payload to be embedded in a card
 //    // for user to click to trigger and open a task module

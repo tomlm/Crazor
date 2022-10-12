@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
-  <TextBlock Size="medium" Weight="bolder" Text="This column set has some columns RTL and some LTR" Wrap="true" />
+  <TextBlock Size="medium" Weight="bolder" Wrap="true">This column set has some columns RTL and some LTR</TextBlock>
   <ColumnSet>
     <Column Rtl="true" Width="stretch">
-      <TextBlock Text="العمود الأول باللغة العربية" Wrap="true" />
+      <TextBlock Wrap="true">العمود الأول باللغة العربية</TextBlock>
     </Column>
     <Column Width="stretch">
-      <TextBlock Text="Column two is in English" Wrap="true" />
+      <TextBlock Wrap="true">Column two is in English</TextBlock>
     </Column>
     <Column Rtl="true" Width="stretch">
-      <TextBlock Text="עמודה 3 בעברית" Wrap="true" />
+      <TextBlock Wrap="true">עמודה 3 בעברית</TextBlock>
     </Column>
     <Column Width="stretch">
-      <TextBlock Text="La columna cuatro está en español" Wrap="true" />
+      <TextBlock Wrap="true">La columna cuatro está en español</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Spacing="large" Size="medium" Weight="bolder" Text="This Column Set is in a container that is entirely RTL" Wrap="true" />
+  <TextBlock Spacing="large" Size="medium" Weight="bolder" Wrap="true">This Column Set is in a container that is entirely RTL</TextBlock>
   <Container Rtl="true">
     <ColumnSet>
       <Column Width="stretch">
-        <TextBlock Text="يتم تعيين هذا العمود بأكمله باللغة العربية ويتم عرضه من اليمين إلى اليسار." Wrap="true" />
+        <TextBlock Wrap="true">يتم تعيين هذا العمود بأكمله باللغة العربية ويتم عرضه من اليمين إلى اليسار.</TextBlock>
       </Column>
       <Column Width="stretch">
-        <TextBlock Text="هذا قط" Wrap="true" />
+        <TextBlock Wrap="true">هذا قط</TextBlock>
         <Image Size="small" Url="https://adaptivecards.io/content/cats/1.png" AltText="صورة قطة" />
       </Column>
     </ColumnSet>
   </Container>
-  <TextBlock Spacing="large" Size="medium" Weight="bolder" Text="This Container is RTL, with a single Container inside it that is LTR. The English text and the second cat should display left to right." Wrap="true" />
+  <TextBlock Spacing="large" Size="medium" Weight="bolder" Wrap="true">This Container is RTL, with a single Container inside it that is LTR. The English text and the second cat should display left to right.</TextBlock>
   <Container Rtl="true">
-    <TextBlock Text="كتلة النص واحد" Wrap="true" />
+    <TextBlock Wrap="true">كتلة النص واحد</TextBlock>
     <Image Size="small" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat with red bandana" />
     <Container>
-      <TextBlock Text="Text Block two" Wrap="true" />
+      <TextBlock Wrap="true">Text Block two</TextBlock>
       <Image Size="small" Url="https://adaptivecards.io/content/cats/3.png" AltText="Cat with shades" />
     </Container>
-    <TextBlock Text="كتلة النص ثلاثة" Wrap="true" />
+    <TextBlock Wrap="true">كتلة النص ثلاثة</TextBlock>
   </Container>
-  <TextBlock Spacing="large" Size="medium" Weight="bolder" Text="This Container is RTL, Alignments should be reversed" Wrap="true" />
+  <TextBlock Spacing="large" Size="medium" Weight="bolder" Wrap="true">This Container is RTL, Alignments should be reversed</TextBlock>
   <Container Rtl="true">
-    <TextBlock Text="This text box is left aligned" Wrap="true" />
-    <TextBlock Text="This text block is right aligned" HorizontalAlignment="right" Wrap="true" />
+    <TextBlock Wrap="true">This text box is left aligned</TextBlock>
+    <TextBlock HorizontalAlignment="right" Wrap="true">This text block is right aligned</TextBlock>
     <Image Size="small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     <Image Size="small" Url="https://adaptivecards.io/content/cats/1.png" HorizontalAlignment="right" AltText="Cat" />
   </Container>

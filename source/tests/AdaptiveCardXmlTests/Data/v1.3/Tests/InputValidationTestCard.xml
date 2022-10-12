@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
-  <TextBlock Size="medium" Text="Please fill out the following form:" Wrap="true" />
+  <TextBlock Size="medium" Wrap="true">Please fill out the following form:</TextBlock>
   <Input.Text Id="fullName" IsRequired="true" Label="Full Name:" ErrorMessage="Name is required" Placeholder="First Last" />
   <Input.Text Id="nickName" Label="Nickname:" />
   <Input.Number Id="number" IsRequired="true" Label="What's your favorite number?" ErrorMessage="Favorite number is required" Value="NaN" Min="NaN" Max="NaN" />

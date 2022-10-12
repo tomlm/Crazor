@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <TextBlock Text="This card contains 16 inputs that use input validation properties, but do not contain error messages. The renderer should return a warning for each input whose validation is enforced by input validation." Wrap="true" />
+  <TextBlock Wrap="true">This card contains 16 inputs that use input validation properties, but do not contain error messages. The renderer should return a warning for each input whose validation is enforced by input validation.</TextBlock>
   <Input.Text Id="requiredText" IsRequired="true" Label="Required Input.Text" />
   <Input.Text Id="maxLength" Label="MaxLength Input.Text" MaxLength="5" />
   <Input.Text Id="regExText" Label="RegEx Input.Text" Regex="([A-Z])\w+" />

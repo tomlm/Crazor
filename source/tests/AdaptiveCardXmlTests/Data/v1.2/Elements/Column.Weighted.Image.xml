@@ -2,11 +2,11 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="1">
-      <TextBlock Text="Weight 1" />
+      <TextBlock>Weight 1</TextBlock>
       <Image Size="large" Url="https://cdn-01.independent.ie/migration_catalog/Non-Staff/article25331906.ece/fea85/AUTOCROP/w620/No%20name" AltText="David Hasselhoff" />
     </Column>
     <Column Width="3">
-      <TextBlock Text="Weight 3" />
+      <TextBlock>Weight 3</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

@@ -8,7 +8,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public partial class CardActivityHandler
     {

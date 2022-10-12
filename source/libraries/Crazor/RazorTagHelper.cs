@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     /// <summary>
     /// Implements a tag helper as a Razor view as the template

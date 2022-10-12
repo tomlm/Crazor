@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Weight="bolder" Text="Try clicking a column!" />
+  <TextBlock Weight="bolder">Try clicking a column!</TextBlock>
   <ColumnSet>
     <Column>
       <SelectAction xsi:type="Action.OpenUrl" Tooltip="cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
-      <TextBlock Text="Column 1" />
+      <TextBlock>Column 1</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
     <Column>
       <SelectAction xsi:type="Action.OpenUrl" Tooltip="another cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
-      <TextBlock Text="Column 2" />
+      <TextBlock>Column 2</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
     <Column>
       <SelectAction xsi:type="Action.OpenUrl" Tooltip="a third cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
-      <TextBlock Text="Column 3" />
+      <TextBlock>Column 3</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
   </ColumnSet>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Size="medium" Weight="bolder" Text="Your registration is almost complete" Wrap="true" />
-  <TextBlock Text="What type of food do you prefer?" Wrap="true" />
+  <TextBlock Size="medium" Weight="bolder" Wrap="true">Your registration is almost complete</TextBlock>
+  <TextBlock Wrap="true">What type of food do you prefer?</TextBlock>
   <ImageSet ImageSize="medium">
     <Image Url="https://adaptivecards.io/content/steak.jpeg" AltText="Steak cut with fries" />
     <Image Url="https://adaptivecards.io/content/chicken.jpeg" AltText="Fried chicken with lettuce" />

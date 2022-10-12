@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Text="Style set to heading" Wrap="true" Style="heading" />
-  <TextBlock Color="good" Text="Style set to heading, color set to good" Wrap="true" Style="heading" />
-  <TextBlock Text="Style set to default" />
-  <TextBlock Text="Style unset" Wrap="true" />
+  <TextBlock Wrap="true" Style="heading">Style set to heading</TextBlock>
+  <TextBlock Color="good" Wrap="true" Style="heading">Style set to heading, color set to good</TextBlock>
+  <TextBlock>Style set to default</TextBlock>
+  <TextBlock Wrap="true">Style unset</TextBlock>
 </Card>

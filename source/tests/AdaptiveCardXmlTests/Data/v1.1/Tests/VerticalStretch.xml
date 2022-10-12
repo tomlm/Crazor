@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees">
   <Container>
-    <TextBlock Text="This is the top container." Wrap="true" />
+    <TextBlock Wrap="true">This is the top container.</TextBlock>
   </Container>
   <Container Spacing="large" Separator="true">
-    <TextBlock Text="This is the middle container. Its **height** property is **stretch** so it uses all the remaining vertical space." Wrap="true" />
+    <TextBlock Wrap="true">This is the middle container. Its **height** property is **stretch** so it uses all the remaining vertical space.</TextBlock>
   </Container>
   <ColumnSet Height="stretch">
     <Column Width="auto">
       <Image Size="small" Style="person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" />
     </Column>
     <Column Spacing="large" Separator="true" Width="stretch">
-      <TextBlock Height="stretch" Text="It also works within a ColumnSet" Wrap="true" />
-      <TextBlock Text="This text aligns with the bottom of the column" Wrap="true" />
+      <TextBlock Height="stretch" Wrap="true">It also works within a ColumnSet</TextBlock>
+      <TextBlock Wrap="true">This text aligns with the bottom of the column</TextBlock>
     </Column>
   </ColumnSet>
   <Container Spacing="large" Separator="true">
-    <TextBlock Text="This is the bottom container." Wrap="true" />
+    <TextBlock Wrap="true">This is the bottom container.</TextBlock>
   </Container>
 </Card>

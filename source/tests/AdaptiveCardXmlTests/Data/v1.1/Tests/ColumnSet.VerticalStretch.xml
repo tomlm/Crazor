@@ -2,11 +2,11 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="1">
-      <TextBlock Text="The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**." Wrap="true" />
+      <TextBlock Wrap="true">The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**.</TextBlock>
     </Column>
     <Column Spacing="large" Separator="true" Width="1">
-      <TextBlock Height="stretch" Text="First TextBlock displayed at the top" Wrap="true" />
-      <TextBlock Text="Second TextBlock displayed at the bottom" Wrap="true" />
+      <TextBlock Height="stretch" Wrap="true">First TextBlock displayed at the top</TextBlock>
+      <TextBlock Wrap="true">Second TextBlock displayed at the bottom</TextBlock>
     </Column>
   </ColumnSet>
 </Card>

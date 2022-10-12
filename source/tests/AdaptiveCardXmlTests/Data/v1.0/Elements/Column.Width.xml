@@ -2,15 +2,15 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <ColumnSet>
     <Column Width="auto">
-      <TextBlock Text="(auto)" />
+      <TextBlock>(auto)</TextBlock>
       <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" AltText="Adaptive cards logo" />
     </Column>
     <Column Width="stretch">
-      <TextBlock Text="(stretch)" HorizontalAlignment="center" />
+      <TextBlock HorizontalAlignment="center">(stretch)</TextBlock>
       <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" HorizontalAlignment="center" AltText="Adaptive cards logo" />
     </Column>
     <Column Width="auto">
-      <TextBlock Text="(auto)" />
+      <TextBlock>(auto)</TextBlock>
       <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" AltText="Adaptive cards logo" />
     </Column>
   </ColumnSet>

@@ -1,4 +1,4 @@
-﻿using Microsoft.Bot.Cards;
+﻿using Crazor;
 
 namespace OpBot.Cards.BingSearch
 {

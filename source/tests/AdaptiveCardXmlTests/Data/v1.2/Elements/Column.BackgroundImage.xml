@@ -11,16 +11,16 @@
       <BackgroundImage Url="https://adaptivecards.io/content/BainbridgeIsland.jpg" />
     </Column>
   </ColumnSet>
-  <TextBlock Text="You can even repeat the background image..." />
+  <TextBlock>You can even repeat the background image...</TextBlock>
   <ColumnSet>
     <Column MinHeight="50px" Width="stretch">
       <BackgroundImage Url="https://adaptivecards.io/content/uparrow.png" FillMode="repeat" />
     </Column>
     <Column VerticalContentAlignment="center" HorizontalAlignment="center" Width="stretch">
-      <TextBlock Text="Those are some neat arrows" HorizontalAlignment="center" Wrap="true" />
+      <TextBlock HorizontalAlignment="center" Wrap="true">Those are some neat arrows</TextBlock>
     </Column>
   </ColumnSet>
-  <TextBlock Text="Horizontal repeat..." />
+  <TextBlock>Horizontal repeat...</TextBlock>
   <ColumnSet>
     <Column MinHeight="50px" Width="stretch">
       <BackgroundImage Url="https://adaptivecards.io/content/downarrow.png" FillMode="repeatHorizontally" />
@@ -32,7 +32,7 @@
       <BackgroundImage Url="https://adaptivecards.io/content/uparrow.png" FillMode="repeatHorizontally" VerticalAlignment="bottom" />
     </Column>
   </ColumnSet>
-  <TextBlock Text="Vertical repeat..." />
+  <TextBlock>Vertical repeat...</TextBlock>
   <ColumnSet>
     <Column MinHeight="50px" Width="stretch">
       <BackgroundImage Url="https://adaptivecards.io/content/uparrow.png" FillMode="repeatVertically" />

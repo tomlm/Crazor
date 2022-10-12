@@ -6,14 +6,14 @@
         <Image Size="small" Url="https://maxcdn.icons8.com/Share/icon/p1em/Time_And_Date/calendar1600.png" AltText="Calendar" />
       </Column>
       <Column Width="stretch">
-        <TextBlock Weight="bolder" Text="Image buttons" Wrap="true" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="Adaptive Cards" Wrap="true" />
-        <TextBlock Spacing="none" IsSubtle="true" Text="{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}" Wrap="true" />
+        <TextBlock Weight="bolder" Wrap="true">Image buttons</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" Wrap="true">Adaptive Cards</TextBlock>
+        <TextBlock Spacing="none" IsSubtle="true" Wrap="true">{{TIME(2017-02-14T17:11:39Z)}} - {{TIME(2017-02-14T17:41:39Z)}}</TextBlock>
       </Column>
     </ColumnSet>
   </Container>
   <Container>
-    <TextBlock Text="Snooze for" Wrap="true" />
+    <TextBlock Wrap="true">Snooze for</TextBlock>
     <Input.ChoiceSet Id="snoozeFor" Value="1">
       <Choice Title="5 minutes" Value="1" />
       <Choice Title="30 minutes" Value="2" />
@@ -31,7 +31,7 @@
 }</Action.Submit>
   <Action.ShowCard Title="Dismiss" IconUrl="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/close-480.png">
     <AdaptiveCard Version="1.0">
-      <TextBlock Text="Icons should appear above the title if the host config is set to Above Title" />
+      <TextBlock>Icons should appear above the title if the host config is set to Above Title</TextBlock>
       <Action.Submit Title="Snooze" IconUrl="https://cdn1.iconfinder.com/data/icons/office-22/48/alarm-clock-512.png">{
   "x": "snooze"
 }</Action.Submit>

@@ -5,7 +5,7 @@
 using AdaptiveCards;
 using System.ComponentModel;
 
-namespace Microsoft.Bot.Cards.AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// This fixes all of the bugs in SDK AdaptiveVisitor

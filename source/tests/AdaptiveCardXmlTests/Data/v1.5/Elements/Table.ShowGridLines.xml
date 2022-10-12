@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.5">
-  <TextBlock Text="Table with gridlines" Wrap="true" Style="heading" />
+  <TextBlock Wrap="true" Style="heading">Table with gridlines</TextBlock>
   <Table>
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableRow>
       <TableCell Style="accent">
-        <TextBlock Text="showGridLines value" Wrap="true" />
+        <TextBlock Wrap="true">showGridLines value</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="Behavior" Wrap="true" />
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell Style="accent">
-        <TextBlock Text="true" Wrap="true" />
-      </TableCell>
-      <TableCell Style="accent">
-        <TextBlock Text="Cells are separated by 1px width gridlines" Wrap="true" />
+        <TextBlock Wrap="true">Behavior</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="accent">
-        <TextBlock Text="false" Wrap="true" />
+        <TextBlock Wrap="true">true</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="Cells are separated by the cell spacing value configued in hostconfig" Wrap="true" />
+        <TextBlock Wrap="true">Cells are separated by 1px width gridlines</TextBlock>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="accent">
+        <TextBlock Wrap="true">false</TextBlock>
+      </TableCell>
+      <TableCell Style="accent">
+        <TextBlock Wrap="true">Cells are separated by the cell spacing value configued in hostconfig</TextBlock>
       </TableCell>
     </TableRow>
   </Table>
-  <TextBlock Text="Table without gridlines" Wrap="true" Style="heading" />
+  <TextBlock Wrap="true" Style="heading">Table without gridlines</TextBlock>
   <Table ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableRow>
       <TableCell Style="accent">
-        <TextBlock Text="showGridLines value" Wrap="true" />
+        <TextBlock Wrap="true">showGridLines value</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="Behavior" Wrap="true" />
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell Style="accent">
-        <TextBlock Text="true" Wrap="true" />
-      </TableCell>
-      <TableCell Style="accent">
-        <TextBlock Text="Cells are separated by 1px width gridlines" Wrap="true" />
+        <TextBlock Wrap="true">Behavior</TextBlock>
       </TableCell>
     </TableRow>
     <TableRow>
       <TableCell Style="accent">
-        <TextBlock Text="false" Wrap="true" />
+        <TextBlock Wrap="true">true</TextBlock>
       </TableCell>
       <TableCell Style="accent">
-        <TextBlock Text="Cells are separated by the cell spacing value configued in hostconfig" Wrap="true" />
+        <TextBlock Wrap="true">Cells are separated by 1px width gridlines</TextBlock>
+      </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell Style="accent">
+        <TextBlock Wrap="true">false</TextBlock>
+      </TableCell>
+      <TableCell Style="accent">
+        <TextBlock Wrap="true">Cells are separated by the cell spacing value configued in hostconfig</TextBlock>
       </TableCell>
     </TableRow>
   </Table>

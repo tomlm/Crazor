@@ -4,16 +4,16 @@
     <ColumnSet>
       <Column Width="auto">
         <Image Size="medium" Url="https://adaptivecards.io/content/cats/3.png" AltText="Shades cat team emblem" />
-        <TextBlock Weight="bolder" Text="SHADES" HorizontalAlignment="center" />
+        <TextBlock Weight="bolder" HorizontalAlignment="center">SHADES</TextBlock>
       </Column>
       <Column Spacing="medium" Separator="true" Width="stretch">
-        <TextBlock Text="Dec 4" HorizontalAlignment="center" />
-        <TextBlock Spacing="none" Text="Final" HorizontalAlignment="center" />
-        <TextBlock Size="extraLarge" Text="7 - 40" HorizontalAlignment="center" />
+        <TextBlock HorizontalAlignment="center">Dec 4</TextBlock>
+        <TextBlock Spacing="none" HorizontalAlignment="center">Final</TextBlock>
+        <TextBlock Size="extraLarge" HorizontalAlignment="center">7 - 40</TextBlock>
       </Column>
       <Column Spacing="medium" Separator="true" Width="auto">
         <Image Size="medium" Url="https://adaptivecards.io/content/cats/2.png" HorizontalAlignment="center" AltText="Skins cat team emblem" />
-        <TextBlock Weight="bolder" Text="SKINS" HorizontalAlignment="center" />
+        <TextBlock Weight="bolder" HorizontalAlignment="center">SKINS</TextBlock>
       </Column>
     </ColumnSet>
   </Container>

@@ -5,7 +5,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using Diag = System.Diagnostics;
-using Microsoft.Bot.Cards.Attributes;
+using Crazor.Attributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +15,10 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
-using Microsoft.Bot.Cards.Interfaces;
+using Crazor.Interfaces;
 using System.Xml;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     /// <summary>
     /// CardApp is the base class of a card application

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="color: default" />
-  <TextBlock Color="accent" Text="color: accent" />
-  <TextBlock Color="good" Text="color: good" />
-  <TextBlock Color="warning" Text="color: warning" />
-  <TextBlock Color="attention" Text="color: attention" />
-  <TextBlock Color="light" Text="color: light" />
-  <TextBlock Color="dark" Text="color: dark" />
+  <TextBlock>color: default</TextBlock>
+  <TextBlock Color="accent">color: accent</TextBlock>
+  <TextBlock Color="good">color: good</TextBlock>
+  <TextBlock Color="warning">color: warning</TextBlock>
+  <TextBlock Color="attention">color: attention</TextBlock>
+  <TextBlock Color="light">color: light</TextBlock>
+  <TextBlock Color="dark">color: dark</TextBlock>
 </Card>

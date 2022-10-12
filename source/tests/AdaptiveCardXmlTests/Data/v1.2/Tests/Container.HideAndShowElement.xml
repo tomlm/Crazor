@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <TextBlock Text="This test checks if showing an element inside a container that is hiding, will behave correctly by not showing the container" Wrap="true" />
-  <TextBlock Text="Container (id1)" Wrap="true" />
+  <TextBlock Wrap="true">This test checks if showing an element inside a container that is hiding, will behave correctly by not showing the container</TextBlock>
+  <TextBlock Wrap="true">Container (id1)</TextBlock>
   <Container Id="id1" Style="emphasis">
-    <TextBlock Id="id2" Text="TextBlock (id2) inside a container" Wrap="true" />
+    <TextBlock Id="id2" Wrap="true">TextBlock (id2) inside a container</TextBlock>
   </Container>
-  <TextBlock Text="Column (id3)" Wrap="true" />
+  <TextBlock Wrap="true">Column (id3)</TextBlock>
   <ColumnSet>
     <Column Id="id3" Spacing="large" Style="emphasis">
-      <TextBlock Id="id4" Text="TextBlock (id4) inside a columnSet" Wrap="true" />
+      <TextBlock Id="id4" Wrap="true">TextBlock (id4) inside a columnSet</TextBlock>
     </Column>
   </ColumnSet>
   <Action.ToggleVisibility Title="Hide containers, show element">

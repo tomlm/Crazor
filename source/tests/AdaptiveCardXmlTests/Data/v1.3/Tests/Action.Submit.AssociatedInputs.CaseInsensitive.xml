@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
-  <TextBlock Weight="bolder" Text="Validate that associatedInputs 'auto' and 'none' are handled case-insensitively" Wrap="true" />
+  <TextBlock Weight="bolder" Wrap="true">Validate that associatedInputs 'auto' and 'none' are handled case-insensitively</TextBlock>
   <Input.Text Id="ID" IsRequired="true" Label="Text Box:" Placeholder="Placeholder text" />
   <Action.Submit Title="NONE" AssociatedInputs="none" />
   <Action.Submit Title="AUTO" />

@@ -19,7 +19,7 @@
       <Choice Title="Typing 'O' should show Banana Smoothie and Orange Juice." Value="3" />
     </Input.ChoiceSet>
   </Container>
-  <TextBlock Id="4" Text="Setting both filtered style and multiline will ignore the style as this example" Wrap="true" />
+  <TextBlock Id="4" Wrap="true">Setting both filtered style and multiline will ignore the style as this example</TextBlock>
   <Input.ChoiceSet Id="3" Style="filtered" IsMultiSelect="true" Placeholder="Placeholder text">
     <Choice Title="Apple Cider" Value="1" />
     <Choice Title="Grape Juice" Value="2" />

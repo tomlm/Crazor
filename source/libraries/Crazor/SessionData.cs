@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Microsoft.Bot.Cards
+namespace Crazor
 {
     public class SessionData
     {
