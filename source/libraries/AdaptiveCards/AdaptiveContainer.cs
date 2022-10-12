@@ -78,5 +78,14 @@ namespace AdaptiveCards
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "left")]
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
+        /// <summary>
+        /// The style used to display this element. See <see cref="AdaptiveContainerStyle" />.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+#if !NETSTANDARD1_3
+        [XmlAttribute]
+#endif
+        [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
+        public AdaptiveContainerStyle Style { get; set; }
     }
 }

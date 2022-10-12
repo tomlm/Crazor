@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <AdaptiveUnknownElement>
-    <Fallback>
-      <Type>drop</Type>
-    </Fallback>
-    <Type>SomeCustomElement</Type>
-  </AdaptiveUnknownElement>
-  <AdaptiveUnknownAction Title="This is a bug!">
-    <Fallback>
-      <Type>drop</Type>
-    </Fallback>
-    <Type>SomeCustomAction</Type>
+  <UnknownElement Type="SomeCustomElement">
+    <Fallback Type="drop" />
+  </UnknownElement>
+  <AdaptiveUnknownAction Title="This is a bug!" Type="SomeCustomAction">
+    <Fallback Type="drop" />
   </AdaptiveUnknownAction>
 </Card>

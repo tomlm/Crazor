@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
   <RichTextBlock>
-    <Inlines>
-      <Type>TextRun</Type>This is the first inline. </Inlines>
-    <Inlines>
-      <Type>TextRun</Type>This inline has default underline value. </Inlines>
-    <Inlines Underline="true">
-      <Type>TextRun</Type>This inline must have underline. </Inlines>
-    <Inlines>
-      <Type>TextRun</Type>This inline must not have underline. </Inlines>
+    <Inlines>This is the first inline. </Inlines>
+    <Inlines>This inline has default underline value. </Inlines>
+    <Inlines Underline="true">This inline must have underline. </Inlines>
+    <Inlines>This inline must not have underline. </Inlines>
   </RichTextBlock>
 </Card>

@@ -60,14 +60,7 @@
   <Input.Toggle Id="input5" IsVisible="false" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="true" />
   <Input.ChoiceSet Id="input6" IsVisible="false" Value="1">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
@@ -88,14 +81,7 @@
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="input9" IsVisible="false" Value="1" Wrap="true">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />

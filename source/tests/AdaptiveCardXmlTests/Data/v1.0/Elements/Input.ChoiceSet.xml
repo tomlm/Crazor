@@ -2,14 +2,7 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Input.ChoiceSet Id="myColor" Label="What color do you want? (isMultiSelect:false, style:compact)" Value="1">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />
@@ -26,14 +19,7 @@
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="myColor3" Label="What colors do you want? (isMultiSelect:true, style:compact)" Value="1,3" IsMultiSelect="true">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />

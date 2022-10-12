@@ -10,14 +10,7 @@
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="filamentCompact" Value="1" Wrap="true">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="HATCHBOX 1.75mm White PLA 3D Printer Filament - 1kg Spool (2.2 lbs) - Dimensional Accuracy +/- 0.03mm" Value="1" />

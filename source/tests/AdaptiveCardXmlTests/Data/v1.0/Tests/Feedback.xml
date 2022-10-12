@@ -3,14 +3,7 @@
   <TextBlock Size="large" Weight="bolder" Text="Please rate your experience" />
   <Input.ChoiceSet Id="Rating" Spacing="medium" Value="5">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="Excellent" Value="5" />
@@ -24,14 +17,7 @@
   <Input.Text Id="FeedbackText" Spacing="medium" IsMultiline="true" MaxLength="500" />
   <TextBlock Spacing="small" Text="%20">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>space</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">preserve</anyType>
-        </value>
-      </item>
+      <Property Name="space">preserve</Property>
     </AdditionalProperties>
   </TextBlock>
   <Action.Submit Title="Send">{

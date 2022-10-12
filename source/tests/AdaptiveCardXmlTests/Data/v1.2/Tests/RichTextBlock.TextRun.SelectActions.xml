@@ -10,17 +10,12 @@
     </Column>
   </ColumnSet>
   <RichTextBlock>
-    <Inlines Color="good">
-      <Type>TextRun</Type>Interacting with the text in the good color will open a web page. <SelectAction xsi:type="Action.OpenUrl" Tooltip="Default" Url="https://adaptivecards.io" /></Inlines>
-    <Inlines Weight="bolder">
-      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
-    <Inlines Color="warning">
-      <Type>TextRun</Type> Interacting with the text in the warning color will submit. <SelectAction xsi:type="Action.Submit" Tooltip="Action.Submit">{
+    <Inlines Color="good">Interacting with the text in the good color will open a web page. <SelectAction xsi:type="Action.OpenUrl" Tooltip="Default" Url="https://adaptivecards.io" /></Inlines>
+    <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
+    <Inlines Color="warning"> Interacting with the text in the warning color will submit. <SelectAction xsi:type="Action.Submit" Tooltip="Action.Submit">{
   "x": "hello world!"
 }</SelectAction></Inlines>
-    <Inlines Weight="bolder">
-      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
-    <Inlines Color="accent">
-      <Type>TextRun</Type>Interacting with the text in the accent color will toggle visibility <SelectAction xsi:type="Action.ToggleVisibility" Tooltip="Toggle!"><TargetElement ElementId="textToToggle" /><TargetElement ElementId="imageToToggle" /><TargetElement ElementId="imageToToggle2" /></SelectAction></Inlines>
+    <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
+    <Inlines Color="accent">Interacting with the text in the accent color will toggle visibility <SelectAction xsi:type="Action.ToggleVisibility" Tooltip="Toggle!"><TargetElement ElementId="textToToggle" /><TargetElement ElementId="imageToToggle" /><TargetElement ElementId="imageToToggle2" /></SelectAction></Inlines>
   </RichTextBlock>
 </Card>

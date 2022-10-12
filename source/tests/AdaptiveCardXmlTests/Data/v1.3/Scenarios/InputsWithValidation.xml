@@ -12,14 +12,7 @@
   <TextBlock Size="medium" Weight="bolder" Text="Input.ChoiceSet" HorizontalAlignment="center" Wrap="true" Style="heading" />
   <Input.ChoiceSet Id="CompactSelectVal" Label="What color do you want? (compact)" Value="1">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>style</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">compact</anyType>
-        </value>
-      </item>
+      <Property Name="style">compact</Property>
     </AdditionalProperties>
     <Choices>
       <Choice Title="Red" Value="1" />

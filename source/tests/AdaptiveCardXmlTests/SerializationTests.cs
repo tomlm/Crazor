@@ -78,8 +78,6 @@ namespace AdaptiveCardXmlTests
                 Debug.WriteLine(json2);
             }
             Assert.Equal(json, json2, ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
-
-
         }
 
     }

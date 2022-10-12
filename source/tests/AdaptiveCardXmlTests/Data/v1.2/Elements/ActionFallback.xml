@@ -1,140 +1,100 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ActionSet>
-    <AdaptiveUnknownAction>
+    <AdaptiveUnknownAction Type="NoExist">
       <Fallback>
-        <Type>content</Type>
-        <Content xsi:type="AdaptiveUnknownElement">
+        <UnknownElement Type="NeitherExist">
           <Fallback>
-            <Type>content</Type>
-            <Content xsi:type="Action.Submit" Title="Action.Submit">{
+            <Action.Submit Title="Action.Submit">{
   "x": 13
-}</Content>
+}</Action.Submit>
           </Fallback>
-          <Type>NeitherExist</Type>
-        </Content>
+        </UnknownElement>
       </Fallback>
-      <Type>NoExist</Type>
     </AdaptiveUnknownAction>
-    <AdaptiveUnknownAction>
+    <AdaptiveUnknownAction Type="NoExist">
       <Fallback>
-        <Type>content</Type>
-        <Content xsi:type="AdaptiveUnknownElement">
+        <UnknownElement Type="NeitherExist">
           <Fallback>
-            <Type>content</Type>
-            <Content xsi:type="Action.OpenUrl" Title="Action.OpenUrl" Url="https://adaptivecards.io" />
+            <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io" />
           </Fallback>
-          <Type>NeitherExist</Type>
-        </Content>
+        </UnknownElement>
       </Fallback>
-      <Type>NoExist</Type>
     </AdaptiveUnknownAction>
-    <AdaptiveUnknownAction>
+    <AdaptiveUnknownAction Type="NoExist">
       <Fallback>
-        <Type>content</Type>
-        <Content xsi:type="AdaptiveUnknownElement">
+        <UnknownElement Type="NeitherExist">
           <Fallback>
-            <Type>content</Type>
-            <Content xsi:type="AdaptiveUnknownElement">
+            <UnknownElement Type="NopeNotThis">
               <Fallback>
-                <Type>content</Type>
-                <Content xsi:type="Action.ShowCard" Title="Action.ShowCard">
+                <Action.ShowCard Title="Action.ShowCard">
                   <AdaptiveCard Version="1.0">
                     <TextBlock Text="What do you think?" />
                     <Action.Submit Title="Neat!" />
                   </AdaptiveCard>
-                </Content>
+                </Action.ShowCard>
               </Fallback>
-              <Type>NopeNotThis</Type>
-            </Content>
+            </UnknownElement>
           </Fallback>
-          <Type>NeitherExist</Type>
-        </Content>
+        </UnknownElement>
       </Fallback>
-      <Type>NoExist</Type>
     </AdaptiveUnknownAction>
-    <AdaptiveUnknownAction>
+    <AdaptiveUnknownAction Type="NoExist">
       <Fallback>
-        <Type>content</Type>
-        <Content xsi:type="AdaptiveUnknownElement">
+        <UnknownElement Type="NeitherExist">
           <Fallback>
-            <Type>content</Type>
-            <Content xsi:type="AdaptiveUnknownElement">
-              <Type>HaHaNope</Type>
-            </Content>
+            <UnknownElement Type="HaHaNope" />
           </Fallback>
-          <Type>NeitherExist</Type>
-        </Content>
+        </UnknownElement>
       </Fallback>
-      <Type>NoExist</Type>
     </AdaptiveUnknownAction>
   </ActionSet>
   <TextBlock Text="This card tests action fallback" />
-  <AdaptiveUnknownAction>
+  <AdaptiveUnknownAction Type="NoExist">
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="AdaptiveUnknownElement">
+      <UnknownElement Type="NeitherExist">
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="Action.Submit" Title="Action.Submit">{
+          <Action.Submit Title="Action.Submit">{
   "x": 13
-}</Content>
+}</Action.Submit>
         </Fallback>
-        <Type>NeitherExist</Type>
-      </Content>
+      </UnknownElement>
     </Fallback>
-    <Type>NoExist</Type>
   </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction>
+  <AdaptiveUnknownAction Type="NoExist">
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="AdaptiveUnknownElement">
+      <UnknownElement Type="NeitherExist">
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="Action.OpenUrl" Title="Action.OpenUrl" Url="https://adaptivecards.io" />
+          <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io" />
         </Fallback>
-        <Type>NeitherExist</Type>
-      </Content>
+      </UnknownElement>
     </Fallback>
-    <Type>NoExist</Type>
   </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction>
+  <AdaptiveUnknownAction Type="NoExist">
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="AdaptiveUnknownElement">
+      <UnknownElement Type="NeitherExist">
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="AdaptiveUnknownElement">
+          <UnknownElement Type="NopeNotThis">
             <Fallback>
-              <Type>content</Type>
-              <Content xsi:type="Action.ShowCard" Title="Action.ShowCard">
+              <Action.ShowCard Title="Action.ShowCard">
                 <AdaptiveCard Version="1.0">
                   <TextBlock Text="What do you think?" />
                   <Action.Submit Title="Neat!" />
                 </AdaptiveCard>
-              </Content>
+              </Action.ShowCard>
             </Fallback>
-            <Type>NopeNotThis</Type>
-          </Content>
+          </UnknownElement>
         </Fallback>
-        <Type>NeitherExist</Type>
-      </Content>
+      </UnknownElement>
     </Fallback>
-    <Type>NoExist</Type>
   </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction>
+  <AdaptiveUnknownAction Type="NoExist">
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="AdaptiveUnknownElement">
+      <UnknownElement Type="NeitherExist">
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="AdaptiveUnknownElement">
-            <Type>HaHaNope</Type>
-          </Content>
+          <UnknownElement Type="HaHaNope" />
         </Fallback>
-        <Type>NeitherExist</Type>
-      </Content>
+      </UnknownElement>
     </Fallback>
-    <Type>NoExist</Type>
   </AdaptiveUnknownAction>
 </Card>

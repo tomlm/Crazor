@@ -77,9 +77,6 @@
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveBackgroundImageConverter.cs">
       <Link>AdaptiveCards\AdaptiveBackgroundImageConverter.cs</Link>
     </Compile>
-    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveBaseElement.cs">
-      <Link>AdaptiveCards\AdaptiveBaseElement.cs</Link>
-    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveCaptionSource.cs">
       <Link>AdaptiveCards\AdaptiveCaptionSource.cs</Link>
     </Compile>
@@ -146,8 +143,14 @@
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveFallbackConverter.cs">
       <Link>AdaptiveCards\AdaptiveFallbackConverter.cs</Link>
     </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveFallbackElement.cs">
+      <Link>AdaptiveCards\AdaptiveFallbackElement.cs</Link>
+    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveFallbackException.cs">
       <Link>AdaptiveCards\AdaptiveFallbackException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveFallbackType.cs">
+      <Link>AdaptiveCards\AdaptiveFallbackType.cs</Link>
     </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveFeatureRegistration.cs">
       <Link>AdaptiveCards\AdaptiveFeatureRegistration.cs</Link>
@@ -181,6 +184,9 @@
     </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveInput.cs">
       <Link>AdaptiveCards\AdaptiveInput.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveInternalID.cs">
+      <Link>AdaptiveCards\AdaptiveInternalID.cs</Link>
     </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveMedia.cs">
       <Link>AdaptiveCards\AdaptiveMedia.cs</Link>

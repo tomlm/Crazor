@@ -20,6 +20,9 @@ namespace AdaptiveCards
         public const string TypeName = "TextRun";
 
         /// <inheritdoc />
+#if !NETSTANDARD1_3
+        [XmlIgnore]
+#endif
         public override string Type { get; set; } = TypeName;
 
         /// <summary>

@@ -21,16 +21,11 @@ namespace AdaptiveCards
         /// <inheritdoc />
         public new const string TypeName = "Column";
 
-        /// <summary>
-        /// We don't need to serialize type because it's implicit
-        /// </summary>
         /// <inheritdoc />
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        [DefaultValue(TypeName)]
-        public override string Type { get; set; }
+        public override string Type { get; set; } = TypeName;
 
         /// <summary>
         /// Size for the column (either ColumnSize string or number which is relative size of the column).

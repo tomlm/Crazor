@@ -11,8 +11,7 @@
     <Column>
       <TextBlock Color="attention" Text="✗: This textblock requires acTest 2.0" Wrap="true">
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="TextBlock" Color="good" Text="✓:We don't support acTest 2.0" Wrap="true" />
+          <TextBlock Color="good" Text="✓:We don't support acTest 2.0" Wrap="true" />
         </Fallback>
       </TextBlock>
     </Column>
@@ -22,8 +21,7 @@
     <Column>
       <TextBlock Color="attention" Text="✗: This textblock requires adaptiveCards 5.0" Wrap="true">
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="TextBlock" Color="good" Text="✓:We don't support adaptiveCards 5.0" Wrap="true" />
+          <TextBlock Color="good" Text="✓:We don't support adaptiveCards 5.0" Wrap="true" />
         </Fallback>
       </TextBlock>
     </Column>

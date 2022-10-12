@@ -6,7 +6,7 @@
       "type": "CSharpKeywordInput",
       "id": "id1",
       "label": "Please enter a csharp keyword",
-      "isRequired": true,
+      "isRequired": "true",
       "errorMessage": "This has to be a csharp keyword!"
     },
     {

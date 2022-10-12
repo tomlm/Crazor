@@ -7,12 +7,9 @@
     <Action.Submit Title="Disabled" />
   </Input.Text>
   <RichTextBlock>
-    <Inlines>
-      <Type>TextRun</Type>Do not click </Inlines>
-    <Inlines>
-      <Type>TextRun</Type>here<SelectAction xsi:type="Action.Submit" /></Inlines>
-    <Inlines>
-      <Type>TextRun</Type>, as it is disabled.</Inlines>
+    <Inlines>Do not click </Inlines>
+    <Inlines>here<SelectAction xsi:type="Action.Submit" /></Inlines>
+    <Inlines>, as it is disabled.</Inlines>
   </RichTextBlock>
   <Action.Submit Title="Disabled" />
   <Action.Submit Title="Enabled (explicit)" />

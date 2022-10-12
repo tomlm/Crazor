@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock IsSubtle="true" Text="This tests that unknown elements are OK" />
-  <AdaptiveUnknownElement>
+  <UnknownElement Type="AmazingFeature">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>isAwesome</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:boolean">true</anyType>
-        </value>
-      </item>
+      <Property Name="isAwesome">true</Property>
     </AdditionalProperties>
-    <Type>AmazingFeature</Type>
-  </AdaptiveUnknownElement>
+  </UnknownElement>
 </Card>

@@ -9,30 +9,13 @@
   <Action.ShowCard Title="Default Style">
     <AdaptiveCard Version="1.0">
       <AdditionalProperties>
-        <item>
-          <key>
-            <string>style</string>
-          </key>
-          <value>
-            <anyType xsi:type="xsd:string">default</anyType>
-          </value>
-        </item>
+        <Property Name="style">default</Property>
       </AdditionalProperties>
       <TextBlock Text="This card has default style" />
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="Emphasis Style">
-    <AdaptiveCard Version="1.0">
-      <AdditionalProperties>
-        <item>
-          <key>
-            <string>style</string>
-          </key>
-          <value>
-            <anyType xsi:type="xsd:string">emphasis</anyType>
-          </value>
-        </item>
-      </AdditionalProperties>
+    <AdaptiveCard Version="1.0" Style="emphasis">
       <TextBlock Text="This card has emphasis style" />
     </AdaptiveCard>
   </Action.ShowCard>

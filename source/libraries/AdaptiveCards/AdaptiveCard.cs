@@ -268,6 +268,17 @@ namespace AdaptiveCards
         [DefaultValue(null)]
         public AdaptiveRefresh Refresh { get; set; }
 
+
+        /// <summary>
+        /// The style used to display this element. See <see cref="AdaptiveContainerStyle" />.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+#if !NETSTANDARD1_3
+        [XmlAttribute]
+#endif
+        [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
+        public AdaptiveContainerStyle Style { get; set; }
+
         /// <summary>
         /// Defines authentication information to enable on-behalf-of single sign on or just-in-time OAuth.
         /// </summary>
@@ -277,6 +288,16 @@ namespace AdaptiveCards
 #endif
         [DefaultValue(null)]
         public AdaptiveAuthentication Authentication { get; set; }
+
+        /// <summary>
+        /// Sets the text flow direction
+        /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+#if !NETSTANDARD1_3
+        [XmlAttribute]
+#endif
+        [DefaultValue(false)]
+        public bool Rtl { get; set; }
 
         /// <summary>
         /// Callback that will be invoked should a null or empty version string is encountered. The callback may return an alternate version to use for parsing.

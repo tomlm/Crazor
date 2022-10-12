@@ -645,7 +645,7 @@
       "showGridLines": false,
       "spacing": "large",
       "separator": true,
-      "firstRowAsHeaders": false
+      "firstRowAsHeader": false
     },
     {
       "type": "Container",

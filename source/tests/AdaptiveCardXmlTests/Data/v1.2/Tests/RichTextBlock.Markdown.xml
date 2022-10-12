@@ -2,7 +2,6 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <RichTextBlock>
     <Inlines>
-      <Type>TextRun</Type>
 
 Leading newlines should not be trimmed.
 Markdown such as **bold** and *italics* should be left as-is, not processed.

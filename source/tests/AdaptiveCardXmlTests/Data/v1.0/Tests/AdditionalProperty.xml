@@ -3,14 +3,7 @@
   <TextBlock Text="Action.OpenUrl of this card has custom property that will render button green" Wrap="true" />
   <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io/">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>color</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">green</anyType>
-        </value>
-      </item>
+      <Property Name="color">green</Property>
     </AdditionalProperties>
   </Action.OpenUrl>
 </Card>

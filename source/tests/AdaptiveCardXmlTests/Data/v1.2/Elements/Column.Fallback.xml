@@ -3,22 +3,15 @@
   <ColumnSet>
     <Column Width="auto">
       <Fallback>
-        <Type>content</Type>
-        <Content xsi:type="Column">
+        <Column>
           <TextBlock Text="Fallback" />
-        </Content>
+        </Column>
       </Fallback>
-      <AdaptiveUnknownElement>
-        <Type>Graph</Type>
-      </AdaptiveUnknownElement>
+      <UnknownElement Type="Graph" />
     </Column>
     <Column>
-      <Fallback>
-        <Type>drop</Type>
-      </Fallback>
-      <AdaptiveUnknownElement>
-        <Type>Graph</Type>
-      </AdaptiveUnknownElement>
+      <Fallback Type="drop" />
+      <UnknownElement Type="Graph" />
     </Column>
     <Column>
       <TextBlock Text="This is a column" Wrap="true" />

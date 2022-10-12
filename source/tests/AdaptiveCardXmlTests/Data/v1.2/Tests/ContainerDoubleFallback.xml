@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
-  <AdaptiveUnknownElement>
+  <UnknownElement Type="whoknows">
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="Container">
+      <Container>
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="TextBlock" Text="Hello World" />
+          <TextBlock Text="Hello World" />
         </Fallback>
-        <AdaptiveUnknownElement>
-          <Type>notme</Type>
-        </AdaptiveUnknownElement>
-      </Content>
+        <UnknownElement Type="notme" />
+      </Container>
     </Fallback>
-    <Type>whoknows</Type>
-  </AdaptiveUnknownElement>
+  </UnknownElement>
 </Card>

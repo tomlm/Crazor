@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <RichTextBlock>
-    <Inlines>
-      <Type>TextRun</Type>This link is disabled: </Inlines>
-    <Inlines>
-      <Type>TextRun</Type>Link<SelectAction xsi:type="Action.OpenUrl" Url="https://adaptivecards.io/" /></Inlines>
+    <Inlines>This link is disabled: </Inlines>
+    <Inlines>Link<SelectAction xsi:type="Action.OpenUrl" Url="https://adaptivecards.io/" /></Inlines>
   </RichTextBlock>
 </Card>

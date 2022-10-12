@@ -12,17 +12,7 @@
     </AdaptiveCard>
   </Action.ShowCard>
   <Action.ShowCard Title="عربي">
-    <AdaptiveCard Version="1.4">
-      <AdditionalProperties>
-        <item>
-          <key>
-            <string>rtl</string>
-          </key>
-          <value>
-            <anyType xsi:type="xsd:boolean">true</anyType>
-          </value>
-        </item>
-      </AdditionalProperties>
+    <AdaptiveCard Version="1.4" Rtl="true">
       <TextBlock Size="medium" Weight="bolder" Text="إستمارة تسجيل" HorizontalAlignment="center" Wrap="true" Style="heading" />
       <Input.Text Id="SimpleValARA" IsRequired="true" Label="اسم" ErrorMessage="مطلوب اسم" />
       <Input.Text Id="EmailValARA" Label="بريد الالكتروني" Style="email" />

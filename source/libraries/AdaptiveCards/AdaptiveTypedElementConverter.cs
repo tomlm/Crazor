@@ -48,7 +48,9 @@ namespace AdaptiveCards
                 [AdaptiveMedia.TypeName] = typeof(AdaptiveMedia),
                 [AdaptiveToggleVisibilityAction.TypeName] = typeof(AdaptiveToggleVisibilityAction),
                 [AdaptiveActionSet.TypeName] = typeof(AdaptiveActionSet),
-                [AdaptiveTable.TypeName] = typeof(AdaptiveTable)
+                [AdaptiveTable.TypeName] = typeof(AdaptiveTable),
+                [AdaptiveUnknownElement.TypeName] = typeof(AdaptiveUnknownElement),
+
             };
             return types;
         });

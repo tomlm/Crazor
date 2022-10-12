@@ -12,14 +12,7 @@
   <TextBlock Separator="true" Text="↓ Empty TextBlock below ↓" />
   <TextBlock Separator="true" Text="">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>space</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">preserve</anyType>
-        </value>
-      </item>
+      <Property Name="space">preserve</Property>
     </AdditionalProperties>
   </TextBlock>
   <TextBlock Separator="true" Text="↑ Empty TextBlock above ↑" />

@@ -56,42 +56,24 @@
     <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." />
   </Container>
   <RichTextBlock>
-    <Inlines Color="good">
-      <Type>TextRun</Type>RichTextBlock with SelectAction, Action has title and tooltip (tooltip should be used as tooltip).<SelectAction xsi:type="Action.Submit" Title="Title" Tooltip="Tooltip" /></Inlines>
-    <Inlines Weight="bolder">
-      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
-    <Inlines Color="warning">
-      <Type>TextRun</Type>RichTextBlock with SelectAction, Action has title and no tooltip (title should be used as tooltip).<SelectAction xsi:type="Action.Submit" Title="title">{
+    <Inlines Color="good">RichTextBlock with SelectAction, Action has title and tooltip (tooltip should be used as tooltip).<SelectAction xsi:type="Action.Submit" Title="Title" Tooltip="Tooltip" /></Inlines>
+    <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
+    <Inlines Color="warning">RichTextBlock with SelectAction, Action has title and no tooltip (title should be used as tooltip).<SelectAction xsi:type="Action.Submit" Title="title">{
   "x": "hello world!"
 }</SelectAction></Inlines>
-    <Inlines Weight="bolder">
-      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
+    <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
   </RichTextBlock>
   <TextBlock Weight="bolder" Text="Image has SelectAction. No title or tooltip (no tooltip)" Wrap="true" />
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>tooltip</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">tooltip</anyType>
-        </value>
-      </item>
+      <Property Name="tooltip">tooltip</Property>
     </AdditionalProperties>
     <SelectAction xsi:type="Action.Submit" />
   </Image>
   <TextBlock Weight="bolder" Text="Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)" Wrap="true" />
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>tooltip</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">tooltip</anyType>
-        </value>
-      </item>
+      <Property Name="tooltip">tooltip</Property>
     </AdditionalProperties>
     <SelectAction xsi:type="Action.Submit" Title="title" Tooltip="tooltip" />
   </Image>

@@ -3,90 +3,53 @@
   <Container Id="A">
     <Container Id="B">
       <Fallback>
-        <Type>content</Type>
-        <Content xsi:type="Container" Id="B">
+        <Container Id="B">
           <TextBlock Id="C" Text="B Container fallback textblock" />
           <Image Id="Z" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-        </Content>
+        </Container>
       </Fallback>
       <ColumnSet Id="C">
         <Column Id="D" Width="auto">
-          <AdaptiveUnknownElement Id="E">
+          <UnknownElement Id="E" Type="Graph">
             <AdditionalProperties>
-              <item>
-                <key>
-                  <string>someProperty</string>
-                </key>
-                <value>
-                  <anyType xsi:type="xsd:string">blah</anyType>
-                </value>
-              </item>
+              <Property Name="someProperty">blah</Property>
             </AdditionalProperties>
             <Fallback>
-              <Type>content</Type>
-              <Content xsi:type="Container" Id="E">
+              <Container Id="E">
                 <Image Id="I" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
                 <TextBlock Id="J" Text="C ColumnSet fallback textblock" />
-              </Content>
+              </Container>
             </Fallback>
-            <Type>Graph</Type>
-          </AdaptiveUnknownElement>
+          </UnknownElement>
         </Column>
       </ColumnSet>
     </Container>
   </Container>
   <TextBlock Id="F" Text="F TextBlock" />
   <Input.Text Id="G" Placeholder="G Input.Text" />
-  <AdaptiveUnknownElement Id="H">
+  <UnknownElement Id="H" Type="Graph">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>someProperty</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">foo</anyType>
-        </value>
-      </item>
+      <Property Name="someProperty">foo</Property>
     </AdditionalProperties>
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="Container" Id="L">
+      <Container Id="L">
         <TextBlock Id="K" Text="H Graph fallback TextBlock" />
-      </Content>
+      </Container>
     </Fallback>
-    <Type>Graph</Type>
-  </AdaptiveUnknownElement>
-  <AdaptiveUnknownAction>
+  </UnknownElement>
+  <AdaptiveUnknownAction Type="MyCoolAction2">
     <AdditionalProperties>
-      <item>
-        <key>
-          <string>coolnessLevel</string>
-        </key>
-        <value>
-          <anyType xsi:type="xsd:string">toTheMax</anyType>
-        </value>
-      </item>
+      <Property Name="coolnessLevel">toTheMax</Property>
     </AdditionalProperties>
     <Fallback>
-      <Type>content</Type>
-      <Content xsi:type="AdaptiveUnknownElement">
+      <UnknownElement Type="MyCoolAction">
         <AdditionalProperties>
-          <item>
-            <key>
-              <string>coolnessLevel</string>
-            </key>
-            <value>
-              <anyType xsi:type="xsd:string">prettyCool</anyType>
-            </value>
-          </item>
+          <Property Name="coolnessLevel">prettyCool</Property>
         </AdditionalProperties>
         <Fallback>
-          <Type>content</Type>
-          <Content xsi:type="Action.Submit" Title="Boring fallback action" />
+          <Action.Submit Title="Boring fallback action" />
         </Fallback>
-        <Type>MyCoolAction</Type>
-      </Content>
+      </UnknownElement>
     </Fallback>
-    <Type>MyCoolAction2</Type>
   </AdaptiveUnknownAction>
 </Card>
