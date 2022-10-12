@@ -40,10 +40,8 @@
     <TextBlock Id="resd" Text="My new textblock" />
     <Input.Date Id="dateid" Value="" />
     <Input.ChoiceSet Id="idchoice" Value="mychoice">
-      <Choices>
-        <Choice Title="Choice 1" Value="Choice 1" />
-        <Choice Title="Choice 2" Value="Choice 2" />
-      </Choices>
+      <Choice Title="Choice 1" Value="Choice 1" />
+      <Choice Title="Choice 2" Value="Choice 2" />
     </Input.ChoiceSet>
     <TextBlock Text="text3" />
     <TextBlock Text="Text4" />

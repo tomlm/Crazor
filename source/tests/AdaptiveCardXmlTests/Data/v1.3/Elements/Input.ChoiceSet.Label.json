@@ -15,8 +15,7 @@
           "value": "2"
         }
       ],
-      "label": "Default Input.ChoiceSet label (compact)",
-      "style": "compact"
+      "label": "Default Input.ChoiceSet label (compact)"
     },
     {
       "type": "Input.ChoiceSet",
@@ -33,8 +32,7 @@
       ],
       "isRequired": true,
       "label": "Required Input.ChoiceSet label (compact)",
-      "errorMessage": "Required input",
-      "style": "compact"
+      "errorMessage": "Required input"
     },
     {
       "type": "Input.ChoiceSet",

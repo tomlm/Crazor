@@ -11,11 +11,9 @@
     <AdaptiveCard Version="1.0">
       <TextBlock Size="medium" Text="How would you like your steak prepared?" Wrap="true" />
       <Input.ChoiceSet Id="SteakTemp" Style="expanded">
-        <Choices>
-          <Choice Title="Rare" Value="rare" />
-          <Choice Title="Medium-Rare" Value="medium-rare" />
-          <Choice Title="Well-done" Value="well-done" />
-        </Choices>
+        <Choice Title="Rare" Value="rare" />
+        <Choice Title="Medium-Rare" Value="medium-rare" />
+        <Choice Title="Well-done" Value="well-done" />
       </Input.ChoiceSet>
       <Input.Text Id="SteakOther" Placeholder="Any other preparation requests?" IsMultiline="true" />
       <Action.Submit Title="OK">{
@@ -27,9 +25,7 @@
     <AdaptiveCard Version="1.0">
       <TextBlock Size="medium" Text="Do you have any allergies?" Wrap="true" />
       <Input.ChoiceSet Id="ChickenAllergy" Style="expanded" IsMultiSelect="true">
-        <Choices>
-          <Choice Title="I'm allergic to peanuts" Value="peanut" />
-        </Choices>
+        <Choice Title="I'm allergic to peanuts" Value="peanut" />
       </Input.ChoiceSet>
       <Input.Text Id="ChickenOther" Placeholder="Any other preparation requests?" IsMultiline="true" />
       <Action.Submit Title="OK">{

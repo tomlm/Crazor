@@ -20,8 +20,7 @@
           "value": "3"
         }
       ],
-      "label": "What color do you want? (isMultiSelect:false, style:compact)",
-      "style": "compact"
+      "label": "What color do you want? (isMultiSelect:false, style:compact)"
     },
     {
       "type": "Input.ChoiceSet",
@@ -63,8 +62,7 @@
           "value": "3"
         }
       ],
-      "label": "What colors do you want? (isMultiSelect:true, style:compact)",
-      "style": "compact"
+      "label": "What colors do you want? (isMultiSelect:true, style:compact)"
     },
     {
       "type": "Input.ChoiceSet",

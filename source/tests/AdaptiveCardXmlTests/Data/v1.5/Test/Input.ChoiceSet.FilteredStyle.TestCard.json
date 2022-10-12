@@ -25,8 +25,7 @@
         }
       ],
       "placeholder": "Click On Expand",
-      "label": "1.0 Compact Style",
-      "style": "compact"
+      "label": "1.0 Compact Style"
     },
     {
       "type": "Container",

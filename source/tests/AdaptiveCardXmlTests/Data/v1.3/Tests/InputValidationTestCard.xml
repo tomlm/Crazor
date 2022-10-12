@@ -9,22 +9,16 @@
   <Input.Toggle Id="mailingList" Label="Would you like to join our mailing list?" Title="Sign me up!" ValueOn="True" ValueOff="False" />
   <Input.Toggle Id="termsOfService" IsRequired="true" Label="Please agree to the terms of service:" ErrorMessage="You must agree to the terms of service" Title="I agree" ValueOn="True" ValueOff="False" />
   <Input.ChoiceSet Id="choiceSet1" IsRequired="true" Label="Please select from the following choices:" ErrorMessage="You must select a choice" Placeholder="Select a Choice">
-    <Choices>
-      <Choice Title="Choice 1" Value="Choice 1" />
-      <Choice Title="Choice 2" Value="Choice 2" />
-    </Choices>
+    <Choice Title="Choice 1" Value="Choice 1" />
+    <Choice Title="Choice 2" Value="Choice 2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="choiceSet2" IsRequired="true" Label="Please select from the following choices:" ErrorMessage="You must select a choice" Style="expanded">
-    <Choices>
-      <Choice Title="Choice 1" Value="Choice 1" />
-      <Choice Title="Choice 2" Value="Choice 2" />
-    </Choices>
+    <Choice Title="Choice 1" Value="Choice 1" />
+    <Choice Title="Choice 2" Value="Choice 2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="choiceSet3" IsRequired="true" Label="Please select from the following choices:" ErrorMessage="You must select a choice" Style="expanded" IsMultiSelect="true">
-    <Choices>
-      <Choice Title="Choice 1" Value="Choice 1" />
-      <Choice Title="Choice 2" Value="Choice 2" />
-    </Choices>
+    <Choice Title="Choice 1" Value="Choice 1" />
+    <Choice Title="Choice 2" Value="Choice 2" />
   </Input.ChoiceSet>
   <Action.Submit Title="Send!" />
 </Card>

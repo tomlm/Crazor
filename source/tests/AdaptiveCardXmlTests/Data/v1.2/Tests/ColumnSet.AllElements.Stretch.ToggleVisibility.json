@@ -370,8 +370,7 @@
                   "value": "3"
                 }
               ],
-              "height": "stretch",
-              "style": "compact"
+              "height": "stretch"
             },
             {
               "type": "Input.ChoiceSet",

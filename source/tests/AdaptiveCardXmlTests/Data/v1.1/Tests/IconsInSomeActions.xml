@@ -15,14 +15,9 @@
   <Container>
     <TextBlock Text="Snooze for" Wrap="true" />
     <Input.ChoiceSet Id="snoozeFor" Value="1">
-      <AdditionalProperties>
-        <Property Name="style">compact</Property>
-      </AdditionalProperties>
-      <Choices>
-        <Choice Title="5 minutes" Value="1" />
-        <Choice Title="30 minutes" Value="2" />
-        <Choice Title="1 hour" Value="3" />
-      </Choices>
+      <Choice Title="5 minutes" Value="1" />
+      <Choice Title="30 minutes" Value="2" />
+      <Choice Title="1 hour" Value="3" />
     </Input.ChoiceSet>
   </Container>
   <Action.Submit Title="Snooze" IconUrl="https://cdn1.iconfinder.com/data/icons/office-22/48/alarm-clock-512.png">{

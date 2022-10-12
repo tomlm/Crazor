@@ -221,8 +221,7 @@
           "value": "2"
         }
       ],
-      "isVisible": false,
-      "style": "compact"
+      "isVisible": false
     },
     {
       "type": "Input.ChoiceSet",
@@ -274,8 +273,7 @@
         }
       ],
       "wrap": true,
-      "isVisible": false,
-      "style": "compact"
+      "isVisible": false
     }
   ],
   "actions": [

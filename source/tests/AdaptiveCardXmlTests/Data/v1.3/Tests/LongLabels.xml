@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Input.ChoiceSet Id="choiceSet" Label="Longer label to verify label wrapping for an Input.ChoiceSet. If that was not long enough, then this should make it long enough. Did you know that honeybees can flap their wings 200 times every second?">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="Option 1" Value="1" />
-      <Choice Title="Option 2" Value="2" />
-    </Choices>
+    <Choice Title="Option 1" Value="1" />
+    <Choice Title="Option 2" Value="2" />
   </Input.ChoiceSet>
   <Input.Toggle Id="toggle" Label="Longer label to verify label wrapping for an Input.Toggle. If that was not long enough, then this should make it long enough. Did you know octopuses have three hearts?" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="false" />
   <Input.Time Id="time" Label="Longer label to verify label wrapping for an Input.Time. If that was not long enough, then this should make it long enough. Did you know bats always turn left when leaving a cave?" />

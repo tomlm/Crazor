@@ -379,8 +379,7 @@
                 }
               ],
               "height": "stretch",
-              "isVisible": false,
-              "style": "compact"
+              "isVisible": false
             },
             {
               "type": "Input.ChoiceSet",

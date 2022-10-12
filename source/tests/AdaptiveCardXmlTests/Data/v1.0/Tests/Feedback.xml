@@ -2,16 +2,11 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Size="large" Weight="bolder" Text="Please rate your experience" />
   <Input.ChoiceSet Id="Rating" Spacing="medium" Value="5">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="Excellent" Value="5" />
-      <Choice Title="Good" Value="4" />
-      <Choice Title="Average" Value="3" />
-      <Choice Title="Poor" Value="2" />
-      <Choice Title="Very poor" Value="1" />
-    </Choices>
+    <Choice Title="Excellent" Value="5" />
+    <Choice Title="Good" Value="4" />
+    <Choice Title="Average" Value="3" />
+    <Choice Title="Poor" Value="2" />
+    <Choice Title="Very poor" Value="1" />
   </Input.ChoiceSet>
   <TextBlock Spacing="large" Text="Leave a comment" />
   <Input.Text Id="FeedbackText" Spacing="medium" IsMultiline="true" MaxLength="500" />

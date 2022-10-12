@@ -7,39 +7,28 @@
     <Column Spacing="large" Separator="true" Width="1">
       <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
       <Input.ChoiceSet Id="input1" Height="stretch">
-        <Choices>
-          <Choice Title="Red" Value="1" />
-          <Choice Title="Green" Value="2" />
-          <Choice Title="Blue" Value="3" />
-        </Choices>
+        <Choice Title="Red" Value="1" />
+        <Choice Title="Green" Value="2" />
+        <Choice Title="Blue" Value="3" />
       </Input.ChoiceSet>
       <Input.ChoiceSet Id="myColor2" Height="stretch" Value="1" Style="expanded">
-        <Choices>
-          <Choice Title="Red" Value="1" />
-          <Choice Title="Green" Value="2" />
-          <Choice Title="Blue" Value="3" />
-        </Choices>
+        <Choice Title="Red" Value="1" />
+        <Choice Title="Green" Value="2" />
+        <Choice Title="Blue" Value="3" />
       </Input.ChoiceSet>
       <TextBlock Text="One last text block at the bottom" Wrap="true" />
     </Column>
     <Column Spacing="large" Separator="true" Width="1">
       <TextBlock Text="This is a textblock that doesn't stretch, but the input text does" Wrap="true" />
       <Input.ChoiceSet Id="myColor3" Height="stretch" Value="1,3" IsMultiSelect="true">
-        <AdditionalProperties>
-          <Property Name="style">compact</Property>
-        </AdditionalProperties>
-        <Choices>
-          <Choice Title="Red" Value="1" />
-          <Choice Title="Green" Value="2" />
-          <Choice Title="Blue" Value="3" />
-        </Choices>
+        <Choice Title="Red" Value="1" />
+        <Choice Title="Green" Value="2" />
+        <Choice Title="Blue" Value="3" />
       </Input.ChoiceSet>
       <Input.ChoiceSet Id="myColor4" Height="stretch" Value="1" Style="expanded" IsMultiSelect="true">
-        <Choices>
-          <Choice Title="Red" Value="1" />
-          <Choice Title="Green" Value="2" />
-          <Choice Title="Blue" Value="3" />
-        </Choices>
+        <Choice Title="Red" Value="1" />
+        <Choice Title="Green" Value="2" />
+        <Choice Title="Blue" Value="3" />
       </Input.ChoiceSet>
       <TextBlock Text="One last text block at the bottom" Wrap="true" />
     </Column>

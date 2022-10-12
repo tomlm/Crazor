@@ -59,34 +59,20 @@
   <Input.Time Id="input4" IsVisible="false" Value="15:30" Min="09:00" Max="17:00" />
   <Input.Toggle Id="input5" IsVisible="false" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="true" />
   <Input.ChoiceSet Id="input6" IsVisible="false" Value="1">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="input7" IsVisible="false" Value="1" Style="expanded">
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="input8" IsVisible="false" Value="1" Style="expanded" IsMultiSelect="true">
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="input9" IsVisible="false" Value="1" Wrap="true">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
   </Input.ChoiceSet>
   <Action.ToggleVisibility Title="Toggle!">
     <TargetElement ElementId="id6" />

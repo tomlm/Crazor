@@ -4,14 +4,9 @@
   <TextBlock IsSubtle="true" Text="Conf Room 112/3377 (10)" Wrap="true" />
   <TextBlock Spacing="none" IsSubtle="true" Text="12:30 PM - 1:30 PM" Wrap="true" />
   <Input.ChoiceSet Id="snooze" Label="Snooze for" Value="5">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="5 minutes" Value="5" />
-      <Choice Title="15 minutes" Value="15" />
-      <Choice Title="30 minutes" Value="30" />
-    </Choices>
+    <Choice Title="5 minutes" Value="5" />
+    <Choice Title="15 minutes" Value="15" />
+    <Choice Title="30 minutes" Value="30" />
   </Input.ChoiceSet>
   <Action.Submit Title="Snooze">{
   "x": "snooze"

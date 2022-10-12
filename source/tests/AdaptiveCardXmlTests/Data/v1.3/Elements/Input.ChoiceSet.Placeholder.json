@@ -22,8 +22,7 @@
       "placeholder": "Please choose",
       "isRequired": true,
       "label": "What color do you want? (compact)",
-      "errorMessage": "This is a required input",
-      "style": "compact"
+      "errorMessage": "This is a required input"
     }
   ],
   "actions": [

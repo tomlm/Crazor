@@ -2,29 +2,23 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <TextBlock Size="large" Weight="bolder" Text="Malt &amp; Vine Order Form" Wrap="true" />
   <Input.ChoiceSet Id="EntreeSelectVal" IsRequired="true" Label="Which entree would you like?" ErrorMessage="This is a required input" Style="none" Placeholder="Please choose">
-    <Choices>
-      <Choice Title="Steak" Value="1" />
-      <Choice Title="Chicken" Value="2" />
-      <Choice Title="Tofu" Value="3" />
-    </Choices>
+    <Choice Title="Steak" Value="1" />
+    <Choice Title="Chicken" Value="2" />
+    <Choice Title="Tofu" Value="3" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="SideVal" IsRequired="true" Label="Which side would you like?" ErrorMessage="This is a required input" Style="none" Placeholder="Please choose">
-    <Choices>
-      <Choice Title="Baked Potato" Value="1" />
-      <Choice Title="Rice" Value="2" />
-      <Choice Title="Vegetables" Value="3" />
-      <Choice Title="Noodles" Value="4" />
-      <Choice Title="No Side" Value="5" />
-    </Choices>
+    <Choice Title="Baked Potato" Value="1" />
+    <Choice Title="Rice" Value="2" />
+    <Choice Title="Vegetables" Value="3" />
+    <Choice Title="Noodles" Value="4" />
+    <Choice Title="No Side" Value="5" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="DrinkVal" IsRequired="true" Label="Which drink would you like?" ErrorMessage="This is a required input" Style="none" Placeholder="Please choose">
-    <Choices>
-      <Choice Title="Water" Value="1" />
-      <Choice Title="Soft Drink" Value="2" />
-      <Choice Title="Coffee" Value="3" />
-      <Choice Title="Natural Juice" Value="4" />
-      <Choice Title="No Drink" Value="5" />
-    </Choices>
+    <Choice Title="Water" Value="1" />
+    <Choice Title="Soft Drink" Value="2" />
+    <Choice Title="Coffee" Value="3" />
+    <Choice Title="Natural Juice" Value="4" />
+    <Choice Title="No Drink" Value="5" />
   </Input.ChoiceSet>
   <Action.Submit Title="Place Order" />
 </Card>

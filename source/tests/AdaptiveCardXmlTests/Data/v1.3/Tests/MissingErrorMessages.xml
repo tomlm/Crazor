@@ -14,22 +14,16 @@
   <Input.Number Id="minNumber" Label="Min Input.Number" Value="NaN" Min="4" Max="NaN" />
   <Input.Number Id="maxNumber" Label="Max Input.Number" Value="NaN" Min="NaN" Max="8" />
   <Input.ChoiceSet Id="compact" IsRequired="true" Label="Required Compact Input.ChoiceSet">
-    <Choices>
-      <Choice Title="Thing 1" Value="Thing 1" />
-      <Choice Title="Thing 2" Value="Thing 2" />
-    </Choices>
+    <Choice Title="Thing 1" Value="Thing 1" />
+    <Choice Title="Thing 2" Value="Thing 2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="expanded" IsRequired="true" Label="Required Expanded Input.ChoiceSet" Style="expanded">
-    <Choices>
-      <Choice Title="Thing 1" Value="Thing 1" />
-      <Choice Title="Thing 2" Value="Thing 2" />
-    </Choices>
+    <Choice Title="Thing 1" Value="Thing 1" />
+    <Choice Title="Thing 2" Value="Thing 2" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="multiselect" IsRequired="true" Label="Required Multiselect Input.ChoiceSet" Style="expanded" IsMultiSelect="true">
-    <Choices>
-      <Choice Title="Thing 1" Value="Thing 1" />
-      <Choice Title="Thing 2" Value="Thing 2" />
-    </Choices>
+    <Choice Title="Thing 1" Value="Thing 1" />
+    <Choice Title="Thing 2" Value="Thing 2" />
   </Input.ChoiceSet>
   <Input.Toggle Id="toggle" IsRequired="true" Label="Required Input.Toggle" Title="Required Input.Toggle" ValueOn="True" ValueOff="False" />
   <Action.Submit Title="Action.Submit" />

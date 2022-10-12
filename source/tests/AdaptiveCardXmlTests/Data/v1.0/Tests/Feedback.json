@@ -34,8 +34,7 @@
           "value": "1"
         }
       ],
-      "spacing": "medium",
-      "style": "compact"
+      "spacing": "medium"
     },
     {
       "type": "TextBlock",

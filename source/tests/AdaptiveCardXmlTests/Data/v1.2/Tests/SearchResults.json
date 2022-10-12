@@ -48,8 +48,7 @@
           "value": "3"
         }
       ],
-      "wrap": true,
-      "style": "compact"
+      "wrap": true
     },
     {
       "type": "TextBlock",

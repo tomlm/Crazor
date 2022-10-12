@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Input.ChoiceSet Id="myColor" Label="What color do you want? (isMultiSelect:false, style:compact)" Value="1">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-      <Choice Title="Blue" Value="3" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
+    <Choice Title="Blue" Value="3" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="myColor2" Label="What color do you want? (isMultiSelect:false, style:expanded)" Value="1" Style="expanded">
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-      <Choice Title="Blue" Value="3" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
+    <Choice Title="Blue" Value="3" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="myColor3" Label="What colors do you want? (isMultiSelect:true, style:compact)" Value="1,3" IsMultiSelect="true">
-    <AdditionalProperties>
-      <Property Name="style">compact</Property>
-    </AdditionalProperties>
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-      <Choice Title="Blue" Value="3" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
+    <Choice Title="Blue" Value="3" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="myColor4" Label="What colors do you want? (isMultiSelect:true, style:expanded)" Value="1" Style="expanded" IsMultiSelect="true">
-    <Choices>
-      <Choice Title="Red" Value="1" />
-      <Choice Title="Green" Value="2" />
-      <Choice Title="Blue" Value="3" />
-    </Choices>
+    <Choice Title="Red" Value="1" />
+    <Choice Title="Green" Value="2" />
+    <Choice Title="Blue" Value="3" />
   </Input.ChoiceSet>
   <Action.Submit Title="OK" />
 </Card>

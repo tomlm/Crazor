@@ -10,11 +10,9 @@
   <Action.ShowCard Title="Steak">
     <AdaptiveCard Version="1.0">
       <Input.ChoiceSet Id="SteakTemp" IsRequired="true" Label="How would you like your steak prepared?" ErrorMessage="Please select one of the above options" Style="expanded">
-        <Choices>
-          <Choice Title="Rare" Value="rare" />
-          <Choice Title="Medium-Rare" Value="medium-rare" />
-          <Choice Title="Well-done" Value="well-done" />
-        </Choices>
+        <Choice Title="Rare" Value="rare" />
+        <Choice Title="Medium-Rare" Value="medium-rare" />
+        <Choice Title="Well-done" Value="well-done" />
       </Input.ChoiceSet>
       <Input.Text Id="SteakOther" Label="Any other preparation requests?" IsMultiline="true" />
       <Action.Submit Title="OK">{

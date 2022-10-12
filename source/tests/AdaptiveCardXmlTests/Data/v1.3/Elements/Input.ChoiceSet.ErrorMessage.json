@@ -18,8 +18,7 @@
       "placeholder": "Please make selection",
       "isRequired": true,
       "label": "Required Input.ChoiceSet label (compact)",
-      "errorMessage": "This is a required input",
-      "style": "compact"
+      "errorMessage": "This is a required input"
     },
     {
       "type": "Input.ChoiceSet",

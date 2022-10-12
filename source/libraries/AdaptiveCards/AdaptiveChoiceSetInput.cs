@@ -42,7 +42,7 @@ namespace AdaptiveCards
         /// <summary>
         /// The style to use when displaying this Input.ChoiceSet.
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
@@ -63,6 +63,9 @@ namespace AdaptiveCards
         /// A collection of available choices.
         /// </summary>
         [JsonRequired]
+#if !NETSTANDARD1_3
+        [XmlElement(typeof(AdaptiveChoice), ElementName = "Choice")]
+#endif
         public List<AdaptiveChoice> Choices { get; set; } = new List<AdaptiveChoice>();
 
         /// <summary>
