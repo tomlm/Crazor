@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <ColumnSet />
+  <ColumnSet>
+    <Column>
+      <TextBlock Text="Column 1" />
+    </Column>
+    <Column>
+      <TextBlock Text="Column 2" />
+    </Column>
+    <Column>
+      <TextBlock Text="Column 3" />
+    </Column>
+  </ColumnSet>
 </Card>

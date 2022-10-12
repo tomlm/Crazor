@@ -22,6 +22,7 @@ namespace AdaptiveCards
         public new const string TypeName = "Column";
 
         /// <inheritdoc />
+        [JsonProperty(Order = -10, DefaultValueHandling = DefaultValueHandling.Include)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif

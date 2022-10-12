@@ -11,7 +11,16 @@
     </ColumnSet>
   </Container>
   <Container>
-    <ColumnSet />
+    <ColumnSet>
+      <Column Width="stretch">
+        <TextBlock Size="extraLarge" Text="Trip to UAE" Wrap="true" Style="heading" />
+      </Column>
+      <Column Width="auto">
+        <ActionSet>
+          <Action.OpenUrl Title="EXPORT AS PDF" Url="https://adaptivecards.io" />
+        </ActionSet>
+      </Column>
+    </ColumnSet>
     <TextBlock Spacing="small" Size="small" Weight="bolder" Text="[ER-13052](https://adaptivecards.io)" Wrap="true" />
     <FactSet Spacing="large">
       <Fact Title="Submitted By" Value="**Matt Hidinger**  matt@contoso.com" />
