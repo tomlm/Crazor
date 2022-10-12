@@ -119,6 +119,9 @@
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveContainerStyle.cs">
       <Link>AdaptiveCards\AdaptiveContainerStyle.cs</Link>
     </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveDataQuery.cs">
+      <Link>AdaptiveCards\AdaptiveDataQuery.cs</Link>
+    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveDateInput.cs">
       <Link>AdaptiveCards\AdaptiveDateInput.cs</Link>
     </Compile>

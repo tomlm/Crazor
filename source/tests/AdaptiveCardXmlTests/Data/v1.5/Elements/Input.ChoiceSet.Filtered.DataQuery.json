@@ -1,0 +1,35 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "peoplePicker",
+      "value": "John Smith",
+      "style": "filtered",
+      "choices.data": {
+        "Type": "Data.Query",
+        "Dataset": "graph.microsoft.com/users"
+      }
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "data",
+      "value": "John Smith",
+      "style": "filtered",
+      "choices.data": {
+        "Type": "Data.Query",
+        "Dataset": "test",
+        "Value": "Jon",
+        "Count": 5,
+        "Skip": 5
+      }
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "OK"
+    }
+  ]
+}

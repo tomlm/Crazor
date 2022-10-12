@@ -62,11 +62,24 @@ namespace AdaptiveCards
         /// <summary>
         /// A collection of available choices.
         /// </summary>
-        [JsonRequired]
+        [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlElement(typeof(AdaptiveChoice), ElementName = "Choice")]
 #endif
         public List<AdaptiveChoice> Choices { get; set; } = new List<AdaptiveChoice>();
+
+        public bool ShouldSerializeChoices() => Choices.Count > 0;
+
+        /// <summary>
+        /// A dataQuery 
+        /// </summary>
+        [JsonProperty("choices.data", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+
+#if !NETSTANDARD1_3
+        [XmlElement(typeof(AdaptiveDataQuery))]
+#endif
+        [DefaultValue(null)]
+        public AdaptiveDataQuery DataQuery { get; set; }
 
         /// <summary>
         /// Controls text wrapping behavior.

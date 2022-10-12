@@ -32,7 +32,7 @@ namespace AdaptiveCards
         /// Allows users to filter choices in a choice set.
         /// </summary>
 #if !NETSTANDARD1_3
-        [XmlEnum("none")]
+        [XmlEnum("filtered")]
 #endif
         Filtered
     }

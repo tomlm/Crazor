@@ -7,7 +7,7 @@
     <Choice Title="Orange Juice" Value="4" />
   </Input.ChoiceSet>
   <Container>
-    <Input.ChoiceSet Id="2" Label="1.5 Filtered Style" Style="none" Placeholder="Type Some To Expand">
+    <Input.ChoiceSet Id="2" Label="1.5 Filtered Style" Style="filtered" Placeholder="Type Some To Expand">
       <Choice Title="Apple Cider" Value="1" />
       <Choice Title="Grape Juice" Value="2" />
       <Choice Title="Banana Smoothie" Value="3" />
@@ -20,7 +20,7 @@
     </Input.ChoiceSet>
   </Container>
   <TextBlock Id="4" Text="Setting both filtered style and multiline will ignore the style as this example" Wrap="true" />
-  <Input.ChoiceSet Id="3" Style="none" IsMultiSelect="true" Placeholder="Placeholder text">
+  <Input.ChoiceSet Id="3" Style="filtered" IsMultiSelect="true" Placeholder="Placeholder text">
     <Choice Title="Apple Cider" Value="1" />
     <Choice Title="Grape Juice" Value="2" />
     <Choice Title="Banana Smoothie" Value="3" />

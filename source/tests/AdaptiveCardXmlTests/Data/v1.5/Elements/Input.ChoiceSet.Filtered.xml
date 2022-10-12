@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
-  <Input.ChoiceSet Id="chosenAnimal" IsRequired="true" Label="Please choose an animal:" ErrorMessage="Please choose an animal" Value="Alligator gar" Style="none">
+  <Input.ChoiceSet Id="chosenAnimal" IsRequired="true" Label="Please choose an animal:" ErrorMessage="Please choose an animal" Value="Alligator gar" Style="filtered">
     <Choice Title="Abyssal whiptail" Value="Abyssal whiptail" />
     <Choice Title="Acadian Flycatcher" Value="Acadian Flycatcher" />
     <Choice Title="Adamantine sea pen" Value="Adamantine sea pen" />
