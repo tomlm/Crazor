@@ -50,12 +50,12 @@ namespace AdaptiveCardXmlTests
         {
             string xmlFile = jsonFile.Replace(".json", ".xml");
             var json = File.ReadAllText(jsonFile);
+            var card = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
+            json = JsonConvert.SerializeObject(card, jsonSettings);
             try
             {
                 if (!File.Exists(xmlFile))
                 {
-                    var card = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
-                    json = JsonConvert.SerializeObject(card, jsonSettings);
                     File.WriteAllText(jsonFile, json);
                     File.WriteAllText(xmlFile, ToXml(card));
                 }
