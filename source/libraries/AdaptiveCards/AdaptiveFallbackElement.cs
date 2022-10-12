@@ -97,6 +97,7 @@ namespace AdaptiveCards
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.EndElement:
+                        reader.ReadEndElement();
                         return;
 
                     case XmlNodeType.Element:
@@ -108,7 +109,7 @@ namespace AdaptiveCards
                         XmlSerializer serializer = new XmlSerializer(typeToCreate, elementTypes.ToArray());
                         Type = AdaptiveFallbackType.Content;
                         Content = (AdaptiveTypedElement)serializer.Deserialize(reader.ReadSubtree());
-                        break;
+                        break; // we've read our content node, we should be done?
                 }
             }
 

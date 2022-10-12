@@ -74,6 +74,8 @@ namespace AdaptiveCardXmlTests
             var json2 = JsonConvert.SerializeObject(xmlCard, jsonSettings);
             if (json != json2)
             {
+                File.WriteAllText(@"c:\scratch\foo1.json", json);
+                File.WriteAllText(@"c:\scratch\foo2.json", json2);
                 Debug.WriteLine(json);
                 Debug.WriteLine(json2);
             }

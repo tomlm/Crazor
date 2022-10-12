@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <Container Id="A">
+    <Requires>
+      <Property Name="adaptiveCards">1.2</Property>
+    </Requires>
     <Container Id="B">
       <Fallback>
         <Container Id="B">
@@ -20,6 +23,9 @@
                 <TextBlock Id="J" Text="C ColumnSet fallback textblock" />
               </Container>
             </Fallback>
+            <Requires>
+              <Property Name="adaptiveCards">1.2</Property>
+            </Requires>
           </UnknownElement>
         </Column>
       </ColumnSet>
@@ -33,6 +39,9 @@
     </AdditionalProperties>
     <Fallback>
       <Container Id="L">
+        <Requires>
+          <Property Name="adaptiveCards">1.2</Property>
+        </Requires>
         <TextBlock Id="K" Text="H Graph fallback TextBlock" />
       </Container>
     </Fallback>
@@ -51,5 +60,8 @@
         </Fallback>
       </UnknownElement>
     </Fallback>
+    <Requires>
+      <Property Name="adaptiveCards">1.2</Property>
+    </Requires>
   </AdaptiveUnknownAction>
 </Card>

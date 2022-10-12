@@ -299,6 +299,19 @@ namespace AdaptiveCards
         [DefaultValue(false)]
         public bool Rtl { get; set; }
 
+
+        /// <summary>
+        /// Defines various metadata properties typically not used for rendering the card
+        /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+#if !NETSTANDARD1_3
+        [XmlElement]
+#endif
+        [DefaultValue(null)]
+        public AdaptiveMetadata Metadata { get; set; }
+
+
+
         /// <summary>
         /// Callback that will be invoked should a null or empty version string is encountered. The callback may return an alternate version to use for parsing.
         /// </summary>

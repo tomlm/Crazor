@@ -194,6 +194,9 @@
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveMediaSource.cs">
       <Link>AdaptiveCards\AdaptiveMediaSource.cs</Link>
     </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveMetadata.cs">
+      <Link>AdaptiveCards\AdaptiveMetadata.cs</Link>
+    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveNumberInput.cs">
       <Link>AdaptiveCards\AdaptiveNumberInput.cs</Link>
     </Compile>

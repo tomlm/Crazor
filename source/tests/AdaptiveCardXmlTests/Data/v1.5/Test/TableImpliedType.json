@@ -11,8 +11,10 @@
       ],
       "rows": [
         {
+          "type": "TableRow",
           "cells": [
             {
+              "type": "TableCell",
               "items": [
                 {
                   "type": "TextBlock",

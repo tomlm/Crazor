@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\v1.6\Elements\" />
     <Folder Include="Data\v1.6\Tests\" />
   </ItemGroup>
 
