@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Input.ChoiceSet Id="peoplePicker" Value="John Smith" Style="filtered">
-    <DataQuery Dataset="graph.microsoft.com/users" Count="0" Skip="0" />
+    <Data.Query Dataset="graph.microsoft.com/users" Count="0" Skip="0" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="data" Value="John Smith" Style="filtered">
-    <DataQuery Dataset="test" Value="Jon" Count="5" Skip="5" />
+    <Data.Query Dataset="test" Value="Jon" Count="5" Skip="5" />
   </Input.ChoiceSet>
   <Input.ChoiceSet Id="compound" Value="John Smith" Style="filtered">
     <Choice Title="Option 1" Value="1" />
     <Choice Title="Option 2" Value="2" />
-    <DataQuery Dataset="test" Value="Jon" Count="5" Skip="5" />
+    <Data.Query Dataset="test" Value="Jon" Count="5" Skip="5" />
   </Input.ChoiceSet>
   <Action.Submit Title="OK" />
 </Card>

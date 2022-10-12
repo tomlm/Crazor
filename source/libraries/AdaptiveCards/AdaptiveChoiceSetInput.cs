@@ -96,7 +96,7 @@ namespace AdaptiveCards
         [JsonProperty("choices.data", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
 
 #if !NETSTANDARD1_3
-        [XmlElement(typeof(AdaptiveDataQuery))]
+        [XmlElement(typeof(AdaptiveDataQuery), ElementName = "Data.Query")]
 #endif
         [DefaultValue(null)]
         public AdaptiveDataQuery DataQuery { get; set; }
