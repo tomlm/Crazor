@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -42,7 +44,7 @@ namespace AdaptiveCards
         [JsonIgnore]
         [XmlText]
         [DefaultValue(null)]
-        public string DataXml
+        public string _Data
         {
             get => (Data != null) ? JsonConvert.SerializeObject(Data, Formatting.Indented) : null;
             set => Data = (value != null) ? JsonConvert.DeserializeObject(value, new JsonSerializerSettings { Converters = { new StrictIntConverter() } }) : null;
@@ -54,9 +56,29 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveAssociatedInputs), "auto")]
         public AdaptiveAssociatedInputs AssociatedInputs { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(AssociatedInputs))]
+        [DefaultValue(null)]
+        public string _AssociatedInputs
+        {
+            get => JToken.FromObject(AssociatedInputs).ToString();
+            set => AssociatedInputs = (AdaptiveAssociatedInputs)Enum.Parse(typeof(AdaptiveAssociatedInputs), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_AssociatedInputs() => AssociatedInputs != AdaptiveAssociatedInputs.Auto;
+#endif
+
     }
 }

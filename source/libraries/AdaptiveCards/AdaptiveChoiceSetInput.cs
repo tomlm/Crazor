@@ -1,12 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
 using AdaptiveCards.Rendering;
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Linq;
 
 namespace AdaptiveCards
 {
@@ -44,10 +45,29 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveChoiceInputStyle), "compact")]
         public AdaptiveChoiceInputStyle Style { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Style))]
+        [DefaultValue(null)]
+        public string _Style
+        {
+            get => JToken.FromObject(Style).ToString();
+            set => Style = (AdaptiveChoiceInputStyle)Enum.Parse(typeof(AdaptiveChoiceInputStyle), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Style() => Style != AdaptiveChoiceInputStyle.Compact;
+#endif
 
         /// <summary>
         /// Determines whether multiple selections are allowed.

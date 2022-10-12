@@ -50,12 +50,12 @@ namespace AdaptiveCards
         /// </summary>
         [JsonIgnore]
         [XmlAttribute(nameof(Width))]
-        public string WidthXml { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
+        public string _Width { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
 
         /// <summary>
         /// Ignore Xml Serialization for complex type of AdaptiveColumnWidth when null
         /// </summary>
-        public bool ShouldSerializeWidthXml() => Width != null;
+        public bool ShouldSerialize_Width() => Width != null;
 #endif
     }
 }

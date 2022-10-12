@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -73,7 +75,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [JsonIgnore]
         [XmlAttribute(nameof(Version))]
-        public string VersionXml { get => Version.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
+        public string _Version { get => Version.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }
 #endif
 
         /// <summary>
@@ -151,13 +153,13 @@ namespace AdaptiveCards
         [JsonIgnore]
         [XmlAttribute(nameof(Height))]
         [DefaultValue(null)]
-        public string HeightXml { get => Height?.ToString(); set => this.Height = (value != null) ? new AdaptiveDimension(value) : null; }
+        public string _Height { get => Height?.ToString(); set => this.Height = (value != null) ? new AdaptiveDimension(value) : null; }
 
         /// <summary>
         /// Control serialization of empty values
         /// </summary>
         /// <returns></returns>
-        public bool ShouldSerializeHeightXml() => Height != null;
+        public bool ShouldSerialize_Height() => Height != null;
 #endif
 
         /// <summary>
@@ -243,10 +245,29 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "top")]
         public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(VerticalContentAlignment))]
+        [DefaultValue(null)]
+        public string _VerticalContentAlignment
+        {
+            get => JToken.FromObject(VerticalContentAlignment).ToString();
+            set => VerticalContentAlignment = (AdaptiveVerticalContentAlignment)Enum.Parse(typeof(AdaptiveVerticalContentAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_VerticalContentAlignment() => VerticalContentAlignment != AdaptiveVerticalContentAlignment.Top;
+#endif
 
         /// <summary>
         /// Action for the card (this allows a default action at the card level)
@@ -274,10 +295,29 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
         public AdaptiveContainerStyle Style { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Style))]
+        [DefaultValue(null)]
+        public string _Style
+        {
+            get => JToken.FromObject(Style).ToString();
+            set => Style = (AdaptiveContainerStyle)Enum.Parse(typeof(AdaptiveContainerStyle), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Style() => Style != AdaptiveContainerStyle.Default;
+#endif
 
         /// <summary>
         /// Defines authentication information to enable on-behalf-of single sign on or just-in-time OAuth.
@@ -335,7 +375,7 @@ namespace AdaptiveCards
                 {
                     ContractResolver = new WarningLoggingContractResolver(parseResult, new ParseContext()),
                     Converters = { new StrictIntConverter() },
-                    Error = delegate (object sender, ErrorEventArgs args)
+                    Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
                     {
                         if (args.ErrorContext.Error.GetType() == typeof(JsonSerializationException))
                         {

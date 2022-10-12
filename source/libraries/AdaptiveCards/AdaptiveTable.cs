@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AdaptiveCards
 {
@@ -48,20 +49,58 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "left")]
         public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(HorizontalCellContentAlignment))]
+        [DefaultValue(null)]
+        public string _HorizontalCellContentAlignment
+        {
+            get => JToken.FromObject(HorizontalCellContentAlignment).ToString();
+            set => HorizontalCellContentAlignment = (AdaptiveHorizontalAlignment)Enum.Parse(typeof(AdaptiveHorizontalAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_HorizontalCellContentAlignment() => HorizontalCellContentAlignment != AdaptiveHorizontalAlignment.Left;
+#endif
 
         /// <summary>
         /// Determines how to align the cell vertically.
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "top")]
         public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(VerticalCellContentAlignment))]
+        [DefaultValue(null)]
+        public string _VerticalCellContentAlignment
+        {
+            get => JToken.FromObject(VerticalCellContentAlignment).ToString();
+            set => VerticalCellContentAlignment = (AdaptiveVerticalAlignment)Enum.Parse(typeof(AdaptiveVerticalAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_VerticalCellContentAlignment() => VerticalCellContentAlignment != AdaptiveVerticalAlignment.Top;
+#endif
 
         /// <summary>
         /// Specifies whether the first row of the table should be treated as a header row, and be announced as such by accessibility software.
@@ -86,11 +125,31 @@ namespace AdaptiveCards
         /// <summary>
         /// Defines the style of the grid. This property currently only controls the grid's color.s
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
         public AdaptiveContainerStyle GridStyle { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(GridStyle))]
+        [DefaultValue(null)]
+        public string _GridStyle
+        {
+            get => JToken.FromObject(GridStyle).ToString();
+            set => GridStyle = (AdaptiveContainerStyle)Enum.Parse(typeof(AdaptiveContainerStyle), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_GridStyle() => GridStyle != AdaptiveContainerStyle.Default;
+#endif
+
     }
 }

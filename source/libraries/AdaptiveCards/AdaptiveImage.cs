@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AdaptiveCards
 {
@@ -53,20 +54,58 @@ namespace AdaptiveCards
         /// Controls the sizing (<see cref="AdaptiveImageSize"/>) of the displayed image.
         /// </summary>
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveImageSize), "auto")]
         public AdaptiveImageSize Size { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Size))]
+        [DefaultValue(null)]
+        public string _Size
+        {
+            get => JToken.FromObject(Size).ToString();
+            set => Size = (AdaptiveImageSize)Enum.Parse(typeof(AdaptiveImageSize), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Size() => Size != AdaptiveImageSize.Auto;
+#endif
 
         /// <summary>
         /// The style (<see cref="AdaptiveImageStyle"/>) in which the image is displayed.
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveImageStyle), "default")]
         public AdaptiveImageStyle Style { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Style))]
+        [DefaultValue(null)]
+        public string _Style
+        {
+            get => JToken.FromObject(Style).ToString();
+            set => Style = (AdaptiveImageStyle)Enum.Parse(typeof(AdaptiveImageStyle), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Style() => Style != AdaptiveImageStyle.Default;
+#endif
 
         /// <summary>
         /// The URL of the image.
@@ -83,10 +122,29 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "left")]
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(HorizontalAlignment))]
+        [DefaultValue(null)]
+        public string _HorizontalAlignment
+        {
+            get => JToken.FromObject(HorizontalAlignment).ToString();
+            set => HorizontalAlignment = (AdaptiveHorizontalAlignment)Enum.Parse(typeof(AdaptiveHorizontalAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_HorizontalAlignment() => HorizontalAlignment != AdaptiveHorizontalAlignment.Left;
+#endif
 
         /// <summary>
         /// A background color for the image specified as #AARRGGBB or #RRGGBB.
@@ -135,9 +193,9 @@ namespace AdaptiveCards
         /// </summary>
         [JsonIgnore]
         [XmlAttribute(nameof(Width))]
-        public string WidthXml { get => Width?.ToString(); set => this.Width = (value != null) ? new AdaptiveDimension(value) : null; }
+        public string _Width { get => Width?.ToString(); set => this.Width = (value != null) ? new AdaptiveDimension(value) : null; }
 
-        public bool ShouldSerializeWidthXml() => Width != null;
+        public bool ShouldSerialize_Width() => Width != null;
 #endif
     }
 

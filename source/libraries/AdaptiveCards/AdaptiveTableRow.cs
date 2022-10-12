@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace AdaptiveCards
@@ -49,10 +50,29 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveSpacing), "default")]
         public AdaptiveSpacing Spacing { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Spacing))]
+        [DefaultValue(null)]
+        public string _Spacing
+        {
+            get => JToken.FromObject(Spacing).ToString();
+            set => Spacing = (AdaptiveSpacing)Enum.Parse(typeof(AdaptiveSpacing), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Spacing() => Spacing != AdaptiveSpacing.Default;
+#endif
 
         /// <summary>
         /// Indicates whether there should be a visible separator (e.g. a line) between this element and the one before it.
@@ -67,12 +87,31 @@ namespace AdaptiveCards
         /// <summary>
         /// The style used to display this element. See <see cref="AdaptiveContainerStyle" />.
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveContainerStyle), "default")]
         public AdaptiveContainerStyle Style { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Style))]
+        [DefaultValue(null)]
+        public string _Style
+        {
+            get => JToken.FromObject(Style).ToString();
+            set => Style = (AdaptiveContainerStyle)Enum.Parse(typeof(AdaptiveContainerStyle), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Style() => Style != AdaptiveContainerStyle.Default;
+#endif
 
         /// <summary>
         /// Indicates whether the element should be visible when the card has been rendered.
@@ -89,30 +128,89 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "left")]
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
-        /// <summary>
-        /// Determines how to align the content horizontally.
-        /// </summary>
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(HorizontalAlignment))]
+        [DefaultValue(null)]
+        public string _HorizontalAlignment
+        {
+            get => JToken.FromObject(HorizontalAlignment).ToString();
+            set => HorizontalAlignment = (AdaptiveHorizontalAlignment)Enum.Parse(typeof(AdaptiveHorizontalAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_HorizontalAlignment() => HorizontalAlignment != AdaptiveHorizontalAlignment.Left;
 #endif
-        [DefaultValue(typeof(AdaptiveHorizontalAlignment), "left")]
-        public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; }
 
         /// <summary>
         /// Determines how to align the content horizontally.
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
+#endif
+        [DefaultValue(typeof(AdaptiveHorizontalAlignment), "left")]
+        public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(HorizontalCellContentAlignment))]
+        [DefaultValue(null)]
+        public string _HorizontalCellContentAlignment
+        {
+            get => JToken.FromObject(HorizontalCellContentAlignment).ToString();
+            set => HorizontalCellContentAlignment = (AdaptiveHorizontalAlignment)Enum.Parse(typeof(AdaptiveHorizontalAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_HorizontalCellContentAlignment() => HorizontalCellContentAlignment != AdaptiveHorizontalAlignment.Left;
+#endif
+
+
+        /// <summary>
+        /// Determines how to align the content horizontally.
+        /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+#if !NETSTANDARD1_3
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "top")]
         public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(VerticalCellContentAlignment))]
+        [DefaultValue(null)]
+        public string _VerticalCellContentAlignment
+        {
+            get => JToken.FromObject(VerticalCellContentAlignment).ToString();
+            set => VerticalCellContentAlignment = (AdaptiveVerticalAlignment)Enum.Parse(typeof(AdaptiveVerticalAlignment), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_VerticalCellContentAlignment() => VerticalCellContentAlignment != AdaptiveVerticalAlignment.Top;
+#endif
+
 
         [JsonProperty]
 #if !NETSTANDARD1_3

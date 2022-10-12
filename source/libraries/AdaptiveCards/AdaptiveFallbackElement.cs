@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AdaptiveCards
 {
@@ -110,7 +111,7 @@ namespace AdaptiveCards
         {
             if (this.Type == AdaptiveFallbackType.Drop)
             {
-                writer.WriteAttributeString("Type", this.Type.ToString().ToLower());
+                writer.WriteAttributeString("Type", JToken.FromObject(this.Type).ToString());
             }
             else
             {

@@ -16,7 +16,7 @@
     },
     {
       "type": "TextBlock",
-      "text": "10. The tenth thing\r10. The list is still going!\r10. Should be 12!",
+      "text": "10. The tenth thing\n10. The list is still going!\n10. Should be 12!",
       "wrap": true
     }
   ]
