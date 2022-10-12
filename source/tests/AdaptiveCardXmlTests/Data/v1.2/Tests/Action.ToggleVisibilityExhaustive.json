@@ -20,8 +20,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "imageToToggle",
               "type": "Image",
+              "id": "imageToToggle",
               "size": "medium",
               "style": "person",
               "url": "https://picsum.photos/100/100?image=112",
@@ -34,8 +34,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "imageToToggle2",
               "type": "Image",
+              "id": "imageToToggle2",
               "size": "medium",
               "url": "https://picsum.photos/100/100?image=123",
               "altText": "sample image 2",

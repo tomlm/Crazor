@@ -29,14 +29,10 @@ namespace AdaptiveCards
         {
         }
 
-        /// <summary>
-        /// We don't need to serialize type because it's implicit
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        /// <inheritdoc/>
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        [DefaultValue(TypeName)]
-        public override string Type { get; set; }
+        public override string Type { get; set; } = TypeName;
     }
 }

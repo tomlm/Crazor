@@ -137,7 +137,7 @@ namespace AdaptiveCards
         /// <summary>
         /// Explicit image Height.
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(Order = -4, DefaultValueHandling = DefaultValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif

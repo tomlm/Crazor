@@ -210,15 +210,15 @@
           "width": "auto",
           "items": [
             {
-              "id": "chevronDown1",
               "type": "Image",
+              "id": "chevronDown1",
               "url": "https://adaptivecards.io/content/down.png",
               "altText": "Air Travel Expense $300 collapsed",
               "width": "20px"
             },
             {
-              "id": "chevronUp1",
               "type": "Image",
+              "id": "chevronUp1",
               "url": "https://adaptivecards.io/content/up.png",
               "altText": "Air Travel Expense $300 expanded",
               "width": "20px",
@@ -345,15 +345,15 @@
           "width": "auto",
           "items": [
             {
-              "id": "chevronDown2",
               "type": "Image",
+              "id": "chevronDown2",
               "url": "https://adaptivecards.io/content/down.png",
               "altText": "Auto Mobile Expense $100 collapsed",
               "width": "20px"
             },
             {
-              "id": "chevronUp2",
               "type": "Image",
+              "id": "chevronUp2",
               "url": "https://adaptivecards.io/content/up.png",
               "altText": "Auto Mobile Expense $100 expanded",
               "width": "20px",
@@ -474,15 +474,15 @@
           "width": "auto",
           "items": [
             {
-              "id": "chevronDown3",
               "type": "Image",
+              "id": "chevronDown3",
               "url": "https://adaptivecards.io/content/down.png",
               "altText": "Excess Baggage Cost $50.38 collapsed",
               "width": "20px"
             },
             {
-              "id": "chevronUp3",
               "type": "Image",
+              "id": "chevronUp3",
               "url": "https://adaptivecards.io/content/up.png",
               "altText": "Excess Baggage Cost $50.38 expanded",
               "width": "20px",
@@ -642,10 +642,10 @@
           ]
         }
       ],
+      "firstRowAsHeader": false,
       "showGridLines": false,
       "spacing": "large",
-      "separator": true,
-      "firstRowAsHeader": false
+      "separator": true
     },
     {
       "type": "Container",

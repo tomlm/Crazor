@@ -9,8 +9,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id4",
               "type": "Image",
+              "id": "id4",
               "size": "small",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -44,8 +44,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id214",
               "type": "Image",
+              "id": "id214",
               "size": "medium",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -79,8 +79,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id24",
               "type": "Image",
+              "id": "id24",
               "size": "large",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -114,8 +114,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id2114",
               "type": "Image",
+              "id": "id2114",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
@@ -148,8 +148,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id21114",
               "type": "Image",
+              "id": "id21114",
               "size": "stretch",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -183,8 +183,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id111111114",
               "type": "Image",
+              "id": "id111111114",
               "size": "small",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -217,8 +217,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id111114",
               "type": "Image",
+              "id": "id111114",
               "size": "medium",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -251,8 +251,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id14",
               "type": "Image",
+              "id": "id14",
               "size": "large",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -285,8 +285,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id1114",
               "type": "Image",
+              "id": "id1114",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat"
@@ -318,8 +318,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id11114",
               "type": "Image",
+              "id": "id11114",
               "size": "stretch",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -352,8 +352,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id45",
               "type": "Image",
+              "id": "id45",
               "size": "small",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -387,8 +387,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id2145",
               "type": "Image",
+              "id": "id2145",
               "size": "medium",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -422,8 +422,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id245",
               "type": "Image",
+              "id": "id245",
               "size": "large",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -457,8 +457,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id21145",
               "type": "Image",
+              "id": "id21145",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat",
@@ -491,8 +491,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id211145",
               "type": "Image",
+              "id": "id211145",
               "size": "stretch",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -526,8 +526,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id1111111145",
               "type": "Image",
+              "id": "id1111111145",
               "size": "small",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -560,8 +560,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id1111145",
               "type": "Image",
+              "id": "id1111145",
               "size": "medium",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -594,8 +594,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id145",
               "type": "Image",
+              "id": "id145",
               "size": "large",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
@@ -628,8 +628,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id11145",
               "type": "Image",
+              "id": "id11145",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",
               "altText": "Cat"
@@ -661,8 +661,8 @@
           "type": "Column",
           "items": [
             {
-              "id": "id111145",
               "type": "Image",
+              "id": "id111145",
               "size": "stretch",
               "url": "https://adaptivecards.io/content/cats/2.png",
               "backgroundColor": "#FF0000FF",

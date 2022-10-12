@@ -22,8 +22,8 @@
                       "text": "You should never see this (fallback: drop)!"
                     },
                     {
-                      "type": "Graph",
                       "id": "firstGraph",
+                      "type": "Graph",
                       "someProperty": "blah"
                     }
                   ]
@@ -65,8 +65,8 @@
                       "text": "You should never see this (fallback: textblock)!"
                     },
                     {
-                      "type": "Graph",
                       "id": "secondGraph",
+                      "type": "Graph",
                       "someOtherProperty": "blah"
                     }
                   ]
@@ -89,11 +89,11 @@
       "text": "There should be another message below ↓"
     },
     {
-      "type": "GraphV2",
       "id": "firstGraphVTwo",
+      "type": "GraphV2",
       "fallback": {
-        "type": "Graph",
         "id": "thirdGraph",
+        "type": "Graph",
         "fallback": {
           "type": "TextBlock",
           "weight": "bolder",
@@ -112,22 +112,22 @@
           "wrap": true
         },
         {
-          "type": "GraphV2",
           "id": "secondGraphVTwo",
+          "type": "GraphV2",
           "fallback": {
-            "type": "Graph",
             "id": "fourthGraph",
+            "type": "Graph",
             "fallback": {
               "type": "MakeSomethingUp"
             }
           }
         },
         {
-          "type": "GraphV2",
           "id": "thirdGraphVTwo",
+          "type": "GraphV2",
           "fallback": {
-            "type": "Graph",
             "id": "fifthGraph",
+            "type": "Graph",
             "fallback": {
               "type": "MakeSomethingElseUp",
               "fallback": "drop"

@@ -3,8 +3,8 @@
   "version": "1.0",
   "body": [
     {
-      "id": "id1",
       "type": "Image",
+      "id": "id1",
       "url": "https://adaptivecards.io/content/cats/1.png",
       "selectAction": {
         "type": "Action.ToggleVisibility",
@@ -16,8 +16,8 @@
       "altText": "Cat"
     },
     {
-      "id": "id10",
       "type": "ActionSet",
+      "id": "id10",
       "actions": [
         {
           "type": "Action.Submit",
@@ -83,8 +83,8 @@
       "type": "ColumnSet",
       "columns": [
         {
-          "id": "id4",
           "type": "Column",
+          "id": "id4",
           "items": [
             {
               "type": "TextBlock",
@@ -99,8 +99,8 @@
           }
         },
         {
-          "id": "id5",
           "type": "Column",
+          "id": "id5",
           "items": [
             {
               "type": "TextBlock",

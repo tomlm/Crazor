@@ -3,8 +3,8 @@
   "version": "1.0",
   "body": [
     {
-      "id": "id1",
       "type": "Image",
+      "id": "id1",
       "url": "https://adaptivecards.io/content/cats/1.png",
       "selectAction": {
         "type": "Action.ToggleVisibility",

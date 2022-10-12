@@ -3,8 +3,8 @@
   "version": "1.2",
   "body": [
     {
-      "type": "CSharpKeywordInput",
       "id": "id1",
+      "type": "CSharpKeywordInput",
       "label": "Please enter a csharp keyword",
       "isRequired": "true",
       "errorMessage": "This has to be a csharp keyword!"

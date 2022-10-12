@@ -15,20 +15,20 @@
               "id": "C",
               "columns": [
                 {
-                  "id": "D",
                   "type": "Column",
+                  "id": "D",
                   "width": "auto",
                   "items": [
                     {
-                      "type": "Graph",
                       "id": "E",
+                      "type": "Graph",
                       "fallback": {
                         "type": "Container",
                         "id": "E",
                         "items": [
                           {
-                            "id": "I",
                             "type": "Image",
+                            "id": "I",
                             "url": "https://adaptivecards.io/content/cats/2.png",
                             "altText": "Cat"
                           },
@@ -59,8 +59,8 @@
                 "text": "B Container fallback textblock"
               },
               {
-                "id": "Z",
                 "type": "Image",
+                "id": "Z",
                 "url": "https://adaptivecards.io/content/cats/1.png",
                 "altText": "Cat"
               }
@@ -83,8 +83,8 @@
       "placeholder": "G Input.Text"
     },
     {
-      "type": "Graph",
       "id": "H",
+      "type": "Graph",
       "fallback": {
         "type": "Container",
         "id": "L",

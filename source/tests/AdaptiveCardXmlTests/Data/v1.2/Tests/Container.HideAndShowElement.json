@@ -34,8 +34,8 @@
       "type": "ColumnSet",
       "columns": [
         {
-          "id": "id3",
           "type": "Column",
+          "id": "id3",
           "items": [
             {
               "type": "TextBlock",

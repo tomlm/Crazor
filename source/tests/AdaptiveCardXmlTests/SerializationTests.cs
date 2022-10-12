@@ -29,7 +29,7 @@ namespace AdaptiveCardXmlTests
         {
             var dataFolder = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "Data"));
             var files = Directory.EnumerateFiles(dataFolder, "*.json", SearchOption.AllDirectories);
-            return files.Select(s => new object[] { Path.GetRelativePath(dataFolder, s), s });
+            return files.Select(s => new object[] { Path.GetFileName(s), s });
         }
 
         public static string ToXml(AdaptiveCard card)
@@ -46,7 +46,7 @@ namespace AdaptiveCardXmlTests
 
         [Theory]
         [MemberData(nameof(GetTestFiles))]
-        public void Do(string name, string jsonFile)
+        public void Test(string name, string jsonFile)
         {
             string xmlFile = jsonFile.Replace(".json", ".xml");
             var json = File.ReadAllText(jsonFile);
@@ -56,7 +56,7 @@ namespace AdaptiveCardXmlTests
                 {
                     var card = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
                     json = JsonConvert.SerializeObject(card, jsonSettings);
-                    // File.WriteAllText(jsonFile, json);
+                    File.WriteAllText(jsonFile, json);
                     File.WriteAllText(xmlFile, ToXml(card));
                 }
             }

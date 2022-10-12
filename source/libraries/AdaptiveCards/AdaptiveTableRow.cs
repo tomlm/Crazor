@@ -21,12 +21,11 @@ namespace AdaptiveCards
         public const string TypeName = "TableRow";
 
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        /// <inheritdoc/>
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
-        [DefaultValue(TypeName)]
-        public string Type { get; set; }
+        public string Type { get; set; } = TypeName;
 
         /// <summary>
         /// Initializes an empty Fact.

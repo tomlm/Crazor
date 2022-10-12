@@ -46,8 +46,8 @@
               "wrap": true
             },
             {
-              "id": "id2",
               "type": "Image",
+              "id": "id2",
               "size": "small",
               "url": "https://adaptivecards.io/content/cats/1.png",
               "altText": "Cat",
@@ -209,8 +209,8 @@
               "type": "ColumnSet",
               "columns": [
                 {
-                  "id": "id13",
                   "type": "Column",
+                  "id": "id13",
                   "items": [
                     {
                       "type": "TextBlock",
