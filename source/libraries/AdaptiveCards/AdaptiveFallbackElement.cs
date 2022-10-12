@@ -72,23 +72,14 @@ namespace AdaptiveCards
         {
             while (reader.MoveToNextAttribute())
             {
-                switch (reader.NodeType)
+                switch (reader.Name)
                 {
-                    case XmlNodeType.Attribute:
-                        switch (reader.Name)
+                    case "Type":
+                        if (Enum.TryParse<AdaptiveFallbackType>(reader.Value, true, out var type))
                         {
-                            case "Type":
-                                if (Enum.TryParse<AdaptiveFallbackType>(reader.Value, true, out var type))
-                                {
-                                    Type = type;
-                                }
-                                break;
+                            Type = type;
                         }
-                        break;
-
-                    default:
-                        Debug.WriteLine(reader.NodeType);
-                        break;
+                        return;
                 }
             }
 
