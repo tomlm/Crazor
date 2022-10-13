@@ -2,7 +2,7 @@
 @inherits CardView<AddressApp>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
-    
+
 
     <TextBlock Size="extraLarge">Addresses</TextBlock>
     @if (Model.Addresses.Any())
@@ -11,19 +11,23 @@
         {
             <Container Separator="true">
                 <ColumnSet Padding="none">
-                    <Column Width="stretch" >
+                    <Column Width="stretch">
                         <TextBlock>@address.Street</TextBlock>
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
                     </Column>
-                    <Column Width="auto" >
+                    <Column Width="auto">
                         <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="small">
-                            <SelectAction xsi:type="Action.Execute" Id="@address.Id" Tooltip="Edit Address" Verb="OnEdit" />
-                        </Image> 
+                            <SelectAction xsi:type="Action.Execute" Tooltip="Edit Address" Verb="OnEdit">
+                                { "resourceId":"@address.Id" }
+                            </SelectAction>
+                        </Image>
                     </Column>
-                    <Column Width="auto" >
+                    <Column Width="auto">
                         <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="small">
-                            <SelectAction xsi:type="Action.Execute" Id="@address.Id" Tooltip="Delete Address" Verb="OnDelete" />
-                        </Image> 
+                            <SelectAction xsi:type="Action.Execute" Tooltip="Delete Address" Verb="OnDelete" >
+                                { "resourceId":"@address.Id" }
+                            </SelectAction>
+                        </Image>
                     </Column>
                 </ColumnSet>
             </Container>
@@ -44,9 +48,9 @@
         ShowCard("Edit", new EditAddressModel() { IsEdit = false, Address = address });
     }
 
-    public void OnEdit(string id)
+    public void OnEdit(string resourceId)
     {
-        var address = Model.Addresses.SingleOrDefault(a => a.Id == id);
+        var address = Model.Addresses.SingleOrDefault(a => a.Id == resourceId);
         if (address != null)
         {
             ShowCard("Edit", new EditAddressModel() { IsEdit = true, Address = address });
