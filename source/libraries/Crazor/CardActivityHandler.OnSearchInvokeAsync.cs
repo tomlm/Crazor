@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
+using AdaptiveCards;
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
@@ -29,7 +30,7 @@ namespace Crazor
             _logger.LogInformation($"Starting application/search processing ");
 
             // Get session data from the invoke payload
-            var parts = searchInvoke.Dataset.Split("!");
+            var parts = searchInvoke.Dataset.Split(AdaptiveDataQuery.Seperator);
             IEncryptionProvider encryptionProvider = _serviceProvider.GetRequiredService<IEncryptionProvider>();
             var data = await encryptionProvider.DecryptAsync(parts[0], cancellationToken);
             var sessionData = SessionData.FromString(data);

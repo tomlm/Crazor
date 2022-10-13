@@ -406,7 +406,7 @@ namespace Crazor
             {
                 if (choiceSet.DataQuery != null)
                 {
-                    choiceSet.DataQuery.Dataset = $"{sessionDataToken}!{choiceSet.DataQuery.Dataset}";
+                    choiceSet.DataQuery.Dataset = $"{sessionDataToken}{AdaptiveDataQuery.Seperator}{choiceSet.DataQuery.Dataset}";
                 }
             }
             return sessionData;

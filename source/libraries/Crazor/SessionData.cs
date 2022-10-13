@@ -12,9 +12,11 @@ namespace Crazor
 {
     public class SessionData
     {
+        private const char seperator = '|';
+        
         public static SessionData FromString(string data)
         {
-            var parts = data.Split('|');
+            var parts = data.Split(seperator);
             var resourceId = parts.Skip(1).Take(1).Single();
             var sessionId = parts.Skip(2).Take(1).Single();
             return new SessionData()
@@ -27,7 +29,7 @@ namespace Crazor
 
         public override string ToString()
         {
-            return $"{App}|{ResourceId ?? String.Empty}|{SessionId ?? String.Empty}";
+            return $"{App}{seperator}{ResourceId ?? String.Empty}{seperator}{SessionId ?? String.Empty}";
         }
 
         /// <summary>

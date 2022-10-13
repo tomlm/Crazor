@@ -57,9 +57,9 @@
         }
     }
 
-    public void OnDelete(string id)
+    public void OnDelete(string resourceId)
     {
-        Model.Addresses = Model.Addresses.Where(a => a.Id != id).ToList();
+        Model.Addresses = Model.Addresses.Where(a => a.Id != resourceId).ToList();
     }
 
     public void OnEditCompleted(EditAddressModel editAddress)

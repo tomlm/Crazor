@@ -10,6 +10,9 @@ namespace AdaptiveCards
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class AdaptiveDataQuery
     {
+        [JsonIgnore]
+        public const char Seperator = '#';
+
         /// <summary>
         /// Specifies that it's a Data.Query object.
         /// </summary>
