@@ -12,13 +12,13 @@
     {
         <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
-    <Input.Text Binding="@nameof(Street)" Style="Text" ErrorMessage="Street is required" />
+    <Input.Text Binding="@nameof(Street)" Style="Text" />
     <FieldErrors Binding="@nameof(Street)" />
 
-    <Input.Text Binding="@nameof(City)" Style="Text" ErrorMessage="City is required" />
+    <Input.Text Binding="@nameof(City)" Style="Text" />
     <FieldErrors Binding="@nameof(City)" />
 
-    <Input.ChoiceSet Id="State" Label="State" ErrorMessage="State is required" Value="@State">
+    <Input.ChoiceSet Binding="State">
         <Choice Title="Alabama" Value="AL" />
         <Choice Title="Arkansas" Value="AR" />
         <Choice Title="Alaska" Value="AK" />
@@ -30,10 +30,10 @@
     </Input.ChoiceSet>
     <FieldErrors Binding="@nameof(State)" />
 
-    <Input.Text Binding="@nameof(PostalCode)" Style="Text" ErrorMessage="Zip is required" />
+    <Input.Text Binding="@nameof(PostalCode)" Style="Text" />
     <FieldErrors Binding="@nameof(PostalCode)" />
 
-    <Input.ChoiceSet Id="Country" Label="Country" ErrorMessage="Country is required" Value="@Country">
+    <Input.ChoiceSet Binding="Country" >
         <Choice Title="U.S.A." Value="USA" />
         <Choice Title="Canada" Value="CA" />
     </Input.ChoiceSet>
