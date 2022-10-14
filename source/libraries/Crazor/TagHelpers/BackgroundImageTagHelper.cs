@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using AdaptiveCards;
 using System;
 using System.ComponentModel;
+using Crazor.Attributes;
 
 namespace Crazor.TagHelpers
 {

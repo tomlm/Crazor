@@ -14,13 +14,13 @@ namespace Crazor.Attributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class BindValueAttribute : Attribute
+    public class BindingAttribute : Attribute
     {
-        public BindValueAttribute()
+        public BindingAttribute()
         {
         }
 
-        public BindValueAttribute(BindingType policy)
+        public BindingAttribute(BindingType policy)
         {
             Policy = policy;
         }

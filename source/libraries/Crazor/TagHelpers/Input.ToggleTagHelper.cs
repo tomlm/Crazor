@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using AdaptiveCards;
 using System;
 using System.ComponentModel;
+using Crazor.Attributes;
 
 namespace Crazor.TagHelpers
 {
@@ -30,7 +31,7 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Label))]
         [DefaultValue(null)]
-        [BindValue(BindingType.DisplayName)]
+        [Binding(BindingType.DisplayName)]
         public String Label { get; set; } 
 
         [HtmlAttributeName(nameof(Separator))]
@@ -51,7 +52,7 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Value))]
         [DefaultValue(null)]
-        [BindValue]
+        [Binding(BindingType.Value)]
         public String Value { get; set; } 
 
         [HtmlAttributeName(nameof(ValueOff))]

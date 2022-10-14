@@ -25,7 +25,7 @@ namespace Crazor.TagHelpers
 
         public TagHelperContent? ChildContent { get; set; }
 
-        [BindValue(BindingType.PropertyName)]
+        [Binding(BindingType.PropertyName)]
         [HtmlAttributeName]
         public string? Id { get; set; }
 
@@ -98,7 +98,7 @@ namespace Crazor.TagHelpers
             foreach (var property in properties)
             {
                 string attributeName = property.GetCustomAttribute<HtmlAttributeNameAttribute>()?.Name ?? property.Name;
-                var bindValueAttribute = property.GetCustomAttribute<BindValueAttribute>();
+                var bindValueAttribute = property.GetCustomAttribute<BindingAttribute>();
                 var value = property?.GetValue(this);
                 if (value == null && Binding != null && bindValueAttribute != null)
                 {

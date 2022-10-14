@@ -31,7 +31,7 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Label))]
         [DefaultValue(null)]
-        [BindValue(BindingType.DisplayName)]
+        [Binding(BindingType.DisplayName)]
         public String Label { get; set; } 
 
         [HtmlAttributeName(nameof(Max))]
@@ -60,7 +60,7 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Value))]
         [DefaultValue(Double.NaN)]
-        [BindValue]
+        [Binding(BindingType.Value)]
         public Double Value { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
