@@ -3,9 +3,7 @@
 //-----------------------------------------------------------------------------
 
 using AdaptiveCards;
-using Crazor.AdaptiveCards;
-using Crazor.Interfaces;
-using Microsoft.Bot.Schema;
+using AdaptiveCards.Rendering;
 using System.Text;
 
 namespace Crazor
@@ -52,7 +50,7 @@ namespace Crazor
         public static IEnumerable<T> GetElements<T>(this AdaptiveTypedElement element)
             where T : AdaptiveTypedElement
         {
-            var visitor = new AdaptiveVisitor2();
+            var visitor = new AdaptiveVisitor();
             visitor.Visit(element);
             return visitor.Elements.OfType<T>();
         }

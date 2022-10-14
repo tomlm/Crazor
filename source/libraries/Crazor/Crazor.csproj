@@ -25,4 +25,8 @@
     <ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AdaptiveCards\" />
+  </ItemGroup>
+
 </Project>

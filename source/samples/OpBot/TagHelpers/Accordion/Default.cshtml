@@ -12,26 +12,32 @@
 <Container Separator="true" Id="@Model.Id">
     <ColumnSet Spacing="None">
         <Column Width="stretch">
-            <SelectAction xsi:type="Action.ToggleVisibility">
-                <TargetElement ElementId="@showButtonId" />
-                <TargetElement ElementId="@hideButtonId" />
-                <TargetElement ElementId="@contentId" />
+            <SelectAction>
+                <Action.ToggleVisibility>
+                    <TargetElement ElementId="@showButtonId" />
+                    <TargetElement ElementId="@hideButtonId" />
+                    <TargetElement ElementId="@contentId" />
+                </Action.ToggleVisibility>
             </SelectAction>
             <TextBlock Wrap="true" Size="Large">@Model.Title</TextBlock>
         </Column>
         <Column Width="Auto">
             <Image Id="@showButtonId" IsVisible="@Model.IsExpanded == false" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Collaps_menu-32.png" Size="Auto">
-                <SelectAction xsi:type="Action.ToggleVisibility">
-                    <TargetElement ElementId="@showButtonId" />
-                    <TargetElement ElementId="@hideButtonId" />
-                    <TargetElement ElementId="@contentId" />
+                <SelectAction>
+                    <Action.ToggleVisibility>
+                        <TargetElement ElementId="@showButtonId" />
+                        <TargetElement ElementId="@hideButtonId" />
+                        <TargetElement ElementId="@contentId" />
+                    </Action.ToggleVisibility>
                 </SelectAction>
             </Image>
             <Image Id="@hideButtonId" IsVisible="@Model.IsExpanded" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Expand_menu-32.png" Size="Auto">
-                <SelectAction xsi:type="Action.ToggleVisibility">
-                    <TargetElement ElementId="@showButtonId" />
-                    <TargetElement ElementId="@hideButtonId" />
-                    <TargetElement ElementId="@contentId" />
+                <SelectAction>
+                    <Action.ToggleVisibility>
+                        <TargetElement ElementId="@showButtonId" />
+                        <TargetElement ElementId="@hideButtonId" />
+                        <TargetElement ElementId="@contentId" />
+                    </Action.ToggleVisibility>
                 </SelectAction>
             </Image>
         </Column>
