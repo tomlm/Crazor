@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Neleus.DependencyInjection.Extensions;
 using OpBot;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Crazor
 {
@@ -24,6 +26,8 @@ namespace Crazor
             services.TryAddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
             services.TryAddScoped<IBot, CardActivityHandler>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddSingleton<IUrlHelper, UrlHelperProxy>();
 
             // add Apps
             var cardAppServices = services.AddByName<CardApp>();

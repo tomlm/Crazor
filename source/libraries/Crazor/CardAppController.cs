@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder;
+using Crazor;
 
 namespace OpBot.Controllers
 {
@@ -9,12 +10,12 @@ namespace OpBot.Controllers
     // achieved by specifying a more specific type for the bot constructor argument.
     [Route("api/cardapps")]
     [ApiController]
-    public class BotController : ControllerBase
+    public class CardAppController : ControllerBase
     {
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
 
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public CardAppController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
             Adapter = adapter;
             Bot = bot;
