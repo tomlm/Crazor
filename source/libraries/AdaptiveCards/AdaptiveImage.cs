@@ -162,15 +162,10 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlElement(typeof(AdaptiveShowCardAction))]
-        [XmlElement(typeof(AdaptiveExecuteAction))]
-        [XmlElement(typeof(AdaptiveSubmitAction))]
-        [XmlElement(typeof(AdaptiveOpenUrlAction))]
-        [XmlElement(typeof(AdaptiveToggleVisibilityAction))]
-        [XmlElement(typeof(AdaptiveUnknownAction))]
+        [XmlElement]
 #endif
         [DefaultValue(null)]
-        public AdaptiveAction SelectAction { get; set; }
+        public AdaptiveSelectAction SelectAction { get; set; }
 
         /// <summary>
         /// Alternate text (alttext) to display for this image.

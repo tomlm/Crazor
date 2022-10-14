@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Image Id="id1" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
-    <Action.ToggleVisibility>
-      <TargetElement ElementId="id2" />
-      <TargetElement ElementId="id10" />
-    </Action.ToggleVisibility>
+    <SelectAction>
+      <Action.ToggleVisibility>
+        <TargetElement ElementId="id2" />
+        <TargetElement ElementId="id10" />
+      </Action.ToggleVisibility>
+    </SelectAction>
   </Image>
   <ActionSet Id="id10" IsVisible="false">
     <Action.Submit Title="ActionSet Toggle Test" />

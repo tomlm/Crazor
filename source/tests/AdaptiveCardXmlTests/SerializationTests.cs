@@ -69,6 +69,7 @@ namespace AdaptiveCardXmlTests
             Debug.WriteLine($"---- {name} -----");
             var xml = File.ReadAllText(xmlFile);
             var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
+            xml = ToXml(jsonCard);
             var reader = XmlReader.Create(new StringReader(xml));
             var xmlCard = serializer.Deserialize(reader);
             var json2 = JsonConvert.SerializeObject(xmlCard, jsonSettings);

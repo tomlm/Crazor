@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Image Id="id1" IsVisible="false" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
-    <Action.ToggleVisibility>
-      <TargetElement ElementId="id2" />
-    </Action.ToggleVisibility>
+    <SelectAction>
+      <Action.ToggleVisibility>
+        <TargetElement ElementId="id2" />
+      </Action.ToggleVisibility>
+    </SelectAction>
   </Image>
   <Container Id="id2" Spacing="large">
     <SelectAction>

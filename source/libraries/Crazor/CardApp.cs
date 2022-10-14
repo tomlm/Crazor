@@ -468,13 +468,10 @@ namespace Crazor
                                 {
                                     new AdaptiveTextBlock("🗙")
                                 },
-                                SelectAction = new AdaptiveSelectAction()
+                                SelectAction = new AdaptiveToggleVisibilityAction()
                                 {
-                                    Action =new AdaptiveToggleVisibilityAction()
-                                    {
-                                        Title = "Close",
-                                        TargetElements = new List<AdaptiveTargetElement>() { new AdaptiveTargetElement($"messageBanner{iMessage}") }
-                                    }
+                                    Title = "Close",
+                                    TargetElements = new List<AdaptiveTargetElement>() { new AdaptiveTargetElement($"messageBanner{iMessage}") }
                                 }
                             }
                         }

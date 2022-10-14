@@ -31,5 +31,11 @@ namespace AdaptiveCards
         [XmlElement(typeof(AdaptiveUnknownAction))]
 #endif
         public AdaptiveAction Action { get; set; }
+
+        public static implicit operator AdaptiveSelectAction(AdaptiveAction action)
+        {
+            return new AdaptiveSelectAction() { Action = action };
+        }
+
     }
 }

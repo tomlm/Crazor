@@ -76,15 +76,21 @@
     <AdditionalProperties>
       <Property Name="tooltip">tooltip</Property>
     </AdditionalProperties>
-    <Action.Submit />
+    <SelectAction>
+      <Action.Submit />
+    </SelectAction>
   </Image>
   <TextBlock Weight="bolder" Wrap="true">Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
-    <Action.Submit Title="title" Tooltip="tooltip" />
+    <SelectAction>
+      <Action.Submit Title="title" Tooltip="tooltip" />
+    </SelectAction>
   </Image>
   <TextBlock Weight="bolder" Wrap="true">Image has SelectAction. Action has title. (title should be used as tooltip)</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
-    <Action.Submit Title="title" />
+    <SelectAction>
+      <Action.Submit Title="title" />
+    </SelectAction>
   </Image>
   <TextBlock Weight="bolder" Wrap="true">Adaptive Card has SelectAction Action has tooltip. (tooltip should appear)</TextBlock>
   <SelectAction>
