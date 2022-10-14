@@ -15,5 +15,9 @@ namespace Crazor.TagHelpers
     [HtmlTargetElement("TableColumn")]
     public class TableColumnTagHelper : ReflectionTagHelper
     {
+
+        [HtmlAttributeName(nameof(Width))]
+        [DefaultValue(null)]
+        public String Width { get; set; } 
     }
 }

@@ -62,5 +62,9 @@ namespace Crazor.TagHelpers
         [DefaultValue(Double.NaN)]
         [BindValue]
         public Double Value { get; set; } 
+
+        [HtmlAttributeName(nameof(Height))]
+        [DefaultValue(null)]
+        public String Height { get; set; } 
     }
 }

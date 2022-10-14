@@ -44,10 +44,6 @@ namespace Crazor.TagHelpers
         [DefaultValue(false)]
         public Boolean Strikethrough { get; set; } 
 
-        [HtmlAttributeName(nameof(Text))]
-        [DefaultValue(null)]
-        public String Text { get; set; } 
-
         [HtmlAttributeName(nameof(Underline))]
         [DefaultValue(false)]
         public Boolean Underline { get; set; } 

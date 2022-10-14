@@ -59,5 +59,13 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName(nameof(VerticalContentAlignment))]
         [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
         public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; } 
+
+        [HtmlAttributeName(nameof(Height))]
+        [DefaultValue(null)]
+        public String Height { get; set; } 
+
+        [HtmlAttributeName(nameof(Width))]
+        [DefaultValue(null)]
+        public String Width { get; set; } 
     }
 }

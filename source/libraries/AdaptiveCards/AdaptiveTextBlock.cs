@@ -157,7 +157,7 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [JsonIgnore]
         [XmlText]
-        public string TextXml
+        public string _Text
         {
             // We use %20 to represent an whitespace only string in xml.
             get => (Text != null && string.IsNullOrWhiteSpace(Text)) ? Text.Replace(" ", "%20") : Text;

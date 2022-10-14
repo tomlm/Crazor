@@ -35,5 +35,9 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName(nameof(Speak))]
         [DefaultValue(null)]
         public String Speak { get; set; } 
+
+        [HtmlAttributeName(nameof(Height))]
+        [DefaultValue(null)]
+        public String Height { get; set; } 
     }
 }

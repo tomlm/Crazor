@@ -66,5 +66,9 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName(nameof(Wrap))]
         [DefaultValue(false)]
         public Boolean Wrap { get; set; } 
+
+        [HtmlAttributeName(nameof(Height))]
+        [DefaultValue(null)]
+        public String Height { get; set; } 
     }
 }

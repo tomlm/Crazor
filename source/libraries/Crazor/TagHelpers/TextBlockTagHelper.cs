@@ -76,10 +76,6 @@ namespace Crazor.TagHelpers
         [DefaultValue(null)]
         public String Text { get; set; } 
 
-        [HtmlAttributeName(nameof(TextXml))]
-        [DefaultValue(null)]
-        public String TextXml { get; set; } 
-
         [HtmlAttributeName(nameof(Weight))]
         [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
         public AdaptiveTextWeight Weight { get; set; } 
@@ -87,5 +83,9 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName(nameof(Wrap))]
         [DefaultValue(false)]
         public Boolean Wrap { get; set; } 
+
+        [HtmlAttributeName(nameof(Height))]
+        [DefaultValue(null)]
+        public String Height { get; set; } 
     }
 }
