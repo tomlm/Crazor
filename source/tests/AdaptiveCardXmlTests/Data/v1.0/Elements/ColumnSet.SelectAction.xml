@@ -2,7 +2,9 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Weight="bolder">Pick up where you left off?</TextBlock>
   <ColumnSet Spacing="medium">
-    <SelectAction xsi:type="Action.OpenUrl" Tooltip="View a map of Silver Star Mountain" Url="https://www.msn.com/" />
+    <SelectAction>
+      <Action.OpenUrl Tooltip="View a map of Silver Star Mountain" Url="https://www.msn.com/" />
+    </SelectAction>
     <Column Width="auto">
       <Image Size="medium" Url="https://unsplash.it/80?image=1083" AltText="Silver Star Mountain" />
     </Column>
@@ -12,7 +14,9 @@
     </Column>
   </ColumnSet>
   <ColumnSet>
-    <SelectAction xsi:type="Action.OpenUrl" Tooltip="Remodel your kitchen with our new cabinet styles!" Url="https://www.adaptivecards.io/" />
+    <SelectAction>
+      <Action.OpenUrl Tooltip="Remodel your kitchen with our new cabinet styles!" Url="https://www.adaptivecards.io/" />
+    </SelectAction>
     <Column Width="auto">
       <Image Size="medium" Url="https://unsplash.it/80?image=1082" AltText="Kitchen Remodel" />
     </Column>
@@ -22,7 +26,9 @@
     </Column>
   </ColumnSet>
   <ColumnSet>
-    <SelectAction xsi:type="Action.OpenUrl" Tooltip="Watch the newest episode today!" Url="https://www.outlook.com/" />
+    <SelectAction>
+      <Action.OpenUrl Tooltip="Watch the newest episode today!" Url="https://www.outlook.com/" />
+    </SelectAction>
     <Column Width="auto">
       <Image Size="medium" Url="https://unsplash.it/80?image=1080" AltText="The Witcher" />
     </Column>

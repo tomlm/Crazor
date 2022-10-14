@@ -18,11 +18,11 @@
     <Fact Title="Due date:" Value="Not set" />
   </FactSet>
   <Action.ShowCard Title="Set due date">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Date Id="dueDate" />
       <Input.Text Id="comment" Placeholder="Add a comment" IsMultiline="true" />
       <Action.Submit Title="OK" />
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.OpenUrl Title="View" Url="https://adaptivecards.io/" />
 </Card>

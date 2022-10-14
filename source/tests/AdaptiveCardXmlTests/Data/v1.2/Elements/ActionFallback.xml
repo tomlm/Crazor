@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <ActionSet>
-    <AdaptiveUnknownAction Type="NoExist">
+    <Action.Unknown Type="NoExist">
       <Fallback>
         <UnknownElement Type="NeitherExist">
           <Fallback>
@@ -11,8 +11,8 @@
           </Fallback>
         </UnknownElement>
       </Fallback>
-    </AdaptiveUnknownAction>
-    <AdaptiveUnknownAction Type="NoExist">
+    </Action.Unknown>
+    <Action.Unknown Type="NoExist">
       <Fallback>
         <UnknownElement Type="NeitherExist">
           <Fallback>
@@ -20,26 +20,26 @@
           </Fallback>
         </UnknownElement>
       </Fallback>
-    </AdaptiveUnknownAction>
-    <AdaptiveUnknownAction Type="NoExist">
+    </Action.Unknown>
+    <Action.Unknown Type="NoExist">
       <Fallback>
         <UnknownElement Type="NeitherExist">
           <Fallback>
             <UnknownElement Type="NopeNotThis">
               <Fallback>
                 <Action.ShowCard Title="Action.ShowCard">
-                  <AdaptiveCard Version="1.0">
+                  <Card Version="1.0">
                     <TextBlock>What do you think?</TextBlock>
                     <Action.Submit Title="Neat!" />
-                  </AdaptiveCard>
+                  </Card>
                 </Action.ShowCard>
               </Fallback>
             </UnknownElement>
           </Fallback>
         </UnknownElement>
       </Fallback>
-    </AdaptiveUnknownAction>
-    <AdaptiveUnknownAction Type="NoExist">
+    </Action.Unknown>
+    <Action.Unknown Type="NoExist">
       <Fallback>
         <UnknownElement Type="NeitherExist">
           <Fallback>
@@ -47,10 +47,10 @@
           </Fallback>
         </UnknownElement>
       </Fallback>
-    </AdaptiveUnknownAction>
+    </Action.Unknown>
   </ActionSet>
   <TextBlock>This card tests action fallback</TextBlock>
-  <AdaptiveUnknownAction Type="NoExist">
+  <Action.Unknown Type="NoExist">
     <Fallback>
       <UnknownElement Type="NeitherExist">
         <Fallback>
@@ -60,8 +60,8 @@
         </Fallback>
       </UnknownElement>
     </Fallback>
-  </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction Type="NoExist">
+  </Action.Unknown>
+  <Action.Unknown Type="NoExist">
     <Fallback>
       <UnknownElement Type="NeitherExist">
         <Fallback>
@@ -69,26 +69,26 @@
         </Fallback>
       </UnknownElement>
     </Fallback>
-  </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction Type="NoExist">
+  </Action.Unknown>
+  <Action.Unknown Type="NoExist">
     <Fallback>
       <UnknownElement Type="NeitherExist">
         <Fallback>
           <UnknownElement Type="NopeNotThis">
             <Fallback>
               <Action.ShowCard Title="Action.ShowCard">
-                <AdaptiveCard Version="1.0">
+                <Card Version="1.0">
                   <TextBlock>What do you think?</TextBlock>
                   <Action.Submit Title="Neat!" />
-                </AdaptiveCard>
+                </Card>
               </Action.ShowCard>
             </Fallback>
           </UnknownElement>
         </Fallback>
       </UnknownElement>
     </Fallback>
-  </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction Type="NoExist">
+  </Action.Unknown>
+  <Action.Unknown Type="NoExist">
     <Fallback>
       <UnknownElement Type="NeitherExist">
         <Fallback>
@@ -96,5 +96,5 @@
         </Fallback>
       </UnknownElement>
     </Fallback>
-  </AdaptiveUnknownAction>
+  </Action.Unknown>
 </Card>

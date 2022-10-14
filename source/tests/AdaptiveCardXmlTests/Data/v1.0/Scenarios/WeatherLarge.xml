@@ -14,28 +14,36 @@
   </ColumnSet>
   <ColumnSet>
     <Column Width="20">
-      <SelectAction xsi:type="Action.OpenUrl" Title="View Wednesday" Url="https://www.microsoft.com/" />
+      <SelectAction>
+        <Action.OpenUrl Title="View Wednesday" Url="https://www.microsoft.com/" />
+      </SelectAction>
       <TextBlock Color="dark" HorizontalAlignment="center" Wrap="true">Wednesday</TextBlock>
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Drizzle-Square.png" AltText="Drizzly weather" />
       <TextBlock Color="dark" HorizontalAlignment="center">**High**	50</TextBlock>
       <TextBlock Spacing="none" Color="dark" HorizontalAlignment="center">**Low**	32</TextBlock>
     </Column>
     <Column Width="20">
-      <SelectAction xsi:type="Action.OpenUrl" Title="View Thursday" Url="https://www.microsoft.com/" />
+      <SelectAction>
+        <Action.OpenUrl Title="View Thursday" Url="https://www.microsoft.com/" />
+      </SelectAction>
       <TextBlock Color="dark" HorizontalAlignment="center" Wrap="true">Thursday</TextBlock>
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
       <TextBlock Color="dark" HorizontalAlignment="center">**High**	50</TextBlock>
       <TextBlock Spacing="none" Color="dark" HorizontalAlignment="center">**Low**	32</TextBlock>
     </Column>
     <Column Width="20">
-      <SelectAction xsi:type="Action.OpenUrl" Title="View Friday" Url="https://www.microsoft.com/" />
+      <SelectAction>
+        <Action.OpenUrl Title="View Friday" Url="https://www.microsoft.com/" />
+      </SelectAction>
       <TextBlock Color="dark" HorizontalAlignment="center" Wrap="true">Friday</TextBlock>
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
       <TextBlock Color="dark" HorizontalAlignment="center">**High**	59</TextBlock>
       <TextBlock Spacing="none" Color="dark" HorizontalAlignment="center">**Low**	32</TextBlock>
     </Column>
     <Column Width="20">
-      <SelectAction xsi:type="Action.OpenUrl" Title="View Saturday" Url="https://www.microsoft.com/" />
+      <SelectAction>
+        <Action.OpenUrl Title="View Saturday" Url="https://www.microsoft.com/" />
+      </SelectAction>
       <TextBlock Color="dark" HorizontalAlignment="center" Wrap="true">Saturday</TextBlock>
       <Image Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png" AltText="Mostly cloudy weather" />
       <TextBlock Color="dark" HorizontalAlignment="center">**High**	50</TextBlock>

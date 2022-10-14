@@ -6,9 +6,9 @@
   "y": -1
 }</Action.Execute>
     <Action.ShowCard Title="ShowCard">
-      <AdaptiveCard Version="1.4">
+      <Card Version="1.4">
         <Action.Execute Title="Neat!" AssociatedInputs="none" Verb="" />
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
   </ActionSet>
   <Input.Text Id="firstName" IsRequired="true" Label="What is your first name?" Regex="^[A-Z]{1}.*" />

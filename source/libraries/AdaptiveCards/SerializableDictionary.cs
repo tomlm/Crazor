@@ -10,7 +10,6 @@ using System.Xml.Serialization;
 namespace AdaptiveCards
 {
 #if !NETSTANDARD1_3
-    [XmlRoot("dictionary")]
     public class SerializableDictionary<TValue> : Dictionary<string, TValue>, IXmlSerializable
     {
         public SerializableDictionary()

@@ -68,7 +68,7 @@
     </UnknownElement>
     <TextBlock Weight="lighter" Wrap="true">...and here</TextBlock>
   </Container>
-  <AdaptiveUnknownAction Title="Be Cool" Type="MyCoolAction2">
+  <Action.Unknown Title="Be Cool" Type="MyCoolAction2">
     <AdditionalProperties>
       <Property Name="coolness">to the max</Property>
     </AdditionalProperties>
@@ -83,8 +83,8 @@
         </Fallback>
       </UnknownElement>
     </Fallback>
-  </AdaptiveUnknownAction>
-  <AdaptiveUnknownAction Title="This is a bug!" Type="Unnecessary">
+  </Action.Unknown>
+  <Action.Unknown Title="This is a bug!" Type="Unnecessary">
     <Fallback Type="drop" />
-  </AdaptiveUnknownAction>
+  </Action.Unknown>
 </Card>

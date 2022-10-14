@@ -16,5 +16,7 @@
       </Column>
     </ColumnSet>
   </Container>
-  <SelectAction xsi:type="Action.OpenUrl" Url="https://msn.com" />
+  <SelectAction>
+    <Action.OpenUrl Url="https://msn.com" />
+  </SelectAction>
 </Card>

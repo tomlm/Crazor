@@ -3,7 +3,7 @@
   <UnknownElement Type="SomeCustomElement">
     <Fallback Type="drop" />
   </UnknownElement>
-  <AdaptiveUnknownAction Title="This is a bug!" Type="SomeCustomAction">
+  <Action.Unknown Title="This is a bug!" Type="SomeCustomAction">
     <Fallback Type="drop" />
-  </AdaptiveUnknownAction>
+  </Action.Unknown>
 </Card>

@@ -30,7 +30,7 @@
   "no icon": "dismiss"
 }</Action.Submit>
   <Action.ShowCard Title="Dismiss" IconUrl="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/close-480.png">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <TextBlock>Icons should appear above the title if the host config is set to Above Title</TextBlock>
       <Action.Submit Title="Snooze" IconUrl="https://cdn1.iconfinder.com/data/icons/office-22/48/alarm-clock-512.png">{
   "x": "snooze"
@@ -41,6 +41,6 @@
       <Action.Submit Title="Dismiss" IconUrl="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/close-480.png">{
   "icon": "dismiss"
 }</Action.Submit>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
 </Card>

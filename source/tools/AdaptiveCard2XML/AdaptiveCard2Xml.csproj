@@ -215,6 +215,12 @@
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveSchemaVersion.cs">
       <Link>AdaptiveCards\AdaptiveSchemaVersion.cs</Link>
     </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveSelectAction.cs">
+      <Link>AdaptiveCards\AdaptiveSelectAction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveSelectActionConverter.cs">
+      <Link>AdaptiveCards\AdaptiveSelectActionConverter.cs</Link>
+    </Compile>
     <Compile Include="..\..\Libraries\AdaptiveCards\AdaptiveSerializationException.cs">
       <Link>AdaptiveCards\AdaptiveSerializationException.cs</Link>
     </Compile>

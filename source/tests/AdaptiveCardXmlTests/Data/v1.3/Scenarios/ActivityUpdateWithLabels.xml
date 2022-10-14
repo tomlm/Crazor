@@ -18,15 +18,15 @@
     <Fact Title="Due date:" Value="Not set" />
   </FactSet>
   <Action.ShowCard Title="Set due date">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Date Id="dueDate" Label="Enter the due date" />
       <Action.Submit Title="OK" />
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.ShowCard Title="Comment">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Text Id="comment" Label="Add a comment" IsMultiline="true" />
       <Action.Submit Title="OK" />
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
 </Card>

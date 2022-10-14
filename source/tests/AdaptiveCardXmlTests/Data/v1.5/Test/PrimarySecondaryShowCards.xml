@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <Action.ShowCard Title="Primary Show Card Action">
-    <AdaptiveCard Version="1.4">
+    <Card Version="1.4">
       <TextBlock Wrap="true">Primary Show Card</TextBlock>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.ShowCard Title="Secondary Show Card Action" Mode="secondary">
-    <AdaptiveCard Version="1.5">
+    <Card Version="1.5">
       <TextBlock Wrap="true">Secondary Show Card</TextBlock>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
 </Card>

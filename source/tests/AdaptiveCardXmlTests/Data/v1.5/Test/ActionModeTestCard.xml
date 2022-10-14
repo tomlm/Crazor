@@ -9,9 +9,9 @@
 }</Action.Submit>
     <Action.OpenUrl Title="OpenUrl" IconUrl="https://www.clipartmax.com/png/full/211-2118815_file-novosel-mushroom-svg-mario-mushroom-icon.png" Mode="secondary" Url="https://github.com/Microsoft/AdaptiveCards" />
     <Action.ShowCard Title="Action ShowCard" Mode="secondary">
-      <AdaptiveCard Version="1.4">
+      <Card Version="1.4">
         <TextBlock Wrap="true">Secondary action show card</TextBlock>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
   </ActionSet>
   <TextBlock>ActionSet **primary + secondary actions**</TextBlock>
@@ -41,24 +41,24 @@
   <TextBlock Wrap="true">Show Card Tests</TextBlock>
   <ActionSet>
     <Action.ShowCard Title="Primary 1">
-      <AdaptiveCard Version="1.4">
+      <Card Version="1.4">
         <TextBlock Wrap="true">Show Card for Primary 1</TextBlock>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
     <Action.ShowCard Title="Primary 2">
-      <AdaptiveCard Version="1.4">
+      <Card Version="1.4">
         <TextBlock Wrap="true">Show Card for Primary 2</TextBlock>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
     <Action.ShowCard Title="Secondary 1" Mode="secondary">
-      <AdaptiveCard Version="1.4">
+      <Card Version="1.4">
         <TextBlock Wrap="true">Show Card for Secondary 1</TextBlock>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
     <Action.ShowCard Title="Secondary 2" Mode="secondary">
-      <AdaptiveCard Version="1.4">
+      <Card Version="1.4">
         <TextBlock Wrap="true">Show card for secondary 2</TextBlock>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
   </ActionSet>
   <TextBlock>========= I am bottom line of body =========</TextBlock>
@@ -68,9 +68,9 @@
 }</Action.Submit>
   <Action.OpenUrl Title="Secondary OpenUrl" IconUrl="https://adaptivecards.io/content/cats/2.png" Mode="secondary" Url="https://adaptivecards.io/" />
   <Action.ShowCard Title="Secondary ShowCard" Mode="secondary">
-    <AdaptiveCard Version="1.4">
+    <Card Version="1.4">
       <TextBlock>What do you think?</TextBlock>
       <Action.Submit Title="Neat!" />
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
 </Card>

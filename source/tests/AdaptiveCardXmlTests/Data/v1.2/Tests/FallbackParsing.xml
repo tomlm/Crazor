@@ -46,7 +46,7 @@
       </Container>
     </Fallback>
   </UnknownElement>
-  <AdaptiveUnknownAction Type="MyCoolAction2">
+  <Action.Unknown Type="MyCoolAction2">
     <AdditionalProperties>
       <Property Name="coolnessLevel">toTheMax</Property>
     </AdditionalProperties>
@@ -63,5 +63,5 @@
     <Requires>
       <Property Name="adaptiveCards">1.2</Property>
     </Requires>
-  </AdaptiveUnknownAction>
+  </Action.Unknown>
 </Card>

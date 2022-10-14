@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Image Id="id1" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
-    <SelectAction xsi:type="Action.ToggleVisibility">
+    <Action.ToggleVisibility>
       <TargetElement ElementId="id2" />
       <TargetElement ElementId="id10" />
-    </SelectAction>
+    </Action.ToggleVisibility>
   </Image>
   <ActionSet Id="id10" IsVisible="false">
     <Action.Submit Title="ActionSet Toggle Test" />
   </ActionSet>
   <Container Id="id2" Spacing="medium">
-    <SelectAction xsi:type="Action.ToggleVisibility">
-      <TargetElement ElementId="id3" />
+    <SelectAction>
+      <Action.ToggleVisibility>
+        <TargetElement ElementId="id3" />
+      </Action.ToggleVisibility>
     </SelectAction>
     <TextBlock>This is some text</TextBlock>
     <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
   </Container>
   <ColumnSet Id="id3" Height="stretch">
-    <SelectAction xsi:type="Action.ToggleVisibility">
-      <TargetElement ElementId="id1" />
+    <SelectAction>
+      <Action.ToggleVisibility>
+        <TargetElement ElementId="id1" />
+      </Action.ToggleVisibility>
     </SelectAction>
     <Column>
       <TextBlock>Column 1</TextBlock>
@@ -29,14 +33,18 @@
   </ColumnSet>
   <ColumnSet>
     <Column Id="id4">
-      <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElement ElementId="id5" />
+      <SelectAction>
+        <Action.ToggleVisibility>
+          <TargetElement ElementId="id5" />
+        </Action.ToggleVisibility>
       </SelectAction>
       <TextBlock>Column 1</TextBlock>
     </Column>
     <Column Id="id5">
-      <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElement ElementId="id4" />
+      <SelectAction>
+        <Action.ToggleVisibility>
+          <TargetElement ElementId="id4" />
+        </Action.ToggleVisibility>
       </SelectAction>
       <TextBlock>Column 2</TextBlock>
     </Column>

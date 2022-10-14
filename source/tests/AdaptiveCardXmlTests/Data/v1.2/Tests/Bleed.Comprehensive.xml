@@ -184,13 +184,13 @@
   <TextBlock Size="extraLarge" Weight="bolder" Wrap="true">REMOVED TEXT</TextBlock>
   <ActionSet>
     <Action.ShowCard Title="Results">
-      <AdaptiveCard Version="1.0">
+      <Card Version="1.0">
         <Container Style="emphasis" Bleed="true">
           <Container>
             <TextBlock Spacing="none" Size="extraLarge" Weight="bolder" Wrap="true">REMOVED TEXT</TextBlock>
           </Container>
         </Container>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
   </ActionSet>
 </Card>

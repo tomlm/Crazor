@@ -35,9 +35,9 @@
   "id": "1234567890"
 }</Action.Submit>
   <Action.ShowCard Title="Show Card">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Text Id="CommentVal" Placeholder="enter comment" />
       <Action.Submit Title="OK" />
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
 </Card>

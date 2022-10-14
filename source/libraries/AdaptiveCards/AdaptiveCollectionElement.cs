@@ -79,7 +79,7 @@ namespace AdaptiveCards
         [XmlElement]
 #endif
         [DefaultValue(null)]
-        public AdaptiveAction SelectAction { get; set; }
+        public AdaptiveSelectAction SelectAction { get; set; }
 
         /// <summary>
         /// Defines if the element can bleed through its parent's padding.

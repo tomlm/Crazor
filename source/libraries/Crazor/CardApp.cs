@@ -317,7 +317,7 @@ namespace Crazor
             }
 
             CardView cardView = (CardView)((RazorView)viewResult.View).RazorPage;
-            cardView.Url = this.Services.GetRequiredService<IUrlHelper>();
+            cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
             cardView.Name = viewName;
             ITempDataProvider tempDataProvider;
@@ -468,10 +468,13 @@ namespace Crazor
                                 {
                                     new AdaptiveTextBlock("🗙")
                                 },
-                                SelectAction = new AdaptiveToggleVisibilityAction()
+                                SelectAction = new AdaptiveSelectAction()
                                 {
-                                    Title = "Close",
-                                    TargetElements = new List<AdaptiveTargetElement>() { new AdaptiveTargetElement($"messageBanner{iMessage}") }
+                                    Action =new AdaptiveToggleVisibilityAction()
+                                    {
+                                        Title = "Close",
+                                        TargetElements = new List<AdaptiveTargetElement>() { new AdaptiveTargetElement($"messageBanner{iMessage}") }
+                                    }
                                 }
                             }
                         }

@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <Image Id="id1" IsVisible="false" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat">
-    <SelectAction xsi:type="Action.ToggleVisibility">
+    <Action.ToggleVisibility>
       <TargetElement ElementId="id2" />
-    </SelectAction>
+    </Action.ToggleVisibility>
   </Image>
   <Container Id="id2" Spacing="large">
-    <SelectAction xsi:type="Action.ToggleVisibility">
-      <TargetElement ElementId="id3" />
+    <SelectAction>
+      <Action.ToggleVisibility>
+        <TargetElement ElementId="id3" />
+      </Action.ToggleVisibility>
     </SelectAction>
     <TextBlock Wrap="true">There's an image above this but the visibility is set to false. There shouldn't be a spacing above</TextBlock>
     <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
   </Container>
   <ColumnSet Id="id3" Height="stretch">
-    <SelectAction xsi:type="Action.ToggleVisibility">
-      <TargetElement ElementId="id1" />
+    <SelectAction>
+      <Action.ToggleVisibility>
+        <TargetElement ElementId="id1" />
+      </Action.ToggleVisibility>
     </SelectAction>
     <Column IsVisible="false">
       <TextBlock>Column 1</TextBlock>

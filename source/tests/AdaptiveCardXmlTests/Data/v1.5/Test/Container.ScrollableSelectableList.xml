@@ -4,9 +4,11 @@
     <TextBlock Size="medium" MaxLines="1">Recent Files</TextBlock>
   </Container>
   <Container Spacing="extraLarge">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "1"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
@@ -18,9 +20,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "2"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
@@ -32,9 +36,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "3"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
@@ -46,9 +52,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "4"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
@@ -60,9 +68,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "5"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />
@@ -74,9 +84,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "6"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
@@ -88,9 +100,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "7"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
@@ -102,9 +116,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "8"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_onenote_v2.png" AltText="OneNote" />
@@ -116,9 +132,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "9"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_word_v2.png" AltText="Microsoft Word" />
@@ -130,9 +148,11 @@
     </ColumnSet>
   </Container>
   <Container Spacing="extraLarge" Separator="true">
-    <SelectAction xsi:type="Action.Submit" Title="">{
+    <SelectAction>
+      <Action.Submit Title="">{
   "ux:position_ref": "10"
-}</SelectAction>
+}</Action.Submit>
+    </SelectAction>
     <ColumnSet>
       <Column Spacing="none" VerticalContentAlignment="center" Width="auto">
         <Image Size="small" Url="https://statics.teams.microsoft.com/evergreen-assets/cortana/file_ppt_v2.png" AltText="PowerPoint" />

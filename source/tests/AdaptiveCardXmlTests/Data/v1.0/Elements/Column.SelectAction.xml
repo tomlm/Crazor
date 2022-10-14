@@ -3,17 +3,23 @@
   <TextBlock Weight="bolder">Try clicking a column!</TextBlock>
   <ColumnSet>
     <Column>
-      <SelectAction xsi:type="Action.OpenUrl" Tooltip="cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      <SelectAction>
+        <Action.OpenUrl Tooltip="cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      </SelectAction>
       <TextBlock>Column 1</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
     <Column>
-      <SelectAction xsi:type="Action.OpenUrl" Tooltip="another cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      <SelectAction>
+        <Action.OpenUrl Tooltip="another cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      </SelectAction>
       <TextBlock>Column 2</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>
     <Column>
-      <SelectAction xsi:type="Action.OpenUrl" Tooltip="a third cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      <SelectAction>
+        <Action.OpenUrl Tooltip="a third cool link" Url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      </SelectAction>
       <TextBlock>Column 3</TextBlock>
       <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
     </Column>

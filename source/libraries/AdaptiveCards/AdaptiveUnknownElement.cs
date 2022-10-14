@@ -24,12 +24,15 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif
-        public override string Type { get; set; } = TypeName;
+        public override string Type { get; set; }
     }
 
     /// <summary>
     /// Represents an unknown action encountered while parsing.
     /// </summary>
+#if !NETSTANDARD1_3
+    [XmlType(TypeName = "Action.Unknown")]
+#endif
     public class AdaptiveUnknownAction : AdaptiveAction
     {
         /// <inheritdoc />
@@ -37,6 +40,6 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlAttribute]
 #endif 
-        public override string Type { get; set; }
+        public override string Type { get; set; } 
     }
 }

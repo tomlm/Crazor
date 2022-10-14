@@ -8,7 +8,7 @@
     <Image Url="https://adaptivecards.io/content/tofu.jpeg" AltText="Tofu topped with red sauce" />
   </ImageSet>
   <Action.ShowCard Title="Steak">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.ChoiceSet Id="SteakTemp" IsRequired="true" Label="How would you like your steak prepared?" ErrorMessage="Please select one of the above options" Style="expanded">
         <Choice Title="Rare" Value="rare" />
         <Choice Title="Medium-Rare" Value="medium-rare" />
@@ -18,24 +18,24 @@
       <Action.Submit Title="OK">{
   "FoodChoice": "Steak"
 }</Action.Submit>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.ShowCard Title="Chicken">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Toggle Id="ChickenAllergy" Label="Do you have any allergies?" Title="I'm allergic to peanuts" ValueOn="noPeanuts" ValueOff="peanuts" />
       <Input.Text Id="ChickenOther" Label="Any other preparation requests?" IsMultiline="true" />
       <Action.Submit Title="OK">{
   "FoodChoice": "Chicken"
 }</Action.Submit>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.ShowCard Title="Tofu">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Toggle Id="Vegetarian" Label="Would you like it prepared vegan?" Title="Please prepare it vegan" ValueOn="vegan" ValueOff="notVegan" />
       <Input.Text Id="VegOther" Label="Any other preparation requests?" IsMultiline="true" />
       <Action.Submit Title="OK">{
   "FoodChoice": "Vegetarian"
 }</Action.Submit>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
 </Card>

@@ -29,6 +29,6 @@
     <Folder Include="Data\v1.6\Tests\" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties data_4v1_12_4elements_4actionfallback_1json__JsonSchema="https://github.com/go-vela/types/releases/latest/download/schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

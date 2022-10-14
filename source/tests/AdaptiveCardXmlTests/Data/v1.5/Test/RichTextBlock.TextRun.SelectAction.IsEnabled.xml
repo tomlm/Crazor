@@ -2,6 +2,6 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
   <RichTextBlock>
     <Inlines>This link is disabled: </Inlines>
-    <Inlines>Link<SelectAction xsi:type="Action.OpenUrl" Url="https://adaptivecards.io/" /></Inlines>
+    <Inlines>Link<Action.OpenUrl Url="https://adaptivecards.io/" /></Inlines>
   </RichTextBlock>
 </Card>

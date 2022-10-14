@@ -14,7 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("ActionSet")]
-    [RestrictChildren("Action.Execute", "Action.OpenUrl", "Action.Submit", "Action.ToggleVisibility", "Action.ShowCard")]
+    [RestrictChildren("Action.Execute", "Action.OpenUrl", "Action.Submit", "Action.ToggleVisibility", "Action.ShowCard", "Action.Unknown")]
     public class ActionSetTagHelper : ReflectionTagHelper
     {
 

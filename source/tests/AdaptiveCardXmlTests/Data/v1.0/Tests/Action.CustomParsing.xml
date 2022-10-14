@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
   <TextBlock Wrap="true">This card has a custom action. If renderer can render the custom type, it will render a button. try clicking the button.</TextBlock>
-  <AdaptiveUnknownAction Title="New Button Type " Type="NewStyle">
+  <Action.Unknown Title="New Button Type " Type="NewStyle">
     <AdditionalProperties>
       <Property Name="Red" Type="integer">150</Property>
       <Property Name="Green" Type="integer">100</Property>
@@ -9,5 +9,5 @@
       <Property Name="CornerRadius" Type="integer">10</Property>
       <Property Name="alertMessage">Add Custom Message Here</Property>
     </AdditionalProperties>
-  </AdaptiveUnknownAction>
+  </Action.Unknown>
 </Card>

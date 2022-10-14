@@ -195,7 +195,12 @@ namespace AdaptiveCards
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3
-        [XmlElement]
+        [XmlElement(typeof(AdaptiveShowCardAction))]
+        [XmlElement(typeof(AdaptiveExecuteAction))]
+        [XmlElement(typeof(AdaptiveSubmitAction))]
+        [XmlElement(typeof(AdaptiveOpenUrlAction))]
+        [XmlElement(typeof(AdaptiveToggleVisibilityAction))]
+        [XmlElement(typeof(AdaptiveUnknownAction))]
 #endif
         [DefaultValue(null)]
         public AdaptiveAction SelectAction { get; set; }

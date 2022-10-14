@@ -16,9 +16,9 @@
   </RichTextBlock>
   <RichTextBlock>
     <Inlines>Here's an inline action: </Inlines>
-    <Inlines>Submit<SelectAction xsi:type="Action.Submit" /></Inlines>
+    <Inlines>Submit<Action.Submit /></Inlines>
     <Inlines>! Here's one that's highlighted: </Inlines>
-    <Inlines Highlight="true">Submit!<SelectAction xsi:type="Action.Submit" /></Inlines>
+    <Inlines Highlight="true">Submit!<Action.Submit /></Inlines>
   </RichTextBlock>
   <TextBlock Size="large" Wrap="true">Highlights with colors and containers:</TextBlock>
   <Container>

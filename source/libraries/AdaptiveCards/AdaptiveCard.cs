@@ -277,7 +277,7 @@ namespace AdaptiveCards
         [XmlElement]
 #endif
         [DefaultValue(null)]
-        public AdaptiveAction SelectAction { get; set; }
+        public AdaptiveSelectAction SelectAction { get; set; }
 
         /// <summary>
         /// Defines how the card can be refreshed by making a request to the target Bot.

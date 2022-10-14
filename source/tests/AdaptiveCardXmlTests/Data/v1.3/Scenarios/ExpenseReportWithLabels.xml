@@ -55,10 +55,12 @@
       <TextBlock Wrap="true">$ 300</TextBlock>
     </Column>
     <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
-      <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElement ElementId="cardContent1" />
-        <TargetElement ElementId="chevronUp1" />
-        <TargetElement ElementId="chevronDown1" />
+      <SelectAction>
+        <Action.ToggleVisibility>
+          <TargetElement ElementId="cardContent1" />
+          <TargetElement ElementId="chevronUp1" />
+          <TargetElement ElementId="chevronDown1" />
+        </Action.ToggleVisibility>
       </SelectAction>
       <Image Id="chevronDown1" Url="https://adaptivecards.io/content/down.png" AltText="Air Travel Expense $300 collapsed" Width="20px" />
       <Image Id="chevronUp1" IsVisible="false" Url="https://adaptivecards.io/content/up.png" AltText="Air Travel Expense $300 expanded" Width="20px" />
@@ -97,10 +99,12 @@
       <TextBlock Wrap="true">$ 100</TextBlock>
     </Column>
     <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
-      <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElement ElementId="cardContent2" />
-        <TargetElement ElementId="chevronUp2" />
-        <TargetElement ElementId="chevronDown2" />
+      <SelectAction>
+        <Action.ToggleVisibility>
+          <TargetElement ElementId="cardContent2" />
+          <TargetElement ElementId="chevronUp2" />
+          <TargetElement ElementId="chevronDown2" />
+        </Action.ToggleVisibility>
       </SelectAction>
       <Image Id="chevronDown2" Url="https://adaptivecards.io/content/down.png" AltText="Auto Mobile Expense $100 collapsed" Width="20px" />
       <Image Id="chevronUp2" IsVisible="false" Url="https://adaptivecards.io/content/up.png" AltText="Auto Mobile Expense $100 expanded" Width="20px" />
@@ -138,10 +142,12 @@
       <TextBlock Wrap="true">$ 4.30</TextBlock>
     </Column>
     <Column Spacing="small" VerticalContentAlignment="center" Width="auto">
-      <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElement ElementId="cardContent3" />
-        <TargetElement ElementId="chevronUp3" />
-        <TargetElement ElementId="chevronDown3" />
+      <SelectAction>
+        <Action.ToggleVisibility>
+          <TargetElement ElementId="cardContent3" />
+          <TargetElement ElementId="chevronUp3" />
+          <TargetElement ElementId="chevronDown3" />
+        </Action.ToggleVisibility>
       </SelectAction>
       <Image Id="chevronDown3" Url="https://adaptivecards.io/content/down.png" AltText="Excess Baggage Cost $50.38 collapsed" Width="20px" />
       <Image Id="chevronUp3" IsVisible="false" Url="https://adaptivecards.io/content/up.png" AltText="Excess Baggage Cost $50.38 expanded" Width="20px" />
@@ -206,10 +212,12 @@
   </Container>
   <ColumnSet>
     <Column VerticalContentAlignment="center" Width="1">
-      <SelectAction xsi:type="Action.ToggleVisibility">
-        <TargetElement ElementId="cardContent4" />
-        <TargetElement ElementId="showHistory" />
-        <TargetElement ElementId="hideHistory" />
+      <SelectAction>
+        <Action.ToggleVisibility>
+          <TargetElement ElementId="cardContent4" />
+          <TargetElement ElementId="showHistory" />
+          <TargetElement ElementId="hideHistory" />
+        </Action.ToggleVisibility>
       </SelectAction>
       <TextBlock Id="showHistory" Color="accent" HorizontalAlignment="right" Wrap="true">Show history</TextBlock>
       <TextBlock Id="hideHistory" IsVisible="false" Color="accent" HorizontalAlignment="right" Wrap="true">Hide history</TextBlock>
@@ -228,13 +236,13 @@
   "action": "approve"
 }</Action.Submit>
       <Action.ShowCard Title="Reject" Style="destructive">
-        <AdaptiveCard Version="1.0">
+        <Card Version="1.0">
           <Input.Text Id="RejectCommentID" IsRequired="true" Label="Please specify an appropriate reason for rejection" ErrorMessage="A reason for rejection is necessary" IsMultiline="true" />
           <Action.Submit Title="Send">{
   "id": "_qkQW8dJlUeLVi7ZMEzYVw",
   "action": "reject"
 }</Action.Submit>
-        </AdaptiveCard>
+        </Card>
       </Action.ShowCard>
     </ActionSet>
   </Container>

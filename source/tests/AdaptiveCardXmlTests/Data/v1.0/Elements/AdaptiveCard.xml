@@ -22,10 +22,10 @@
     </FactSet>
   </Container>
   <Action.ShowCard Title="Comment">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <Input.Text Id="comment" Placeholder="Enter your comment" IsMultiline="true" />
       <Action.Submit Title="OK" />
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.OpenUrl Title="View" Url="https://adaptivecards.io/" />
 </Card>

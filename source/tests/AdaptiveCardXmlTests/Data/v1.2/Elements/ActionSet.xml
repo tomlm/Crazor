@@ -3,17 +3,17 @@
   <TextBlock Wrap="true">Cards can have action sets in the middle of their body.</TextBlock>
   <ActionSet>
     <Action.ShowCard Title="ShowCard">
-      <AdaptiveCard Version="1.0">
+      <Card Version="1.0">
         <TextBlock>This is a show card</TextBlock>
-      </AdaptiveCard>
+      </Card>
     </Action.ShowCard>
     <Action.OpenUrl Title="OpenUrl" Url="https://adaptivecards.io" />
   </ActionSet>
   <TextBlock Wrap="true">There are also still "actions" at the bottom of the card</TextBlock>
   <Action.ShowCard Title="ShowCard">
-    <AdaptiveCard Version="1.0">
+    <Card Version="1.0">
       <TextBlock>This is a show card</TextBlock>
-    </AdaptiveCard>
+    </Card>
   </Action.ShowCard>
   <Action.OpenUrl Title="OpenUrl" Url="https://adaptivecards.io" />
 </Card>

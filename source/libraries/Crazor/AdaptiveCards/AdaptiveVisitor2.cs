@@ -102,6 +102,11 @@ namespace Crazor.AdaptiveCards
             }
         }
 
+        protected virtual void Visit(AdaptiveSelectAction selectAction)
+        {
+            Visit(selectAction.Action);
+        }
+
         protected virtual void Visit(AdaptiveContainer container)
         {
             Elements.Add(container);
