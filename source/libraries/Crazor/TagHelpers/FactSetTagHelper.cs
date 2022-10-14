@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("FactSet")]
+    [RestrictChildren("Fact")]
     public class FactSetTagHelper : ReflectionTagHelper
     {
 

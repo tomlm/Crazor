@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("RichTextBlock")]
+    [RestrictChildren("TextRun")]
     public class RichTextBlockTagHelper : ReflectionTagHelper
     {
 

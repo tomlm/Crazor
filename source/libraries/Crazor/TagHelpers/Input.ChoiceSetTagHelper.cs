@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Input.ChoiceSet")]
+    [RestrictChildren("Choice","Data.Query")]
     public class InputChoiceSetTagHelper : ReflectionTagHelper
     {
 

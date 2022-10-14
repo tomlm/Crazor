@@ -13,7 +13,7 @@ namespace Crazor.TagHelpers
     /// TagHelper for Choice
     /// </summary>
 
-    [HtmlTargetElement("Choice")]
+    [HtmlTargetElement("Choice", ParentTag ="Input.ChoiceSet")]
     public class ChoiceTagHelper : ReflectionTagHelper
     {
 

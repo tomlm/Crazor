@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Table")]
+    [RestrictChildren("TableColumn", "TableRow")]
     public class TableTagHelper : ReflectionTagHelper
     {
 

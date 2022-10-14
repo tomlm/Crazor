@@ -13,60 +13,60 @@ namespace Crazor.TagHelpers
     /// TagHelper for Column
     /// </summary>
 
-    [HtmlTargetElement("Column")]
+    [HtmlTargetElement("Column", ParentTag = "ColumnSet")]
     public class ColumnTagHelper : ReflectionTagHelper
     {
 
         [HtmlAttributeName(nameof(Bleed))]
         [DefaultValue(false)]
-        public Boolean Bleed { get; set; } 
+        public Boolean Bleed { get; set; }
 
         [HtmlAttributeName(nameof(HorizontalAlignment))]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
+        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
         [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean IsVisible { get; set; } = true;
 
         [HtmlAttributeName(nameof(MinHeight))]
         [DefaultValue(null)]
-        public String MinHeight { get; set; } 
+        public String MinHeight { get; set; }
 
         [HtmlAttributeName(nameof(Rtl))]
         [DefaultValue(false)]
-        public Boolean Rtl { get; set; } 
+        public Boolean Rtl { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
         [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean Separator { get; set; }
 
         [HtmlAttributeName(nameof(Size))]
         [DefaultValue(null)]
-        public String Size { get; set; } 
+        public String Size { get; set; }
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-        public AdaptiveSpacing Spacing { get; set; } 
+        public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
         [DefaultValue(null)]
-        public String Speak { get; set; } 
+        public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
         [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-        public AdaptiveContainerStyle Style { get; set; } 
+        public AdaptiveContainerStyle Style { get; set; }
 
         [HtmlAttributeName(nameof(VerticalContentAlignment))]
         [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
-        public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; } 
+        public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
         [DefaultValue(null)]
-        public String Height { get; set; } 
+        public String Height { get; set; }
 
         [HtmlAttributeName(nameof(Width))]
         [DefaultValue(null)]
-        public String Width { get; set; } 
+        public String Width { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace AdaptiveCards
     /// Data.Query data structure for filtered choicesets.
     /// </summary>
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [XmlType("Data.Query")]
     public class AdaptiveDataQuery
     {
         [JsonIgnore]

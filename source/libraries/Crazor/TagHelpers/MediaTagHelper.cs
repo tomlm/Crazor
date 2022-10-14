@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Media")]
+    [RestrictChildren("MediaSource", "CaptionSource")]
     public class MediaTagHelper : ReflectionTagHelper
     {
 

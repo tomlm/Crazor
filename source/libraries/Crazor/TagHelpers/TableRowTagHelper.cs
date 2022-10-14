@@ -13,36 +13,37 @@ namespace Crazor.TagHelpers
     /// TagHelper for TableRow
     /// </summary>
 
-    [HtmlTargetElement("TableRow")]
+    [HtmlTargetElement("TableRow", ParentTag = "Table")]
+    [RestrictChildren("TableCell")]
     public class TableRowTagHelper : ReflectionTagHelper
     {
 
         [HtmlAttributeName(nameof(HorizontalAlignment))]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
+        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
         [HtmlAttributeName(nameof(HorizontalCellContentAlignment))]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-        public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; } 
+        public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
         [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean IsVisible { get; set; } = true;
 
         [HtmlAttributeName(nameof(Separator))]
         [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean Separator { get; set; }
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-        public AdaptiveSpacing Spacing { get; set; } 
+        public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
         [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-        public AdaptiveContainerStyle Style { get; set; } 
+        public AdaptiveContainerStyle Style { get; set; }
 
         [HtmlAttributeName(nameof(VerticalCellContentAlignment))]
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-        public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; } 
+        public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
     }
 }

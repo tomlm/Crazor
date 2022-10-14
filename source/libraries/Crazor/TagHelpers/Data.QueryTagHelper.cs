@@ -10,20 +10,22 @@ namespace Crazor.TagHelpers
 {
 
     /// <summary>
-    /// TagHelper for Fact
+    /// TagHelper for Data.Query
     /// </summary>
 
-    [HtmlTargetElement("Fact", ParentTag ="FactSet")]
-    public class FactTagHelper : ReflectionTagHelper
+    [HtmlTargetElement("Data.Query", ParentTag ="Input.ChoiceSet")]
+    public class DataQueryTagHelper : ReflectionTagHelper
     {
 
-        [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
-        public String Speak { get; set; } 
+        [HtmlAttributeName(nameof(Count))]
+        public Int32 Count { get; set; } 
 
-        [HtmlAttributeName(nameof(Title))]
+        [HtmlAttributeName(nameof(Dataset))]
         [DefaultValue(null)]
-        public String Title { get; set; } 
+        public String Dataset { get; set; } 
+
+        [HtmlAttributeName(nameof(Skip))]
+        public Int32 Skip { get; set; } 
 
         [HtmlAttributeName(nameof(Value))]
         [DefaultValue(null)]

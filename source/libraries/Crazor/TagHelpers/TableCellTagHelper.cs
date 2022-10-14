@@ -13,7 +13,7 @@ namespace Crazor.TagHelpers
     /// TagHelper for TableCell
     /// </summary>
 
-    [HtmlTargetElement("TableCell")]
+    [HtmlTargetElement("TableCell", ParentTag ="TableRow")]
     public class TableCellTagHelper : ReflectionTagHelper
     {
 

@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("ColumnSet")]
+    [RestrictChildren("Column")]
     public class ColumnSetTagHelper : ReflectionTagHelper
     {
 

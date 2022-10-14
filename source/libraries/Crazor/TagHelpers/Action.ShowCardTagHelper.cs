@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Action.ShowCard")]
+    [RestrictChildren("Card")]
     public class ActionShowCardTagHelper : ReflectionTagHelper
     {
 
