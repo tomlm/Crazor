@@ -1,11 +1,12 @@
 ﻿@using Crazor
 @using OpBot.TagHelpers.FieldErrors
 @model FieldErrorsTagHelper
+@addTagHelper *, Crazor
 
-@if (Model.Errors != null && Model.Errors.TryGetValue(Model.Id, out var messages))
+@if (Model.ValidationErrors != null && Model.ValidationErrors.Any())
 {
-    foreach(var message in messages)
+    foreach (var message in Model.ValidationErrors)
     {
-        <TextBlock Spacing="none" Color="attention">@message</TextBlock>
+        <TextBlock Spacing="None" Color="Attention">@message</TextBlock>
     }
 }

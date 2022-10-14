@@ -1,21 +1,22 @@
 ﻿@using OpBot.Cards.Address
+@using System.ComponentModel
 @inherits CardView<EditAddressModel>
+@addTagHelper Container, Crazor
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
-
     @if (Model.IsEdit)
     {
-        <TextBlock Size="extraLarge">Edit Address</TextBlock>
+        <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
     }
     else
     {
-        <TextBlock Size="extraLarge">Add Address</TextBlock>
+        <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
-    <Input.Text Id="Street" Label="Street" Style="text" ErrorMessage="Street is required" Value="@Street" />
-    <FieldErrors Id="Street" Errors="@ValidationErrors" />
+    <Input.Text Binding="@nameof(Street)" Style="Text" ErrorMessage="Street is required" />
+    <FieldErrors Binding="@nameof(Street)" />
 
-    <Input.Text Id="City" Label="City" Style="text" ErrorMessage="City is required" Value="@City" />
-    <FieldErrors Id="City" Errors="@ValidationErrors" />
+    <Input.Text Binding="@nameof(City)" Style="Text" ErrorMessage="City is required" />
+    <FieldErrors Binding="@nameof(City)" />
 
     <Input.ChoiceSet Id="State" Label="State" ErrorMessage="State is required" Value="@State">
         <Choice Title="Alabama" Value="AL" />
@@ -27,16 +28,16 @@
         <Choice Title="Iowa" Value="IA" />
         <Choice Title="Oregon" Value="OR" />
     </Input.ChoiceSet>
-    <FieldErrors Id="State" Errors="@ValidationErrors" />
+    <FieldErrors Binding="@nameof(State)" />
 
-    <Input.Text Id="PostalCode" Label="Zip" Style="text" ErrorMessage="Zip is required" Value="@PostalCode" />
-    <FieldErrors Id="PostalCode" Errors="@ValidationErrors" />
+    <Input.Text Binding="@nameof(PostalCode)" Style="Text" ErrorMessage="Zip is required" />
+    <FieldErrors Binding="@nameof(PostalCode)" />
 
     <Input.ChoiceSet Id="Country" Label="Country" ErrorMessage="Country is required" Value="@Country">
         <Choice Title="U.S.A." Value="USA" />
         <Choice Title="Canada" Value="CA" />
     </Input.ChoiceSet>
-    <FieldErrors Id="Country" Errors="@ValidationErrors" />
+    <FieldErrors Binding="@nameof(Country)" />
 
     <Action.Execute Title="Cancel" Verb="OnCancel" />
     <Action.Execute Title="Save" Verb="OnSave" />
@@ -62,6 +63,7 @@
     [BindProperty]
     [Required]
     [MaxLength(20)]
+    [DisplayName("Zip")]
     public string? PostalCode { get; set; }
 
     [BindProperty]

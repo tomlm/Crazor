@@ -1,7 +1,7 @@
 ﻿using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Crazor;
+using Crazor.TagHelpers;
 
 namespace OpBot.TagHelpers.Person
 {
@@ -12,7 +12,7 @@ namespace OpBot.TagHelpers.Person
         public string Url { get; set; } = string.Empty;
 
         [HtmlAttributeName]
-        public string Size { get; set; } = AdaptiveImageSize.Small.ToString();
+        public AdaptiveImageSize Size { get; set; } = AdaptiveImageSize.Small;
 
         [HtmlAttributeName]
         public string? Name { get; set; } = string.Empty;

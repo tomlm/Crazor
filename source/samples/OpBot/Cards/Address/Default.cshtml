@@ -4,7 +4,7 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
 
 
-    <TextBlock Size="extraLarge">Addresses</TextBlock>
+    <TextBlock Size="ExtraLarge">Addresses</TextBlock>
     @if (Model.Addresses.Any())
     {
         @foreach (var address in Model.Addresses)
@@ -16,14 +16,14 @@
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
                     </Column>
                     <Column Width="auto">
-                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="small">
+                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="Small">
                             <SelectAction xsi:type="Action.Execute" Tooltip="Edit Address" Verb="OnEdit">
                                 { "resourceId":"@address.Id" }
                             </SelectAction>
                         </Image>
                     </Column>
                     <Column Width="auto">
-                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="small">
+                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="Small">
                             <SelectAction xsi:type="Action.Execute" Tooltip="Delete Address" Verb="OnDelete" >
                                 { "resourceId":"@address.Id" }
                             </SelectAction>

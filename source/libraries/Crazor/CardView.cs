@@ -277,11 +277,12 @@ namespace Crazor
                     xml = writer.ToString().Trim();
                 }
 
-                //if (!xml.StartsWith("<?xml"))
-                //{
-                //    xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
-                //}
+                if (!xml.StartsWith("<?xml"))
+                {
+                    xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
+                }
                 Diag.Debug.WriteLine(xml);
+                
                 var reader = XmlReader.Create(new StringReader(xml));
                 var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
                 return card;
@@ -306,7 +307,7 @@ namespace Crazor
             var searchMethod = GetMethod($"Get{search.Dataset}Choices");
             if (searchMethod != null)
             {
-                JObject data = JObject.FromObject(new 
+                JObject data = JObject.FromObject(new
                 {
                     queryText = search.QueryText,
                     top = search.QueryOptions.Top,

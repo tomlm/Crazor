@@ -6,23 +6,23 @@
 
     @if (Model.IsEdit)
     {
-        <TextBlock Size="extraLarge">Edit Catalog Item</TextBlock>
+        <TextBlock Size="ExtraLarge">Edit Catalog Item</TextBlock>
     }
     else
     {
-        <TextBlock Size="extraLarge">Add Catalog Item</TextBlock>
+        <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
     }
-    <Input.Text Id="ItemName" Label="Name" Style="text" ErrorMessage="Name is required." Value="@ItemName" />
-    <FieldErrors Id="ItemName" Errors="@ValidationErrors" />
+    <Input.Text Id="ItemName" Label="Name" Style="Text" ErrorMessage="Name is required." Value="@ItemName" />
+    <FieldErrors Id="ItemName"/>
     
-    <Input.Text Id="Description" Label="Description" Style="text" ErrorMessage="Description is required" Value="@Description" />
-    <FieldErrors Id="Description" Errors="@ValidationErrors" />
+    <Input.Text Id="Description" Label="Description" Style="Text" ErrorMessage="Description is required" Value="@Description" />
+    <FieldErrors Id="Description"/>
     
     <Input.Number Id="Price" Label="Price" ErrorMessage="Price is required." Value="@Price" />
-    <FieldErrors Id="Price" Errors="@ValidationErrors" />
+    <FieldErrors Id="Price"/>
 
-    <Input.Text Id="PictureUri" Label="PictureUri" Style="text" ErrorMessage="Picture Uri is required." Value="@PictureUri" />
-    <FieldErrors Id="PictureUri" Errors="@ValidationErrors" />
+    <Input.Text Id="PictureUri" Label="PictureUri" Style="Text" ErrorMessage="Picture Uri is required." Value="@PictureUri" />
+    <FieldErrors Id="PictureUri"/>
 
     <Action.Execute Title="Cancel" Verb="OnCancel" />
     <Action.Execute Title="Save" Verb="OnSave" />
@@ -42,7 +42,7 @@
 
     [BindProperty]
     [Required]
-    public decimal Price { get; set; }
+    public double Price { get; set; }
 
     [BindProperty]
     [Required]
@@ -55,7 +55,7 @@
         {
             ItemName = Model.Item.Name;
             Description = Model.Item.Description;
-            Price = Model.Item.Price;
+            Price = (Double)Model.Item.Price;
             PictureUri = Model.Item.PictureUri;
         }
     }
@@ -66,7 +66,7 @@
         {
             Model.Item.Name = ItemName;
             Model.Item.Description = Description;
-            Model.Item.Price = Price;
+            Model.Item.Price = (Decimal)Price;
             Model.Item.PictureUri = PictureUri;
 
             this.Close(Model);

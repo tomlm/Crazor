@@ -51,7 +51,7 @@ namespace AdaptiveCards
         /// <summary>
         /// The JSON property name that this class implements.
         /// </summary>
-        public const string TypeName = "backgroundImage";
+        public const string TypeName = "BackgroundImage";
 
         /// <summary>
         /// The Url of the background image.

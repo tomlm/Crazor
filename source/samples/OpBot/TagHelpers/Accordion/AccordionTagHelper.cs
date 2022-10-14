@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using Crazor;
+using Crazor.TagHelpers;
 
 namespace OpBot.TagHelpers.Accordion
 {

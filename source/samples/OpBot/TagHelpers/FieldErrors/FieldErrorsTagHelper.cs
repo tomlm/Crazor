@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using Crazor;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Crazor.TagHelpers;
 
 namespace OpBot.TagHelpers.FieldErrors
 {
@@ -9,9 +11,5 @@ namespace OpBot.TagHelpers.FieldErrors
     [HtmlTargetElement("FieldErrors")]
     public class FieldErrorsTagHelper : RazorTagHelper
     {
-
-        [HtmlAttributeName]
-        public Dictionary<string, HashSet<string>>? Errors { get; set; }
-
     }
 }
