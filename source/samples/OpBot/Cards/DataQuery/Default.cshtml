@@ -3,20 +3,20 @@
 @inherits CardView
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
-    <Input.ChoiceSet Binding="nameof(Option)" Style="Filtered" >
+    <Input.ChoiceSet Binding="nameof(Number)" Style="Filtered" >
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />
         <Choice Title="4" Value="4" />
-        <Data.Query Dataset="MyDataSet" />
+        <Data.Query Dataset="Numbers" />
     </Input.ChoiceSet>
 </Card>
 
 @functions {
     [BindProperty]
-    public int Option { get; set; }
+    public int Number { get; set; }
 
-    public async Task<AdaptiveChoice[]> GetMyDataSetChoicesAsync(string queryText, int top = 10, int skip = 0)
+    public async Task<AdaptiveChoice[]> GetNumbersChoicesAsync(string queryText, int top = 10, int skip = 0)
     {
         return Enumerable.Range(1, 1000000)
            .Where(v => v.ToString().StartsWith(queryText?.Trim() ?? String.Empty))
@@ -25,8 +25,4 @@
            .Select(v => new AdaptiveChoice() { Title = v.ToString(), Value = v.ToString() })
            .ToArray();
     }
-
-    //public async Task<AdaptiveChoice[]> GetMyDataSetChoicesAsync(string queryText, int top = 10, int skip = 0)
-    //{
-    //}
 }
