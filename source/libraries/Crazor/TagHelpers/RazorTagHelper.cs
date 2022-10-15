@@ -50,6 +50,7 @@ namespace Crazor.TagHelpers
 
         public override void Init(TagHelperContext context)
         {
+            // find the View property, it's handy
             var viewContext = ViewContext;
             while (this.View == null)
             {
@@ -74,54 +75,18 @@ namespace Crazor.TagHelpers
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (ViewContext is null)
-            {
-                throw new ArgumentNullException(nameof(ViewContext));
-            }
-
-            // get child content and capture it in our model so we can insert it in our output
+            // get child content and capture it in our model so we can insert it in our .cshtml template
             ChildContent = await output.GetChildContentAsync();
 
             IHtmlHelper? htmlHelper = ViewContext.HttpContext.RequestServices.GetService<IHtmlHelper>();
             ArgumentNullException.ThrowIfNull(htmlHelper);
 
+            // bind our view content
             (htmlHelper as IViewContextAware)!.Contextualize(ViewContext);
             var content = await htmlHelper.PartialAsync(_viewPath, this);
 
             output.TagName = null;
             output.Content.SetHtmlContent(content);
-        }
-
-        public string EmitAttributes(string[] ignore = null)
-        {
-            ignore = ignore ?? Array.Empty<string>();
-            var properties = GetType().GetProperties()
-                .Where(p => !ignore.Contains(p.Name) && p.GetCustomAttribute<HtmlAttributeNameAttribute>(true) != null);
-            StringBuilder sb = new StringBuilder();
-            foreach (var property in properties)
-            {
-                string attributeName = property.GetCustomAttribute<HtmlAttributeNameAttribute>()?.Name ?? property.Name;
-                var bindValueAttribute = property.GetCustomAttribute<BindingAttribute>();
-                var value = property?.GetValue(this);
-
-                if (value != null)
-                {
-                    if (property.PropertyType.IsEnum)
-                    {
-                        sb.AppendLine($"{attributeName}=\"{value}\" ");
-                    }
-                    else if (property.PropertyType == typeof(bool))
-                    {
-                        sb.AppendLine($"{attributeName}=\"{value.ToString().ToLower()}\" ");
-                    }
-                    else
-                    {
-                        sb.AppendLine($"{attributeName}=\"{value.ToString()}\" ");
-                    }
-                }
-            }
-
-            return sb.ToString();
         }
     }
 }
