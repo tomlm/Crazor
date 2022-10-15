@@ -14,7 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Input.Number")]
-    public class InputNumberTagHelper : ReflectionTagHelper
+    public class InputNumberTagHelper : InputTagHelper
     {
 
         [HtmlAttributeName(nameof(ErrorMessage))]

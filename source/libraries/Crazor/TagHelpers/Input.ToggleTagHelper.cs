@@ -14,7 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Input.Toggle")]
-    public class InputToggleTagHelper : ReflectionTagHelper
+    public class InputToggleTagHelper : InputTagHelper
     {
 
         [HtmlAttributeName(nameof(ErrorMessage))]

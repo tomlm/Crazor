@@ -121,7 +121,7 @@ namespace Crazor.TagHelpers
         public string EmitAttributes(string[] ignore = null)
         {
             ignore = ignore ?? Array.Empty<string>();
-            var properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            var properties = GetType().GetProperties()
                 .Where(p => !ignore.Contains(p.Name) && p.GetCustomAttribute<HtmlAttributeNameAttribute>(true) != null);
             StringBuilder sb = new StringBuilder();
             foreach (var property in properties)

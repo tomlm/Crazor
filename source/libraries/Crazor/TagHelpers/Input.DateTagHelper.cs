@@ -14,7 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Input.Date")]
-    public class InputDateTagHelper : ReflectionTagHelper
+    public class InputDateTagHelper : InputTagHelper
     {
 
         [HtmlAttributeName(nameof(ErrorMessage))]

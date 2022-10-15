@@ -15,7 +15,7 @@ namespace Crazor.TagHelpers
 
     [HtmlTargetElement("Input.ChoiceSet")]
     [RestrictChildren("Choice","Data.Query")]
-    public class InputChoiceSetTagHelper : ReflectionTagHelper
+    public class InputChoiceSetTagHelper : InputTagHelper
     {
 
         [HtmlAttributeName(nameof(ErrorMessage))]
