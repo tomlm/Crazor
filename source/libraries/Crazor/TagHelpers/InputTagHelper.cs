@@ -49,13 +49,22 @@ namespace Crazor.TagHelpers
 
                 if (!String.IsNullOrEmpty(this.Binding))
                 {
-                    this.BindingProperty = this.View.GetType().GetProperty(this.Binding);
-                    if (this.BindingProperty != null)
+                    this.BindingValue = this.View;
+                    var parts = this.Binding.Split('.');
+                    foreach (var part in parts)
                     {
-                        this.BindingValue = this.View.GetPropertyValue(this.Binding);
-                        var dna = this.BindingProperty.GetCustomAttribute<DisplayNameAttribute>();
-                        this.BindingDisplayName = dna?.DisplayName ?? Binding;
+                        this.BindingProperty = this.BindingValue?.GetType().GetProperty(part);
+                        if (this.BindingProperty != null)
+                        {
+                            this.BindingValue = this.BindingProperty?.GetValue(this.BindingValue);
+                        }
+                        else
+                        {
+                            throw new ArgumentNullException($"Could not find property path {part} of {this.Binding}");
+                        }
                     }
+                    var dna = this.BindingProperty.GetCustomAttribute<DisplayNameAttribute>();
+                    this.BindingDisplayName = dna?.DisplayName ?? parts.Last();
                 }
             }
         }

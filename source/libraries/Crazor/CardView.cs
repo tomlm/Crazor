@@ -1,15 +1,19 @@
 ﻿using AdaptiveCards;
+using DataAnnotationsValidator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -77,17 +81,30 @@ namespace Crazor
             JObject? data = (JObject?)this.Action?.Data;
             if (data != null)
             {
-                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(BindPropertyAttribute))))
+                foreach (var property in data.Properties())
                 {
-                    var prop = data.Properties().Where(p => p.Name.ToLower() == property.Name.ToLower()).SingleOrDefault();
-                    if (prop != null)
+                    var parts = property.Name.Split('.');
+
+                    // if root is [BindProperty]
+                    var prop = this.GetType().GetProperty(parts[0]);
+                    if (prop != null && prop.GetCustomAttribute<BindPropertyAttribute>() != null)
                     {
-                        property.SetValue(this, prop.Value.ToObject(property.PropertyType));
+                        object obj = this;
+                        foreach(var part in parts.Take(parts.Count() - 1))
+                        {
+                            obj = obj.GetPropertyValue(part);
+                        }
+                        var targetProperty = obj.GetType().GetProperty(parts.Last());
+                        if (targetProperty != null)
+                        {
+                            targetProperty.SetValue(obj, property.Value.ToObject(targetProperty.PropertyType));
+                        }
+                        else
+                        {
+                            targetProperty.SetValue(obj, (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null);
+                        }
                     }
-                    else
-                    {
-                        property.SetValue(this, (property.PropertyType.IsValueType) ? Activator.CreateInstance(property.PropertyType) : null);
-                    }
+
                 }
             }
 
@@ -285,7 +302,7 @@ namespace Crazor
                     xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
                 }
                 Diag.Debug.WriteLine(xml);
-                
+
                 var reader = XmlReader.Create(new StringReader(xml));
                 var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
                 return card;

@@ -1,0 +1,89 @@
+﻿@using Newtonsoft.Json
+@using OpBot.Cards.Address2
+@using System.ComponentModel
+@inherits CardView<EditAddressModel>
+
+<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
+    @if (Model.IsEdit)
+    {
+        <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
+    }
+    else
+    {
+        <TextBlock Size="ExtraLarge">Add Address</TextBlock>
+    }
+
+    <Input.Text Binding="Address.Street" />
+    <FieldErrors Id="Address.Street" />
+
+    <Input.Text Binding="Address.City" />
+    <FieldErrors Id="Address.City" />
+
+    <Input.ChoiceSet Binding="Address.State">
+        <Choice Title="Alabama" Value="AL" />
+        <Choice Title="Arkansas" Value="AR" />
+        <Choice Title="Alaska" Value="AK" />
+        <Choice Title="California" Value="CA" />
+        <Choice Title="Idaho" Value="ID" />
+        <Choice Title="Washington" Value="WA" />
+        <Choice Title="Iowa" Value="IA" />
+        <Choice Title="Oregon" Value="OR" />
+    </Input.ChoiceSet>
+    <FieldErrors Id="Address.State" />
+
+    <Input.Text Binding="Address.PostalCode" />
+    <FieldErrors Id="Address.PostalCode" />
+
+    <Input.ChoiceSet Binding="Address.Country">
+        <Choice Title="U.S.A." Value="USA" />
+        <Choice Title="Canada" Value="CA" />
+    </Input.ChoiceSet>
+    <FieldErrors Id="Address.Country" />
+
+    <Action.Execute Title="Cancel" Verb="OnCancel" />
+    <Action.Execute Title="Save" Verb="OnSave" />
+</Card>
+
+@functions {
+    /* Supported Data Annotations
+    *   [PasswordPropertyText]
+    *   [Range]
+    *   [Phone]
+    *   [Url]
+    *   [Email]
+    *   [StringLength]
+    *   [MaxLength]
+    *   [RegularExpression("Ames", ErrorMessage = "The value must be Ames")]
+    *   [DataType(DataType.Text)]
+    *   [DataType(DataType.Email)]
+    *   [DataType(DataType.Password)]
+    *   [DataType(DataType.Tel)]
+    *   [DataType(DataType.Url)]
+    */
+
+    [BindProperty]
+    public Address Address { get; set; }
+
+    public void OnInitialize()
+    {
+        if (Model.Address != null)
+        {
+            // clone object for editing.
+            this.Address = JsonConvert.DeserializeObject<Address>(JsonConvert.SerializeObject(Model.Address));
+        }
+    }
+
+    public void OnSave()
+    {
+        if (this.IsModelValid)
+        {
+            Model.Address = this.Address;
+            this.Close(Model);
+        }
+    }
+
+    public void OnCancel()
+    {
+        this.Cancel("No changes made.");
+    }
+}
