@@ -47,7 +47,7 @@
 
     [BindProperty]
     [Required]
-    [MaxLength(100)]
+    [MaxLength(100, ErrorMessage = "Street can't be so long.")]
     public string? Street { get; set; }
 
     [BindProperty]
