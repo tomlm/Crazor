@@ -23,7 +23,7 @@ namespace Crazor
             IMessageActivity message = turnContext.Activity.AsMessageActivity();
             if (message != null)
             {
-                var app = message.Text.Trim();
+                var app = turnContext.Activity.RemoveRecipientMention().Trim();
                 if (app.ToLower().EndsWith("app"))
                 {
                     var card = await GetPreviewCard(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
