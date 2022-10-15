@@ -5,6 +5,8 @@ using AdaptiveCards;
 using System;
 using System.ComponentModel;
 using Crazor.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace Crazor.TagHelpers
 {
@@ -17,22 +19,9 @@ namespace Crazor.TagHelpers
     public class InputNumberTagHelper : InputTagHelper
     {
 
-        [HtmlAttributeName(nameof(ErrorMessage))]
-        [DefaultValue(null)]
-        public String ErrorMessage { get; set; } 
-
-        [HtmlAttributeName(nameof(IsRequired))]
-        [DefaultValue(false)]
-        public Boolean IsRequired { get; set; } 
-
         [HtmlAttributeName(nameof(IsVisible))]
         [DefaultValue(true)]
         public Boolean IsVisible { get; set; }  = true;
-
-        [HtmlAttributeName(nameof(Label))]
-        [DefaultValue(null)]
-        [Binding(BindingType.DisplayName)]
-        public String Label { get; set; } 
 
         [HtmlAttributeName(nameof(Max))]
         [DefaultValue(Double.NaN)]
@@ -65,6 +54,29 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Height))]
         [DefaultValue(null)]
-        public String Height { get; set; } 
+        public String Height { get; set; }
+
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            await base.ProcessAsync(context, output);
+
+            // if we don't have required, but binding property has [Required] then set it
+            var rangeAttribute = BindingProperty.GetCustomAttribute<RangeAttribute>();
+            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            {
+                output.Attributes.SetAttribute(nameof(Min), Convert.ToDouble(rangeAttribute.Minimum));
+            }
+
+            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+            {
+                output.Attributes.SetAttribute(nameof(Max), Convert.ToDouble(rangeAttribute.Maximum));
+            }
+
+            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+            {
+                output.Attributes.SetAttribute(nameof(Min), rangeAttribute?.ErrorMessage);
+            }
+        }
+
     }
 }

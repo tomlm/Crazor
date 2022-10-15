@@ -16,23 +16,9 @@ namespace Crazor.TagHelpers
     [HtmlTargetElement("Input.Toggle")]
     public class InputToggleTagHelper : InputTagHelper
     {
-
-        [HtmlAttributeName(nameof(ErrorMessage))]
-        [DefaultValue(null)]
-        public String ErrorMessage { get; set; } 
-
-        [HtmlAttributeName(nameof(IsRequired))]
-        [DefaultValue(false)]
-        public Boolean IsRequired { get; set; } 
-
         [HtmlAttributeName(nameof(IsVisible))]
         [DefaultValue(true)]
         public Boolean IsVisible { get; set; }  = true;
-
-        [HtmlAttributeName(nameof(Label))]
-        [DefaultValue(null)]
-        [Binding(BindingType.DisplayName)]
-        public String Label { get; set; } 
 
         [HtmlAttributeName(nameof(Separator))]
         [DefaultValue(false)]

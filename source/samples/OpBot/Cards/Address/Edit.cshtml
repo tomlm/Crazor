@@ -12,10 +12,10 @@
         <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
 
-    <Input.Text Binding="@nameof(Street)" Style="Text" />
+    <Input.Text Binding="@nameof(Street)" />
     <FieldErrors Id="@nameof(Street)" />
 
-    <Input.Text Binding="@nameof(City)" Style="Text" />
+    <Input.Text Binding="@nameof(City)" />
     <FieldErrors Id="@nameof(City)" />
 
     <Input.ChoiceSet Binding="State">
@@ -30,10 +30,10 @@
     </Input.ChoiceSet>
     <FieldErrors Id="@nameof(State)" />
 
-    <Input.Text Binding="@nameof(PostalCode)" Style="Text" />
+    <Input.Text Binding="@nameof(PostalCode)" />
     <FieldErrors Id="@nameof(PostalCode)" />
 
-    <Input.ChoiceSet Binding="Country" >
+    <Input.ChoiceSet Binding="Country">
         <Choice Title="U.S.A." Value="USA" />
         <Choice Title="Canada" Value="CA" />
     </Input.ChoiceSet>
@@ -44,20 +44,35 @@
 </Card>
 
 @functions {
+/* Supported Data Annotations 
+*   [PasswordPropertyText]
+*   [Range]
+*   [Phone]
+*   [Url]
+*   [Email]
+*   [StringLength]
+*   [MaxLength]
+*   [RegularExpression("Ames", ErrorMessage = "The value must be Ames")]
+*   [DataType(DataType.Text)]
+*   [DataType(DataType.Email)]
+*   [DataType(DataType.Password)]
+*   [DataType(DataType.Tel)]
+*   [DataType(DataType.Url)]
+*/
 
     [BindProperty]
     [Required]
-    [MaxLength(100, ErrorMessage = "Street can't be so long.")]
+    [StringLength(100)]
     public string? Street { get; set; }
 
     [BindProperty]
     [Required]
-    [MaxLength(100)]
+    [StringLength(100)]
     public string? City { get; set; }
 
     [BindProperty]
     [Required]
-    [MaxLength(30)]
+    [StringLength(30)]
     public string? State { get; set; }
 
     [BindProperty]

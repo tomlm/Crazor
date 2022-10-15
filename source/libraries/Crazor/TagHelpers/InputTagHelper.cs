@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using Crazor.Attributes;
 using DataAnnotationsValidator;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crazor.TagHelpers
 {
@@ -13,13 +15,28 @@ namespace Crazor.TagHelpers
     /// </summary>
     public class InputTagHelper : ReflectionTagHelper
     {
+
+        [HtmlAttributeName(nameof(IsRequired))]
+        [DefaultValue(false)]
+        public Boolean IsRequired { get; set; }
+
+        [HtmlAttributeName(nameof(Label))]
+        [DefaultValue(null)]
+        [Binding(BindingType.DisplayName)]
+        public String Label { get; set; }
+
+        [HtmlAttributeName(nameof(ErrorMessage))]
+        [DefaultValue(null)]
+        public String ErrorMessage { get; set; }
+
+
         [HtmlAttributeName]
         public string Binding { get; set; }
 
-        [HtmlAttributeNotBound]
+        public PropertyInfo BindingProperty { get; set; }
+
         public object BindingValue { get; set; }
 
-        [HtmlAttributeNotBound]
         public string BindingDisplayName { get; set; }
 
         public override void Init(TagHelperContext context)
@@ -32,17 +49,15 @@ namespace Crazor.TagHelpers
 
                 if (!String.IsNullOrEmpty(this.Binding))
                 {
-                    var property = this.View.GetType().GetProperty(this.Binding);
-                    if (property != null)
+                    this.BindingProperty = this.View.GetType().GetProperty(this.Binding);
+                    if (this.BindingProperty != null)
                     {
                         this.BindingValue = this.View.GetPropertyValue(this.Binding);
-                        var dna = property.GetCustomAttribute<DisplayNameAttribute>();
+                        var dna = this.BindingProperty.GetCustomAttribute<DisplayNameAttribute>();
                         this.BindingDisplayName = dna?.DisplayName ?? Binding;
                     }
                 }
             }
-
-            base.Init(context);
         }
 
 
@@ -56,6 +71,7 @@ namespace Crazor.TagHelpers
                 output.Attributes.Remove(binding);
             }
 
+            // Process BindingAttributes
             var properties = this.GetType().GetProperties()
                 .Where(p => p.GetCustomAttribute<BindingAttribute>(true) != null);
             StringBuilder sb = new StringBuilder();
@@ -91,17 +107,20 @@ namespace Crazor.TagHelpers
                         value = value.ToString().ToLower();
                     }
 
-                    TagHelperAttribute tagHelperAttribute;
-                    // remove the attribute if it's already been emitted by the base class, so we can add the right value.
-                    if (output.Attributes.TryGetAttribute(attributeName, out tagHelperAttribute))
+                    if (output.Attributes.TryGetAttribute(attributeName, out var att))
                     {
-                        output.Attributes.Remove(tagHelperAttribute);
+                        output.Attributes.Remove(att);
                     }
-
-                    // add the binding value.
                     output.Attributes.Add(attributeName, value);
                 }
             }
+
+            // if we don't have required, but binding property has [Required] then set it
+            if (output.Attributes[nameof(IsRequired)] == null && BindingProperty.GetCustomAttribute<RequiredAttribute>() != null)
+            {
+                output.Attributes.SetAttribute(nameof(IsRequired), "true");
+            }
+
         }
     }
 }
