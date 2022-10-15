@@ -3,10 +3,10 @@
 @model FieldErrorsTagHelper
 @addTagHelper *, Crazor
 
-@if (Model.ValidationErrors != null && Model.ValidationErrors.Any())
+@if (Model.Id != null && Model.View.ValidationErrors != null && Model.View.ValidationErrors.TryGetValue(Model.Id, out var errors))
 {
-    foreach (var message in Model.ValidationErrors)
+    foreach (var error in errors)
     {
-        <TextBlock Spacing="None" Color="Attention">@message</TextBlock>
+        <TextBlock Spacing="None" Color="Attention">@error</TextBlock>
     }
 }

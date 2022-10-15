@@ -38,19 +38,10 @@ namespace Crazor.TagHelpers
 
         public TagHelperContent? ChildContent { get; set; }
 
-        [Binding(BindingType.PropertyName)]
         [HtmlAttributeName]
         public string? Id { get; set; }
 
-        [HtmlAttributeName]
-        public string Binding { get; set; }
-
-        public object BindingValue { get; set; }
-
         public CardView View { get; set; }
-
-        [HtmlAttributeName(nameof(ValidationErrors))]
-        public HashSet<string> ValidationErrors { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -59,16 +50,15 @@ namespace Crazor.TagHelpers
 
         public override void Init(TagHelperContext context)
         {
-            CardView cardView = null;
             var viewContext = ViewContext;
-            while (cardView == null)
+            while (this.View == null)
             {
                 // ((RazorView)page.ViewContext.View).RazorPage;
                 if (viewContext.View is RazorView rv)
                 {
                     if (rv.RazorPage is CardView cv)
                     {
-                        cardView = cv;
+                        this.View = cv;
                         break;
                     }
                     else
@@ -77,22 +67,6 @@ namespace Crazor.TagHelpers
                     }
                 }
                 break;
-            }
-            if (cardView != null)
-            {
-                var id = Id ?? Binding;
-                if (!string.IsNullOrEmpty(id))
-                {
-                    if (cardView.ValidationErrors.TryGetValue(id, out var errors))
-                    {
-                        ValidationErrors = errors;
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(Binding))
-                {
-                    BindingValue = cardView.GetPropertyValue(Binding);
-                }
             }
 
             base.Init(context);
@@ -129,29 +103,6 @@ namespace Crazor.TagHelpers
                 string attributeName = property.GetCustomAttribute<HtmlAttributeNameAttribute>()?.Name ?? property.Name;
                 var bindValueAttribute = property.GetCustomAttribute<BindingAttribute>();
                 var value = property?.GetValue(this);
-                if (value == null && Binding != null && bindValueAttribute != null)
-                {
-                    switch(bindValueAttribute.Policy)
-                    {
-                        case BindingType.DisplayName:
-                            var dna = property.GetCustomAttribute<DisplayNameAttribute>();
-                            if (dna != null)
-                            {
-                                value = dna.DisplayName ?? Binding;
-                            }
-                            else
-                            {
-                                value = Binding;
-                            }
-                            break;
-                        case BindingType.PropertyName:
-                            value = Binding;
-                            break;
-                        case BindingType.Value:
-                            value = BindingValue;
-                            break;
-                    }
-                }
 
                 if (value != null)
                 {
@@ -171,23 +122,6 @@ namespace Crazor.TagHelpers
             }
 
             return sb.ToString();
-        }
-
-        public string EmitDisplayName(string attributeName)
-        {
-            var property = GetType().GetProperty(attributeName, BindingFlags.Public | BindingFlags.Instance);
-            if (property == null)
-            {
-                return string.Empty;
-            }
-            string displayName = Binding ?? Id ?? attributeName;
-            var dna = property.GetCustomAttribute<DisplayNameAttribute>();
-            if (dna != null)
-            {
-                displayName = dna.DisplayName;
-            }
-            var value = property.GetValue(this);
-            return $"{attributeName}=\"{displayName}\"";
         }
     }
 }
