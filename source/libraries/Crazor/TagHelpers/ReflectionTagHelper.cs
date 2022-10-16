@@ -75,7 +75,7 @@ namespace Crazor.TagHelpers
                         continue;
                     }
 
-                    if (property.PropertyType == typeof(bool))
+                    if (property.PropertyType == typeof(bool) || property.PropertyType == typeof(bool?))
                     {
                         output.Attributes.Add(attributeName, value.ToString().ToLower());
                     }

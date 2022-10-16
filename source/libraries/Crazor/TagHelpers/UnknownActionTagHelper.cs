@@ -22,8 +22,7 @@ namespace Crazor.TagHelpers
         public String IconUrl { get; set; } 
 
         [HtmlAttributeName(nameof(IsEnabled))]
-        [DefaultValue(true)]
-        public Boolean IsEnabled { get; set; }  = true;
+        public Boolean? IsEnabled { get; set; }  
 
         [HtmlAttributeName(nameof(Mode))]
         [DefaultValue(typeof(AdaptiveActionMode), "Primary")]

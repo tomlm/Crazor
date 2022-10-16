@@ -13,16 +13,16 @@
         <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
     }
     <Input.Text Id="ItemName" Label="Name" Style="Text" ErrorMessage="Name is required." Value="@ItemName" />
-    <FieldErrors Id="ItemName"/>
+    <ValidationErrors Binding="ItemName"/>
     
     <Input.Text Id="Description" Label="Description" Style="Text" ErrorMessage="Description is required" Value="@Description" />
-    <FieldErrors Id="Description"/>
+    <ValidationErrors Binding="Description"/>
     
     <Input.Number Id="Price" Label="Price" ErrorMessage="Price is required." Value="@Price" />
-    <FieldErrors Id="Price"/>
+    <ValidationErrors Binding="Price"/>
 
     <Input.Text Id="PictureUri" Label="PictureUri" Style="Text" ErrorMessage="Picture Uri is required." Value="@PictureUri" />
-    <FieldErrors Id="PictureUri"/>
+    <ValidationErrors Binding="PictureUri"/>
 
     <Action.Execute Title="Cancel" Verb="OnCancel" />
     <Action.Execute Title="Save" Verb="OnSave" />

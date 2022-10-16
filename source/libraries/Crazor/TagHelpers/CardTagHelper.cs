@@ -30,8 +30,7 @@ namespace Crazor.TagHelpers
         public String MinHeight { get; set; } 
 
         [HtmlAttributeName(nameof(Rtl))]
-        [DefaultValue(false)]
-        public Boolean Rtl { get; set; } 
+        public Boolean? Rtl { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
         [DefaultValue(null)]

@@ -17,12 +17,10 @@ namespace Crazor.TagHelpers
     public class InputToggleTagHelper : InputTagHelper
     {
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean? IsVisible { get; set; }  
 
         [HtmlAttributeName(nameof(Separator))]
-        [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean? Separator { get; set; } 
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
@@ -50,8 +48,7 @@ namespace Crazor.TagHelpers
         public String ValueOn { get; set; } 
 
         [HtmlAttributeName(nameof(Wrap))]
-        [DefaultValue(false)]
-        public Boolean Wrap { get; set; } 
+        public Boolean? Wrap { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
         [DefaultValue(null)]

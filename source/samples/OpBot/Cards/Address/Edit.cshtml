@@ -12,11 +12,11 @@
         <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
 
-    <Input.Text Binding="@nameof(Street)" />
-    <FieldErrors Id="@nameof(Street)" />
+    <Input.Text Binding="@nameof(Street)" IsRequired="false"/>
+    <ValidationErrors Binding="@nameof(Street)" />
 
     <Input.Text Binding="@nameof(City)" />
-    <FieldErrors Id="@nameof(City)" />
+    <ValidationErrors Binding="@nameof(City)" />
 
     <Input.ChoiceSet Binding="State">
         <Choice Title="Alabama" Value="AL" />
@@ -28,16 +28,16 @@
         <Choice Title="Iowa" Value="IA" />
         <Choice Title="Oregon" Value="OR" />
     </Input.ChoiceSet>
-    <FieldErrors Id="@nameof(State)" />
+    <ValidationErrors Binding="@nameof(State)" />
 
     <Input.Text Binding="@nameof(PostalCode)" />
-    <FieldErrors Id="@nameof(PostalCode)" />
+    <ValidationErrors Binding="@nameof(PostalCode)" />
 
     <Input.ChoiceSet Binding="Country">
         <Choice Title="U.S.A." Value="USA" />
         <Choice Title="Canada" Value="CA" />
     </Input.ChoiceSet>
-    <FieldErrors Id="@nameof(Country)" />
+    <ValidationErrors Binding="@nameof(Country)" />
 
     <Action.Execute Title="Cancel" Verb="OnCancel" />
     <Action.Execute Title="Save" Verb="OnSave" />

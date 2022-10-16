@@ -20,16 +20,13 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(IsMultiline))]
-        [DefaultValue(false)]
-        public Boolean IsMultiline { get; set; }
+        public Boolean? IsMultiline { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; } = true;
+        public Boolean? IsVisible { get; set; } 
 
         [HtmlAttributeName(nameof(MaxLength))]
-        [DefaultValue(0)]
-        public Int32 MaxLength { get; set; }
+        public Int32? MaxLength { get; set; }
 
         [HtmlAttributeName(nameof(Placeholder))]
         [DefaultValue(null)]
@@ -40,8 +37,7 @@ namespace Crazor.TagHelpers
         public String Regex { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
-        [DefaultValue(false)]
-        public Boolean Separator { get; set; }
+        public Boolean? Separator { get; set; }
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
@@ -71,7 +67,7 @@ namespace Crazor.TagHelpers
 
             // --- Client side validation....
             var regexAttribute = BindingProperty.GetCustomAttribute<RegularExpressionAttribute>();
-            if (output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
+            if (IfValidation() && output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
             {
                 output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
 
@@ -83,7 +79,7 @@ namespace Crazor.TagHelpers
 
             // -- MaxLength 
             var stringLengthAttribute = BindingProperty.GetCustomAttribute<StringLengthAttribute>();
-            if (output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
+            if (IfValidation() && output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(MaxLength), stringLengthAttribute?.MaximumLength);
             }

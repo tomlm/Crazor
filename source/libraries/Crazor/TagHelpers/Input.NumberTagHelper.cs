@@ -20,24 +20,22 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean? IsVisible { get; set; }  
 
         [HtmlAttributeName(nameof(Max))]
         [DefaultValue(Double.NaN)]
-        public Double Max { get; set; } 
+        public Double? Max { get; set; } 
 
         [HtmlAttributeName(nameof(Min))]
         [DefaultValue(Double.NaN)]
-        public Double Min { get; set; } 
+        public Double? Min { get; set; } 
 
         [HtmlAttributeName(nameof(Placeholder))]
         [DefaultValue(null)]
         public String Placeholder { get; set; } 
 
         [HtmlAttributeName(nameof(Separator))]
-        [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean? Separator { get; set; } 
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
@@ -48,9 +46,8 @@ namespace Crazor.TagHelpers
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(Double.NaN)]
         [Binding(BindingType.Value)]
-        public Double Value { get; set; } 
+        public Double? Value { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
         [DefaultValue(null)]
@@ -62,17 +59,17 @@ namespace Crazor.TagHelpers
 
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty.GetCustomAttribute<RangeAttribute>();
-            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            if (IfValidation() && output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
             {
                 output.Attributes.SetAttribute(nameof(Min), Convert.ToDouble(rangeAttribute.Minimum));
             }
 
-            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+            if (IfValidation() && output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
             {
                 output.Attributes.SetAttribute(nameof(Max), Convert.ToDouble(rangeAttribute.Maximum));
             }
 
-            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+            if (IfValidation() && output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
             {
                 output.Attributes.SetAttribute(nameof(Min), rangeAttribute?.ErrorMessage);
             }

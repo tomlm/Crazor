@@ -18,28 +18,24 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(Bleed))]
-        [DefaultValue(false)]
-        public Boolean Bleed { get; set; }
+        public Boolean? Bleed { get; set; }
 
         [HtmlAttributeName(nameof(HorizontalAlignment))]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; } = true;
+        public Boolean? IsVisible { get; set; } 
 
         [HtmlAttributeName(nameof(MinHeight))]
         [DefaultValue(null)]
         public String MinHeight { get; set; }
 
         [HtmlAttributeName(nameof(Rtl))]
-        [DefaultValue(false)]
-        public Boolean Rtl { get; set; }
+        public Boolean? Rtl { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
-        [DefaultValue(false)]
-        public Boolean Separator { get; set; }
+        public Boolean? Separator { get; set; }
 
         [HtmlAttributeName(nameof(Size))]
         [DefaultValue(null)]

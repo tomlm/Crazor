@@ -19,8 +19,7 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(FirstRowAsHeader))]
-        [DefaultValue(true)]
-        public Boolean FirstRowAsHeader { get; set; }  = true;
+        public Boolean? FirstRowAsHeader { get; set; }  
 
         [HtmlAttributeName(nameof(GridStyle))]
         [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
@@ -31,16 +30,13 @@ namespace Crazor.TagHelpers
         public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; } 
 
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean? IsVisible { get; set; }  
 
         [HtmlAttributeName(nameof(Separator))]
-        [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean? Separator { get; set; } 
 
         [HtmlAttributeName(nameof(ShowGridLines))]
-        [DefaultValue(true)]
-        public Boolean ShowGridLines { get; set; }  = true;
+        public Boolean? ShowGridLines { get; set; }  
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]

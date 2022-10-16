@@ -4,12 +4,23 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using Crazor.Attributes;
-using DataAnnotationsValidator;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace Crazor.TagHelpers
 {
+    public enum ValidationPolicy
+    {
+        /// <summary>
+        /// Validation is mapped to client validation tags
+        /// </summary>
+        Auto,
+
+        /// <summary>
+        /// Disable all client side validation 
+        /// </summary>
+        None
+    }
+
     /// <summary>
     /// Shows errors when present for a given input id as TextBlock Attention
     /// </summary>
@@ -17,21 +28,28 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(IsRequired))]
-        [DefaultValue(false)]
-        public Boolean IsRequired { get; set; }
+        public Boolean? IsRequired { get; set; }
 
         [HtmlAttributeName(nameof(Label))]
         [DefaultValue(null)]
         [Binding(BindingType.DisplayName)]
         public String Label { get; set; }
 
+        /// <summary>
+        /// Client side verification error message.
+        /// </summary>
         [HtmlAttributeName(nameof(ErrorMessage))]
         [DefaultValue(null)]
         public String ErrorMessage { get; set; }
 
-
-        [HtmlAttributeName]
+        /// <summary>
+        /// Binding proeprty name. Set this to the path of the property to bind this tag to.
+        /// </summary>
+        [HtmlAttributeName(nameof(Binding))]
         public string Binding { get; set; }
+
+        [HtmlAttributeName(nameof(Validation))]
+        public ValidationPolicy Validation { get; set; }
 
         public PropertyInfo BindingProperty { get; set; }
 
@@ -75,9 +93,12 @@ namespace Crazor.TagHelpers
             await base.ProcessAsync(context, output);
 
             // remove binding, because we don't want it emitted, we are going to process it here.
-            if (output.Attributes.TryGetAttribute(nameof(Binding), out var binding))
+            foreach (var ignore in new[] { nameof(Binding), nameof(Validation) })
             {
-                output.Attributes.Remove(binding);
+                if (output.Attributes.TryGetAttribute(ignore, out var binding))
+                {
+                    output.Attributes.Remove(binding);
+                }
             }
 
             // Process BindingAttributes
@@ -125,11 +146,14 @@ namespace Crazor.TagHelpers
             }
 
             // if we don't have required, but binding property has [Required] then set it
-            if (output.Attributes[nameof(IsRequired)] == null && BindingProperty.GetCustomAttribute<RequiredAttribute>() != null)
+            if (IfValidation() && output.Attributes[nameof(IsRequired)] == null && BindingProperty.GetCustomAttribute<RequiredAttribute>() != null)
             {
                 output.Attributes.SetAttribute(nameof(IsRequired), "true");
             }
 
         }
+
+        protected bool IfValidation()
+             => Validation == ValidationPolicy.Auto;
     }
 }

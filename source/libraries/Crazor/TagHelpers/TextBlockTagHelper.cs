@@ -30,28 +30,23 @@ namespace Crazor.TagHelpers
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
 
         [HtmlAttributeName(nameof(IsSubtle))]
-        [DefaultValue(false)]
-        public Boolean IsSubtle { get; set; } 
+        public Boolean? IsSubtle { get; set; } 
 
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean? IsVisible { get; set; }  
 
         [HtmlAttributeName(nameof(Italic))]
-        [DefaultValue(false)]
-        public Boolean Italic { get; set; } 
+        public Boolean? Italic { get; set; } 
 
         [HtmlAttributeName(nameof(MaxLines))]
-        [DefaultValue(0)]
-        public Int32 MaxLines { get; set; } 
+        public Int32? MaxLines { get; set; } 
 
         [HtmlAttributeName(nameof(MaxWidth))]
-        [DefaultValue(0)]
-        public Int32 MaxWidth { get; set; } 
+        public Int32? MaxWidth { get; set; } 
 
         [HtmlAttributeName(nameof(Separator))]
         [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean? Separator { get; set; } 
 
         [HtmlAttributeName(nameof(Size))]
         [DefaultValue(typeof(AdaptiveTextSize), "Default")]
@@ -66,8 +61,7 @@ namespace Crazor.TagHelpers
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Strikethrough))]
-        [DefaultValue(false)]
-        public Boolean Strikethrough { get; set; } 
+        public Boolean? Strikethrough { get; set; } 
 
         [HtmlAttributeName(nameof(Style))]
         [DefaultValue(typeof(AdaptiveTextBlockStyle), "Default")]
@@ -82,8 +76,7 @@ namespace Crazor.TagHelpers
         public AdaptiveTextWeight Weight { get; set; } 
 
         [HtmlAttributeName(nameof(Wrap))]
-        [DefaultValue(false)]
-        public Boolean Wrap { get; set; } 
+        public Boolean? Wrap { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
         [DefaultValue(null)]

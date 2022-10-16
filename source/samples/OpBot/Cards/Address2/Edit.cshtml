@@ -13,8 +13,8 @@
         <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
 
-    <Input.Text Binding="Address.Street" />
-    <FieldErrors Id="Address.Street" />
+    <Input.Text Binding="Address.Street" IsRequired="false"/>
+    <ValidationErrors Id="Address.City" />
 
     <Input.Text Binding="Address.City" />
     <FieldErrors Id="Address.City" />
@@ -40,7 +40,7 @@
     </Input.ChoiceSet>
     <FieldErrors Id="Address.Country" />
 
-    <Action.Execute Title="Cancel" Verb="OnCancel" />
+    <Action.Execute Title="Cancel" Verb="OnCancel" AssociatedInputs="None" />
     <Action.Execute Title="Save" Verb="OnSave" />
 </Card>
 

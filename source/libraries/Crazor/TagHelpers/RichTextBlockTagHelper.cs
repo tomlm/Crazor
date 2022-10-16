@@ -23,12 +23,10 @@ namespace Crazor.TagHelpers
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
 
         [HtmlAttributeName(nameof(IsVisible))]
-        [DefaultValue(true)]
-        public Boolean IsVisible { get; set; }  = true;
+        public Boolean? IsVisible { get; set; }  
 
         [HtmlAttributeName(nameof(Separator))]
-        [DefaultValue(false)]
-        public Boolean Separator { get; set; } 
+        public Boolean? Separator { get; set; } 
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
