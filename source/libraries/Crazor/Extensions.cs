@@ -34,7 +34,7 @@ namespace Crazor
             return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj, _cloneSettings), _cloneSettings);
         }
 
-        public static IServiceCollection AddCardApps(this IServiceCollection services)
+        public static IServiceCollection AddCrazor(this IServiceCollection services)
         {
             services.AddHttpClient();
             services.TryAddSingleton<IStorage, MemoryStorage>();

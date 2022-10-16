@@ -4,14 +4,15 @@ using Crazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ---- <CRAZOR>
 // add storage
 var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
 if (!String.IsNullOrEmpty(storageKey))
 {
-    builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(SampleWebApp)));
+    builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "opbot"));
 }
-
-builder.Services.AddCardApps();
+builder.Services.AddCrazor();
+// ---- </CRAZOR>
 
 var mvcBuilder = builder.Services.AddMvc();
 if (builder.Environment.IsDevelopment())
