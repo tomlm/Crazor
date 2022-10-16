@@ -57,7 +57,6 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Strikethrough))]
@@ -68,7 +67,6 @@ namespace Crazor.TagHelpers
         public AdaptiveTextBlockStyle Style { get; set; } 
 
         [HtmlAttributeName(nameof(Text))]
-        [DefaultValue(null)]
         public String Text { get; set; } 
 
         [HtmlAttributeName(nameof(Weight))]
@@ -79,7 +77,6 @@ namespace Crazor.TagHelpers
         public Boolean? Wrap { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; } 
     }
 }

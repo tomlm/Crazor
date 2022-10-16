@@ -27,7 +27,6 @@ namespace Crazor.TagHelpers
         public Boolean? IsVisible { get; set; } 
 
         [HtmlAttributeName(nameof(Placeholder))]
-        [DefaultValue(null)]
         public String Placeholder { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
@@ -38,7 +37,6 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
@@ -46,7 +44,6 @@ namespace Crazor.TagHelpers
         public AdaptiveChoiceInputStyle Style { get; set; }
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(null)]
         [Binding(BindingType.Value)]
         public String Value { get; set; }
 
@@ -54,7 +51,6 @@ namespace Crazor.TagHelpers
         public Boolean? Wrap { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; }
 
     }

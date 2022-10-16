@@ -21,14 +21,12 @@ namespace Crazor.TagHelpers
         public Int32? Count { get; set; } 
 
         [HtmlAttributeName(nameof(Dataset))]
-        [DefaultValue(null)]
         public String Dataset { get; set; } 
 
         [HtmlAttributeName(nameof(Skip))]
         public Int32? Skip { get; set; } 
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(null)]
         public String Value { get; set; } 
     }
 }

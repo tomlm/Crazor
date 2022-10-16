@@ -18,11 +18,9 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(MimeType))]
-        [DefaultValue(null)]
         public String MimeType { get; set; } 
 
         [HtmlAttributeName(nameof(Url))]
-        [DefaultValue(null)]
         public String Url { get; set; } 
     }
 }

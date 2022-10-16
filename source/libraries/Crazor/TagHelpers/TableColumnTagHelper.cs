@@ -18,7 +18,6 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(Width))]
-        [DefaultValue(null)]
         public String Width { get; set; } 
     }
 }

@@ -19,7 +19,6 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(IconUrl))]
-        [DefaultValue(null)]
         public String IconUrl { get; set; } 
 
         [HtmlAttributeName(nameof(IsEnabled))]
@@ -30,7 +29,6 @@ namespace Crazor.TagHelpers
         public AdaptiveActionMode Mode { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Style))]
@@ -38,11 +36,9 @@ namespace Crazor.TagHelpers
         public AdaptiveActionStyle Style { get; set; } 
 
         [HtmlAttributeName(nameof(Title))]
-        [DefaultValue(null)]
         public String Title { get; set; } 
 
         [HtmlAttributeName(nameof(Tooltip))]
-        [DefaultValue(null)]
         public String Tooltip { get; set; } 
     }
 }

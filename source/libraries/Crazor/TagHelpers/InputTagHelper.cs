@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.ComponentModel;
 using System.Reflection;
@@ -31,7 +31,6 @@ namespace Crazor.TagHelpers
         public Boolean? IsRequired { get; set; }
 
         [HtmlAttributeName(nameof(Label))]
-        [DefaultValue(null)]
         [Binding(BindingType.DisplayName)]
         public String Label { get; set; }
 
@@ -39,7 +38,6 @@ namespace Crazor.TagHelpers
         /// Client side verification error message.
         /// </summary>
         [HtmlAttributeName(nameof(ErrorMessage))]
-        [DefaultValue(null)]
         public String ErrorMessage { get; set; }
 
         /// <summary>

@@ -26,7 +26,6 @@ namespace Crazor.TagHelpers
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
 
         [HtmlAttributeName(nameof(Url))]
-        [DefaultValue(null)]
         public String Url { get; set; } 
 
         [HtmlAttributeName(nameof(VerticalAlignment))]

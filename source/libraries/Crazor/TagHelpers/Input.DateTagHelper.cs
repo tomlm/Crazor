@@ -23,15 +23,12 @@ namespace Crazor.TagHelpers
         public Boolean? IsVisible { get; set; } 
 
         [HtmlAttributeName(nameof(Max))]
-        [DefaultValue(null)]
         public String Max { get; set; }
 
         [HtmlAttributeName(nameof(Min))]
-        [DefaultValue(null)]
         public String Min { get; set; }
 
         [HtmlAttributeName(nameof(Placeholder))]
-        [DefaultValue(null)]
         public String Placeholder { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
@@ -42,16 +39,13 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(null)]
         [Binding(BindingType.Value)]
         public String Value { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)

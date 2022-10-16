@@ -19,14 +19,12 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(AltText))]
-        [DefaultValue(null)]
         public String AltText { get; set; } 
 
         [HtmlAttributeName(nameof(IsVisible))]
         public Boolean? IsVisible { get; set; }  
 
         [HtmlAttributeName(nameof(Poster))]
-        [DefaultValue(null)]
         public String Poster { get; set; } 
 
         [HtmlAttributeName(nameof(Separator))]
@@ -37,11 +35,9 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; } 
     }
 }

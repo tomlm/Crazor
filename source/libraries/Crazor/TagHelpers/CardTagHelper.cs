@@ -18,22 +18,18 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(FallbackText))]
-        [DefaultValue(null)]
         public String FallbackText { get; set; } 
 
         [HtmlAttributeName(nameof(Lang))]
-        [DefaultValue(null)]
         public String Lang { get; set; } 
 
         [HtmlAttributeName(nameof(MinHeight))]
-        [DefaultValue(null)]
         public String MinHeight { get; set; } 
 
         [HtmlAttributeName(nameof(Rtl))]
         public Boolean? Rtl { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Style))]
@@ -41,7 +37,6 @@ namespace Crazor.TagHelpers
         public AdaptiveContainerStyle Style { get; set; } 
 
         [HtmlAttributeName(nameof(Title))]
-        [DefaultValue(null)]
         public String Title { get; set; } 
 
         [HtmlAttributeName(nameof(VerticalContentAlignment))]
@@ -49,11 +44,9 @@ namespace Crazor.TagHelpers
         public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; } 
 
         [HtmlAttributeName(nameof(Version))]
-        [DefaultValue(null)]
         public String Version { get; set; } 
     }
 }

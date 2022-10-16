@@ -29,11 +29,9 @@ namespace Crazor.TagHelpers
         public Int32? MaxLength { get; set; }
 
         [HtmlAttributeName(nameof(Placeholder))]
-        [DefaultValue(null)]
         public String Placeholder { get; set; }
 
         [HtmlAttributeName(nameof(Regex))]
-        [DefaultValue(null)]
         public String Regex { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
@@ -44,7 +42,6 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
@@ -52,12 +49,10 @@ namespace Crazor.TagHelpers
         public AdaptiveTextInputStyle Style { get; set; }
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(null)]
         [Binding(BindingType.Value)]
         public String Value { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; }
 
 

@@ -18,11 +18,9 @@ namespace Crazor.TagHelpers
     {
 
         [HtmlAttributeName(nameof(AltText))]
-        [DefaultValue(null)]
         public String AltText { get; set; } 
 
         [HtmlAttributeName(nameof(BackgroundColor))]
-        [DefaultValue(null)]
         public String BackgroundColor { get; set; } 
 
         [HtmlAttributeName(nameof(HorizontalAlignment))]
@@ -44,7 +42,6 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Style))]
@@ -52,15 +49,12 @@ namespace Crazor.TagHelpers
         public AdaptiveImageStyle Style { get; set; } 
 
         [HtmlAttributeName(nameof(Url))]
-        [DefaultValue(null)]
         public String Url { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; } 
 
         [HtmlAttributeName(nameof(Width))]
-        [DefaultValue(null)]
         public String Width { get; set; } 
     }
 }

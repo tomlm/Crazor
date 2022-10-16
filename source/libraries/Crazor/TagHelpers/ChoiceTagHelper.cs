@@ -21,15 +21,12 @@ namespace Crazor.TagHelpers
         public Boolean? IsSelected { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Title))]
-        [DefaultValue(null)]
         public String Title { get; set; } 
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(null)]
         public String Value { get; set; } 
     }
 }

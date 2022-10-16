@@ -28,7 +28,6 @@ namespace Crazor.TagHelpers
         public Boolean? IsVisible { get; set; } 
 
         [HtmlAttributeName(nameof(MinHeight))]
-        [DefaultValue(null)]
         public String MinHeight { get; set; }
 
         [HtmlAttributeName(nameof(Rtl))]
@@ -38,7 +37,6 @@ namespace Crazor.TagHelpers
         public Boolean? Separator { get; set; }
 
         [HtmlAttributeName(nameof(Size))]
-        [DefaultValue(null)]
         public String Size { get; set; }
 
         [HtmlAttributeName(nameof(Spacing))]
@@ -46,7 +44,6 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
@@ -58,11 +55,9 @@ namespace Crazor.TagHelpers
         public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; }
 
         [HtmlAttributeName(nameof(Width))]
-        [DefaultValue(null)]
         public String Width { get; set; }
     }
 }

@@ -27,31 +27,25 @@ namespace Crazor.TagHelpers
         public AdaptiveSpacing Spacing { get; set; } 
 
         [HtmlAttributeName(nameof(Speak))]
-        [DefaultValue(null)]
         public String Speak { get; set; } 
 
         [HtmlAttributeName(nameof(Title))]
-        [DefaultValue(null)]
         public String Title { get; set; } 
 
         [HtmlAttributeName(nameof(Value))]
-        [DefaultValue(null)]
         [Binding(BindingType.Value)]
         public String Value { get; set; } 
 
         [HtmlAttributeName(nameof(ValueOff))]
-        [DefaultValue(null)]
         public String ValueOff { get; set; } 
 
         [HtmlAttributeName(nameof(ValueOn))]
-        [DefaultValue(null)]
         public String ValueOn { get; set; } 
 
         [HtmlAttributeName(nameof(Wrap))]
         public Boolean? Wrap { get; set; } 
 
         [HtmlAttributeName(nameof(Height))]
-        [DefaultValue(null)]
         public String Height { get; set; } 
     }
 }
