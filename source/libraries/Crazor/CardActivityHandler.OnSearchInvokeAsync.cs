@@ -30,7 +30,7 @@ namespace Crazor
             _logger.LogInformation($"Starting application/search processing ");
 
             // Get session data from the invoke payload
-            var parts = searchInvoke.Dataset.Split(AdaptiveDataQuery.Seperator);
+            var parts = searchInvoke.Dataset.Split(AdaptiveDataQuery.Separator);
             IEncryptionProvider encryptionProvider = _serviceProvider.GetRequiredService<IEncryptionProvider>();
             var data = await encryptionProvider.DecryptAsync(parts[0], cancellationToken);
             var sessionData = SessionData.FromString(data);

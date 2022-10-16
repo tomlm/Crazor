@@ -25,18 +25,17 @@ namespace Crazor
         {
             var uri = new Uri(query.Url);
             _logger.LogInformation($"Starting composeExtension/queryLink processing {uri}");
-            var botUri = new Uri(_configuration.GetValue<string>("BotUri"));
+            var hostName = _configuration.GetValue<string>("HostName");
 
             // get play page url => envir, cardId, instanceId,
-            if ((uri.Host == "opcardbot.azurewebsites.net" || uri.Host == "localhost") && uri.LocalPath.ToLower().StartsWith("/cards/"))
+            if (uri.Host == hostName)
             {
                 var parts = uri.LocalPath.Trim('/').Split('/');
                 var app = parts[1] + "App";
                 var resourceId = (parts.Length > 2) ? parts[2] : null;
-                var sessionId = (parts.Length > 3) ? parts[3] : null;
-                var view = (parts.Length > 4) ? parts[4] : null;
+                var view = (parts.Length > 3) ? parts[3] : null;
 
-                var adaptiveCard = await GetPreviewCard(turnContext, app, resourceId, sessionId, view, cancellationToken);
+                var adaptiveCard = await GetPreviewCard(turnContext, app, resourceId, turnContext.Activity.Id, view, cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.
                 var preview = new Attachment(
