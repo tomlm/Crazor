@@ -9,9 +9,5 @@ namespace SampleWebApp.Cards.HelloWorld
             : base(services)
         {
         }
-
-        // [SharedMemory] // property value is shared with all viewers.
-        // [SessionMemory] // property value is for each viewer
-        // public int Counter { get; set; } = 0;
     }
 }

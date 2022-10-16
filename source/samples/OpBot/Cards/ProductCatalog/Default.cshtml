@@ -8,9 +8,9 @@
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Product Catalog</TextBlock>
 
-    @if (Model.CatalogItems.Any())
+    @if (App.CatalogItems.Any())
     {
-        @foreach (var item in Model.CatalogItems)
+        @foreach (var item in App.CatalogItems)
         {
             <Container Separator="true">
                 <ColumnSet Padding="none">
@@ -31,14 +31,14 @@
                         <Image Url="https://cdn.icon-icons.com/icons2/931/PNG/512/edit_modify_icon-icons.com_72390.png" Size="Small">
                             <SelectAction>
                                 <Action.Execute Id="@item.Id" Tooltip="Edit" Verb="OnEdit" />
-                            </SelectAction> 
+                            </SelectAction>
                         </Image>
                     </Column>
                     <Column Width="auto">
                         <Image Url="https://cdn.icon-icons.com/icons2/3251/PNG/512/delete_regular_icon_203689.png" Size="Small">
                             <SelectAction>
                                 <Action.Execute Id="@item.Id" Tooltip="Delete" Verb="OnDelete" />
-                            </SelectAction> 
+                            </SelectAction>
                         </Image>
                     </Column>
                 </ColumnSet>
@@ -53,37 +53,37 @@
     public void OnAdd()
     {
         var item = new ProductCatalogItem();
-        ShowCard("Edit", new CreateEditProductCatalogModel { IsEdit = false, Item = item });
+        ShowCard("Edit", new EditOrAddProductCatalogItem() { IsEdit = false, Item = item });
     }
 
     public void OnDetail(string id)
     {
-        var item = Model.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
+        var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
         if (item != null)
         {
-            ShowCard("Detail", new DetailProductCatalogModel() { Item = item });
+            ShowCard("Detail", item);
         }
     }
 
     public void OnEdit(string id)
     {
-        var item = Model.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
+        var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
         if (item != null)
         {
-            ShowCard("Edit", new CreateEditProductCatalogModel() { IsEdit = true, Item = item });
+            ShowCard("Edit", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
         }
     }
 
     public void OnDelete(string id)
     {
-        Model.CatalogItems = Model.CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
+        App.CatalogItems = App.CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
     }
 
-    public async Task OnEditCompleted(CreateEditProductCatalogModel model)
+    public async Task OnEditCompleted(EditOrAddProductCatalogItem model)
     {
         if (model.IsEdit)
         {
-            var item = Model.CatalogItems.Where(a => a.Id == model.Item.Id).SingleOrDefault();
+            var item = App.CatalogItems.Where(a => a.Id == model.Item.Id).SingleOrDefault();
 
             if (item != null)
             {
@@ -106,7 +106,7 @@
         else
         {
             // Add local copy
-            Model.CatalogItems.Add(model.Item);
+            App.CatalogItems.Add(model.Item);
             AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
 
             // Update in API

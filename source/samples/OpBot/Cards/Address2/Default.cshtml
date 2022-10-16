@@ -5,9 +5,9 @@
 
 
     <TextBlock Size="ExtraLarge">Addresses</TextBlock>
-    @if (Model.Addresses.Any())
+    @if (App.Addresses.Any())
     {
-        @foreach (var address in Model.Addresses)
+        @foreach (var address in App.Addresses)
         {
             <Container Separator="true">
                 <ColumnSet Padding="none">
@@ -54,7 +54,7 @@
 
     public void OnEdit(string resourceId)
     {
-        var address = Model.Addresses.SingleOrDefault(a => a.Id == resourceId);
+        var address = App.Addresses.SingleOrDefault(a => a.Id == resourceId);
         if (address != null)
         {
             ShowCard("Edit", new EditAddressModel() { IsEdit = true, Address = address });
@@ -63,22 +63,22 @@
 
     public void OnDelete(string resourceId)
     {
-        Model.Addresses = Model.Addresses.Where(a => a.Id != resourceId).ToList();
+        App.Addresses = App.Addresses.Where(a => a.Id != resourceId).ToList();
     }
 
-    public void OnEditCompleted(EditAddressModel editAddress)
+    public void OnEditCompleted(EditAddressModel model)
     {
-        ArgumentNullException.ThrowIfNull(editAddress.Address);
-        if (editAddress.IsEdit)
+        ArgumentNullException.ThrowIfNull(model.Address);
+        if (model.IsEdit)
         {
-            var address = Model.Addresses.Where(a => a.Id == editAddress.Address.Id).SingleOrDefault();
+            var address = App.Addresses.Where(a => a.Id == model.Address.Id).SingleOrDefault();
             if (address != null)
             {
-                address.Street = editAddress.Address.Street;
-                address.City = editAddress.Address.City;
-                address.State = editAddress.Address.State;
-                address.PostalCode = editAddress.Address.PostalCode;
-                address.Country = editAddress.Address.Country;
+                address.Street = model.Address.Street;
+                address.City = model.Address.City;
+                address.State = model.Address.State;
+                address.PostalCode = model.Address.PostalCode;
+                address.Country = model.Address.Country;
                 AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
             }
             else
@@ -88,7 +88,7 @@
         }
         else
         {
-            Model.Addresses.Add(editAddress.Address);
+            App.Addresses.Add(model.Address);
             AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
         }
     }

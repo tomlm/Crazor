@@ -3,14 +3,14 @@
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
-    <TextBlock Size="Large">Shared Counter:@Model.SharedCounter</TextBlock>
+    <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
 
     <ActionSet>
         <Action.Execute Title="+ Shared" Verb="OnIncrementShared" />
         <Action.Execute Title="- Shared" Verb="OnDecrementShared" />
     </ActionSet>
 
-    <TextBlock Size="Large">Session Counter:@Model.SessionCounter</TextBlock>
+    <TextBlock Size="Large">Session Counter:@App.SessionCounter</TextBlock>
     <ActionSet>
         <Action.Execute Title="+ Session" Verb="OnIncrementSession" />
         <Action.Execute Title="- Session" Verb="OnDecrementSession" />
@@ -21,18 +21,18 @@
 @functions {
 
     public void OnIncrementSession()
-        => Model.SessionCounter++;
+        => App.SessionCounter++;
 
     public void OnDecrementSession()
-        => Model.SessionCounter--;
+        => App.SessionCounter--;
 
     public void OnIncrementShared()
-        => Model.SharedCounter++;
+        => App.SharedCounter++;
 
     public async Task OnDecrementSharedAsync()
     {
         await Task.Delay(0);
-        Model.SharedCounter--;
+        App.SharedCounter--;
     }
 }
 

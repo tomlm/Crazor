@@ -53,7 +53,7 @@ namespace Crazor.TagHelpers
             await base.ProcessAsync(context, output);
 
             // if we don't have required, but binding property has [Required] then set it
-            var rangeAttribute = BindingProperty.GetCustomAttribute<RangeAttribute>();
+            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
             if (IfValidation() && output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
             {
                 output.Attributes.SetAttribute(nameof(Min), rangeAttribute.Minimum.ToString());

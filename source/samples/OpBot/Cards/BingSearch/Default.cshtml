@@ -2,13 +2,13 @@
 @using Microsoft.Bing.WebSearch.Models
 @using Microsoft.Extensions.Configuration
 @using OpBot.Cards.BingSearch
-@inherits CardView<DefaultModel>
+@inherits CardView<BingSearchApp, SearchModel>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Bing Search</TextBlock>
     <ColumnSet>
         <Column Width="stretch">
-            <Input.Text Id="Query" Value="@Query" />
+            <Input.Text Binding="Model.Query" Label="" Placeholder="Enter search terms"/>
         </Column>
         <Column Width="auto">
             <ActionSet>
@@ -16,9 +16,28 @@
             </ActionSet>
         </Column>
     </ColumnSet>
+    <ColumnSet>
+        <Column Width="auto">
+            @if (HasPrev())
+            {
+                <ActionSet>
+                    <Action.Execute Title="<" Verb="OnPrevious" />
+                </ActionSet>
+            }
+        </Column>
+        <Column Width="stretch" />
+        <Column Width="auto">
+            @if (HasNext())
+            {
+                <ActionSet>
+                    <Action.Execute Title=">" Verb="OnNext" />
+                </ActionSet>
+            }
+        </Column>
+    </ColumnSet>
     if (Results != null)
     {
-    @foreach (var result in Model.Results)
+    @foreach (var result in Results)
     {
         <Container Separator="true">
             <ColumnSet>
@@ -37,46 +56,28 @@
         </Container>
     }
     }
-    <ColumnSet>
-        <Column Width="auto">
-            @if (Model.HasPrev)
-            {
-                <ActionSet>
-                    <Action.Execute Title="<" Verb="OnPrevious" />
-                </ActionSet>
-            }
-        </Column>
-        <Column Width="stretch" />
-        <Column Width="auto">
-            @if (Model.HasNext)
-            {
-                <ActionSet>
-                    <Action.Execute Title=">" Verb="OnNext" />
-                </ActionSet>
-            }
-        </Column>
-    </ColumnSet>
 </Card>
 
 @functions {
     public const int PageSize = 5;
 
-    [BindProperty]
-    [Required]
-    [StringLength(100)]
-    public string? Query { get; set; }
+    public IList<WebPage> Results { get; set; } = new List<WebPage>();
+
+    public bool HasNext() => Results.Any();
+
+    public bool HasPrev() => Results.Any() && Model.Offset > 0;
 
     public async Task OnSearchAsync()
     {
-        if (!String.IsNullOrWhiteSpace(Query))
+        if (!String.IsNullOrWhiteSpace(Model.Query))
         {
             var configuration = (IConfiguration)ViewContext.HttpContext.RequestServices.GetService(typeof(IConfiguration))!;
             var apiKey = configuration.GetValue<string>("BingKey");
             var search = new WebSearchClient(new ApiKeyServiceClientCredentials(apiKey));
 
-            var searchResult = await search.Web.SearchAsync(query: Query, count: PageSize, offset: Model.Offset);
+            var searchResult = await search.Web.SearchAsync(query: Model.Query, count: PageSize, offset: Model.Offset);
 
-            Model.Results = searchResult.WebPages.Value!;
+            Results = searchResult.WebPages.Value!;
         }
     }
 

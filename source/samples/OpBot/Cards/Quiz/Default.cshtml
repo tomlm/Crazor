@@ -1,5 +1,5 @@
 ﻿@using OpBot.Cards.Quiz
-@inherits CardView<DefaultModel>
+@inherits CardView<QuizApp, DefaultModel>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     
@@ -7,7 +7,7 @@
     @if (Model.TotalGuesses > 0)
     {
         <Container Style="Emphasis">
-            <TextBlock>You have guessed correct @(((float)Model.CorrectGuesses / (float)Model.TotalGuesses).ToString("0.0%"))% of the time.</TextBlock>
+            <TextBlock>You have guessed correct @(((float)Model.CorrectGuesses / (float)Model.TotalGuesses).ToString("0.0%")) of the time.</TextBlock>
         </Container>
     }
     <TextBlock Size="Medium" Wdith="Bolder">What is @Model.Number1 + @Model.Number2?</TextBlock>

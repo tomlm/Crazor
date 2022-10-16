@@ -1,7 +1,7 @@
 ﻿@using Newtonsoft.Json
 @using OpBot.Cards.Address2
 @using System.ComponentModel
-@inherits CardView<EditAddressModel>
+@inherits CardView<Address2App, EditAddressModel>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     @if (Model.IsEdit)
@@ -13,13 +13,9 @@
         <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
 
-    <Input.Text Binding="Address.Street" IsRequired="false"/>
-    <ValidationErrors Id="Address.Street" />
-
-    <Input.Text Binding="Address.City" />
-    <ValidationErrors Id="Address.City" />
-
-    <Input.ChoiceSet Binding="Address.State">
+    <Input.Text Binding="Model.Address.Street" IsRequired="false"/>
+    <Input.Text Binding="Model.Address.City" />
+    <Input.ChoiceSet Binding="Model.Address.State">
         <Choice Title="Alabama" Value="AL" />
         <Choice Title="Arkansas" Value="AR" />
         <Choice Title="Alaska" Value="AK" />
@@ -29,40 +25,33 @@
         <Choice Title="Iowa" Value="IA" />
         <Choice Title="Oregon" Value="OR" />
     </Input.ChoiceSet>
-    <ValidationErrors Id="Address.State" />
-
-    <Input.Text Binding="Address.PostalCode" />
-    <ValidationErrors Id="Address.PostalCode" />
-
-    <Input.ChoiceSet Binding="Address.Country">
+    <Input.Text Binding="Model.Address.PostalCode" />
+    <Input.ChoiceSet Binding="Model.Address.Country">
         <Choice Title="U.S.A." Value="USA" />
         <Choice Title="Canada" Value="CA" />
     </Input.ChoiceSet>
-    <ValidationErrors Id="Address.Country" />
 
     <Action.Execute Title="Cancel" Verb="OnCancel" AssociatedInputs="None" />
     <Action.Execute Title="Save" Verb="OnSave" />
 </Card>
 
 @functions {
-    [BindProperty]
-    public Address Address { get; set; } 
-
-    public void OnInitialize()
-    {
-        if (Model.Address != null)
-        {
-            // clone object for editing.
-            this.Address = Model.Address.Clone();
-        }
-    }
-
     public void OnSave()
     {
         if (this.IsModelValid)
         {
-            Model.Address = this.Address;
             this.Close(Model);
+        }
+        else
+        {
+            // you can process validationErrors by hand, in this case Create Banner Messages for errors.
+            foreach(var error in this.ValidationErrors)
+            {
+                foreach(var message in error.Value)
+                {
+                    AddBannerMessage(message, AdaptiveContainerStyle.Attention);
+                }
+            }
         }
     }
 

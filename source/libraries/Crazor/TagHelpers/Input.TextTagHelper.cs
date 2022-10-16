@@ -61,7 +61,7 @@ namespace Crazor.TagHelpers
             await base.ProcessAsync(context, output);
 
             // --- Client side validation....
-            var regexAttribute = BindingProperty.GetCustomAttribute<RegularExpressionAttribute>();
+            var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
             if (IfValidation() && output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
             {
                 output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
@@ -73,44 +73,44 @@ namespace Crazor.TagHelpers
             }
 
             // -- MaxLength 
-            var stringLengthAttribute = BindingProperty.GetCustomAttribute<StringLengthAttribute>();
+            var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
             if (IfValidation() && output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(MaxLength), stringLengthAttribute?.MaximumLength);
             }
 
             // ----  style
-            var maxLengthAttribute = BindingProperty.GetCustomAttribute<MaxLengthAttribute>();
+            var maxLengthAttribute = BindingProperty?.GetCustomAttribute<MaxLengthAttribute>();
             if (output.Attributes[nameof(MaxLength)] == null && maxLengthAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(MaxLength), maxLengthAttribute?.Length);
             }
 
-            var phoneAttribute = BindingProperty.GetCustomAttribute<PhoneAttribute>();
+            var phoneAttribute = BindingProperty?.GetCustomAttribute<PhoneAttribute>();
             if (output.Attributes[nameof(Style)] == null && phoneAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Tel);
             }
 
-            var emailAttribute = BindingProperty.GetCustomAttribute<EmailAddressAttribute>();
+            var emailAttribute = BindingProperty?.GetCustomAttribute<EmailAddressAttribute>();
             if (output.Attributes[nameof(Style)] == null && emailAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Email);
             }
 
-            var passwordAttribute = BindingProperty.GetCustomAttribute<PasswordPropertyTextAttribute>();
+            var passwordAttribute = BindingProperty?.GetCustomAttribute<PasswordPropertyTextAttribute>();
             if (output.Attributes[nameof(Style)] == null && passwordAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Password);
             }
 
-            var urlAttribute = BindingProperty.GetCustomAttribute<UrlAttribute>();
+            var urlAttribute = BindingProperty?.GetCustomAttribute<UrlAttribute>();
             if (output.Attributes[nameof(Style)] == null && urlAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Url);
             }
 
-            var dtAttribute = BindingProperty.GetCustomAttribute<DataTypeAttribute>();
+            var dtAttribute = BindingProperty?.GetCustomAttribute<DataTypeAttribute>();
             if (output.Attributes[nameof(Style)] == null && dtAttribute != null)
             {
                 switch (dtAttribute.DataType)

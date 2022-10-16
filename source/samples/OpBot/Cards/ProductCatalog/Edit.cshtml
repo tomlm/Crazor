@@ -1,5 +1,5 @@
 ﻿@using OpBot.Cards.ProductCatalog
-@inherits CardView<CreateEditProductCatalogModel>
+@inherits CardView<ProductCatalogApp, EditOrAddProductCatalogItem>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     
@@ -12,17 +12,17 @@
     {
         <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
     }
-    <Input.Text Id="ItemName" Label="Name" Style="Text" ErrorMessage="Name is required." Value="@ItemName" />
-    <ValidationErrors Binding="ItemName"/>
+    <Input.Text Binding="Model.Item.Name" Label="Name" />
+    <ValidationErrors Binding="Model.Item.Name" />
     
-    <Input.Text Id="Description" Label="Description" Style="Text" ErrorMessage="Description is required" Value="@Description" />
-    <ValidationErrors Binding="Description"/>
+    <Input.Text Binding="Model.Item.Description" Label="Description" />
+    <ValidationErrors Binding="Model.Item.Description" />
     
-    <Input.Number Id="Price" Label="Price" ErrorMessage="Price is required." Value="@Price" />
-    <ValidationErrors Binding="Price"/>
+    <Input.Number Binding="Model.Item.Price" Label="Price" />
+    <ValidationErrors Binding="Model.Item.Price" />
 
-    <Input.Text Id="PictureUri" Label="PictureUri" Style="Text" ErrorMessage="Picture Uri is required." Value="@PictureUri" />
-    <ValidationErrors Binding="PictureUri"/>
+    <Input.Text Binding="Model.Item.PictureUri" Label="PictureUri" ErrorMessage="Picture Uri is required." />
+    <ValidationErrors Binding="Model.Item.PictureUri" />
 
     <Action.Execute Title="Cancel" Verb="OnCancel" />
     <Action.Execute Title="Save" Verb="OnSave" />
@@ -30,45 +30,10 @@
 
 @functions {
 
-    [BindProperty]
-    [Required]
-    [MaxLength(100)]
-    public string? ItemName { get; set; }
-
-    [BindProperty]
-    [Required]
-    [MaxLength(100)]
-    public string? Description { get; set; }
-
-    [BindProperty]
-    [Required]
-    public double Price { get; set; }
-
-    [BindProperty]
-    [Required]
-    [MaxLength(100)]
-    public string? PictureUri { get; set; }
-
-    public void OnInitialize()
-    {
-        if (Model.Item != null)
-        {
-            ItemName = Model.Item.Name;
-            Description = Model.Item.Description;
-            Price = (Double)Model.Item.Price;
-            PictureUri = Model.Item.PictureUri;
-        }
-    }
-
     public void OnSave()
     {
         if (this.IsModelValid)
         {
-            Model.Item.Name = ItemName!;
-            Model.Item.Description = Description!;
-            Model.Item.Price = (Decimal)Price;
-            Model.Item.PictureUri = PictureUri!;
-
             this.Close(Model);
         }
     }

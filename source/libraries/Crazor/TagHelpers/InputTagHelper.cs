@@ -79,7 +79,7 @@ namespace Crazor.TagHelpers
                             throw new ArgumentNullException($"Could not find property path {part} of {this.Binding}");
                         }
                     }
-                    var dna = this.BindingProperty.GetCustomAttribute<DisplayNameAttribute>();
+                    var dna = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
                     this.BindingDisplayName = dna?.DisplayName ?? parts.Last();
                 }
             }
@@ -144,7 +144,7 @@ namespace Crazor.TagHelpers
             }
 
             // if we don't have required, but binding property has [Required] then set it
-            if (IfValidation() && output.Attributes[nameof(IsRequired)] == null && BindingProperty.GetCustomAttribute<RequiredAttribute>() != null)
+            if (IfValidation() && output.Attributes[nameof(IsRequired)] == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
             {
                 output.Attributes.SetAttribute(nameof(IsRequired), "true");
             }

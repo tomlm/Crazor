@@ -1,9 +1,9 @@
 ﻿@using OpBot.Cards.DataQuery
 @using AdaptiveCards
-@inherits CardView
+@inherits CardView<DataQueryApp>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
-    <Input.ChoiceSet Binding="nameof(Number)" Style="Filtered" >
+    <Input.ChoiceSet Binding="Number" Style="Filtered" >
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />

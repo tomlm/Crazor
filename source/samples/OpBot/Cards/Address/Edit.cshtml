@@ -1,6 +1,6 @@
 ﻿@using OpBot.Cards.Address
 @using System.ComponentModel
-@inherits CardView<EditAddressModel>
+@inherits CardView<AddressApp, EditAddressModel>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     @if (Model.IsEdit)
@@ -102,12 +102,11 @@
     {
         if (this.IsModelValid)
         {
-            ArgumentNullException.ThrowIfNull(Model.Address);
-            Model.Address.Street = Street;
-            Model.Address.City = City;
-            Model.Address.State = State;
-            Model.Address.PostalCode = PostalCode;
-            Model.Address.Country = Country;
+            Model.Address!.Street = Street;
+            Model.Address!.City = City;
+            Model.Address!.State = State;
+            Model.Address!.PostalCode = PostalCode;
+            Model.Address!.Country = Country;
 
             this.Close(Model);
         }

@@ -3,17 +3,14 @@ using DataAnnotationsValidator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -84,7 +81,8 @@ namespace Crazor
 
                     // if root is [BindProperty]
                     var prop = this.GetType().GetProperty(parts[0]);
-                    if (prop != null && prop.GetCustomAttribute<BindPropertyAttribute>() != null)
+                    if (prop != null && 
+                        (prop.Name == "Model" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
                     {
                         object obj = this;
                         foreach (var part in parts.Take(parts.Count() - 1))
@@ -113,6 +111,18 @@ namespace Crazor
             this.IsModelValid = validator.TryValidateObject(this, validationResults);
             AddValidationResults(String.Empty, validationResults);
 
+            var model = this.GetModel();
+            if (model != null)
+            {
+                validationResults = new List<ValidationResult>();
+
+                if (!validator.TryValidateObjectRecursive(this.GetModel(), validationResults))
+                {
+                    this.IsModelValid = false;
+                    AddValidationResults($"Model.", validationResults);
+                }
+            }
+
             // for complex types do a recursive deep validation. We can't
             // do this at the root because CardView is too complicated for a deep compare.
             foreach (var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<BindPropertyAttribute>() != null &&
@@ -124,8 +134,8 @@ namespace Crazor
                 if (!validator.TryValidateObjectRecursive(value, validationResults))
                 {
                     this.IsModelValid = false;
+                    AddValidationResults($"{property.Name}.", validationResults);
                 }
-                AddValidationResults($"{property.Name}.", validationResults);
             }
 
             var verb = action.Verb;
@@ -392,13 +402,22 @@ namespace Crazor
 
     }
 
-    public class CardView<ModelT> : CardView
+    public class CardView<AppT> : CardView
+    where AppT : CardApp
+    {
+        // Summary:
+        //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
+        //     property.
+        public AppT App
+        {
+            get => (AppT)base.App;
+        }
+    }
+
+    public class CardView<AppT, ModelT> : CardView<AppT>
+        where AppT : CardApp
         where ModelT : class
     {
-        public CardView()
-        {
-        }
-
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
         //     property.
