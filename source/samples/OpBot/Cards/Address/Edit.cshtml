@@ -1,5 +1,7 @@
-﻿@using OpBot.Cards.Address
+﻿@using Newtonsoft.Json
+@using OpBot.Cards.Address
 @using System.ComponentModel
+
 @inherits CardView<AddressApp, EditAddressModel>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
@@ -12,103 +14,35 @@
         <TextBlock Size="ExtraLarge">Add Address</TextBlock>
     }
 
-    <Input.Text Binding="@nameof(Street)" IsRequired="false"/>
-    <ValidationErrors Binding="@nameof(Street)" />
+    <Input.Text Binding="Model.Address.Street" />
+    <ValidationErrors Binding="Model.Address.Street"/>
 
-    <Input.Text Binding="@nameof(City)" />
-    <ValidationErrors Binding="@nameof(City)" />
+    <Input.Text Binding="Model.Address.City" />
+    <ValidationErrors Binding="Model.Address.City" />
 
-    <Input.ChoiceSet Binding="State">
-        <Choice Title="Alabama" Value="AL" />
-        <Choice Title="Arkansas" Value="AR" />
-        <Choice Title="Alaska" Value="AK" />
-        <Choice Title="California" Value="CA" />
-        <Choice Title="Idaho" Value="ID" />
-        <Choice Title="Washington" Value="WA" />
-        <Choice Title="Iowa" Value="IA" />
-        <Choice Title="Oregon" Value="OR" />
-    </Input.ChoiceSet>
-    <ValidationErrors Binding="@nameof(State)" />
+    <Input.ChoiceSet Binding="Model.Address.State" />
+    <ValidationErrors Binding="Model.Address.State" />
 
-    <Input.Text Binding="@nameof(PostalCode)" />
-    <ValidationErrors Binding="@nameof(PostalCode)" />
+    <Input.Text Binding="Model.Address.PostalCode" />
+    <ValidationErrors Binding="Model.Address.PostalCode" />
 
-    <Input.ChoiceSet Binding="Country">
-        <Choice Title="U.S.A." Value="USA" />
-        <Choice Title="Canada" Value="CA" />
-    </Input.ChoiceSet>
-    <ValidationErrors Binding="@nameof(Country)" />
+    <Input.ChoiceSet Binding="Model.Address.Country" />
+    <ValidationErrors Binding="Model.Address.Country" />
 
-    <Action.Execute Title="Cancel" Verb="OnCancel" />
+    <Action.Execute Title="Cancel" Verb="OnCancel" AssociatedInputs="None" />
     <Action.Execute Title="Save" Verb="OnSave" />
 </Card>
 
 @functions {
- //Supported Data Annotations 
- //  [PasswordPropertyText]
- //  [Range]
- //  [Phone]
- //  [Url]
- //  [Email]
- //  [StringLength]
- //  [PasswordPropertyText]
- //  [MaxLength]
- //  [RegularExpression("Ames", ErrorMessage = "The value must be Ames")]
- //  [DataType(DataType.Text)]
- //  [DataType(DataType.Email)]
- //  [DataType(DataType.Password)]
- //  [DataType(DataType.Tel)]
- //  [DataType(DataType.Url)]
-
-    [BindProperty]
-    [Required]
-    [StringLength(100)]
-    public string? Street { get; set; }
-
-    [BindProperty]
-    [Required]
-    [StringLength(100)]
-    public string? City { get; set; }
-
-    [BindProperty]
-    [Required]
-    [StringLength(30)]
-    public string? State { get; set; }
-
-    [BindProperty]
-    [Required]
-    [MaxLength(20)]
-    [DisplayName("Zip")]
-    public string? PostalCode { get; set; }
-
-    [BindProperty]
-    [Required]
-    [MaxLength(50)]
-    public string? Country { get; set; }
-
-    public void OnInitialize()
-    {
-        if (Model.Address != null)
-        {
-            Street = Model.Address.Street;
-            City = Model.Address.City;
-            State = Model.Address.State;
-            PostalCode = Model.Address.PostalCode;
-            Country = Model.Address.Country;
-        }
-    }
-
     public void OnSave()
     {
         if (this.IsModelValid)
         {
-            Model.Address!.Street = Street;
-            Model.Address!.City = City;
-            Model.Address!.State = State;
-            Model.Address!.PostalCode = PostalCode;
-            Model.Address!.Country = Country;
-
             this.Close(Model);
+        }
+        else
+        {
+            AddBannerMessage("Please correct the errors in this form", AdaptiveContainerStyle.Attention);
         }
     }
 

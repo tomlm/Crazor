@@ -79,8 +79,9 @@ namespace Crazor.TagHelpers
                             throw new ArgumentNullException($"Could not find property path {part} of {this.Binding}");
                         }
                     }
-                    var dna = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
-                    this.BindingDisplayName = dna?.DisplayName ?? parts.Last();
+                    var dnAttr = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
+                    var descAttr = this.BindingProperty?.GetCustomAttribute<DescriptionAttribute>();
+                    this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? parts.Last();
                 }
             }
         }
