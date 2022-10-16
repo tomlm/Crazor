@@ -25,7 +25,7 @@ namespace Crazor
         {
             var uri = new Uri(query.Url);
             _logger.LogInformation($"Starting composeExtension/queryLink processing {uri}");
-            var hostName = _configuration.GetValue<string>("HostName");
+            var hostName = _configuration.GetValue<string>("HostName") ?? uri.Host;
 
             // get play page url => envir, cardId, instanceId,
             if (uri.Host == hostName)
