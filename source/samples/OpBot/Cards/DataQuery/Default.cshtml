@@ -18,6 +18,7 @@
 
     public async Task<AdaptiveChoice[]> GetNumbersChoicesAsync(string queryText, int top = 10, int skip = 0)
     {
+        await Task.CompletedTask;
         return Enumerable.Range(1, 1000000)
            .Where(v => v.ToString().StartsWith(queryText?.Trim() ?? String.Empty))
            .Skip(skip)

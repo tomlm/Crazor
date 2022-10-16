@@ -64,10 +64,10 @@
     {
         if (this.IsModelValid)
         {
-            Model.Item.Name = ItemName;
-            Model.Item.Description = Description;
+            Model.Item.Name = ItemName!;
+            Model.Item.Description = Description!;
             Model.Item.Price = (Decimal)Price;
-            Model.Item.PictureUri = PictureUri;
+            Model.Item.PictureUri = PictureUri!;
 
             this.Close(Model);
         }

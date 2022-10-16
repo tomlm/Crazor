@@ -73,6 +73,9 @@ namespace AdaptiveCards
         public AdaptiveSchemaVersion Version { get; set; } = new AdaptiveSchemaVersion("1.0");
 
 #if !NETSTANDARD1_3
+        /// <summary>
+        /// Xml serialization for complex type version.
+        /// </summary>
         [JsonIgnore]
         [XmlAttribute(nameof(Version))]
         public string _Version { get => Version.ToString(); set => this.Version = new AdaptiveSchemaVersion(value); }

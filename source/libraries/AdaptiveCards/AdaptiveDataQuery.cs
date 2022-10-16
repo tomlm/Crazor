@@ -12,7 +12,7 @@ namespace AdaptiveCards
     public class AdaptiveDataQuery
     {
         [JsonIgnore]
-        public const char Seperator = '#';
+        internal const char Seperator = '#';
 
         /// <summary>
         /// Specifies that it's a Data.Query object.

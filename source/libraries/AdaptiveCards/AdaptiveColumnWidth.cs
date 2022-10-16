@@ -75,7 +75,7 @@ namespace AdaptiveCards
         /// <summary>
         /// Initializes an AdaptiveColumnWidth instance with the given width as ("auto","stretch", "100px", "1.5" /*relative size*/}
         /// </summary>
-        /// <param name="px">The device-independent pixel size to use.</param>
+        /// <param name="width">The device-independent pixel size to use.</param>
         public AdaptiveColumnWidth(string width)
         {
             switch (width.ToLower())

@@ -17,7 +17,7 @@
     <ValidationErrors Id="Address.Street" />
 
     <Input.Text Binding="Address.City" />
-    <FieldErrors Id="Address.City" />
+    <ValidationErrors Id="Address.City" />
 
     <Input.ChoiceSet Binding="Address.State">
         <Choice Title="Alabama" Value="AL" />
@@ -29,16 +29,16 @@
         <Choice Title="Iowa" Value="IA" />
         <Choice Title="Oregon" Value="OR" />
     </Input.ChoiceSet>
-    <FieldErrors Id="Address.State" />
+    <ValidationErrors Id="Address.State" />
 
     <Input.Text Binding="Address.PostalCode" />
-    <FieldErrors Id="Address.PostalCode" />
+    <ValidationErrors Id="Address.PostalCode" />
 
     <Input.ChoiceSet Binding="Address.Country">
         <Choice Title="U.S.A." Value="USA" />
         <Choice Title="Canada" Value="CA" />
     </Input.ChoiceSet>
-    <FieldErrors Id="Address.Country" />
+    <ValidationErrors Id="Address.Country" />
 
     <Action.Execute Title="Cancel" Verb="OnCancel" AssociatedInputs="None" />
     <Action.Execute Title="Save" Verb="OnSave" />
@@ -46,7 +46,7 @@
 
 @functions {
     [BindProperty]
-    public Address Address { get; set; }
+    public Address Address { get; set; } 
 
     public void OnInitialize()
     {

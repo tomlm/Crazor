@@ -88,6 +88,10 @@ namespace AdaptiveCards
             }
         }
 
+        /// <summary>
+        /// Assignment operator
+        /// </summary>
+        /// <param name="val">string to convert to dimension.</param>
         public static implicit operator AdaptiveDimension(string val) => new AdaptiveDimension(val);
 
         /// <summary>

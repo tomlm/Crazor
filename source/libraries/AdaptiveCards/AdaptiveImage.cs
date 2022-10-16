@@ -195,6 +195,10 @@ namespace AdaptiveCards
         [XmlAttribute(nameof(Width))]
         public string _Width { get => Width?.ToString(); set => this.Width = (value != null) ? new AdaptiveDimension(value) : null; }
 
+        /// <summary>
+        /// Only serialize if set.
+        /// </summary>
+        /// <returns>true/false</returns>
         public bool ShouldSerialize_Width() => Width != null;
 #endif
     }

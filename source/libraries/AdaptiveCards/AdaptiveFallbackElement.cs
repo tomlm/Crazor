@@ -69,6 +69,10 @@ namespace AdaptiveCards
             return null;
         }
 
+        /// <summary>
+        /// Convert xml to element.
+        /// </summary>
+        /// <param name="reader">xml reader.</param>
         public void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -107,6 +111,10 @@ namespace AdaptiveCards
 
         }
 
+        /// <summary>
+        /// Write element as xml
+        /// </summary>
+        /// <param name="writer">xml writer.</param>
         public void WriteXml(XmlWriter writer)
         {
             if (this.Type == AdaptiveFallbackType.Drop)
