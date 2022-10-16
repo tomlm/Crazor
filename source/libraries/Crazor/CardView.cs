@@ -74,9 +74,6 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(this.App);
             this.Action = action;
 
-            var validator = new DataAnnotationsValidator.DataAnnotationsValidator();
-            var validationResults = new List<ValidationResult>();
-
             // Bind properties
             JObject? data = (JObject?)this.Action?.Data;
             if (data != null)
@@ -90,7 +87,7 @@ namespace Crazor
                     if (prop != null && prop.GetCustomAttribute<BindPropertyAttribute>() != null)
                     {
                         object obj = this;
-                        foreach(var part in parts.Take(parts.Count() - 1))
+                        foreach (var part in parts.Take(parts.Count() - 1))
                         {
                             obj = obj.GetPropertyValue(part);
                         }
@@ -108,24 +105,27 @@ namespace Crazor
                 }
             }
 
-            // validate object model
+            // validate root object model
+            var validator = new DataAnnotationsValidator.DataAnnotationsValidator();
+
+            // do shallow validation for root level properties
+            var validationResults = new List<ValidationResult>();
             this.IsModelValid = validator.TryValidateObject(this, validationResults);
-            foreach (var result in validationResults)
+            AddValidationResults(String.Empty, validationResults);
+
+            // for complex types do a recursive deep validation. We can't
+            // do this at the root because CardView is too complicated for a deep compare.
+            foreach (var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<BindPropertyAttribute>() != null &&
+                                                                              !p.PropertyType.IsValueType &&
+                                                                              p.PropertyType != typeof(string)))
             {
-                foreach (var member in result.MemberNames)
+                validationResults = new List<ValidationResult>();
+                var value = property.GetValue(this);
+                if (!validator.TryValidateObjectRecursive(value, validationResults))
                 {
-                    if (!ValidationErrors.TryGetValue(member, out var list))
-                    {
-
-                        list = new HashSet<string>();
-                        ValidationErrors[member] = list;
-                    }
-
-                    if (result.ErrorMessage != null)
-                    {
-                        list.Add(result.ErrorMessage);
-                    }
+                    this.IsModelValid = false;
                 }
+                AddValidationResults($"{property.Name}.", validationResults);
             }
 
             var verb = action.Verb;
@@ -155,6 +155,27 @@ namespace Crazor
                 }
             }
             return false;
+        }
+
+        private void AddValidationResults(string prefix, List<ValidationResult> validationResults)
+        {
+            foreach (var result in validationResults)
+            {
+                foreach (var member in result.MemberNames)
+                {
+                    var path = $"{prefix}{member}";
+                    if (!ValidationErrors.TryGetValue(path, out var list))
+                    {
+                        list = new HashSet<string>();
+                        ValidationErrors[path] = list;
+                    }
+
+                    if (result.ErrorMessage != null)
+                    {
+                        list.Add(result.ErrorMessage);
+                    }
+                }
+            }
         }
 
         public virtual object? GetModel()
