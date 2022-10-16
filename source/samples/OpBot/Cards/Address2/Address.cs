@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace OpBot.Cards.Address2
 {
-    public class Address
+    public class Address 
     {
         public string? Id { get; set; } = Utils.GetNewId();
         //Supported Data Annotations 
@@ -44,5 +45,10 @@ namespace OpBot.Cards.Address2
         [Required]
         [MaxLength(50)]
         public string? Country { get; set; }
+
+        public Address Clone()
+        {
+            return (Address)this.DeepClone();
+        }
     }
 }

@@ -53,7 +53,7 @@
         if (Model.Address != null)
         {
             // clone object for editing.
-            this.Address = JsonConvert.DeserializeObject<Address>(JsonConvert.SerializeObject(Model.Address));
+            this.Address = Model.Address.Clone();
         }
     }
 
