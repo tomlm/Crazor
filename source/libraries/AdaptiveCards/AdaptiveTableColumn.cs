@@ -53,6 +53,10 @@ namespace AdaptiveCards
         [XmlAttribute(nameof(Width))]
         public string _Width { get => Width?.ToString(); set => this.Width = new AdaptiveColumnWidth(value); }
 
+        /// <summary>
+        /// Controls serialization 
+        /// </summary>
+        /// <returns></returns>
         public bool ShouldSerialize_Width() => Width != null;
 #endif
     }

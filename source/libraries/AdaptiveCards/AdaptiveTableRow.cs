@@ -212,6 +212,9 @@ namespace AdaptiveCards
 #endif
 
 
+        /// <summary>
+        /// Cells for the row
+        /// </summary>
         [JsonProperty]
 #if !NETSTANDARD1_3
         [XmlElement("TableCell")]

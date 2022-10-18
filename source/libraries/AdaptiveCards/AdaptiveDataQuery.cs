@@ -11,6 +11,9 @@ namespace AdaptiveCards
     [XmlType("Data.Query")]
     public class AdaptiveDataQuery
     {
+        /// <summary>
+        /// separator
+        /// </summary>
         [JsonIgnore]
         public const char Separator = '#';
 

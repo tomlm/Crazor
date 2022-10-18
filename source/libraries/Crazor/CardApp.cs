@@ -111,7 +111,7 @@ namespace Crazor
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
         [JsonIgnore]
-        public Dictionary<string, AdaptiveElement> Stylesheet { get; set; }
+        public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; } 
 
         /// <summary>
         /// Handle action
@@ -133,7 +133,7 @@ namespace Crazor
                 {
                     var xml = await File.ReadAllTextAsync(stylesheetPath, cancellationToken);
                     xml = $"<Card Version=\"1.6\">\n{xml}\n</Card>";
-                    var card = (AdaptiveCard)_cardSerializer.Deserialize(XmlReader.Create(new StringReader(xml)));
+                    var card = (AdaptiveCard)_cardSerializer!.Deserialize(XmlReader.Create(new StringReader(xml!)))!;
                     Stylesheet = card.Body.ToDictionary(el => $"{el.Type}.{el.Id}", StringComparer.OrdinalIgnoreCase);
                 }
             }
@@ -145,9 +145,9 @@ namespace Crazor
                     if (this.Action.Verb == Constants.LOADROUTE_VERB)
                     {
                         var loadPage = ((JObject)this.Action.Data).ToObject<LoadRouteModel>();
-                        if (this.CurrentCard != loadPage.View)
+                        if (this.CurrentCard != loadPage!.View)
                         {
-                            ShowCard(loadPage.View);
+                            ShowCard(loadPage.View!);
                         }
                     }
 
@@ -358,7 +358,7 @@ namespace Crazor
 
             CardView cardView = (CardView)((RazorView)viewResult.View).RazorPage;
             cardView.RazorView = viewResult.View;
-            cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
+            // cardView.Url = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
             cardView.Name = viewName;
             ITempDataProvider tempDataProvider;
@@ -404,7 +404,12 @@ namespace Crazor
             var viewRoute = this.CurrentView!.GetRoute();
             if (!viewRoute.StartsWith('/'))
             {
-                viewRoute = $"{this.GetRoute()}/{viewRoute}";
+                if (viewRoute.Length > 0)
+                    viewRoute = $"{this.GetRoute()}/{this.CurrentView.Name}/{viewRoute}";
+                else if (this.CurrentView.Name != "Default")
+                    viewRoute = $"{this.GetRoute()}/{this.CurrentView.Name}";
+                else
+                    viewRoute = this.GetRoute();
             }
             outboundCard.AdditionalProperties["url"] = viewRoute;
         }

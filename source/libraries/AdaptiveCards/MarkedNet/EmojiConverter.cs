@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Microsoft.MarkedNet
 {
+    /// <summary>
+    /// Emoji converter
+    /// </summary>
     public static class EmojiConverter
     {
         private static Dictionary<string, string> markup2Emoji = new Dictionary<string, string>();

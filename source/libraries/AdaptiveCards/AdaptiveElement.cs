@@ -60,7 +60,7 @@ namespace AdaptiveCards
         public string Speak { get; set; }
 
         /// <summary>
-        /// The amount of space the element should be separated from the previous element. Default value is <see cref="AdaptiveHeight.Auto"/>.
+        /// The amount of space the element should be separated from the previous element. Default value is <see cref="AdaptiveDimension.Auto"/>.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 #if !NETSTANDARD1_3

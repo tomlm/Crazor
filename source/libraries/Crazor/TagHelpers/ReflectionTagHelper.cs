@@ -42,7 +42,7 @@ namespace Crazor.TagHelpers
             while (this.View == null)
             {
                 // ((RazorView)page.ViewContext.View).RazorPage;
-                if (viewContext.View is RazorView rv)
+                if (viewContext!.View is RazorView rv)
                 {
                     if (rv.RazorPage is CardView cv)
                     {
@@ -63,8 +63,10 @@ namespace Crazor.TagHelpers
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            await Task.CompletedTask;
+
             // process class
-            if (View.App.Stylesheet != null && this.Class != null)
+            if (View?.App?.Stylesheet != null && this.Class != null)
             {
                 var targetElement = this.GetType().GetCustomAttribute<HtmlTargetElementAttribute>();
                 if (targetElement != null)
@@ -75,7 +77,7 @@ namespace Crazor.TagHelpers
                         {
                             foreach (var property in el.GetType().GetProperties().Where(p => p.Name != "Id" && p.GetCustomAttribute<XmlAttributeAttribute>() != null))
                             {
-                                var xmlAttribute = property.GetCustomAttribute<XmlAttributeAttribute>();
+                                var xmlAttribute = property.GetCustomAttribute<XmlAttributeAttribute>()!;
                                 var propertyName = String.IsNullOrEmpty(xmlAttribute.AttributeName) ? property.Name : xmlAttribute.AttributeName;
                                 var value = property.GetValue(el);
                                 if (value != null)
@@ -129,7 +131,7 @@ namespace Crazor.TagHelpers
             {
                 string attributeName = property.GetCustomAttribute<HtmlAttributeNameAttribute>()?.Name ?? property.Name;
                 var bindValueAttribute = property.GetCustomAttribute<BindingAttribute>();
-                var value = property?.GetValue(this);
+                var value = property.GetValue(this);
 
                 if (value != null)
                 {
@@ -142,7 +144,7 @@ namespace Crazor.TagHelpers
 
                     if (property.PropertyType == typeof(bool) || property.PropertyType == typeof(bool?))
                     {
-                        output.Attributes.SetAttribute(attributeName, value.ToString().ToLower());
+                        output.Attributes.SetAttribute(attributeName, value.ToString()!.ToLower());
                     }
                     else
                     {

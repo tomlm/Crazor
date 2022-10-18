@@ -104,7 +104,7 @@ namespace AdaptiveCards
         /// <summary>
         /// Initializes an AdaptiveColumnWidth instance with the given pixel size.
         /// </summary>
-        /// <param name="px">The device-independent pixel size to use.</param>
+        /// <param name="size">The device-independent pixel size to use.</param>
         public AdaptiveColumnWidth(float size)
         {
             this.Unit = (float)size;
@@ -120,7 +120,7 @@ namespace AdaptiveCards
         public string WidthType { get; set; }
 
         /// <summary>
-        /// The specific columnWidth to use (only valid for the <see cref="AdaptiveColumnWidthType.Pixel"/> type).
+        /// The specific columnWidth .
         /// </summary>
         public float? Unit { get; set; }
 

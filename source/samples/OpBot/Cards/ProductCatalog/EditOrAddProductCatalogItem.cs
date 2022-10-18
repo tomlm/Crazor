@@ -7,6 +7,6 @@ namespace OpBot.Cards.ProductCatalog
     {
         public bool IsEdit { get; set; }
 
-        public ProductCatalogItem Item { get; set; }
+        public ProductCatalogItem? Item { get; set; }
     }
 }

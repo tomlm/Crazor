@@ -57,7 +57,7 @@ namespace AdaptiveCardXmlTests
                 if (!File.Exists(xmlFile))
                 {
                     File.WriteAllText(jsonFile, json);
-                    File.WriteAllText(xmlFile, ToXml(card));
+                    File.WriteAllText(xmlFile, ToXml(card!));
                 }
             }
             catch (Exception err)
@@ -69,7 +69,7 @@ namespace AdaptiveCardXmlTests
             Debug.WriteLine($"---- {name} -----");
             var xml = File.ReadAllText(xmlFile);
             var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
-            xml = ToXml(jsonCard);
+            xml = ToXml(jsonCard!);
             var reader = XmlReader.Create(new StringReader(xml));
             var xmlCard = serializer.Deserialize(reader);
             var json2 = JsonConvert.SerializeObject(xmlCard, jsonSettings);

@@ -23,7 +23,7 @@ namespace OpBot.Cards.ProductCatalog
             {
                 var response = await client.GetStringAsync(request);
 
-                CatalogItems = JsonConvert.DeserializeObject<List<ProductCatalogItem>>(response);
+                CatalogItems = JsonConvert.DeserializeObject<List<ProductCatalogItem>>(response)!;
             }
 
             await base.LoadAppAsync(resourceId, sessionId, activity, cancellationToken);      

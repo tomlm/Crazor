@@ -55,7 +55,7 @@ namespace Crazor.TagHelpers
             while (this.View == null)
             {
                 // ((RazorView)page.ViewContext.View).RazorPage;
-                if (viewContext.View is RazorView rv)
+                if (viewContext!.View is RazorView rv)
                 {
                     if (rv.RazorPage is CardView cv)
                     {
@@ -78,7 +78,7 @@ namespace Crazor.TagHelpers
             // get child content and capture it in our model so we can insert it in our .cshtml template
             ChildContent = await output.GetChildContentAsync();
 
-            IHtmlHelper? htmlHelper = ViewContext.HttpContext.RequestServices.GetService<IHtmlHelper>();
+            IHtmlHelper? htmlHelper = ViewContext!.HttpContext.RequestServices.GetService<IHtmlHelper>();
             ArgumentNullException.ThrowIfNull(htmlHelper);
 
             // bind our view content

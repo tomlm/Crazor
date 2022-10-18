@@ -69,7 +69,7 @@ namespace Crazor.TagHelpers
                     output.TagMode = TagMode.StartTagAndEndTag;
                     foreach (var value in BindingProperty.PropertyType.GetEnumValues())
                     {
-                        MemberInfo memberInfo = BindingProperty.PropertyType.GetMember(value.ToString()).First();
+                        MemberInfo memberInfo = BindingProperty.PropertyType.GetMember(value.ToString()!).First();
 
                         // we can then attempt to retrieve the    
                         // description attribute from the member info    

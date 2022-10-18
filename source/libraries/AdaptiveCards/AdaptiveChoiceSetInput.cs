@@ -88,6 +88,10 @@ namespace AdaptiveCards
 #endif
         public List<AdaptiveChoice> Choices { get; set; } = new List<AdaptiveChoice>();
 
+        /// <summary>
+        /// Controls serialization of property
+        /// </summary>
+        /// <returns></returns>
         public bool ShouldSerializeChoices() => Choices.Count > 0;
 
         /// <summary>

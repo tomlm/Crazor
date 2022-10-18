@@ -17,20 +17,20 @@ namespace Crazor
     public class SearchInvoke : SearchInvokeValue
     {
         [JsonProperty]
-        public string Dataset { get; set; }
+        public string? Dataset { get; set; }
 
         [JsonProperty]
-        public string SessionData { get; set; }
+        public string? SessionData { get; set; }
     }
 
     public partial class CardActivityHandler
     {
         protected virtual async Task<AdaptiveCardInvokeResponse> OnSearchInvokeAsync(ITurnContext<IInvokeActivity> turnContext, SearchInvoke searchInvoke, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"Starting application/search processing ");
+            _logger!.LogInformation($"Starting application/search processing ");
 
             // Get session data from the invoke payload
-            var parts = searchInvoke.Dataset.Split(AdaptiveDataQuery.Separator);
+            var parts = searchInvoke!.Dataset!.Split(AdaptiveDataQuery.Separator);
             IEncryptionProvider encryptionProvider = _serviceProvider.GetRequiredService<IEncryptionProvider>();
             var data = await encryptionProvider.DecryptAsync(parts[0], cancellationToken);
             var sessionData = SessionData.FromString(data);

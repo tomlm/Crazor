@@ -64,11 +64,6 @@ namespace AdaptiveCards
 #endif
         public AdaptiveTypedElement Content { get; set; }
 
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
-
         /// <summary>
         /// Convert xml to element.
         /// </summary>
@@ -127,6 +122,12 @@ namespace AdaptiveCards
 
                 serializer.Serialize(writer, Content);
             }
+        }
+
+        /// <inheritdoc/>
+        public XmlSchema GetSchema()
+        {
+            return null;
         }
     }
 }

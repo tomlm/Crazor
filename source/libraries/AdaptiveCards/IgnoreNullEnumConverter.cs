@@ -24,7 +24,8 @@ namespace AdaptiveCards
         }
 
         /// <inheritdoc />
-        public IgnoreNullEnumConverter(bool camelCase) : base(camelCase)
+        public IgnoreNullEnumConverter(bool camelCase) 
+            : base(camelCase)
         {
         }
 

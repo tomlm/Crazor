@@ -113,7 +113,7 @@ namespace Crazor.TagHelpers
                 // only emit values that we have
                 if (value != null)
                 {
-                    if (property.PropertyType == typeof(bool))
+                    if (property!.PropertyType == typeof(bool))
                     {
                         // xml only likes "true" not "True".
                         value = value.ToString()!.ToLower();

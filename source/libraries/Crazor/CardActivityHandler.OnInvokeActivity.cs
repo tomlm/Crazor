@@ -22,7 +22,7 @@ namespace Crazor
             {
                 case "application/search":
                     var searchInvoke = JObject.FromObject(turnContext.Activity.Value).ToObject<SearchInvoke>();
-                    return CreateInvokeResponse(await OnSearchInvokeAsync(turnContext, searchInvoke, cancellationToken).ConfigureAwait(false));
+                    return CreateInvokeResponse(await OnSearchInvokeAsync(turnContext, searchInvoke!, cancellationToken).ConfigureAwait(false));
 
                 default:
                     return await base.OnInvokeActivityAsync(turnContext, cancellationToken);

@@ -31,14 +31,14 @@ namespace Crazor
         {
         }
 
-        [JsonIgnore]
-        public IUrlHelper UrlHelper { get; set; }
+        //[JsonIgnore]
+        //public IUrlHelper Url { get; set; }
 
         [JsonIgnore]
         public string Name { get; set; } = String.Empty;
 
         [JsonIgnore]
-        public CardApp App { get; set; }
+        public virtual CardApp? App { get; set; }
 
         [JsonIgnore]
         public AdaptiveCardInvokeAction? Action { get; set; }
@@ -93,7 +93,7 @@ namespace Crazor
                     if (routeAttribute != null)
                     {
                         var loadRoute = data.ToObject<LoadRouteModel>();
-                        data = loadRoute.GetDataForRoute(routeAttribute);
+                        data = loadRoute!.GetDataForRoute(routeAttribute);
                     }
 
                     await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
@@ -240,45 +240,7 @@ namespace Crazor
 
         public virtual string GetRoute()
         {
-            //var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
-            //if (routeAttribute != null)
-            //{
-            //    var template = routeAttribute.Template.TrimStart('/', '~');
-            //    var parts = template.Split('/');
-            //    StringBuilder sb = new StringBuilder();
-            //    sb.Append(App.GetRoute());
-            //    foreach(var part in parts)
-            //    {
-            //        if (part.StartsWith('{') && part.EndsWith('}'))
-            //        {
-            //            var path = part.TrimStart('{').TrimEnd('}');
-            //            var value = ObjectPath.GetPathValue<object>(this, path.TrimEnd('?'));
-            //            if (value != null)
-            //            {
-            //                sb.Append($"/{value}");
-            //            }
-            //            else if (!path.EndsWith('?'))
-            //            {
-            //                throw new ArgumentNullException($"{part} not found in {template}");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            sb.Append($"/{part}");
-            //        }
-            //    }
-
-            //    return sb.ToString();
-            //}
-            // else 
-            if (this.Name == "Default")
-            {
-                return App.GetRoute();
-            }
-            else
-            {
-                return $"{App.GetRoute()}/{this.Name}";
-            }
+            return String.Empty;
         }
 
         /// <summary>
@@ -287,7 +249,7 @@ namespace Crazor
         /// <param name="screenName"></param>
         public void ShowCard(string cardName, object? model = null)
         {
-            this.App?.ShowCard(cardName, model);
+            this.App!.ShowCard(cardName, model);
         }
 
         public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
@@ -330,7 +292,7 @@ namespace Crazor
                 {
                     if (parm.Name?.ToLower() == "id")
                     {
-                        if (Action.Id != null)
+                        if (Action!.Id != null)
                         {
                             args.Add(Action.Id);
                         }
@@ -369,9 +331,14 @@ namespace Crazor
             else if (verbMethod.ReturnType.Name == "Task`1")
             {
                 var task = verbMethod.Invoke(this, args?.ToArray());
-                await (Task)task;
-                var result = task.GetType().GetProperty("Result", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance).GetValue(task);
-                return result;
+                if (task != null)
+                {
+
+                    await (Task)task;
+                    var result = task!.GetType().GetProperty("Result", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance)!.GetValue(task);
+                    return result;
+                }
+                throw new ArgumentNullException(verbMethod.Name);
             }
             else
             {
@@ -432,7 +399,7 @@ namespace Crazor
 
                 var reader = XmlReader.Create(new StringReader(xml));
                 var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
-                
+
                 // Diag.Debug.WriteLine(JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
                 return card;
             }
@@ -463,9 +430,11 @@ namespace Crazor
                     skip = search.QueryOptions.Skip
                 });
 
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 return (AdaptiveChoice[])await InvokeMethodAsync(searchMethod, GetMethodArgs(searchMethod, data));
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning restore CS8603 // Possible null reference return.
             }
 
             throw new Exception($"Get{search.Dataset}Choices or Get{search.Dataset}ChoicesAsync not found!");
@@ -506,9 +475,9 @@ namespace Crazor
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
         //     property.
-        public AppT App
+        public new AppT App
         {
-            get => (AppT)base.App;
+            get => (AppT)base.App!;
         }
     }
 
@@ -523,7 +492,7 @@ namespace Crazor
         {
             get
             {
-                if (ViewData.Model != null)
+                if (ViewData!.Model != null)
                 {
                     return ViewData.Model;
                 }
@@ -535,7 +504,7 @@ namespace Crazor
 
             set
             {
-                this.ViewData.Model = value;
+                this.ViewData!.Model = value;
                 this.ViewContext.ViewData.Model = value;
             }
         }

@@ -32,6 +32,10 @@ namespace AdaptiveCards
 #endif
         public AdaptiveAction Action { get; set; }
 
+        /// <summary>
+        /// Assignment operator
+        /// </summary>
+        /// <param name="action"></param>
         public static implicit operator AdaptiveSelectAction(AdaptiveAction action)
         {
             return new AdaptiveSelectAction() { Action = action };
