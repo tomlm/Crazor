@@ -10,21 +10,11 @@
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
-
     <Input.Text Binding="Model.Street" />
-    <ValidationErrors Binding="Model.Street" />
-
     <Input.Text Binding="Model.City" />
-    <ValidationErrors Binding="Model.City" />
-
     <Input.ChoiceSet Binding="Model.State" />
-    <ValidationErrors Binding="Model.State" />
-
-    <Input.Text Binding="Model.PostalCode" />
-    <ValidationErrors Binding="Model.PostalCode" />
-
+    <Input.Text Binding="Model.PostalCode"  />
     <Input.ChoiceSet Binding="Model.Country" />
-    <ValidationErrors Binding="Model.Country" />
 
     <Action.Cancel />
     <Action.OK />
@@ -35,7 +25,7 @@
     public void OnLoadRoute(string addressId)
     {
         this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == addressId);
-        
+
         if (this.Model == null)
         {
             CancelView($"Address was not found.");

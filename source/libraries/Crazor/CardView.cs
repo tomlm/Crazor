@@ -117,7 +117,10 @@ namespace Crazor
             switch (verb)
             {
                 case Constants.OK_VERB:
-                    this.CloseView(this.GetModel());
+                    if (this.IsModelValid)
+                    {
+                        this.CloseView(this.GetModel());
+                    }
                     return true;
 
                 case Constants.CANCEL_VERB:

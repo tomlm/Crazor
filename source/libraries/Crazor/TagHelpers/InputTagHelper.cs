@@ -46,8 +46,17 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName(nameof(Binding))]
         public string Binding { get; set; }
 
+        /// <summary>
+        /// Control whehter to map attributes to client side validation.
+        /// </summary>
         [HtmlAttributeName(nameof(Validation))]
         public ValidationPolicy Validation { get; set; }
+
+        /// <summary>
+        /// Set to false to hide the validation errors
+        /// </summary>
+        [HtmlAttributeName(nameof(ShowErrors))]
+        public bool? ShowErrors { get; set; }
 
         public PropertyInfo BindingProperty { get; set; }
 
@@ -150,6 +159,25 @@ namespace Crazor.TagHelpers
                 output.Attributes.SetAttribute(nameof(IsRequired), "true");
             }
 
+            // Add server side error messages.
+            output.Attributes.RemoveAll(nameof(ShowErrors));
+
+            if (ShowErrors == null || ShowErrors.Value == true)
+            {
+                if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
+                {
+                    if (errors.Any())
+                    {
+                        sb = new StringBuilder();
+                        sb.AppendLine();
+                        foreach (var error in errors)
+                        {
+                            sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
+                        }
+                        output.PostElement.SetHtmlContent(sb.ToString());
+                    }
+                }
+            }
         }
 
         protected bool IfValidation()
