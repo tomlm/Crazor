@@ -1,32 +1,61 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DataAnnotationsValidatorNetStandard" Version="1.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Bot.Builder" Version="4.17.1" />
-    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.17.1" />
-    <PackageReference Include="Microsoft.Bot.Connector" Version="4.17.1" />
-    <PackageReference Include="Microsoft.Bot.Schema" Version="4.17.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Neleus.DependencyInjection.Extensions" Version="1.0.6" />
-  </ItemGroup>
+	<PropertyGroup>
+		<Version>1.0.0-preview</Version>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<Description>Razor support for creating Adaptive Cards.</Description>
+		<Company>Microsoft</Company>
+		<Authors>Microsoft</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/microsoft/crazor</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/microsoft/crazor/main/icon.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>adaptivecards</PackageTags>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/microsoft/crazor</RepositoryUrl>
+		<Copyright>All rights reserved</Copyright>
+		<RootNamespace>Crazor</RootNamespace>
+		<ContentTargetFolders>content</ContentTargetFolders>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="icon.png" Pack="true" PackagePath="" />
+		<None Include="readme.md" Pack="true" PackagePath="" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AdaptiveCards\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DataAnnotationsValidatorNetStandard" Version="1.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Bot.Builder" Version="4.17.1" />
+		<PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.17.1" />
+		<PackageReference Include="Microsoft.Bot.Connector" Version="4.17.1" />
+		<PackageReference Include="Microsoft.Bot.Schema" Version="4.17.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Neleus.DependencyInjection.Extensions" Version="1.0.6" />
+		<PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="AdaptiveCards\" />
+	</ItemGroup>
 
 </Project>
