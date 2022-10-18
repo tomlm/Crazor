@@ -16,7 +16,7 @@ namespace Crazor.TagHelpers
         public ActionOKTagHelper()
         {
             this.Title = "OK";
-            this.Verb = Constants.CLOSE_VERB;
+            this.Verb = Constants.OK_VERB;
         }
 
         public async override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)

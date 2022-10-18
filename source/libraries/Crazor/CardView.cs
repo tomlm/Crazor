@@ -108,7 +108,7 @@ namespace Crazor
             // Default implementation of CLOSE and CANCEL calls CloseView() or CancelView() appropriately.
             switch (verb)
             {
-                case Constants.CLOSE_VERB:
+                case Constants.OK_VERB:
                     this.CloseView(this.GetModel());
                     return true;
 

@@ -15,7 +15,7 @@ namespace Crazor
         public const string PREVIEW_VERB = "Preview";
         public const string SHOW_VERB = "Show";
         public const string CANCEL_VERB = "Cancel";
-        public const string CLOSE_VERB = "Close";
+        public const string OK_VERB = "OK";
         public const string LOADPAGE_VERB = "LoadPage";
         public const string BACK_VERB = "Back";
         public const string SETTINGS_VERB = "Settings";
