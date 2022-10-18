@@ -56,17 +56,17 @@ namespace Crazor.TagHelpers
 
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (IfValidation() && output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
             {
                 output.Attributes.SetAttribute(nameof(Min), Convert.ToDateTime(rangeAttribute.Minimum));
             }
 
-            if (IfValidation() && output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
             {
                 output.Attributes.SetAttribute(nameof(Max), Convert.ToDateTime(rangeAttribute.Maximum));
             }
 
-            if (IfValidation() && output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
             {
                 output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
             }

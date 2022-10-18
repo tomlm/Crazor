@@ -58,7 +58,8 @@ namespace Crazor.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var properties = this.GetType().GetProperties()
-                .Where(p => p.GetCustomAttribute<HtmlAttributeNameAttribute>(true) != null);
+                .Where(p => p.GetCustomAttribute<HtmlAttributeNameAttribute>(true) != null && 
+                            p.GetCustomAttribute<HtmlAttributeIgnoreAttribute>() == null);
             StringBuilder sb = new StringBuilder();
             foreach (var property in properties)
             {
@@ -77,11 +78,11 @@ namespace Crazor.TagHelpers
 
                     if (property.PropertyType == typeof(bool) || property.PropertyType == typeof(bool?))
                     {
-                        output.Attributes.Add(attributeName, value.ToString().ToLower());
+                        output.Attributes.SetAttribute(attributeName, value.ToString().ToLower());
                     }
                     else
                     {
-                        output.Attributes.Add(attributeName, value.ToString());
+                        output.Attributes.SetAttribute(attributeName, value.ToString());
                     }
                 }
             }

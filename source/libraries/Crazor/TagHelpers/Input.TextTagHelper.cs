@@ -62,7 +62,7 @@ namespace Crazor.TagHelpers
 
             // --- Client side validation....
             var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
-            if (IfValidation() && output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
+            if (output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
             {
                 output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
 
@@ -74,7 +74,7 @@ namespace Crazor.TagHelpers
 
             // -- MaxLength 
             var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
-            if (IfValidation() && output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
+            if (output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
             {
                 output.Attributes.SetAttribute(nameof(MaxLength), stringLengthAttribute?.MaximumLength);
             }

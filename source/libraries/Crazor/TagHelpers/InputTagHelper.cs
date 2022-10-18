@@ -8,19 +8,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Crazor.TagHelpers
 {
-    public enum ValidationPolicy
-    {
-        /// <summary>
-        /// Validation is mapped to client validation tags
-        /// </summary>
-        Auto,
-
-        /// <summary>
-        /// Disable all client side validation 
-        /// </summary>
-        None
-    }
-
     /// <summary>
     /// Shows errors when present for a given input id as TextBlock Attention
     /// </summary>
@@ -44,18 +31,14 @@ namespace Crazor.TagHelpers
         /// Binding proeprty name. Set this to the path of the property to bind this tag to.
         /// </summary>
         [HtmlAttributeName(nameof(Binding))]
+        [HtmlAttributeIgnore]
         public string Binding { get; set; }
-
-        /// <summary>
-        /// Control whehter to map attributes to client side validation.
-        /// </summary>
-        [HtmlAttributeName(nameof(Validation))]
-        public ValidationPolicy Validation { get; set; }
 
         /// <summary>
         /// Set to false to hide the validation errors
         /// </summary>
         [HtmlAttributeName(nameof(ShowErrors))]
+        [HtmlAttributeIgnore]
         public bool? ShowErrors { get; set; }
 
         public PropertyInfo BindingProperty { get; set; }
@@ -78,10 +61,10 @@ namespace Crazor.TagHelpers
                     var parts = this.Binding.Split('.');
                     foreach (var part in parts)
                     {
-                        this.BindingProperty = this.BindingValue?.GetType().GetProperty(part);
+                        this.BindingProperty = this.BindingValue?.GetType().GetProperty(part)!;
                         if (this.BindingProperty != null)
                         {
-                            this.BindingValue = this.BindingProperty?.GetValue(this.BindingValue);
+                            this.BindingValue = this.BindingProperty?.GetValue(this.BindingValue)!;
                         }
                         else
                         {
@@ -99,15 +82,6 @@ namespace Crazor.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
-
-            // remove binding, because we don't want it emitted, we are going to process it here.
-            foreach (var ignore in new[] { nameof(Binding), nameof(Validation) })
-            {
-                if (output.Attributes.TryGetAttribute(ignore, out var binding))
-                {
-                    output.Attributes.Remove(binding);
-                }
-            }
 
             // Process BindingAttributes
             var properties = this.GetType().GetProperties()
@@ -142,26 +116,20 @@ namespace Crazor.TagHelpers
                     if (property.PropertyType == typeof(bool))
                     {
                         // xml only likes "true" not "True".
-                        value = value.ToString().ToLower();
+                        value = value.ToString()!.ToLower();
                     }
 
-                    if (output.Attributes.TryGetAttribute(attributeName, out var att))
-                    {
-                        output.Attributes.Remove(att);
-                    }
-                    output.Attributes.Add(attributeName, value);
+                    output.Attributes.SetAttribute(attributeName, value);
                 }
             }
 
             // if we don't have required, but binding property has [Required] then set it
-            if (IfValidation() && output.Attributes[nameof(IsRequired)] == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+            if (output.Attributes[nameof(IsRequired)] == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
             {
                 output.Attributes.SetAttribute(nameof(IsRequired), "true");
             }
 
             // Add server side error messages.
-            output.Attributes.RemoveAll(nameof(ShowErrors));
-
             if (ShowErrors == null || ShowErrors.Value == true)
             {
                 if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
@@ -179,8 +147,5 @@ namespace Crazor.TagHelpers
                 }
             }
         }
-
-        protected bool IfValidation()
-             => Validation == ValidationPolicy.Auto;
     }
 }
