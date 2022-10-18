@@ -17,7 +17,7 @@
                         <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="Small">
                             <SelectAction>
                                 <Action.Execute Tooltip="Edit Address" Verb="OnEdit">
-                                    { "resourceId":"@address.Id" }
+                                    { "addressId":"@address.Id" }
                                 </Action.Execute>
                             </SelectAction>
                         </Image>
@@ -26,7 +26,7 @@
                         <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="Small">
                             <SelectAction>
                                 <Action.Execute Tooltip="Delete Address" Verb="OnDelete">
-                                    { "resourceId":"@address.Id" }
+                                    { "addressId":"@address.Id" }
                                 </Action.Execute>
                             </SelectAction>
                         </Image>
@@ -49,18 +49,18 @@
         ShowCard("Add");
     }
 
-    public void OnEdit(string resourceId)
+    public void OnEdit(string addressId)
     {
-        var address = App.Addresses.SingleOrDefault(a => a.Id == resourceId);
+        var address = App.Addresses.SingleOrDefault(a => a.Id == addressId);
         if (address != null)
         {
             ShowCard("Edit", address);
         }
     }
 
-    public void OnDelete(string resourceId)
+    public void OnDelete(string addressId)
     {
-        App.Addresses = App.Addresses.Where(a => a.Id != resourceId).ToList();
+        App.Addresses = App.Addresses.Where(a => a.Id != addressId).ToList();
     }
 
     public void OnEditCompleted(Address editAddress)
