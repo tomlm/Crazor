@@ -1,14 +1,11 @@
 ﻿@using Newtonsoft.Json
 @using OpBot.Cards.Address
 @using System.ComponentModel
+
 @inherits CardView<AddressApp, Address>
 
-@functions {
-    public override string GetRoute() => $"{base.GetRoute()}/{this.Model.Id}";
-}
-
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
-    <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
+    <TextBlock Size="ExtraLarge">Add Address</TextBlock>
 
     <Input.Text Binding="Model.Street" />
     <ValidationErrors Binding="Model.Street" />
@@ -25,18 +22,13 @@
     <Input.ChoiceSet Binding="Model.Country" />
     <ValidationErrors Binding="Model.Country" />
 
-    <Action.Cancel />
+    <Action.Cancel Title="Cancel "/>
     <Action.Close Title="Save" />
 </Card>
 
 @functions {
-
-    public void OnLoadPage(string subPath)
+    public void OnCancel()
     {
-        this.Model = this.App.Addresses.Where(a => a.Id == subPath).SingleOrDefault();
-        if (this.Model == null)
-        {
-            CancelView($"Address was not found.");
-        }
+        this.CancelView("No address added.");
     }
 }

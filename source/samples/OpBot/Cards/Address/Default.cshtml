@@ -2,8 +2,6 @@
 @inherits CardView<AddressApp>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
-
-
     <TextBlock Size="ExtraLarge">Addresses</TextBlock>
     @if (App.Addresses.Any())
     {
@@ -48,8 +46,7 @@
 
     public void OnAdd()
     {
-        var address = new Address();
-        ShowCard("Edit", new EditAddressModel() { IsEdit = false, Address = address });
+        ShowCard("Add");
     }
 
     public void OnEdit(string resourceId)
@@ -57,7 +54,7 @@
         var address = App.Addresses.SingleOrDefault(a => a.Id == resourceId);
         if (address != null)
         {
-            ShowCard("Edit", new EditAddressModel() { IsEdit = true, Address = address });
+            ShowCard("Edit", address);
         }
     }
 
@@ -66,42 +63,37 @@
         App.Addresses = App.Addresses.Where(a => a.Id != resourceId).ToList();
     }
 
-    public void OnEditCompleted(EditAddressModel editAddress)
+    public void OnEditCompleted(Address editAddress)
     {
-        ArgumentNullException.ThrowIfNull(editAddress.Address);
-        if (editAddress.IsEdit)
+        ArgumentNullException.ThrowIfNull(editAddress);
+        var address = App.Addresses.Where(a => a.Id == editAddress.Id).SingleOrDefault();
+        if (address != null)
         {
-            var address = App.Addresses.Where(a => a.Id == editAddress.Address.Id).SingleOrDefault();
-            if (address != null)
-            {
-                address.Street = editAddress.Address.Street;
-                address.City = editAddress.Address.City;
-                address.State = editAddress.Address.State;
-                address.PostalCode = editAddress.Address.PostalCode;
-                address.Country = editAddress.Address.Country;
-                AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
-            }
-            else
-            {
-                AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
-            }
+            address.Street = editAddress.Street;
+            address.City = editAddress.City;
+            address.State = editAddress.State;
+            address.PostalCode = editAddress.PostalCode;
+            address.Country = editAddress.Country;
+            AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
         }
         else
         {
-            App.Addresses.Add(editAddress.Address);
-            AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
+            AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
         }
     }
 
-    public void OnEditCanceled(string? message)
+    public void OnAddCompleted(Address address)
+    {
+        ArgumentNullException.ThrowIfNull(address);
+        App.Addresses.Add(address);
+        AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
+    }
+
+    public void OnCanceled(string? message)
     {
         if (!String.IsNullOrWhiteSpace(message))
         {
             AddBannerMessage(message, AdaptiveContainerStyle.Accent);
-        }
-        else
-        {
-            AddBannerMessage("Canceled", AdaptiveContainerStyle.Accent);
         }
     }
 }

@@ -13,13 +13,6 @@
 
     <Image Url="@Model.PictureUri" />
 
-    <Action.Execute Title="Go Back" Verb="OnCancel" />
+    <Action.Cancel Title="Go Back" />
 </Card>
 
-@functions {
-
-    public void OnCancel()
-    {
-        this.Cancel();
-    }
-}

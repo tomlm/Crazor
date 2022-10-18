@@ -8,6 +8,7 @@ namespace OpBot.Cards.Address
     public class Address
     {
         public string? Id { get; set; } = Utils.GetNewId();
+        
         //Supported Data Annotations 
         //  [PasswordPropertyText]
         //  [Range]

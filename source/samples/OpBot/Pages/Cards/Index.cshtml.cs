@@ -30,7 +30,7 @@ namespace OpBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public async Task OnGetAsync(string app, string? resourceId, string? screen, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, string? resourceId, string? viewName, string? subPath, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {
@@ -61,7 +61,18 @@ namespace OpBot.Pages.Cards
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = resourceId ?? app },
-                Value = new AdaptiveCardInvokeValue() { Action = new AdaptiveCardInvokeAction() { Verb = screen ?? Constants.SHOW_VERB, } }
+                Value = new AdaptiveCardInvokeValue()
+                {
+                    Action = new AdaptiveCardInvokeAction()
+                    {
+                        Verb = Constants.LOADPAGE_VERB,
+                        Data = new LoadPageModel
+                        {
+                            View  = viewName ?? "Default",
+                            SubPath = subPath
+                        }
+                    }
+                }
             }, cancellationToken);
 
             // process Action.Execute

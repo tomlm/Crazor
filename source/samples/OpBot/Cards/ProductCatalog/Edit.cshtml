@@ -24,22 +24,7 @@
     <Input.Text Binding="Model.Item.PictureUri" Label="PictureUri" ErrorMessage="Picture Uri is required." />
     <ValidationErrors Binding="Model.Item.PictureUri" />
 
-    <Action.Execute Title="Cancel" Verb="OnCancel" />
-    <Action.Execute Title="Save" Verb="OnSave" />
+    <Action.Cancel />
+    <Action.Close Title="Save"  />
 </Card>
 
-@functions {
-
-    public void OnSave()
-    {
-        if (this.IsModelValid)
-        {
-            this.Close(Model);
-        }
-    }
-
-    public void OnCancel()
-    {
-        this.Cancel("No Op");
-    }
-}

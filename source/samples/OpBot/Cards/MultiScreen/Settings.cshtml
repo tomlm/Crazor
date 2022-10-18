@@ -6,14 +6,7 @@
         <TextBlock Size="ExtraLarge" Weight="Bolder">Settings</TextBlock>
         <TextBlock Size="Medium">Created by Tom Laird-McConnell</TextBlock>
     </Container>
-    <Action.Execute Title="Cancel" Verb="Cancel" />
-    <Action.Execute Title="Save" Verb="OnSave" />
+    <Action.Cancel/>
+    <Action.Close  />
 </Card>
 
-@functions{
-
-    public void OnSave()
-    {
-        this.Close();
-    }
-}

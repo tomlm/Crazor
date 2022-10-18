@@ -18,6 +18,9 @@ using Newtonsoft.Json;
 using Crazor.Interfaces;
 using System.Xml;
 using static Crazor.CardActivityHandler;
+using System;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Crazor
 {
@@ -117,8 +120,18 @@ namespace Crazor
             {
                 if (!String.IsNullOrEmpty(this.Action.Verb))
                 {
+                    if (this.Action.Verb == Constants.LOADPAGE_VERB)
+                    {
+                        var loadPage = ((JObject)this.Action.Data).ToObject<LoadPageModel>();
+                        if (this.CurrentCard != loadPage.View)
+                        {
+                            ShowCard(loadPage.View);
+                        }
+                    }
+
                     var state = this.CallStack[0];
                     var cardView = this.CurrentView;
+
                     await this.CurrentView.OnVerbAsync(this.Action, cancellationToken);
                     if (LastResult != null)
                     {
@@ -226,6 +239,11 @@ namespace Crazor
             BannerMessages.Add(new BannerMessage() { Text = text, Style = style });
         }
 
+        public virtual string GetRoute()
+        {
+            return $"/Cards/{this.Name}/{this.ResourceId}";
+        }
+
         /// <summary>
         /// Load state from storage
         /// </summary>
@@ -317,6 +335,7 @@ namespace Crazor
             }
 
             CardView cardView = (CardView)((RazorView)viewResult.View).RazorPage;
+            cardView.RazorView = viewResult.View;
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
             cardView.Name = viewName;
@@ -327,11 +346,10 @@ namespace Crazor
             tempDataProvider = Services.GetRequiredService<ITempDataProvider>();
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
-                Model = model ?? this
+                Model = model
             };
             var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
-            cardView.RazorView = viewResult.View;
             cardView.OnLoadCardContext(viewContext);
             return cardView;
         }
@@ -356,14 +374,12 @@ namespace Crazor
             if (CurrentCard != "Default")
             {
                 outboundCard.Title = $"{this.Name} - {CurrentCard}";
-                outboundCard.AdditionalProperties["url"] = $"/Cards/{this.Name}/{ResourceId}/{CurrentCard}";
             }
             else
             {
                 outboundCard.Title = $"{this.Name}";
-                outboundCard.AdditionalProperties["url"] = $"/Cards/{this.Name}/{ResourceId}";
             }
-
+            outboundCard.AdditionalProperties["url"] = this.CurrentView.GetRoute();
         }
 
         private async Task<SessionData> AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)

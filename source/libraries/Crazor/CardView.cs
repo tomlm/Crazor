@@ -38,7 +38,7 @@ namespace Crazor
         public string Name { get; set; } = String.Empty;
 
         [JsonIgnore]
-        public CardApp? App { get; set; }
+        public CardApp App { get; set; }
 
         [JsonIgnore]
         public AdaptiveCardInvokeAction? Action { get; set; }
@@ -52,6 +52,11 @@ namespace Crazor
         [JsonIgnore]
         public bool IsModelValid { get; set; } = true;
 
+        /// <summary>
+        /// ExecuteAsync is disabled because the default writes the output directly to 
+        /// the response, and we need to process it directly.
+        /// </summary>
+        /// <returns></returns>
         public override Task ExecuteAsync()
         {
             return Task.CompletedTask;
@@ -71,7 +76,59 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(this.App);
             this.Action = action;
 
-            // Bind properties
+            // Process BindProperty tags
+            BindProperties();
+
+            var verb = action.Verb;
+            MethodInfo? verbMethod = null;
+
+            if (verb == Constants.LOADPAGE_VERB)
+            {
+                // LoadPage verb should invoke this method FIRST before validation, as this method should load the model.
+                verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
+                if (verbMethod != null)
+                {
+                    await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
+                }
+
+                ValidateModel();
+                return true;
+            }
+
+            // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
+            ValidateModel();
+
+            verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
+            if (verbMethod != null)
+            {
+                await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
+                return true;
+            }
+
+            // Default implementation of CLOSE and CANCEL calls CloseView() or CancelView() appropriately.
+            switch (verb)
+            {
+                case Constants.CLOSE_VERB:
+                    this.CloseView(this.GetModel());
+                    return true;
+
+                case Constants.CANCEL_VERB:
+                    this.CancelView();
+                    return true;
+            }
+
+            // Otherwise, if a verb matches a view just navigate to it.
+            if (App.HasView(verb))
+            {
+                ShowCard(verb);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void BindProperties()
+        {
             JObject? data = (JObject?)this.Action?.Data;
             if (data != null)
             {
@@ -81,7 +138,7 @@ namespace Crazor
 
                     // if root is [BindProperty]
                     var prop = this.GetType().GetProperty(parts[0]);
-                    if (prop != null && 
+                    if (prop != null &&
                         (prop.Name == "Model" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
                     {
                         object obj = this;
@@ -92,17 +149,22 @@ namespace Crazor
                         var targetProperty = obj.GetType().GetProperty(parts.Last());
                         if (targetProperty != null)
                         {
-                            targetProperty.SetValue(obj, property.Value.ToObject(targetProperty.PropertyType));
-                        }
-                        else
-                        {
-                            targetProperty.SetValue(obj, (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null);
+                            if (property.Value != null)
+                            {
+                                targetProperty.SetValue(obj, property.Value.ToObject(targetProperty.PropertyType));
+                            }
+                            else
+                            {
+                                targetProperty.SetValue(obj, (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null);
+                            }
                         }
                     }
-
                 }
             }
+        }
 
+        private void ValidateModel()
+        {
             // validate root object model
             var validator = new DataAnnotationsValidator.DataAnnotationsValidator();
 
@@ -137,34 +199,6 @@ namespace Crazor
                     AddValidationResults($"{property.Name}.", validationResults);
                 }
             }
-
-            var verb = action.Verb;
-            if (!String.IsNullOrEmpty(verb))
-            {
-                MethodInfo? verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
-                if (verbMethod != null)
-                {
-                    await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
-                    return true;
-                }
-
-                if (App.HasView(verb))
-                {
-                    ShowCard(verb);
-                    return true;
-                }
-
-                switch (verb.ToLower())
-                {
-                    case "close":
-                        this.Close(this.GetModel());
-                        break;
-                    case "cancel":
-                        this.Cancel();
-                        break;
-                }
-            }
-            return false;
         }
 
         private void AddValidationResults(string prefix, List<ValidationResult> validationResults)
@@ -193,13 +227,56 @@ namespace Crazor
             return this.ViewBag.Model;
         }
 
+        public virtual string GetRoute()
+        {
+            //var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
+            //if (routeAttribute != null)
+            //{
+            //    var template = routeAttribute.Template.TrimStart('/', '~');
+            //    var parts = template.Split('/');
+            //    StringBuilder sb = new StringBuilder();
+            //    sb.Append(App.GetRoute());
+            //    foreach(var part in parts)
+            //    {
+            //        if (part.StartsWith('{') && part.EndsWith('}'))
+            //        {
+            //            var path = part.TrimStart('{').TrimEnd('}');
+            //            var value = ObjectPath.GetPathValue<object>(this, path.TrimEnd('?'));
+            //            if (value != null)
+            //            {
+            //                sb.Append($"/{value}");
+            //            }
+            //            else if (!path.EndsWith('?'))
+            //            {
+            //                throw new ArgumentNullException($"{part} not found in {template}");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            sb.Append($"/{part}");
+            //        }
+            //    }
+
+            //    return sb.ToString();
+            //}
+            // else 
+            if (this.Name == "Default")
+            {
+                return App.GetRoute();
+            }
+            else
+            {
+                return $"{App.GetRoute()}/{this.Name}";
+            }
+        }
+
         /// <summary>
         /// Navigate to screen name.
         /// </summary>
         /// <param name="screenName"></param>
         public void ShowCard(string cardName, object? model = null)
         {
-            this.App?.ShowCard(cardName, model ?? this.App);
+            this.App?.ShowCard(cardName, model);
         }
 
         public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
@@ -207,7 +284,7 @@ namespace Crazor
             this.App?.AddBannerMessage(text, style);
         }
 
-        public void Close(object? result = null)
+        public void CloseView(object? result = null)
         {
             // pop screen
             // grab current view
@@ -221,7 +298,7 @@ namespace Crazor
             });
         }
 
-        public void Cancel(string? message = null)
+        public void CancelView(string? message = null)
         {
             this.App?.Close(new CardResult()
             {
@@ -307,6 +384,14 @@ namespace Crazor
                 if (verbMethod != null)
                 {
                     await InvokeMethodAsync(verbMethod, new List<object?>() { screenResult.Message });
+                }
+                else
+                {
+                    verbMethod = GetMethod($"OnCanceled") ?? GetMethod($"Canceled");
+                    if (verbMethod != null)
+                    {
+                        await InvokeMethodAsync(verbMethod, new List<object?>() { screenResult.Message });
+                    }
                 }
             }
         }
@@ -403,7 +488,7 @@ namespace Crazor
     }
 
     public class CardView<AppT> : CardView
-    where AppT : CardApp
+        where AppT : CardApp
     {
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
@@ -425,7 +510,7 @@ namespace Crazor
         {
             get
             {
-                if (ViewData != null)
+                if (ViewData.Model != null)
                 {
                     return ViewData.Model;
                 }
@@ -433,6 +518,12 @@ namespace Crazor
 #pragma warning disable CS8603 // Possible null reference return.
                 return default(ModelT);
 #pragma warning restore CS8603 // Possible null reference return.
+            }
+
+            set
+            {
+                this.ViewData.Model = value;
+                this.ViewContext.ViewData.Model = value;
             }
         }
 
