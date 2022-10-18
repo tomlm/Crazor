@@ -1,7 +1,4 @@
-﻿@using Newtonsoft.Json
-@using OpBot.Cards.Addresses
-@using System.ComponentModel
-
+﻿@using OpBot.Cards.Addresses
 @inherits CardView<AddressesApp, Address>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
@@ -16,9 +13,3 @@
     <Action.OK />
 </Card>
 
-@functions {
-    public void OnCancel()
-    {
-        this.CancelView("No address added.");
-    }
-}

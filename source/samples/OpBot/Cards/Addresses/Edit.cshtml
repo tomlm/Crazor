@@ -1,12 +1,7 @@
-﻿@using Newtonsoft.Json
-@using OpBot.Cards.Addresses
-@using System.ComponentModel
+﻿@using OpBot.Cards.Addresses
 @inherits CardView<AddressesApp, Address>
 
 @attribute [Route("{addressId}")]
-@functions {
-    public override string GetRoute() => $"{base.GetRoute()}/{this.Model.Id}";
-}
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
@@ -21,6 +16,7 @@
 </Card>
 
 @functions {
+    public override string GetRoute() => $"{base.GetRoute()}/{this.Model.Id}";
 
     public void OnLoadRoute(string addressId)
     {
@@ -32,3 +28,4 @@
         }
     }
 }
+
