@@ -64,12 +64,12 @@
     <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." />
   </Container>
   <RichTextBlock>
-    <Inlines Color="good">RichTextBlock with SelectAction, Action has title and tooltip (tooltip should be used as tooltip).<Action.Submit Title="Title" Tooltip="Tooltip" /></Inlines>
-    <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
-    <Inlines Color="warning">RichTextBlock with SelectAction, Action has title and no tooltip (title should be used as tooltip).<Action.Submit Title="title">{
+    <TextRun Color="good">RichTextBlock with SelectAction, Action has title and tooltip (tooltip should be used as tooltip).<Action.Submit Title="Title" Tooltip="Tooltip" /></TextRun>
+    <TextRun Weight="bolder"> -Should not trigger any actions- </TextRun>
+    <TextRun Color="warning">RichTextBlock with SelectAction, Action has title and no tooltip (title should be used as tooltip).<Action.Submit Title="title">{
   "x": "hello world!"
-}</Action.Submit></Inlines>
-    <Inlines Weight="bolder"> -Should not trigger any actions- </Inlines>
+}</Action.Submit></TextRun>
+    <TextRun Weight="bolder"> -Should not trigger any actions- </TextRun>
   </RichTextBlock>
   <TextBlock Weight="bolder" Wrap="true">Image has SelectAction. No title or tooltip (no tooltip)</TextBlock>
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">

@@ -9,9 +9,9 @@
     <Action.Submit Title="Disabled" />
   </Input.Text>
   <RichTextBlock>
-    <Inlines>Do not click </Inlines>
-    <Inlines>here<Action.Submit /></Inlines>
-    <Inlines>, as it is disabled.</Inlines>
+    <TextRun>Do not click </TextRun>
+    <TextRun>here<Action.Submit /></TextRun>
+    <TextRun>, as it is disabled.</TextRun>
   </RichTextBlock>
   <Action.Submit Title="Disabled" />
   <Action.Submit Title="Enabled (explicit)" />

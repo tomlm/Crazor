@@ -4,11 +4,12 @@
 @attribute [Route("{addressId}")]
 
 <Card Version="1.5">
-    <TextBlock Size="ExtraLarge">Edit Address</TextBlock>
+    <TextBlock Class="H1">Edit Address</TextBlock>
+
     <Input.Text Binding="Model.Street" />
     <Input.Text Binding="Model.City" />
     <Input.ChoiceSet Binding="Model.State" />
-    <Input.Text Binding="Model.PostalCode"  />
+    <Input.Text Binding="Model.PostalCode" />
     <Input.ChoiceSet Binding="Model.Country" />
 
     <Action.Cancel />

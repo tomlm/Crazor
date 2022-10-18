@@ -132,22 +132,6 @@ namespace AdaptiveCards
         public bool IsSubtle { get; set; }
 
         /// <inheritdoc />
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-#if !NETSTANDARD1_3
-        [XmlAttribute]
-#endif
-        [DefaultValue(false)]
-        public bool Italic { get; set; }
-
-        /// <inheritdoc />
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-#if !NETSTANDARD1_3
-        [XmlAttribute]
-#endif
-        [DefaultValue(false)]
-        public bool Strikethrough { get; set; }
-
-        /// <inheritdoc />
         [JsonRequired]
 #if !NETSTANDARD1_3
         [XmlIgnore]

@@ -69,7 +69,7 @@ namespace AdaptiveCards
         [JsonRequired]
         [JsonConverter(typeof(AdaptiveInlinesConverter))]
 #if !NETSTANDARD1_3
-        [XmlElement(typeof(AdaptiveTextRun))]
+        [XmlElement(typeof(AdaptiveTextRun), ElementName = "TextRun")]
 #endif
         public List<AdaptiveInline> Inlines { get; set; } = new List<AdaptiveInline>();
     }

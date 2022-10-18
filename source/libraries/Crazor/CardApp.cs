@@ -17,10 +17,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using Crazor.Interfaces;
 using System.Xml;
-using static Crazor.CardActivityHandler;
-using System;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
+using System.Xml.Serialization;
+using System.Text;
 
 namespace Crazor
 {
@@ -34,6 +32,13 @@ namespace Crazor
     /// </remarks>
     public class CardApp
     {
+        private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
+        private static XmlWriterSettings _settings = new XmlWriterSettings()
+        {
+            Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
+            Indent = true,
+        };
+
         public CardApp(IServiceProvider services)
         {
             ArgumentNullException.ThrowIfNull(services);
@@ -105,6 +110,9 @@ namespace Crazor
         [JsonIgnore]
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
+        [JsonIgnore]
+        public Dictionary<string, AdaptiveElement> Stylesheet { get; set; }
+
         /// <summary>
         /// Handle action
         /// </summary>
@@ -116,6 +124,20 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(CurrentView);
             ArgumentNullException.ThrowIfNull(this.Action);
             Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb})-----");
+
+            // Load stylesheet
+            if (Stylesheet == null)
+            {
+                var stylesheetPath = Path.Combine(Environment.CurrentDirectory, $"Cards/{Name}/Stylesheet.cshtml");
+                if (File.Exists(stylesheetPath))
+                {
+                    var xml = await File.ReadAllTextAsync(stylesheetPath, cancellationToken);
+                    xml = $"<Card Version=\"1.6\">\n{xml}\n</Card>";
+                    var card = (AdaptiveCard)_cardSerializer.Deserialize(XmlReader.Create(new StringReader(xml)));
+                    Stylesheet = card.Body.ToDictionary(el => $"{el.Type}.{el.Id}", StringComparer.OrdinalIgnoreCase);
+                }
+            }
+
             try
             {
                 if (!String.IsNullOrEmpty(this.Action.Verb))

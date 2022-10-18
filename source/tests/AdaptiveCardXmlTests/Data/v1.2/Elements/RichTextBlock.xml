@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
   <RichTextBlock>
-    <Inlines>This is the first inline. </Inlines>
-    <Inlines Color="good">We support colors,</Inlines>
-    <Inlines IsSubtle="true"> both regular and subtle. </Inlines>
-    <Inlines Size="small">Text </Inlines>
-    <Inlines Size="medium">of </Inlines>
-    <Inlines Size="large">all </Inlines>
-    <Inlines Size="extraLarge">sizes! </Inlines>
-    <Inlines Weight="lighter">Light weight text. </Inlines>
-    <Inlines Weight="bolder">Bold weight text. </Inlines>
-    <Inlines Highlight="true">Highlights. </Inlines>
-    <Inlines Italic="true">Italics. </Inlines>
-    <Inlines Strikethrough="true">Strikethrough. </Inlines>
-    <Inlines FontType="monospace">Monospace too!</Inlines>
+    <TextRun>This is the first inline. </TextRun>
+    <TextRun Color="good">We support colors,</TextRun>
+    <TextRun IsSubtle="true"> both regular and subtle. </TextRun>
+    <TextRun Size="small">Text </TextRun>
+    <TextRun Size="medium">of </TextRun>
+    <TextRun Size="large">all </TextRun>
+    <TextRun Size="extraLarge">sizes! </TextRun>
+    <TextRun Weight="lighter">Light weight text. </TextRun>
+    <TextRun Weight="bolder">Bold weight text. </TextRun>
+    <TextRun Highlight="true">Highlights. </TextRun>
+    <TextRun Italic="true">Italics. </TextRun>
+    <TextRun Strikethrough="true">Strikethrough. </TextRun>
+    <TextRun FontType="monospace">Monospace too!</TextRun>
   </RichTextBlock>
   <RichTextBlock>
-    <Inlines>Date-Time parsing: {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}</Inlines>
+    <TextRun>Date-Time parsing: {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}</TextRun>
   </RichTextBlock>
   <RichTextBlock HorizontalAlignment="center">
-    <Inlines>Rich text blocks also support center alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </Inlines>
+    <TextRun>Rich text blocks also support center alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </TextRun>
   </RichTextBlock>
   <RichTextBlock HorizontalAlignment="right">
-    <Inlines>Rich text blocks also support right alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </Inlines>
+    <TextRun>Rich text blocks also support right alignment. Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor </TextRun>
   </RichTextBlock>
   <RichTextBlock />
 </Card>

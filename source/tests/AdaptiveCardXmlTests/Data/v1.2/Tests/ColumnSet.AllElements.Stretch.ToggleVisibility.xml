@@ -55,8 +55,8 @@
       </Media>
       <TextBlock Wrap="true">RichTextBlock (id15)</TextBlock>
       <RichTextBlock Id="id15" Height="stretch">
-        <Inlines>This is the first inline. </Inlines>
-        <Inlines Color="good">We support colors, </Inlines>
+        <TextRun>This is the first inline. </TextRun>
+        <TextRun Color="good">We support colors, </TextRun>
       </RichTextBlock>
       <TextBlock Wrap="true">TextBlock at the bottom</TextBlock>
     </Column>

@@ -432,6 +432,8 @@ namespace Crazor
 
                 var reader = XmlReader.Create(new StringReader(xml));
                 var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
+                
+                // Diag.Debug.WriteLine(JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
                 return card;
             }
             catch (Exception err)

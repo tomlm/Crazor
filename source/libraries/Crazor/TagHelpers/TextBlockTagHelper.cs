@@ -35,9 +35,6 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName(nameof(IsVisible))]
         public Boolean? IsVisible { get; set; }  
 
-        [HtmlAttributeName(nameof(Italic))]
-        public Boolean? Italic { get; set; } 
-
         [HtmlAttributeName(nameof(MaxLines))]
         public Int32? MaxLines { get; set; } 
 
@@ -58,9 +55,6 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Speak))]
         public String Speak { get; set; } 
-
-        [HtmlAttributeName(nameof(Strikethrough))]
-        public Boolean? Strikethrough { get; set; } 
 
         [HtmlAttributeName(nameof(Style))]
         [DefaultValue(typeof(AdaptiveTextBlockStyle), "Default")]

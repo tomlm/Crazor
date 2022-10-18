@@ -32,20 +32,20 @@
         <ColumnSet>
           <Column Width="1">
             <RichTextBlock>
-              <Inlines Size="medium">8:15 PM
-</Inlines>
-              <Inlines IsSubtle="true">Sat, Mar 4, 2017
-</Inlines>
-              <Inlines IsSubtle="true">San Francisco</Inlines>
+              <TextRun Size="medium">8:15 PM
+</TextRun>
+              <TextRun IsSubtle="true">Sat, Mar 4, 2017
+</TextRun>
+              <TextRun IsSubtle="true">San Francisco</TextRun>
             </RichTextBlock>
           </Column>
           <Column Width="1">
             <RichTextBlock HorizontalAlignment="right">
-              <Inlines Size="medium">3:30 AM
-</Inlines>
-              <Inlines IsSubtle="true">Sat, Mar 4, 2017
-</Inlines>
-              <Inlines IsSubtle="true">New York</Inlines>
+              <TextRun Size="medium">3:30 AM
+</TextRun>
+              <TextRun IsSubtle="true">Sat, Mar 4, 2017
+</TextRun>
+              <TextRun IsSubtle="true">New York</TextRun>
             </RichTextBlock>
           </Column>
         </ColumnSet>
