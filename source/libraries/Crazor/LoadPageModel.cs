@@ -10,6 +10,6 @@ namespace Crazor
     {
         public string View { get; set; }
 
-        public string SubPath { get; set; }
+        public string Path { get; set; }
     }
 }

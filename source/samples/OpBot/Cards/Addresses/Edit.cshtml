@@ -25,15 +25,16 @@
     <Input.ChoiceSet Binding="Model.Country" />
     <ValidationErrors Binding="Model.Country" />
 
-    <Action.OK />
     <Action.Cancel />
+    <Action.OK />
 </Card>
 
 @functions {
 
-    public void OnLoadPage(string subPath)
+    public void OnLoadRoute(string path)
     {
-        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == subPath);
+        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == path);
+        
         if (this.Model == null)
         {
             CancelView($"Address was not found.");

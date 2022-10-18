@@ -82,16 +82,16 @@ namespace Crazor
             var verb = action.Verb;
             MethodInfo? verbMethod = null;
 
-            if (verb == Constants.LOADPAGE_VERB)
+            if (verb == Constants.LOADROUTE_VERB)
             {
-                // LoadPage verb should invoke this method FIRST before validation, as this method should load the model.
+                // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
                 verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
                 if (verbMethod != null)
                 {
                     await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
                 }
-
-                ValidateModel();
+                // I *think* the correct behavior is not NOT validate on LoadROUTE
+                // ValidateModel();
                 return true;
             }
 

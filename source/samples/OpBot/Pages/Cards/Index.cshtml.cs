@@ -30,7 +30,7 @@ namespace OpBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public async Task OnGetAsync(string app, string? resourceId, string? viewName, string? subPath, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, string? resourceId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {
@@ -65,11 +65,11 @@ namespace OpBot.Pages.Cards
                 {
                     Action = new AdaptiveCardInvokeAction()
                     {
-                        Verb = Constants.LOADPAGE_VERB,
+                        Verb = Constants.LOADROUTE_VERB,
                         Data = new LoadPageModel
                         {
                             View  = viewName ?? "Default",
-                            SubPath = subPath
+                            Path = path
                         }
                     }
                 }
