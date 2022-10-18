@@ -127,19 +127,17 @@ Parameters are bound from
 > 
 > See [Quiz source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Quiz) for source code
 
-### Two-way Property binding
+### Smart Two-way Property binding
 ![image](https://user-images.githubusercontent.com/17789481/190312063-0de73827-cd0d-4236-98bc-4ab829802a73.png)
 
-Similarly you can define properties two-way bind property between input fields and properties.  This allows you to 
-bind the value of an input to the value that's passed in and have two-way binding happen.
+The input controls all support smart two-way binding via **Binding** property. 
+
+The **Binding** property will automatically emit Id="PropertyName" and Value="PropertyValue" making two way binding "just-work". 
+In addition, any attributes on the target property will be promoted into the validation of the input.  
+
 ```xml
-<Input.Text Id="Name" Value="@Name" .../>
-@functions {
-	[BindProperty]
-	public string Name {get;set;}
-}
+<Input.Text Binding="Model.Name"  .../>
 ```
-In any action handler the Name property will have the value of the input field.
 
 > See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/dfd398) for an example of property binding
 > 
@@ -158,6 +156,9 @@ With property binding you can apply validation attributes to get validation auto
 * **Model.IsValid** will be true if all validation passes
 * **ValidationErrors** will contain a map of property name to an array of error messages for that property.
 
+> NOTE: The Input controls will automatically display the validation errors for the input control.  You can disable this
+> by setting **ShowErrors="false"**
+
 > See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/dfd398) for an example of validation 
 > 
 > See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
@@ -168,8 +169,8 @@ With property binding you can apply validation attributes to get validation auto
 The CardApp maintains a session state property called **CallStack** which is a call stack of cards that have been called.  
 Each CardView has 3 methods for controlling that call stack.
 * **ShowCard(cardname, model)** This will push the current card on to the stack and load the next card, passing model as the model for the card.
-* **Cancel(message)** This will pop the current card off the stack, and the calling card OnXXXXCanceled() will be called with "message" telling you why it was canceled.
-* **Close(result)** This will pop the current card off the stack and the calling cards OnXXXCompleted() will be called with the result of the card.
+* **CancelView(message)** This will pop the current card off the stack, and the calling card OnXXXXCanceled() will be called with "message" telling you why it was canceled.
+* **CloseView(result)** This will pop the current card off the stack and the calling cards OnXXXCompleted() will be called with the result of the card.
 
 > See [MultiScreen Card](https://opcardbot.azurewebsites.net/cards/MultiScreen/ddfdfda8) for an example of navigation
 > 
@@ -214,23 +215,20 @@ public class XXXApp : CardApp
 ## Creating a new card
 To create a new card
 1. Add a Foo.cshtml to the same folder as the CardApp 
+2. define a data model FooModel
+3. make sure you .cshtml inherits from CardView<XXXApp, FooModel>
 ```xml
-@inherits CardView<FooModel>
-<!--   the Model   ^^^^^^^^ -->
+@inherits CardView<XXXApp,FooModel>
+<!--   the App     ^^^^^^ -->
+<!--   the Model          ^^^^^^^^ -->
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Hello world!</TextBlock>
 </Card>
 ```
-2. define a data model FooModel
-3. make sure you .cshtml inherits from CardView<FooModel>
-```
-@inherits CardView<FooModel>
-```
 
 ## Defining a card data model
-You can define the model anywhere, but I kind of like the convention of defining it as code behind for template
-so foo.cshtml has the view, foo.cshtml.cs has the datamodel.
+Simply define the model as a class with validation attributes on it.
 
 # Hosting goo
 
