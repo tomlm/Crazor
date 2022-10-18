@@ -25,6 +25,10 @@ The programming model is the classes available to program against the conceptual
 ## App => derive from CardApp
 To define an application you derive a class from CardApp and put it in the Cards/{AppName} folder.
 
+The App class represents your global application state.  Any properties you put onto the app class are accessible in all card views via the **App** property.
+
+Data on the App class which are marked with memory scope attributes are automatically persisted for you between each round-trip with the server.
+
 ### Memory Scope attributes
 App contains state which is shared for all cards in the application. 
 
@@ -40,16 +44,17 @@ On the App you can override **OnLoadAppStateAsync()** and **OnSaveAppStateAsync(
 > See [Counters source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Counters) for source code
 
 
-## Cards => CardView&lt;ModelT&gt;
-Each card is a view for the application. The view is defined as a razor template via .cshtml.cs file. Just like all razor templates
-you can define the model for the view by using a generic.
+## Cards => CardView&lt;AppT,ModelT&gt;
+Each card is a view for the application. The view is defined as a razor template via .cshtml.cs file. By suppliying the AppT
+argument to CardView you get strongly typed access to your App via the **App** property, and by supplying the ModelT argument
+to the CardView generic you define the strongly typed access to your Model via the **Model** property.
 
 ### Model Definition
 ![image](https://user-images.githubusercontent.com/17789481/190311890-b39d3b1f-5e0e-4feb-a49d-478d4dbc8dcd.png)
 
 The CardView has 2 key properties useful for writing data binding:
-* @Model => is an instance of the ModelT 
-* App => is the shared application object with all shared/session properties
+* **App** => is the shared application object with all shared/session properties
+* **Model** => is an instance of the ModelT 
 
 Example razor template binding to the model and app properties.
 ```xml
@@ -86,20 +91,27 @@ Multiple conventions for method names will be attempted:
 > 
 > See [Counters source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Counters) for source code
 
+#### Built-in verb handlers
+If there is not a verb handler defined the following verbs will automatically execute
+* **Close** - This will call CloseView(Model), but only if the the model is valid (aka IsModelValid == true)
+* **Cancel** - This will call CancelView(), closing the current view and going back to the caller of the view.
+* If the verb is not matched and it matches the name of a view it will navigate to that view.
+
 
 #### OnInitialized()
-When a card is navigated to OnInitialized() will be called giving you an opportunity to do any initialization you want.
+When a card is navigated to OnInitialized() will be called giving you an opportunity to do any initialization you want, for example
+looking at the .Model and adjusting your card behavior appropriately.
 
 ### Parameter binding
 ![image](https://user-images.githubusercontent.com/17789481/190312008-c0c144ad-4387-4d84-a883-62b793e1a8c3.png)
 
-When a method is defined if it has a paramter which is the same as an a property being passed in handler it will automaticaaly be passed.
+When a method is defined if it has a argument which is the same as the id it will automaticaaly be passed.
 
 For example:
 ```xml
 <Input.Text Id="Name" .../>
 ```
-You can get the value from "name".
+You can get the value from "name" by simply adding **string name** as an argument.
 
 ```C#
 public void OnClick(string name)
