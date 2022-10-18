@@ -7,14 +7,15 @@ namespace Crazor.TagHelpers
 {
 
     /// <summary>
-    /// TagHelper for Action.Execute with Cancel verb (associatedInputs = None and
+    /// TagHelper for Action.Execute to close current view and return the results to caller.
     /// </summary>
-
-    [HtmlTargetElement("Action.Close")]
-    public class ActionCloseTagHelper : ActionExecuteTagHelper
+    /// <remarks>Default behavior is to call CloseView(GetModel()) </remarks>
+    [HtmlTargetElement("Action.OK")]
+    public class ActionOKTagHelper : ActionExecuteTagHelper
     {
-        public ActionCloseTagHelper()
+        public ActionOKTagHelper()
         {
+            this.Title = "OK";
             this.Verb = Constants.CLOSE_VERB;
         }
 

@@ -1,7 +1,7 @@
 ﻿@using Newtonsoft.Json
-@using OpBot.Cards.Address
+@using OpBot.Cards.Addresses
 @using System.ComponentModel
-@inherits CardView<AddressApp, Address>
+@inherits CardView<AddressesApp, Address>
 
 @functions {
     public override string GetRoute() => $"{base.GetRoute()}/{this.Model.Id}";
@@ -26,14 +26,14 @@
     <ValidationErrors Binding="Model.Country" />
 
     <Action.Cancel />
-    <Action.Close Title="Save" />
+    <Action.OK Title="Save" />
 </Card>
 
 @functions {
 
     public void OnLoadPage(string subPath)
     {
-        this.Model = this.App.Addresses.Where(a => a.Id == subPath).SingleOrDefault();
+        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == subPath);
         if (this.Model == null)
         {
             CancelView($"Address was not found.");

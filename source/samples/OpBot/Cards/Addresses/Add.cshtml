@@ -1,8 +1,8 @@
 ﻿@using Newtonsoft.Json
-@using OpBot.Cards.Address
+@using OpBot.Cards.Addresses
 @using System.ComponentModel
 
-@inherits CardView<AddressApp, Address>
+@inherits CardView<AddressesApp, Address>
 
 <Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.5">
     <TextBlock Size="ExtraLarge">Add Address</TextBlock>
@@ -22,8 +22,8 @@
     <Input.ChoiceSet Binding="Model.Country" />
     <ValidationErrors Binding="Model.Country" />
 
-    <Action.Cancel Title="Cancel "/>
-    <Action.Close Title="Save" />
+    <Action.Cancel />
+    <Action.OK Title="Save" />
 </Card>
 
 @functions {

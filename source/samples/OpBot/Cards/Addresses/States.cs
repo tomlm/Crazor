@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace OpBot.Cards.Address
+namespace OpBot.Cards.Addresses
 {
     public enum States
     {

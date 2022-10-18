@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 
-namespace OpBot.Cards.Address
+namespace OpBot.Cards.Addresses
 {
     public class Address
     {

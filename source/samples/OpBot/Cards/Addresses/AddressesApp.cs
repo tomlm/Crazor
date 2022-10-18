@@ -4,11 +4,11 @@ using Crazor;
 using Crazor.Attributes;
 using Microsoft.Bot.Schema;
 
-namespace OpBot.Cards.Address
+namespace OpBot.Cards.Addresses
 {
-    public class AddressApp : CardApp
+    public class AddressesApp : CardApp
     {
-        public AddressApp(IServiceProvider services)
+        public AddressesApp(IServiceProvider services)
             : base(services)
         {
         }
