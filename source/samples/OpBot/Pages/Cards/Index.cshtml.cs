@@ -66,7 +66,7 @@ namespace OpBot.Pages.Cards
                     Action = new AdaptiveCardInvokeAction()
                     {
                         Verb = Constants.LOADROUTE_VERB,
-                        Data = new LoadPageModel
+                        Data = new LoadRouteModel
                         {
                             View  = viewName ?? "Default",
                             Path = path

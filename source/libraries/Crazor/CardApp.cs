@@ -122,7 +122,7 @@ namespace Crazor
                 {
                     if (this.Action.Verb == Constants.LOADROUTE_VERB)
                     {
-                        var loadPage = ((JObject)this.Action.Data).ToObject<LoadPageModel>();
+                        var loadPage = ((JObject)this.Action.Data).ToObject<LoadRouteModel>();
                         if (this.CurrentCard != loadPage.View)
                         {
                             ShowCard(loadPage.View);

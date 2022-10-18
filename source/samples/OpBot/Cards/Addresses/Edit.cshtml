@@ -3,6 +3,7 @@
 @using System.ComponentModel
 @inherits CardView<AddressesApp, Address>
 
+@attribute [Route("{addressId}")]
 @functions {
     public override string GetRoute() => $"{base.GetRoute()}/{this.Model.Id}";
 }
@@ -31,9 +32,9 @@
 
 @functions {
 
-    public void OnLoadRoute(string path)
+    public void OnLoadRoute(string addressId)
     {
-        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == path);
+        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == addressId);
         
         if (this.Model == null)
         {

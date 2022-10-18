@@ -88,7 +88,15 @@ namespace Crazor
                 verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
                 if (verbMethod != null)
                 {
-                    await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
+                    var data = JObject.FromObject(this.Action.Data);
+                    var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
+                    if (routeAttribute != null)
+                    {
+                        var loadRoute = data.ToObject<LoadRouteModel>();
+                        data = loadRoute.GetDataForRoute(routeAttribute);
+                    }
+
+                    await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
                 }
                 // I *think* the correct behavior is not NOT validate on LoadROUTE
                 // ValidateModel();
