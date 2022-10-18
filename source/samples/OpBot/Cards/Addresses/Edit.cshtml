@@ -17,11 +17,13 @@
 </Card>
 
 @functions {
-    public override string GetRoute() => $"{base.GetRoute()}/{this.Model.Id}";
+    // add the address we are editing to the route.
+    public override string GetRoute() => $"{this.Model.Id}";
 
+    // look up the address when this route is loaded in a new browser.
     public void OnLoadRoute(string addressId)
     {
-        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == addressId);
+        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == addressId)!;
 
         if (this.Model == null)
         {

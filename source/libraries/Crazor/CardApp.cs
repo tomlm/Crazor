@@ -401,7 +401,12 @@ namespace Crazor
             {
                 outboundCard.Title = $"{this.Name}";
             }
-            outboundCard.AdditionalProperties["url"] = this.CurrentView.GetRoute();
+            var viewRoute = this.CurrentView!.GetRoute();
+            if (!viewRoute.StartsWith('/'))
+            {
+                viewRoute = $"{this.GetRoute()}/{viewRoute}";
+            }
+            outboundCard.AdditionalProperties["url"] = viewRoute;
         }
 
         private async Task<SessionData> AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)

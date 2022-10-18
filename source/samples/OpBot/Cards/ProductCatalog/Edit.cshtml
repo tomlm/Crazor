@@ -2,8 +2,6 @@
 @inherits CardView<ProductCatalogApp, EditOrAddProductCatalogItem>
 
 <Card Version="1.5">
-    
-
     @if (Model.IsEdit)
     {
         <TextBlock Size="ExtraLarge">Edit Catalog Item</TextBlock>
@@ -12,19 +10,12 @@
     {
         <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
     }
-    <Input.Text Binding="Model.Item.Name" Label="Name" />
-    <ValidationErrors Binding="Model.Item.Name" />
-    
-    <Input.Text Binding="Model.Item.Description" Label="Description" />
-    <ValidationErrors Binding="Model.Item.Description" />
-    
-    <Input.Number Binding="Model.Item.Price" Label="Price" />
-    <ValidationErrors Binding="Model.Item.Price" />
-
-    <Input.Text Binding="Model.Item.PictureUri" Label="PictureUri" ErrorMessage="Picture Uri is required." />
-    <ValidationErrors Binding="Model.Item.PictureUri" />
+    <Input.Text Binding="Model.Item.Name"  />
+    <Input.Text Binding="Model.Item.Description" />
+    <Input.Number Binding="Model.Item.Price" />
+    <Input.Text Binding="Model.Item.PictureUri" Label="Picture Url" ErrorMessage="The Picture Url is required." />
 
     <Action.Cancel />
-    <Action.OK Title="Save"  />
+    <Action.OK Title="Save" />
 </Card>
 
