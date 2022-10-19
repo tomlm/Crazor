@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Weather forecast for Monday is high of 62 and low of 42 degrees with a 20% chance of rain&lt;/s&gt;&lt;s&gt;Winds will be 5 mph from the northeast&lt;/s&gt;">
+<Card Version="1.0" Speak="&lt;s&gt;Weather forecast for Monday is high of 62 and low of 42 degrees with a 20% chance of rain&lt;/s&gt;&lt;s&gt;Winds will be 5 mph from the northeast&lt;/s&gt;">
   <BackgroundImage Url="https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Background.jpg" />
   <ColumnSet>
     <Column Width="35">

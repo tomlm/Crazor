@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card Version="1.0">
   <TextBlock Wrap="true">This test checks if showing an element inside a container that is hiding, will behave correctly by not showing the container</TextBlock>
   <TextBlock Wrap="true">Container (id1)</TextBlock>
   <Container Id="id1" Style="emphasis">

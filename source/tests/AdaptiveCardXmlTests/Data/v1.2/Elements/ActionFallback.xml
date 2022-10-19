@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+<Card Version="1.2">
   <ActionSet>
     <Action.Unknown Type="NoExist">
       <Fallback>
-        <UnknownElement Type="NeitherExist">
+        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
           <Fallback>
             <Action.Submit Title="Action.Submit">{
   "x": 13
@@ -14,7 +14,7 @@
     </Action.Unknown>
     <Action.Unknown Type="NoExist">
       <Fallback>
-        <UnknownElement Type="NeitherExist">
+        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
           <Fallback>
             <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io" />
           </Fallback>
@@ -23,7 +23,7 @@
     </Action.Unknown>
     <Action.Unknown Type="NoExist">
       <Fallback>
-        <UnknownElement Type="NeitherExist">
+        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
           <Fallback>
             <UnknownElement Type="NopeNotThis">
               <Fallback>
@@ -41,7 +41,7 @@
     </Action.Unknown>
     <Action.Unknown Type="NoExist">
       <Fallback>
-        <UnknownElement Type="NeitherExist">
+        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
           <Fallback>
             <UnknownElement Type="HaHaNope" />
           </Fallback>
@@ -52,7 +52,7 @@
   <TextBlock>This card tests action fallback</TextBlock>
   <Action.Unknown Type="NoExist">
     <Fallback>
-      <UnknownElement Type="NeitherExist">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
         <Fallback>
           <Action.Submit Title="Action.Submit">{
   "x": 13
@@ -63,7 +63,7 @@
   </Action.Unknown>
   <Action.Unknown Type="NoExist">
     <Fallback>
-      <UnknownElement Type="NeitherExist">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
         <Fallback>
           <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io" />
         </Fallback>
@@ -72,7 +72,7 @@
   </Action.Unknown>
   <Action.Unknown Type="NoExist">
     <Fallback>
-      <UnknownElement Type="NeitherExist">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
         <Fallback>
           <UnknownElement Type="NopeNotThis">
             <Fallback>
@@ -90,7 +90,7 @@
   </Action.Unknown>
   <Action.Unknown Type="NoExist">
     <Fallback>
-      <UnknownElement Type="NeitherExist">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="NeitherExist">
         <Fallback>
           <UnknownElement Type="HaHaNope" />
         </Fallback>

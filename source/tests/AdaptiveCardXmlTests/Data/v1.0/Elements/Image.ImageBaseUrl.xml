@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card Version="1.0">
   <BackgroundImage Url="https://foo.com/sets/background.png" />
   <Image Url="https://foo.com/Assets/Adaptive10.png" AltText="Adaptive cards 1.0 logo" />
   <Action.ShowCard Title="Open Card" IconUrl="https://foo.com/Assets/Adaptive10.png">

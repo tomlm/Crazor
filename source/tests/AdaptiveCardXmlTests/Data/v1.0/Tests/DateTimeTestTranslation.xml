@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Lang="es">
+<Card Version="1.0" Lang="es">
   <Container>
     <TextBlock Size="large" Color="good">VALID DATE / TIME FORMATS</TextBlock>
     <TextBlock Wrap="true">No offset {{DATE(2017-02-14T06:08:00Z)}} {{TIME(2017-02-14T06:08:00Z)}}</TextBlock>

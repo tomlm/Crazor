@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
+<Card Version="1.1">
   <TextBlock Wrap="true">Media supports **audio** and **video** content!</TextBlock>
   <TextBlock Spacing="medium" Separator="true" Size="large" HorizontalAlignment="center">Video</TextBlock>
   <Media Poster="https://adaptivecards.io/content/poster-video.png" AltText="Adaptive Cards overview video">

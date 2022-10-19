@@ -98,7 +98,7 @@ namespace AdaptiveCard2Xml
             {
                 using (XmlWriter writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true }))
                 {
-                    new XmlSerializer(typeof(AdaptiveCard)).Serialize(writer, card);
+                    new XmlSerializer(typeof(AdaptiveCard)).Serialize(writer, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
                 }
                 stream.Seek(0, SeekOrigin.Begin);
 

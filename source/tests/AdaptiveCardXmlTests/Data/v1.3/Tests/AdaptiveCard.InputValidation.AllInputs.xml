@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.3">
+<Card Version="1.3">
   <Input.Text Id="input1" Label="This is an optional input" Placeholder="Placeholder text" />
   <Input.Text Id="input2" IsRequired="true" Label="This is a required Text input. This label is intentionally long to show that it correctly wraps." ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Placeholder="Placeholder text" Regex="abc" />
   <Input.Date Id="input3" IsRequired="true" Label="This is a required Date input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Min="6/1/2020" Max="6/30/2020" />

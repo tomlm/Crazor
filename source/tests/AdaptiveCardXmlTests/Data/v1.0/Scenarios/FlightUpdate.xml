@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;Flight KL0605 to San Fransisco has been delayed.&lt;/s&gt;&lt;s&gt;It will not leave until 10:10 AM.&lt;/s&gt;">
+<Card Version="1.0" Speak="&lt;s&gt;Flight KL0605 to San Fransisco has been delayed.&lt;/s&gt;&lt;s&gt;It will not leave until 10:10 AM.&lt;/s&gt;">
   <ColumnSet>
     <Column Width="auto">
       <Image Size="small" Url="https://adaptivecards.io/content/airplane.png" AltText="Airplane" />

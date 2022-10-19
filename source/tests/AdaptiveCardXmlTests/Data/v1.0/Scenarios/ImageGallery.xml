@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card Version="1.0">
   <TextBlock Size="large" Wrap="true">Here are some cool photos</TextBlock>
   <TextBlock Size="medium" Weight="lighter" Wrap="true">Sorry some of them are repeats</TextBlock>
   <ImageSet ImageSize="medium">

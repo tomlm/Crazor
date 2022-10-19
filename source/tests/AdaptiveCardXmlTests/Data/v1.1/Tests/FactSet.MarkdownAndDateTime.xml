@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1" Lang="es">
+<Card Version="1.1" Lang="es">
   <TextBlock Wrap="true">*italic text* with date of {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}</TextBlock>
   <TextBlock Wrap="true">Normal text with date of {{DATE(2017-02-14T06:08:39Z,LONG)}} {{TIME(2017-02-14T06:08:39Z)}}</TextBlock>
   <FactSet>

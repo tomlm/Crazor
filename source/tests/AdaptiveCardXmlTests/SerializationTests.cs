@@ -38,7 +38,7 @@ namespace AdaptiveCardXmlTests
             {
                 using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
                 {
-                    serializer.Serialize(xmlWriter, card);
+                    serializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
                 }
                 return textWriter.ToString(); //This is the output as a string
             }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0" Speak="&lt;s&gt;The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees&lt;/s&gt;">
+<Card Version="1.0" Speak="&lt;s&gt;The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees&lt;/s&gt;">
   <TextBlock Size="large" IsSubtle="true" Wrap="true">Redmond, WA</TextBlock>
   <TextBlock Spacing="none" Wrap="true">Mon, Nov 4, 2019 6:21 PM</TextBlock>
   <ColumnSet>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.4">
+<Card Version="1.4">
   <Image Url="https://adaptivecards.io/content/adaptive-card-50.png" AltText="Adaptive cards logo" />
   <TextBlock Size="large" Weight="bolder">Overflow Action Test Card!</TextBlock>
   <TextBlock>ActionSet **all secondary actions**</TextBlock>

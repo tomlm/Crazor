@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card Version="1.0">
   <FactSet>
     <Fact Title="This is a long FactSet that should wrap the title" Value="This is a long FactSet that can introduce wrapping for the value" />
     <Fact Title="Fact 2" Value="Value 2" />

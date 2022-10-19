@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+<Card Version="1.0">
   <TextBlock Size="medium" Weight="bolder" HorizontalAlignment="center" Wrap="true" Style="heading">Input.Text elements</TextBlock>
   <Input.Text Id="SimpleVal" IsRequired="true" Label="Name" ErrorMessage="Name is required" />
   <Input.Text Id="UrlVal" Label="Homepage" Style="url" />

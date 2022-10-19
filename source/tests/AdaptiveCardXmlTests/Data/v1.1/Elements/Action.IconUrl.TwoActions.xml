@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1">
+<Card Version="1.1">
   <TextBlock Wrap="true">This card has two actions, one of which has an icon. The icon is always placed to the left of title.</TextBlock>
   <Action.OpenUrl Title="With Icon" IconUrl="https://adaptivecards.io/content/cats/2.png" Url="https://adaptivecards.io" />
   <Action.OpenUrl Title="Without Icon" Url="https://adaptivecards.io" />

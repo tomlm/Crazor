@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2">
+<Card Version="1.2">
   <Container Id="A">
     <Requires>
       <Property Name="adaptiveCards">1.2</Property>
     </Requires>
     <Container Id="B">
       <Fallback>
-        <Container Id="B">
+        <Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="B">
           <TextBlock Id="C">B Container fallback textblock</TextBlock>
           <Image Id="Z" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
         </Container>
@@ -18,7 +18,7 @@
               <Property Name="someProperty">blah</Property>
             </AdditionalProperties>
             <Fallback>
-              <Container Id="E">
+              <Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="E">
                 <Image Id="I" Url="https://adaptivecards.io/content/cats/2.png" AltText="Cat" />
                 <TextBlock Id="J">C ColumnSet fallback textblock</TextBlock>
               </Container>
@@ -38,7 +38,7 @@
       <Property Name="someProperty">foo</Property>
     </AdditionalProperties>
     <Fallback>
-      <Container Id="L">
+      <Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="L">
         <Requires>
           <Property Name="adaptiveCards">1.2</Property>
         </Requires>
@@ -51,7 +51,7 @@
       <Property Name="coolnessLevel">toTheMax</Property>
     </AdditionalProperties>
     <Fallback>
-      <UnknownElement Type="MyCoolAction">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="MyCoolAction">
         <AdditionalProperties>
           <Property Name="coolnessLevel">prettyCool</Property>
         </AdditionalProperties>
