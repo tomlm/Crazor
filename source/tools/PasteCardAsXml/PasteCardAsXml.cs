@@ -3,8 +3,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.ComponentModel.Design;
 using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 
 namespace PasteCardAsXml
@@ -89,13 +88,12 @@ namespace PasteCardAsXml
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
             string title = "PasteCardAsXml";
-
+            var text = Clipboard.GetText(TextDataFormat.UnicodeText);
             // Show a message box to prove we were here
             VsShellUtilities.ShowMessageBox(
                 this.package,
-                message,
+                text,
                 title,
                 OLEMSGICON.OLEMSGICON_INFO,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
