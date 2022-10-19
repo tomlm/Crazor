@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Crazor
 {
@@ -75,7 +76,7 @@ namespace Crazor
         /// <param name="sessionId">instanceId</param>
         /// <param name="cancellationToken">ct</param>
         /// <returns>card with session data.</returns>
-        public async Task<AdaptiveCard> GetPreviewCard(ITurnContext turnContext, string app, string? resourceId, string? sessionId, string? view, CancellationToken cancellationToken)
+        public async Task<AdaptiveCard> GetCard(ITurnContext turnContext, string app, string? resourceId, string? sessionId, string? view, CancellationToken cancellationToken)
         {
             sessionId = sessionId ?? Utils.GetNewId();
 
@@ -89,6 +90,47 @@ namespace Crazor
             };
             activity!.Value = invokeValue;
             // create card
+            var cardApp = await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
+
+            // process Action.Execute
+            var result = await cardApp.OnActionExecuteAsync(cancellationToken);
+
+            AdaptiveCard adaptiveCard = (AdaptiveCard)result.Value;
+            if (turnContext.Activity.ChannelId == Channels.Msteams)
+            {
+                // update refresh members list.
+                await SetTeamsRefreshUserIds(adaptiveCard, turnContext, cancellationToken);
+            }
+
+            await cardApp.SaveAppAsync(cancellationToken);
+            return (AdaptiveCard)result.Value;
+        }
+
+        public async Task<AdaptiveCard> GetCardForUrl(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
+        {
+            var parts = uri.LocalPath.Trim('/').Split('/');
+            var app = parts[1] + "App";
+            var resourceId = (parts.Length > 2) ? parts[2] : null;
+            var view = (parts.Length > 3) ? parts[3] : null;
+            var path = String.Join('/', parts.Skip(4).ToArray());
+            var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
+
+            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext.Activity));
+            var invokeValue = new AdaptiveCardInvokeValue()
+            {
+                Action = new AdaptiveCardInvokeAction()
+                {
+                    Verb = Constants.LOADROUTE_VERB,
+                    Data = new LoadRouteModel
+                    {
+                        View = view ?? Constants.DEFAULT_VIEW,
+                        Path = path
+                    }
+                }
+            };
+            activity!.Value = invokeValue;
+            
+            // create app
             var cardApp = await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
 
             // process Action.Execute

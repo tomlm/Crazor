@@ -26,7 +26,7 @@ namespace Crazor
                 var app = turnContext.Activity.RemoveRecipientMention().Trim();
                 if (app.ToLower().EndsWith("app"))
                 {
-                    var card = await GetPreviewCard(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
+                    var card = await GetCard(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
                     var response = Activity.CreateMessageActivity();
                     response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
                     await turnContext.SendActivityAsync(response);

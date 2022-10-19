@@ -46,7 +46,7 @@ namespace Crazor
             this.Services = services;
             this.CallStack = new List<CardViewState>()
             {
-                new CardViewState("Default", null)
+                new CardViewState(Constants.DEFAULT_VIEW, null)
             };
             this.CardType = this.GetType().Name;
             this.Name = CardType.EndsWith("App") ? CardType.Substring(0, CardType.Length - 3) : CardType;
@@ -245,7 +245,7 @@ namespace Crazor
 
             if (!this.CallStack.Any())
             {
-                this.CallStack.Insert(0, new CardViewState("Default"));
+                this.CallStack.Insert(0, new CardViewState(Constants.DEFAULT_VIEW));
             }
 
             this.CurrentView = View(this.CurrentCard, this.CallStack[0].Model);
@@ -393,7 +393,7 @@ namespace Crazor
             // add session data to outbound card
             await AddSessionDataToAdaptiveCardAsync(outboundCard, cancellationToken);
 
-            if (CurrentCard != "Default")
+            if (CurrentCard != Constants.DEFAULT_VIEW)
             {
                 outboundCard.Title = $"{this.Name} - {CurrentCard}";
             }
@@ -406,7 +406,7 @@ namespace Crazor
             {
                 if (viewRoute.Length > 0)
                     viewRoute = $"{this.GetRoute()}/{this.CurrentView.Name}/{viewRoute}";
-                else if (this.CurrentView.Name != "Default")
+                else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
                     viewRoute = $"{this.GetRoute()}/{this.CurrentView.Name}";
                 else
                     viewRoute = this.GetRoute();
@@ -584,12 +584,12 @@ namespace Crazor
             };
             outboundCard.Body.Insert(0, ellipsis);
 
-            if (HasView("About"))
+            if (HasView(Constants.ABOUT_VIEW))
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
-                    Title = "About",
-                    Verb = Constants.ABOUT_VERB,
+                    Title = Constants.ABOUT_VIEW,
+                    Verb = Constants.ABOUT_VIEW,
                     IconUrl = "https://powercardbot.azurewebsites.net/about.png",
                     AssociatedInputs = AdaptiveAssociatedInputs.None
                     //   AdditionalProperties = new SerializableDictionary<string, object>() { { "mode", "secondary" } }
@@ -601,12 +601,12 @@ namespace Crazor
                 systemMenu.Actions.Add(outboundCard.Refresh.Action);
             }
 
-            if (this.HasView("Settings"))
+            if (this.HasView(Constants.SETTINGS_VIEW))
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
-                    Title = "Settings",
-                    Verb = Constants.SETTINGS_VERB,
+                    Title = Constants.SETTINGS_VIEW,
+                    Verb = Constants.SETTINGS_VIEW,
                     IconUrl = "https://powercardbot.azurewebsites.net/settings.png",
                     AssociatedInputs = AdaptiveAssociatedInputs.None
                     //AdditionalProperties = new SerializableDictionary<string, object>() { { "mode", "secondary" } }

@@ -11,13 +11,17 @@ namespace Crazor
         public const string IDDATA_KEY = "_id";
 
         // well known verbs
-        public const string ABOUT_VERB = "About";
         public const string PREVIEW_VERB = "Preview";
         public const string SHOW_VERB = "Show";
         public const string CANCEL_VERB = "Cancel";
         public const string OK_VERB = "OK";
         public const string LOADROUTE_VERB = "LoadRoute";
         public const string BACK_VERB = "Back";
-        public const string SETTINGS_VERB = "Settings";
+
+        // well known screens
+        public const string DEFAULT_VIEW = "Default";
+        public const string ABOUT_VIEW = "About";
+        public const string SETTINGS_VIEW = "Settings";
+
     }
 }
