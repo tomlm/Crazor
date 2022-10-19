@@ -68,12 +68,12 @@ namespace Crazor.TagHelpers
                         }
                         else
                         {
-                            throw new ArgumentNullException($"Could not find property path {part} of {this.Binding}");
+                            throw new Exception($"Invalid Binding='{this.Binding}': property '{part}' does not exist");
                         }
                     }
                     var dnAttr = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
                     var descAttr = this.BindingProperty?.GetCustomAttribute<DescriptionAttribute>();
-                    this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? parts.Last();
+                    this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? MakeTitle(parts.Last());
                 }
             }
         }
@@ -147,5 +147,42 @@ namespace Crazor.TagHelpers
                 }
             }
         }
+
+        protected string MakeTitle(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                return String.Empty;
+            }
+
+            name = $"{Char.ToUpper(name[0])}{name.Substring(1)}";
+            StringBuilder sb = new StringBuilder();
+            bool isLower = false;
+            bool endIsSpace = false;
+            foreach (var ch in name)
+            {
+                if (isLower && Char.IsUpper(ch))
+                {
+                    sb.Append($" {ch}");
+                }
+                else if (Char.IsLetterOrDigit(ch))
+                {
+                    if (endIsSpace)
+                        sb.Append(Char.ToUpper(ch));
+                    else
+                        sb.Append(ch);
+                    endIsSpace = false;
+                }
+                else if (!sb.ToString().EndsWith(' '))
+                {
+                    sb.Append(" ");
+                    endIsSpace = true;
+                }
+                isLower = Char.IsLower(ch);
+            }
+
+            return sb.ToString();
+        }
+
     }
 }

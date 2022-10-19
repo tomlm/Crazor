@@ -26,17 +26,15 @@ namespace OpBot.Cards.Inputs
 
         [Required]
         [DataType(DataType.Time)]
-        [Description("Arrival time")]
         [Range(typeof(DateTime), minimum: "08:00", maximum: "20:00", ErrorMessage = "Arrival time must be between 8AM and 8PM")]
-        public DateTime? Arrival { get; set; }
+        public DateTime? ArrivalTime { get; set; }
 
         [Required]
         [Description("Percentage")]
-        [Range(minimum:0, maximum: 100, ErrorMessage = "percentage must be between 0 and 100.")]
+        [Range(minimum:0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
         public Double? Percent  { get; set; }
 
         [Required]
-        [Description("Attendees")]
         [Range(minimum: 0, maximum: 100, ErrorMessage = "Attendees must be between 0 and 100.")]
         public int? Attendees { get; set; }
 
@@ -45,16 +43,13 @@ namespace OpBot.Cards.Inputs
 
         [Required]
         [Phone]
-        [Description("Phone Number")]
-        public string Phone{ get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Description("Password")]
         public string Password { get; set; }
 
         [Required]
-        [Description("Favorite pet")]
         public Pets? FavoritePet { get; set; }
     }
 }

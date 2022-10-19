@@ -5,13 +5,14 @@
     <TextBlock Style="Heading">Values!</TextBlock>
 
     <TextBlock>Birthday: @App.Data.Birthday?.ToShortDateString()</TextBlock>
-    <TextBlock>Arrival: @App.Data.Arrival?.ToString("HH:MM")</TextBlock>
+    <TextBlock>Arrival: @App.Data.ArrivalTime?.ToString("HH:MM")</TextBlock>
     <TextBlock>Percentage: @App.Data.Percent</TextBlock>
     <TextBlock>Attendees: @App.Data.Attendees</TextBlock>
-    <TextBlock>Phone: @App.Data.Phone</TextBlock>
+    <TextBlock>Phone: @App.Data.PhoneNumber</TextBlock>
     <TextBlock>Password: @App.Data.Password</TextBlock>
     <TextBlock>IsCool: @App.Data.IsCool</TextBlock>
     <TextBlock>Favorite Pet: @App.Data.FavoritePet</TextBlock>
+
     <Action.Execute Title="Edit" Verb="Edit"/>
 </Card>
 
