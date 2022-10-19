@@ -5,10 +5,10 @@ on:
     - main
 env:
   AZURE_WEBAPP_NAME: OpCardBot
-  AZURE_WEBAPP_PACKAGE_PATH: Samples\OpBot\published
+  AZURE_WEBAPP_PACKAGE_PATH: Source\Samples\OpBot\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: Samples\OpBot
+  WORKING_DIRECTORY:  Source\Samples\OpBot
 jobs:
   build:
     runs-on: windows-latest
