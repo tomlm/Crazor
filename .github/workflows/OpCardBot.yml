@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Web App OpCardBot
+name: Publish OpCardBot
 on:
   push:
     branches:
