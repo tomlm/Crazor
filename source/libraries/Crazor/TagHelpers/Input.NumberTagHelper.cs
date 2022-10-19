@@ -66,7 +66,7 @@ namespace Crazor.TagHelpers
 
             if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
             {
-                output.Attributes.SetAttribute(nameof(Min), rangeAttribute?.ErrorMessage);
+                output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
             }
         }
 

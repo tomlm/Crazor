@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
@@ -119,12 +120,12 @@ namespace Crazor
                 case Constants.OK_VERB:
                     if (this.IsModelValid)
                     {
-                        this.CloseView(this.GetModel());
+                        this.CloseCard(this.GetModel());
                     }
                     return true;
 
                 case Constants.CANCEL_VERB:
-                    this.CancelView();
+                    this.CancelCard();
                     return true;
             }
 
@@ -162,7 +163,60 @@ namespace Crazor
                         {
                             if (property.Value != null)
                             {
-                                targetProperty.SetValue(obj, property.Value.ToObject(targetProperty.PropertyType));
+                                var val = (object)property.Value;
+                                var targetType = targetProperty.PropertyType;
+                                if (targetType.Name == "Nullable`1")
+                                {
+                                    targetType = targetType.GenericTypeArguments[0];
+                                }
+
+                                switch (targetProperty.PropertyType.Name)
+                                {
+                                    case "Byte":
+                                        val = Convert.ToByte(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "Int16":
+                                        val = Convert.ToInt16(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "Int32":
+                                        val = Convert.ToInt32(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "Int64":
+                                        val = Convert.ToInt64(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "UInt16":
+                                        val = Convert.ToUInt16(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "UInt32":
+                                        val = Convert.ToUInt32(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "UInt64":
+                                        val = Convert.ToUInt64(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "Single":
+                                        val = Convert.ToSingle(Convert.ToDouble(val.ToString()));
+                                        break;
+                                    case "Double":
+                                        val = Convert.ToDouble(val.ToString());
+                                        break;
+                                    case "Boolean":
+                                        val = Convert.ToBoolean(val.ToString());
+                                        break;
+                                    case "DateTime":
+                                        val = Convert.ToDateTime(val.ToString());
+                                        break;
+                                    default:
+                                        if (targetType.IsEnum)
+                                        {
+                                            val = Enum.Parse(targetType, val.ToString()!);
+                                        }
+                                        else
+                                        {
+                                            val = Convert.ChangeType(val.ToString(), targetType);
+                                        }
+                                        break;
+                                }
+                                targetProperty.SetValue(obj, val);
                             }
                             else
                             {
@@ -252,18 +306,23 @@ namespace Crazor
             this.App!.ShowCard(cardName, model);
         }
 
+        /// <summary>
+        /// Add a banner message to be displayed to the viewer.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="style"></param>
         public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
         {
             this.App?.AddBannerMessage(text, style);
         }
 
-        public void CloseView(object? result = null)
+        /// <summary>
+        /// Close the current card, optionalling returning the result
+        /// </summary>
+        /// <param name="result">the result to return to the current caller</param>
+        public void CloseCard(object? result = null)
         {
-            // pop screen
-            // grab current view
-            // restore screen with screenstate
-            // set result
-            this.App?.Close(new CardResult()
+            this.App?.CloseCard(new CardResult()
             {
                 Name = this.Name,
                 Result = result,
@@ -271,9 +330,13 @@ namespace Crazor
             });
         }
 
-        public void CancelView(string? message = null)
+        /// <summary>
+        /// Cancel the current card, returning a message
+        /// </summary>
+        /// <param name="message">optional message to return.</param>
+        public void CancelCard(string? message = null)
         {
-            this.App?.Close(new CardResult()
+            this.App?.CloseCard(new CardResult()
             {
                 Name = this.Name,
                 Message = message,

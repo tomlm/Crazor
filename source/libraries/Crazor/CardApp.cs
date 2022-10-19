@@ -233,7 +233,7 @@ namespace Crazor
             this.CurrentView = View(cardName, model);
         }
 
-        public void Close(CardResult? result = null)
+        public void CloseCard(CardResult? result = null)
         {
             var lastCard = this.CurrentCard;
             this.LastResult = result;

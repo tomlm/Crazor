@@ -57,9 +57,12 @@ namespace Crazor.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
-
-
-            if (BindingProperty.PropertyType.IsEnum)
+            var bindingType = BindingProperty.PropertyType;
+            if (bindingType.Name == "Nullable`1")
+            {
+                bindingType = bindingType.GenericTypeArguments[0];
+            }
+            if (bindingType.IsEnum)
             {
                 var childContent = await output.GetChildContentAsync();
                 if (!childContent.GetContent().TrimStart().StartsWith("<Choice"))
@@ -67,9 +70,9 @@ namespace Crazor.TagHelpers
                     // automatically compute choice from enumeration.
                     StringBuilder sb = new StringBuilder();
                     output.TagMode = TagMode.StartTagAndEndTag;
-                    foreach (var value in BindingProperty.PropertyType.GetEnumValues())
+                    foreach (var value in bindingType.GetEnumValues())
                     {
-                        MemberInfo memberInfo = BindingProperty.PropertyType.GetMember(value.ToString()!).First();
+                        MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
 
                         // we can then attempt to retrieve the    
                         // description attribute from the member info    

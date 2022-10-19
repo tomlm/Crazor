@@ -18,15 +18,16 @@ namespace Crazor.TagHelpers
     [HtmlTargetElement("Input.Date")]
     public class InputDateTagHelper : InputTagHelper
     {
+        internal const string Format = "yyyy-MM-dd";
 
         [HtmlAttributeName(nameof(IsVisible))]
         public Boolean? IsVisible { get; set; } 
 
         [HtmlAttributeName(nameof(Max))]
-        public String Max { get; set; }
+        public DateTime? Max { get; set; }
 
         [HtmlAttributeName(nameof(Min))]
-        public String Min { get; set; }
+        public DateTime? Min { get; set; }
 
         [HtmlAttributeName(nameof(Placeholder))]
         public String Placeholder { get; set; }
@@ -43,7 +44,7 @@ namespace Crazor.TagHelpers
 
         [HtmlAttributeName(nameof(Value))]
         [Binding(BindingType.Value)]
-        public String Value { get; set; }
+        public DateTime? Value { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
         public String Height { get; set; }
@@ -52,21 +53,35 @@ namespace Crazor.TagHelpers
         {
             await base.ProcessAsync(context, output);
 
+            // make sure value is output in correct format 
+            if (output.Attributes[nameof(Value)] != null)
+            {
+                var value = output.Attributes[nameof(Value)].Value;
+                if (value is string str)
+                {
+                    output.Attributes.SetAttribute(nameof(Value), DateTime.Parse(str).ToString(Format));
+                }
+                else if (value is DateTime dt)
+                {
+                    output.Attributes.SetAttribute(nameof(Value), dt.ToString(Format));
+                }
+            }
+
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
             if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
             {
-                output.Attributes.SetAttribute(nameof(Min), rangeAttribute.Minimum.ToString());
+                output.Attributes.SetAttribute(nameof(Min), DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format));
             }
 
             if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
             {
-                output.Attributes.SetAttribute(nameof(Max), rangeAttribute.Maximum.ToString());
+                output.Attributes.SetAttribute(nameof(Max), DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format));
             }
 
             if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
             {
-                output.Attributes.SetAttribute(nameof(Min), rangeAttribute?.ErrorMessage);
+                output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
             }
         }
     }
