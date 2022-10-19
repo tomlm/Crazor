@@ -1,13 +1,16 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Runtime;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using AdaptiveCards;
 using EnvDTE;
+using Microsoft.VisualStudio.Settings.Internal;
 using Microsoft.VisualStudio.Shell;
 using Newtonsoft.Json;
+using static Microsoft.VisualStudio.Threading.AsyncReaderWriterLock;
 using Task = System.Threading.Tasks.Task;
 
 namespace AdaptiveCard2Xml
@@ -94,23 +97,19 @@ namespace AdaptiveCard2Xml
             ThreadHelper.ThrowIfNotOnUIThread();
             var json = Clipboard.GetText(TextDataFormat.UnicodeText);
             var card = JsonConvert.DeserializeObject<AdaptiveCard>(json);
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (XmlWriter writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true }))
-                {
-                    new XmlSerializer(typeof(AdaptiveCard)).Serialize(writer, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
-                }
-                stream.Seek(0, SeekOrigin.Begin);
+            var serializer = new XmlSerializer(typeof(AdaptiveCard));
 
-                using (TextReader reader = new StreamReader(stream))
+            using (StringWriter textWriter = new StringWriter())
+            {
+                using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, new XmlWriterSettings() { Indent = true }))
                 {
-                    var xml = reader.ReadToEnd();
-                    DTE dte = Package.GetGlobalService(typeof(DTE)) as DTE;
-                    TextDocument activeDoc = dte.ActiveDocument.Object() as TextDocument;
-                    activeDoc.Selection.SelectAll();
-                    activeDoc.Selection.Delete();
-                    activeDoc.CreateEditPoint().Insert(xml);
+                    serializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
                 }
+
+                var xml = textWriter.ToString(); 
+                DTE dte = Package.GetGlobalService(typeof(DTE)) as DTE;
+                TextDocument activeDoc = dte.ActiveDocument.Object() as TextDocument;
+                activeDoc.CreateEditPoint(activeDoc.Selection.ActivePoint).Insert(xml);
             }
         }
     }
