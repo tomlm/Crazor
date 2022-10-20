@@ -25,7 +25,7 @@ namespace Crazor
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
             services.TryAddScoped<IBot, CardActivityHandler>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddSingleton<IUrlHelper, UrlHelperProxy>();
+            services.TryAddScoped<IUrlHelper, UrlHelperProxy>();
 
             // add Apps
             var cardAppServices = services.AddByName<CardApp>();

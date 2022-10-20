@@ -14,7 +14,7 @@
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
                     </Column>
                     <Column Width="auto">
-                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Edit-File-icon.png" Size="Small">
+                        <Image Url="@UrlHelper.Content("~/images/EditIcon.png")" Size="Small">
                             <SelectAction>
                                 <Action.Execute Tooltip="Edit Address" Verb="OnEdit">
                                     { "addressId":"@address.Id" }
@@ -23,7 +23,7 @@
                         </Image>
                     </Column>
                     <Column Width="auto">
-                        <Image Url="https://icons.iconarchive.com/icons/icons8/windows-8/72/Files-Delete-File-icon.png" Size="Small">
+                        <Image Url="@UrlHelper.Content("~/images/DeleteIcon.png")" Size="Small">
                             <SelectAction>
                                 <Action.Execute Tooltip="Delete Address" Verb="OnDelete">
                                     { "addressId":"@address.Id" }

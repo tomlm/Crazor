@@ -358,7 +358,7 @@ namespace Crazor
 
             CardView cardView = (CardView)((RazorView)viewResult.View).RazorPage;
             cardView.RazorView = viewResult.View;
-            // cardView.Url = this.Services.GetRequiredService<IUrlHelper>();
+            cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
             cardView.Name = viewName;
             ITempDataProvider tempDataProvider;

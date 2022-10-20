@@ -32,8 +32,8 @@ namespace Crazor
         {
         }
 
-        //[JsonIgnore]
-        //public IUrlHelper Url { get; set; }
+        [JsonIgnore]
+        public IUrlHelper UrlHelper { get; set; }
 
         [JsonIgnore]
         public string Name { get; set; } = String.Empty;
