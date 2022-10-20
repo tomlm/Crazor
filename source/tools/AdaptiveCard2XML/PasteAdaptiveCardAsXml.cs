@@ -1,12 +1,15 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using AdaptiveCards;
 using EnvDTE;
+using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Settings.Internal;
 using Microsoft.VisualStudio.Shell;
 using Newtonsoft.Json;
@@ -106,11 +109,28 @@ namespace AdaptiveCard2Xml
                     serializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
                 }
 
-                var xml = textWriter.ToString(); 
+                var xml = MassageXml(textWriter.ToString());
                 DTE dte = Package.GetGlobalService(typeof(DTE)) as DTE;
                 TextDocument activeDoc = dte.ActiveDocument.Object() as TextDocument;
                 activeDoc.CreateEditPoint(activeDoc.Selection.ActivePoint).Insert(xml);
             }
+        }
+
+        public string MassageXml(string xml)
+        {
+            foreach (var enumType in typeof(AdaptiveCard).Assembly.GetTypes().Where(t => t.Name.StartsWith("Adaptive") && t.IsEnum))
+            {
+                foreach (var value in enumType.GetEnumValues())
+                {
+                    MemberInfo memberInfo = enumType.GetMember(value.ToString()).First();
+                    var xmlEnumAtt = memberInfo.GetCustomAttribute<XmlEnumAttribute>();
+                    if (xmlEnumAtt != null)
+                    {
+                        xml = xml.Replace($"\"{xmlEnumAtt.Name}\"", $"\"{memberInfo.Name}\"");
+                    }
+                }
+            }
+            return xml;
         }
     }
 }
