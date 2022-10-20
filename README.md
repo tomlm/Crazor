@@ -230,6 +230,15 @@ To create a new card
 ## Defining a card data model
 Simply define the model as a class with validation attributes on it.
 
+## Paste AdaptiveCard JSON as XML
+There is a VSIX which installs a tool into visual studio which will allow you to paste json from AdaptiveCards.io designer into 
+your cshtml as a XML.
+
+![image](https://user-images.githubusercontent.com/17789481/196826860-263d6bfa-093c-4ae3-9c88-8205d316a205.png)
+
+To install it download and install [AdaptiveCard2XML.vsix](https://raw.githubusercontent.com/microsoft/crazor/main/AdaptiveCard2Xml.vsix?token=GHSAT0AAAAAABZXDAL5AWLWO3WIMNEXSKW6Y2QTYAA)
+> 
+
 # Hosting goo
 
 ## Dependency injection stuff.
