@@ -7,6 +7,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	
+	<PropertyGroup>
 		<Version>1.0.$([System.DateTime]::Now.ToString("yyyyMMdd.HHmm"))-beta</Version>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Description>Razor support for creating Adaptive Cards.</Description>

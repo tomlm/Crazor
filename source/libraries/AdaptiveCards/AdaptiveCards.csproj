@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
+<!--		
 		<Authors>Microsoft</Authors>
 		<Summary>Adaptive Card object model for .NET</Summary>
 		<Description>This library implements classes for building and serializing adaptive card objects</Description>
@@ -16,7 +17,7 @@
 		<copyright>© Microsoft Corporation. All rights reserved.</copyright>
 		<GenerateAssemblyInfo Condition="$(Tfs_PackageVersionNumber) != ''">false</GenerateAssemblyInfo>
 		<DocumentationFile>$(MSBuildProjectDirectory)/docs/AdaptiveCards.xml</DocumentationFile>
-		<VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
+		<VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml> -->
 	</PropertyGroup>
 
 	<ItemGroup>
