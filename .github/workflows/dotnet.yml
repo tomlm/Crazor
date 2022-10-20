@@ -3,7 +3,8 @@ name: BuildAndRunTests
 on:
   pull_request:
     branches: [ "main" ]
-
+    paths:
+    - source/**
 jobs:
   build:
 

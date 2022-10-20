@@ -3,6 +3,8 @@ on:
   push:
     branches:
     - main
+    paths:
+    - source/**
 env:
   AZURE_WEBAPP_NAME: OpCardBot
   AZURE_WEBAPP_PACKAGE_PATH: Source\Samples\OpBot\published
