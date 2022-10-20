@@ -19,11 +19,8 @@ jobs:
       run: dotnet restore source/Crazor.sln
     - name: Add Nuget Source
       run: dotnet nuget add source --username tomlm --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tomlm/index.json"
-    - name: Build
-      run: dotnet build --no-restore source/Crazor.sln
     - name: Publish Package
       run: | 
-          mkdir __out
-          dotnet pack -c Release -o __out --no-restore
+          dotnet pack -c Release --no-restore source/libraries/crazor/crazor.csproj
           dotnet nuget push "source/libraries/crazor/bin/Release/Crazor*.nupkg"  --api-key YOUR_GITHUB_PAT --source "github"
           
