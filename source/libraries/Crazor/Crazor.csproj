@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Version>1.0.0-preview</Version>
+		<Version>1.0.$([System.DateTime]::Now.ToString("yyyyMMdd.HHmm"))-beta</Version>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Description>Razor support for creating Adaptive Cards.</Description>
 		<Company>Microsoft</Company>
