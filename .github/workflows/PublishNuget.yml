@@ -21,10 +21,10 @@ jobs:
           format: YYYYMMDDHHmmss
 
       - name: echoDate2
-        run: echo '${{steps.version}}''
+        run: echo '${{steps.version.date}}'
 
       - name: echoDate
-        run: echo ${{steps.version}}
+        run: echo ${{steps.version.date}}
 
       # Checkout the repo
       - uses: actions/checkout@v3
