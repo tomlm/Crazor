@@ -29,5 +29,6 @@ jobs:
       run: | 
           mkdir out
           dotnet pack --no-restore source/libraries/crazor/crazor.csproj -o out
-          dotnet nuget push "out/*.nupkg" --skip-duplicate 
+          chdir out
+          dotnet nuget push "**/*.nupkg" --skip-duplicate 
           
