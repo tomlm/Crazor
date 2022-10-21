@@ -7,7 +7,6 @@ on:
 
 env:
   AZURE_ARTIFACTS_FEED_URL:   https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json
-  BUILD_CONFIGURATION: 'Debug'    # set this to the appropriate build configuration
   DOTNET_VERSION: '6.x' 
 
 jobs:
@@ -27,12 +26,12 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_ARTIFACTS_PAT }} 
 
       # Run dotnet build and package
-      - name: dotnet build and publish
+      - name: dotnet build and pack
         run: |
           dotnet restore source/libraries/Crazor/Crazor.csproj
-          dotnet build -c '${{ env.BUILD_CONFIGURATION }}' source/libraries/Crazor/Crazor.csproj
-          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix beta-$GITHUB_RUN_ID source/libraries/Crazor/Crazor.csproj
+          dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
+          dotnet pack -c Debug --no-restore --version-suffix beta-$GITHUB_RUN_ID source/libraries/Crazor/Crazor.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key AzureArtifacts source/libraries/Crazor/bin/Release/*.nupkg
+        run: dotnet nuget push --api-key AzureArtifacts source/libraries/Crazor/bin/Debug/*.nupkg
