@@ -1,5 +1,7 @@
 
-![image](https://user-images.githubusercontent.com/17789481/196562674-d02d2ca5-ad39-4be7-9e1c-3e02cfd73a6e.png)
+
+![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
+
 
 # Crazor
 **Crazor** is a library which marries Razor with Adaptive Cards to create a super productive 
