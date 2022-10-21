@@ -25,7 +25,7 @@ jobs:
     - name: Build Debug 
       run: dotnet build --no-restore source/Crazor.sln 
     - name: Pack
-      run: dotnet pack source/Libraries/Crazor/Crazor.csproj -c Release
+      run: dotnet pack source/Libraries/Crazor/Crazor.csproj 
     - name: Prep packages
       run: dotnet nuget add source --username tomlm --password ${{ secrets.TOMLM_PAT }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tomlm/index.json"
     - name: Publish to GitHub packages 
