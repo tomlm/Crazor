@@ -85,7 +85,7 @@ namespace Crazor
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
-                    Verb = view ?? Constants.PREVIEW_VERB
+                    Verb = view ?? Constants.REFRESH_VERB
                 }
             };
             activity!.Value = invokeValue;

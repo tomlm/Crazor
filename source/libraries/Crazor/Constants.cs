@@ -11,7 +11,7 @@ namespace Crazor
         public const string IDDATA_KEY = "_id";
 
         // well known verbs
-        public const string PREVIEW_VERB = "Preview";
+        public const string REFRESH_VERB = "Refresh";
         public const string SHOW_VERB = "Show";
         public const string CANCEL_VERB = "Cancel";
         public const string OK_VERB = "OK";

@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection.Metadata.Ecma335;
 using Crazor.Attributes;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Crazor.Interfaces;
 
 namespace Crazor.TagHelpers
 {
@@ -41,7 +42,7 @@ namespace Crazor.TagHelpers
         [HtmlAttributeName]
         public string? Id { get; set; }
 
-        public CardView View { get; set; }
+        public ICardView View { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -57,7 +58,7 @@ namespace Crazor.TagHelpers
                 // ((RazorView)page.ViewContext.View).RazorPage;
                 if (viewContext!.View is RazorView rv)
                 {
-                    if (rv.RazorPage is CardView cv)
+                    if (rv.RazorPage is ICardView cv)
                     {
                         this.View = cv;
                         break;

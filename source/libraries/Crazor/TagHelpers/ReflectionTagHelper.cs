@@ -1,18 +1,14 @@
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using AdaptiveCards;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using Crazor.Attributes;
-using DataAnnotationsValidator;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Linq;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
+using Crazor.Interfaces;
 
 namespace Crazor.TagHelpers
 {
@@ -34,7 +30,7 @@ namespace Crazor.TagHelpers
         public string Class { get; set; }
 
         [HtmlAttributeNotBound]
-        public CardView View { get; set; }
+        public ICardView View { get; set; }
 
         public override void Init(TagHelperContext context)
         {
@@ -44,7 +40,7 @@ namespace Crazor.TagHelpers
                 // ((RazorView)page.ViewContext.View).RazorPage;
                 if (viewContext!.View is RazorView rv)
                 {
-                    if (rv.RazorPage is CardView cv)
+                    if (rv.RazorPage is ICardView cv)
                     {
                         this.View = cv;
                         break;

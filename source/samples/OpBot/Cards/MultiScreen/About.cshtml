@@ -1,4 +1,6 @@
-﻿@inherits CardView
+﻿@using OpBot.Cards.MultiScreen
+@inherits CardView<MultiScreenApp>
+
 <Card Version="1.5">
     <Container>
         <TextBlock Size="ExtraLarge" Weight="Bolder">@App?.CardType</TextBlock>

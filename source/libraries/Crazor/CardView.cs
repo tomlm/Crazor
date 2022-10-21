@@ -1,4 +1,5 @@
 ﻿using AdaptiveCards;
+using Crazor.Interfaces;
 using DataAnnotationsValidator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -19,7 +20,8 @@ using Diag = System.Diagnostics;
 
 namespace Crazor
 {
-    public class CardView : RazorPage
+    public class CardView<AppT> : RazorPage, ICardView
+        where AppT: CardApp
     {
         private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
         private static XmlWriterSettings _settings = new XmlWriterSettings()
@@ -39,7 +41,7 @@ namespace Crazor
         public string Name { get; set; } = String.Empty;
 
         [JsonIgnore]
-        public virtual CardApp? App { get; set; }
+        public AppT App { get; set; }
 
         [JsonIgnore]
         public AdaptiveCardInvokeAction? Action { get; set; }
@@ -52,6 +54,9 @@ namespace Crazor
 
         [JsonIgnore]
         public bool IsModelValid { get; set; } = true;
+
+        [JsonIgnore]
+        CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
 
         /// <summary>
         /// ExecuteAsync is disabled because the default writes the output directly to 
@@ -101,11 +106,13 @@ namespace Crazor
                 }
                 // I *think* the correct behavior is not NOT validate on LoadROUTE
                 // ValidateModel();
-                return true;
+                verb = Constants.REFRESH_VERB;
             }
-
-            // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
-            ValidateModel();
+            else
+            { 
+                // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
+                ValidateModel();
+            }
 
             verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
             if (verbMethod != null)
@@ -151,7 +158,7 @@ namespace Crazor
                     // if root is [BindProperty]
                     var prop = this.GetType().GetProperty(parts[0]);
                     if (prop != null &&
-                        (prop.Name == "Model" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
+                        (prop.Name == "Model" || prop.Name == "App" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
                     {
                         object obj = this;
                         foreach (var part in parts.Take(parts.Count() - 1))
@@ -170,7 +177,7 @@ namespace Crazor
                                     targetType = targetType.GenericTypeArguments[0];
                                 }
 
-                                switch (targetProperty.PropertyType.Name)
+                                switch (targetType.Name)
                                 {
                                     case "Byte":
                                         val = Convert.ToByte(Convert.ToDouble(val.ToString()));
@@ -530,18 +537,6 @@ namespace Crazor
             }
         }
 
-    }
-
-    public class CardView<AppT> : CardView
-        where AppT : CardApp
-    {
-        // Summary:
-        //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
-        //     property.
-        public new AppT App
-        {
-            get => (AppT)base.App!;
-        }
     }
 
     public class CardView<AppT, ModelT> : CardView<AppT>

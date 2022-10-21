@@ -19,6 +19,7 @@ using Crazor.Interfaces;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
+using System.Reflection;
 
 namespace Crazor
 {
@@ -99,7 +100,7 @@ namespace Crazor
         public string CurrentCard => CallStack.First().Name;
 
         [JsonIgnore]
-        public CardView? CurrentView { get; private set; }
+        public ICardView CurrentView { get; private set; }
 
         [JsonIgnore]
         public CardResult? LastResult { get; set; }
@@ -111,7 +112,7 @@ namespace Crazor
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
         [JsonIgnore]
-        public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; } 
+        public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
 
         /// <summary>
         /// Handle action
@@ -142,15 +143,6 @@ namespace Crazor
             {
                 if (!String.IsNullOrEmpty(this.Action.Verb))
                 {
-                    if (this.Action.Verb == Constants.LOADROUTE_VERB)
-                    {
-                        var loadPage = ((JObject)this.Action.Data).ToObject<LoadRouteModel>();
-                        if (this.CurrentCard != loadPage!.View)
-                        {
-                            ShowCard(loadPage.View!);
-                        }
-                    }
-
                     var state = this.CallStack[0];
                     var cardView = this.CurrentView;
 
@@ -302,7 +294,26 @@ namespace Crazor
                 SetScopedMemory<SessionMemoryAttribute>((JObject)state[sessionKey]);
             }
 
-            this.CurrentView = View(this.CurrentCard, this.CallStack[0].Model);
+            if (Action.Verb == Constants.LOADROUTE_VERB)
+            {
+                var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
+                if (this.CurrentCard != loadRoute.View)
+                {
+                    ShowCard(loadRoute.View);
+                    return;
+                }
+            }
+            
+            // load current card.
+            var cardView = View(this.CurrentCard, this.CallStack[0].Model);
+            
+            // NOTE: if the current card navigates to another card
+            // then CurrentView will be non null, but if it doesn't
+            // then we need to set it.
+            if (this.CurrentView == null)
+            {
+                this.CurrentView = cardView;
+            }
         }
 
         /// <summary>
@@ -346,7 +357,7 @@ namespace Crazor
         /// <param name="viewName"></param>
         /// <returns>view</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public CardView View(string viewName, object? model = null)
+        public ICardView View(string viewName, object? model = null)
         {
             var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
             var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
@@ -356,7 +367,7 @@ namespace Crazor
                 throw new ArgumentNullException($"{viewName} does not match any available view");
             }
 
-            CardView cardView = (CardView)((RazorView)viewResult.View).RazorPage;
+            ICardView cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
             cardView.RazorView = viewResult.View;
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
@@ -393,6 +404,7 @@ namespace Crazor
             // add session data to outbound card
             await AddSessionDataToAdaptiveCardAsync(outboundCard, cancellationToken);
 
+#pragma warning disable CS0618 // Type or member is obsolete
             if (CurrentCard != Constants.DEFAULT_VIEW)
             {
                 outboundCard.Title = $"{this.Name} - {CurrentCard}";
@@ -401,6 +413,8 @@ namespace Crazor
             {
                 outboundCard.Title = $"{this.Name}";
             }
+#pragma warning restore CS0618 // Type or member is obsolete
+
             var viewRoute = this.CurrentView!.GetRoute();
             if (!viewRoute.StartsWith('/'))
             {
