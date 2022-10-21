@@ -4,30 +4,35 @@ on:
   workflow_dispatch:
     branches: [ "main" ]
 
+
+env:
+  AZURE_ARTIFACTS_FEED_URL:   https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json
+  BUILD_CONFIGURATION: 'Debug'    # set this to the appropriate build configuration
+  DOTNET_VERSION: '6.x' 
+
 jobs:
-  build:
-
+  az-artifacts-build-and-deploy:
     runs-on: windows-latest
-
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    
-    - name: Restore dependencies
-      run: dotnet restore source/Crazor.sln
-    
-    - name: Build Debug 
-      run: dotnet build --no-restore source/Crazor.sln 
-    
-    - name: Pack
-      run: dotnet pack source/Libraries/Crazor/Crazor.csproj 
-    
-    - name: Prep packages
-      run: dotnet nuget add source --username tomlm --password ${{ secrets.TOMLM_PAT }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tomlm/index.json"
-    
-    - name: Publish to GitHub packages 
-      run: dotnet nuget push "source/libraries/crazor/bin/Release/*.nupkg"  --api-key ${{ secrets.TOMLM_PAT }} --source "github"
+      # Checkout the repo
+      - uses: actions/checkout@v3
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.AZURE_ARTIFACTS_PAT }} 
+
+      # Run dotnet build and package
+      - name: dotnet build and publish
+        run: |
+          dotnet restore
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}'
+          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix beta-$GITHUB_RUN_ID
+
+      # Publish the package to Azure Artifacts
+      - name: 'dotnet publish'
+        run: dotnet nuget push --api-key AzureArtifacts bin/Release/*.nupkg
