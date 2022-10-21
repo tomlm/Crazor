@@ -17,7 +17,9 @@ namespace OpBot
                 // NOTE: In production environment, you should consider logging this to
                 // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
                 // to add telemetry capture to your bot.
+#pragma warning disable CA2254 // Template should be a static expression
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
+#pragma warning restore CA2254 // Template should be a static expression
 
                 // Note: Since this Messaging Extension does not have the messageTeamMembers permission
                 // in the manifest, the bot will not be allowed to message users.

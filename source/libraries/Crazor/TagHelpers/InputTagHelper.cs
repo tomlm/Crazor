@@ -148,7 +148,7 @@ namespace Crazor.TagHelpers
             }
         }
 
-        protected string MakeTitle(string name)
+        protected static string MakeTitle(string name)
         {
             if (String.IsNullOrEmpty(name))
             {
@@ -175,7 +175,7 @@ namespace Crazor.TagHelpers
                 }
                 else if (!sb.ToString().EndsWith(' '))
                 {
-                    sb.Append(" ");
+                    sb.Append(' ');
                     endIsSpace = true;
                 }
                 isLower = Char.IsLower(ch);

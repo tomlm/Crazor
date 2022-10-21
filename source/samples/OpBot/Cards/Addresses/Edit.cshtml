@@ -23,7 +23,7 @@
     // look up the address when this route is loaded in a new browser.
     public void OnLoadRoute(string addressId)
     {
-        this.Model = this.App.Addresses.SingleOrDefault(a => a.Id == addressId)!;
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)!;
 
         if (this.Model == null)
         {

@@ -79,7 +79,7 @@ namespace Crazor
 
         internal static async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync_JIT(
             ITurnContext<IInvokeActivity> turnContext, ILogger<CardActivityHandler> logger,
-            CancellationToken cancellationToken, ITeamsInstall teamsInstall)
+            ITeamsInstall teamsInstall, CancellationToken cancellationToken)
         {
             logger.LogInformation("Checking Install Status of Teams App");
             var status = await teamsInstall.GetInstallStatusAsync(turnContext, logger, cancellationToken);

@@ -115,7 +115,7 @@ namespace Crazor
             var path = String.Join('/', parts.Skip(4).ToArray());
             var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
 
-            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext.Activity));
+            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext?.Activity!));
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
@@ -137,7 +137,7 @@ namespace Crazor
             var result = await cardApp.OnActionExecuteAsync(cancellationToken);
 
             AdaptiveCard adaptiveCard = (AdaptiveCard)result.Value;
-            if (turnContext.Activity.ChannelId == Channels.Msteams)
+            if (turnContext?.Activity.ChannelId == Channels.Msteams)
             {
                 // update refresh members list.
                 await SetTeamsRefreshUserIds(adaptiveCard, turnContext, cancellationToken);

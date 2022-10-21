@@ -83,9 +83,9 @@
     {
         if (model.IsEdit)
         {
-            var item = App.CatalogItems.Where(a => a.Id == model.Item.Id).SingleOrDefault();
+            var item = App.CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
 
-            if (item != null)
+            if (item != null && model.Item != null)
             {
                 // Update local copy
                 item.Name = model.Item.Name;
@@ -106,15 +106,18 @@
         else
         {
             // Add local copy
-            App.CatalogItems.Add(model.Item);
-            AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
-
-            // Update in API
-            var request = "https://ordersapi.azurewebsites.net/api/orders";
-            var data = JsonConvert.SerializeObject(model.Item);
-            using (var client = new HttpClient())
+            if (model.Item != null)
             {
-                var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"));
+                App.CatalogItems.Add(model.Item);
+                AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
+
+                // Update in API
+                var request = "https://ordersapi.azurewebsites.net/api/orders";
+                var data = JsonConvert.SerializeObject(model.Item);
+                using (var client = new HttpClient())
+                {
+                    var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"));
+                }
             }
         }
     }

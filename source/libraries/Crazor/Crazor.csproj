@@ -29,6 +29,7 @@
 		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
 		<RootNamespace>Crazor</RootNamespace>
 		<ContentTargetFolders>content</ContentTargetFolders>
+		<AnalysisLevel>6.0-minimum</AnalysisLevel>
 	</PropertyGroup>
 
 	<ItemGroup>

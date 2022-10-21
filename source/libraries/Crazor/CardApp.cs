@@ -40,7 +40,9 @@ namespace Crazor
             Indent = true,
         };
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardApp(IServiceProvider services)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             ArgumentNullException.ThrowIfNull(services);
 
@@ -297,9 +299,9 @@ namespace Crazor
             if (Action.Verb == Constants.LOADROUTE_VERB)
             {
                 var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
-                if (this.CurrentCard != loadRoute.View)
+                if (loadRoute != null && this.CurrentCard != loadRoute.View)
                 {
-                    ShowCard(loadRoute.View);
+                    ShowCard(loadRoute.View!);
                     return;
                 }
             }
@@ -475,7 +477,7 @@ namespace Crazor
             return sessionData;
         }
 
-        private void AddRefresh(AdaptiveCard outboundCard)
+        private static void AddRefresh(AdaptiveCard outboundCard)
         {
             var refresh = new AdaptiveExecuteAction()
             {

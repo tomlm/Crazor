@@ -30,24 +30,26 @@ namespace Crazor
             Indent = true,
         };
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardView()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
 
         [JsonIgnore]
-        public IUrlHelper UrlHelper { get; set; }
+        public IUrlHelper UrlHelper { get; set; } 
 
         [JsonIgnore]
-        public string Name { get; set; } = String.Empty;
+        public string Name { get; set; } 
 
         [JsonIgnore]
         public AppT App { get; set; }
 
         [JsonIgnore]
-        public AdaptiveCardInvokeAction? Action { get; set; }
+        public AdaptiveCardInvokeAction Action { get; set; }
 
         [JsonIgnore]
-        public IView? RazorView { get; set; }
+        public IView RazorView { get; set; }
 
         [JsonIgnore]
         public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
@@ -161,7 +163,7 @@ namespace Crazor
                         (prop.Name == "Model" || prop.Name == "App" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
                     {
                         object obj = this;
-                        foreach (var part in parts.Take(parts.Count() - 1))
+                        foreach (var part in parts.Take(parts.Length - 1))
                         {
                             obj = obj.GetPropertyValue(part);
                         }

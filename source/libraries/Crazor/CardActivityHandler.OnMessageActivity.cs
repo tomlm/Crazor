@@ -29,7 +29,7 @@ namespace Crazor
                     var card = await GetCard(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
                     var response = Activity.CreateMessageActivity();
                     response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
-                    await turnContext.SendActivityAsync(response);
+                    await turnContext.SendActivityAsync(response, cancellationToken);
                 }
             }
         }

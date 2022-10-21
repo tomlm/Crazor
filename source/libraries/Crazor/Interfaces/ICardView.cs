@@ -15,9 +15,9 @@ namespace Crazor.Interfaces
 
         CardApp App { get; set; }
 
-        AdaptiveCardInvokeAction? Action { get; set; }
+        AdaptiveCardInvokeAction Action { get; set; }
 
-        IView? RazorView { get; set; }
+        IView RazorView { get; set; }
 
         Dictionary<string, HashSet<string>> ValidationErrors { get; set; }
 

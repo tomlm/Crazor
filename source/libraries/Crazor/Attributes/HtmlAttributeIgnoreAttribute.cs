@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crazor.TagHelpers
+namespace Crazor.Attributes
 {
+    [AttributeUsage(AttributeTargets.Property)]
     public class HtmlAttributeIgnoreAttribute : Attribute
     {
     }

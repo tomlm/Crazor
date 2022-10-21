@@ -21,6 +21,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\..\.editorconfig" Link=".editorconfig" />
 		<None Include="EULA-Windows.txt" Pack="true" PackagePath="\" />
 	</ItemGroup>
 

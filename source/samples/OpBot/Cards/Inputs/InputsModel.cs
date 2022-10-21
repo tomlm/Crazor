@@ -39,15 +39,15 @@ namespace OpBot.Cards.Inputs
         public int? Attendees { get; set; }
 
         [Description("Cool")]
-        public bool IsCool{ get; set; }
+        public bool? IsCool{ get; set; }
 
         [Required]
         [Phone]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Required]
         public Pets? FavoritePet { get; set; }

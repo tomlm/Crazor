@@ -22,7 +22,10 @@ namespace AdaptiveCards
             defaultValue = Enum.Parse(typeof(TEnum), "0").ToString();
         }
 
-        public IgnoreDefaultStringEnumConverter(bool camelCaseText) : base(camelCaseText)
+        public IgnoreDefaultStringEnumConverter(bool camelCaseText)
+#pragma warning disable CS0618 // Type or member is obsolete
+            : base(camelCaseText)
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             defaultValue = Enum.Parse(typeof(TEnum), "0").ToString();
         }
