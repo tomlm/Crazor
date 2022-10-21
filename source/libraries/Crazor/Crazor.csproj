@@ -14,7 +14,7 @@
 	<PropertyGroup>
 		<Version>1.0.$([System.DateTime]::Now.ToString("yyyyMMdd.HHmm"))-beta</Version>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<Description>Razor support for creating Adaptive Cards.</Description>
+		<Description>Experimental library for creating Adaptive Cards using ASP.NET Razor tooling.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -26,7 +26,7 @@
 		<PackageTags>adaptivecards</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/microsoft/crazor</RepositoryUrl>
-		<Copyright>All rights reserved</Copyright>
+		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
 		<RootNamespace>Crazor</RootNamespace>
 		<ContentTargetFolders>content</ContentTargetFolders>
 	</PropertyGroup>
@@ -56,7 +56,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All"/>
+		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
