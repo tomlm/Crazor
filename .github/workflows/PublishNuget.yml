@@ -11,13 +11,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-        source-url: https://nuget.pkg.github.com/tomlm/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}        
     
     - name: Restore dependencies
       run: dotnet restore source/Crazor.sln
@@ -25,8 +23,11 @@ jobs:
     - name: Build Debug 
       run: dotnet build --no-restore source/Crazor.sln 
     
-    - name: Publish Package
-      run: | 
-          dotnet pack -c Debug --no-restore source/libraries/crazor/crazor.csproj
-          dotnet nuget push "./source/libaries/bin/debug/crazor*.nupkg" --skip-duplicate 
-          
+    - name: Pack
+      run: dotnet pack source/Libraries/Crazor/Crazor.csproj 
+    
+    - name: Prep packages
+      run: dotnet nuget add source --username tomlm --password ${{ secrets.TOMLM_PAT }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tomlm/index.json"
+    
+    - name: Publish to GitHub packages 
+      run: dotnet nuget push "source/libraries/crazor/bin/Release/*.nupkg"  --api-key ${{ secrets.TOMLM_PAT }} --source "github"
