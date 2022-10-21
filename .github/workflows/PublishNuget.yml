@@ -13,21 +13,18 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: calculate-dates-and-times
+      - name: version
         # You may pin to the exact commit or the version.
         # uses: lee-dohm/calculate-dates-and-times@598e2d8253f20d161824d8dd0c1fabc0dd1c975e
         uses: lee-dohm/calculate-dates-and-times@v1.0.2
         with:
           format: YYYYMMDDHHmmss
 
-      - name: echoDate
-        run: echo ${{date}}
-
       - name: echoDate2
-        run: echo '${{date}}''
+        run: echo '${{steps.version}}''
 
-      - name: echoDate3
-        run: echo '${{env.date}}''
+      - name: echoDate
+        run: echo ${{steps.version}}
 
       # Checkout the repo
       - uses: actions/checkout@v3
@@ -46,7 +43,7 @@ jobs:
         run: |
           dotnet restore source/libraries/Crazor/Crazor.csproj
           dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
-          dotnet pack -c Debug --no-restore --version-suffix beta-${{ date }} source/libraries/Crazor/Crazor.csproj
+          dotnet pack -c Debug --no-restore --version-suffix 'beta-${{ steps.version }}' source/libraries/Crazor/Crazor.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
