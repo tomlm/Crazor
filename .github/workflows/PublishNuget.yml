@@ -24,10 +24,9 @@ jobs:
     
     - name: Build Debug 
       run: dotnet build --no-restore source/Crazor.sln 
-    
-    - name: Publish Package
-      run: | 
-          mkdir out
-          dotnet pack --no-restore source/libraries/crazor/crazor.csproj -o out
-          dotnet nuget push "**/*.nupkg" --skip-duplicate 
-          
+    - name: Pack
+      run: dotnet pack source/Libraries/Crazor/Crazor.csproj -c Release
+    - name: Prep packages
+      run: dotnet nuget add source --username tomlm --password ${{ secrets.GITHUB_TOMLM_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tomlm/index.json"
+    - name: Publish to GitHub packages 
+      run: dotnet nuget push "source/libraries/crazor/bin/Release/*.nupkg"  --api-key secrets.GITHUB_TOMLM_TOKEN --source "github"
