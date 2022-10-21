@@ -1,5 +1,7 @@
 
-![image](https://user-images.githubusercontent.com/17789481/196562674-d02d2ca5-ad39-4be7-9e1c-3e02cfd73a6e.png)
+
+![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
+
 
 # Crazor
 **Crazor** is a library which marries Razor with Adaptive Cards to create a super productive 
@@ -139,9 +141,9 @@ In addition, any attributes on the target property will be promoted into the val
 <Input.Text Binding="Model.Name"  .../>
 ```
 
-> See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/dfd398) for an example of property binding
+> See [Addresses Card](https://opcardbot.azurewebsites.net/cards/Addresses/dfd398) for an example of property binding
 > 
-> See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
+> See [Addresses Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Addresses) for source code
 
 ### Validation attributes
 ![image](https://user-images.githubusercontent.com/17789481/190312095-542518e7-f9bd-4526-86e1-0e014bd0e4bc.png)
@@ -159,9 +161,9 @@ With property binding you can apply validation attributes to get validation auto
 > NOTE: The Input controls will automatically display the validation errors for the input control.  You can disable this
 > by setting **ShowErrors="false"**
 
-> See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/dfd398) for an example of validation 
+> See [Addresses Card](https://opcardbot.azurewebsites.net/cards/Addresses/dfd398) for an example of property binding
 > 
-> See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
+> See [Addresses Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Addresses) for source code
 
 ### Navigation functions
 ![image](https://user-images.githubusercontent.com/17789481/190312126-9db0ffa6-27ae-4c7a-a311-52df7f4aaaa5.png)
@@ -176,9 +178,9 @@ Each CardView has 3 methods for controlling that call stack.
 > 
 > See [MultiScreen Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/MultiScreen) for source code
 > 
-> See [Address Card](https://opcardbot.azurewebsites.net/cards/Address/ddergegdfda8) for an example of of navigation with model passing between cards.
+> See [Addresses Card](https://opcardbot.azurewebsites.net/cards/Addresses/dfd398) for an example of property binding
 > 
-> See [Address Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Address) for source code
+> See [Addresses Card source](https://github.com/microsoft/crazor/tree/main/source/samples/OpBot/Cards/Addresses) for source code
 
 ## Other helper functions
 * **AddBannerMessage(message, style)** - gives you ability to add a banner message with background style.  
