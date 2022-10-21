@@ -27,6 +27,7 @@ jobs:
     
     - name: Publish Package
       run: | 
-          dotnet pack -c Debug --no-restore source/libraries/crazor/crazor.csproj
-          dotnet nuget push "./source/libaries/bin/debug/crazor*.nupkg" --skip-duplicate 
+          mkdir out
+          dotnet pack --no-restore source/libraries/crazor/crazor.csproj -o out
+          dotnet nuget push "out/*.nupkg" --skip-duplicate 
           
