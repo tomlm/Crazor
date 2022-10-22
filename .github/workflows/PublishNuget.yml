@@ -13,12 +13,6 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: setDate
-        run: echo "NOW::$(date +'%Y%m%dT%H%M%S')" >> $GITHUB_ENV
-
-      - name: echoDate2
-        run: echo '${{env.date}}'
-
       # Checkout the repo
       - uses: actions/checkout@v3
 
@@ -36,7 +30,7 @@ jobs:
         run: |
           dotnet restore source/libraries/Crazor/Crazor.csproj
           dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
-          dotnet pack -c Debug --no-restore --version-suffix 'beta-${{ env.date }}' source/libraries/Crazor/Crazor.csproj
+          dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d.%H%M%S') source/libraries/Crazor/Crazor.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
