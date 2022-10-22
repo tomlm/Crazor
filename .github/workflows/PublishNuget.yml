@@ -16,7 +16,7 @@ jobs:
       - name: Test1
         id: t1
         uses: Kaven-Universe/github-action-current-date-time@v1.1.0
-      with:
+        with:
           format: "YYYYMMDDHHmm"      
       
       #- name: Set version
