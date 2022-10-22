@@ -6,7 +6,7 @@ using Microsoft.Bot.Builder.Azure.Blobs;
 var builder = WebApplication.CreateBuilder(args);
 
 // ---- <CRAZOR>
-// add storage
+// register blob storage for state management
 var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
 if (!String.IsNullOrEmpty(storageKey))
 {

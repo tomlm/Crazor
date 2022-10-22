@@ -19,7 +19,7 @@ namespace OpBot.Pages.Cards
         {
             _configuration = configuration;
             _appFactory = cardFactory;
-            BotUri = configuration.GetValue<string>("BotUri");
+            BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardsapps").AbsoluteUri;
         }
 
         public string BotUri { get; set; }

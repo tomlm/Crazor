@@ -10,6 +10,7 @@ using OpBot;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Crazor
 {
@@ -19,7 +20,18 @@ namespace Crazor
         public static IServiceCollection AddCrazor(this IServiceCollection services)
         {
             services.AddHttpClient();
-            services.TryAddSingleton<IStorage, MemoryStorage>();
+            services.TryAddSingleton<IStorage>((sp) =>
+            {
+                Trace.TraceWarning(@"There is no IStorage provider registered for Crazor cards to use.");
+                Trace.TraceWarning("The MemoryStorage provider is being used which is only suitable for local development becuase it is not durable.");
+                Trace.TraceWarning("Add an IStorage provider via dependency injection in your program.cs.  For example to register Azure BlobStorage as your provider:");
+                Trace.TraceWarning("    var storageKey = builder.Configuration.GetValue<string>(\"AzureStorage\");");
+                Trace.TraceWarning("    if (!String.IsNullOrEmpty(storageKey))");
+                Trace.TraceWarning("    {");
+                Trace.TraceWarning("        builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, \"opbot\"));");
+                Trace.TraceWarning("    }");
+                return new MemoryStorage();
+            });
             services.TryAddSingleton<IEncryptionProvider, NoEncryptionProvider>();
             services.TryAddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
