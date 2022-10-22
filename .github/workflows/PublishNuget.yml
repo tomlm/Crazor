@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - name: show
+        run: echo 'beta-$(date +'%Y%m%d.%H%M%S')'
+
       # Checkout the repo
       - uses: actions/checkout@v3
 
