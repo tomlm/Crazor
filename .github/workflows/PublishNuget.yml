@@ -13,11 +13,12 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: version
+      - name: Set version
+        id: version
         run: echo "NOW=beta-$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
 
       - name: test
-        run: echo $NOW
+        run: echo '${{steps.version.outputs.NOW}}'
 
       # Checkout the repo
       - uses: actions/checkout@v3
@@ -32,12 +33,13 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_ARTIFACTS_PAT }} 
 
       # Run dotnet build and package
+      # dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d%H%M') source/libraries/Crazor/Crazor.csproj
       - name: dotnet build and pack
         run: |
           dotnet restore source/libraries/Crazor/Crazor.csproj
           dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
-          dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d%H%M') source/libraries/Crazor/Crazor.csproj
+          dotnet pack -c Debug --no-restore --version-suffix ${{steps.version.outputs.NOW}} source/libraries/Crazor/Crazor.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key AzureArtifacts 'source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{$NOW}}.nupkg'
+        run: dotnet nuget push --api-key AzureArtifacts 'source/libraries/Crazor/bin/Debug/Crazor.1.0.0-${{steps.version.outputs.NOW}}.nupkg'
