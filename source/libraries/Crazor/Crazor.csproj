@@ -4,6 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<AnalysisLevel>6.0-minimum</AnalysisLevel>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -21,7 +22,7 @@
 		<Authors>Microsoft</Authors>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/microsoft/crazor</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/microsoft/crazor/main/icon.png</PackageIconUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/microsoft/crazor/main/source/libraries/Crazor/icon.png?token=GHSAT0AAAAAABZXDAL4ZXP2NR3BU63OERE4Y2UP4CQ</PackageIconUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
@@ -30,12 +31,11 @@
 		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
 		<RootNamespace>Crazor</RootNamespace>
 		<ContentTargetFolders>content</ContentTargetFolders>
-		<AnalysisLevel>6.0-minimum</AnalysisLevel>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="icon.png" Pack="true" PackagePath="" />
-		<None Include="readme.md" Pack="true" PackagePath="" />
+		<None Include="icon.png" Pack="True" PackagePath="\" />
+		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -52,8 +52,8 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Neleus.DependencyInjection.Extensions" Version="1.0.6" />
 		<PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
