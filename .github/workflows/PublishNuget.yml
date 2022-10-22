@@ -13,16 +13,18 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: ajilraju/actions-date@master #release v0.1
-        with:
-          args: date +%F
+      - name: Test1
+        id: t1
+        uses: Kaven-Universe/github-action-current-date-time@v1.1.0
+      with:
+          format: "YYYYMMDDHHmm"      
       
-      - name: Set version
-        id: version
-        run: echo "NOW=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
+      #- name: Set version
+      #  id: version
+      #  run: echo "NOW=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
 
       - name: test
-        run: echo '${{env.NOW}}'
+        run: echo "The time was ${{ steps.t1.outputs.time }}"
 
       # Checkout the repo
       - uses: actions/checkout@v3
@@ -45,7 +47,7 @@ jobs:
         run: dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
 
       - name: dotnet pack
-        run: dotnet pack -c Debug --no-restore --version-suffix "beta-${{ env.NOW }}" source/libraries/Crazor/Crazor.csproj
+        run: dotnet pack -c Debug --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" source/libraries/Crazor/Crazor.csproj
 
       - name: dotnet push
-        run: dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{ env.NOW }}.nupkg"
+        run: dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
