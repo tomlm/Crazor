@@ -13,19 +13,12 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Test1
+      - name: Get version timestamp
         id: t1
         uses: Kaven-Universe/github-action-current-date-time@v1.1.0
         with:
           format: "YYYYMMDDHHmm"      
       
-      #- name: Set version
-      #  id: version
-      #  run: echo "NOW=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
-
-      - name: test
-        run: echo "The time was ${{ steps.t1.outputs.time }}"
-
       # Checkout the repo
       - uses: actions/checkout@v3
 
