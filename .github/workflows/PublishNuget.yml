@@ -38,8 +38,8 @@ jobs:
         run: |
           dotnet restore source/libraries/Crazor/Crazor.csproj
           dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
-          dotnet pack -c Debug --no-restore --version-suffix ${{steps.version.outputs.NOW}} source/libraries/Crazor/Crazor.csproj
+          dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d%H%M') source/libraries/Crazor/Crazor.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key AzureArtifacts 'source/libraries/Crazor/bin/Debug/Crazor.1.0.0-${{steps.version.outputs.NOW}}.nupkg'
+        run: dotnet nuget push --api-key AzureArtifacts 'source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-$(date +'%Y%m%d%H%M').nupkg'
