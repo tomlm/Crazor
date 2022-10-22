@@ -3,22 +3,22 @@
 @using System.Net
 @using System.Web
 @using Newtonsoft.Json
-@model OpBot.Pages.Cards.CardHostModel
+@model SampleWebApp.Pages.Cards.CardHostModel
 
 <!DOCTYPE html>
 
 <html>
 
 <head>
-    <title>
-        @if (Model.CardApp!.CurrentCard != "Default")
-        {
-            @($"{Model.CardApp.Name}-{@Model.CardApp.CurrentCard}")
-        }
-        else
-        {
-            @Model.CardApp.Name
-        }
+    <title>            
+    @if (Model.CardApp!.CurrentCard != "Default")
+    {
+        @($"{Model.CardApp.Name}-{@Model.CardApp.CurrentCard}")
+    }
+    else
+    {
+        @Model.CardApp.Name 
+    }
     </title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
@@ -401,7 +401,7 @@
                     success: function (invokeResponse, status, xhr) {   // success callback function
                         adaptiveCard.parse(invokeResponse.value);
                         if (invokeResponse.value.url != null && window.location.pathname != invokeResponse.value.url) {
-                            window.history.replaceState({}, null, invokeResponse.value["url"]);
+                            window.history.replaceState({ }, null, invokeResponse.value["url"]);
                             document.title = invokeResponse.value.title;
                         }
                         cardDiv.replaceChild(adaptiveCard.render(), cardDiv.children[0]);

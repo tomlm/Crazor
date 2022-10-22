@@ -1,13 +1,11 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Crazor;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 
-namespace OpBot.Pages.Cards
+namespace SampleWebApp.Pages.Cards
 {
     public class CardHostModel : PageModel
     {
@@ -19,7 +17,7 @@ namespace OpBot.Pages.Cards
         {
             _configuration = configuration;
             _appFactory = cardFactory;
-            BotUri = configuration.GetValue<string>("BotUri");
+            BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardsapps").AbsoluteUri;
         }
 
         public string BotUri { get; set; }
@@ -30,7 +28,7 @@ namespace OpBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public async Task OnGetAsync(string app, string? resourceId, string? screen, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, string? resourceId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {
@@ -61,7 +59,18 @@ namespace OpBot.Pages.Cards
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = resourceId ?? app },
-                Value = new AdaptiveCardInvokeValue() { Action = new AdaptiveCardInvokeAction() { Verb = screen ?? Constants.SHOW_VERB, } }
+                Value = new AdaptiveCardInvokeValue()
+                {
+                    Action = new AdaptiveCardInvokeAction()
+                    {
+                        Verb = Constants.LOADROUTE_VERB,
+                        Data = new LoadRouteModel
+                        {
+                            View = viewName ?? "Default",
+                            Path = path
+                        }
+                    }
+                }
             }, cancellationToken);
 
             // process Action.Execute
