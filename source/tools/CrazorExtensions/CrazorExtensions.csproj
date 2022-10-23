@@ -94,9 +94,16 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
-    <ProjectReference Include="..\Templates\CrazorItemTemplates\CrazorItemTemplates.csproj">
+    <ProjectReference Include="..\Templates\CrazorCardAndModelTemplate\CrazorCardAndModelTemplate.csproj">
       <Project>{5847AA90-9D21-4368-AB1B-59BE96EDC944}</Project>
-      <Name>CrazorItemTemplates</Name>
+      <Name>CrazorCardAndModelTemplate</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Templates\CrazorCardTemplate\CrazorCardTemplate.csproj">
+      <Project>{D882DE79-E704-4823-9910-56EEC16182E6}</Project>
+      <Name>CrazorCardTemplate</Name>
       <VSIXSubPath>ItemTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>

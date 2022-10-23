@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
 	<TemplateData>
-		<Name>AdaptiveCard template and Model (Crazor)</Name>
-		<Description>Adds a crazor cshtml card and model</Description>
-		<Icon>CrazorItemTemplates.ico</Icon>
-		<TemplateID>2036c482-52d4-4841-99c6-03584abd3cd2</TemplateID>
+		<Name>AdaptiveCard template (Crazor)</Name>
+		<Description>Adds a crazor cshtml card</Description>
+		<Icon>CrazorCardTemplate.ico</Icon>
+		<TemplateID>7e5ce020-2dc3-4480-bba0-a7ced6981967</TemplateID>
 		<ProjectType>CSharp</ProjectType>
 		<TemplateGroupID>AspNetCore</TemplateGroupID>
 		<CreateInPlace>true</CreateInPlace>
@@ -19,7 +19,6 @@
 			</Reference>
 		</References>
 		<ProjectItem TargetFileName="$fileinputname$.cshtml" ReplaceParameters="true">Card.cshtml</ProjectItem>
-		<ProjectItem TargetFileName="$fileinputname$Model.cs" ReplaceParameters="true">CardModel.cs</ProjectItem>
 		<CustomParameters>
 			<CustomParameter Name="$InputName$" Value="$fileinputname$"/>
 		</CustomParameters>

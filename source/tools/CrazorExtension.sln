@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCards", "C:\source\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorExtensions", "CrazorExtensions\CrazorExtensions.csproj", "{F5DF8DE0-21D1-46FD-BE99-86E6AC419FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorItemTemplates", "Templates\CrazorItemTemplates\CrazorItemTemplates.csproj", "{5847AA90-9D21-4368-AB1B-59BE96EDC944}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{A873D60B-CEF9-4BCD-A045-39D0C922EC34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorAppTemplate", "templates\CrazorAppTemplate\CrazorAppTemplate.csproj", "{BFE27180-78FA-46F7-B280-0149A4370EEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorCardAndModelTemplate", "Templates\CrazorCardAndModelTemplate\CrazorCardAndModelTemplate.csproj", "{5847AA90-9D21-4368-AB1B-59BE96EDC944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorCardTemplate", "Templates\CrazorCardTemplate\CrazorCardTemplate.csproj", "{D882DE79-E704-4823-9910-56EEC16182E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +39,6 @@ Global
 		{F5DF8DE0-21D1-46FD-BE99-86E6AC419FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5DF8DE0-21D1-46FD-BE99-86E6AC419FF0}.Release|x86.ActiveCfg = Release|x86
 		{F5DF8DE0-21D1-46FD-BE99-86E6AC419FF0}.Release|x86.Build.0 = Release|x86
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|x86.ActiveCfg = Debug|x86
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|x86.Build.0 = Debug|x86
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|x86.ActiveCfg = Release|x86
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|x86.Build.0 = Release|x86
 		{BFE27180-78FA-46F7-B280-0149A4370EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFE27180-78FA-46F7-B280-0149A4370EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE27180-78FA-46F7-B280-0149A4370EEB}.Debug|x86.ActiveCfg = Debug|x86
@@ -53,13 +47,30 @@ Global
 		{BFE27180-78FA-46F7-B280-0149A4370EEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFE27180-78FA-46F7-B280-0149A4370EEB}.Release|x86.ActiveCfg = Release|x86
 		{BFE27180-78FA-46F7-B280-0149A4370EEB}.Release|x86.Build.0 = Release|x86
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|x86.ActiveCfg = Debug|x86
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Debug|x86.Build.0 = Debug|x86
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|x86.ActiveCfg = Release|x86
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944}.Release|x86.Build.0 = Release|x86
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Debug|x86.ActiveCfg = Debug|x86
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Debug|x86.Build.0 = Debug|x86
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Release|x86.ActiveCfg = Release|x86
+		{D882DE79-E704-4823-9910-56EEC16182E6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5847AA90-9D21-4368-AB1B-59BE96EDC944} = {A873D60B-CEF9-4BCD-A045-39D0C922EC34}
 		{BFE27180-78FA-46F7-B280-0149A4370EEB} = {A873D60B-CEF9-4BCD-A045-39D0C922EC34}
+		{5847AA90-9D21-4368-AB1B-59BE96EDC944} = {A873D60B-CEF9-4BCD-A045-39D0C922EC34}
+		{D882DE79-E704-4823-9910-56EEC16182E6} = {A873D60B-CEF9-4BCD-A045-39D0C922EC34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FFA5C14D-3ED6-45A7-8F7C-1D89B077E724}
