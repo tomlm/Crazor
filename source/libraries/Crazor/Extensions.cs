@@ -41,7 +41,7 @@ namespace Crazor
 
             // add Apps
             var cardAppServices = services.AddByName<CardApp>();
-            foreach (var cardAppType in Assembly.GetCallingAssembly().DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp))))
+            foreach (var cardAppType in Assembly.GetCallingAssembly().DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false))
             {
                 services.AddScoped(cardAppType);
                 cardAppServices.Add(cardAppType.Name, cardAppType);
