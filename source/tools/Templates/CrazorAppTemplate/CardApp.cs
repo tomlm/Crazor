@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using AdaptiveCards;
-using Crazor;
-using Crazor.Attributes;
-using Microsoft.Bot.Schema;
+﻿using Crazor;
 
-namespace $rootnamespace$.$InputName$
+namespace $rootnamespace$.Cards.$InputName$
 {
     public class $itemname$ : CardApp
     {

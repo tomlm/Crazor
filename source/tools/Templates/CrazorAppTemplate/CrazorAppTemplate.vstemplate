@@ -10,6 +10,7 @@
 		<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
 		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
 		<CreateInPlace>true</CreateInPlace>
+		<DefaultName>Hello</DefaultName>
 	</TemplateData>
 	<TemplateContent>
 		<References>
@@ -17,9 +18,9 @@
 				<Assembly>System</Assembly>
 			</Reference>
 		</References>
-		<ProjectItem TargetFileName="$fileinputname$\$fileinputname$App.cs" ReplaceParameters="true">CardApp.cs</ProjectItem>
-		<ProjectItem TargetFileName="$fileinputname$\DefaultModel.cs" ReplaceParameters="true">DefaultModel.cs</ProjectItem>
-		<ProjectItem TargetFileName="$fileinputname$\Default.cshtml" ReplaceParameters="true">Default.cshtml</ProjectItem>
+		<ProjectItem TargetFileName="\Cards\$fileinputname$\$fileinputname$App.cs" ReplaceParameters="true">CardApp.cs</ProjectItem>
+		<ProjectItem TargetFileName="\Cards\$fileinputname$\DefaultModel.cs" ReplaceParameters="true">DefaultModel.cs</ProjectItem>
+		<ProjectItem TargetFileName="\Cards\$fileinputname$\Default.cshtml" ReplaceParameters="true">Default.cshtml</ProjectItem>
 		<CustomParameters>
 			<CustomParameter Name="$InputName$" Value="$fileinputname$"/>
 		</CustomParameters>
