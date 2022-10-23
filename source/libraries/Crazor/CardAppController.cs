@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
 
 namespace Crazor.Controllers
 {
@@ -11,6 +13,8 @@ namespace Crazor.Controllers
     [ApiController]
     public class CardAppController : ControllerBase
     {
+        private static HttpClient _httpClient = new HttpClient();
+
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
 
@@ -26,6 +30,21 @@ namespace Crazor.Controllers
             // Delegate the processing of the HTTP POST to the adapter.
             // The adapter will invoke the bot.
             await Adapter.ProcessAsync(Request, Response, Bot);
+        }
+
+        public static async Task<string> GetTokenAsync(IConfiguration configuration)
+        {
+            string appId = configuration.GetValue<string>("MicrosoftAppId");
+            string password = configuration.GetValue<string>("MicrosoftAppPassword");
+            if (appId != null && password != null)
+            {
+                var credentials = new MicrosoftAppCredentials(appId, password, _httpClient, null, /*oAuthScope*/appId);
+                return await credentials.GetTokenAsync();
+            }
+            else
+            {
+                return String.Empty;
+            }
         }
     }
 }

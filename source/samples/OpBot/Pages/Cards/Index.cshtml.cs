@@ -6,6 +6,7 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
+using Crazor.Controllers;
 
 namespace OpBot.Pages.Cards
 {
@@ -36,17 +37,8 @@ namespace OpBot.Pages.Cards
             {
                 app += "App";
             }
-            string appId = _configuration.GetValue<string>("MicrosoftAppId");
-            string password = _configuration.GetValue<string>("MicrosoftAppPassword");
-            if (appId != null && password != null)
-            {
-                var credentials = new MicrosoftAppCredentials(appId, password, _httpClient, null, /*oAuthScope*/appId);
-                this.Token = await credentials.GetTokenAsync();
-            }
-            else
-            {
-                this.Token = String.Empty;
-            }
+
+            this.Token = await CardAppController.GetTokenAsync(_configuration);
 
             this.CardApp = _appFactory.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
