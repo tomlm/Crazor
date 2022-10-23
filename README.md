@@ -268,7 +268,7 @@ Configuration needs following keys
 * **MicrosoftAppId** - The appid for your bot registration id
 * **MicrosoftAppPassword** - The client secret for your bot registration (from Active Directory)
 * **AzureStorage** - The connection string for an Azure Storage account to use.
-* **BotUri** - The full uri end point for your registration **https://{YOURSERVICENAME}.azurewebsites.net/api/cardapps** NOTE: **/api/cardapps**
+* **HostUri** - The full uri web server  **https://{YOURSERVICENAME}.azurewebsites.net**
 
 > NOTE: For local development I set BotUri appsettings.json to localhost:xxxx/api/cardapps, and in portal I have it configured with full deployed url
 
