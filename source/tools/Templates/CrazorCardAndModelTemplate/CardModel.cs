@@ -2,6 +2,6 @@
 {
     public class $itemname$
     {
-        public string Title { get; set; } = "$Input.Name";
+        public string Title { get; set; } = "$InputName$";
     }
 }
