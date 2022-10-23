@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 using static Microsoft.VisualStudio.Threading.AsyncReaderWriterLock;
 using Task = System.Threading.Tasks.Task;
 
-namespace AdaptiveCard2Xml
+namespace CrazorExtensions
 {
     /// <summary>
     /// Command handler

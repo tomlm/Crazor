@@ -22,7 +22,7 @@
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidAdaptiveCard2XmlPackage">
+  <Commands package="guidCrazorExtensionsPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -36,7 +36,7 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidAdaptiveCard2XmlPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+      <Group guid="guidCrazorExtensionsPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
     </Groups>
@@ -52,8 +52,8 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidAdaptiveCard2XmlPackageCmdSet" id="PasteAdaptiveCardAsXmlId" priority="0x0100" type="Button">
-        <Parent guid="guidAdaptiveCard2XmlPackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidCrazorExtensionsPackageCmdSet" id="PasteAdaptiveCardAsXmlId" priority="0x0100" type="Button">
+        <Parent guid="guidCrazorExtensionsPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>Paste AdaptiveCard JSON As XML</ButtonText>
@@ -74,10 +74,10 @@
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidAdaptiveCard2XmlPackage" value="{d9accd73-34ce-4d7d-ba3e-a9b01521b8ae}" />
+    <GuidSymbol name="guidCrazorExtensionsPackage" value="{d9accd73-34ce-4d7d-ba3e-a9b01521b8ae}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidAdaptiveCard2XmlPackageCmdSet" value="{9a18b675-be1d-4e5a-87c3-28c84b89225d}">
+    <GuidSymbol name="guidCrazorExtensionsPackageCmdSet" value="{9a18b675-be1d-4e5a-87c3-28c84b89225d}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="PasteAdaptiveCardAsXmlId" value="0x0100" />
     </GuidSymbol>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+	<TemplateData>
+		<Name>AdaptiveCard App (Crazor)</Name>
+		<Description>Create a new card app folder with a new CardApp and default card view for a folder.</Description>
+		<Icon>CrazorAppTemplate.ico</Icon>
+		<TemplateID>50d273a5-7c81-4143-9ff3-594118534f5a</TemplateID>
+		<ProjectType>CSharp</ProjectType>
+		<TemplateGroupID>AspNetCore</TemplateGroupID>
+		<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+		<DefaultName>Example</DefaultName>
+		<CreateInPlace>true</CreateInPlace>
+	</TemplateData>
+	<TemplateContent>
+		<References>
+			<Reference>
+				<Assembly>System</Assembly>
+			</Reference>
+		</References>
+		<ProjectItem TargetFileName="$fileinputname$\$fileinputname$App.cs" ReplaceParameters="true">CardApp.cs</ProjectItem>
+		<ProjectItem TargetFileName="$fileinputname$\DefaultModel.cs" ReplaceParameters="true">DefaultModel.cs</ProjectItem>
+		<ProjectItem TargetFileName="$fileinputname$\Default.cshtml" ReplaceParameters="true">Default.cshtml</ProjectItem>
+		<CustomParameters>
+			<CustomParameter Name="$InputName$" Value="$fileinputname$"/>
+		</CustomParameters>
+	</TemplateContent>
+</VSTemplate>
