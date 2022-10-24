@@ -3,7 +3,7 @@
 @using System.Net
 @using System.Web
 @using Newtonsoft.Json
-@model OpBot.Pages.Cards.CardHostModel
+@model PhysOpBot.Pages.Cards.CardHostModel
 
 <!DOCTYPE html>
 
@@ -38,7 +38,11 @@
     </div>
     <br />
     <br />
+    
 
+    <label for="dvToken">Dataverse Token</label>
+    <input type="text" id="dvToken"  />
+    
     <script type="text/javascript">
         function getCookie(cookieName) {
             var name = cookieName + "=";
@@ -390,9 +394,14 @@
                         value: invokeValue
                     }, null, 2),
                     beforeSend: function (xhr) {
-                        var token = "@Model.Token";
-                        if (token.length > 0)
-                            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                        //var token = "@Model.Token";
+                        //if (token.length > 0)
+                        //    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+
+                        var dvToken = tryGetDvToken()
+                        if (dvToken && dvToken.length > 0)
+                            xhr.setRequestHeader('X-DV-Token', dvToken);
+
                     },
                     error: function (invokeResponse, status, xhr) {
                         $("#cardDiv").unbind('mouseenter mouseleave');
@@ -411,11 +420,24 @@
                 });
             });
 
-        const tryGetToken = () => {
-            const input = document.getElementById('token');
-            const token = input.value.trim();
-            return token;
+        const tryGetDvToken = () => {
+            const token = localStorage.getItem("dvToken");
+            if(token) {
+                return token;
+            }
+            //const input = document.getElementById('dvToken');
+            //const token = input.value.trim();
+            //return token;
         }
+
+        let dvTokenInput = document.getElementById("dvToken");
+        dvTokenInput.addEventListener("change", () => {
+          // And save the results into the session storage object
+            localStorage.setItem("dvToken", dvTokenInput.value);
+            invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
+        });
+
+        dvTokenInput.value = localStorage.getItem("dvToken");
 
         adaptiveCard.onExecuteAction = function (actionIn) {
             var action = actionIn.toJSON();
@@ -431,7 +453,9 @@
 
         };
         adaptiveCard.parse(card);
-        cardDiv.appendChild(adaptiveCard.render());
+        //cardDiv.appendChild(adaptiveCard.render());
+        cardDiv.appendChild(document.createElement("div"));
+        invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
 
     </script>
 </body>

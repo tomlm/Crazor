@@ -1,0 +1,30 @@
+﻿@using Crazor
+@using CrazorDemoBot.Cards.Dice
+@inherits CardView<DiceApp>
+
+<Card Version="1.6">
+    <TextBlock Style="Heading">Dice roller</TextBlock>
+    @if (App.Dice?.Any() == true)
+    {
+        <ImageSet>
+        @foreach(var die in App.Dice)
+        {
+            <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium"/>
+        }
+        </ImageSet>
+    }
+    <Action.Execute Verb="RollDice" Title="Roll Dice"/>
+</Card>
+
+
+@functions {
+    public void OnInitialize()
+    {
+        if (!App.NumberDice.HasValue)
+        {
+            ShowCard("Settings");
+        }
+    }
+
+    public void RollDice() => App.RollDice();
+}

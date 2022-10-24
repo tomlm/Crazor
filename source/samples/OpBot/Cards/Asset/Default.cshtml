@@ -1,0 +1,58 @@
+﻿@using OpBot.Cards.Asset
+@using OpBot.Cards.WorkOrder
+@inherits CardView<AssetApp>
+
+<Card Version="1.5">
+    <Version Major="1" Minor="4" />
+    <TextBlock Size="Large" Weight="Bolder">Connected Asset</TextBlock>
+    <FactSet>
+        <Fact Title="Name" Value="Hydraulic Power Unit #3"></Fact>
+        <Fact Title="Location" Value="Building 26"></Fact>
+        <Fact Title="SLA" Value="24 hours"></Fact>
+    </FactSet>
+    <ActionSet>
+        <Action.ShowCard Title="Sensors">
+            <Card>
+                <Image Url="https://hackathon2022-cards.azurewebsites.net/img/iot-chart.png" />
+            </Card>
+        </Action.ShowCard>
+        <Action.ShowCard Title="Service History">
+            <Card>
+                <TextBlock>3 recent work orders</TextBlock>
+               
+            </Card>
+        </Action.ShowCard>
+        <Action.ShowCard Title="Experts">
+            <Card>
+                <ColumnSet>
+                    @foreach(var expert in Experts) {
+                    <Column Width="Auto">
+                        <Image Width="20px" Url="@expert.Photo" HorizontalAlignment="Center" />
+                        <TextBlock Wrap="true" Size="Small" HorizontalAlignment="Center">@expert.Name</TextBlock>
+                    </Column>
+                    }
+                </ColumnSet>
+                <ActionSet>
+                    <Action.OpenUrl Title="Start Group Chat" Url="https://adaptivecards.io" />
+                </ActionSet>
+            </Card>
+        </Action.ShowCard>
+    </ActionSet>
+    
+</Card>
+
+@functions {
+   
+
+    public void OnInitialize()
+    {
+        Experts.AddRange(Person.GetExperts());
+    }
+
+    public List<Person> Experts { get; set; } = new List<Person>();
+
+    public void ShowHistory() {
+        ShowCard("History", this);
+    }
+}
+

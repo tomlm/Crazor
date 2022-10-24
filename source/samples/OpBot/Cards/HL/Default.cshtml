@@ -1,0 +1,170 @@
+﻿@using OpBot.Cards.HL
+@using OpBot.Cards.WorkOrder
+@inherits CardView<HLApp>
+
+<Card Version="1.5">
+    <Version Major="1" Minor="4" />
+
+    <Container>
+        <ColumnSet Style="Emphasis">
+            <Column>
+                <TextBlock Size="Large">@App.WorkOrder.Name</TextBlock>
+                <TextBlock Size="Medium" Weight="Bolder" Spacing="None">@App.WorkOrder.SystemStatus.Name</TextBlock>
+
+            </Column>
+            <Column VerticalContentAlignment="Center">
+                @if (App.WorkOrder.AssignedTo != null)
+                {
+
+                    <ColumnSet Spacing="None">
+                        <Column Width="Auto" VerticalContentAlignment="Center">
+                            <Image Size="Small" Url="@App.WorkOrder.AssignedTo.Photo" Style="Person" />
+                        </Column>
+                        <Column VerticalContentAlignment="Center">
+                            <TextBlock>@App.WorkOrder.AssignedTo.Name</TextBlock>
+                            <TextBlock Spacing="None" Size="Small" IsSubtle="true">@App.WorkOrder.AssignedTo.Email</TextBlock>
+                        </Column>
+                    </ColumnSet>
+
+                }
+                else
+                {
+                    <TextBlock Size="Large" Weight="Bolder">Assigned to</TextBlock>
+                    <TextBlock Size="Medium" Color="Attention" Weight="Bolder" Spacing="None">Not assigned</TextBlock>
+                }
+            </Column>
+        </ColumnSet>
+    </Container>
+
+    <Container>
+        <FactSet>
+            <Fact Title="Work Type:" Value="@App.WorkOrder.WorkOrderType.Name" />
+            <Fact Title="Asset:" Value="@App.WorkOrder.CustomerAsset.Name" />
+            <Fact Title="Summary:" Value="@App.WorkOrder.Summary" />
+            @if (App.WorkOrder.PromisedBy != null)
+            {
+                <Fact Title="Promised:" Value="@App.WorkOrder.PromisedBy.Value.ToString("g")" />
+            }
+            @if (App.WorkOrder.StartTime != null)
+            {
+                <Fact Title="Started:" Value="@App.WorkOrder.StartTime.Value.ToString("g")" />
+            }
+
+            @if (App.WorkOrder.CompleteTime != null)
+            {
+                <Fact Title="Completed:" Value="@App.WorkOrder.CompleteTime.Value.ToString("g")" />
+            }
+        </FactSet>
+        <ColumnSet>
+            @if (App.WorkOrder.StartTime == null)
+            {
+                <Column Width="Stretch">
+                    <ActionSet>
+                        @if (App.WorkOrder.CompleteTime == null)
+                        {
+                            <Action.Execute Title="Start Work" Verb="StartWork" Style="Positive" />
+                        }
+                    </ActionSet>
+                </Column>
+            }
+            @if (App.WorkOrder.StartTime != null)
+            {
+                @if (App.WorkOrder.CompleteTime == null)
+                {
+                    <Column Width="Stretch">
+                        <ActionSet>
+                            <Action.OpenUrl Title="View Guide" Url="ms-guides://orgaf2f7711/g/OckDlKyqPEyXAous2Y3mSQ" />
+                        </ActionSet>
+                    </Column>
+                    <Column Width="Stretch">
+                        <ActionSet>
+                            <Action.Execute Title="Complete Work" Verb="CompleteWork" Style="Positive" />
+                        </ActionSet>
+                    </Column>
+                    <Column Width="Stretch">
+                        <ActionSet>
+                            <Action.Execute Title="Cancel Work" Verb="CancelWork" Style="Destructive" />
+                        </ActionSet>
+                    </Column>
+                }
+                else
+                {
+                    <Column Width="Stretch">
+                        <ActionSet>
+                            <Action.Execute Title="Re-open Work" Verb="StartWork" />
+                        </ActionSet>
+                    </Column>
+                }
+            }
+        </ColumnSet>
+    </Container>
+
+    @if (App.WorkOrder.StartTime != null && App.WorkOrder.CompleteTime == null)
+    {
+        <Container Separator="true" Spacing="Medium">
+            <TextBlock Wrap="true" Size="Medium" Weight="Bolder">Products to use</TextBlock>
+            <Input.ChoiceSet Id="send_supplies_used" Spacing="Medium" Style="Expanded" IsMultiSelect="true">
+                <Choice Title="1 Gallon Hydraulic Fluid" Value="1" />
+                <Choice Title="13x Absorbent Pads" Value="2" />
+                <Choice Title="1x O-Ring 030-20 Seal Viton" Value="3" />
+                <Choice Title="1x PRV 100-1000PSI JIC Connector" Value="4" />
+            </Input.ChoiceSet>
+        </Container>
+    }
+
+    @if (App.WorkOrder.CompleteTime == null)
+    {
+        <Container Separator="true" Spacing="Medium">
+            <TextBlock Wrap="true" Size="Medium" Weight="Bolder">Experts</TextBlock>
+            <ColumnSet Spacing="Medium">
+                @foreach (var expert in Person.GetExperts())
+                {
+                    <Column Width="Auto">
+                        <Image Size="Medium" Url="@expert.Photo" HorizontalAlignment="Center" Style="Person" />
+                        <TextBlock Wrap="true" Size="Small" HorizontalAlignment="Center">@expert.Name</TextBlock>
+                    </Column>
+                }
+            </ColumnSet>
+        </Container>
+    }
+</Card>
+
+@functions {
+
+    public List<string> WorkOrderStatuses { get; set; }
+
+    public void StartWork() {
+        App.WorkOrder.SystemStatus = new SystemStatus("In Progress");
+        App.WorkOrder.StartTime = DateTime.UtcNow;
+        App.WorkOrder.CompleteTime = null;
+    }
+
+    public void CompleteWork()
+    {
+        App.WorkOrder.SystemStatus = new SystemStatus("Completed");
+        App.WorkOrder.CompleteTime = DateTime.UtcNow;
+    }
+
+    public void CancelWork()
+    {
+        App.WorkOrder.StartTime = null;
+        App.WorkOrder.CompleteTime = null;
+        App.WorkOrder.SystemStatus = new SystemStatus("Canceled");
+    }
+
+    public void OnInitialize()
+    {
+        if(App.WorkOrder.PromisedBy == null)
+            App.WorkOrder.PromisedBy = DateTime.UtcNow.AddHours(24);
+
+        WorkOrderStatuses = new List<string> {
+            "Unscheduled",
+            "Scheduled",
+            "In Progress",
+            "Completed",
+            "Posted",
+            "Canceled"
+        };
+    }
+
+}

@@ -1,0 +1,15 @@
+﻿@using System.Text;
+@using System.Net.Http;
+@using Newtonsoft.Json;
+@using OpBot.Cards.WorkOrder
+
+@inherits CardView<WhoAmIApp>
+
+<Card Version="1.5">
+    @if (App.WhoAmI != null) {
+        <TextBlock>Hello, @App.WhoAmI.UserId</TextBlock>
+    } else {
+        <TextBlock Wrap="true" Size="Medium">Unable to authenticate with Dataverse.</TextBlock>
+        <TextBlock Wrap="true">Did you include the X-DV-Token header and make sure it isn't expired?</TextBlock>
+    }
+</Card>

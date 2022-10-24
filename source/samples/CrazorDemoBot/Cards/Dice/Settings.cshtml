@@ -1,0 +1,24 @@
+﻿@using Crazor
+@using CrazorDemoBot.Cards.Dice
+@inherits CardView<DiceApp>
+
+<Card Version="1.6">
+    <Input.Number Binding="App.NumberDice" />
+
+    @if (App.NumberDice.HasValue)
+    {
+        <Action.Cancel />
+    }
+    <Action.OK />
+</Card>
+
+@functions {
+    public void OnOK()
+    {
+        if (this.App.NumberDice.HasValue)
+        {
+            this.App.RollDice();
+            CloseCard();
+        }
+    }
+}

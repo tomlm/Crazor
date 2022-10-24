@@ -1,0 +1,18 @@
+﻿@using CrazorDemoBot.Cards.ProductCatalog
+@inherits CardView<ProductCatalogApp,ProductCatalogItem>
+
+<Card Version="1.5">
+
+    <TextBlock Size="ExtraLarge" Weight="Bolder">@Model.Name</TextBlock>
+
+    <TextBlock Size="Medium" Id="DescriptionHeading" Label="Description" />
+    <TextBlock Id="Description" Label="DescriptionLabel">@Model.Description</TextBlock>
+
+    <TextBlock Size="Medium" Id="PriceHeading" Label="Price" />
+    <TextBlock Id="Price" Label="PriceLabel">@Model.Price</TextBlock>
+
+    <Image Url="@Model.PictureUri" />
+
+    <Action.Cancel Title="Go Back" />
+</Card>
+

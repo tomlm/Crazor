@@ -1,0 +1,13 @@
+﻿@using CrazorDemoBot.TagHelpers.Person
+@model PersonTagHelper
+@addTagHelper *, Crazor
+
+<ColumnSet Id="@Model.Id">
+    <Column Width="Auto" HorizontalAlignment="Center">
+        <Image Style="Person" Url="@Model.Url" Size="@Model.Size" />
+        <TextBlock Weight="Bolder" Wrap="true">@Model.Name</TextBlock>
+    </Column>
+    <Column Width="stretch" VerticalContentAlignment="Center" >
+        <TextBlock Wrap="true" HorizontalAlignment="Center">@Model.Text</TextBlock>
+    </Column>
+</ColumnSet>

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.14",
+  "id": "aa584ff7-bd92-4903-b702-9a79c1f70be1",
+  "packageName": "com.package.name",
+  "name": {
+    "short": "CrazorCardBot",
+    "full": "CrazorCardBot - Demo Crazor Cards"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "mpnId": "",
+    "websiteUrl": "https://crazordemobot.azurewebsites.net/",
+    "privacyUrl": "https://crazordemobot.azurewebsites.net/",
+    "termsOfUseUrl": "https://crazordemobot.azurewebsites.net/"
+  },
+  "description": {
+    "short": "CrazorCardBot",
+    "full": "CrazorCardBot - Demo Crazor Cards"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
+      "commands": [
+        {
+          "id": "exampleCmd3",
+          "title": "Example Command 3",
+          "type": "action",
+          "context": [
+            "compose",
+            "commandBox",
+            "message"
+          ],
+          "description": "Command Description; e.g., Add a customer",
+          "fetchTask": false,
+          "taskInfo": {
+            "title": "Initial dialog title"
+          }
+        }
+      ],
+      "canUpdateConfiguration": true,
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "crazordemobot.azurewebsites.net"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validDomains": [
+    "crazordemobot.azurewebsites.net"
+  ]
+}

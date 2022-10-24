@@ -1,0 +1,109 @@
+﻿@using System.Text;
+@using System.Net.Http;
+@using Newtonsoft.Json;
+@using OpBot.Cards.WorkOrder
+
+@inherits CardView<WorkOrderApp, WorkOrder>
+
+<Card Version="1.5">
+    <Version Major="1" Minor="4" />
+
+    <ColumnSet Style="Emphasis">
+        <Column>
+            <TextBlock Size="Large" Weight="Bolder">@Model.Name</TextBlock>
+            <TextBlock Size="Medium" Weight="Bolder" Color="@Model.GetStatusColor" Spacing="None">@Model.SystemStatus.Name</TextBlock>
+        </Column>
+        <Column>
+        @if (Model.AssignedTo != null)
+        {
+            
+                <ColumnSet Spacing="None">
+                    <Column Width="Auto" VerticalContentAlignment="Center">
+                        <Image Size="Small" Url="@Model.AssignedTo.Photo" />
+                    </Column>
+                    <Column VerticalContentAlignment="Center">
+                        <TextBlock Size="Large">@Model.AssignedTo.Name</TextBlock>
+                        <TextBlock Spacing="None" Size="Medium" IsSubtle="true">@Model.AssignedTo.Email</TextBlock>
+                    </Column>
+                </ColumnSet>
+            
+        } else {
+            <TextBlock Size="Large" Weight="Bolder">Assigned to</TextBlock>
+            <TextBlock Size="Medium" Color="Attention" Weight="Bolder" Spacing="None">Not assigned</TextBlock>
+        }
+        </Column>
+    </ColumnSet>
+    <FactSet>
+        <Fact Title="Work Order Type:" Value="@Model.WorkOrderType.Name" />
+        <Fact Title="Asset:" Value="@Model.CustomerAsset.Name" />
+        <Fact Title="Summary:" Value="@Model.Summary" />
+        @if (Model.PromisedBy != null)
+        {
+            <Fact Title="Promised:" Value="@Model.PromisedBy.Value.ToString("g")" />
+        }
+        @if (Model.StartTime != null)
+        {
+            <Fact Title="Started:" Value="@Model.StartTime.Value.ToString("g")" />
+        }
+        else
+        {
+            <Fact Title="Started:" Value="Not started" />
+        }
+
+        @if (Model.CompleteTime != null)
+        {
+            <Fact Title="Completed:" Value="@Model.CompleteTime.Value.ToString("g")" />
+        }
+        else
+        {
+            <Fact Title="Completed:" Value="Not complete" />
+        }
+    </FactSet>
+
+    <ActionSet>
+        <Action.ShowCard Title="Assign to">
+            <Card>
+                <Input.ChoiceSet Id="AssignedToUserId" Value="@AssignedToUserId" Label="Assign to">
+                    @foreach(var person in Person.GetTechnicians()) {
+                        <Choice Title="@person.Name" Value="@person.Email" />
+                    }
+@*                    <Choices.Data Dataset="graph.microsoft.com/users?scope=currentContext" />*@
+                </Input.ChoiceSet>
+                <ActionSet>
+                    <Action.Execute Verb="AssignTo" Title="Assign to Selected" />
+                    <Action.Execute Verb="AssignTo" Title="Assign to Self">
+                        {
+                            "assignToSelf": "true"
+                        }
+                    </Action.Execute>
+                </ActionSet>
+            </Card>
+        </Action.ShowCard>
+        <Action.ShowCard Title="Sensors">
+            <Card>
+                <Image Url="https://hackathon2022-cards.azurewebsites.net/img/iot-chart.png" />
+            </Card>
+        </Action.ShowCard>
+        <Action.OpenUrl Title="Open" Url="https://dynamics.microsoft.com/en-us/field-service/overview/" />
+    </ActionSet>
+</Card>
+
+@functions {
+
+    [BindProperty]
+    public string AssignedToUserId { get; set; }
+
+    public void AssignTo(bool? assignToSelf) 
+    {
+        Model.SystemStatus = new SystemStatus("Scheduled");
+
+        if (assignToSelf == true)
+        {
+            Model.AssignTo(Person.DEMO_USER);
+        }
+        else 
+        {
+            Model.AssignTo(AssignedToUserId);
+        }
+    }
+}

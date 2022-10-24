@@ -1,0 +1,24 @@
+﻿@using System.Text;
+@using System.Net.Http;
+@using Newtonsoft.Json;
+@using OpBot.Cards.WorkOrder
+
+@inherits CardView<WorkOrderApp>
+
+<Card Version="1.5">
+    <Version Major="1" Minor="4" />
+
+    <Action.Execute Verb="OnCreate" Title="Create Work Order"></Action.Execute>
+</Card>
+
+@functions {
+
+    public void OnCreate() {
+
+        ShowCard("QuickCreate", new QuickCreateModel 
+        { 
+            //IsEdit = false, 
+            //WorkOrder = new WorkOrder() 
+        });
+    }
+}

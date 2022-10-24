@@ -1,0 +1,19 @@
+﻿@using OpBot.Cards.Planner
+@inherits CardView<PlannerApp>
+
+<Card Version="1.5">
+    <Version Major="1" Minor="4" />
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Hello world!</TextBlock>
+    <Action.Execute Title="Create" Verb="Create"/>
+</Card>
+
+@functions {
+
+    public void OnCreate() {
+        ShowCard("Edit", new EditModel {
+            IsEdit = false
+        });
+    }
+
+}
+

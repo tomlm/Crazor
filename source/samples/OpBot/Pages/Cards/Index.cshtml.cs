@@ -1,18 +1,14 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Crazor;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
 
-namespace OpBot.Pages.Cards
+namespace PhysOpBot.Pages.Cards
 {
     public class CardHostModel : PageModel
     {
-        private static HttpClient _httpClient = new HttpClient();
         private IServiceByNameFactory<CardApp> _appFactory;
         private IConfiguration _configuration;
 
@@ -60,7 +56,7 @@ namespace OpBot.Pages.Cards
                         Verb = Constants.LOADROUTE_VERB,
                         Data = new LoadRouteModel
                         {
-                            View  = viewName ?? "Default",
+                            View = viewName ?? "Default",
                             Path = path
                         }
                     }

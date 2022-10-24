@@ -1,0 +1,34 @@
+﻿@using CrazorDemoBot.Cards.Addresses
+@inherits CardView<AddressesApp, Address>
+
+@attribute [Route("{addressId}")]
+
+<Card Version="1.5">
+    <TextBlock Class="H1">Edit Address</TextBlock>
+
+    <Input.Text Binding="Model.Street" />
+    <Input.Text Binding="Model.City" />
+    <Input.ChoiceSet Binding="Model.State" />
+    <Input.Text Binding="Model.PostalCode" />
+    <Input.ChoiceSet Binding="Model.Country" />
+
+    <Action.Cancel />
+    <Action.OK />
+</Card>
+
+@functions {
+    // add the address we are editing to the route.
+    public override string GetRoute() => $"{this.Model.Id}";
+
+    // look up the address when this route is loaded in a new browser.
+    public void OnLoadRoute(string addressId)
+    {
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)!;
+
+        if (this.Model == null)
+        {
+            CancelCard($"Address was not found.");
+        }
+    }
+}
+

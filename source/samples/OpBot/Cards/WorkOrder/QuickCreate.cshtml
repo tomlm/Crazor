@@ -1,0 +1,145 @@
+﻿@using OpBot
+@using System.Text;
+@using System.Net.Http;
+@using Newtonsoft.Json;
+@using OpBot.Cards.WorkOrder
+
+@inherits CardView<WorkOrderApp, QuickCreateModel>
+
+<Card Version="1.5">
+    <Version Major="1" Minor="4" />
+
+    <TextBlock Size="Large" Weight="Bolder">Create Work Order</TextBlock>
+
+    <ColumnSet Style="Accent">
+        <Column Width="Auto" VerticalContentAlignment="Center">
+            <TextBlock>💡</TextBlock>
+        </Column>
+        <Column>
+            <TextBlock Wrap="true" Size="Small">Some work order details have been added automatically.</TextBlock>
+        </Column>
+    </ColumnSet>
+
+    <TextBlock Size="Default" Weight="Bolder">Customer Details</TextBlock>
+
+    <Input.ChoiceSet Separator="true" Label="Service Account" Id="ServiceAccount" Value="@ServiceAccount">
+        <Choice Title="Adventure Works (sample)" Value="Adventure Works (sample)"></Choice>
+        <Choice Title="Alpine Ski House (sample)" Value="Alpine Ski House (sample)"></Choice>
+    </Input.ChoiceSet>
+    <FieldErrors Id="ServiceAccount" Errors="@ValidationErrors" />
+   
+
+    <TextBlock Size="Default" Weight="Bolder" Spacing="Large">Incident Details</TextBlock>
+
+    <Input.ChoiceSet Separator="true" Label="Work Order Type" Id="WorkOrderType" Value="@WorkOrderType">
+        <Choice Title="Installation" Value="Installation"></Choice>
+        <Choice Title="Diagnose and Repair" Value="Diagnose and Repair"></Choice>
+        <Choice Title="Scheduled Maintenance" Value="Scheduled Maintenace"></Choice>
+        <Choice Title="Quote" Value="Quote"></Choice>
+    </Input.ChoiceSet>
+
+    <Input.ChoiceSet Label="Customer Asset" Id="CustomerAsset" Value="@CustomerAsset">
+        <Choice Title="Hydraulic Power Unit #1" Value="Hydraulic Power Unit #1"></Choice>
+        <Choice Title="Hydraulic Power Unit #2" Value="Hydraulic Power Unit #2"></Choice>
+        <Choice Title="Hydraulic Power Unit #3" Value="Hydraulic Power Unit #3"></Choice>
+        <Choice Title="Hydraulic Power Unit #4" Value="Hydraulic Power Unit #4"></Choice>
+        <Choice Title="Hydraulic Power Unit #5" Value="Hydraulic Power Unit #5"></Choice>
+    </Input.ChoiceSet>
+
+    <Input.ChoiceSet Label="IoT Alert" Id="IoTAlert" Value="@IoTAlert">
+        <Choice Title="Test" Value="Test"></Choice>
+    </Input.ChoiceSet>
+
+    <Input.Text Label="Work Order Summary" IsMultiline="true" Id="@nameof(WorkOrderSummary)" Value="@WorkOrderSummary" />
+    <FieldErrors Id="WorkOrderSummary" Errors="@ValidationErrors" />
+
+    <Action.Execute Verb="OnSave" Mode="Primary" Title="Create Work Order"></Action.Execute>
+</Card>
+
+@functions {
+    [BindProperty]
+    [Required]
+    public string? ServiceAccount { get; set; } = "Alpine Ski House (sample)";
+
+    [BindProperty]
+    [Required]
+    public string? WorkOrderSummary { get; set; }
+
+    [BindProperty]
+    [Required]
+    public string? WorkOrderType { get; set; } = "Diagnose and Repair";
+
+
+    [BindProperty]
+    public string? CustomerAsset { get; set; } = "Hydraulic Power Unit #3";
+
+
+    [BindProperty]
+    public string? IoTAlert { get; set; }
+
+    public async Task OnSave()
+    {
+        if (!IsModelValid)
+            return;
+
+        if (DataverseCardApp.TryGetHeaders(App.Services, out var uri, out var token))
+        {
+            async Task<T> SendAsync<T>(HttpMethod method, string path, object? body)
+                => (await DataverseCardApp.SendAsync<T>(method, path, uri, token, body));
+
+            async Task<T> GetAsync<T>(string path)
+                => (await SendAsync<OData<T>>(HttpMethod.Get, path, null)).Value;
+
+            async Task<Uri> PostAsync(string path, object body)
+                => (await SendAsync<Uri>(HttpMethod.Post, path, body));
+
+            async Task<IEnumerable<T>> EnumerableAsync<T>(string path)
+                => (await GetAsync<IEnumerable<T>>(path));
+
+            async Task<T> SingleAsync<T>(string path)
+                => (await EnumerableAsync<T>(path)).Single();
+
+            async Task<T?> SingleOrDefaultAsync<T>(string path)
+                => (await EnumerableAsync<T>(path)).SingleOrDefault();
+
+            async Task<T?> FirstOrDefaultAsync<T>(string path)
+                => (await EnumerableAsync<T>(path)).FirstOrDefault();
+
+            var priceLevel = await SingleAsync<PriceLevel>("pricelevels?$top=1");
+
+            Uri accountUri;
+
+            var account = await FirstOrDefaultAsync<Account>($"accounts?$filter=name eq '{ServiceAccount}'");
+
+            if (account == null)
+            {
+                account = new Account
+                    {
+                        Name = this.ServiceAccount,
+                        DefaultPriceLevelId = new Uri(uri, $"pricelevels/{priceLevel.PriceLevelId}"),
+                    };
+
+                accountUri = await PostAsync("accounts", account);
+            }
+            else
+            {
+                accountUri = new Uri(uri, $"accounts/{account.AccountId}");
+            }
+
+
+
+            var workOrder = new WorkOrder { Summary = WorkOrderSummary, ServiceAccount = accountUri };
+            //workOrder.WorkOrderType = await FirstOrDefaultAsync<WorkOrderType>($"msdyn_workordertypes?$filter=msdyn_name eq '{WorkOrderType}'");
+
+            var workOrderUri = await PostAsync("msdyn_workorders", workOrder);
+            var createdWorkOrder = await GetAsync<WorkOrder>(workOrderUri.ToString());
+
+        }
+        else
+        {
+            var createdWorkOrder = WorkOrder.Dummy;
+            ShowCard("Details", createdWorkOrder);
+        }
+
+    }
+}

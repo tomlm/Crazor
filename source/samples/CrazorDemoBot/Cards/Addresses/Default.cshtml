@@ -1,0 +1,99 @@
+﻿@using CrazorDemoBot.Cards.Addresses
+@inherits CardView<AddressesApp>
+
+<Card Version="1.5">
+    <TextBlock Size="ExtraLarge">Addresses</TextBlock>
+    @if (App.Addresses.Any())
+    {
+        @foreach (var address in App.Addresses)
+        {
+            <Container Separator="true">
+                <ColumnSet Padding="none">
+                    <Column Width="stretch">
+                        <TextBlock>@address.Street</TextBlock>
+                        <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="@UrlHelper.Content("~/images/EditIcon.png")" Size="Small">
+                            <SelectAction>
+                                <Action.Execute Tooltip="Edit Address" Verb="OnEdit">
+                                    { "addressId":"@address.Id" }
+                                </Action.Execute>
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="@UrlHelper.Content("~/images/DeleteIcon.png")" Size="Small">
+                            <SelectAction>
+                                <Action.Execute Tooltip="Delete Address" Verb="OnDelete">
+                                    { "addressId":"@address.Id" }
+                                </Action.Execute>
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                </ColumnSet>
+            </Container>
+        }
+    }
+    else
+    {
+        <TextBlock>No addresses.</TextBlock>
+    }
+    <Action.Execute Title="Add Address" Verb="OnAdd" />
+</Card>
+
+@functions {
+
+    public void OnAdd()
+    {
+        ShowCard("Add");
+    }
+
+    public void OnEdit(string addressId)
+    {
+        var address = App.Addresses.SingleOrDefault(a => a.Id == addressId);
+        if (address != null)
+        {
+            ShowCard("Edit", address);
+        }
+    }
+
+    public void OnDelete(string addressId)
+    {
+        App.Addresses = App.Addresses.Where(a => a.Id != addressId).ToList();
+    }
+
+    public void OnEditCompleted(Address editAddress)
+    {
+        ArgumentNullException.ThrowIfNull(editAddress);
+        var address = App.Addresses.Where(a => a.Id == editAddress.Id).SingleOrDefault();
+        if (address != null)
+        {
+            address.Street = editAddress.Street;
+            address.City = editAddress.City;
+            address.State = editAddress.State;
+            address.PostalCode = editAddress.PostalCode;
+            address.Country = editAddress.Country;
+            AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
+        }
+        else
+        {
+            AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
+        }
+    }
+
+    public void OnAddCompleted(Address address)
+    {
+        ArgumentNullException.ThrowIfNull(address);
+        App.Addresses.Add(address);
+        AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
+    }
+
+    public void OnCanceled(string? message)
+    {
+        if (!String.IsNullOrWhiteSpace(message))
+        {
+            AddBannerMessage(message, AdaptiveContainerStyle.Accent);
+        }
+    }
+}

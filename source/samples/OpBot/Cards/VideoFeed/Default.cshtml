@@ -1,0 +1,18 @@
+﻿@using OpBot.Cards.VideoFeed
+@inherits CardView<VideoFeedApp>
+
+<Card Version="1.5">
+	<Version Major="1" Minor="4" />
+	<TextBlock Size="Large" Weight="Bolder">Spill Detected</TextBlock>
+	<FactSet>
+		<Fact Title="Confidence" Value="92.62%" />
+		<Fact Title="Location" Value="Building 26" />
+		<Fact Title="Camera" Value="Eastern wall, camera 3" />
+	</FactSet>
+	<Media Poster="https://hackathon2022-cards.azurewebsites.net/img/spill.png">
+		<MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/spill-video.mp4"></MediaSource>
+	</Media>
+	<ActionSet>
+		<Action.OpenUrl Title="View live" Url="https://dynamics.microsoft.com/en-us/field-service/overview/" />
+	</ActionSet>
+</Card>

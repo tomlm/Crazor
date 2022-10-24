@@ -1,0 +1,124 @@
+﻿@using CrazorDemoBot.Cards.ProductCatalog
+@using System.Text;
+@using System.Net.Http;
+@using Newtonsoft.Json;
+
+@inherits CardView<ProductCatalogApp>
+
+<Card Version="1.5">
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Product Catalog</TextBlock>
+
+    @if (App.CatalogItems.Any())
+    {
+        @foreach (var item in App.CatalogItems)
+        {
+            <Container Separator="true">
+                <ColumnSet Padding="none">
+                    <Column Width="stretch">
+                        <TextBlock Size="Large" Weight="Bolder">@item.Name</TextBlock>
+                        <TextBlock Size="Medium">@item.Description</TextBlock>
+                        <TextBlock Size="Medium">Price: $@item.Price</TextBlock>
+                        <Image Url="@item.PictureUri" />
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="https://cdn.icon-icons.com/icons2/3399/PNG/512/detail_icon_215012.png" Size="Small">
+                            <SelectAction>
+                                <Action.Execute Id="@item.Id" Tooltip="Detail" Verb="OnDetail" />
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="https://cdn.icon-icons.com/icons2/931/PNG/512/edit_modify_icon-icons.com_72390.png" Size="Small">
+                            <SelectAction>
+                                <Action.Execute Id="@item.Id" Tooltip="Edit" Verb="OnEdit" />
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="https://cdn.icon-icons.com/icons2/3251/PNG/512/delete_regular_icon_203689.png" Size="Small">
+                            <SelectAction>
+                                <Action.Execute Id="@item.Id" Tooltip="Delete" Verb="OnDelete" />
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                </ColumnSet>
+            </Container>
+        }
+    }
+
+    <Action.Execute Title="Add Product Item" Verb="OnAdd" />
+</Card>
+
+@functions {
+    public void OnAdd()
+    {
+        var item = new ProductCatalogItem();
+        ShowCard("Edit", new EditOrAddProductCatalogItem() { IsEdit = false, Item = item });
+    }
+
+    public void OnDetail(string id)
+    {
+        var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
+        if (item != null)
+        {
+            ShowCard("Detail", item);
+        }
+    }
+
+    public void OnEdit(string id)
+    {
+        var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
+        if (item != null)
+        {
+            ShowCard("Edit", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
+        }
+    }
+
+    public void OnDelete(string id)
+    {
+        App.CatalogItems = App.CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
+    }
+
+    public async Task OnEditCompleted(EditOrAddProductCatalogItem model)
+    {
+        if (model.IsEdit)
+        {
+            var item = App.CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
+
+            if (item != null && model.Item != null)
+            {
+                // Update local copy
+                item.Name = model.Item.Name;
+                item.Description = model.Item.Description;
+                item.Price = model.Item.Price;
+                item.PictureUri = model.Item.PictureUri;
+                AddBannerMessage("Catalog Item successfully updated!", AdaptiveContainerStyle.Good);
+
+                // Update in API
+                var request = "https://ordersapi.azurewebsites.net/api/orders";
+                var data = JsonConvert.SerializeObject(item);
+                using (var client = new HttpClient())
+                {
+                    var response = await client.PutAsync(request, new StringContent(data, Encoding.UTF8, "application/json"));
+                }
+            }
+        }
+        else
+        {
+            // Add local copy
+            if (model.Item != null)
+            {
+                App.CatalogItems.Add(model.Item);
+                AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
+
+                // Update in API
+                var request = "https://ordersapi.azurewebsites.net/api/orders";
+                var data = JsonConvert.SerializeObject(model.Item);
+                using (var client = new HttpClient())
+                {
+                    var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"));
+                }
+            }
+        }
+    }
+}
