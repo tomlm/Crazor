@@ -1,4 +1,5 @@
 ﻿using Crazor;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using System.Net;
@@ -15,7 +16,7 @@ namespace OpBot
 
        
         public static bool TryGetHeaders(IServiceProvider provider, out Uri? uri, out string? token)
-            => TryGetHeaders(provider.GetRequiredService<IHttpContextAccessor>().HttpContext, out uri, out token);
+            => TryGetHeaders(provider.GetRequiredService<IActionContextAccessor>().ActionContext.HttpContext, out uri, out token);
 
         private static readonly Uri DefaultUri = new Uri("https://org829366eb.crm.dynamics.com/api/data/v9.2/");
 

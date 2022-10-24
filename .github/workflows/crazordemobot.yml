@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Web App crazordemobot
+name: Publish CrazorDemoBot
 on:
   push:
     branches:

@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -21,7 +22,7 @@ using Diag = System.Diagnostics;
 namespace Crazor
 {
     public class CardView<AppT> : RazorPage, ICardView
-        where AppT: CardApp
+        where AppT : CardApp
     {
         private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
         private static XmlWriterSettings _settings = new XmlWriterSettings()
@@ -37,10 +38,10 @@ namespace Crazor
         }
 
         [JsonIgnore]
-        public IUrlHelper UrlHelper { get; set; } 
+        public IUrlHelper UrlHelper { get; set; }
 
         [JsonIgnore]
-        public string Name { get; set; } 
+        public string Name { get; set; }
 
         [JsonIgnore]
         public AppT App { get; set; }
@@ -111,7 +112,7 @@ namespace Crazor
                 verb = Constants.REFRESH_VERB;
             }
             else
-            { 
+            {
                 // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
                 ValidateModel();
             }
@@ -472,7 +473,12 @@ namespace Crazor
                 var reader = XmlReader.Create(new StringReader(xml));
                 var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
 
-                // Diag.Debug.WriteLine(JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
+                if (Debugger.IsAttached)
+                {
+                    var cardPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "card.json");
+                    Diag.Debug.WriteLine($"AdaptiveCard JSON available at:\n{cardPath}");
+                    File.WriteAllText(cardPath, JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
+                }
                 return card;
             }
             catch (Exception err)

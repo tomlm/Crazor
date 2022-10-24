@@ -57,43 +57,47 @@ namespace Crazor.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
-            var bindingType = BindingProperty.PropertyType;
-            if (bindingType.Name == "Nullable`1")
+            
+            if (BindingProperty != null)
             {
-                bindingType = bindingType.GenericTypeArguments[0];
-            }
-            if (bindingType.IsEnum)
-            {
-                var childContent = await output.GetChildContentAsync();
-                if (!childContent.GetContent().TrimStart().StartsWith("<Choice"))
+                var bindingType = BindingProperty.PropertyType;
+                if (bindingType.Name == "Nullable`1")
                 {
-                    // automatically compute choice from enumeration.
-                    StringBuilder sb = new StringBuilder();
-                    output.TagMode = TagMode.StartTagAndEndTag;
-                    foreach (var value in bindingType.GetEnumValues())
+                    bindingType = bindingType.GenericTypeArguments[0];
+                }
+                if (bindingType.IsEnum)
+                {
+                    var childContent = await output.GetChildContentAsync();
+                    if (!childContent.GetContent().TrimStart().StartsWith("<Choice"))
                     {
-                        MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
+                        // automatically compute choice from enumeration.
+                        StringBuilder sb = new StringBuilder();
+                        output.TagMode = TagMode.StartTagAndEndTag;
+                        foreach (var value in bindingType.GetEnumValues())
+                        {
+                            MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
 
-                        // we can then attempt to retrieve the    
-                        // description attribute from the member info    
-                        var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
-                        var displayAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
-                        // if we find the attribute we can access its values    
-                        if (descriptionAttribute != null)
-                        {
-                            sb.AppendLine($"<Choice Title=\"{descriptionAttribute.Description}\" Value=\"{value}\"/>");
+                            // we can then attempt to retrieve the    
+                            // description attribute from the member info    
+                            var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
+                            var displayAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
+                            // if we find the attribute we can access its values    
+                            if (descriptionAttribute != null)
+                            {
+                                sb.AppendLine($"<Choice Title=\"{descriptionAttribute.Description}\" Value=\"{value}\"/>");
+                            }
+                            else if (displayAttribute != null)
+                            {
+                                sb.AppendLine($"<Choice Title=\"{displayAttribute.DisplayName}\" Value=\"{value}\"/>");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"<Choice Title=\"{value}\" Value=\"{value}\"/>");
+                            }
                         }
-                        else if (displayAttribute != null)
-                        {
-                            sb.AppendLine($"<Choice Title=\"{displayAttribute.DisplayName}\" Value=\"{value}\"/>");
-                        }
-                        else
-                        {
-                            sb.AppendLine($"<Choice Title=\"{value}\" Value=\"{value}\"/>");
-                        }
+
+                        output.Content.SetHtmlContent(sb.ToString());
                     }
-                    
-                    output.Content.SetHtmlContent(sb.ToString());
                 }
             }
         }

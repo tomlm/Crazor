@@ -32,7 +32,7 @@ namespace Crazor.TagHelpers
         /// </summary>
         [HtmlAttributeName(nameof(Binding))]
         [HtmlAttributeIgnore]
-        public string Binding { get; set; }
+        public string? Binding { get; set; }
 
         /// <summary>
         /// Set to false to hide the validation errors
@@ -41,11 +41,11 @@ namespace Crazor.TagHelpers
         [HtmlAttributeIgnore]
         public bool? ShowErrors { get; set; }
 
-        public PropertyInfo BindingProperty { get; set; }
+        public PropertyInfo? BindingProperty { get; set; }
 
-        public object BindingValue { get; set; }
+        public object? BindingValue { get; set; }
 
-        public string BindingDisplayName { get; set; }
+        public string? BindingDisplayName { get; set; }
 
         public override void Init(TagHelperContext context)
         {

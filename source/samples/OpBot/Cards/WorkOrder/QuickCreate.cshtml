@@ -7,7 +7,6 @@
 @inherits CardView<WorkOrderApp, QuickCreateModel>
 
 <Card Version="1.5">
-    <Version Major="1" Minor="4" />
 
     <TextBlock Size="Large" Weight="Bolder">Create Work Order</TextBlock>
 
@@ -53,7 +52,7 @@
     <Input.Text Label="Work Order Summary" IsMultiline="true" Id="@nameof(WorkOrderSummary)" Value="@WorkOrderSummary" />
     <FieldErrors Id="WorkOrderSummary" Errors="@ValidationErrors" />
 
-    <Action.Execute Verb="OnSave" Mode="Primary" Title="Create Work Order"></Action.Execute>
+    <Action.Execute Verb="OnSave" Style="Positive" Title="Create Work Order"></Action.Execute>
 </Card>
 
 @functions {

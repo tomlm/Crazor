@@ -7,7 +7,6 @@
 @inherits CardView<PlannerApp, EditModel>
 
 <Card Version="1.5">
-    <Version Major="1" Minor="4" />
 
     <TextBlock Size="Large" Weight="Bolder">Create Task</TextBlock>
 
@@ -20,7 +19,7 @@
         </Column>
     </ColumnSet>
 
-    <Action.Execute Verb="OnSave" Mode="Primary" Title="Create Task"></Action.Execute>
+    <Action.Execute Verb="OnSave" Style="Positive" Title="Create Task"></Action.Execute>
 </Card>
 
 @functions {
