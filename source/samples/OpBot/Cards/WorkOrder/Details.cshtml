@@ -1,8 +1,7 @@
-﻿@using System.Text;
-@using System.Net.Http;
-@using Newtonsoft.Json;
+﻿@using System.Text
+@using System.Net.Http
+@using Newtonsoft.Json
 @using OpBot.Cards.WorkOrder
-
 @inherits CardView<WorkOrderApp, WorkOrder>
 
 <Card Version="1.5">
@@ -62,7 +61,7 @@
     <ActionSet>
         <Action.ShowCard Title="Assign to">
             <Card>
-                <Input.ChoiceSet Id="AssignedToUserId" Value="@AssignedToUserId" Label="Assign to">
+                <Input.ChoiceSet Binding="AssignedToUserId" Label="Assign to">
                     @foreach(var person in Person.GetTechnicians()) {
                         <Choice Title="@person.Name" Value="@person.Email" />
                     }
@@ -72,7 +71,7 @@
                     <Action.Execute Verb="AssignTo" Title="Assign to Selected" />
                     <Action.Execute Verb="AssignTo" Title="Assign to Self">
                         {
-                            "assignToSelf": "true"
+                            "assignToSelf": true
                         }
                     </Action.Execute>
                 </ActionSet>

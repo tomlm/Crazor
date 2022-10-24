@@ -1,6 +1,6 @@
 ﻿using AdaptiveCards;
 using Crazor.Interfaces;
-using DataAnnotationsValidator;
+using Crazor.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
@@ -241,7 +241,7 @@ namespace Crazor
         private void ValidateModel()
         {
             // validate root object model
-            var validator = new DataAnnotationsValidator.DataAnnotationsValidator();
+            var validator = new DataAnnotationsValidator();
 
             // do shallow validation for root level properties
             var validationResults = new List<ValidationResult>();
@@ -253,7 +253,7 @@ namespace Crazor
             {
                 validationResults = new List<ValidationResult>();
 
-                if (!validator.TryValidateObjectRecursive(this.GetModel(), validationResults))
+                if (!validator.TryValidateObjectRecursive(model, validationResults))
                 {
                     this.IsModelValid = false;
                     AddValidationResults($"Model.", validationResults);

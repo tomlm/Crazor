@@ -1,7 +1,4 @@
-﻿@using System.Text;
-@using System.Net.Http;
-@using Newtonsoft.Json;
-@using OpBot.Cards.WorkOrder
+﻿@using OpBot.Cards.WorkOrder
 
 @inherits CardView<WorkOrderApp>
 
@@ -14,10 +11,6 @@
 
     public void OnCreate() {
 
-        ShowCard("QuickCreate", new QuickCreateModel 
-        { 
-            //IsEdit = false, 
-            //WorkOrder = new WorkOrder() 
-        });
+        ShowCard("QuickCreate");
     }
 }

@@ -4,7 +4,7 @@
 @using Newtonsoft.Json;
 @using OpBot.Cards.WorkOrder
 
-@inherits CardView<WorkOrderApp, QuickCreateModel>
+@inherits CardView<WorkOrderApp>
 
 <Card Version="1.5">
 
@@ -21,23 +21,22 @@
 
     <TextBlock Size="Default" Weight="Bolder">Customer Details</TextBlock>
 
-    <Input.ChoiceSet Separator="true" Label="Service Account" Id="ServiceAccount" Value="@ServiceAccount">
+    <Input.ChoiceSet Separator="true" Label="Service Account" Binding="ServiceAccount" >
         <Choice Title="Adventure Works (sample)" Value="Adventure Works (sample)"></Choice>
         <Choice Title="Alpine Ski House (sample)" Value="Alpine Ski House (sample)"></Choice>
     </Input.ChoiceSet>
-    <FieldErrors Id="ServiceAccount" Errors="@ValidationErrors" />
    
 
     <TextBlock Size="Default" Weight="Bolder" Spacing="Large">Incident Details</TextBlock>
 
-    <Input.ChoiceSet Separator="true" Label="Work Order Type" Id="WorkOrderType" Value="@WorkOrderType">
+    <Input.ChoiceSet Separator="true" Label="Work Order Type" Binding="WorkOrderType" >
         <Choice Title="Installation" Value="Installation"></Choice>
         <Choice Title="Diagnose and Repair" Value="Diagnose and Repair"></Choice>
         <Choice Title="Scheduled Maintenance" Value="Scheduled Maintenace"></Choice>
         <Choice Title="Quote" Value="Quote"></Choice>
     </Input.ChoiceSet>
 
-    <Input.ChoiceSet Label="Customer Asset" Id="CustomerAsset" Value="@CustomerAsset">
+    <Input.ChoiceSet Label="Customer Asset" Binding="CustomerAsset" >
         <Choice Title="Hydraulic Power Unit #1" Value="Hydraulic Power Unit #1"></Choice>
         <Choice Title="Hydraulic Power Unit #2" Value="Hydraulic Power Unit #2"></Choice>
         <Choice Title="Hydraulic Power Unit #3" Value="Hydraulic Power Unit #3"></Choice>
@@ -45,12 +44,11 @@
         <Choice Title="Hydraulic Power Unit #5" Value="Hydraulic Power Unit #5"></Choice>
     </Input.ChoiceSet>
 
-    <Input.ChoiceSet Label="IoT Alert" Id="IoTAlert" Value="@IoTAlert">
+    <Input.ChoiceSet Label="IoT Alert" Binding="IoTAlert" >
         <Choice Title="Test" Value="Test"></Choice>
     </Input.ChoiceSet>
 
-    <Input.Text Label="Work Order Summary" IsMultiline="true" Id="@nameof(WorkOrderSummary)" Value="@WorkOrderSummary" />
-    <FieldErrors Id="WorkOrderSummary" Errors="@ValidationErrors" />
+    <Input.Text Label="Work Order Summary" IsMultiline="true" Binding="WorkOrderSummary" />
 
     <Action.Execute Verb="OnSave" Style="Positive" Title="Create Work Order"></Action.Execute>
 </Card>

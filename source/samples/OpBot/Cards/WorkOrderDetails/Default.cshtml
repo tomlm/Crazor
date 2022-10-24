@@ -1,5 +1,6 @@
 ﻿@using System.Text;
 @using System.Net.Http;
+@using Crazor
 @using Newtonsoft.Json;
 @using OpBot.Cards.WorkOrder;
 @using OpBot.Cards.WorkOrderDetails
@@ -65,7 +66,7 @@
     <ActionSet>
         <Action.ShowCard Title="Assign to">
             <Card>
-                <Input.ChoiceSet Id="AssignedToUserId" Value="@AssignedToUserId" Label="Assign to">
+                <Input.ChoiceSet Binding="AssignedToUserId" Label="Assign to">
                     @foreach (var person in Person.GetTechnicians())
                     {
                         <Choice Title="@person.Name" Value="@person.Email" />
