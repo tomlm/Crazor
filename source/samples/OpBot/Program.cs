@@ -20,10 +20,12 @@ var mvcBuilder = builder.Services.AddMvc()
     {
         options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
     }); 
-if (builder.Environment.IsDevelopment())
-{
-    mvcBuilder.AddRazorRuntimeCompilation();
-}
+
+// uncomment this to enable live edit of markup pages
+//if (builder.Environment.IsDevelopment())
+//{
+//    mvcBuilder.AddRazorRuntimeCompilation();
+//}
 
 builder.Services.AddControllers();
 
