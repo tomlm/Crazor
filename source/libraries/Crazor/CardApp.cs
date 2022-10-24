@@ -296,7 +296,7 @@ namespace Crazor
                 SetScopedMemory<SessionMemoryAttribute>((JObject)state[sessionKey]);
             }
 
-            if (Action.Verb == Constants.LOADROUTE_VERB)
+            if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
                 var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
                 if (loadRoute != null && this.CurrentCard != loadRoute.View)
