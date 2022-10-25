@@ -1,6 +1,6 @@
 ﻿using Crazor;
 
-namespace $rootnamespace$.Cards.$InputName$
+namespace $rootnamespace$.$InputName$
 {
     public class $itemname$ : CardApp
     {
