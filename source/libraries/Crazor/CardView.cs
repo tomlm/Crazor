@@ -112,7 +112,8 @@ namespace Crazor
                     }
                     catch(CardRouteNotFoundException notFound)
                     {
-                        CancelCard(notFound.Message);
+                        AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
+                        CancelCard();
                     }
                     catch (Exception err)
                     {
