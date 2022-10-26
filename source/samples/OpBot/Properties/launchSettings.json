@@ -1,29 +1,25 @@
-﻿{
+{
+  "profiles": {
+    "OpBot": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadEnabled": true,
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7131;http://localhost:5131"
+    },
+    "Profile 1": {
+      "commandName": "IISExpress"
+    }
+  },
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:29156",
-      "sslPort": 44343
-    }
-  },
-  "profiles": {
-    "OpBot": {
-      "hotReloadEnabled": true,
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:7130;http://localhost:5130",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      "applicationUrl": "http://localhost:29157",
+      "sslPort": 44344
     }
   }
 }

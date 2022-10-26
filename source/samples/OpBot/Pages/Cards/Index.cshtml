@@ -394,9 +394,9 @@
                         value: invokeValue
                     }, null, 2),
                     beforeSend: function (xhr) {
-                        //var token = "@Model.Token";
-                        //if (token.length > 0)
-                        //    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                        var token = "@Model.Token";
+                        if (token.length > 0)
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 
                         var dvToken = tryGetDvToken()
                         if (dvToken && dvToken.length > 0)
