@@ -110,7 +110,11 @@ namespace Crazor
                     {
                         await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
                     }
-                    catch(TargetInvocationException err)
+                    catch(CardRouteNotFoundException notFound)
+                    {
+                        CancelCard(notFound.Message);
+                    }
+                    catch (Exception err)
                     {
                         if (err.InnerException is CardRouteNotFoundException notFound)
                         {

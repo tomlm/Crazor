@@ -50,5 +50,13 @@ namespace OpBot.Cards.WorkOrder
             return base.SaveAppAsync(cancellationToken);
         }
 
+        public async Task<WorkOrder> LookupWorkOrder(string workOrderName)
+        {
+            await Task.CompletedTask;
+
+            if (WorkOrders.TryGetValue(workOrderName, out var model))
+                return model;
+            return null;
+        }
     }
 }
