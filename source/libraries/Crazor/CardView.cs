@@ -1,4 +1,5 @@
 ﻿using AdaptiveCards;
+using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Crazor.Validation;
 using Microsoft.AspNetCore.Mvc;
@@ -105,7 +106,21 @@ namespace Crazor
                         data = loadRoute!.GetDataForRoute(routeAttribute);
                     }
 
-                    await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
+                    try
+                    {
+                        await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
+                    }
+                    catch(TargetInvocationException err)
+                    {
+                        if (err.InnerException is CardRouteNotFoundException notFound)
+                        {
+                            CancelCard(notFound.Message);
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
                 }
                 // I *think* the correct behavior is not NOT validate on LoadROUTE
                 // ValidateModel();
@@ -308,12 +323,23 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Navigate to screen name.
+        /// Navigate to card by name
         /// </summary>
-        /// <param name="screenName"></param>
+        /// <param name="cardName">name of card </param>
+        /// <param name="model">model to pass</param>
         public void ShowCard(string cardName, object? model = null)
         {
             this.App!.ShowCard(cardName, model);
+        }
+
+        /// <summary>
+        /// Replace this card with another one 
+        /// </summary>
+        /// <param name="cardName"></param>
+        /// <param name="model">model to pass</param>
+        public void ReplaceCard(string cardName, object? model = null)
+        {
+            this.App!.ReplaceCard(cardName, model);
         }
 
         /// <summary>

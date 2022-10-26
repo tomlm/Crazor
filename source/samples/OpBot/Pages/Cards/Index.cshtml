@@ -453,9 +453,10 @@
 
         };
         adaptiveCard.parse(card);
-        //cardDiv.appendChild(adaptiveCard.render());
-        cardDiv.appendChild(document.createElement("div"));
-        invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
+        cardDiv.appendChild(adaptiveCard.render());
+        // HACK invoke refresh, this breaks deep link...how do we do this?
+        //cardDiv.appendChild(document.createElement("div"));
+        //invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
 
     </script>
 </body>

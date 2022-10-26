@@ -9,8 +9,21 @@
 
 @functions {
 
-    public void OnCreate() {
+    public void OnCreate()
+    {
+        ShowCard("QuickCreate", new WorkOrder()
+            {
+                Name = Utils.GetNewId(),
+                ServiceAccount = "Alpine Ski House (sample)",
+                WorkOrderType = new WorkOrderType("Diagnose and Repair"),
+                CustomerAsset = new Asset("Hydraulic Power Unit #3"),
+                SystemStatus = new SystemStatus("Unscheduled")
+            });
+    }
 
-        ShowCard("QuickCreate");
+    public void OnQuickCreateCompleted(WorkOrder workOrder)
+    {
+        App.WorkOrders[workOrder.Name] = workOrder;
+        ShowCard("Details", workOrder);
     }
 }

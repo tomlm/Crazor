@@ -12,7 +12,7 @@ namespace OpBot.Cards.WorkOrder
         }
 
         [SharedMemory]
-        public WorkOrder WorkOrder { get; set; }
+        public Dictionary<string, WorkOrder> WorkOrders { get; set; } = new Dictionary<string, WorkOrder>();
 
 
         [SharedMemory]
@@ -29,17 +29,17 @@ namespace OpBot.Cards.WorkOrder
         {
             await base.LoadAppAsync(resourceId, sessionId, activity, cancellationToken);
             
-            var accounts = await GetResponseAsync<OData<IEnumerable<Account>>>(HttpMethod.Get, "accounts?$top=5");
-            if (accounts != null)
-            {
-                ServiceAccounts = accounts.Value.ToList();
-            }
+            //var accounts = await GetResponseAsync<OData<IEnumerable<Account>>>(HttpMethod.Get, "accounts?$top=5");
+            //if (accounts != null)
+            //{
+            //    ServiceAccounts = accounts.Value.ToList();
+            //}
 
-            var workOrderTypes = await GetResponseAsync<OData<IEnumerable<WorkOrderType>>>(HttpMethod.Get, "msdyn_workordertypes?$top=5");
-            if (workOrderTypes != null)
-            {
-                WorkOrderTypes = workOrderTypes.Value.ToList();
-            }
+            //var workOrderTypes = await GetResponseAsync<OData<IEnumerable<WorkOrderType>>>(HttpMethod.Get, "msdyn_workordertypes?$top=5");
+            //if (workOrderTypes != null)
+            //{
+            //    WorkOrderTypes = workOrderTypes.Value.ToList();
+            //}
 
             // TODO:
             // Fetch a real Work Order using the resourceId

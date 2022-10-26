@@ -4,6 +4,21 @@
 @using OpBot.Cards.WorkOrder
 @inherits CardView<WorkOrderApp, WorkOrder>
 
+@*Routing*@
+@attribute [Route("{workOrderName}")]
+@functions {
+    public override string GetRoute() => $"{this.Model.Name}";
+
+    public void OnLoadRoute(string workOrderName)
+    {
+        if (this.App.WorkOrders.TryGetValue(workOrderName, out var model))
+            this.Model = model;
+        else    
+            throw new CardRouteNotFoundException($"Work Order {workOrderName} not found");
+    }
+}
+
+@*Card*@
 <Card Version="1.5">
 
     <ColumnSet Style="Emphasis">
@@ -86,6 +101,7 @@
     </ActionSet>
 </Card>
 
+@*Logic*@
 @functions {
 
     [BindProperty]

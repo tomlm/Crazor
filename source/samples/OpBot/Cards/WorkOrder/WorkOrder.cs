@@ -8,27 +8,31 @@ namespace OpBot.Cards.WorkOrder
     {
 
         [JsonProperty("msdyn_name")]
+        [Required]
         public string Name { get; set; }
 
         [JsonProperty("msdyn_serviceaccount@odata.bind")]
-        public Uri ServiceAccount { get; set; }
+        public string ServiceAccount { get; set; }
 
         [JsonProperty("msdyn_workordersummary")]
+        [Required]
         public string Summary { get; set; }
 
         [JsonProperty("msdyn_workordertype")]
+        [Required]
         public WorkOrderType WorkOrderType { get; set; }
 
-
         [JsonProperty("msdyn_systemstatus")]
+        [Required]
         public SystemStatus SystemStatus { get; set; }
 
         [JsonProperty("msdyn_pricelist")]
-        [Required]
         public PriceLevel PriceList { get; set; }
 
         [JsonProperty("msdyn_customerasset")]
         public Asset CustomerAsset { get; set; }
+
+        public string IoTAlert { get; set; }
 
         public DateTimeOffset? PromisedBy { get; set; }
 
@@ -43,6 +47,7 @@ namespace OpBot.Cards.WorkOrder
             this.AssignedTo = Person.GetTechnicians().FirstOrDefault(x => x.Email.Equals(userName, StringComparison.OrdinalIgnoreCase));
         }
 
+        [JsonIgnore]
         public AdaptiveTextColor GetStatusColor
         {
             get
@@ -87,6 +92,7 @@ namespace OpBot.Cards.WorkOrder
             Name = name;
         }
 
+        [Required]
         public string Name { get; set;  }
     }
 }

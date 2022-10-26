@@ -19,17 +19,5 @@ namespace OpBot.Cards.HL
 
         [SharedMemory]
         public WorkOrder.WorkOrder WorkOrder { get; set; }
-
-        //[SessionMemory]
-        //public string Status { get; set; } = "Scheduled";
-
-        //[SessionMemory]
-        //public DateTimeOffset? PromisedBy { get; set; }
-
-        //[SessionMemory]
-        //public DateTimeOffset? StartTime { get; set; }
-
-        //[SessionMemory]
-        //public DateTimeOffset? CompleteTime { get; set; }
     }
 }

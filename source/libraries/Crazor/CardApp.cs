@@ -221,9 +221,25 @@ namespace Crazor
             };
         }
 
+        /// <summary>
+        /// Navigate to card by name passing optional model
+        /// </summary>
+        /// <param name="cardName"></param>
+        /// <param name="model"></param>
         public void ShowCard(string cardName, object? model = null)
         {
             this.CallStack.Insert(0, new CardViewState(cardName, model));
+            this.CurrentView = View(cardName, model);
+        }
+
+        /// <summary>
+        /// Replace current card with a different card by name passing optional model
+        /// </summary>
+        /// <param name="cardName">card to switch to</param>
+        /// <param name="model">model to pass card</param>
+        public void ReplaceCard(string cardName, object? model = null)
+        {
+            this.CallStack[0] = new CardViewState(cardName, model);
             this.CurrentView = View(cardName, model);
         }
 

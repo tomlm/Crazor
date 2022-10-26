@@ -1,4 +1,6 @@
-﻿namespace OpBot.Cards.WorkOrder
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OpBot.Cards.WorkOrder
 {
     public class Asset
     {
@@ -11,6 +13,7 @@
             Name = name;
         }
 
+        [Required]
         public string Name { get; set; }
     }
 }
