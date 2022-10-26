@@ -103,7 +103,7 @@
     [BindProperty]
     public string AssignedToUserId { get; set; }
 
-    public void AssignTo(bool? assignToSelf) 
+    public async Task AssignTo(bool? assignToSelf) 
     {
         Model.SystemStatus = new SystemStatus("Scheduled");
 
@@ -115,5 +115,6 @@
         {
             Model.AssignTo(AssignedToUserId);
         }
+        await App.UpdateWorkOrder(this.Model);
     }
 }

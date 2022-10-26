@@ -50,7 +50,7 @@ namespace OpBot.Cards.WorkOrder
             return base.SaveAppAsync(cancellationToken);
         }
 
-        public async Task<WorkOrder> LookupWorkOrder(string workOrderName)
+        public async Task<WorkOrder?> LookupWorkOrder(string workOrderName)
         {
             await Task.CompletedTask;
 
@@ -58,5 +58,18 @@ namespace OpBot.Cards.WorkOrder
                 return model;
             return null;
         }
+
+        public async Task UpdateWorkOrder(WorkOrder workOrder)
+        {
+            await Task.CompletedTask;
+            WorkOrders[workOrder.Name] = workOrder;
+        }
+
+        public async Task DeleteWorkOrder(string name)
+        {
+            await Task.CompletedTask;
+            WorkOrders.Remove(name);
+        }
+
     }
 }
