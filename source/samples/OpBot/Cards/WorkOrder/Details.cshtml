@@ -72,7 +72,7 @@
     <ActionSet>
         <Action.ShowCard Title="Assign to">
             <Card>
-                <Input.ChoiceSet Binding="AssignedToUserId" Label="Assign to">
+                <Input.ChoiceSet Binding="AssignedToUserId" Label="Assign to" Style="Filtered">
                     @foreach(var person in Person.GetTechnicians()) {
                         <Choice Title="@person.Name" Value="@person.Email" />
                     }
