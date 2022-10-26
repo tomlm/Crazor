@@ -76,7 +76,7 @@
                     @foreach(var person in Person.GetTechnicians()) {
                         <Choice Title="@person.Name" Value="@person.Email" />
                     }
-                    <Data.Query Dataset="graph.microsoft.com/users?scope=currentContext" />
+                    <Data.Query Dataset="graph.microsoft.com/users" />
                 </Input.ChoiceSet>
                 <ActionSet>
                     <Action.Execute Verb="AssignTo" Title="Assign to Selected" />
