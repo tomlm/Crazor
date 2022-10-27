@@ -308,19 +308,24 @@ namespace Crazor
             this.Action = invoke.Action;
 
             var storage = this.Services.GetRequiredService<IStorage>();
-            var resourceKey = GetKey(SharedId);
+            var sharedKey = (SharedId != null) ? GetKey(SharedId) : null;
             var sessionKey = (SessionId != null) ? GetKey(SessionId) : null;
 
-            var keys = new List<string>() { resourceKey };
+            var keys = new List<string>() { };
+            if (sharedKey != null)
+            {
+                keys.Add(sharedKey);
+            }
+
             if (sessionKey != null)
             {
                 keys.Add(sessionKey);
             }
 
             var state = await storage.ReadAsync(keys.ToArray(), cancellationToken);
-            if (state.ContainsKey(resourceKey))
+            if (sharedKey != null && state.ContainsKey(sharedKey))
             {
-                SetScopedMemory<SharedMemoryAttribute>((JObject)state[resourceKey]);
+                SetScopedMemory<SharedMemoryAttribute>((JObject)state[sharedKey]);
             }
 
             if (sessionKey != null && state.ContainsKey(sessionKey))
