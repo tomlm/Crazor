@@ -21,11 +21,11 @@ namespace Crazor
     /// </summary>
     public partial class CardActivityHandler : TeamsActivityHandler
     {
-        private readonly IEncryptionProvider _encryptionProvider;
-        private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<CardActivityHandler>? _logger;
-        private readonly IServiceByNameFactory<CardApp> _apps;
-        private readonly IConfiguration _configuration;
+        protected readonly IEncryptionProvider _encryptionProvider;
+        protected readonly IServiceProvider _serviceProvider;
+        protected readonly ILogger<CardActivityHandler>? _logger;
+        protected readonly IServiceByNameFactory<CardApp> _apps;
+        protected readonly IConfiguration _configuration;
 
         public CardActivityHandler(
             IServiceProvider serviceProvider,
@@ -76,7 +76,7 @@ namespace Crazor
         /// <param name="sessionId">instanceId</param>
         /// <param name="cancellationToken">ct</param>
         /// <returns>card with session data.</returns>
-        public async Task<AdaptiveCard> GetCard(ITurnContext turnContext, string app, string? resourceId, string? sessionId, string? view, CancellationToken cancellationToken)
+        public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, string app, string? resourceId, string? sessionId, string? view, CancellationToken cancellationToken)
         {
             sessionId = sessionId ?? Utils.GetNewId();
 
@@ -90,23 +90,10 @@ namespace Crazor
             };
             activity!.Value = invokeValue;
             // create card
-            var cardApp = await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
-
-            // process Action.Execute
-            var result = await cardApp.OnActionExecuteAsync(cancellationToken);
-
-            AdaptiveCard adaptiveCard = (AdaptiveCard)result.Value;
-            if (turnContext.Activity.ChannelId == Channels.Msteams)
-            {
-                // update refresh members list.
-                await SetTeamsRefreshUserIds(adaptiveCard, turnContext, cancellationToken);
-            }
-
-            await cardApp.SaveAppAsync(cancellationToken);
-            return (AdaptiveCard)result.Value;
+            return await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
         }
 
-        public async Task<AdaptiveCard> GetCardForUrl(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
+        public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
         {
             var parts = uri.LocalPath.Trim('/').Split('/');
             var app = parts[1] + "App";
@@ -129,22 +116,8 @@ namespace Crazor
                 }
             };
             activity!.Value = invokeValue;
-            
-            // create app
-            var cardApp = await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
 
-            // process Action.Execute
-            var result = await cardApp.OnActionExecuteAsync(cancellationToken);
-
-            AdaptiveCard adaptiveCard = (AdaptiveCard)result.Value;
-            if (turnContext?.Activity.ChannelId == Channels.Msteams)
-            {
-                // update refresh members list.
-                await SetTeamsRefreshUserIds(adaptiveCard, turnContext, cancellationToken);
-            }
-
-            await cardApp.SaveAppAsync(cancellationToken);
-            return (AdaptiveCard)result.Value;
+            return await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
         }
 
     }

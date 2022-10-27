@@ -30,7 +30,11 @@ namespace Crazor
             // get play page url => envir, cardId, instanceId,
             if (uri.Host == hostName)
             {
-                var adaptiveCard = await GetCardForUrl(turnContext, uri, cancellationToken);
+                var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+                var invokeResponse = await cardApp.OnActionExecuteAsync(cancellationToken);
+                await cardApp.SaveAppAsync(cancellationToken);
+
+                var adaptiveCard = (AdaptiveCard)invokeResponse.Value;
 
                 // for clients that don't support AC you must send a preview card attachment.
                 var preview = new Attachment(

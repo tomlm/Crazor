@@ -17,20 +17,8 @@ namespace Crazor
         protected async override Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
             SessionData sessionData = await GetSessionDataFromInvokeAsync(invokeValue, cancellationToken);
-
-            // Create card from sessiondata
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
-
-            // process Action
             var invokeResponse = await cardApp.OnActionExecuteAsync(cancellationToken);
-
-            AdaptiveCard adaptiveCard = (AdaptiveCard)invokeResponse.Value;
-            if (turnContext.Activity.ChannelId == Channels.Msteams)
-            {
-                // update refresh members list.
-                await SetTeamsRefreshUserIds(adaptiveCard, turnContext, cancellationToken);
-            }
-
             await cardApp.SaveAppAsync(cancellationToken);
             return invokeResponse;
         }
@@ -44,24 +32,6 @@ namespace Crazor
             var sessionData = SessionData.FromString(data);
             return sessionData;
         }
-
-        private async Task SetTeamsRefreshUserIds(AdaptiveCard adaptiveCard, ITurnContext turnContext, CancellationToken cancellationToken)
-        {
-            var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
-            try
-            {
-                var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60,
-                    cancellationToken: cancellationToken);
-                adaptiveCard.Refresh.UserIds =
-                    teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
-            }
-            catch (Exception e)
-            {
-                _logger?.LogError(e, "Unable to set Refresh UserIds");
-                // await _errors.HandleAsync(e, cancellationToken);
-            }
-        }
-
 
         protected override Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
             // we extract SSO tokens in Card Adapter where we have information about whether the channel is trusted

@@ -6,7 +6,7 @@
 
 @inherits CardView<WorkOrderApp, WorkOrder>
 
-<Card Version="1.5">
+<Card Version="1.5" Title="Create Work Order">
 
     <TextBlock Size="Large" Weight="Bolder">Create Work Order</TextBlock>
 
@@ -64,7 +64,7 @@
         {
             foreach (var error in this.ValidationErrors)
             {
-                foreach(var value in error.Value)
+                foreach (var value in error.Value)
                 {
                     AddBannerMessage($"{error.Key}: {value}", AdaptiveContainerStyle.Attention);
                 }

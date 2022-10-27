@@ -57,18 +57,18 @@
       "botId": "541f3bfd-741b-48fd-a86b-ad58e7f5e478",
       "commands": [
         {
-          "id": "exampleCmd3",
-          "title": "Example Command 3",
+          "id": "/cards/workorder/create",
+          "title": "Create Work Order",
           "type": "action",
           "context": [
             "compose",
-            "commandBox",
-            "message"
+            "commandBox"
           ],
-          "description": "Command Description; e.g., Add a customer",
-          "fetchTask": false,
+          "description": "Create a new Work Order",
+          "fetchTask": true,
           "taskInfo": {
-            "title": "Initial dialog title"
+            "data": {
+            }
           }
         }
       ],

@@ -20,6 +20,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 namespace Crazor
 {
@@ -115,6 +116,21 @@ namespace Crazor
 
         [JsonIgnore]
         public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
+
+
+        public virtual async Task<AdaptiveCardInvokeResponse> OnActionExecuteAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var response = await OnActionExecuteAsync(cancellationToken);
+
+            if (response.Value is AdaptiveCard adaptiveCard && turnContext.Activity.ChannelId == Channels.Msteams)
+            {
+                // we need to add refresh userids
+                var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
+                var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
+                adaptiveCard.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
+            }
+            return response;
+        }
 
         /// <summary>
         /// Handle action
@@ -321,10 +337,10 @@ namespace Crazor
                     return;
                 }
             }
-            
+
             // load current card.
             var cardView = View(this.CurrentCard, this.CallStack[0].Model);
-            
+
             // NOTE: if the current card navigates to another card
             // then CurrentView will be non null, but if it doesn't
             // then we need to set it.
