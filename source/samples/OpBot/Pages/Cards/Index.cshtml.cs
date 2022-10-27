@@ -4,6 +4,7 @@ using Crazor;
 using Microsoft.Bot.Schema;
 using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PhysOpBot.Pages.Cards
 {
@@ -27,7 +28,7 @@ namespace PhysOpBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public async Task OnGetAsync(string app, string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, [FromQuery(Name ="id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {

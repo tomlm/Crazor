@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Crazor
 {
@@ -95,7 +96,7 @@ namespace Crazor
 
         public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
         {
-            ParsePath(uri.LocalPath, out var app, out var sharedId, out var view, out var path);
+            CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var path);
 
             var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
 
@@ -115,23 +116,6 @@ namespace Crazor
             activity!.Value = invokeValue;
 
             return await this.LoadAppAsync(app, sharedId, sessionId, activity, cancellationToken);
-        }
-
-        /// <summary>
-        /// Parse a /cards/{app}/{view}{path} into parts.
-        /// </summary>
-        /// <param name="localPath"></param>
-        /// <param name="app"></param>
-        /// <param name="sharedId"></param>
-        /// <param name="view"></param>
-        /// <param name="path"></param>
-        protected static void ParsePath(string localPath, out string app, out string? sharedId, out string? view, out string path)
-        {
-            var parts = localPath.Trim('/').Split('/');
-            app = parts[1] + "App";
-            sharedId = (parts.Length > 2) ? parts[2] : null;
-            view = (parts.Length > 3) ? parts[3] : null;
-            path = String.Join('/', parts.Skip(4).ToArray());
         }
     }
 }

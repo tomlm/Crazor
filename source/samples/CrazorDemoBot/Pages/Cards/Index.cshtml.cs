@@ -7,6 +7,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CrazorDemoBot.Pages.Cards
 {
@@ -31,25 +32,26 @@ namespace CrazorDemoBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public async Task OnGetAsync(string app, string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {
                 app += "App";
             }
 
+            var sessionId = Utils.GetNewId();
+
             this.Token = await CardAppController.GetTokenAsync(_configuration);
 
             this.CardApp = _appFactory.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
-            string sessionId = Utils.GetNewId();
 
             // create card
-            await this.CardApp.LoadAppAsync(sharedId, sessionId, new Activity(ActivityTypes.Invoke)
+            await this.CardApp.LoadAppAsync(sharedId: sharedId, sessionId: sessionId, new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
                 ChannelId = $"emulator",
-                Id = Utils.GetNewId(),
+                Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = sharedId ?? app },

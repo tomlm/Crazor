@@ -18,6 +18,6 @@
     @foreach (var cardAppType in serviceByName.GetNames().OrderBy(n => n))
     {
         var appName = cardAppType.Replace("App", String.Empty);
-        <li><a href="/Cards/@appName/@Utils.GetNewId()">@appName Card</a></li>
+        <li><a href="/Cards/@appName">@appName Card</a></li>
     }
 </ul>

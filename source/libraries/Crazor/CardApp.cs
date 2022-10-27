@@ -20,7 +20,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
 using System.Reflection;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Crazor
 {
@@ -289,8 +289,24 @@ namespace Crazor
 
         public virtual string GetRoute()
         {
-            return $"/Cards/{this.Name}/{this.SharedId}";
+            UriBuilder uri = new UriBuilder();
+            
+            var viewRoute = this.CurrentView!.GetRoute();
+            if (!viewRoute.StartsWith('/'))
+            {
+                if (viewRoute.Length > 0)
+                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}/{viewRoute}";
+                else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
+                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
+                else
+                    uri.Path = $"/Cards/{this.Name}";
+            }
+
+            if (!String.IsNullOrEmpty(this.SharedId))
+                uri.Query=$"sid={this.SharedId}";
+            return uri.Uri.PathAndQuery;
         }
+
 
         /// <summary>
         /// Load state from storage
@@ -300,7 +316,8 @@ namespace Crazor
         public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(activity);
-            this.SharedId = sharedId;
+            this.SharedId = sharedId ??
+                (this.GetType().GetProperties().Any(p => p.GetCustomAttribute<SharedMemoryAttribute>() != null) ? Utils.GetNewId() : null);
             this.SessionId = sessionId ?? Utils.GetNewId();
             this.Activity = activity;
             var invoke = JToken.FromObject(activity.Value).ToObject<AdaptiveCardInvokeValue>();
@@ -454,23 +471,12 @@ namespace Crazor
             }
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            var viewRoute = this.CurrentView!.GetRoute();
-            if (!viewRoute.StartsWith('/'))
-            {
-                if (viewRoute.Length > 0)
-                    viewRoute = $"{this.GetRoute()}/{this.CurrentView.Name}/{viewRoute}";
-                else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
-                    viewRoute = $"{this.GetRoute()}/{this.CurrentView.Name}";
-                else
-                    viewRoute = this.GetRoute();
-            }
-            outboundCard.AdditionalProperties["url"] = viewRoute;
+            outboundCard.AdditionalProperties["url"] = GetRoute();
         }
 
         private async Task<SessionData> AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.SessionId);
-            ArgumentNullException.ThrowIfNull(this.SharedId);
 
             var sessionData = new SessionData
             {
@@ -705,5 +711,32 @@ namespace Crazor
         }
 
         private string GetKey(string? key) => $"{CardType}-{key}";
+
+        /// <summary>
+        /// Parse a /cards/{app}/{view}{path} into parts.
+        /// </summary>
+        /// <param name="localPath"></param>
+        /// <param name="app"></param>
+        /// <param name="sharedId"></param>
+        /// <param name="view"></param>
+        /// <param name="path"></param>
+        public static void ParseUri(Uri uri, out string app, out string? sharedId, out string? view, out string path)
+        {
+            sharedId = null;
+            var parts = uri.LocalPath.Trim('/').Split('/');
+            app = parts[1] + "App";
+            // sharedId = (parts.Length > 2) ? parts[2] : null;
+            view = (parts.Length > 2) ? parts[2] : null;
+            path = String.Join('/', parts.Skip(3).ToArray());
+            if (!String.IsNullOrEmpty(uri.Query))
+            {
+                var dict = QueryHelpers.ParseQuery(uri.Query);
+                if (dict.TryGetValue("id", out var values))
+                {
+                    sharedId = values.Single();
+                }
+            }
+        }
+
     }
 }
