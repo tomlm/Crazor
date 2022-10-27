@@ -29,7 +29,6 @@ namespace CrazorDemoBot.Cards.ProductCatalog
             await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);      
         }
 
-        [SharedMemory]
         public List<ProductCatalogItem> CatalogItems { get; set; } = new List<ProductCatalogItem>();
     }
 }

@@ -69,7 +69,7 @@ namespace Crazor
         /// Instance Id for the card.
         /// </summary>
         [JsonIgnore]
-        public string? SharedId { get; private set; }
+        public string? SharedId { get; set; }
 
         /// <summary>
         /// Session Id for the card
@@ -303,10 +303,15 @@ namespace Crazor
             }
 
             if (!String.IsNullOrEmpty(this.SharedId))
-                uri.Query=$"sid={this.SharedId}";
+                uri.Query=$"id={this.SharedId}";
             return uri.Uri.PathAndQuery;
         }
 
+        /// <summary>
+        /// Override this to set the shared Id when known.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetSharedId() => null;
 
         /// <summary>
         /// Load state from storage
@@ -316,8 +321,7 @@ namespace Crazor
         public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(activity);
-            this.SharedId = sharedId ??
-                (this.GetType().GetProperties().Any(p => p.GetCustomAttribute<SharedMemoryAttribute>() != null) ? Utils.GetNewId() : null);
+            this.SharedId = sharedId ?? GetSharedId();
             this.SessionId = sessionId ?? Utils.GetNewId();
             this.Activity = activity;
             var invoke = JToken.FromObject(activity.Value).ToObject<AdaptiveCardInvokeValue>();

@@ -365,6 +365,8 @@
         let cardDiv = document.getElementById('cardDiv');
         let adaptiveCard = new AdaptiveCards.AdaptiveCard();
         adaptiveCard.hostConfig = hostConfig;
+        
+        window.history.replaceState({ }, null, '@Model.Url');
 
         const invokeBot = (invokeName, invokeValue) =>
             new Promise((resolve, reject) => {

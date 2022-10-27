@@ -1,4 +1,5 @@
-﻿using Crazor.Attributes;
+﻿using Crazor;
+using Crazor.Attributes;
 using Microsoft.Bot.Schema;
 
 namespace OpBot.Cards.WorkOrder
@@ -24,31 +25,7 @@ namespace OpBot.Cards.WorkOrder
 
         public List<SystemStatus> SystemStatuses { get; set; }
 
-
-        public override async Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
-        {
-            await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
-            
-            //var accounts = await GetResponseAsync<OData<IEnumerable<Account>>>(HttpMethod.Get, "accounts?$top=5");
-            //if (accounts != null)
-            //{
-            //    ServiceAccounts = accounts.Value.ToList();
-            //}
-
-            //var workOrderTypes = await GetResponseAsync<OData<IEnumerable<WorkOrderType>>>(HttpMethod.Get, "msdyn_workordertypes?$top=5");
-            //if (workOrderTypes != null)
-            //{
-            //    WorkOrderTypes = workOrderTypes.Value.ToList();
-            //}
-
-            // TODO:
-            // Fetch a real Work Order using the sharedId
-        }
-
-        public override Task SaveAppAsync(CancellationToken cancellationToken)
-        {
-            return base.SaveAppAsync(cancellationToken);
-        }
+        public override string GetSharedId() => Utils.GetNewId();
 
         public async Task<WorkOrder?> LookupWorkOrder(string workOrderName)
         {

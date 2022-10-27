@@ -10,7 +10,7 @@ namespace CrazorDemoBot.Cards.Inputs
         {
         }
 
-        [SharedMemory]
+        [SessionMemory]
         public InputsModel Data { get; set; } = new InputsModel();
     }
 }

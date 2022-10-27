@@ -32,6 +32,8 @@ namespace CrazorDemoBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
+        public string Url { get; set; }
+
         public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
@@ -75,6 +77,7 @@ namespace CrazorDemoBot.Pages.Cards
             await this.CardApp.SaveAppAsync(cancellationToken);
 
             this.AdaptiveCard = (AdaptiveCard)result.Value;
+            this.Url = this.CardApp.GetRoute();
         }
     }
 }

@@ -15,11 +15,6 @@ namespace CrazorDemoBot.Cards.Addresses
         [SharedMemory]
         public List<Address> Addresses { get; set; } = new List<Address>();
 
-        public override Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
-        {
-            if (sharedId == null)
-                sharedId = DateTime.Now.ToString("yyyyMMdd");
-            return base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
-        }
+        public override string GetSharedId() => DateTime.Now.ToString("yyyyMMdd");
     }
 }

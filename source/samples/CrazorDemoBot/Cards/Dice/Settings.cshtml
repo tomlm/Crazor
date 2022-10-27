@@ -3,9 +3,10 @@
 @inherits CardView<DiceApp>
 
 <Card Version="1.6">
+    <Input.Text Binding="App.DiceName" />
     <Input.Number Binding="App.NumberDice" />
 
-    @if (App.NumberDice.HasValue)
+    @if (IsModelValid)
     {
         <Action.Cancel />
     }
@@ -13,10 +14,13 @@
 </Card>
 
 @functions {
+
+
     public void OnOK()
     {
-        if (this.App.NumberDice.HasValue)
+        if (IsModelValid && this.App.NumberDice.HasValue)
         {
+            this.App.SharedId = App.DiceName.Replace(" ", String.Empty);
             this.App.RollDice();
             CloseCard();
         }

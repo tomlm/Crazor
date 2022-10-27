@@ -15,6 +15,11 @@ namespace CrazorDemoBot.Cards.Dice
 
         [SharedMemory]
         [Required]
+        [StringLength(50, MinimumLength = 1)]
+        public string DiceName { get; set; }
+
+        [SharedMemory]
+        [Required]
         [Description("Number of dice")]
         [Range(1, 50, ErrorMessage = "Dice must be between 1 and 50.")]
         public int? NumberDice { get; set; }
