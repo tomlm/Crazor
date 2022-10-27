@@ -31,7 +31,7 @@ namespace CrazorDemoBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public async Task OnGetAsync(string app, string? resourceId, string? viewName, string? path, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {
@@ -45,14 +45,14 @@ namespace CrazorDemoBot.Pages.Cards
             string sessionId = Utils.GetNewId();
 
             // create card
-            await this.CardApp.LoadAppAsync(resourceId, sessionId, new Activity(ActivityTypes.Invoke)
+            await this.CardApp.LoadAppAsync(sharedId, sessionId, new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
                 ChannelId = $"emulator",
                 Id = Utils.GetNewId(),
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = resourceId ?? app },
+                Conversation = new ConversationAccount() { Id = sharedId ?? app },
                 Value = new AdaptiveCardInvokeValue()
                 {
                     Action = new AdaptiveCardInvokeAction()

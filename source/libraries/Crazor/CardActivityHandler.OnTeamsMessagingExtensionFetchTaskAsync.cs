@@ -29,7 +29,7 @@ namespace Crazor
             _logger!.LogInformation($"Starting composeExtension/fetchTask processing");
             string appId = action.CommandId;
 
-            var cardApp = await LoadAppAsync(turnContext, appId, resourceId: null, sessionId: null, view: null, cancellationToken: cancellationToken);
+            var cardApp = await LoadAppAsync(turnContext, appId, sharedId: null, sessionId: null, view: null, cancellationToken: cancellationToken);
             var invokeResponse = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
             var adaptiveCard = (AdaptiveCard)invokeResponse.Value;

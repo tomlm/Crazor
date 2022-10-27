@@ -134,9 +134,9 @@ namespace OpBot
             }
         }
 
-        public override async Task LoadAppAsync(string? resourceId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+        public override async Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
-            await base.LoadAppAsync(resourceId, sessionId, activity, cancellationToken);
+            await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
         }
 
         public async Task<T?> GetResponseAsync<T>(HttpMethod method, string urlPath)

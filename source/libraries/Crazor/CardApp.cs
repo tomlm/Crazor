@@ -69,7 +69,7 @@ namespace Crazor
         /// Instance Id for the card.
         /// </summary>
         [JsonIgnore]
-        public string? ResourceId { get; private set; }
+        public string? SharedId { get; private set; }
 
         /// <summary>
         /// Session Id for the card
@@ -289,7 +289,7 @@ namespace Crazor
 
         public virtual string GetRoute()
         {
-            return $"/Cards/{this.Name}/{this.ResourceId}";
+            return $"/Cards/{this.Name}/{this.SharedId}";
         }
 
         /// <summary>
@@ -297,10 +297,10 @@ namespace Crazor
         /// </summary>
         /// <param name="storage"></param>
         /// <returns></returns>
-        public async virtual Task LoadAppAsync(string? resourceId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+        public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(activity);
-            this.ResourceId = resourceId;
+            this.SharedId = sharedId;
             this.SessionId = sessionId ?? Utils.GetNewId();
             this.Activity = activity;
             var invoke = JToken.FromObject(activity.Value).ToObject<AdaptiveCardInvokeValue>();
@@ -308,7 +308,7 @@ namespace Crazor
             this.Action = invoke.Action;
 
             var storage = this.Services.GetRequiredService<IStorage>();
-            var resourceKey = GetKey(ResourceId);
+            var resourceKey = GetKey(SharedId);
             var sessionKey = (SessionId != null) ? GetKey(SessionId) : null;
 
             var keys = new List<string>() { resourceKey };
@@ -359,9 +359,9 @@ namespace Crazor
         {
             var storage = this.Services.GetRequiredService<IStorage>();
             var data = new Dictionary<string, object>();
-            if (ResourceId != null)
+            if (SharedId != null)
             {
-                data.Add(GetKey(ResourceId), GetScopedMemory<SharedMemoryAttribute>());
+                data.Add(GetKey(SharedId), GetScopedMemory<SharedMemoryAttribute>());
             }
 
             if (SessionId != null)
@@ -465,12 +465,12 @@ namespace Crazor
         private async Task<SessionData> AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.SessionId);
-            ArgumentNullException.ThrowIfNull(this.ResourceId);
+            ArgumentNullException.ThrowIfNull(this.SharedId);
 
             var sessionData = new SessionData
             {
                 App = this.CardType,
-                ResourceId = this.ResourceId,
+                SharedId = this.SharedId,
                 SessionId = this.SessionId
             };
             var sessionDataToken = sessionData.ToString();

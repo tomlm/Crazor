@@ -52,19 +52,19 @@ namespace Crazor
         /// <param name="activity"></param>
         /// <param name="cancellationToken"></param>
         /// <param name="app"></param>
-        /// <param name="resourceId"></param>
+        /// <param name="sharedId"></param>
         /// <param name="sessionId"></param>
         /// <returns></returns>
-        public virtual async Task<CardApp> LoadAppAsync(string app, string? resourceId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+        public virtual async Task<CardApp> LoadAppAsync(string app, string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
             var cardApp = _apps.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(cardApp);
-            await cardApp.LoadAppAsync(resourceId, sessionId, activity, cancellationToken);
+            await cardApp.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
             return cardApp;
         }
 
         public virtual Task<CardApp> LoadAppAsync(SessionData sessionData, Activity activity, CancellationToken cancellationToken) =>
-            LoadAppAsync(sessionData.App, sessionData.ResourceId, sessionData.SessionId, activity, cancellationToken);
+            LoadAppAsync(sessionData.App, sessionData.SharedId, sessionData.SessionId, activity, cancellationToken);
 
         /// <summary>
         /// ShowCard - return the card in it's current state
@@ -72,11 +72,11 @@ namespace Crazor
         /// <remarks>
         /// This will resolve a Session, and so should only be called to "refresh" a card that was deliverered or unfurled.
         /// </remarks>
-        /// <param name="resourceId">resourceId</param>
+        /// <param name="sharedId">sharedId</param>
         /// <param name="sessionId">instanceId</param>
         /// <param name="cancellationToken">ct</param>
         /// <returns>card with session data.</returns>
-        public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, string app, string? resourceId, string? sessionId, string? view, CancellationToken cancellationToken)
+        public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, string app, string? sharedId, string? sessionId, string? view, CancellationToken cancellationToken)
         {
             sessionId = sessionId ?? Utils.GetNewId();
 
@@ -90,16 +90,13 @@ namespace Crazor
             };
             activity!.Value = invokeValue;
             // create card
-            return await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
+            return await this.LoadAppAsync(app, sharedId, sessionId, activity, cancellationToken);
         }
 
         public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
         {
-            var parts = uri.LocalPath.Trim('/').Split('/');
-            var app = parts[1] + "App";
-            var resourceId = (parts.Length > 2) ? parts[2] : null;
-            var view = (parts.Length > 3) ? parts[3] : null;
-            var path = String.Join('/', parts.Skip(4).ToArray());
+            ParsePath(uri.LocalPath, out var app, out var sharedId, out var view, out var path);
+
             var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
 
             var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext?.Activity!));
@@ -117,8 +114,24 @@ namespace Crazor
             };
             activity!.Value = invokeValue;
 
-            return await this.LoadAppAsync(app, resourceId, sessionId, activity, cancellationToken);
+            return await this.LoadAppAsync(app, sharedId, sessionId, activity, cancellationToken);
         }
 
+        /// <summary>
+        /// Parse a /cards/{app}/{view}{path} into parts.
+        /// </summary>
+        /// <param name="localPath"></param>
+        /// <param name="app"></param>
+        /// <param name="sharedId"></param>
+        /// <param name="view"></param>
+        /// <param name="path"></param>
+        protected static void ParsePath(string localPath, out string app, out string? sharedId, out string? view, out string path)
+        {
+            var parts = localPath.Trim('/').Split('/');
+            app = parts[1] + "App";
+            sharedId = (parts.Length > 2) ? parts[2] : null;
+            view = (parts.Length > 3) ? parts[3] : null;
+            path = String.Join('/', parts.Skip(4).ToArray());
+        }
     }
 }

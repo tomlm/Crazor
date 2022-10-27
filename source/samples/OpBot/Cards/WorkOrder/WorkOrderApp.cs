@@ -25,9 +25,9 @@ namespace OpBot.Cards.WorkOrder
         public List<SystemStatus> SystemStatuses { get; set; }
 
 
-        public override async Task LoadAppAsync(string? resourceId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+        public override async Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
-            await base.LoadAppAsync(resourceId, sessionId, activity, cancellationToken);
+            await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
             
             //var accounts = await GetResponseAsync<OData<IEnumerable<Account>>>(HttpMethod.Get, "accounts?$top=5");
             //if (accounts != null)
@@ -42,7 +42,7 @@ namespace OpBot.Cards.WorkOrder
             //}
 
             // TODO:
-            // Fetch a real Work Order using the resourceId
+            // Fetch a real Work Order using the sharedId
         }
 
         public override Task SaveAppAsync(CancellationToken cancellationToken)
