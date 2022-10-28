@@ -24,6 +24,13 @@
         {
             ShowCard("Settings");
         }
+        else 
+        {
+            if (App.IsTaskModule)
+            {
+                CloseTaskModule(TaskModuleStatus.Insert);
+            }
+        }
     }
 
     public void RollDice() => App.RollDice();

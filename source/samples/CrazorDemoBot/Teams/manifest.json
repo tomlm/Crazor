@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "manifestVersion": "1.14",
   "id": "7b042a98-e2b4-428d-a1d0-753b4ddf8c0c",
   "packageName": "com.package.name",
@@ -89,7 +89,25 @@
             "width": "small",
             "height": "small"
           }
+        },
+        {
+          "id": "/Cards/Dice/Settings",
+          "type": "action",
+          "title": "Create Dice card",
+          "description": "Create a dice card to share",
+          "initialRun": true,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "taskInfo": {
+            "title": "Create Dice Card",
+            "width": "small",
+            "height": "small"
+          }
         }
+
       ],
       "canUpdateConfiguration": true,
       "messageHandlers": [
