@@ -30,13 +30,15 @@ namespace Crazor
 
             // reconstruct actionexecute from .data[Action.Execute]
             // gin up a AdaptiveCardInvokeValue
+            dynamic data = JObject.FromObject(action.Data);
+
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
                     Data = action.Data,
-                    Id = (string)JObject.FromObject(action.Data)["_id"],
-                    Verb = (string)JObject.FromObject(action.Data)["_verb"]
+                    Id = (string)data._id,
+                    Verb = (string)data._verb
                 }
             };
 
@@ -71,26 +73,49 @@ namespace Crazor
                     };
 
                 case TaskModuleAction.InsertCard:
-                    // insert card into output
-                    return new MessagingExtensionActionResponse
-                    {
-                        ComposeExtension = new MessagingExtensionResult(attachmentLayout: "list", type: "result")
-                        {
-                            // url to card
-                            Text = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetRoute()).AbsoluteUri,
-                            Attachments = new List<MessagingExtensionAttachment>()
-                            {
-                                // card
-                                new MessagingExtensionAttachment(AdaptiveCard.ContentType, content: adaptiveCard)
-                            }
-                        },
-                    };
+                    return CreateInsertCardResponse(cardApp, adaptiveCard);
 
                 case TaskModuleAction.PostCard:
+                    return CreatePreviewResponse(cardApp, adaptiveCard);
+                case TaskModuleAction.Auto:
                 case TaskModuleAction.None:
                 default:
                     return new MessagingExtensionActionResponse() { };
             }
+        }
+
+        protected MessagingExtensionActionResponse CreateInsertCardResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
+        {
+            // insert card into output
+            return new MessagingExtensionActionResponse
+            {
+                ComposeExtension = new MessagingExtensionResult(attachmentLayout: "list", type: "result")
+                {
+                    // url to card
+                    Text = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetRoute()).AbsoluteUri,
+                    Attachments = new List<MessagingExtensionAttachment>()
+                    {
+                        // card
+                        new MessagingExtensionAttachment(AdaptiveCard.ContentType, content: adaptiveCard)
+                    }
+                },
+            };
+        }
+
+        protected MessagingExtensionActionResponse CreatePreviewResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
+        {
+            // return preview
+            return new MessagingExtensionActionResponse
+            {
+                ComposeExtension = new MessagingExtensionResult(type: "botMessagePreview")
+                {
+                    ActivityPreview = MessageFactory.Attachment(new Attachment
+                    {
+                        Content = adaptiveCard,
+                        ContentType = AdaptiveCard.ContentType
+                    }) as Activity
+                }
+            };
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Crazor
+﻿namespace Crazor
 {
     public enum TaskModuleAction
     {
@@ -22,10 +16,15 @@ namespace Crazor
         /// Done, Insert a card into the compose window
         /// </summary>
         InsertCard,
-        
+
         /// <summary>
         /// Done, Post a message to the channel with a card embedded in it
         /// </summary>
-        PostCard
+        PostCard,
+
+        /// <summary>
+        /// Done, Post if it's a commandbox, insert if it's a compose box.
+        /// </summary>
+        Auto
     }
 }

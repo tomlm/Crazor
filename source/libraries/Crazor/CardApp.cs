@@ -22,6 +22,7 @@ using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Bot.Schema.Teams;
+using System.Threading;
 
 namespace Crazor
 {
@@ -487,16 +488,19 @@ namespace Crazor
             outboundCard.AdditionalProperties["url"] = GetRoute();
         }
 
-        private async Task<SessionData> AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
+        public SessionData GetSessionData()
         {
-            ArgumentNullException.ThrowIfNull(this.SessionId);
-
-            var sessionData = new SessionData
+            return new SessionData()
             {
                 App = this.CardType,
                 SharedId = this.SharedId,
                 SessionId = this.SessionId
             };
+        }
+
+        public async Task<string> GetSessionDataToken(CancellationToken cancellationToken)
+        {
+            var sessionData = GetSessionData();
             var sessionDataToken = sessionData.ToString();
 
             var encryptionProvider = this.Services.GetService<IEncryptionProvider>();
@@ -504,6 +508,14 @@ namespace Crazor
             {
                 sessionDataToken = await encryptionProvider.EncryptAsync(sessionDataToken.ToString(), cancellationToken);
             }
+            return sessionDataToken;
+        }
+
+        private async Task AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
+        {
+            ArgumentNullException.ThrowIfNull(this.SessionId);
+
+            var sessionDataToken = await GetSessionDataToken(cancellationToken);
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
             {
@@ -539,7 +551,6 @@ namespace Crazor
                     choiceSet.DataQuery.Dataset = $"{sessionDataToken}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
                 }
             }
-            return sessionData;
         }
 
         private static void AddRefresh(AdaptiveCard outboundCard)
