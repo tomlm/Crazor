@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifestVersion": "1.14",
   "id": "aa584ff7-bd92-4903-b702-9a79c1f70be1",
   "packageName": "com.package.name",
@@ -57,18 +57,20 @@
       "botId": "541f3bfd-741b-48fd-a86b-ad58e7f5e478",
       "commands": [
         {
-          "id": "/cards/workorder/create",
-          "title": "Create Work Order",
+          "id": "/Cards/WorkOrder/QuickCreate",
           "type": "action",
-          "context": [
-            "compose",
-            "commandBox"
-          ],
-          "description": "Create a new Work Order",
+          "title": "Add new Work Order",
+          "description": "Add a work order",
+          "initialRun": true,
           "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
           "taskInfo": {
-            "data": {
-            }
+            "title": "Add Work Order",
+            "width": "small",
+            "height": "small"
           }
         }
       ],
@@ -79,14 +81,20 @@
           "value": {
             "domains": [
               "opcardbot.azurewebsites.net"
-            ]
+            ],
+            "supportsAnonymizedPayloads": false
           }
         }
       ]
     }
   ],
   "validDomains": [
-    "opcardbot.azurewebsites.net",
-    "*.ngrok.io"
-  ]
+    "opcardbot.azurewebsites.net"
+  ],
+  "authorization": {
+    "permissions": {
+      "orgWide": [],
+      "resourceSpecific": []
+    }
+  }
 }
