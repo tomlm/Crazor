@@ -13,6 +13,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Reflection;
+using System.Text;
+using System.Xml.Serialization;
+using System.Xml;
+using Microsoft.CodeAnalysis;
 
 namespace Crazor
 {
@@ -36,7 +40,7 @@ namespace Crazor
 
             var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
-
+            adaptiveCard.Refresh = null;
             var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
 
             return new MessagingExtensionActionResponse()
@@ -50,31 +54,33 @@ namespace Crazor
 
         protected AdaptiveCard TransformActionExecuteToSubmit(AdaptiveCard card)
         {
-            foreach(var action in card.GetElements<AdaptiveExecuteAction>())
+            foreach (var action in card.GetElements<AdaptiveExecuteAction>())
             {
                 if (action.Data == null)
                 {
                     action.Data = new JObject();
                 }
-                ((JObject)action.Data)[AdaptiveExecuteAction.TypeName] = JObject.FromObject(action);
+                ((JObject)action.Data)["_verb"] = action.Verb;
+                action.Verb = null;
             }
             var json = JsonConvert.SerializeObject(card);
             json = json.Replace(AdaptiveExecuteAction.TypeName, AdaptiveSubmitAction.TypeName);
+            File.WriteAllText(@"c:\scratch\foo.json", json);
             return JsonConvert.DeserializeObject<AdaptiveCard>(json)!;
         }
 
         protected TaskModuleTaskInfo GetTaskInfoForCard(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
             var taskModuleAttribute = cardApp.CurrentView.GetType().GetCustomAttribute<TaskModuleAttribute>();
-            var taskInfo = taskModuleAttribute?.AsTaskInfo(cardApp.Name) ??
+            var taskInfo = taskModuleAttribute?.AsTaskInfo(adaptiveCard?.Title ?? cardApp.Name) ??
                 new TaskModuleTaskInfo()
                 {
-                    Title = cardApp.Name,
-                    Height = "small",
-                    Width = "small"
+                    Title = adaptiveCard?.Title ?? cardApp.Name,
+                    Height = "medium",
+                    Width = "medium"
                 };
             taskInfo.FallbackUrl = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetRoute()).AbsoluteUri;
-            taskInfo.Url = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
+            // taskInfo.Url = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
             taskInfo.CompletionBotId = _configuration.GetValue<string>("MicrosoftAppId");
             taskInfo.Card = new Attachment()
             {

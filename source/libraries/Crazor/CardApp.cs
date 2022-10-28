@@ -514,7 +514,8 @@ namespace Crazor
                 }
                 var data = (JObject)action.Data;
                 data[Constants.SESSIONDATA_KEY] = JToken.FromObject(sessionDataToken);
-                data[Constants.IDDATA_KEY] = action.Id;
+                if (action.Id != null)
+                    data[Constants.IDDATA_KEY] = action.Id;
             }
 
             foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
@@ -527,7 +528,8 @@ namespace Crazor
 
                 var data = (JObject)action.Data;
                 data[Constants.SESSIONDATA_KEY] = JToken.FromObject(sessionDataToken);
-                data[Constants.IDDATA_KEY] = action.Id;
+                if (action.Id != null)
+                    data[Constants.IDDATA_KEY] = action.Id;
             }
 
             foreach (var choiceSet in outboundCard.GetElements<AdaptiveChoiceSetInput>())

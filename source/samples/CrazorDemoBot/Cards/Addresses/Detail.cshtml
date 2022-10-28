@@ -5,37 +5,44 @@
 @attribute [Route("{addressId}")]
 @functions {
     public override string GetRoute()
-        => $"{this.Model.Id}";
+    => $"{this.Model?.Id}";
 
     public void OnLoadRoute(string addressId)
-        => this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)! ?? throw new CardRouteNotFoundException($"Address {addressId} not found");
+        => this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)!;
 }
 
-<Card Version="1.5">
+<Card Version="1.5" Title="Address">
     <TextBlock Class="H1">Address</TextBlock>
 
-    <FactSet>
-        <Fact Title="Street" Value="@Model.Street" />
-        <Fact Title="City" Value="@Model.City" />
-        <Fact Title="State" Value="@Model.State" />
-        <Fact Title="PostalCode" Value="@Model.PostalCode" />
-        <Fact Title="Country" Value="@Model.Country" />
-    </FactSet>
+    @if (this.Model == null)
+    {
+        <TextBlock>This address does not exist anymore.</TextBlock>
+        <Action.Execute Verb="Default" Title="Show Addresses"/>
+    }
+    else
+    {
+        <FactSet>
+            <Fact Title="Street" Value="@Model.Street" />
+            <Fact Title="City" Value="@Model.City" />
+            <Fact Title="State" Value="@Model.State" />
+            <Fact Title="PostalCode" Value="@Model.PostalCode" />
+            <Fact Title="Country" Value="@Model.Country" />
+        </FactSet>
 
-    <Action.Execute Title="Delete" Verb="Delete" />
-    <Action.Execute Title="Edit" Verb="Edit" />
-    <Action.OK />
+        <Action.Execute Title="Delete" Verb="Delete" />
+        <Action.Execute Title="Edit" Verb="Edit" />
+    }
 </Card>
 
 @functions {
     public void OnEdit()
     {
-        ReplaceCard("Edit", Model);
+        ShowCard("Edit", Model);
     }
 
     public void OnDelete()
     {
         App.DeleteAddress(Model.Id);
-        CloseCard("Deleted");
+        this.Model = null;
     }
 }

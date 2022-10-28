@@ -1,13 +1,13 @@
 ﻿@using CrazorDemoBot.Cards.Addresses
 @inherits CardView<AddressesApp, Address>
 
-<Card Version="1.5">
+<Card Version="1.5" Title="Add Address">
     <TextBlock Class="H1">Add Address</TextBlock>
 
     <Input.Text Binding="Model.Street" />
     <Input.Text Binding="Model.City" />
     <Input.ChoiceSet Binding="Model.State" />
-    <Input.Text Binding="Model.PostalCode" />
+    <Input.Text Binding="Model.PostalCode" Regex="" />
     <Input.ChoiceSet Binding="Model.Country" />
 
     <Action.Cancel />
@@ -15,13 +15,31 @@
 </Card>
 
 @functions {
+
     public void OnOK()
     {
         if (IsModelValid)
         {
             App.AddAddress(Model);
-            AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
             ReplaceCard("Detail", Model);
+
+            if (App.IsTaskModule)
+            {
+                CloseTaskModule(TaskModuleStatus.Insert);
+            }
+            else
+            {
+                AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
+            }
         }
+    }
+
+    public void OnCancel()
+    {
+        if (App.IsTaskModule)
+        {
+            CloseTaskModule(TaskModuleStatus.None);
+        }
+        CancelCard();
     }
 }

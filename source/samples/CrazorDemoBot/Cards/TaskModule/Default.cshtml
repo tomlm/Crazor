@@ -1,0 +1,17 @@
+﻿@using CrazorDemoBot.Cards.TaskModule
+@inherits CardView<TaskModuleApp>
+
+<Card Version="1.5">
+    <TextBlock>Counter is @App.Counter!</TextBlock>
+</Card>
+
+@functions {
+    public void OnInitialize()
+    {
+        if (App.Counter == 0)
+        {
+            ShowCard("Edit");
+        }
+    }
+
+}

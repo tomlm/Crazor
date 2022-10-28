@@ -11,13 +11,13 @@
         => this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)! ?? throw new CardRouteNotFoundException($"Address {addressId} not found");
 }
 
-<Card Version="1.5">
+<Card Version="1.5" Title="Edit Address">
     <TextBlock Class="H1">Edit Address</TextBlock>
 
     <Input.Text Binding="Model.Street" />
     <Input.Text Binding="Model.City" />
     <Input.ChoiceSet Binding="Model.State" />
-    <Input.Text Binding="Model.PostalCode" />
+    <Input.Text Binding="Model.PostalCode" Regex="" />
     <Input.ChoiceSet Binding="Model.Country" />
 
     <Action.Cancel />
@@ -29,7 +29,7 @@
     {
         if (IsModelValid)
         {
-            var address = App.Addresses.Where(a => a.Id == Model.Id).SingleOrDefault();
+            var address = App.GetAddress(Model.Id!);
             if (address != null)
             {
                 address.Street = Model.Street;
@@ -38,12 +38,8 @@
                 address.PostalCode = Model.PostalCode;
                 address.Country = Model.Country;
                 AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
-                ReplaceCard("Detail", address);
             }
-            else
-            {
-                AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
-            }
+            CloseCard();
         }
     }
 }

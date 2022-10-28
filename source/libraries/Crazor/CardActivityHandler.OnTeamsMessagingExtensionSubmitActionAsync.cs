@@ -3,17 +3,12 @@
 //-----------------------------------------------------------------------------
 
 using AdaptiveCards;
-using Crazor.Attributes;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Net.Mime;
-using System.Reflection;
-using System.Security.Policy;
 
 namespace Crazor
 {
@@ -33,27 +28,30 @@ namespace Crazor
         {
             _logger!.LogInformation($"Starting OnTeamsMessagingExtensionSubmitActionAsync() ");
 
-            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
-
-            var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
-            cardApp.IsTaskModule = true;
-            cardApp.MessageExtensionAction = action;
-
             // reconstruct actionexecute from .data[Action.Execute]
-            var actionExecute = JObject.FromObject(action.Data)[AdaptiveExecuteAction.TypeName].ToObject<AdaptiveExecuteAction>()!;
-            // gin up a AdaptiveCardInvokeAction
-            cardApp.Action = new AdaptiveCardInvokeAction()
+            // gin up a AdaptiveCardInvokeValue
+            var invokeValue = new AdaptiveCardInvokeValue()
             {
-                Data = actionExecute.Data,
-                Id = actionExecute.Id,
-                Verb = actionExecute.Verb,
+                Action = new AdaptiveCardInvokeAction()
+                {
+                    Data = action.Data,
+                    Id = (string)JObject.FromObject(action.Data)["_id"],
+                    Verb = (string)JObject.FromObject(action.Data)["_verb"]
+                }
             };
 
             // copy data over (skipping Action.Execute property)
             foreach (var property in ((JObject)action.Data).Properties().Where(property => property.Name != AdaptiveExecuteAction.TypeName))
             {
-                ((JObject)cardApp.Action.Data)[property.Name] = property.Value;
+                ((JObject)invokeValue.Action.Data)[property.Name] = property.Value;
             }
+
+            SessionData sessionData = await GetSessionDataFromInvokeAsync(invokeValue, cancellationToken);
+            var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
+
+            cardApp.IsTaskModule = true;
+            cardApp.MessageExtensionAction = action;
+            cardApp.Action = invokeValue.Action;
 
             var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
@@ -61,12 +59,14 @@ namespace Crazor
             switch (cardApp.TaskModuleStatus)
             {
                 case TaskModuleStatus.Continue:
+                    adaptiveCard.Refresh = null;
+                    var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
                     // continue taskModule bound to current card view.
                     return new MessagingExtensionActionResponse()
                     {
                         Task = new TaskModuleContinueResponse()
                         {
-                            Value = GetTaskInfoForCard(cardApp, adaptiveCard)
+                            Value = GetTaskInfoForCard(cardApp, submitCard)
                         },
                     };
 

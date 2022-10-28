@@ -43,6 +43,7 @@ namespace CrazorDemoBot.Cards.Addresses
         public string? PostalCode { get; set; }
 
         [Required]
-        public Countries Country { get; set; }
+        [DefaultValue(typeof(Countries), "US")]
+        public Countries Country { get; set; } = Countries.US;
     }
 }

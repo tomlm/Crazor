@@ -1,7 +1,7 @@
 ﻿@using CrazorDemoBot.Cards.Addresses
 @inherits CardView<AddressesApp>
 
-<Card Version="1.5">
+<Card Version="1.5" Title="Addresses for @DateTime.Now.ToShortDateString()">
     <TextBlock Size="ExtraLarge">Addresses</TextBlock>
     @if (App.Addresses.Any())
     {
@@ -75,14 +75,5 @@
     public void OnDelete(string addressId)
     {
         App.Addresses = App.Addresses.Where(a => a.Id != addressId).ToList();
-    }
-
-
-    public void OnCanceled(string? message)
-    {
-        if (!String.IsNullOrWhiteSpace(message))
-        {
-            AddBannerMessage(message, AdaptiveContainerStyle.Accent);
-        }
     }
 }

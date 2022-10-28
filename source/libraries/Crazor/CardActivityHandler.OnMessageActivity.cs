@@ -23,7 +23,7 @@ namespace Crazor
             IMessageActivity message = turnContext.Activity.AsMessageActivity();
             if (message != null)
             {
-                var app = turnContext.Activity.RemoveRecipientMention().Trim();
+                var app = turnContext.Activity.RemoveRecipientMention()?.Trim() ?? String.Empty;
                 if (app.ToLower().EndsWith("app"))
                 {
                     var cardApp = await LoadAppAsync(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);

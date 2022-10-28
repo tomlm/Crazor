@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "version": "1.0.0",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "version": "1.0.5",
   "manifestVersion": "1.14",
   "id": "7b042a98-e2b4-428d-a1d0-753b4ddf8c0c",
   "packageName": "com.package.name",
@@ -58,16 +58,36 @@
       "commands": [
         {
           "id": "/Cards/Addresses/Add",
-          "title": "Add Address",
           "type": "action",
-          "context": [
-            "compose",
-            "commandBox"
-          ],
-          "description": "Command Description; e.g., Add a customer",
+          "title": "Add new address",
+          "description": "Add an address for today",
+          "initialRun": true,
           "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
           "taskInfo": {
-            "title": "Add Address"
+            "title": "Add Address",
+            "width": "small",
+            "height": "small"
+          }
+        },
+        {
+          "id": "/Cards/TaskModule/Edit",
+          "type": "action",
+          "title": "Test TaskModule",
+          "description": "Test Task Module",
+          "initialRun": true,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "taskInfo": {
+            "title": "Test TaskModule",
+            "width": "small",
+            "height": "small"
           }
         }
       ],
@@ -78,7 +98,8 @@
           "value": {
             "domains": [
               "crazordemobot.azurewebsites.net"
-            ]
+            ],
+            "supportsAnonymizedPayloads": false
           }
         }
       ]
@@ -86,5 +107,11 @@
   ],
   "validDomains": [
     "crazordemobot.azurewebsites.net"
-  ]
+  ],
+  "authorization": {
+    "permissions": {
+      "orgWide": [],
+      "resourceSpecific": []
+    }
+  }
 }
