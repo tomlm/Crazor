@@ -10,15 +10,6 @@
 
     <TextBlock Size="Large" Weight="Bolder">Create Work Order</TextBlock>
 
-    <ColumnSet Style="Accent">
-        <Column Width="Auto" VerticalContentAlignment="Center">
-            <TextBlock>💡</TextBlock>
-        </Column>
-        <Column>
-            <TextBlock Wrap="true" Size="Small">Some work order details have been added automatically.</TextBlock>
-        </Column>
-    </ColumnSet>
-
     <TextBlock Size="Default" Weight="Bolder">Customer Details</TextBlock>
 
     <Input.ChoiceSet Separator="true" Label="Service Account" Binding="Model.ServiceAccount">
@@ -54,11 +45,22 @@
 </Card>
 
 @functions {
+    public void OnInitialize()
+    {
+        if (this.Model.Name == null)
+        {
+            this.Model.Name = Utils.GetNewId();
+        }
+    }
+
     public async Task OnSave()
     {
         if (IsModelValid)
         {
-            CloseCard(this.Model);
+            await App.AddWorkOrder(this.Model);
+
+            CloseTaskModule(TaskModuleAction.Auto);
+            ReplaceCard("Details", this.Model);
         }
         else
         {

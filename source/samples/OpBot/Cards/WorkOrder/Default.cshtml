@@ -19,11 +19,7 @@
                 CustomerAsset = new Asset("Hydraulic Power Unit #3"),
                 SystemStatus = new SystemStatus("Unscheduled")
             });
+        AddBannerMessage("💡 Some work order details have been added automatically.", AdaptiveContainerStyle.Accent);
     }
 
-    public void OnQuickCreateCompleted(WorkOrder workOrder)
-    {
-        App.WorkOrders[workOrder.Name] = workOrder;
-        ShowCard("Details", workOrder);
-    }
 }

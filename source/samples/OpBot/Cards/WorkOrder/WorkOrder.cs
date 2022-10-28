@@ -20,17 +20,17 @@ namespace OpBot.Cards.WorkOrder
 
         [JsonProperty("msdyn_workordertype")]
         [Required]
-        public WorkOrderType WorkOrderType { get; set; }
+        public WorkOrderType WorkOrderType { get; set; } = new WorkOrderType();
 
         [JsonProperty("msdyn_systemstatus")]
         [Required]
-        public SystemStatus SystemStatus { get; set; }
+        public SystemStatus SystemStatus { get; set; } = new SystemStatus();
 
         [JsonProperty("msdyn_pricelist")]
-        public PriceLevel PriceList { get; set; }
+        public PriceLevel PriceList { get; set; } = new PriceLevel();
 
         [JsonProperty("msdyn_customerasset")]
-        public Asset CustomerAsset { get; set; }
+        public Asset CustomerAsset { get; set; } = new Asset();
 
         public string IoTAlert { get; set; }
 
@@ -56,7 +56,7 @@ namespace OpBot.Cards.WorkOrder
                 {
                     case "Unscheduled":
                     case "Canceled":
-                        return AdaptiveTextColor .Attention;
+                        return AdaptiveTextColor.Attention;
 
                     case "Scheduled":
                     case "In Progress":
@@ -93,6 +93,6 @@ namespace OpBot.Cards.WorkOrder
         }
 
         [Required]
-        public string Name { get; set;  }
+        public string Name { get; set; }
     }
 }

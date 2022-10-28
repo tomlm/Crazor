@@ -48,5 +48,10 @@ namespace OpBot.Cards.WorkOrder
             WorkOrders.Remove(name);
         }
 
+        public async Task AddWorkOrder(WorkOrder workOrder)
+        {
+            await Task.CompletedTask;
+            this.WorkOrders[workOrder.Name] = workOrder;
+        }
     }
 }
