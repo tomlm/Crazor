@@ -18,9 +18,14 @@ namespace Crazor
         {
             SessionData sessionData = await GetSessionDataFromInvokeAsync(invokeValue, cancellationToken);
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
-            var invokeResponse = await cardApp.OnActionExecuteAsync(cancellationToken);
+            var card = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
-            return invokeResponse;
+            return new AdaptiveCardInvokeResponse()
+            {
+                StatusCode = 200,
+                Type = AdaptiveCard.ContentType,
+                Value = card
+            };
         }
 
 

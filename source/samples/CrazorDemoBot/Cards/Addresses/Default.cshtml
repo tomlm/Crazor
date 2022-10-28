@@ -32,6 +32,11 @@
                         </Image>
                     </Column>
                 </ColumnSet>
+                <SelectAction>
+                    <Action.Execute Verb="Detail">
+                        { "addressId":"@address.Id" }
+                    </Action.Execute>
+                </SelectAction>
             </Container>
         }
     }
@@ -49,9 +54,18 @@
         ShowCard("Add");
     }
 
+    public void OnDetail(string addressId)
+    {
+        var address = App.GetAddress(addressId);
+        if (address != null)
+        {
+            ShowCard("Detail", address);
+        }
+    }
+
     public void OnEdit(string addressId)
     {
-        var address = App.Addresses.SingleOrDefault(a => a.Id == addressId);
+        var address = App.GetAddress(addressId);
         if (address != null)
         {
             ShowCard("Edit", address);
@@ -63,31 +77,6 @@
         App.Addresses = App.Addresses.Where(a => a.Id != addressId).ToList();
     }
 
-    public void OnEditCompleted(Address editAddress)
-    {
-        ArgumentNullException.ThrowIfNull(editAddress);
-        var address = App.Addresses.Where(a => a.Id == editAddress.Id).SingleOrDefault();
-        if (address != null)
-        {
-            address.Street = editAddress.Street;
-            address.City = editAddress.City;
-            address.State = editAddress.State;
-            address.PostalCode = editAddress.PostalCode;
-            address.Country = editAddress.Country;
-            AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
-        }
-        else
-        {
-            AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
-        }
-    }
-
-    public void OnAddCompleted(Address address)
-    {
-        ArgumentNullException.ThrowIfNull(address);
-        App.Addresses.Add(address);
-        AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
-    }
 
     public void OnCanceled(string? message)
     {

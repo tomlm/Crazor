@@ -27,9 +27,8 @@ namespace Crazor
                 if (app.ToLower().EndsWith("app"))
                 {
                     var cardApp = await LoadAppAsync(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
-                    var invokeResponse = await cardApp.OnActionExecuteAsync(cancellationToken);
+                    var card = await cardApp.OnActionExecuteAsync(cancellationToken);
                     await cardApp.SaveAppAsync(cancellationToken);
-                    var card = (AdaptiveCard)invokeResponse.Value;
                     var response = Activity.CreateMessageActivity();
                     response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
                     await turnContext.SendActivityAsync(response, cancellationToken);

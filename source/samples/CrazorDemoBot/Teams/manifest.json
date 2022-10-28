@@ -57,18 +57,17 @@
       "botId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
       "commands": [
         {
-          "id": "exampleCmd3",
-          "title": "Example Command 3",
+          "id": "/Cards/Addresses/Add",
+          "title": "Add Address",
           "type": "action",
           "context": [
             "compose",
-            "commandBox",
-            "message"
+            "commandBox"
           ],
           "description": "Command Description; e.g., Add a customer",
-          "fetchTask": false,
+          "fetchTask": true,
           "taskInfo": {
-            "title": "Initial dialog title"
+            "title": "Add Address"
           }
         }
       ],

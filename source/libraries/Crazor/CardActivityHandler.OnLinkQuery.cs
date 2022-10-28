@@ -31,10 +31,8 @@ namespace Crazor
             if (uri.Host == hostName)
             {
                 var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
-                var invokeResponse = await cardApp.OnActionExecuteAsync(cancellationToken);
+                var card = await cardApp.OnActionExecuteAsync(cancellationToken);
                 await cardApp.SaveAppAsync(cancellationToken);
-
-                var adaptiveCard = (AdaptiveCard)invokeResponse.Value;
 
                 // for clients that don't support AC you must send a preview card attachment.
                 var preview = new Attachment(
@@ -44,7 +42,7 @@ namespace Crazor
                         subtitle: "",
                         buttons: new List<CardAction>()
                         {
-                                new CardAction() { Type = "openUrl", Title = "View card", Value = query.Url }
+                            new CardAction() { Type = "openUrl", Title = "View card", Value = query.Url }
                         })
                 );
 
@@ -55,7 +53,7 @@ namespace Crazor
                         AttachmentLayout = AttachmentLayoutTypes.List,
                         Attachments = new List<MessagingExtensionAttachment>()
                         {
-                            new MessagingExtensionAttachment(contentType: AdaptiveCard.ContentType, content: adaptiveCard, preview: preview)
+                            new MessagingExtensionAttachment(contentType: AdaptiveCard.ContentType, content: card, preview: preview)
                         }
                     });
             }

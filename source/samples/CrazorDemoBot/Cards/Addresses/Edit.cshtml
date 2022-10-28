@@ -24,3 +24,26 @@
     <Action.OK />
 </Card>
 
+@functions {
+    public void OnOK()
+    {
+        if (IsModelValid)
+        {
+            var address = App.Addresses.Where(a => a.Id == Model.Id).SingleOrDefault();
+            if (address != null)
+            {
+                address.Street = Model.Street;
+                address.City = Model.City;
+                address.State = Model.State;
+                address.PostalCode = Model.PostalCode;
+                address.Country = Model.Country;
+                AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
+                ReplaceCard("Detail", address);
+            }
+            else
+            {
+                AddBannerMessage("Address not found", AdaptiveContainerStyle.Attention);
+            }
+        }
+    }
+}

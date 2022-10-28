@@ -72,11 +72,10 @@ namespace CrazorDemoBot.Pages.Cards
             }, cancellationToken);
 
             // process Action.Execute
-            var result = await this.CardApp.OnActionExecuteAsync(cancellationToken);
+            this.AdaptiveCard = await this.CardApp.OnActionExecuteAsync(cancellationToken);
 
             await this.CardApp.SaveAppAsync(cancellationToken);
 
-            this.AdaptiveCard = (AdaptiveCard)result.Value;
             this.Url = this.CardApp.GetRoute();
         }
     }

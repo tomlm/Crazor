@@ -1,0 +1,41 @@
+﻿@using CrazorDemoBot.Cards.Addresses
+@inherits CardView<AddressesApp, Address>
+
+@* This card supports a deep link route *@
+@attribute [Route("{addressId}")]
+@functions {
+    public override string GetRoute()
+        => $"{this.Model.Id}";
+
+    public void OnLoadRoute(string addressId)
+        => this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)! ?? throw new CardRouteNotFoundException($"Address {addressId} not found");
+}
+
+<Card Version="1.5">
+    <TextBlock Class="H1">Address</TextBlock>
+
+    <FactSet>
+        <Fact Title="Street" Value="@Model.Street" />
+        <Fact Title="City" Value="@Model.City" />
+        <Fact Title="State" Value="@Model.State" />
+        <Fact Title="PostalCode" Value="@Model.PostalCode" />
+        <Fact Title="Country" Value="@Model.Country" />
+    </FactSet>
+
+    <Action.Execute Title="Delete" Verb="Delete" />
+    <Action.Execute Title="Edit" Verb="Edit" />
+    <Action.OK />
+</Card>
+
+@functions {
+    public void OnEdit()
+    {
+        ReplaceCard("Edit", Model);
+    }
+
+    public void OnDelete()
+    {
+        App.DeleteAddress(Model.Id);
+        CloseCard("Deleted");
+    }
+}

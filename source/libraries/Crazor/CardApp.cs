@@ -21,6 +21,7 @@ using System.Xml.Serialization;
 using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Bot.Schema.Teams;
 
 namespace Crazor
 {
@@ -117,19 +118,27 @@ namespace Crazor
         [JsonIgnore]
         public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
 
+        [JsonIgnore]
+        public bool IsTaskModule { get; set; } = false;
 
-        public virtual async Task<AdaptiveCardInvokeResponse> OnActionExecuteAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        [JsonIgnore]
+        public TaskModuleStatus TaskModuleStatus { get; set; }
+
+        [JsonIgnore]
+        public MessagingExtensionAction MessageExtensionAction { get; set; }
+
+        public virtual async Task<AdaptiveCard> OnActionExecuteAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            var response = await OnActionExecuteAsync(cancellationToken);
+            var result = await OnActionExecuteAsync(cancellationToken);
 
-            if (response.Value is AdaptiveCard adaptiveCard && turnContext.Activity.ChannelId == Channels.Msteams)
+            if (result is AdaptiveCard adaptiveCard && turnContext.Activity.ChannelId == Channels.Msteams)
             {
                 // we need to add refresh userids
                 var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
                 var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
                 adaptiveCard.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
             }
-            return response;
+            return result;
         }
 
         /// <summary>
@@ -137,7 +146,7 @@ namespace Crazor
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public virtual async Task<AdaptiveCardInvokeResponse> OnActionExecuteAsync(CancellationToken cancellationToken)
+        public virtual async Task<AdaptiveCard> OnActionExecuteAsync(CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Action);
             ArgumentNullException.ThrowIfNull(CurrentView);
@@ -209,12 +218,7 @@ namespace Crazor
 
             await ApplyCardModificationsAsync(outboundCard, cancellationToken);
 
-            return new AdaptiveCardInvokeResponse()
-            {
-                StatusCode = 200,
-                Type = AdaptiveCard.ContentType,
-                Value = outboundCard
-            };
+            return outboundCard;
         }
 
         /// <summary>
@@ -277,6 +281,11 @@ namespace Crazor
             this.CurrentView = View(this.CurrentCard, this.CallStack[0].Model);
         }
 
+        public void CloseTaskModule(TaskModuleStatus status)
+        {
+            this.TaskModuleStatus = status;
+        }
+
         /// <summary>
         /// Add a banner message 
         /// </summary>
@@ -290,7 +299,7 @@ namespace Crazor
         public virtual string GetRoute()
         {
             UriBuilder uri = new UriBuilder();
-            
+
             var viewRoute = this.CurrentView!.GetRoute();
             if (!viewRoute.StartsWith('/'))
             {
@@ -303,7 +312,7 @@ namespace Crazor
             }
 
             if (!String.IsNullOrEmpty(this.SharedId))
-                uri.Query=$"id={this.SharedId}";
+                uri.Query = $"id={this.SharedId}";
             return uri.Uri.PathAndQuery;
         }
 
@@ -498,13 +507,20 @@ namespace Crazor
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
             {
-                if (action.Data == null)
+                if ((action.Data == null) ||
+                    (action.Data is string text && string.IsNullOrWhiteSpace(text)))
                 {
                     action.Data = new JObject();
                 }
+                var data = (JObject)action.Data;
+                data[Constants.SESSIONDATA_KEY] = JToken.FromObject(sessionDataToken);
+                data[Constants.IDDATA_KEY] = action.Id;
+            }
 
+            foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
+            {
                 // YAML authoring errors - "data:" without children properties is an empty string
-                if (action.Data is string text && string.IsNullOrWhiteSpace(text))
+                if (action.Data == null || (action.Data is string text && string.IsNullOrWhiteSpace(text)))
                 {
                     action.Data = new JObject();
                 }

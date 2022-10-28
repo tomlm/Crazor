@@ -110,7 +110,7 @@ namespace Crazor
                     {
                         await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
                     }
-                    catch(CardRouteNotFoundException notFound)
+                    catch (CardRouteNotFoundException notFound)
                     {
                         AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
                         CancelCard();
@@ -369,6 +369,15 @@ namespace Crazor
                 Result = result,
                 Success = true
             });
+        }
+
+        /// <summary>
+        /// Change the taskmodule status
+        /// </summary>
+        /// <param name="status"></param>
+        public void CloseTaskModule(TaskModuleStatus status)
+        {
+            App.CloseTaskModule(status);
         }
 
         /// <summary>
