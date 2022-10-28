@@ -3,7 +3,7 @@
 @inherits CardView<DiceApp>
 
 <Card Version="1.6">
-    <TextBlock Style="Heading">Dice roller</TextBlock>
+    <TextBlock Size="Large" Style="Heading">@App.DiceName</TextBlock>
     @if (App.Dice?.Any() == true)
     {
         <ImageSet>
