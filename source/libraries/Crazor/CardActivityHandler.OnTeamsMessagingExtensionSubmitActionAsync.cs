@@ -76,8 +76,19 @@ namespace Crazor
                     return CreateInsertCardResponse(cardApp, adaptiveCard);
 
                 case TaskModuleAction.PostCard:
-                    return CreatePreviewResponse(cardApp, adaptiveCard);
+                    return CreatePreviewSendResponse(cardApp, adaptiveCard);
+
                 case TaskModuleAction.Auto:
+                    if (action.CommandContext.Contains("compose"))
+                    {
+                        return CreateInsertCardResponse(cardApp, adaptiveCard);
+                    }
+                    else if (action.CommandContext.Contains("commandBox"))
+                    {
+                        return CreatePreviewSendResponse(cardApp, adaptiveCard);
+                    }
+                    return new MessagingExtensionActionResponse() { };
+
                 case TaskModuleAction.None:
                 default:
                     return new MessagingExtensionActionResponse() { };
@@ -102,7 +113,7 @@ namespace Crazor
             };
         }
 
-        protected MessagingExtensionActionResponse CreatePreviewResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
+        protected MessagingExtensionActionResponse CreatePreviewSendResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
             // return preview
             return new MessagingExtensionActionResponse

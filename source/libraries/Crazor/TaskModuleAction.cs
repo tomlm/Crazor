@@ -5,12 +5,12 @@
         /// <summary>
         /// Card is still being worked on
         /// </summary>
-        Continue, 
+        Continue,
 
         /// <summary>
-        /// Done, don't share a card
+        /// Done, Post if it's a commandbox, insert if it's a compose box.
         /// </summary>
-        None,
+        Auto,
 
         /// <summary>
         /// Done, Insert a card into the compose window
@@ -23,8 +23,8 @@
         PostCard,
 
         /// <summary>
-        /// Done, Post if it's a commandbox, insert if it's a compose box.
+        /// Done, don't share a card
         /// </summary>
-        Auto
+        None,
     }
 }
