@@ -13,7 +13,7 @@
 @functions {
 
     [BindProperty]
-    public TaskModuleStatus Status { get; set; }
+    public TaskModuleAction Action { get; set; }
 
     public void OnIncrement()
     {
@@ -24,7 +24,7 @@
     {
         if (App.IsTaskModule)
         {
-            CloseTaskModule(Status);
+            CloseTaskModule(Action);
         }
         CloseCard();
     }
@@ -33,7 +33,7 @@
     {
         if (App.IsTaskModule)
         {
-            CloseTaskModule(TaskModuleStatus.None);
+            CloseTaskModule(TaskModuleAction.None);
         }
     }
 }

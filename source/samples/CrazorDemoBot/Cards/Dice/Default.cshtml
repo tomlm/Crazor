@@ -7,14 +7,14 @@
     @if (App.Dice?.Any() == true)
     {
         <ImageSet>
-        @foreach(var die in App.Dice)
-        {
-            <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium"/>
-        }
+            @foreach (var die in App.Dice)
+            {
+                <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
+            }
         </ImageSet>
     }
-    <Action.Execute Verb="RollDice" Title="Roll Dice"/>
-    <Action.Execute Verb="Refresh" Title="Refresh"/>
+    <Action.Execute Verb="RollDice" Title="Roll Dice" />
+    <Action.Execute Verb="Refresh" Title="Refresh" />
 </Card>
 
 
@@ -25,12 +25,9 @@
         {
             ShowCard("Settings");
         }
-        else 
+        else
         {
-            if (App.IsTaskModule)
-            {
-                CloseTaskModule(TaskModuleStatus.Insert);
-            }
+            CloseTaskModule(TaskModuleAction.InsertCard);
         }
     }
 

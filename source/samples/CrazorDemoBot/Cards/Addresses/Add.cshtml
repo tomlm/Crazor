@@ -25,7 +25,7 @@
 
             if (App.IsTaskModule)
             {
-                CloseTaskModule(TaskModuleStatus.Insert);
+                CloseTaskModule(TaskModuleAction.InsertCard);
             }
             else
             {
@@ -36,10 +36,7 @@
 
     public void OnCancel()
     {
-        if (App.IsTaskModule)
-        {
-            CloseTaskModule(TaskModuleStatus.None);
-        }
+        CloseTaskModule(TaskModuleAction.None);
         CancelCard();
     }
 }

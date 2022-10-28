@@ -122,7 +122,7 @@ namespace Crazor
         public bool IsTaskModule { get; set; } = false;
 
         [JsonIgnore]
-        public TaskModuleStatus TaskModuleStatus { get; set; }
+        public TaskModuleAction TaskModuleStatus { get; set; }
 
         [JsonIgnore]
         public MessagingExtensionAction MessageExtensionAction { get; set; }
@@ -281,7 +281,7 @@ namespace Crazor
             this.CurrentView = View(this.CurrentCard, this.CallStack[0].Model);
         }
 
-        public void CloseTaskModule(TaskModuleStatus status)
+        public void CloseTaskModule(TaskModuleAction status)
         {
             this.TaskModuleStatus = status;
         }

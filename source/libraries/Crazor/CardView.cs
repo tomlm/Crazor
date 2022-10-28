@@ -375,7 +375,7 @@ namespace Crazor
         /// Change the taskmodule status
         /// </summary>
         /// <param name="status"></param>
-        public void CloseTaskModule(TaskModuleStatus status)
+        public void CloseTaskModule(TaskModuleAction status)
         {
             App.CloseTaskModule(status);
         }

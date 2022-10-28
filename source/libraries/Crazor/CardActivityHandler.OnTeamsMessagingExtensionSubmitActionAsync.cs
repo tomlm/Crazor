@@ -58,7 +58,7 @@ namespace Crazor
 
             switch (cardApp.TaskModuleStatus)
             {
-                case TaskModuleStatus.Continue:
+                case TaskModuleAction.Continue:
                     adaptiveCard.Refresh = null;
                     var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
                     // continue taskModule bound to current card view.
@@ -70,7 +70,7 @@ namespace Crazor
                         },
                     };
 
-                case TaskModuleStatus.Insert:
+                case TaskModuleAction.InsertCard:
                     // insert card into output
                     return new MessagingExtensionActionResponse
                     {
@@ -86,8 +86,8 @@ namespace Crazor
                         },
                     };
 
-                case TaskModuleStatus.Post:
-                case TaskModuleStatus.None:
+                case TaskModuleAction.PostCard:
+                case TaskModuleAction.None:
                 default:
                     return new MessagingExtensionActionResponse() { };
             }

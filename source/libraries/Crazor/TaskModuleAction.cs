@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crazor
 {
-    public enum TaskModuleStatus
+    public enum TaskModuleAction
     {
         /// <summary>
         /// Card is still being worked on
@@ -21,11 +21,11 @@ namespace Crazor
         /// <summary>
         /// Done, Insert a card into the compose window
         /// </summary>
-        Insert,
+        InsertCard,
         
         /// <summary>
         /// Done, Post a message to the channel with a card embedded in it
         /// </summary>
-        Post
+        PostCard
     }
 }
