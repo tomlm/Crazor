@@ -17,6 +17,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Xml;
 using Microsoft.CodeAnalysis;
+using System.Diagnostics;
 
 namespace Crazor
 {
@@ -65,7 +66,6 @@ namespace Crazor
             }
             var json = JsonConvert.SerializeObject(card);
             json = json.Replace(AdaptiveExecuteAction.TypeName, AdaptiveSubmitAction.TypeName);
-            File.WriteAllText(@"c:\scratch\foo.json", json);
             return JsonConvert.DeserializeObject<AdaptiveCard>(json)!;
         }
 
