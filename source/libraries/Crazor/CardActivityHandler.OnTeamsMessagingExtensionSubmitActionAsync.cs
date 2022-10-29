@@ -79,11 +79,11 @@ namespace Crazor
                     return CreatePreviewSendResponse(cardApp, adaptiveCard);
 
                 case TaskModuleAction.Auto:
-                    if (action.CommandContext.Contains("compose"))
+                    if (action.CommandContext == "compose")
                     {
                         return CreateInsertCardResponse(cardApp, adaptiveCard);
                     }
-                    else if (action.CommandContext.Contains("commandBox"))
+                    else if (action.CommandContext.ToLower() == "commandbox")
                     {
                         return CreatePreviewSendResponse(cardApp, adaptiveCard);
                     }
