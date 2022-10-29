@@ -62,6 +62,9 @@ namespace Crazor
         [JsonIgnore]
         CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
 
+        [JsonIgnore]
+        public bool IsTaskModule => App.IsTaskModule;
+
         /// <summary>
         /// ExecuteAsync is disabled because the default writes the output directly to 
         /// the response, and we need to process it directly.
