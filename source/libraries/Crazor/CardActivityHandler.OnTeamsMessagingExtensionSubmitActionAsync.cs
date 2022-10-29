@@ -83,7 +83,7 @@ namespace Crazor
                     {
                         return CreateInsertCardResponse(cardApp, adaptiveCard);
                     }
-                    else if (action.CommandContext.ToLower() == "commandbox")
+                    else // if (action.CommandContext.ToLower() == "commandbox")
                     {
                         return CreatePreviewSendResponse(cardApp, adaptiveCard);
                     }
