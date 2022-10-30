@@ -1,0 +1,20 @@
+﻿@using Crazor
+@using CrazorDemoBot.Cards.Dice
+@inherits CardView<DiceApp>
+
+<Card Version="1.5">
+    <TextBlock Size="Large" Style="Heading">@App.DiceName</TextBlock>
+    <ImageSet>
+        @foreach (var die in App.Dice)
+        {
+            <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
+        }
+    </ImageSet>
+    <Action.Execute Verb="RollDice" Title="Roll Dice" />
+    <Action.Execute Verb="Refresh" Title="Refresh" />
+</Card>
+
+
+@functions {
+    public void RollDice() => App.RollDice();
+}

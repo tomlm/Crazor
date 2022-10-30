@@ -2,13 +2,13 @@
 @using Microsoft.Bing.WebSearch.Models
 @using Microsoft.Extensions.Configuration
 @using CrazorDemoBot.Cards.BingSearch
-@inherits CardView<BingSearchApp, SearchModel>
+@inherits CardView<BingSearchApp>
 
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Bing Search</TextBlock>
     <ColumnSet>
         <Column Width="stretch">
-            <Input.Text Binding="Model.Query" Label="" Placeholder="Enter search terms"/>
+            <Input.Text Binding="Query" Label="" Placeholder="Enter search terms"/>
         </Column>
         <Column Width="auto">
             <ActionSet>
@@ -59,23 +59,35 @@
 </Card>
 
 @functions {
+    [SessionMemory]
+    [BindProperty]
+    [Required]
+    [StringLength(100)]
+    public string? Query { get; set; }
+
+    [SessionMemory]
+    [BindProperty]
+    public int Offset { get; set; }
+
     public const int PageSize = 5;
 
     public IList<WebPage> Results { get; set; } = new List<WebPage>();
 
-    public bool HasNext() => Results.Any();
+    public bool HasNext() 
+        => Results.Any();
 
-    public bool HasPrev() => Results.Any() && Model.Offset > 0;
+    public bool HasPrev() 
+        => Results.Any() && Offset > 0;
 
     public async Task OnSearchAsync()
     {
-        if (!String.IsNullOrWhiteSpace(Model.Query))
+        if (!String.IsNullOrWhiteSpace(Query))
         {
             var configuration = (IConfiguration)ViewContext.HttpContext.RequestServices.GetService(typeof(IConfiguration))!;
             var apiKey = configuration.GetValue<string>("BingKey");
             var search = new WebSearchClient(new ApiKeyServiceClientCredentials(apiKey));
 
-            var searchResult = await search.Web.SearchAsync(query: Model.Query, count: PageSize, offset: Model.Offset);
+            var searchResult = await search.Web.SearchAsync(query: Query, count: PageSize, offset: Offset);
 
             Results = searchResult.WebPages.Value!;
         }
@@ -83,14 +95,14 @@
 
     public async Task OnNextAsync()
     {
-        Model.Offset += PageSize;
+        Offset += PageSize;
         await OnSearchAsync();
     }
 
     public async Task OnPreviousAsync()
     {
-        if (Model.Offset != 0)
-            Model.Offset -= PageSize;
+        if (Offset != 0)
+            Offset -= PageSize;
         await OnSearchAsync();
     }
 }

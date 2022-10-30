@@ -1,4 +1,5 @@
 ﻿using AdaptiveCards;
+using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Crazor.Validation;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
@@ -38,31 +38,22 @@ namespace Crazor
         {
         }
 
-        [JsonIgnore]
         public IUrlHelper UrlHelper { get; set; }
 
-        [JsonIgnore]
         public string Name { get; set; }
 
-        [JsonIgnore]
         public AppT App { get; set; }
 
-        [JsonIgnore]
         public AdaptiveCardInvokeAction Action { get; set; }
 
-        [JsonIgnore]
         public IView RazorView { get; set; }
 
-        [JsonIgnore]
         public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
 
-        [JsonIgnore]
         public bool IsModelValid { get; set; } = true;
 
-        [JsonIgnore]
         CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
 
-        [JsonIgnore]
         public bool IsTaskModule => App.IsTaskModule;
 
         /// <summary>
@@ -147,13 +138,13 @@ namespace Crazor
                 return true;
             }
 
-            // Default implementation of CLOSE and CANCEL calls CloseView() or CancelView() appropriately.
+            // Default implementation of OK and CANCEL calls CloseCard() or CancelCard() appropriately.
             switch (verb)
             {
                 case Constants.OK_VERB:
                     if (this.IsModelValid)
                     {
-                        this.CloseCard(this.GetModel());
+                        this.CloseCard(ViewContext.ViewData.Model);
                     }
                     return true;
 
@@ -192,70 +183,7 @@ namespace Crazor
                             obj = obj.GetPropertyValue(part);
                         }
                         var targetProperty = obj.GetType().GetProperty(parts.Last());
-                        if (targetProperty != null)
-                        {
-                            if (property.Value != null)
-                            {
-                                var val = (object)property.Value;
-                                var targetType = targetProperty.PropertyType;
-                                if (targetType.Name == "Nullable`1")
-                                {
-                                    targetType = targetType.GenericTypeArguments[0];
-                                }
-
-                                switch (targetType.Name)
-                                {
-                                    case "Byte":
-                                        val = Convert.ToByte(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "Int16":
-                                        val = Convert.ToInt16(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "Int32":
-                                        val = Convert.ToInt32(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "Int64":
-                                        val = Convert.ToInt64(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "UInt16":
-                                        val = Convert.ToUInt16(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "UInt32":
-                                        val = Convert.ToUInt32(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "UInt64":
-                                        val = Convert.ToUInt64(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "Single":
-                                        val = Convert.ToSingle(Convert.ToDouble(val.ToString()));
-                                        break;
-                                    case "Double":
-                                        val = Convert.ToDouble(val.ToString());
-                                        break;
-                                    case "Boolean":
-                                        val = Convert.ToBoolean(val.ToString());
-                                        break;
-                                    case "DateTime":
-                                        val = Convert.ToDateTime(val.ToString());
-                                        break;
-                                    default:
-                                        if (targetType.IsEnum)
-                                        {
-                                            val = Enum.Parse(targetType, val.ToString()!);
-                                        }
-                                        else
-                                        {
-                                            val = Convert.ChangeType(val.ToString(), targetType);
-                                        }
-                                        break;
-                                }
-                                targetProperty.SetValue(obj, val);
-                            }
-                            else
-                            {
-                                targetProperty.SetValue(obj, (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null);
-                            }
-                        }
+                        obj.SetTargetProperty(targetProperty, property.Value);
                     }
                 }
             }
@@ -271,23 +199,23 @@ namespace Crazor
             this.IsModelValid = validator.TryValidateObject(this, validationResults);
             AddValidationResults(String.Empty, validationResults);
 
-            var model = this.GetModel();
-            if (model != null)
-            {
-                validationResults = new List<ValidationResult>();
+            //var model = ViewContext.ViewData.Model;
+            //if (model != null)
+            //{
+            //    validationResults = new List<ValidationResult>();
 
-                if (!validator.TryValidateObjectRecursive(model, validationResults))
-                {
-                    this.IsModelValid = false;
-                    AddValidationResults($"Model.", validationResults);
-                }
-            }
+            //    if (!validator.TryValidateObjectRecursive(model, validationResults))
+            //    {
+            //        this.IsModelValid = false;
+            //        AddValidationResults($"Model.", validationResults);
+            //    }
+            //}
 
             // for complex types do a recursive deep validation. We can't
             // do this at the root because CardView is too complicated for a deep compare.
-            foreach (var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<BindPropertyAttribute>() != null &&
-                                                                              !p.PropertyType.IsValueType &&
-                                                                              p.PropertyType != typeof(string)))
+            foreach (var property in this.GetType().GetProperties()
+                                        .Where(p => (p.GetCustomAttribute<BindPropertyAttribute>() != null || p.GetCustomAttribute<SessionMemoryAttribute>() != null))
+                                        .Where(p => !p.PropertyType.IsValueType && p.PropertyType != typeof(string)))
             {
                 validationResults = new List<ValidationResult>();
                 var value = property.GetValue(this);
@@ -318,11 +246,6 @@ namespace Crazor
                     }
                 }
             }
-        }
-
-        public virtual object? GetModel()
-        {
-            return this.ViewBag.Model;
         }
 
         public virtual string GetRoute()
@@ -594,9 +517,18 @@ namespace Crazor
         where AppT : CardApp
         where ModelT : class
     {
+        public CardView()
+        {
+            if (typeof(ModelT).IsAssignableTo(typeof(CardApp)))
+            {
+                throw new ArgumentException($"{nameof(ModelT)} You can't pass a CardApp as a model");
+            }
+        }
+
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
         //     property.
+        [SessionMemory]
         public ModelT Model
         {
             get
@@ -642,9 +574,5 @@ namespace Crazor
             base.OnLoadCardContext(viewContext);
         }
 
-        public override object GetModel()
-        {
-            return this.Model;
-        }
     }
 }

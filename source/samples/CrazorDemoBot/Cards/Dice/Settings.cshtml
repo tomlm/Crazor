@@ -14,15 +14,14 @@
 </Card>
 
 @functions {
-
-
     public void OnOK()
     {
         if (IsModelValid && this.App.NumberDice.HasValue)
         {
             this.App.SharedId = App.DiceName.Replace(" ", String.Empty);
             this.App.RollDice();
-            CloseCard();
+            CloseTaskModule(TaskModuleAction.Auto);
+            ReplaceCard("Roll");
         }
     }
 }

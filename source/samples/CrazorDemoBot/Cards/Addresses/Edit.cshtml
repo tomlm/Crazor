@@ -29,17 +29,8 @@
     {
         if (IsModelValid)
         {
-            var address = App.GetAddress(Model.Id!);
-            if (address != null)
-            {
-                address.Street = Model.Street;
-                address.City = Model.City;
-                address.State = Model.State;
-                address.PostalCode = Model.PostalCode;
-                address.Country = Model.Country;
-                AddBannerMessage("Address updated", AdaptiveContainerStyle.Good);
-            }
-            CloseCard();
+            App.UpdateAddress(Model);
+            CloseCard(Model);
         }
     }
 }

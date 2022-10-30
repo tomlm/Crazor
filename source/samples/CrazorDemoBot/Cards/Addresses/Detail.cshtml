@@ -31,6 +31,7 @@
 
         <Action.Execute Title="Delete" Verb="Delete" />
         <Action.Execute Title="Edit" Verb="Edit" />
+        <Action.Execute Title="All Addresses" Verb="All" />
     }
 </Card>
 
@@ -40,9 +41,19 @@
         ShowCard("Edit", Model);
     }
 
+    public void OnAll()
+    {
+        CloseCard();
+    }
+
     public void OnDelete()
     {
         App.DeleteAddress(Model.Id);
         this.Model = null;
+    }
+
+    public void OnEditCompleted(Address address)
+    {
+        this.Model = address;
     }
 }

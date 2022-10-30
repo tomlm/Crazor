@@ -11,16 +11,5 @@ namespace OpBot.Cards.WorkOrderDetails
         {
         }
 
-        [SessionMemory]
-        public string Status { get; set; } = "Scheduled";
-
-        [SessionMemory]
-        public DateTimeOffset? PromisedBy { get; set; }
-
-        [SessionMemory]
-        public DateTimeOffset? StartTime { get; set; }
-
-        [SessionMemory]
-        public DateTimeOffset? CompleteTime { get; set; }
     }
 }

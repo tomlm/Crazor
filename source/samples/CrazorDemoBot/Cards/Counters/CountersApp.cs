@@ -13,9 +13,6 @@ namespace CrazorDemoBot.Cards.Counters
         {
         }
 
-        [SessionMemory]
-        public int SessionCounter { get; set; } = 0;
-
         [SharedMemory]
         public int SharedCounter { get; set; } = 0;
 

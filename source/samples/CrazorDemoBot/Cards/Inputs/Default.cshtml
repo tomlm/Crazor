@@ -4,27 +4,30 @@
 <Card Version="1.5">
     <TextBlock Style="Heading">Values!</TextBlock>
 
-    <TextBlock>Birthday: @App.Data.Birthday?.ToShortDateString()</TextBlock>
-    <TextBlock>Arrival: @App.Data.ArrivalTime?.ToString("HH:MM")</TextBlock>
-    <TextBlock>Percentage: @App.Data.Percent</TextBlock>
-    <TextBlock>Attendees: @App.Data.Attendees</TextBlock>
-    <TextBlock>Phone: @App.Data.PhoneNumber</TextBlock>
-    <TextBlock>Password: @App.Data.Password</TextBlock>
-    <TextBlock>IsCool: @App.Data.IsCool</TextBlock>
-    <TextBlock>Favorite Pet: @App.Data.FavoritePet</TextBlock>
+    <TextBlock>Birthday: @Data.Birthday?.ToShortDateString()</TextBlock>
+    <TextBlock>Arrival: @Data.ArrivalTime?.ToString("HH:MM")</TextBlock>
+    <TextBlock>Percentage: @Data.Percent</TextBlock>
+    <TextBlock>Attendees: @Data.Attendees</TextBlock>
+    <TextBlock>Phone: @Data.PhoneNumber</TextBlock>
+    <TextBlock>Password: @Data.Password</TextBlock>
+    <TextBlock>IsCool: @Data.IsCool</TextBlock>
+    <TextBlock>Favorite Pet: @Data.FavoritePet</TextBlock>
 
     <Action.Execute Title="Edit" Verb="Edit"/>
 </Card>
 
 @functions {
+    [SessionMemory]
+    public InputsModel Data { get; set; } = new InputsModel();
+
     public void OnEdit()
     {
-        ShowCard("Edit", App.Data);
+        ShowCard("Edit", Data);
     }
 
     public void OnEditCompleted(InputsModel model)
     {
-        App.Data = model;
+        Data = model;
     }
 }
 

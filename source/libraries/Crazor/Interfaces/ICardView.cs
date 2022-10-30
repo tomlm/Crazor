@@ -33,8 +33,6 @@ namespace Crazor.Interfaces
 
         Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services);
 
-        object? GetModel();
-
         string GetRoute();
     }
 }

@@ -2,34 +2,12 @@
 @using CrazorDemoBot.Cards.Dice
 @inherits CardView<DiceApp>
 
-<Card Version="1.5">
-    <TextBlock Size="Large" Style="Heading">@App.DiceName</TextBlock>
-    @if (App.Dice?.Any() == true)
-    {
-        <ImageSet>
-            @foreach (var die in App.Dice)
-            {
-                <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
-            }
-        </ImageSet>
-    }
-    <Action.Execute Verb="RollDice" Title="Roll Dice" />
-    <Action.Execute Verb="Refresh" Title="Refresh" />
-</Card>
-
-
 @functions {
     public void OnInitialize()
     {
-        if (!App.NumberDice.HasValue)
-        {
-            ShowCard("Settings");
-        }
+        if (App.Dice != null)
+            ReplaceCard("Roll");
         else
-        {
-            CloseTaskModule(TaskModuleAction.Auto);
-        }
+            ShowCard("Settings");
     }
-
-    public void RollDice() => App.RollDice();
 }

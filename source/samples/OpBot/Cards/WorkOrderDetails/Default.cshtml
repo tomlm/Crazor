@@ -1,11 +1,12 @@
 ﻿@using System.Text;
 @using System.Net.Http;
 @using Crazor
+@using Crazor.Attributes
 @using Newtonsoft.Json;
 @using OpBot.Cards.WorkOrder;
 @using OpBot.Cards.WorkOrderDetails
 
-@inherits CardView<WorkOrderDetailsApp, WorkOrder>
+@inherits CardView<WorkOrderDetailsApp>
 
 <Card Version="1.5">
 
@@ -93,9 +94,20 @@
 </Card>
 
 @functions {
-
-    [SharedMemory]
+    [SessionMemory]
     public WorkOrder WorkOrder { get; set; }
+
+    [SessionMemory]
+    public string Status { get; set; } = "Scheduled";
+
+    [SessionMemory]
+    public DateTimeOffset? PromisedBy { get; set; }
+
+    [SessionMemory]
+    public DateTimeOffset? StartTime { get; set; }
+
+    [SessionMemory]
+    public DateTimeOffset? CompleteTime { get; set; }
 
     [BindProperty]
     public string AssignedToUserId { get; set; }
@@ -115,8 +127,6 @@
 
     public void OnInitialize()
     {
-        WorkOrder = Model;
-
         // Silly hack to make sure we always have a work order value
         // for example a direct GET request to the /Details screen
         if (WorkOrder == null || string.IsNullOrEmpty(WorkOrder.Name))

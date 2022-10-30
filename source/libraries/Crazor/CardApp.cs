@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Newtonsoft.Json;
 using Crazor.Interfaces;
 using System.Xml;
 using System.Xml.Serialization;
@@ -22,7 +21,6 @@ using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Bot.Schema.Teams;
-using System.Threading;
 
 namespace Crazor
 {
@@ -61,71 +59,55 @@ namespace Crazor
         /// <summary>
         /// Name of the App.
         /// </summary>
-        [JsonIgnore]
         public string CardType { get; private set; }
 
-        [JsonIgnore]
         public string Name { get; set; }
 
         /// <summary>
         /// Instance Id for the card.
         /// </summary>
-        [JsonIgnore]
         public string? SharedId { get; set; }
 
         /// <summary>
         /// Session Id for the card
         /// </summary>
-        [JsonIgnore]
         public string? SessionId { get; private set; }
 
         /// <summary>
         /// The activity we are processing.
         /// </summary>
-        [JsonIgnore]
         public Activity? Activity { get; set; }
 
         /// <summary>
         /// The action we are processing.
         /// </summary>
-        [JsonIgnore]
         public AdaptiveCardInvokeAction? Action { get; set; }
 
-        [JsonIgnore]
         public IServiceProvider Services { get; set; }
 
         /// <summary>
         /// Navigation stack
         /// </summary>
         [SessionMemory]
-        [JsonIgnore]
         public List<CardViewState> CallStack { get; set; }
 
-        [JsonIgnore]
         public string CurrentCard => CallStack.First().Name;
 
-        [JsonIgnore]
         public ICardView CurrentView { get; private set; }
 
-        [JsonIgnore]
         public CardResult? LastResult { get; set; }
 
         /// <summary>
         /// Messages to add to the card
         /// </summary>
-        [JsonIgnore]
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
-        [JsonIgnore]
         public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
 
-        [JsonIgnore]
         public bool IsTaskModule { get; set; } = false;
 
-        [JsonIgnore]
         public TaskModuleAction TaskModuleStatus { get; set; }
 
-        [JsonIgnore]
         public MessagingExtensionAction MessageExtensionAction { get; set; }
 
         public virtual async Task<AdaptiveCard> OnActionExecuteAsync(ITurnContext turnContext, CancellationToken cancellationToken)
@@ -171,20 +153,13 @@ namespace Crazor
             {
                 if (!String.IsNullOrEmpty(this.Action.Verb))
                 {
-                    var state = this.CallStack[0];
-                    var cardView = this.CurrentView;
-
                     await this.CurrentView.OnVerbAsync(this.Action, cancellationToken);
                     if (LastResult != null)
                     {
                         await this.CurrentView.OnCardResumeAsync(LastResult, cancellationToken);
                     }
 
-                    state.Model = cardView.GetModel();
-                    if (state.Model is CardApp)
-                    {
-                        state.Model = null;
-                    }
+                    SaveCardState(this.CallStack[0], this.CurrentView);
                 }
             }
             catch (Exception err)
@@ -249,8 +224,18 @@ namespace Crazor
         /// <param name="model"></param>
         public void ShowCard(string cardName, object? model = null)
         {
-            this.CallStack.Insert(0, new CardViewState(cardName, model));
-            this.CurrentView = View(cardName, model);
+            if (this.CurrentView != null)
+            {
+                SaveCardState(this.CallStack[0], this.CurrentView);
+            }
+            else
+            {
+
+            }
+
+            var state = new CardViewState(cardName, model);
+            this.CallStack.Insert(0, state);
+            this.CurrentView = LoadView(cardName, state);
         }
 
         /// <summary>
@@ -260,8 +245,10 @@ namespace Crazor
         /// <param name="model">model to pass card</param>
         public void ReplaceCard(string cardName, object? model = null)
         {
-            this.CallStack[0] = new CardViewState(cardName, model);
-            this.CurrentView = View(cardName, model);
+            SaveCardState(this.CallStack[0], this.CurrentView);
+            var cardState = new CardViewState(cardName, model);
+            this.CallStack[0] = cardState;
+            this.CurrentView = LoadView(cardName, cardState);
         }
 
         public void CloseCard(CardResult? result = null)
@@ -279,7 +266,7 @@ namespace Crazor
                 this.CallStack.Insert(0, new CardViewState(Constants.DEFAULT_VIEW));
             }
 
-            this.CurrentView = View(this.CurrentCard, this.CallStack[0].Model);
+            this.CurrentView = LoadView(this.CurrentCard, this.CallStack[0]);
         }
 
         public void CloseTaskModule(TaskModuleAction status)
@@ -375,7 +362,7 @@ namespace Crazor
             }
 
             // load current card.
-            var cardView = View(this.CurrentCard, this.CallStack[0].Model);
+            var cardView = LoadView(this.CurrentCard, this.CallStack[0]);
 
             // NOTE: if the current card navigates to another card
             // then CurrentView will be non null, but if it doesn't
@@ -427,7 +414,7 @@ namespace Crazor
         /// <param name="viewName"></param>
         /// <returns>view</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public ICardView View(string viewName, object? model = null)
+        public ICardView LoadView(string viewName, CardViewState cardState)
         {
             var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
             var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
@@ -442,6 +429,10 @@ namespace Crazor
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
             cardView.Name = viewName;
+
+            // rester card SessionMemory properties
+            LoadCardState(cardState, cardView);
+
             ITempDataProvider tempDataProvider;
             ActionContext actionContext;
             var httpContext = new DefaultHttpContext { RequestServices = Services };
@@ -449,7 +440,7 @@ namespace Crazor
             tempDataProvider = Services.GetRequiredService<ITempDataProvider>();
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
-                Model = model
+                Model = cardState.Model
             };
             var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
@@ -738,6 +729,41 @@ namespace Crazor
                         {
                             property.SetValue(this, value.ToObject(property.PropertyType));
                         }
+                    }
+                }
+            }
+        }
+
+        private void LoadCardState(CardViewState cardState, ICardView cardView)
+        {
+            foreach (var property in cardView.GetType().GetProperties()
+                                                        .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
+            {
+                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
+                {
+                    cardView.SetTargetProperty(property, val);
+                }
+            }
+        }
+
+
+
+        private void SaveCardState(CardViewState state, ICardView cardView)
+        {
+            // capture all properties on CardView which are not on base type and not ignored.
+            foreach (var property in cardView.GetType().GetProperties()
+                                                        .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
+            {
+                var val = property.GetValue(cardView);
+                if (val != null)
+                {
+                    if (property.Name == "Model")
+                    {
+                        state.Model = val;
+                    }
+                    else
+                    {
+                        state.SessionMemory[property.Name] = JToken.FromObject(val);
                     }
                 }
             }
