@@ -70,6 +70,8 @@ namespace Crazor
                      options.ViewLocationFormats.Add("/Cards/{0}.cshtml");
                  });
 
+            HttpHelper.BotMessageSerializerSettings.Formatting = Formatting.None;
+            HttpHelper.BotMessageSerializer.Formatting = Formatting.None;
             return services;
         }
 

@@ -2,20 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Crazor.Interfaces;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
-using System.IO;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
-using Crazor.Encryption;
 
 namespace Crazor
 {

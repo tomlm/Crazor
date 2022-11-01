@@ -15,11 +15,7 @@ if (!String.IsNullOrEmpty(storageKey))
 builder.Services.AddCrazor();
 // ---- </CRAZOR>
 
-var mvcBuilder = builder.Services.AddMvc()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
-    }); 
+var mvcBuilder = builder.Services.AddMvc();
 
 // uncomment this to enable live edit of markup pages
 //if (builder.Environment.IsDevelopment())

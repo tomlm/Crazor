@@ -2,6 +2,7 @@ using Microsoft.Bot.Builder;
 using Crazor;
 using System.Diagnostics;
 using Microsoft.Bot.Builder.Azure.Blobs;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +16,7 @@ if (!String.IsNullOrEmpty(storageKey))
 builder.Services.AddCrazor();
 // ---- </CRAZOR>
 
-var mvcBuilder = builder.Services.AddMvc()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
-    });
+var mvcBuilder = builder.Services.AddMvc();
 
 //if (builder.Environment.IsDevelopment())
 //{
