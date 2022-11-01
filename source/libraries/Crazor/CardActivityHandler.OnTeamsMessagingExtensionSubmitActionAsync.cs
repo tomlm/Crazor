@@ -28,7 +28,7 @@ namespace Crazor
         {
             _logger!.LogInformation($"Starting OnTeamsMessagingExtensionSubmitActionAsync() ");
 
-            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(action);
+            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(action.Data));
 
             SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);

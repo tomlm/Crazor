@@ -50,23 +50,23 @@ namespace Crazor
             return sb.ToString();
         }
 
-        public static AdaptiveCardInvokeValue TransfromSubmitDataToExecuteAction(dynamic data)
+        public static AdaptiveCardInvokeValue TransfromSubmitDataToExecuteAction(JObject data)
         {
             // reconstruct actionexecute from .data[Action.Execute]
             // gin up a AdaptiveCardInvokeValue
-
+            dynamic d = data;
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
                     Data = data,
-                    Id = (string)data._id,
-                    Verb = (string)data._verb
+                    Id = (string)d._id,
+                    Verb = (string)d._verb
                 }
             };
 
             // copy data over (skipping Action.Execute property)
-            foreach (var property in ((JObject)data).Properties().Where(property => property.Name != AdaptiveExecuteAction.TypeName))
+            foreach (var property in data.Properties().Where(property => property.Name != AdaptiveExecuteAction.TypeName))
             {
                 ((JObject)invokeValue.Action.Data)[property.Name] = property.Value;
             }
