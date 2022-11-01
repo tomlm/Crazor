@@ -334,7 +334,7 @@
                 },
                 "preExpandSingleShowCardAction": false,
                 "actionsOrientation": "Horizontal",
-                "actionAlignment": "stretch"
+                "actionAlignment": "left"
             },
             "adaptiveCard": {
                 "allowCustomStyle": false
@@ -366,7 +366,7 @@
         let adaptiveCard = new AdaptiveCards.AdaptiveCard();
         adaptiveCard.hostConfig = hostConfig;
         
-        window.history.replaceState({ }, null, '@Model.Url');
+        window.history.replaceState({ }, null, '@Model.RouteUrl');
 
         const invokeBot = (invokeName, invokeValue) =>
             new Promise((resolve, reject) => {
@@ -385,7 +385,7 @@
                         serviceUrl: 'http://blank',
                         id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.Activity?.Id)',
                         type: 'invoke',
-                        channelId: 'emulator',
+                        channelId: '@Model.ChannelId',
                         from: { id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.SessionId)', name: name },
                         to: { id: 'bot id' },
                         name: invokeName,

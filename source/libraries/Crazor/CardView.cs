@@ -10,10 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -300,7 +298,7 @@ namespace Crazor
         /// <summary>
         /// Change the taskmodule status
         /// </summary>
-        /// <param name="status"></param>
+        /// <param name="status">action to take on closing</param>
         public void CloseTaskModule(TaskModuleAction status)
         {
             App.CloseTaskModule(status);
@@ -430,22 +428,23 @@ namespace Crazor
                     xml = writer.ToString().Trim();
                 }
 
-                if (!xml.StartsWith("<?xml"))
+                if (!String.IsNullOrWhiteSpace(xml))
                 {
-                    xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
+                    if (!xml.StartsWith("<?xml"))
+                    {
+                        xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
+                    }
+                    Diag.Debug.WriteLine(xml);
+
+                    var reader = XmlReader.Create(new StringReader(xml));
+                    var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
+                   return card;
                 }
-                Diag.Debug.WriteLine(xml);
-
-                var reader = XmlReader.Create(new StringReader(xml));
-                var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
-
-                if (Debugger.IsAttached)
+                else
                 {
-                    var cardPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "card.json");
-                    Diag.Debug.WriteLine($"AdaptiveCard JSON available at:\n{cardPath}");
-                    File.WriteAllText(cardPath, JsonConvert.SerializeObject(card, Newtonsoft.Json.Formatting.Indented));
+                    // no card defined in markup
+                    return new AdaptiveCard();
                 }
-                return card;
             }
             catch (Exception err)
             {

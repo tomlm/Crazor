@@ -16,7 +16,7 @@ namespace Crazor
     {
         protected async override Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            SessionData sessionData = await GetSessionDataFromInvokeAsync(invokeValue, cancellationToken);
+            SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
             var card = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
@@ -28,15 +28,6 @@ namespace Crazor
             };
         }
 
-
-        protected async Task<SessionData> GetSessionDataFromInvokeAsync(AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
-        {
-            // Get session data from the invoke payload
-            IEncryptionProvider encryptionProvider = _serviceProvider.GetRequiredService<IEncryptionProvider>();
-            var data = await encryptionProvider.DecryptAsync((string)((dynamic)invokeValue.Action.Data)._sessiondata, cancellationToken);
-            var sessionData = SessionData.FromString(data);
-            return sessionData;
-        }
 
         protected override Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
             // we extract SSO tokens in Card Adapter where we have information about whether the channel is trusted

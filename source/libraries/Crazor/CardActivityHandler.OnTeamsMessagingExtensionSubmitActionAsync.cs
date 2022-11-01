@@ -28,27 +28,9 @@ namespace Crazor
         {
             _logger!.LogInformation($"Starting OnTeamsMessagingExtensionSubmitActionAsync() ");
 
-            // reconstruct actionexecute from .data[Action.Execute]
-            // gin up a AdaptiveCardInvokeValue
-            dynamic data = JObject.FromObject(action.Data);
+            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(action);
 
-            var invokeValue = new AdaptiveCardInvokeValue()
-            {
-                Action = new AdaptiveCardInvokeAction()
-                {
-                    Data = action.Data,
-                    Id = (string)data._id,
-                    Verb = (string)data._verb
-                }
-            };
-
-            // copy data over (skipping Action.Execute property)
-            foreach (var property in ((JObject)action.Data).Properties().Where(property => property.Name != AdaptiveExecuteAction.TypeName))
-            {
-                ((JObject)invokeValue.Action.Data)[property.Name] = property.Value;
-            }
-
-            SessionData sessionData = await GetSessionDataFromInvokeAsync(invokeValue, cancellationToken);
+            SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
 
             cardApp.IsTaskModule = true;
@@ -94,6 +76,7 @@ namespace Crazor
                     return new MessagingExtensionActionResponse() { };
             }
         }
+
 
         protected MessagingExtensionActionResponse CreateInsertCardResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
         {

@@ -10,15 +10,15 @@
 <html>
 
 <head>
-    <title>            
-    @if (Model.CardApp!.CurrentCard != "Default")
-    {
-        @($"{Model.CardApp.Name}-{@Model.CardApp.CurrentCard}")
-    }
-    else
-    {
-        @Model.CardApp.Name 
-    }
+    <title>
+        @if (Model.CardApp!.CurrentCard != "Default")
+        {
+            @($"{Model.CardApp.Name}-{@Model.CardApp.CurrentCard}")
+        }
+        else
+        {
+            @Model.CardApp.Name
+        }
     </title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
@@ -38,11 +38,11 @@
     </div>
     <br />
     <br />
-    
+
 
     <label for="dvToken">Dataverse Token</label>
-    <input type="text" id="dvToken"  />
-    
+    <input type="text" id="dvToken" />
+ 
     <script type="text/javascript">
         function getCookie(cookieName) {
             var name = cookieName + "=";
@@ -338,7 +338,7 @@
                 },
                 "preExpandSingleShowCardAction": false,
                 "actionsOrientation": "Horizontal",
-                "actionAlignment": "stretch"
+                "actionAlignment": "left"
             },
             "adaptiveCard": {
                 "allowCustomStyle": false
@@ -370,7 +370,7 @@
         let adaptiveCard = new AdaptiveCards.AdaptiveCard();
         adaptiveCard.hostConfig = hostConfig;
 
-        window.history.replaceState({ }, null, '@Model.Url');
+        window.history.replaceState({}, null, '@Model.RouteUrl');
 
         const invokeBot = (invokeName, invokeValue) =>
             new Promise((resolve, reject) => {
@@ -389,7 +389,7 @@
                         serviceUrl: 'http://blank',
                         id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.Activity?.Id)',
                         type: 'invoke',
-                        channelId: 'emulator',
+                        channelId: '@Model.ChannelId',
                         from: { id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.SessionId)', name: name },
                         to: { id: 'bot id' },
                         name: invokeName,
@@ -403,7 +403,7 @@
                         var dvToken = tryGetDvToken()
                         if (dvToken && dvToken.length > 0)
                             xhr.setRequestHeader('X-DV-Token', dvToken);
-
+                 
                     },
                     error: function (invokeResponse, status, xhr) {
                         $("#cardDiv").unbind('mouseenter mouseleave');
@@ -412,7 +412,7 @@
                     success: function (invokeResponse, status, xhr) {   // success callback function
                         adaptiveCard.parse(invokeResponse.value);
                         if (invokeResponse.value.url != null && window.location.pathname != invokeResponse.value.url) {
-                            window.history.replaceState({ }, null, invokeResponse.value["url"]);
+                            window.history.replaceState({}, null, invokeResponse.value["url"]);
                             document.title = invokeResponse.value.title;
                         }
                         cardDiv.replaceChild(adaptiveCard.render(), cardDiv.children[0]);
@@ -424,7 +424,7 @@
 
         const tryGetDvToken = () => {
             const token = localStorage.getItem("dvToken");
-            if(token) {
+            if (token) {
                 return token;
             }
             //const input = document.getElementById('dvToken');
@@ -434,13 +434,13 @@
 
         let dvTokenInput = document.getElementById("dvToken");
         dvTokenInput.addEventListener("change", () => {
-          // And save the results into the session storage object
+            // And save the results into the session storage object
             localStorage.setItem("dvToken", dvTokenInput.value);
             invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
         });
 
         dvTokenInput.value = localStorage.getItem("dvToken");
-
+     
         adaptiveCard.onExecuteAction = function (actionIn) {
             var action = actionIn.toJSON();
             action.data = actionIn.data;
@@ -456,9 +456,9 @@
         };
         adaptiveCard.parse(card);
         cardDiv.appendChild(adaptiveCard.render());
-        // HACK invoke refresh, this breaks deep link...how do we do this?
-        //cardDiv.appendChild(document.createElement("div"));
-        //invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
+                // HACK invoke refresh, this breaks deep link...how do we do this?
+                //cardDiv.appendChild(document.createElement("div"));
+                //invokeBot('adaptiveCard/action', { action: adaptiveCard.refresh.action.toJSON() });
 
     </script>
 </body>

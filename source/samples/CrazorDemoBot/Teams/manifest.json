@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "manifestVersion": "1.14",
   "id": "7b042a98-e2b4-428d-a1d0-753b4ddf8c0c",
   "packageName": "com.package.name",
@@ -36,6 +36,18 @@
       "scopes": [
         "personal"
       ]
+    },
+    {
+      "entityId": "/Cards/Addresses",
+      "name": "Addresses",
+      "contentBotId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "AllCardsTab",
+      "name": "Cards",
+      "contentBotId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
+      "scopes": [ "personal" ]
     }
   ],
   "bots": [

@@ -76,16 +76,16 @@ namespace AdaptiveCards
         /// <summary>
         ///  A collection representing features and feature versions that this element requires.
         /// </summary>
-        [JsonProperty(Order = 1)]
+        [JsonProperty(Order = 1, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
         [XmlElement]
 #endif
-        public SerializableDictionary<string> Requires { get; set; } = new SerializableDictionary<string>(StringComparer.OrdinalIgnoreCase);
+        public SerializableDictionary<string> Requires { get; set; } 
 
         /// <summary>
         /// Determines whether the <see cref="AdditionalProperties"/> property should be serialized.
         /// </summary>
-        public bool ShouldSerializeRequires() => this.Requires.Count > 0;
+        public bool ShouldSerializeRequires() => this.Requires != null && this.Requires.Count > 0;
 
 
         /// <summary>

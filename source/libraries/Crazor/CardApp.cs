@@ -21,6 +21,10 @@ using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Bot.Schema.Teams;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
 
 namespace Crazor
 {
@@ -41,6 +45,8 @@ namespace Crazor
             Indent = true,
         };
 
+        protected IConfiguration _configuration;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardApp(IServiceProvider services)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -48,6 +54,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(services);
 
             this.Services = services;
+            this._configuration = services.GetRequiredService<IConfiguration>();
             this.CallStack = new List<CardViewState>()
             {
                 new CardViewState(Constants.DEFAULT_VIEW, null)
@@ -57,11 +64,19 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Name of the App.
+        /// Typoe of the App.
         /// </summary>
         public string CardType { get; private set; }
 
+        /// <summary>
+        /// Name of the app
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// IconUrl to use for the card.
+        /// </summary>
+        public string IconUrl { get; set; }
 
         /// <summary>
         /// Instance Id for the card.
@@ -106,6 +121,8 @@ namespace Crazor
 
         public bool IsTaskModule { get; set; } = false;
 
+        public bool IsTabModule => this.Activity.ChannelId == Channels.Msteams && this.Activity.Conversation.Id.StartsWith("tab:");
+
         public TaskModuleAction TaskModuleStatus { get; set; }
 
         public MessagingExtensionAction MessageExtensionAction { get; set; }
@@ -114,7 +131,8 @@ namespace Crazor
         {
             var result = await OnActionExecuteAsync(cancellationToken);
 
-            if (result is AdaptiveCard adaptiveCard && turnContext.Activity.ChannelId == Channels.Msteams)
+            if (result is AdaptiveCard adaptiveCard && turnContext.Activity.ChannelId == Channels.Msteams &&
+                !turnContext.Activity.Conversation.Id.StartsWith("tab:"))
             {
                 // we need to add refresh userids
                 var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
@@ -224,18 +242,10 @@ namespace Crazor
         /// <param name="model"></param>
         public void ShowCard(string cardName, object? model = null)
         {
-            if (this.CurrentView != null)
-            {
-                SaveCardState(this.CallStack[0], this.CurrentView);
-            }
-            else
-            {
-
-            }
-
-            var state = new CardViewState(cardName, model);
-            this.CallStack.Insert(0, state);
-            this.CurrentView = LoadView(cardName, state);
+            SaveCardState(this.CallStack[0], this.CurrentView);
+            var cardState = new CardViewState(cardName, model);
+            this.CallStack.Insert(0, cardState);
+            LoadView(cardState);
         }
 
         /// <summary>
@@ -245,10 +255,9 @@ namespace Crazor
         /// <param name="model">model to pass card</param>
         public void ReplaceCard(string cardName, object? model = null)
         {
-            SaveCardState(this.CallStack[0], this.CurrentView);
             var cardState = new CardViewState(cardName, model);
             this.CallStack[0] = cardState;
-            this.CurrentView = LoadView(cardName, cardState);
+            LoadView(cardState);
         }
 
         public void CloseCard(CardResult? result = null)
@@ -266,7 +275,7 @@ namespace Crazor
                 this.CallStack.Insert(0, new CardViewState(Constants.DEFAULT_VIEW));
             }
 
-            this.CurrentView = LoadView(this.CurrentCard, this.CallStack[0]);
+            LoadView(this.CallStack[0]);
         }
 
         public void CloseTaskModule(TaskModuleAction status)
@@ -362,15 +371,7 @@ namespace Crazor
             }
 
             // load current card.
-            var cardView = LoadView(this.CurrentCard, this.CallStack[0]);
-
-            // NOTE: if the current card navigates to another card
-            // then CurrentView will be non null, but if it doesn't
-            // then we need to set it.
-            if (this.CurrentView == null)
-            {
-                this.CurrentView = cardView;
-            }
+            LoadView(this.CallStack[0]);
         }
 
         /// <summary>
@@ -414,21 +415,21 @@ namespace Crazor
         /// <param name="viewName"></param>
         /// <returns>view</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public ICardView LoadView(string viewName, CardViewState cardState)
+        public void LoadView(CardViewState cardState)
         {
             var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
-            var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
+            var viewPath = $"/Cards/{Name}/{cardState.Name}.cshtml";
             var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
             if (viewResult?.View == null)
             {
-                throw new ArgumentNullException($"{viewName} does not match any available view");
+                throw new ArgumentNullException($"{cardState.Name} does not match any available view");
             }
 
             ICardView cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
             cardView.RazorView = viewResult.View;
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
-            cardView.Name = viewName;
+            cardView.Name = cardState.Name;
 
             // rester card SessionMemory properties
             LoadCardState(cardState, cardView);
@@ -444,8 +445,8 @@ namespace Crazor
             };
             var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
-            cardView.OnLoadCardContext(viewContext);
-            return cardView;
+            this.CurrentView = cardView;
+            this.CurrentView.OnLoadCardContext(viewContext);
         }
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
@@ -455,12 +456,9 @@ namespace Crazor
 
             AddRefresh(outboundCard);
 
-            if (this.Activity.ChannelId != Channels.Msteams)
-            {
-                AddSystemMenu(outboundCard);
-            }
-
             AddMessageBanner(outboundCard);
+
+            AddSystemMenu(outboundCard);
 
             // add session data to outbound card
             await AddSessionDataToAdaptiveCardAsync(outboundCard, cancellationToken);
@@ -549,10 +547,9 @@ namespace Crazor
             var refresh = new AdaptiveExecuteAction()
             {
                 Title = "Refresh",
-                Verb = Constants.SHOW_VERB,
+                Verb = Constants.REFRESH_VERB,
                 IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
-                AssociatedInputs = AdaptiveAssociatedInputs.None
-                //AdditionalProperties = new SerializableDictionary<string, object>() { { "mode", "secondary" } }
+                AssociatedInputs = AdaptiveAssociatedInputs.None,
             };
             outboundCard.Refresh = new AdaptiveRefresh() { Action = refresh };
         }
@@ -617,86 +614,123 @@ namespace Crazor
 
         private void AddSystemMenu(AdaptiveCard outboundCard)
         {
-            if (outboundCard.Body.Any())
-            {
-                outboundCard.Body.First().Separator = false;
-            }
-
-            var ellipsis = new AdaptiveColumnSet()
-            {
-                Separator = false,
-                Spacing = AdaptiveSpacing.None,
-                Columns = new List<AdaptiveColumn>()
-                {
-                    new AdaptiveColumn()
-                    {
-                        Width = AdaptiveColumnWidth.Stretch,
-                        Spacing = AdaptiveSpacing.None,
-                    },
-                    new AdaptiveColumn()
-                    {
-                        Spacing = AdaptiveSpacing.None,
-                        Width = AdaptiveColumnWidth.Auto,
-                        VerticalContentAlignment = AdaptiveVerticalContentAlignment.Bottom,
-                        Items = new List<AdaptiveElement>()
-                        {
-                            new AdaptiveImage()
-                            {
-                                Url = "https://powercardbot.azurewebsites.net/ellipsis.png",
-                                Width = "16px",
-                                SelectAction = new AdaptiveToggleVisibilityAction()
-                                {
-                                    TargetElements = new List<AdaptiveTargetElement>()
-                                    {
-                                        new AdaptiveTargetElement()
-                                        {
-                                             ElementId = "systemMenu"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-
             var systemMenu = new AdaptiveActionSet()
             {
                 Id = "systemMenu",
-                IsVisible = false
+                IsVisible = false,
+                Separator = true
             };
-            outboundCard.Body.Insert(0, ellipsis);
 
-            if (HasView(Constants.ABOUT_VIEW))
+            if (Activity.ChannelId == _configuration.GetValue<Uri>("HostUri").Host && outboundCard.Refresh?.Action != null)
+            {
+                outboundCard.Refresh.Action.Mode = AdaptiveActionMode.Secondary;
+                systemMenu.Actions.Add(outboundCard.Refresh.Action);
+            }
+
+            if (HasView(Constants.ABOUT_VIEW) && this.CurrentCard != Constants.ABOUT_VIEW)
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
                     Title = Constants.ABOUT_VIEW,
                     Verb = Constants.ABOUT_VIEW,
                     IconUrl = "https://powercardbot.azurewebsites.net/about.png",
-                    AssociatedInputs = AdaptiveAssociatedInputs.None
-                    //   AdditionalProperties = new SerializableDictionary<string, object>() { { "mode", "secondary" } }
+                    AssociatedInputs = AdaptiveAssociatedInputs.None,
+                    Mode = AdaptiveActionMode.Secondary
                 });
             }
 
-            if (outboundCard.Refresh != null)
-            {
-                systemMenu.Actions.Add(outboundCard.Refresh.Action);
-            }
-
-            if (this.HasView(Constants.SETTINGS_VIEW))
+            if (this.HasView(Constants.SETTINGS_VIEW) && this.CurrentCard != Constants.SETTINGS_VIEW)
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
                     Title = Constants.SETTINGS_VIEW,
                     Verb = Constants.SETTINGS_VIEW,
                     IconUrl = "https://powercardbot.azurewebsites.net/settings.png",
-                    AssociatedInputs = AdaptiveAssociatedInputs.None
-                    //AdditionalProperties = new SerializableDictionary<string, object>() { { "mode", "secondary" } }
+                    AssociatedInputs = AdaptiveAssociatedInputs.None,
+                    Mode = AdaptiveActionMode.Secondary
                 });
             }
 
-            outboundCard.Body.Insert(1, systemMenu);
+            if (this.Activity.ChannelId == _configuration.GetValue<Uri>("HostUri").Host)
+            {
+                if (outboundCard.Body.Any())
+                {
+                    outboundCard.Body.First().Separator = false;
+                }
+
+                var ellipsis = new AdaptiveColumnSet()
+                {
+                    Separator = false,
+                    Spacing = AdaptiveSpacing.None,
+                    Columns = new List<AdaptiveColumn>()
+                    {
+                        new AdaptiveColumn()
+                        {
+                            Width = AdaptiveColumnWidth.Auto,
+                            VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
+                            Items = new List<AdaptiveElement>()
+                            {
+                                new AdaptiveImage(_configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png")
+                                {
+                                    Size= AdaptiveImageSize.Small
+                                }
+                            }
+                        },
+                        new AdaptiveColumn()
+                        {
+                            Width = AdaptiveColumnWidth.Stretch,
+                            VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
+                            Items = new List<AdaptiveElement>()
+                            {
+                                new AdaptiveTextBlock(_configuration.GetValue<string>("BotName")) { Size= AdaptiveTextSize.Small }
+                            }
+                        },
+                        new AdaptiveColumn()
+                        {
+                            Width = AdaptiveColumnWidth.Auto,
+                            VerticalContentAlignment = AdaptiveVerticalContentAlignment.Bottom,
+                            Items = new List<AdaptiveElement>()
+                            {
+                                new AdaptiveRichTextBlock()
+                                {
+                                    Inlines = new List<AdaptiveInline>()
+                                    {
+                                        new AdaptiveTextRun("…")
+                                        {
+                                            Size = AdaptiveTextSize.Large,
+                                            Weight = AdaptiveTextWeight.Bolder,
+                                            SelectAction = new AdaptiveToggleVisibilityAction()
+                                            {
+                                                TargetElements = new List<AdaptiveTargetElement>()
+                                                {
+                                                    new AdaptiveTargetElement() { ElementId = "systemMenu"}
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                outboundCard.Body.Insert(0, ellipsis);
+
+                foreach (var action in systemMenu.Actions)
+                {
+                    action.Mode = AdaptiveActionMode.Primary;
+                }
+
+                outboundCard.Body.Insert(1, systemMenu);
+                outboundCard.Body.Insert(2, new AdaptiveContainer() { Separator = true, Spacing = AdaptiveSpacing.None, Id = "systemMenuBorder" });
+            }
+            else
+            {
+                foreach (var action in systemMenu.Actions)
+                {
+                    outboundCard.Actions.Add(action);
+                }
+            }
         }
 
         private object GetScopedMemory<MemoryAttributeT>()
@@ -750,20 +784,23 @@ namespace Crazor
 
         private void SaveCardState(CardViewState state, ICardView cardView)
         {
-            // capture all properties on CardView which are not on base type and not ignored.
-            foreach (var property in cardView.GetType().GetProperties()
-                                                        .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
+            if (cardView != null)
             {
-                var val = property.GetValue(cardView);
-                if (val != null)
+                // capture all properties on CardView which are not on base type and not ignored.
+                foreach (var property in cardView.GetType().GetProperties()
+                                                            .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
                 {
-                    if (property.Name == "Model")
+                    var val = property.GetValue(cardView);
+                    if (val != null)
                     {
-                        state.Model = val;
-                    }
-                    else
-                    {
-                        state.SessionMemory[property.Name] = JToken.FromObject(val);
+                        if (property.Name == "Model")
+                        {
+                            state.Model = val;
+                        }
+                        else
+                        {
+                            state.SessionMemory[property.Name] = JToken.FromObject(val);
+                        }
                     }
                 }
             }
@@ -774,17 +811,15 @@ namespace Crazor
         /// <summary>
         /// Parse a /cards/{app}/{view}{path} into parts.
         /// </summary>
-        /// <param name="localPath"></param>
-        /// <param name="app"></param>
-        /// <param name="sharedId"></param>
-        /// <param name="view"></param>
-        /// <param name="path"></param>
-        public static void ParseUri(Uri uri, out string app, out string? sharedId, out string? view, out string path)
+        /// <param name="uri">uri</param>
+        /// <param name="turnContext">Turn context</param>
+        /// <param name="app">app from the uri</param>
+        /// <param name="sharedId">sharedId from the uri</param>
+        public static void ParseUri(Uri uri, out string app, out string? sharedId, out string view, out string path)
         {
             sharedId = null;
             var parts = uri.LocalPath.Trim('/').Split('/');
             app = parts[1] + "App";
-            // sharedId = (parts.Length > 2) ? parts[2] : null;
             view = (parts.Length > 2) ? parts[2] : null;
             path = String.Join('/', parts.Skip(3).ToArray());
             if (!String.IsNullOrEmpty(uri.Query))

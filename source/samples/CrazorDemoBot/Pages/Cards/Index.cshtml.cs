@@ -22,9 +22,12 @@ namespace CrazorDemoBot.Pages.Cards
             _configuration = configuration;
             _appFactory = cardFactory;
             BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
+            ChannelId = _configuration.GetValue<Uri>("HostUri").Host;
         }
 
         public string BotUri { get; set; }
+
+        public string ChannelId { get; set; }
 
         public string? Token { get; set; }
 
@@ -32,7 +35,7 @@ namespace CrazorDemoBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public string Url { get; set; }
+        public string RouteUrl { get; set; }
 
         public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
@@ -52,7 +55,7 @@ namespace CrazorDemoBot.Pages.Cards
             await this.CardApp.LoadAppAsync(sharedId: sharedId, sessionId: sessionId, new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
-                ChannelId = $"emulator",
+                ChannelId = this.ChannelId,
                 Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
@@ -76,7 +79,7 @@ namespace CrazorDemoBot.Pages.Cards
 
             await this.CardApp.SaveAppAsync(cancellationToken);
 
-            this.Url = this.CardApp.GetRoute();
+            this.RouteUrl = this.CardApp.GetRoute();
         }
     }
 }

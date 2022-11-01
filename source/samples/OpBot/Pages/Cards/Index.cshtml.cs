@@ -10,6 +10,7 @@ namespace PhysOpBot.Pages.Cards
 {
     public class CardHostModel : PageModel
     {
+        private static HttpClient _httpClient = new HttpClient();
         private IServiceByNameFactory<CardApp> _appFactory;
         private IConfiguration _configuration;
 
@@ -18,9 +19,12 @@ namespace PhysOpBot.Pages.Cards
             _configuration = configuration;
             _appFactory = cardFactory;
             BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
+            ChannelId = _configuration.GetValue<Uri>("HostUri").Host;
         }
 
         public string BotUri { get; set; }
+
+        public string ChannelId { get; set; }
 
         public string? Token { get; set; }
 
@@ -28,26 +32,27 @@ namespace PhysOpBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public string Url { get; set; }
+        public string RouteUrl { get; set; }
 
-        public async Task OnGetAsync(string app, [FromQuery(Name ="id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
+        public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
             if (!app.ToLower().EndsWith("app"))
             {
                 app += "App";
             }
 
+            var sessionId = Utils.GetNewId();
+
             this.Token = await CardAppController.GetTokenAsync(_configuration);
 
             this.CardApp = _appFactory.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
-            string sessionId = Utils.GetNewId();
 
             // create card
-            await this.CardApp.LoadAppAsync(sharedId, sessionId, new Activity(ActivityTypes.Invoke)
+            await this.CardApp.LoadAppAsync(sharedId: sharedId, sessionId: sessionId, new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
-                ChannelId = $"emulator",
+                ChannelId = this.ChannelId,
                 Id = Utils.GetNewId(),
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
@@ -71,7 +76,7 @@ namespace PhysOpBot.Pages.Cards
 
             await this.CardApp.SaveAppAsync(cancellationToken);
 
-            this.Url = this.CardApp.GetRoute();
+            this.RouteUrl = this.CardApp.GetRoute();
         }
     }
 }

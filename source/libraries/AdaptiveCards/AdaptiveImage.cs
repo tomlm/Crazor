@@ -53,6 +53,7 @@ namespace AdaptiveCards
         /// <summary>
         /// Controls the sizing (<see cref="AdaptiveImageSize"/>) of the displayed image.
         /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
 #if !NETSTANDARD1_3
         [XmlIgnore]
 #endif
@@ -75,7 +76,7 @@ namespace AdaptiveCards
         /// <summary>
         /// hides default value for xml serialization
         /// </summary>
-        public bool ShouldSerialize_Size() => Size != AdaptiveImageSize.Auto;
+        public bool ShouldSerialize_Size() => _Size != null && Size != AdaptiveImageSize.Auto;
 #endif
 
         /// <summary>

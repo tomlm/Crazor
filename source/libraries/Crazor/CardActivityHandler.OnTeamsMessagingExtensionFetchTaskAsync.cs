@@ -55,6 +55,7 @@ namespace Crazor
 
         protected AdaptiveCard TransformActionExecuteToSubmit(AdaptiveCard card)
         {
+            card.Refresh = null;
             foreach (var action in card.GetElements<AdaptiveExecuteAction>())
             {
                 if (action.Data == null)
@@ -64,9 +65,9 @@ namespace Crazor
                 ((JObject)action.Data)["_verb"] = action.Verb;
                 action.Verb = null;
             }
-            var json = JsonConvert.SerializeObject(card);
-            json = json.Replace(AdaptiveExecuteAction.TypeName, AdaptiveSubmitAction.TypeName);
-            return JsonConvert.DeserializeObject<AdaptiveCard>(json)!;
+            var json = JsonConvert.SerializeObject(card, _jsonSettings);
+            json = json.Replace($"\"type\": \"{AdaptiveExecuteAction.TypeName}\"", $"\"type\": \"{AdaptiveSubmitAction.TypeName}\"");
+            return JsonConvert.DeserializeObject<AdaptiveCard>(json, _jsonSettings)!;
         }
 
         protected TaskModuleTaskInfo GetTaskInfoForCard(CardApp cardApp, AdaptiveCard adaptiveCard)

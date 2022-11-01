@@ -14,6 +14,8 @@ using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using System.IO;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.DependencyInjection;
+using Crazor.Encryption;
 
 namespace Crazor
 {
@@ -26,25 +28,27 @@ namespace Crazor
         protected readonly IServiceProvider _serviceProvider;
         protected readonly ILogger<CardActivityHandler>? _logger;
         protected readonly IServiceByNameFactory<CardApp> _apps;
+        protected readonly IServiceByNameFactory<CardTabModule> _tabs;
         protected readonly IConfiguration _configuration;
-
-        public CardActivityHandler(
-            IServiceProvider serviceProvider,
-            IConfiguration configuration,
-            IServiceByNameFactory<CardApp> cards,
-            IEncryptionProvider encryptionProvider,
-            ILogger<CardActivityHandler> logger)
+        
+        private static JsonSerializerSettings _jsonSettings = new JsonSerializerSettings()
         {
-            ArgumentNullException.ThrowIfNull(encryptionProvider);
+            Formatting = Newtonsoft.Json.Formatting.Indented,
+            NullValueHandling = NullValueHandling.Ignore,
+            DefaultValueHandling = DefaultValueHandling.Ignore,
+        };
+
+        public CardActivityHandler(IServiceProvider serviceProvider)
+        {
             ArgumentNullException.ThrowIfNull(serviceProvider);
-            ArgumentNullException.ThrowIfNull(cards);
-            ArgumentNullException.ThrowIfNull(configuration);
-            _configuration = configuration; ;
-            _encryptionProvider = encryptionProvider;
             _serviceProvider = serviceProvider;
-            _apps = cards;
-            _logger = logger;
+            _configuration = _serviceProvider.GetRequiredService<IConfiguration>();
+            _encryptionProvider = _serviceProvider.GetService<IEncryptionProvider>();
+            _apps = _serviceProvider.GetRequiredService<IServiceByNameFactory<CardApp>>();
+            _tabs = _serviceProvider.GetRequiredService<IServiceByNameFactory<CardTabModule>>();
+            _logger = _serviceProvider.GetService<ILogger<CardActivityHandler>>();
         }
+
         protected Dictionary<string, Type> Cards { get; private set; } = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
@@ -81,15 +85,8 @@ namespace Crazor
         {
             sessionId = sessionId ?? Utils.GetNewId();
 
-            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext.Activity));
-            var invokeValue = new AdaptiveCardInvokeValue()
-            {
-                Action = new AdaptiveCardInvokeAction()
-                {
-                    Verb = view ?? Constants.REFRESH_VERB
-                }
-            };
-            activity!.Value = invokeValue;
+            Activity? activity = turnContext.CreateActionInvokeActivity(view);
+
             // create card
             return await this.LoadAppAsync(app, sharedId, sessionId, activity, cancellationToken);
         }
@@ -97,25 +94,11 @@ namespace Crazor
         public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
         {
             CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var path);
+            var loadRouteActivity = turnContext.CreateLoadRouteActivity(view, path);
 
             var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
 
-            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext?.Activity!));
-            var invokeValue = new AdaptiveCardInvokeValue()
-            {
-                Action = new AdaptiveCardInvokeAction()
-                {
-                    Verb = Constants.LOADROUTE_VERB,
-                    Data = new LoadRouteModel
-                    {
-                        View = view ?? Constants.DEFAULT_VIEW,
-                        Path = path
-                    }
-                }
-            };
-            activity!.Value = invokeValue;
-
-            return await this.LoadAppAsync(app, sharedId, sessionId, activity, cancellationToken);
+            return await this.LoadAppAsync(app, sharedId, sessionId, loadRouteActivity, cancellationToken);
         }
     }
 }

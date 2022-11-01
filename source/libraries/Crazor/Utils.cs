@@ -4,6 +4,7 @@
 
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
+using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
@@ -49,83 +50,32 @@ namespace Crazor
             return sb.ToString();
         }
 
-        public static IEnumerable<T> GetElements<T>(this AdaptiveTypedElement element)
-            where T : AdaptiveTypedElement
+        public static AdaptiveCardInvokeValue TransfromSubmitDataToExecuteAction(dynamic data)
         {
-            var visitor = new AdaptiveVisitor();
-            visitor.Visit(element);
-            return visitor.Elements.OfType<T>();
-        }
+            // reconstruct actionexecute from .data[Action.Execute]
+            // gin up a AdaptiveCardInvokeValue
 
-        public static void SetTargetProperty(this object targetObject, PropertyInfo? targetProperty, object value)
-        {
-            if (targetProperty != null)
+            var invokeValue = new AdaptiveCardInvokeValue()
             {
-                if (value != null)
+                Action = new AdaptiveCardInvokeAction()
                 {
-                    var targetType = targetProperty.PropertyType;
-                    if (targetType.Name == "Nullable`1")
-                    {
-                        targetType = targetType.GenericTypeArguments[0];
-                    }
+                    Data = data,
+                    Id = (string)data._id,
+                    Verb = (string)data._verb
+                }
+            };
 
-                    switch (targetType.Name)
-                    {
-                        case "Byte":
-                            value = Convert.ToByte(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Int16":
-                            value = Convert.ToInt16(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Int32":
-                            value = Convert.ToInt32(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Int64":
-                            value = Convert.ToInt64(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "UInt16":
-                            value = Convert.ToUInt16(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "UInt32":
-                            value = Convert.ToUInt32(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "UInt64":
-                            value = Convert.ToUInt64(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Single":
-                            value = Convert.ToSingle(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Double":
-                            value = Convert.ToDouble(value.ToString());
-                            break;
-                        case "Boolean":
-                            value = Convert.ToBoolean(value.ToString());
-                            break;
-                        case "DateTime":
-                            value = Convert.ToDateTime(value.ToString());
-                            break;
-                        case "String":
-                            value = value.ToString();
-                            break;
-                        default:
-                            if (targetType.IsEnum)
-                            {
-                                value = Enum.Parse(targetType, value.ToString()!);
-                            }
-                            else if (value is JToken jt)
-                            {
-                                value = jt.ToObject(targetType)!;
-                            } 
-                            break;
-                    }
-                    targetProperty.SetValue(targetObject, value);
-                }
-                else
-                {
-                    targetProperty.SetValue(targetObject, (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null);
-                }
+            // copy data over (skipping Action.Execute property)
+            foreach (var property in ((JObject)data).Properties().Where(property => property.Name != AdaptiveExecuteAction.TypeName))
+            {
+                ((JObject)invokeValue.Action.Data)[property.Name] = property.Value;
             }
+
+            return invokeValue;
         }
+
+
+
 
     }
 }
