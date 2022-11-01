@@ -21,10 +21,7 @@ using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Bot.Schema.Teams;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using System.ComponentModel;
 
 namespace Crazor
 {
@@ -670,7 +667,7 @@ namespace Crazor
                             VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
                             Items = new List<AdaptiveElement>()
                             {
-                                new AdaptiveImage(_configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png")
+                                new AdaptiveImage(new Uri(_configuration.GetValue<Uri>("HostUri"), _configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png").AbsoluteUri)
                                 {
                                     Size= AdaptiveImageSize.Small
                                 }
