@@ -51,7 +51,7 @@
 
     public void OnAdd()
     {
-        ShowCard("Add");
+        ShowView("Add");
     }
 
     public void OnDetail(string addressId)
@@ -59,7 +59,7 @@
         var address = App.GetAddress(addressId);
         if (address != null)
         {
-            ShowCard("Detail", address);
+            ShowView("Detail", address);
         }
     }
 
@@ -68,7 +68,7 @@
         var address = App.GetAddress(addressId);
         if (address != null)
         {
-            ShowCard("Edit", address);
+            ShowView("Edit", address);
         }
     }
 

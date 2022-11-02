@@ -1,13 +1,35 @@
-﻿@using Crazor
-@using CrazorDemoBot.Cards.Dice
+﻿@using CrazorDemoBot.Cards.Dice
 @inherits CardView<DiceApp>
 
-@functions {
-    public void OnInitialize()
+<Card Version="1.5">
+    <TextBlock Size="Large" Weight="Bolder" Style="Heading">@App.DiceName</TextBlock>
+    @if (App.Dice != null)
     {
-        if (App.Dice != null)
-            ShowCard("Roll");
-        else
-            ShowCard("Settings");
+        <ImageSet>
+            @foreach (var die in App.Dice)
+            {
+                <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
+            }
+        </ImageSet>
     }
+    <Action.Execute Verb="RollDice" Title="Roll Dice" />
+    <Action.Execute Verb="Refresh" Title="Refresh" />
+</Card>
+
+
+@functions {
+    public void OnInitialized() 
+    {
+        if (App.Dice == null)
+            ShowView("Settings");
+    }
+
+    public void OnResume(CardResult result)
+    {
+        // ....
+    }
+
+    public void RollDice()
+        => App.RollDice();
 }
+

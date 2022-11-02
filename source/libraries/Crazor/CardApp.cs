@@ -222,7 +222,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(CurrentView);
             Diag.Trace.WriteLine($"------- OnSearch({searchInvoke.Dataset}, {searchInvoke.QueryText})-----");
 
-            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, Services);
+            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, Services, cancellationToken);
 
             return new AdaptiveCardInvokeResponse()
             {
@@ -237,7 +237,7 @@ namespace Crazor
         /// </summary>
         /// <param name="cardName"></param>
         /// <param name="model"></param>
-        public void ShowCard(string cardName, object? model = null)
+        public void ShowView(string cardName, object? model = null)
         {
             SaveCardState(this.CallStack[0], this.CurrentView);
             var cardState = new CardViewState(cardName, model);
@@ -250,14 +250,14 @@ namespace Crazor
         /// </summary>
         /// <param name="cardName">card to switch to</param>
         /// <param name="model">model to pass card</param>
-        public void ReplaceCard(string cardName, object? model = null)
+        public void ReplaceView(string cardName, object? model = null)
         {
             var cardState = new CardViewState(cardName, model);
             this.CallStack[0] = cardState;
             LoadView(cardState);
         }
 
-        public void CloseCard(CardResult? result = null)
+        public void CloseView(CardResult? result = null)
         {
             var lastCard = this.CurrentCard;
             this.LastResult = result;
@@ -314,7 +314,7 @@ namespace Crazor
         /// Override this to set the shared Id when known.
         /// </summary>
         /// <returns></returns>
-        public virtual string GetSharedId() => null;
+        public virtual string GetSharedId() => String.Empty;
 
         /// <summary>
         /// Load state from storage
@@ -362,7 +362,7 @@ namespace Crazor
                 var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
                 if (loadRoute != null && this.CurrentCard != loadRoute.View)
                 {
-                    ShowCard(loadRoute.View!);
+                    ShowView(loadRoute.View!);
                     return;
                 }
             }
@@ -443,7 +443,7 @@ namespace Crazor
             var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
             this.CurrentView = cardView;
-            this.CurrentView.OnLoadCardContext(viewContext);
+            this.CurrentView.OnLoadCard(cardState);
         }
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)

@@ -45,7 +45,7 @@
 </Card>
 
 @functions {
-    public void OnInitialize()
+    public void OnInitialized()
     {
         if (this.Model.Name == null)
         {
@@ -60,7 +60,7 @@
             await App.AddWorkOrder(this.Model);
 
             CloseTaskModule(TaskModuleAction.Auto);
-            ReplaceCard("Details", this.Model);
+            ReplaceView("Details", this.Model);
         }
         else
         {

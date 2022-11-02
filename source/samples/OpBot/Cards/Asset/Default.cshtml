@@ -44,7 +44,7 @@
 @functions {
    
 
-    public void OnInitialize()
+    public void OnInitialized()
     {
         Experts.AddRange(Person.GetExperts());
     }
@@ -52,7 +52,7 @@
     public List<Person> Experts { get; set; } = new List<Person>();
 
     public void ShowHistory() {
-        ShowCard("History", this);
+        ShowView("History", this);
     }
 }
 

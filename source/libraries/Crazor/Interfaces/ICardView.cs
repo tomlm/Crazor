@@ -23,15 +23,15 @@ namespace Crazor.Interfaces
 
         bool IsModelValid { get; set; }
 
-        void OnLoadCardContext(ViewContext viewContext);
+        void OnLoadCard(CardViewState cardState);
 
         Task<bool> OnVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken);
 
-        Task OnCardResumeAsync(CardResult screenResult, CancellationToken ct);
+        Task OnCardResumeAsync(CardResult screenResult, CancellationToken cancellationToken);
 
         Task<AdaptiveCard?> BindView(IServiceProvider services);
 
-        Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services);
+        Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services, CancellationToken cancellationToken);
 
         string GetRoute();
     }

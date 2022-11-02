@@ -19,3 +19,17 @@
     <Action.OK Title="Save" />
 </Card>
 
+@functions{
+    public void OnInitialized()
+    {
+
+    }
+
+    public void OnOK()
+    {
+        if (IsModelValid)
+        {
+            CloseView(this.Model);
+        }
+    }
+}

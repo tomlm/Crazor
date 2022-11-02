@@ -38,12 +38,12 @@
 @functions {
     public void OnEdit()
     {
-        ShowCard("Edit", Model);
+        ShowView("Edit", Model);
     }
 
     public void OnAll()
     {
-        CloseCard();
+        CloseView();
     }
 
     public void OnDelete()
@@ -52,8 +52,11 @@
         this.Model = null;
     }
 
-    public void OnEditCompleted(Address address)
+    public void OnResume(CardResult cardResult)
     {
-        this.Model = address;
+        if (cardResult.Name == "Edit")
+        {
+            this.Model = (Address)cardResult.Result!;
+        }
     }
 }

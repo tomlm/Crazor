@@ -64,12 +64,16 @@ namespace Crazor
             return Task.CompletedTask;
         }
 
-        public virtual void OnLoadCardContext(ViewContext viewContext)
+        public virtual void OnLoadCard(CardViewState cardState)
         {
-            var method = GetMethod("OnInitialize");
-            if (method != null)
+            if (cardState.Initialized == false)
             {
-                method.Invoke(this, null);
+                var method = GetMethod("OnInitialized");
+                if (method != null)
+                {
+                    method.Invoke(this, null);
+                }
+                cardState.Initialized = true;
             }
         }
 
@@ -100,18 +104,18 @@ namespace Crazor
 
                     try
                     {
-                        await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data));
+                        await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data, cancellationToken));
                     }
                     catch (CardRouteNotFoundException notFound)
                     {
                         AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
-                        CancelCard();
+                        CancelView();
                     }
                     catch (Exception err)
                     {
                         if (err.InnerException is CardRouteNotFoundException notFound)
                         {
-                            CancelCard(notFound.Message);
+                            CancelView(notFound.Message);
                         }
                         else
                         {
@@ -132,7 +136,7 @@ namespace Crazor
             verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
             if (verbMethod != null)
             {
-                await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data));
+                await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data, cancellationToken));
                 return true;
             }
 
@@ -142,19 +146,19 @@ namespace Crazor
                 case Constants.OK_VERB:
                     if (this.IsModelValid)
                     {
-                        this.CloseCard(ViewContext.ViewData.Model);
+                        this.CloseView(ViewContext.ViewData.Model);
                     }
                     return true;
 
                 case Constants.CANCEL_VERB:
-                    this.CancelCard();
+                    this.CancelView();
                     return true;
             }
 
             // Otherwise, if a verb matches a view just navigate to it.
             if (App.HasView(verb))
             {
-                ShowCard(verb);
+                ShowView(verb);
                 return true;
             }
 
@@ -256,9 +260,9 @@ namespace Crazor
         /// </summary>
         /// <param name="cardName">name of card </param>
         /// <param name="model">model to pass</param>
-        public void ShowCard(string cardName, object? model = null)
+        public void ShowView(string cardName, object? model = null)
         {
-            this.App!.ShowCard(cardName, model);
+            this.App!.ShowView(cardName, model);
         }
 
         /// <summary>
@@ -266,9 +270,9 @@ namespace Crazor
         /// </summary>
         /// <param name="cardName"></param>
         /// <param name="model">model to pass</param>
-        public void ReplaceCard(string cardName, object? model = null)
+        public void ReplaceView(string cardName, object? model = null)
         {
-            this.App!.ReplaceCard(cardName, model);
+            this.App!.ReplaceView(cardName, model);
         }
 
         /// <summary>
@@ -285,9 +289,9 @@ namespace Crazor
         /// Close the current card, optionalling returning the result
         /// </summary>
         /// <param name="result">the result to return to the current caller</param>
-        public void CloseCard(object? result = null)
+        public void CloseView(object? result = null)
         {
-            this.App?.CloseCard(new CardResult()
+            this.App?.CloseView(new CardResult()
             {
                 Name = this.Name,
                 Result = result,
@@ -308,9 +312,9 @@ namespace Crazor
         /// Cancel the current card, returning a message
         /// </summary>
         /// <param name="message">optional message to return.</param>
-        public void CancelCard(string? message = null)
+        public void CancelView(string? message = null)
         {
-            this.App?.CloseCard(new CardResult()
+            this.App?.CloseView(new CardResult()
             {
                 Name = this.Name,
                 Message = message,
@@ -318,7 +322,7 @@ namespace Crazor
             });
         }
 
-        private List<object?>? GetMethodArgs(MethodInfo? method, JObject? data)
+        private List<object?>? GetMethodArgs(MethodInfo? method, JObject? data, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(method);
 
@@ -327,7 +331,11 @@ namespace Crazor
             {
                 foreach (var parm in method.GetParameters())
                 {
-                    if (parm.Name?.ToLower() == "id")
+                    if (parm.ParameterType == typeof(CancellationToken))
+                    {
+                        args.Add(cancellationToken);
+                    }
+                    else if (parm.Name?.ToLower() == "id")
                     {
                         if (Action!.Id != null)
                         {
@@ -383,31 +391,23 @@ namespace Crazor
             }
         }
 
-        public virtual async Task OnCardResumeAsync(CardResult screenResult, CancellationToken ct)
+        /// <summary>
+        /// When a card returns back to this card (aka it's resumed) 
+        /// </summary>
+        /// <param name="cardResult"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task OnCardResumeAsync(CardResult cardResult, CancellationToken cancellationToken)
         {
-            if (screenResult.Success)
+            MethodInfo? verbMethod = GetMethod($"OnResume") ?? GetMethod($"OnResumeAsync");
+            if (verbMethod != null)
             {
-                MethodInfo? verbMethod = GetMethod($"On{screenResult.Name}Completed") ?? GetMethod($"{screenResult.Name}Completed");
-                if (verbMethod != null)
+                var args = new List<Object?>() { cardResult };
+                if (verbMethod.GetParameters().Last().ParameterType == typeof(CancellationToken))
                 {
-                    await InvokeMethodAsync(verbMethod, new List<object?>() { screenResult.Result });
+                    args.Add(cancellationToken);
                 }
-            }
-            else
-            {
-                MethodInfo? verbMethod = GetMethod($"On{screenResult.Name}Canceled") ?? GetMethod($"{screenResult.Name}Canceled");
-                if (verbMethod != null)
-                {
-                    await InvokeMethodAsync(verbMethod, new List<object?>() { screenResult.Message });
-                }
-                else
-                {
-                    verbMethod = GetMethod($"OnCanceled") ?? GetMethod($"Canceled");
-                    if (verbMethod != null)
-                    {
-                        await InvokeMethodAsync(verbMethod, new List<object?>() { screenResult.Message });
-                    }
-                }
+                await InvokeMethodAsync(verbMethod, args);
             }
         }
 
@@ -438,7 +438,7 @@ namespace Crazor
 
                     var reader = XmlReader.Create(new StringReader(xml));
                     var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
-                   return card;
+                    return card;
                 }
                 else
                 {
@@ -461,7 +461,7 @@ namespace Crazor
             }
         }
 
-        public async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services)
+        public async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services, CancellationToken cancellationToken)
         {
             var searchMethod = GetMethod($"Get{search.Dataset}Choices");
             if (searchMethod != null)
@@ -475,7 +475,7 @@ namespace Crazor
 
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-                return (AdaptiveChoice[])await InvokeMethodAsync(searchMethod, GetMethodArgs(searchMethod, data));
+                return (AdaptiveChoice[])await InvokeMethodAsync(searchMethod, GetMethodArgs(searchMethod, data, cancellationToken));
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning restore CS8603 // Possible null reference return.
             }
@@ -532,7 +532,7 @@ namespace Crazor
         {
             get
             {
-                if (ViewData!.Model != null)
+                if (ViewData?.Model != null)
                 {
                     return ViewData.Model;
                 }
@@ -555,22 +555,23 @@ namespace Crazor
         [RazorInject]
         public ViewDataDictionary<ModelT>? ViewData { get; set; }
 
-        public override void OnLoadCardContext(ViewContext viewContext)
+        public override void OnLoadCard(CardViewState cardViewState)
         {
-            ModelT? model = viewContext.ViewData.Model as ModelT;
+            ModelT? model = this.ViewContext.ViewData.Model as ModelT;
             if (model == null)
             {
-                if (viewContext.ViewData.Model is JToken jt)
+                if (this.ViewContext.ViewData.Model is JToken jt)
                 {
-                    viewContext.ViewData.Model = (ModelT?)jt.ToObject(typeof(ModelT));
+                    this.ViewContext.ViewData.Model = (ModelT?)jt.ToObject(typeof(ModelT));
                 }
                 else
                 {
-                    viewContext.ViewData.Model = Activator.CreateInstance<ModelT>();
+                    this.ViewContext.ViewData.Model = Activator.CreateInstance<ModelT>();
                 }
             }
-            this.ViewData = new ViewDataDictionary<ModelT>(viewContext.ViewData);
-            base.OnLoadCardContext(viewContext);
+            this.ViewData = new ViewDataDictionary<ModelT>(this.ViewContext.ViewData);
+
+            base.OnLoadCard(cardViewState);
         }
 
     }

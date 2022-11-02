@@ -12,16 +12,16 @@
 @functions {
     public void OnCard2()
     {
-        ShowCard("Card2");
+        ShowView("Card2");
     }
 
-    public void OnCard2Completed(object result)
+    public void OnResume(CardResult cardResult)
     {
-        AddBannerMessage("Card2 completed!", AdaptiveContainerStyle.Good);
-    }
-    
-    public void OnCard2Canceled(string message)
-    {
-        AddBannerMessage("Card2 canceled!", AdaptiveContainerStyle.Warning);
+        if (cardResult.Success == true)
+            AddBannerMessage($"{cardResult.Name} completed!", AdaptiveContainerStyle.Good);
+        else 
+        {
+            AddBannerMessage($"{cardResult.Name} Canceled!", AdaptiveContainerStyle.Warning);
+        }
     }
 }

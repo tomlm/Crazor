@@ -26,6 +26,8 @@ namespace Crazor
         // name of the card view
         public string Name { get; set; } = String.Empty;
 
+        public bool Initialized { get; set; }
+
         // card view model
         public object? Model { get; set; } = null;
 

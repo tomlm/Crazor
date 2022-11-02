@@ -22,12 +22,15 @@
 
     public void OnEdit()
     {
-        ShowCard("Edit", Data);
+        ShowView("Edit", Data);
     }
 
-    public void OnEditCompleted(InputsModel model)
+    public void OnResume(CardResult cardResult)
     {
-        Data = model;
+        if (cardResult.Name == "Edit")
+        {
+            Data = (InputsModel)cardResult.Result!;
+        }
     }
 }
 

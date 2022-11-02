@@ -21,7 +21,7 @@
         if (IsModelValid)
         {
             App.AddAddress(Model);
-            ReplaceCard("Detail", Model);
+            ReplaceView("Detail", Model);
 
             if (IsTaskModule)
             {
@@ -37,6 +37,6 @@
     public void OnCancel()
     {
         CloseTaskModule(TaskModuleAction.None);
-        CancelCard();
+        CancelView();
     }
 }
