@@ -16,6 +16,7 @@ namespace CrazorDemoBot.Cards
             uris.Add("/Cards/HelloWorld");
             uris.Add("/Cards/Counters");
             uris.Add("/Cards/Quiz");
+            uris.Add("/Cards/TagHelper");
 
             return Task.FromResult(uris.ToArray());
         }
