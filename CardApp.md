@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
-# CardApp Class
+# The CardApp Class
 The **CardApp** class manages the application lifecycle for a card application. 
 
 The **CardApp** class represents your application state and methods.  Any properties and methods you put onto the app class are accessible from all **CardView** objects in the folder via the **App** property.

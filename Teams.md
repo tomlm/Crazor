@@ -18,6 +18,8 @@ The manifest describes all of the data teams needs to interact with your crazor 
 
 ## Edit extension metadata
 
+The extension metadata describes your bot and information about you as a developer
+
 ![image-20221102145639056](C:\Users\tomlm\AppData\Roaming\Typora\typora-user-images\image-20221102145639056.png)
 
 1. **Set the $.id to your bot Id **
@@ -78,3 +80,9 @@ For each card you want to have be a tab add a section to **staticTabs**
 
 Zip **all 3 files** up into a .zip file and import into teams and you can chat with your bot/link unfurl, etc.
 
+1. go to Teams Store
+2. Click on **Manage your Apps**![image-20221102161013896](Teams.assets/image-20221102161013896.png)
+3. Click on Upload an App![image-20221102161035140](Teams.assets/image-20221102161035140.png)
+4. When it comes up, click on **ADD TO TEAMS**
+
+You should now be able to do link unfurling and commands for your crazor based project.

@@ -9,7 +9,7 @@ Here's all of the goo for setting up your Crazor project
 
 # Adding Crazor 
 
-To install crazor into a aspnetcore project
+Adding crazor is super easy.  You basically add the crazor package, register some dependencies and start authoring cards!
 
 ## Installing Crazor package
 
@@ -62,8 +62,9 @@ builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(sto
 # Local development 
 
 * update **HostUri** in your project appsettings.json to the appropriate https://localhost:{PORT}
-* (Optional) add **MicrosoftAppId** to appsettings.json
-* (Optional) store the **MicrosoftAppPassword** and **AzureStorage** in your user-secrets
+* *(Optional)* if you have a bot registration add **MicrosoftAppId** to appsettings.json
+* *(Optional)* if you have a bot registration store the **MicrosoftAppPassword** in you user-secrets
+* *(Optional)* If you have azure storage store **AzureStorage** setting in your user-secrets
 
 # Setting up Azure
 
@@ -83,7 +84,7 @@ Create an **Azure Web Service** to deploy your service to.
 
 ## Create a Bot Registration
 
-To deploy you will need a bot registration.  In azure portal
+To deploy you will need a bot registration.  In azure portal go to [Create an Azure Bot - Microsoft Azure](https://ms.portal.azure.com/#create/Microsoft.AzureBot)
 1. Create a **MultiTenant** ***registration only bot***, this will give you an appid which you should put into appsettings.json as **"MicrosoftAppId"**
 2. Go to mananage keys (there is a link on the bot registration page) **create a new client secret**.  
 3. **Copy and save it** off someplace safe (don't check it in!) 
