@@ -29,23 +29,33 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Teams integrations** - Your card application can be **unfurled via a link**, pop up as a **Task Module**, a **Tab** etc. Just register your app with teams and it just works.
 * **Out of the box card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can follow to interact with your card application.
 
-# Documentation
+# Installation
 
-* [Installing Crazor](Install.md) - Installing Crazor into your porject
-* Building card applications
-  * [Card Apps](CardApp.md) - Documentation on CardApplication class
-  * [Card Views](CardView.md) - Documentation on CardView class
-  * [Card Memory](Memory.md) - information on persistence and memory model
-  * [Components (Advanced)](TagHelpers.md) - defining reusuable components via tag helpers
-
-* [Deployment](Deployment.md) - Setting up your web service azure
-* [Teams](Teams.md) - Information on installing your card applications into teams
-* [Visual Studio Extension](VSIX.md) - Information on visual studio extension 
+[Installing Crazor](Install.md) - Installing Crazor into your porject
 
 # Walkthroughs
 
 * [HelloWorld](HelloWorldWalkthrough.md) - walkthrough creating your first card application.
 * [Counters](CountersWalkthrough.md) - walkthrough showing creating a card with data binding and action handlers.
+
+# Documentation
+
+* [Card Apps](CardApp.md) - How to create a CardApplication class
+* [Card Views](CardView.md) - How to define views with CardView class
+* [Card Memory](Memory.md) - information on persistence and memory model
+* [Components (Advanced)](TagHelpers.md) - How to define reusuable components 
+
+# Setting up Azure
+
+[Setting up your azure web deployment](Deployment.md)  
+
+# Teams
+
+[Installing your card applications into teams](Teams.md) 
+
+# Visual Studio Extension 
+
+[Installing an extension for Visual Studio](VSIX.md) 
 
 # Contributing
 
