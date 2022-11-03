@@ -237,7 +237,60 @@ and
 
 
 
-> 
+# Custom binding
+
+The CardView class can also be 100% a code only view if you have a situation where you don't like using Razor template.
+
+To do that simply create a class which derives from **CardView<>** (like @inherits above) and override the **BindView()** method to return an Adaptive Card.
+
+## Example:
+
+```C#
+namespace Example
+{
+    public class MyCodeView : CardView<CodeOnlyViewApp>
+    {
+        [SessionMemory]
+        public int Counter { get; set; }
+
+        public override async Task<AdaptiveCard?> BindCard(CancellationToken cancellationToken)
+        {
+            return new AdaptiveCard("1.5")
+            {
+                Body = new List<AdaptiveElement>() 
+                { 
+                    new AdaptiveTextBlock($"Counter is {this.Counter}") 
+                },
+                Actions = new List<AdaptiveAction>() 
+                {
+                    new AdaptiveExecuteAction(){ Verb = nameof(OnIncrement), Title = "Increment"}
+                }
+            };
+        }
+
+        public void OnIncrement()
+            => this.Counter++;
+    }
+}
+```
+
+To use the view you simply use the full path for the class:
+
+```C#
+ShowView("Example.MyCodeView")
+```
+
+Or you can use the generic form
+
+```c#
+ShowView<MyCodeView>();
+```
+
+>  NOTE: All memory attributes, state management action handlers work, but you do not get the benefit of any of the Razor TagHelpers functionality, specifically 
+>
+> * Input control **Binding** property 
+> * **Action.OK**/**Action.Cancel**
+> * **Custom TagHelpers** 
 
 
 
