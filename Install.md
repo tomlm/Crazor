@@ -6,7 +6,7 @@
 
 Adding crazor is super easy.  You basically add the crazor package, register some dependencies and start authoring cards!
 
-## Installing Crazor package
+## Add Crazor package
 
 ```shell
 nuget add package crazor
@@ -20,9 +20,11 @@ builder.Services.AddCrazor();
 
 
 
-## Installing IStorage provider
+## Adding IStorage provider
 
-You will need a IStorage provider for key/value storage of memory. The Azure blob storage library works great
+The default IStorage provider is the volitile MemoryStorage where all data is simple stored in memory and lost when you restart the process. 
+
+To deploy a service you need a real IStorage provider. Here's how to add the Azure Blob IStorage implementation:
 
 ```shell
 nuget add Microsoft.Bot.Builder.Azure.Blobs
@@ -32,7 +34,8 @@ Registering dependency injection
 
 ```C#
 var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
-builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "mybot"));
+if (storageKey != null)
+	builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "mybot"));
 ```
 
 # Modifications to your Web Project
