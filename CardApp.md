@@ -22,7 +22,7 @@ To load and persist the values of any property you have 2 mechanisms:
 
 ## Methods
 
-You can define any methods you like on the **CardApp**.  
+You can define any methods you like on the **CardApp**.
 
 A useful pattern is to put methods which manipulate your shared state on the app so that you can consolidate data manipulation methods for all **CardView** classes. For example, you can add CRUD methods which manipulate your data to the **CardApp**, and call **App.Create(...)** from a view to manipulate your data directly.
 
@@ -36,3 +36,8 @@ A useful pattern is to put methods which manipulate your shared state on the app
 
 
 
+> 
+
+
+
+![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)

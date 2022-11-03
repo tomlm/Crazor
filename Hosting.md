@@ -2,77 +2,13 @@
 
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
-
-# Hosting goo
-
-Here's all of the goo for setting up your Crazor project
-
-# Adding Crazor 
-
-Adding crazor is super easy.  You basically add the crazor package, register some dependencies and start authoring cards!
-
-## Installing Crazor package
-
-```shell
-nuget add package crazor
-```
-
-Register crazor
-
-```c#
-builder.Services.AddCrazor();
-```
-
-
-
-## Installing IStorage provider
-
-You will need a IStorage provider for key/value storage of memory. The Azure blob storage library works great
-
-```shell
-nuget add Microsoft.Bot.Builder.Azure.Blobs
-```
-
-Registering dependency injection
-
-```C#
-var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
-builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "mybot"));
-```
-
-# Modifications to your Web Project
-
-1. add a **Cards** folder
-
-2. Create a **_ViewImports.cshtml** file containing this:
-
-   ```C#
-   @using AdaptiveCards
-   @using Crazor
-   @using Crazor.Exceptions
-   @using Crazor.Attributes
-   @using System.ComponentModel.DataAnnotations
-   @removeTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-   @removeTagHelper *, Microsoft.AspNetCore.Mvc.Razor
-   @addTagHelper *, Crazor
-   ```
-
-   
-
-# Local development 
-
-* update **HostUri** in your project appsettings.json to the appropriate https://localhost:{PORT}
-* *(Optional)* if you have a bot registration add **MicrosoftAppId** to appsettings.json
-* *(Optional)* if you have a bot registration store the **MicrosoftAppPassword** in you user-secrets
-* *(Optional)* If you have azure storage store **AzureStorage** setting in your user-secrets
-
 # Setting up Azure
 
 To make your projectwork you need
 
 * A Web Site
-* A bot registration
-* A Azure Storage account
+* A Azure Bot registration
+* An Azure Storage account
 
 ## Create an Azure Storage account
 
@@ -113,3 +49,8 @@ Update the web service configuration with the following settings.
 
 The web app is jsut a normal Azure web app, just deploy it to the cloud.
 
+> 
+
+
+
+![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
