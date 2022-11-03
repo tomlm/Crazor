@@ -2,8 +2,20 @@
 
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
+# Conceptual Model
+
+The web services hosts multiple **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
+
+## Card Applications
+
+Your service can host 1:N **Card Applications**.  A card application is a mini application which is based on AdaptiveCards, using Razor as the templating engine. 
+
+## Card Views
+
+Each card application is made up of 1:N **Card Views**. A card view is a razor template, binding the data and logic to create a "screen" in the application. 
 
 # The CardView Class
+
 The **CardView** defines a view for the **CardApp** application as a razor template **.cshtml** file.
 
 To make the .cshtml template a **Crazor template** you insert the **@inherits CardView<>** directive defining that CardView is the base class for the view.
@@ -153,9 +165,9 @@ The typical pattern is to only commit and close the data if the validation passe
 
 Input controls do 2 things automatically related to validation:
 
-1. They map validation attributes to client side validation properties to get client side validation as appropriate.
-2. They validate server side as well (because server side validation is richer than what Adaptive Cards provides)
-3. If there are validation errors they will automatically display the error message next to the input control that has incorrect ddata.
+1. They **map validation attributes to client side validation** properties to get client side validation as appropriate.
+2. They **validate server side as well** (because server side validation is richer than what Adaptive Cards provides)
+3. If there are validation errors they will **automatically display the error message** next to the input control that has incorrect ddata.
 
 > NOTE: You can disable this validation errors on an input control by setting **ShowErrors="false"**
 

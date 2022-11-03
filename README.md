@@ -29,34 +29,22 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Teams integrations** - Your card application can be **unfurled via a link**, pop up as a **Task Module**, a **Tab** etc. Just register your app with teams and it just works.
 * **Out of the box card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can follow to interact with your card application.
 
-## Conceptual Model
-
-The web services hosts multiple **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
-
-### Card Applications
-
-Your service can host 1:N **Card Applications**.  A card application is a mini application which is based on AdaptiveCards, using Razor as the templating engine. 
-
-### Card Views
-
-Each card application is made up of 1:N **Card Views**. A card view is a razor template, binding the data and logic to create a "screen" in the application. 
-
 # Documentation
 
 * [Installing Crazor](Install.md) - Installing Crazor into your porject
-* Details on building card applications
+* Building card applications
   * [Card Apps](CardApp.md) - Documentation on CardApplication class
   * [Card Views](CardView.md) - Documentation on CardView class
   * [Card Memory](Memory.md) - information on persistence and memory model
-  * [(Advanced) TagHelpers](TagHelpers) - defining reusuable tag helpers
+  * [Components (Advanced)](TagHelpers.md) - defining reusuable components via tag helpers
 
-* [Deployment](hosting.md) - Setting up your web service azure
+* [Deployment](Deployment.md) - Setting up your web service azure
 * [Teams](Teams.md) - Information on installing your card applications into teams
 * [Visual Studio Extension](VSIX.md) - Information on visual studio extension 
 
 # Walkthroughs
 
-* [HelloWorld](HelloWorld) - walkthrough creating your first card application.
+* [HelloWorld](HelloWorldWalkthrough.md) - walkthrough creating your first card application.
 * [Counters](CountersWalkthrough.md) - walkthrough showing creating a card with data binding and action handlers.
 
 # Contributing
