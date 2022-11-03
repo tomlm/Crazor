@@ -75,8 +75,8 @@
                     @*                    <Choices.Data Dataset="graph.microsoft.com/users?scope=currentContext" />*@
                 </Input.ChoiceSet>
                 <ActionSet>
-                    <Action.Execute Verb="AssignTo" Title="Assign to Selected" />
-                    <Action.Execute Verb="AssignTo" Title="Assign to Self">
+                    <Action.Execute Verb="@nameof(OnAssignTo)" Title="Assign to Selected" />
+                    <Action.Execute Verb="@nameof(OnAssignTo)" Title="Assign to Self">
                         {
                         "assignToSelf": "true"
                         }
@@ -112,7 +112,7 @@
     [BindProperty]
     public string AssignedToUserId { get; set; }
 
-    public void AssignTo(bool? assignToSelf) 
+    public void OnAssignTo(bool? assignToSelf) 
     {
         WorkOrder.SystemStatus = new SystemStatus("Scheduled");
         if (assignToSelf == true)

@@ -3,14 +3,12 @@
 
 <Card Version="1.5" Title="Test Task Module Functionality">
     <TextBlock>Counter is @App.Counter!</TextBlock>
-    <ActionSet>
-        <Action.Execute Verb="Increment" Title="Increment" />
-    </ActionSet>
 
     @if (IsTaskModule)
     {
         <Input.ChoiceSet Binding="TaskAction" Style="Expanded" />
     }
+    <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />
 
     @if (IsTaskModule)
     {
@@ -24,10 +22,7 @@
     [BindProperty]
     public TaskModuleAction TaskAction { get; set; }
 
-    public void OnIncrement()
-    {
-        App.Counter++;
-    }
+    public void OnIncrement() => App.Counter++;
 
     public void OnOK()
     {
@@ -37,6 +32,6 @@
 
     public void OnCancel()
     {
-        CloseTaskModule(TaskModuleAction.Auto);
+        CloseTaskModule(TaskModuleAction.None);
     }
 }

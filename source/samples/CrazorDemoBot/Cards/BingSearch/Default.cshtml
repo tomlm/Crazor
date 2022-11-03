@@ -12,7 +12,7 @@
         </Column>
         <Column Width="auto">
             <ActionSet>
-                <Action.Execute Title="Search" Verb="OnSearch" />
+                <Action.Execute Title="Search" Verb="@nameof(OnSearch)" />
             </ActionSet>
         </Column>
     </ColumnSet>
@@ -21,7 +21,7 @@
             @if (HasPrev())
             {
                 <ActionSet>
-                    <Action.Execute Title="<" Verb="OnPrevious" />
+                    <Action.Execute Title="<" Verb="@nameof(OnPrevious)" />
                 </ActionSet>
             }
         </Column>
@@ -30,7 +30,7 @@
             @if (HasNext())
             {
                 <ActionSet>
-                    <Action.Execute Title=">" Verb="OnNext" />
+                    <Action.Execute Title=">" Verb="@nameof(OnNext)" />
                 </ActionSet>
             }
         </Column>
@@ -79,7 +79,7 @@
     public bool HasPrev() 
         => Results.Any() && Offset > 0;
 
-    public async Task OnSearchAsync()
+    public async Task OnSearch()
     {
         if (!String.IsNullOrWhiteSpace(Query))
         {
@@ -93,16 +93,16 @@
         }
     }
 
-    public async Task OnNextAsync()
+    public async Task OnNext()
     {
         Offset += PageSize;
-        await OnSearchAsync();
+        await OnSearch();
     }
 
-    public async Task OnPreviousAsync()
+    public async Task OnPrevious()
     {
         if (Offset != 0)
             Offset -= PageSize;
-        await OnSearchAsync();
+        await OnSearch();
     }
 }

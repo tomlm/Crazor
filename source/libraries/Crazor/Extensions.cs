@@ -47,7 +47,7 @@ namespace Crazor
 
             // add Apps
             var cardAppServices = services.AddByName<CardApp>();
-            foreach (var cardAppType in Assembly.GetCallingAssembly().DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false))
+            foreach (var cardAppType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)))
             {
                 services.AddScoped(cardAppType);
                 cardAppServices.Add(cardAppType.Name, cardAppType);
@@ -56,12 +56,22 @@ namespace Crazor
 
             // add TabModules
             var cardTabModuleServices = services.AddByName<CardTabModule>();
-            foreach (var tabModuleType in Assembly.GetCallingAssembly().DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false))
+            foreach (var tabModuleType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)))
             {
                 services.AddScoped(tabModuleType);
                 cardTabModuleServices.Add(tabModuleType.Name, tabModuleType);
             }
             cardTabModuleServices.Build();
+
+            // add Cardviews
+            var cardViewServices = services.AddByName<ICardView>();
+            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(ICardView)))))
+            {
+                var cardViewType = cardView.AsType();
+                services.AddScoped(cardViewType);
+                cardViewServices.Add(cardViewType.FullName, cardViewType);
+            }
+            cardViewServices.Build();
 
             // add card Razor pages support
             var mvcBuilder = services.AddRazorPages()

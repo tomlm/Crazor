@@ -16,7 +16,7 @@ namespace Crazor.TagHelpers
         public ActionCancelTagHelper()
         {
             this.AssociatedInputs = AdaptiveAssociatedInputs.None;
-            this.Title = Constants.CANCEL_VERB;
+            this.Title = "Cancel";
             this.Verb = Constants.CANCEL_VERB;
         }
 

@@ -22,6 +22,8 @@ using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Neleus.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Crazor
 {
@@ -89,6 +91,11 @@ namespace Crazor
         /// The activity we are processing.
         /// </summary>
         public Activity? Activity { get; set; }
+
+        /// <summary>
+        /// The default view to render
+        /// </summary>
+        public string DefaultView { get; set; } = Constants.DEFAULT_VIEW;
 
         /// <summary>
         /// The action we are processing.
@@ -186,7 +193,7 @@ namespace Crazor
             AdaptiveCard? outboundCard;
             try
             {
-                outboundCard = await CurrentView.BindView(Services);
+                outboundCard = await CurrentView.BindCard(cancellationToken);
                 ArgumentNullException.ThrowIfNull(outboundCard);
             }
             catch (XmlException xerr)
@@ -417,13 +424,22 @@ namespace Crazor
             var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
             var viewPath = $"/Cards/{Name}/{cardState.Name}.cshtml";
             var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-            if (viewResult?.View == null)
+            IView view;
+            ICardView cardView;
+            if (viewResult?.View != null)
             {
-                throw new ArgumentNullException($"{cardState.Name} does not match any available view");
+                view = viewResult?.View!;
+                cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
+                cardView.RazorView = viewResult.View;
+            }
+            else
+            {
+                // This is a non-cshtml view, let's see if we can construct it.
+                cardView = this.Services.GetByName<ICardView>(cardState.Name);
+                view = new ViewStub() ;
+                ArgumentNullException.ThrowIfNull(cardView);
             }
 
-            ICardView cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
-            cardView.RazorView = viewResult.View;
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
             cardView.App = this;
             cardView.Name = cardState.Name;
@@ -440,7 +456,8 @@ namespace Crazor
             {
                 Model = cardState.Model
             };
-            var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
+
+            var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
             this.CurrentView = cardView;
             this.CurrentView.OnLoadCard(cardState);
@@ -829,5 +846,14 @@ namespace Crazor
             }
         }
 
+        private class ViewStub : IView
+        {
+            public string Path { get; set; } = string.Empty;
+
+            public Task RenderAsync(ViewContext context)
+            {
+                return Task.CompletedTask;
+            }
+        }
     }
 }

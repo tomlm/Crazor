@@ -15,7 +15,7 @@ namespace Crazor.TagHelpers
     {
         public ActionOKTagHelper()
         {
-            this.Title = Constants.OK_VERB;
+            this.Title = "OK";
             this.Verb = Constants.OK_VERB;
         }
 

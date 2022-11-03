@@ -79,8 +79,8 @@
                     @*<Data.Query Dataset="graph.microsoft.com/users" />*@
                 </Input.ChoiceSet>
                 <ActionSet>
-                    <Action.Execute Verb="AssignTo" Title="Assign to Selected" />
-                    <Action.Execute Verb="AssignTo" Title="Assign to Self">
+                    <Action.Execute Verb="@nameof(OnAssignTo)" Title="Assign to Selected" />
+                    <Action.Execute Verb="@nameof(OnAssignTo)" Title="Assign to Self">
                         {
                             "assignToSelf": true
                         }
@@ -104,7 +104,7 @@
     [BindProperty]
     public string AssignedToUserId { get; set; }
 
-    public async Task AssignTo(bool? assignToSelf) 
+    public async Task OnAssignTo(bool? assignToSelf) 
     {
         Model.SystemStatus = new SystemStatus("Scheduled");
 

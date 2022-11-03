@@ -64,7 +64,7 @@ namespace PhysOpBot.Pages.Cards
                         Verb = Constants.LOADROUTE_VERB,
                         Data = new LoadRouteModel
                         {
-                            View = viewName ?? "Default",
+                            View = viewName ?? Constants.DEFAULT_VIEW,
                             Path = path
                         }
                     }

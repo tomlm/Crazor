@@ -55,35 +55,29 @@ the verb up to a method on the **CardView**.  This method is called an ***Action
 
 For example:
 ```xml
-<Action.Execute Title="Do some stuff" Verb="DoSomeStuff"/>
+<Action.Execute Title="Do some stuff" Verb="OnDoSomeStuff"/>
 ```
 
 You write the code to respond to it by defining a method with the same name.
 ```cs
 @functions {
-	public void DoSomeStuff()
+	public void OnDoSomeStuff()
 	{  
 		Model.Counters++;
 	}
 }
 ```
-## Verb Handler Naming
+>  **Recommendation ** is good practive to use @nameof so that your verb and method names stay in sync and you get a build break when you change one without the other.
 
-When resolving any verb name (example: **ZZZ**) multiple method names will be attempted:
+```xml
+<Action.Execute Title="Do some stuff" Verb="@nameof(OnDoSomeStuff)"/>
+```
 
-* **DoZZZ()**
-* **DoZZZAsync()**
-* **OnZZZ()**
-* **OnZZZAsync()**
 
-> NOTE: Any handler can be async by using a return type of **Task**
 
-## Built-in verb handlers
+> NOTE 1 : Any handler can be async by using a return type of **Task**
 
-If there is not a verb handler defined the following built-in verb handlers  will automatically execute
-* **CloseView** - This will call **CloseView(Model),** but only if the the model is valid (aka IsModelValid == true)
-* **CancelView** - This will call **CancelView()**, closing the current view and going back to the caller of the view.
-* If the **verb does not match** and it **matches the name of a view**  => it will show.
+> NOTE 2: If the **verb does not match** and it **matches the name of a view**  => it will navigate to that view...aka ShowView(verb)
 
 ## Verb handler parameter binding
 

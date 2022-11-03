@@ -61,7 +61,7 @@
                     <ActionSet>
                         @if (App.WorkOrder.CompleteTime == null)
                         {
-                            <Action.Execute Title="Start Work" Verb="StartWork" Style="Positive" />
+                            <Action.Execute Title="Start Work" Verb="@nameof(OnStartWork)" Style="Positive" />
                         }
                     </ActionSet>
                 </Column>
@@ -77,12 +77,12 @@
                     </Column>
                     <Column Width="Stretch">
                         <ActionSet>
-                            <Action.Execute Title="Complete Work" Verb="CompleteWork" Style="Positive" />
+                            <Action.Execute Title="Complete Work" Verb="@nameof(OnCompleteWork)" Style="Positive" />
                         </ActionSet>
                     </Column>
                     <Column Width="Stretch">
                         <ActionSet>
-                            <Action.Execute Title="Cancel Work" Verb="CancelWork" Style="Destructive" />
+                            <Action.Execute Title="Cancel Work" Verb="@nameof(OnCancelWork)" Style="Destructive" />
                         </ActionSet>
                     </Column>
                 }
@@ -90,7 +90,7 @@
                 {
                     <Column Width="Stretch">
                         <ActionSet>
-                            <Action.Execute Title="Re-open Work" Verb="StartWork" />
+                            <Action.Execute Title="Re-open Work" Verb="@nameof(OnStartWork)" />
                         </ActionSet>
                     </Column>
                 }
@@ -132,19 +132,19 @@
 
     public List<string> WorkOrderStatuses { get; set; }
 
-    public void StartWork() {
+    public void OnStartWork() {
         App.WorkOrder.SystemStatus = new SystemStatus("In Progress");
         App.WorkOrder.StartTime = DateTime.UtcNow;
         App.WorkOrder.CompleteTime = null;
     }
 
-    public void CompleteWork()
+    public void OnCompleteWork()
     {
         App.WorkOrder.SystemStatus = new SystemStatus("Completed");
         App.WorkOrder.CompleteTime = DateTime.UtcNow;
     }
 
-    public void CancelWork()
+    public void OnCancelWork()
     {
         App.WorkOrder.StartTime = null;
         App.WorkOrder.CompleteTime = null;

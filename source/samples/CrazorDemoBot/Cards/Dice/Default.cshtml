@@ -12,8 +12,8 @@
             }
         </ImageSet>
     }
-    <Action.Execute Verb="RollDice" Title="Roll Dice" />
-    <Action.Execute Verb="Refresh" Title="Refresh" />
+    <Action.Execute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
+    <Action.Execute Title="Refresh" />
 </Card>
 
 
@@ -24,12 +24,7 @@
             ShowView("Settings");
     }
 
-    public void OnResume(CardResult result)
-    {
-        // ....
-    }
-
-    public void RollDice()
+    public void OnRollDice()
         => App.RollDice();
 }
 

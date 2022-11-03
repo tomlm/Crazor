@@ -23,7 +23,7 @@
                     <Column Width="auto">
                         <Image Url="https://cdn.icon-icons.com/icons2/3399/PNG/512/detail_icon_215012.png" Size="Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Detail" Verb="OnDetail">
+                                <Action.Execute Tooltip="Detail" Verb="@nameof(OnDetail)">
                                     {"id":"@item.Id"}
                                 </Action.Execute>
                             </SelectAction>
@@ -32,7 +32,7 @@
                     <Column Width="auto">
                         <Image Url="https://cdn.icon-icons.com/icons2/931/PNG/512/edit_modify_icon-icons.com_72390.png" Size="Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Edit" Verb="OnEdit">
+                                <Action.Execute Tooltip="Edit" Verb="@nameof(OnEdit)">
                                     {"id":"@item.Id"}
                                 </Action.Execute>
                             </SelectAction>
@@ -41,7 +41,7 @@
                     <Column Width="auto">
                         <Image Url="https://cdn.icon-icons.com/icons2/3251/PNG/512/delete_regular_icon_203689.png" Size="Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Delete" Verb="OnDelete" >
+                                <Action.Execute Tooltip="Delete" Verb="@nameof(OnDelete)">
                                     {"id":"@item.Id"}
                                 </Action.Execute>
                             </SelectAction>
@@ -52,7 +52,7 @@
         }
     }
 
-    <Action.Execute Title="Add Product Item" Verb="OnAdd" />
+    <Action.Execute Title="Add Product Item" Verb="@nameof(OnAdd)" />
 </Card>
 
 @functions {

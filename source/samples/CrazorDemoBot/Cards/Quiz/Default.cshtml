@@ -13,7 +13,7 @@
     <TextBlock Size="Medium" Wdith="Bolder">What is @Model.Number1 + @Model.Number2?</TextBlock>
     <Input.Text Id="answer" Label="Your answer?" Placeholder="Enter in your answer as a number."/>
 
-    <Action.Execute Title="Submit" Verb="OnSubmit" />
+    <Action.Execute Title="Submit" Verb="@nameof(OnSubmit)" />
 
 </Card>
 

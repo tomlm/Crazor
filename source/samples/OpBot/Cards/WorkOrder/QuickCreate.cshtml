@@ -41,7 +41,7 @@
 
     <Input.Text Label="Work Order Summary" IsMultiline="true" Binding="Model.Summary" />
 
-    <Action.Execute Verb="OnSave" Style="Positive" Title="Create Work Order"></Action.Execute>
+    <Action.Execute Verb="@nameof(OnSave)" Style="Positive" Title="Create Work Order"></Action.Execute>
 </Card>
 
 @functions {

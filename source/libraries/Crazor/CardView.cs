@@ -91,7 +91,7 @@ namespace Crazor
             if (verb == Constants.LOADROUTE_VERB)
             {
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
-                verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
+                verbMethod = GetMethod(verb);
                 if (verbMethod != null)
                 {
                     var data = JObject.FromObject(this.Action.Data);
@@ -133,7 +133,7 @@ namespace Crazor
                 ValidateModel();
             }
 
-            verbMethod = GetMethod($"On{verb}") ?? GetMethod(verb);
+            verbMethod = GetMethod(verb);
             if (verbMethod != null)
             {
                 await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data, cancellationToken));
@@ -265,6 +265,11 @@ namespace Crazor
             this.App!.ShowView(cardName, model);
         }
 
+        public void ShowView<T>(object? model = null)
+        {
+            this.App!.ShowView(typeof(T).FullName!, model);
+        }
+
         /// <summary>
         /// Replace this card with another one 
         /// </summary>
@@ -273,6 +278,11 @@ namespace Crazor
         public void ReplaceView(string cardName, object? model = null)
         {
             this.App!.ReplaceView(cardName, model);
+        }
+
+        public void ReplaceView<T>(object? model = null)
+        {
+            this.App!.ReplaceView(typeof(T).FullName!, model);
         }
 
         /// <summary>
@@ -399,7 +409,7 @@ namespace Crazor
         /// <returns></returns>
         public virtual async Task OnCardResumeAsync(CardResult cardResult, CancellationToken cancellationToken)
         {
-            MethodInfo? verbMethod = GetMethod($"OnResume") ?? GetMethod($"OnResumeAsync");
+            MethodInfo? verbMethod = GetMethod($"OnResume");
             if (verbMethod != null)
             {
                 var args = new List<Object?>() { cardResult };
@@ -416,7 +426,7 @@ namespace Crazor
         /// </summary>
         /// <param name="viewName">view name</param>
         /// <returns>bound card</returns>
-        public async Task<AdaptiveCard?> BindView(IServiceProvider services)
+        public virtual async Task<AdaptiveCard?> BindCard(CancellationToken cancellationToken)
         {
             string xml = String.Empty;
             try
@@ -483,14 +493,9 @@ namespace Crazor
             throw new Exception($"Get{search.Dataset}Choices or Get{search.Dataset}ChoicesAsync not found!");
         }
 
-        public MethodInfo? GetMethod(string methodPrefix)
+        public MethodInfo? GetMethod(string methodName)
         {
-            var method = this.GetType().GetMethod($"{methodPrefix}Async");
-            if (method == null)
-            {
-                method = this.GetType().GetMethod($"{methodPrefix}");
-            }
-            return method;
+            return this.GetType().GetMethod($"{methodName}");
         }
 
         protected virtual JObject GetScopedMemory<MemoryAttributeT>()

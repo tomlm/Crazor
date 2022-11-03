@@ -16,7 +16,7 @@
                     <Column Width="auto">
                         <Image Url="@UrlHelper.Content("~/images/EditIcon.png")" Size="Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Edit Address" Verb="OnEdit">
+                                <Action.Execute Tooltip="Edit Address" Verb="@nameof(OnEdit)">
                                     { "addressId":"@address.Id" }
                                 </Action.Execute>
                             </SelectAction>
@@ -25,7 +25,7 @@
                     <Column Width="auto">
                         <Image Url="@UrlHelper.Content("~/images/DeleteIcon.png")" Size="Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Delete Address" Verb="OnDelete">
+                                <Action.Execute Tooltip="Delete Address" Verb="@nameof(OnDelete)">
                                     { "addressId":"@address.Id" }
                                 </Action.Execute>
                             </SelectAction>
@@ -33,7 +33,7 @@
                     </Column>
                 </ColumnSet>
                 <SelectAction>
-                    <Action.Execute Verb="Detail">
+                    <Action.Execute Verb="@nameof(OnDetail)">
                         { "addressId":"@address.Id" }
                     </Action.Execute>
                 </SelectAction>
@@ -44,7 +44,7 @@
     {
         <TextBlock>No addresses.</TextBlock>
     }
-    <Action.Execute Title="Add Address" Verb="OnAdd" />
+    <Action.Execute Title="Add Address" Verb="@nameof(OnAdd)" />
 </Card>
 
 @functions {

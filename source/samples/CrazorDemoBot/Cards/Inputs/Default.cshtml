@@ -13,7 +13,7 @@
     <TextBlock>IsCool: @Data.IsCool</TextBlock>
     <TextBlock>Favorite Pet: @Data.FavoritePet</TextBlock>
 
-    <Action.Execute Title="Edit" Verb="Edit"/>
+    <Action.Execute Title="Edit" Verb="@nameof(OnEdit)"/>
 </Card>
 
 @functions {

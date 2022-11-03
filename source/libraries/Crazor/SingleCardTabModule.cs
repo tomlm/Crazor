@@ -8,13 +8,15 @@ namespace Crazor
     /// <remarks>This is used by Tab Fetch to process registrations that are entityId path style /Cards/MyCard</remarks>
     internal class SingleCardTabModule : CardTabModule
     {
+        public SingleCardTabModule(IServiceProvider services) : base(services)
+        { }
+
         internal SingleCardTabModule(IServiceProvider services, string path) : base(services)
         {
             if (Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out var uri))
             {
                 this.Path = path;
 
-                // we do a load route
                 uri = uri.IsAbsoluteUri ? uri : new Uri(_configuration.GetValue<Uri>("HostUri"), uri);
                 CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var subPath);
                 this.Name = app;

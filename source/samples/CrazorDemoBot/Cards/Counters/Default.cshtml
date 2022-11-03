@@ -6,14 +6,14 @@
     <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
 
     <ActionSet>
-        <Action.Execute Title="+ Shared" Verb="OnIncrementShared" />
-        <Action.Execute Title="- Shared" Verb="OnDecrementShared" />
+        <Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)" />
+        <Action.Execute Title="- Shared" Verb="@nameof(OnDecrementSharedAsync)" />
     </ActionSet>
 
     <TextBlock Size="Large">Session Counter:@SessionCounter</TextBlock>
     <ActionSet>
-        <Action.Execute Title="+ Session" Verb="OnIncrementSession" />
-        <Action.Execute Title="- Session" Verb="OnDecrementSession" />
+        <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementSession)" />
+        <Action.Execute Title="- Session" Verb="@nameof(OnDecrementSession)" />
     </ActionSet>
 
 </Card>

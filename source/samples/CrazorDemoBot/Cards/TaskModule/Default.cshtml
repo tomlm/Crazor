@@ -3,15 +3,12 @@
 
 <Card Version="1.5">
     <TextBlock>Counter is @App.Counter!</TextBlock>
+    <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />
 </Card>
 
 @functions {
-    public void OnInitialized()
-    {
-        if (App.Counter == 0)
-        {
-            ShowView("Edit");
-        }
-    }
+    public void OnInitialized() => ShowView("Edit");
+
+    public void OnIncrement() => App.Counter++;
 
 }
