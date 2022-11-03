@@ -70,8 +70,6 @@ public async virtual Task SaveAppAsync(CancellationToken cancellationToken)
 
 >  NOTE 1: If you want **[SessionMemory]** and **[SharedMemory]** attributes to continue to work you need to call the base implementation when overriding these methods.
 
-> 
-
-
+>  NOTE 2: You should not put **[SessionMemory]** or **[SharedMemory]** attributes on properties which are loaded and saved to external data sources as that will cause the data be persisted twice, once to the custom store and once to the IStorage key value store.
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
