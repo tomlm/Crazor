@@ -392,7 +392,7 @@
                         value: invokeValue
                     }, null, 2),
                     beforeSend: function (xhr) {
-                        var token = "@Model.Token";
+                        var token = getCookie("token");
                         if (token.length > 0)
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                     },

@@ -30,8 +30,6 @@ namespace Crazor.HostPage.Pages.Cards
 
         public string ChannelId { get; set; }
 
-        public string? Token { get; set; }
-
         public CardApp? CardApp { get; set; }
 
         public AdaptiveCard? AdaptiveCard { get; set; }
@@ -47,7 +45,8 @@ namespace Crazor.HostPage.Pages.Cards
 
             var sessionId = Utils.GetNewId();
 
-            this.Token = await CardAppController.GetTokenAsync(_configuration);
+            var token = await CardAppController.GetTokenAsync(_configuration);
+            this.Response.Cookies.Append("token", token);
 
             this.CardApp = _appFactory.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
