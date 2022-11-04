@@ -38,7 +38,6 @@ namespace Crazor.Controllers
             string appId = configuration.GetValue<string>("MicrosoftAppId");
             if (appId != null)
             {
-                // var credentials = new MicrosoftAppCredentials(appId, password, _httpClient, null, /*oAuthScope*/appId);
                 var credentialsFactory = new ConfigurationServiceClientCredentialFactory(configuration);
                 var credentials = (AppCredentials)await credentialsFactory.CreateCredentialsAsync(appId, appId, AuthenticationConstants.ToChannelFromBotLoginUrlTemplate, false, CancellationToken.None);
                 return await credentials.GetTokenAsync();
