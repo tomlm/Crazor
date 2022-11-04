@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifestVersion": "1.14",
   "id": "aa584ff7-bd92-4903-b702-9a79c1f70be1",
   "packageName": "com.package.name",
   "name": {
-    "short": "OpsCardBot",
-    "full": "OpsCardBot - Test Ops Cards"
+    "short": "PhysOpsBot",
+    "full": "Physical Operations Bot - Test Ops Cards"
   },
   "developer": {
     "name": "Microsoft",
@@ -16,7 +16,7 @@
     "termsOfUseUrl": "https://opcardbot.azurewebsites.net/"
   },
   "description": {
-    "short": "OpsCardBot",
+    "short": "PhysOpsBot",
     "full": "this is the description"
   },
   "icons": {
@@ -36,11 +36,17 @@
       "scopes": [
         "personal"
       ]
+    },
+    {
+      "entityId": "/Cards/WorkOrder",
+      "name": "Work Orders",
+      "contentBotId": "adac6678-3c34-4772-910a-a96cda3f5b05",
+      "scopes": [ "personal" ]
     }
   ],
   "bots": [
     {
-      "botId": "541f3bfd-741b-48fd-a86b-ad58e7f5e478",
+      "botId": "adac6678-3c34-4772-910a-a96cda3f5b05",
       "scopes": [
         "personal",
         "team",
@@ -54,7 +60,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "541f3bfd-741b-48fd-a86b-ad58e7f5e478",
+      "botId": "adac6678-3c34-4772-910a-a96cda3f5b05",
       "commands": [
         {
           "id": "/Cards/WorkOrder/QuickCreate",
