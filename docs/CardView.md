@@ -184,13 +184,24 @@ Input controls do 2 things automatically related to validation:
 
 
 
-# Other Handlers
+# Life cycle handlers
 
-In addition to the verb based handlers there are a couple of additional handlers which are useful.
+In addition to the verb based handlers there are a couple of additional of life cycle handlers which are useful.
+
+The life cycle of any action is 
+
+* **App.OnLoadAppAsync()**
+  * **CardView.OnInitialized()** - Will be called only when a card state is new.
+  * **CardView.OnLoadView()** - Will be called when a Verb needs to be processed or Resume needs to be processed
+    * **CardView.OnVerb()** => which invokes to the Verb handler
+    * **CardView.OnResume()** => handles your dialog being resumed.
+* **App.OnSaveAppAsync()**
+
+
 
 ## OnInitialized
 
-When a card is loaded the first time **OnInitialized()** will be called giving you the opportunity to initialize your properties and/or route to a different cardview.
+When a card state is new the **OnInitialized()** method will be called giving you the opportunity to inspect incoming model and/or route to a different cardview. It will only be called once for the lifetime of that view.
 
 ```C#
     public void OnInitialized() 
@@ -200,11 +211,35 @@ When a card is loaded the first time **OnInitialized()** will be called giving y
     }
 ```
 
-> NOTE: OnInitialized is only synchronous, there is no async version of this method.
+> NOTE: **OnInitialized()** is only **synchronous**, there is no async version of this method.
 
+## OnLoadView()
 
+**OnLoadView()** is invoked on every action and before **OnResume()** and **OnVerb()**
 
-## OnResume
+It can be synchronous or async
+
+Example:
+
+```C#
+    public void OnLoadView()
+    {
+        // ... load something.
+    }
+```
+
+and
+
+```C#
+    public Task OnLoadView(CancellationToken ct)
+    {
+        // .... look up something
+    }
+```
+
+# 
+
+## OnResume()
 
 When a card is being resumed from another card calling **CancelView()**/**CloseView()** the **OnResume** handler is called. 
 
@@ -229,7 +264,7 @@ Example:
 and
 
 ```C#
-    public Task OnResumeAsync(CardResult result, CancellationToken ct)
+    public Task OnResume(CardResult result, CancellationToken ct)
     {
         // ....
     }
@@ -239,9 +274,9 @@ and
 
 # Custom binding
 
-The CardView class can also be 100% a code only view if you have a situation where you don't like using Razor template.
+The **CardView** class does not have to use Razor templates. You can implement your own BindView() method.
 
-To do that simply create a class which derives from **CardView<>** (like @inherits above) and override the **BindView()** method to return an Adaptive Card.
+Simply create a class which derives from **CardView<>** (like @inherits above) and override the **BindView()** method to return an Adaptive Card.
 
 ## Example:
 
@@ -274,16 +309,11 @@ namespace Example
 }
 ```
 
-To use the view you simply use the full path for the class:
-
-```C#
-ShowView("Example.MyCodeView")
-```
-
-Or you can use the generic form
+To use the view you simply use the generic form of ShowView<>() or ReplaceView<>()
 
 ```c#
 ShowView<MyCodeView>();
+ReplaceView<MyCodeView>();
 ```
 
 >  NOTE: All memory attributes, state management action handlers work, but you do not get the benefit of any of the Razor TagHelpers functionality, specifically 
