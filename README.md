@@ -43,7 +43,8 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * [Card Apps](CardApp.md) - How to create a CardApplication class
 * [Card Views](CardView.md) - How to define views with CardView class
 * [Card Memory](Memory.md) - information on persistence and memory model
-* [Components (Advanced)](TagHelpers.md) - How to define reusuable components 
+* [Card Routing](RoutingCards.md) - information on customizing urls to support deep linking into cards
+* [TagHelpers (Advanced)](TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
 # Setting up Azure
 
