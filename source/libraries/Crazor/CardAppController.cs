@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 namespace Crazor.Controllers
 {
@@ -35,10 +36,11 @@ namespace Crazor.Controllers
         public static async Task<string> GetTokenAsync(IConfiguration configuration)
         {
             string appId = configuration.GetValue<string>("MicrosoftAppId");
-            string password = configuration.GetValue<string>("MicrosoftAppPassword");
-            if (appId != null && password != null)
+            if (appId != null)
             {
-                var credentials = new MicrosoftAppCredentials(appId, password, _httpClient, null, /*oAuthScope*/appId);
+                // var credentials = new MicrosoftAppCredentials(appId, password, _httpClient, null, /*oAuthScope*/appId);
+                var credentialsFactory = new ConfigurationServiceClientCredentialFactory(configuration);
+                var credentials = (AppCredentials)await credentialsFactory.CreateCredentialsAsync(appId, appId, AuthenticationConstants.ToChannelFromBotLoginUrlTemplate, false, CancellationToken.None);
                 return await credentials.GetTokenAsync();
             }
             else
