@@ -8,10 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="wwwroot\images\boticon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.17.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="6.0.8" />
@@ -24,10 +20,4 @@
 		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
 		<ProjectReference Include="..\..\Libraries\AdaptiveCards\AdaptiveCards.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="wwwroot\images\EditIcon.png" />
-	  <None Include="wwwroot\images\boticon.png" />
-	</ItemGroup>
-
 </Project>
