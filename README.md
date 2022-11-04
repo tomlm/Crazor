@@ -14,7 +14,7 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 # Features
 
-![image-20221103114149668](assets/image-20221103114149668.png)
+![image](https://user-images.githubusercontent.com/17789481/199912880-bc35becb-9469-4470-9253-612cdf1a9d53.png)
 
 **Crazor** provides:
 
