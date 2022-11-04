@@ -33,7 +33,7 @@ This enables your bot to receive and response to messages.
 
 ## To add link unfurling for your cards
 
-This enables your bot to unfurl your web site links into cards.
+![image-20221104004207183](assets/image-20221104004207183.png)This enables your bot to unfurl your web site links into cards.
 
 ![image-20221102145929240](assets/image-20221102145929240.png)
 
@@ -44,6 +44,10 @@ This enables your bot to unfurl your web site links into cards.
 
 
 ## To add a card as a Task Module
+
+![image-20221104003856059](assets/image-20221104003856059.png)
+
+![image-20221104004023935](assets/image-20221104004023935.png)
 
 To add your card as a Task Module you edit the **composeExtensions** section to add **commands**
 
@@ -60,7 +64,7 @@ For each card you want to surface as custom command task module:
 
 ## To add a card as a Tab Module
 
-You can add your card as a tab by editing the **staticTabs** section.
+![image-20221104004105515](assets/image-20221104004105515.png)You can add your card as a tab by editing the **staticTabs** section.
 
 ![image-20221102151410289](assets/image-20221102151410289.png)
 

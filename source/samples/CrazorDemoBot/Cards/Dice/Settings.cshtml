@@ -19,6 +19,7 @@
         if (this.IsModelValid)
         {
             this.App.RollDice();
+            this.CloseTaskModule(TaskModuleAction.Auto);
             CloseView();
         }
     }
