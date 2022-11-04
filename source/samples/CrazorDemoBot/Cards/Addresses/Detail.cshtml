@@ -56,9 +56,9 @@
 
     public void OnResume(CardResult cardResult)
     {
-        if (cardResult.Name == "Edit")
+        if (cardResult.Success)
         {
-            this.Model = (Address)cardResult.Result!;
+            this.Model = cardResult.AsResult<Address>()!;
         }
     }
 }

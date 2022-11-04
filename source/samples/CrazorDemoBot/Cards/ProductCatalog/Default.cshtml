@@ -59,7 +59,7 @@
     public void OnAdd()
     {
         var item = new ProductCatalogItem();
-        ShowView("Edit", new EditOrAddProductCatalogItem() { IsEdit = false, Item = item });
+        ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = false, Item = item });
     }
 
     public void OnDetail(string id)
@@ -76,7 +76,7 @@
         var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
         if (item != null)
         {
-            ShowView("Edit", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
+            ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
         }
     }
 
@@ -85,45 +85,51 @@
         App.CatalogItems = App.CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
     }
 
-    public async Task OnResumeAsync(CardResult cardResult, CancellationToken cancellationToken)
+    public async Task OnResume(CardResult cardResult, CancellationToken cancellationToken)
     {
-        var model = (EditOrAddProductCatalogItem)cardResult.Result!;
-        if (model.IsEdit)
+        if (cardResult.Success)
         {
-            var item = App.CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
-
-            if (item != null && model.Item != null)
+            if (cardResult.Name == "EditOrAdd")
             {
-                // Update local copy
-                item.Name = model.Item.Name;
-                item.Description = model.Item.Description;
-                item.Price = model.Item.Price;
-                item.PictureUri = model.Item.PictureUri;
-                AddBannerMessage("Catalog Item successfully updated!", AdaptiveContainerStyle.Good);
-
-                // Update in API
-                var request = "https://ordersapi.azurewebsites.net/api/orders";
-                var data = JsonConvert.SerializeObject(item);
-                using (var client = new HttpClient())
+                var model = cardResult.AsResult<EditOrAddProductCatalogItem>()!;
+                if (model.IsEdit)
                 {
-                    var response = await client.PutAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
+                    var item = App.CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
+
+                    if (item != null && model.Item != null)
+                    {
+                        // Update local copy
+                        item.Name = model.Item.Name;
+                        item.Description = model.Item.Description;
+                        item.Price = model.Item.Price;
+                        item.PictureUri = model.Item.PictureUri;
+                        AddBannerMessage("Catalog Item successfully updated!", AdaptiveContainerStyle.Good);
+
+                        // Update in API
+                        var request = "https://ordersapi.azurewebsites.net/api/orders";
+                        var data = JsonConvert.SerializeObject(item);
+                        using (var client = new HttpClient())
+                        {
+                            var response = await client.PutAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
+                        }
+                    }
                 }
-            }
-        }
-        else
-        {
-            // Add local copy
-            if (model.Item != null)
-            {
-                App.CatalogItems.Add(model.Item);
-                AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
-
-                // Update in API
-                var request = "https://ordersapi.azurewebsites.net/api/orders";
-                var data = JsonConvert.SerializeObject(model.Item);
-                using (var client = new HttpClient())
+                else
                 {
-                    var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
+                    // Add local copy
+                    if (model.Item != null)
+                    {
+                        App.CatalogItems.Add(model.Item);
+                        AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
+
+                        // Update in API
+                        var request = "https://ordersapi.azurewebsites.net/api/orders";
+                        var data = JsonConvert.SerializeObject(model.Item);
+                        using (var client = new HttpClient())
+                        {
+                            var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
+                        }
+                    }
                 }
             }
         }

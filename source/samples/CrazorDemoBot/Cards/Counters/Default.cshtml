@@ -7,10 +7,10 @@
 
     <ActionSet>
         <Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)" />
-        <Action.Execute Title="- Shared" Verb="@nameof(OnDecrementSharedAsync)" />
+        <Action.Execute Title="- Shared" Verb="@nameof(OnDecrementShared)" />
     </ActionSet>
 
-    <TextBlock Size="Large">Session Counter:@SessionCounter</TextBlock>
+    <TextBlock Size="Large">Session Counter:@App.SessionCounter</TextBlock>
     <ActionSet>
         <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementSession)" />
         <Action.Execute Title="- Session" Verb="@nameof(OnDecrementSession)" />
@@ -19,22 +19,19 @@
 </Card>
 
 @functions {
-    [SessionMemory]
-    public int SessionCounter { get; set; }
-
     public void OnIncrementSession()
-        => this.SessionCounter++;
+        => this.App.SessionCounter++;
 
     public void OnDecrementSession()
-        => this.SessionCounter--;
+        => this.App.SessionCounter--;
 
     public void OnIncrementShared()
         => App.SharedCounter++;
 
-    public async Task OnDecrementSharedAsync()
+    public Task OnDecrementShared()
     {
-        await Task.Delay(0);
         App.SharedCounter--;
+        return Task.CompletedTask;
     }
 }
 

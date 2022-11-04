@@ -345,17 +345,17 @@ namespace Crazor
                     {
                         args.Add(cancellationToken);
                     }
-                    else if (parm.Name?.ToLower() == "id")
-                    {
-                        if (Action!.Id != null)
-                        {
-                            args.Add(Action.Id);
-                        }
-                        else if (data.TryGetValue(Constants.IDDATA_KEY, out var id))
-                        {
-                            args.Add(id.ToString());
-                        }
-                    }
+                    //else if (parm.Name?.ToLower() == "id")
+                    //{
+                    //    if (Action!.Id != null)
+                    //    {
+                    //        args.Add(Action.Id);
+                    //    }
+                    //    else if (data.TryGetValue(Constants.IDDATA_KEY, out var id))
+                    //    {
+                    //        args.Add(id.ToString());
+                    //    }
+                    //}
                     else
                     {
                         var prop = data.Properties().Where(p => p.Name.ToLower() == parm?.Name?.ToLower()).SingleOrDefault();

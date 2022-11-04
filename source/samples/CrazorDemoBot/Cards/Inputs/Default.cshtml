@@ -22,14 +22,16 @@
 
     public void OnEdit()
     {
+        // pass data to the the edit view to be edited
         ShowView("Edit", Data);
     }
 
     public void OnResume(CardResult cardResult)
     {
-        if (cardResult.Name == "Edit")
+        if (cardResult.Success)
         {
-            Data = (InputsModel)cardResult.Result!;
+            // when it comes back successfully, update our property.
+            Data = cardResult.AsResult<InputsModel>()!;
         }
     }
 }

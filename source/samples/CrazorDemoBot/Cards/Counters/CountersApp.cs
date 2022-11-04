@@ -16,6 +16,9 @@ namespace CrazorDemoBot.Cards.Counters
         [SharedMemory]
         public int SharedCounter { get; set; } = 0;
 
+        [SessionMemory]
+        public int SessionCounter { get; set; }
+
         public override string GetSharedId() => Utils.GetNewId();
     }
 }
