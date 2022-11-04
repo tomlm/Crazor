@@ -23,6 +23,8 @@ var mvcBuilder = builder.Services.AddMvc();
 //}
 
 builder.Services.AddControllers();
+//builder.Services.AddControllersWithViews(); 
+//builder.Services.AddRazorPages();
 
 var app = builder.Build();
 

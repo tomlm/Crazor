@@ -49,8 +49,11 @@ namespace Crazor
             var cardAppServices = services.AddByName<CardApp>();
             foreach (var cardAppType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)))
             {
-                services.AddScoped(cardAppType);
-                cardAppServices.Add(cardAppType.Name, cardAppType);
+                if (cardAppType.Name != nameof(CardApp))
+                {
+                    services.AddScoped(cardAppType);
+                    cardAppServices.Add(cardAppType.Name, cardAppType);
+                }
             }
             cardAppServices.Build();
 
@@ -68,8 +71,11 @@ namespace Crazor
             foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(ICardView)))))
             {
                 var cardViewType = cardView.AsType();
-                services.AddScoped(cardViewType);
-                cardViewServices.Add(cardViewType.FullName, cardViewType);
+                if (cardViewType != typeof(CardView<>) && cardViewType != typeof(CardView<,>))
+                {
+                    services.AddScoped(cardViewType);
+                    cardViewServices.Add(cardViewType.FullName, cardViewType);
+                }
             }
             cardViewServices.Build();
 

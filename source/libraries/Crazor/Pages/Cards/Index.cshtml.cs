@@ -8,8 +8,9 @@ using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
-namespace CrazorDemoBot.Pages.Cards
+namespace Crazor.HostPage.Pages.Cards
 {
     public class CardHostModel : PageModel
     {
