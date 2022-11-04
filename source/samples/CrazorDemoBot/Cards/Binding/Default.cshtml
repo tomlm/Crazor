@@ -1,0 +1,44 @@
+﻿@using CrazorDemoBot.Cards.Binding
+@inherits CardView<BindingApp>
+
+<Card Version="1.5">
+    <TextBlock Size="ExtraLarge">Binding Example</TextBlock>
+
+    <TextBlock Size="Medium" Weight="Bolder">One-way bindings</TextBlock>
+    <Container Separator="true" Style="Emphasis">
+        <TextBlock Wrap="true" IsSubtle="true">these are one-way because there is no Value attribute binding the value of the property </TextBlock>
+    </Container>
+
+    <Input.Text Id="Input1" Label="Input1: One-way binding to argument of OnSubmit()" />
+    <Input.Text Id="Input2" Label="Input2: One-way binding to Input2 property" />
+
+    <TextBlock Size="Medium" Weight="Bolder">Two-way bindings</TextBlock>
+    <Container Separator="true" Style="Emphasis">
+        <TextBlock Wrap="true">These are two-way because there IS a Value attribute binding the value of the property and sending it to the client</TextBlock>
+    </Container>
+
+    <Input.Text Id="Input3" Value="@Input3" Label="Input3: Two-way binding to property" />
+    <Input.Text Binding="Input4" Label="Input4: Two-way binding to property with one attribute instead of two" />
+
+    <Action.Execute Verb="@nameof(OnSubmit)" Title="Submit" />
+</Card>
+
+@functions
+{
+    [BindProperty]
+    public string Input2 { get; set; }
+
+    [BindProperty]
+    public string Input3 { get; set; }
+
+    [BindProperty]
+    public string Input4 { get; set; }
+
+    public void OnSubmit(string Input1)
+    {
+        AddBannerMessage($"Input4={Input4}", AdaptiveContainerStyle.Emphasis);
+        AddBannerMessage($"Input3={Input3}", AdaptiveContainerStyle.Emphasis);
+        AddBannerMessage($"Input2={Input2}", AdaptiveContainerStyle.Emphasis);
+        AddBannerMessage($"Input1={Input1}", AdaptiveContainerStyle.Emphasis);
+    }
+}
