@@ -31,32 +31,32 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 # Installation
 
-[Installing Crazor](Install.md) - Installing Crazor into your porject
+[Installing Crazor](docs/Install.md) - Installing Crazor into your porject
 
 # Walkthroughs
 
-* [HelloWorld](HelloWorldWalkthrough.md) - walkthrough creating your first card application.
-* [Counters](CountersWalkthrough.md) - walkthrough showing creating a card with data binding and action handlers.
+* [HelloWorld](docs/HelloWorldWalkthrough.md) - walkthrough creating your first card application.
+* [Counters](docs/CountersWalkthrough.md) - walkthrough showing creating a card with data binding and action handlers.
 
 # Documentation
 
-* [Card Apps](CardApp.md) - How to create a CardApplication class
-* [Card Views](CardView.md) - How to define views with CardView class
-* [Card Memory](Memory.md) - information on persistence and memory model
-* [Card Routing](RoutingCards.md) - information on customizing urls to support deep linking into cards
-* [TagHelpers (Advanced)](TagHelpers.md) - How to define reusuable components via custom TagHelpers
+* [Card Apps](docs/CardApp.md) - How to create a CardApplication class
+* [Card Views](docs/CardView.md) - How to define views with CardView class
+* [Card Memory](docs/Memory.md) - information on persistence and memory model
+* [Card Routing](docs/RoutingCards.md) - information on customizing urls to support deep linking into cards
+* [TagHelpers (Advanced)](docs/TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
 # Setting up Azure
 
-[Setting up your azure web deployment](Deployment.md)  
+[Setting up your azure web deployment](docs/Deployment.md)  
 
 # Teams
 
-[Installing your card applications into teams](Teams.md) 
+[Installing your card applications into teams](docs/Teams.md) 
 
 # Visual Studio Extension 
 
-[Installing an extension for Visual Studio](VSIX.md) 
+[Installing an extension for Visual Studio](docs/VSIX.md) 
 
 # Contributing
 
