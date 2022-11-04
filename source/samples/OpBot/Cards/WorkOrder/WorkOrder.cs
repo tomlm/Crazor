@@ -9,14 +9,14 @@ namespace OpBot.Cards.WorkOrder
 
         [JsonProperty("msdyn_name")]
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonProperty("msdyn_serviceaccount@odata.bind")]
-        public string ServiceAccount { get; set; }
+        public string? ServiceAccount { get; set; }
 
         [JsonProperty("msdyn_workordersummary")]
         [Required]
-        public string Summary { get; set; }
+        public string? Summary { get; set; }
 
         [JsonProperty("msdyn_workordertype")]
         [Required]
@@ -32,7 +32,7 @@ namespace OpBot.Cards.WorkOrder
         [JsonProperty("msdyn_customerasset")]
         public Asset CustomerAsset { get; set; } = new Asset();
 
-        public string IoTAlert { get; set; }
+        public string? IoTAlert { get; set; }
 
         public DateTimeOffset? PromisedBy { get; set; }
 
@@ -44,7 +44,7 @@ namespace OpBot.Cards.WorkOrder
 
         public void AssignTo(string userName)
         {
-            this.AssignedTo = Person.GetTechnicians().FirstOrDefault(x => x.Email.Equals(userName, StringComparison.OrdinalIgnoreCase));
+            this.AssignedTo = Person.GetTechnicians().FirstOrDefault(x => x.Email!.Equals(userName, StringComparison.OrdinalIgnoreCase));
         }
 
         [JsonIgnore]
@@ -93,6 +93,6 @@ namespace OpBot.Cards.WorkOrder
         }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

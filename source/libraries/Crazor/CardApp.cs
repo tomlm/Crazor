@@ -321,7 +321,7 @@ namespace Crazor
         /// Override this to set the shared Id when known.
         /// </summary>
         /// <returns></returns>
-        public virtual string GetSharedId() => String.Empty;
+        public virtual string? GetSharedId() => this.Name;
 
         /// <summary>
         /// Load state from storage

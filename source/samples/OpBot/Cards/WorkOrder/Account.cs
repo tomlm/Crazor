@@ -8,9 +8,9 @@ namespace OpBot.Cards.WorkOrder
         public Guid? AccountId { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonProperty("defaultpricelevelid@odata.bind")]
-        public Uri DefaultPriceLevelId { get; set; }
+        public Uri? DefaultPriceLevelId { get; set; }
     }
 }

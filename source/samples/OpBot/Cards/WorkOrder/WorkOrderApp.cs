@@ -17,13 +17,13 @@ namespace OpBot.Cards.WorkOrder
 
 
         [SharedMemory]
-        public List<Account> ServiceAccounts { get; set; }
+        public List<Account>? ServiceAccounts { get; set; }
 
-        public List<WorkOrderType> WorkOrderTypes { get; set; }
+        public List<WorkOrderType>? WorkOrderTypes { get; set; }
 
-        public List<PriceLevel> PriceLists { get; set; }
+        public List<PriceLevel>? PriceLists { get; set; }
 
-        public List<SystemStatus> SystemStatuses { get; set; }
+        public List<SystemStatus>? SystemStatuses { get; set; }
 
         public override string GetSharedId() => Utils.GetNewId();
 
@@ -39,7 +39,7 @@ namespace OpBot.Cards.WorkOrder
         public async Task UpdateWorkOrder(WorkOrder workOrder)
         {
             await Task.CompletedTask;
-            WorkOrders[workOrder.Name] = workOrder;
+            WorkOrders[workOrder.Name!] = workOrder;
         }
 
         public async Task DeleteWorkOrder(string name)
@@ -51,7 +51,7 @@ namespace OpBot.Cards.WorkOrder
         public async Task AddWorkOrder(WorkOrder workOrder)
         {
             await Task.CompletedTask;
-            this.WorkOrders[workOrder.Name] = workOrder;
+            this.WorkOrders[workOrder.Name!] = workOrder;
         }
     }
 }

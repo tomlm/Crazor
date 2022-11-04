@@ -16,9 +16,8 @@
 @functions {
     public void OnOK()
     {
-        if (IsModelValid && this.App.NumberDice.HasValue)
+        if (this.IsModelValid)
         {
-            this.App.SharedId = App.DiceName.Replace(" ", String.Empty);
             this.App.RollDice();
             CloseView();
         }

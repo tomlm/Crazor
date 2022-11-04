@@ -32,7 +32,7 @@ namespace PhysOpBot.Pages.Cards
 
         public AdaptiveCard? AdaptiveCard { get; set; }
 
-        public string RouteUrl { get; set; }
+        public string? RouteUrl { get; set; }
 
         public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {

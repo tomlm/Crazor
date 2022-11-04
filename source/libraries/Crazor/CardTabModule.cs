@@ -19,10 +19,10 @@ namespace Crazor
         protected IConfiguration _configuration;
         protected IServiceByNameFactory<CardApp> _cardApps;
         protected IEncryptionProvider _encryptionProvider;
-        protected ILogger _logger;
+        protected ILogger? _logger;
         protected IStorage _storage;
 
-        public CardTabModule(IServiceProvider services, string name = null)
+        public CardTabModule(IServiceProvider services, string? name = null)
         {
             _serviceProvider = services;
             _configuration = services.GetRequiredService<IConfiguration>();

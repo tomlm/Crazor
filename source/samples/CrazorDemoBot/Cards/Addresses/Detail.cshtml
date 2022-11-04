@@ -1,6 +1,5 @@
 ﻿@using CrazorDemoBot.Cards.Addresses
 @inherits CardView<AddressesApp, Address>
-
 @* This card supports a deep link route *@
 @attribute [Route("{addressId}")]
 @functions {
@@ -17,7 +16,7 @@
     @if (this.Model == null)
     {
         <TextBlock>This address does not exist anymore.</TextBlock>
-        <Action.Execute Verb="@nameof(OnAll)" Title="Show Addresses"/>
+        <Action.Execute Verb="@nameof(OnAll)" Title="Show Addresses" />
     }
     else
     {
@@ -48,8 +47,11 @@
 
     public void OnDelete()
     {
-        App.DeleteAddress(Model.Id);
-        this.Model = null;
+        if (Model.Id != null)
+        {
+            App.DeleteAddress(Model.Id);
+            CloseView();
+        }
     }
 
     public void OnResume(CardResult cardResult)

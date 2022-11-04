@@ -44,7 +44,7 @@
     [BindProperty]
     public string? DueDate { get; set; }
 
-    public async Task OnSave()
+    public void OnSave()
     {
         if (!IsModelValid)
             return;

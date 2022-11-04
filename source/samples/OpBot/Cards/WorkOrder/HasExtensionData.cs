@@ -8,6 +8,6 @@ namespace OpBot.Cards.WorkOrder
     {
         [SkipRecursiveValidation]
         [JsonExtensionData]
-        public JObject ExtensionData { get; set; }
+        public JObject? ExtensionData { get; set; }
     }
 }

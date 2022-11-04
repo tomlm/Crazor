@@ -2,6 +2,6 @@
 {
     public class OData<T> : HasExtensionData
     {
-        public T Value { get; set; }
+        public T? Value { get; set; }
     }
 }

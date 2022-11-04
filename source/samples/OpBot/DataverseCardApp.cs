@@ -16,7 +16,7 @@ namespace OpBot
 
        
         public static bool TryGetHeaders(IServiceProvider provider, out Uri? uri, out string? token)
-            => TryGetHeaders(provider.GetRequiredService<IActionContextAccessor>().ActionContext.HttpContext, out uri, out token);
+            => TryGetHeaders(provider.GetRequiredService<IActionContextAccessor>().ActionContext!.HttpContext, out uri, out token);
 
         private static readonly Uri DefaultUri = new Uri("https://org829366eb.crm.dynamics.com/api/data/v9.2/");
 
@@ -83,7 +83,7 @@ namespace OpBot
             NullValueHandling = NullValueHandling.Ignore,
         };
 
-        public static async Task<T?> SendAsync<T>(HttpMethod method, string path, Uri uri, string token, object body = null)
+        public static async Task<T?> SendAsync<T>(HttpMethod method, string path, Uri uri, string token, object? body = null)
         {
             using var client = new HttpClient();
             using var request = new HttpRequestMessage(method, new Uri(uri, path));
@@ -143,7 +143,7 @@ namespace OpBot
         {
             if (TryGetHeaders(Services, out var uri, out var token))
             {
-                return await SendAsync<T>(method, urlPath, uri, token);
+                return await SendAsync<T>(method, urlPath, uri!, token!);
             }
             else
             {

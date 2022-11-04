@@ -14,6 +14,6 @@ namespace OpBot.Cards.WorkOrder
         }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

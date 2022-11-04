@@ -8,20 +8,22 @@ namespace Crazor.Validation
 {
     // From https://github.com/reustmd/DataAnnotationsValidatorRecursive
     // MIT License
-    internal class DataAnnotationsValidator : IDataAnnotationsValidator
+    internal class DataAnnotationsValidator 
     {
-        public bool TryValidateObject(object obj, ICollection<ValidationResult> results, IDictionary<object, object> validationContextItems = null)
+        public bool TryValidateObject(object obj, ICollection<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)
         {
             return Validator.TryValidateObject(obj, new ValidationContext(obj, null, validationContextItems), results, true);
         }
 
-        public bool TryValidateObjectRecursive<T>(T obj, List<ValidationResult> results, IDictionary<object, object> validationContextItems = null)
+        public bool TryValidateObjectRecursive<T>(T obj, List<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)
         {
             return TryValidateObjectRecursive(obj, results, new HashSet<object>(), validationContextItems);
         }
 
-        private bool TryValidateObjectRecursive<T>(T obj, List<ValidationResult> results, ISet<object> validatedObjects, IDictionary<object, object> validationContextItems = null)
+        private bool TryValidateObjectRecursive<T>(T obj, List<ValidationResult> results, ISet<object> validatedObjects, IDictionary<object, object>? validationContextItems = null)
         {
+            ArgumentNullException.ThrowIfNull(obj);
+
             //short-circuit to avoid infinit loops on cyclical object graphs
             if (validatedObjects.Contains(obj))
             {

@@ -9,14 +9,15 @@ namespace CrazorDemoBot.Cards.Dice
 {
     public class DiceApp : CardApp
     {
-        public DiceApp(IServiceProvider services) : base(services)
+        public DiceApp(IServiceProvider services) 
+            : base(services)
         {
         }
 
         [SharedMemory]
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        public string DiceName { get; set; }
+        public string? DiceName { get; set; }
 
         [SharedMemory]
         [Required]
@@ -26,6 +27,8 @@ namespace CrazorDemoBot.Cards.Dice
 
         [SharedMemory]
         public List<int>? Dice { get; set; }
+
+        public override string? GetSharedId() => this.DiceName;
 
         public void RollDice()
         {
