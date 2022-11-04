@@ -27,7 +27,7 @@ namespace Crazor.Interfaces
         /// Called to load state
         /// </summary>
         /// <param name="cardState"></param>
-        void OnLoadCard(CardViewState cardState);
+        void OnLoadState(CardViewState cardState);
 
         /// <summary>
         /// Called to process verb

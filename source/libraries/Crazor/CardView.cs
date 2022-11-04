@@ -64,11 +64,12 @@ namespace Crazor
             return Task.CompletedTask;
         }
 
-        public virtual void OnLoadCard(CardViewState cardState)
+        public virtual void OnLoadState(CardViewState cardState)
         {
+            MethodInfo? method;
             if (cardState.Initialized == false)
             {
-                var method = GetMethod("OnInitialized");
+                method = GetMethod("OnInitialized");
                 if (method != null)
                 {
                     method.Invoke(this, null);
@@ -86,15 +87,21 @@ namespace Crazor
             BindProperties();
 
             var verb = action.Verb;
-            MethodInfo? verbMethod = null;
+            var data = JObject.FromObject(this.Action.Data);
 
+            var loadViewMethod = GetMethod("OnLoadView");
+            if (loadViewMethod != null)
+            {
+                await InvokeMethodAsync(loadViewMethod, GetMethodArgs(loadViewMethod, data, cancellationToken));
+            }
+
+            MethodInfo? verbMethod = null;
             if (verb == Constants.LOADROUTE_VERB)
             {
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
                 verbMethod = GetMethod(verb);
                 if (verbMethod != null)
                 {
-                    var data = JObject.FromObject(this.Action.Data);
                     var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
                     if (routeAttribute != null)
                     {
@@ -409,15 +416,21 @@ namespace Crazor
         /// <returns></returns>
         public virtual async Task OnCardResumeAsync(CardResult cardResult, CancellationToken cancellationToken)
         {
-            MethodInfo? verbMethod = GetMethod($"OnResume");
-            if (verbMethod != null)
+            var loadViewMethod = GetMethod("OnLoadView");
+            if (loadViewMethod != null)
+            {
+                await InvokeMethodAsync(loadViewMethod, GetMethodArgs(loadViewMethod, new JObject(), cancellationToken));
+            }
+
+            MethodInfo? resumeMethod = GetMethod($"OnResume");
+            if (resumeMethod != null)
             {
                 var args = new List<Object?>() { cardResult };
-                if (verbMethod.GetParameters().Last().ParameterType == typeof(CancellationToken))
+                if (resumeMethod.GetParameters().Last().ParameterType == typeof(CancellationToken))
                 {
                     args.Add(cancellationToken);
                 }
-                await InvokeMethodAsync(verbMethod, args);
+                await InvokeMethodAsync(resumeMethod, args);
             }
         }
 
@@ -560,7 +573,7 @@ namespace Crazor
         [RazorInject]
         public ViewDataDictionary<ModelT>? ViewData { get; set; }
 
-        public override void OnLoadCard(CardViewState cardViewState)
+        public override void OnLoadState(CardViewState cardViewState)
         {
             ModelT? model = this.ViewContext.ViewData.Model as ModelT;
             if (model == null)
@@ -576,7 +589,7 @@ namespace Crazor
             }
             this.ViewData = new ViewDataDictionary<ModelT>(this.ViewContext.ViewData);
 
-            base.OnLoadCard(cardViewState);
+            base.OnLoadState(cardViewState);
         }
 
     }

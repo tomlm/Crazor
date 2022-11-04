@@ -15,20 +15,5 @@ namespace CrazorDemoBot.Cards.ProductCatalog
             : base(services)
         {
         }
-
-        public override async Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
-        {
-            var request = "https://ordersapi.azurewebsites.net/api/orders";
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetStringAsync(request);
-
-                CatalogItems = JsonConvert.DeserializeObject<List<ProductCatalogItem>>(response)!;
-            }
-
-            await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);      
-        }
-
-        public List<ProductCatalogItem> CatalogItems { get; set; } = new List<ProductCatalogItem>();
     }
 }

@@ -460,7 +460,7 @@ namespace Crazor
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
             this.CurrentView = cardView;
-            this.CurrentView.OnLoadCard(cardState);
+            this.CurrentView.OnLoadState(cardState);
         }
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)

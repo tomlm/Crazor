@@ -5,12 +5,13 @@
 
 @inherits CardView<ProductCatalogApp>
 
+
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Product Catalog</TextBlock>
 
-    @if (App.CatalogItems.Any())
+    @if (CatalogItems.Any())
     {
-        @foreach (var item in App.CatalogItems)
+        @foreach (var item in CatalogItems)
         {
             <Container Separator="true">
                 <ColumnSet Padding="none">
@@ -56,6 +57,20 @@
 </Card>
 
 @functions {
+    
+    public List<ProductCatalogItem> CatalogItems { get; set; }
+
+    public async Task OnLoadView()
+    {
+        var request = "https://ordersapi.azurewebsites.net/api/orders";
+        using (var client = new HttpClient())
+        {
+            var response = await client.GetStringAsync(request);
+
+            CatalogItems = JsonConvert.DeserializeObject<List<ProductCatalogItem>>(response)!;
+        }
+    }
+
     public void OnAdd()
     {
         var item = new ProductCatalogItem();
@@ -64,7 +79,7 @@
 
     public void OnDetail(string id)
     {
-        var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
+        var item = CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
         if (item != null)
         {
             ShowView("Detail", item);
@@ -73,7 +88,7 @@
 
     public void OnEdit(string id)
     {
-        var item = App.CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
+        var item = CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
         if (item != null)
         {
             ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
@@ -82,7 +97,7 @@
 
     public void OnDelete(string id)
     {
-        App.CatalogItems = App.CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
+        CatalogItems = CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
     }
 
     public async Task OnResume(CardResult cardResult, CancellationToken cancellationToken)
@@ -94,7 +109,7 @@
                 var model = cardResult.AsResult<EditOrAddProductCatalogItem>()!;
                 if (model.IsEdit)
                 {
-                    var item = App.CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
+                    var item = CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
 
                     if (item != null && model.Item != null)
                     {
@@ -119,7 +134,7 @@
                     // Add local copy
                     if (model.Item != null)
                     {
-                        App.CatalogItems.Add(model.Item);
+                        CatalogItems.Add(model.Item);
                         AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
 
                         // Update in API
@@ -134,4 +149,5 @@
             }
         }
     }
+
 }
