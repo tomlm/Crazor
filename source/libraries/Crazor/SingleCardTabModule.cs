@@ -8,7 +8,9 @@ namespace Crazor
     /// <remarks>This is used by Tab Fetch to process registrations that are entityId path style /Cards/MyCard</remarks>
     internal class SingleCardTabModule : CardTabModule
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public SingleCardTabModule(IServiceProvider services) : base(services)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         { }
 
         internal SingleCardTabModule(IServiceProvider services, string path) : base(services)

@@ -11,10 +11,10 @@ namespace Crazor
         public const string IDDATA_KEY = "_id";
 
         // well known verbs
-        public const string REFRESH_VERB = "OnRefresh";
         public const string CANCEL_VERB = "OnCancel";
         public const string OK_VERB = "OnOK";
         public const string LOADROUTE_VERB = "OnLoadRoute";
+        public const string SHOWVIEW_VERB = "OnShowView";
 
         // well known screens
         public const string DEFAULT_VIEW = "Default";

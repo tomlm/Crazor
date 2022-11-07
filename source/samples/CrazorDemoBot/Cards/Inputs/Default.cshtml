@@ -26,8 +26,9 @@
         ShowView("Edit", Data);
     }
 
-    public void OnResume(CardResult cardResult)
+    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
+        await Task.CompletedTask;
         if (cardResult.Success)
         {
             // when it comes back successfully, update our property.

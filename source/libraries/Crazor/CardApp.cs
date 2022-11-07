@@ -78,11 +78,11 @@ namespace Crazor
         public string IconUrl { get; set; }
 
         /// <summary>
+        /// <summary>
         /// Instance Id for the card.
         /// </summary>
         public string? SharedId { get; set; }
 
-        /// <summary>
         /// Session Id for the card
         /// </summary>
         public string? SessionId { get; private set; }
@@ -155,7 +155,10 @@ namespace Crazor
         {
             ArgumentNullException.ThrowIfNull(this.Action);
             ArgumentNullException.ThrowIfNull(CurrentView);
-            ArgumentNullException.ThrowIfNull(this.Action);
+            if (this.Action.Verb == null)
+            {
+                this.Action.Verb = Constants.SHOWVIEW_VERB;
+            }
             Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb})-----");
 
             // Load stylesheet
@@ -175,10 +178,10 @@ namespace Crazor
             {
                 if (!String.IsNullOrEmpty(this.Action.Verb))
                 {
-                    await this.CurrentView.OnVerbAsync(this.Action, cancellationToken);
+                    await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
                     if (LastResult != null)
                     {
-                        await this.CurrentView.OnCardResumeAsync(LastResult, cancellationToken);
+                        await this.CurrentView.OnResumeViewAsync(LastResult, cancellationToken);
                     }
 
                     SaveCardState(this.CallStack[0], this.CurrentView);
@@ -193,7 +196,7 @@ namespace Crazor
             AdaptiveCard? outboundCard;
             try
             {
-                outboundCard = await CurrentView.BindCard(cancellationToken);
+                outboundCard = await CurrentView.BindView(cancellationToken);
                 ArgumentNullException.ThrowIfNull(outboundCard);
             }
             catch (XmlException xerr)
@@ -229,7 +232,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(CurrentView);
             Diag.Trace.WriteLine($"------- OnSearch({searchInvoke.Dataset}, {searchInvoke.QueryText})-----");
 
-            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, Services, cancellationToken);
+            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, cancellationToken);
 
             return new AdaptiveCardInvokeResponse()
             {
@@ -248,7 +251,8 @@ namespace Crazor
         {
             SaveCardState(this.CallStack[0], this.CurrentView);
             var cardState = new CardViewState(cardName, model);
-            this.CallStack.Insert(0, cardState);
+            CallStack.Insert(0, cardState);
+            Action!.Verb = Constants.SHOWVIEW_VERB;
             LoadView(cardState);
         }
 
@@ -261,6 +265,7 @@ namespace Crazor
         {
             var cardState = new CardViewState(cardName, model);
             this.CallStack[0] = cardState;
+            Action!.Verb = Constants.SHOWVIEW_VERB;
             LoadView(cardState);
         }
 
@@ -279,6 +284,7 @@ namespace Crazor
                 this.CallStack.Insert(0, new CardViewState(Constants.DEFAULT_VIEW));
             }
 
+            Action!.Verb = Constants.SHOWVIEW_VERB;
             LoadView(this.CallStack[0]);
         }
 
@@ -321,7 +327,7 @@ namespace Crazor
         /// Override this to set the shared Id when known.
         /// </summary>
         /// <returns></returns>
-        public virtual string? GetSharedId() => this.Name;
+        public virtual string? GetSharedId() => null;
 
         /// <summary>
         /// Load state from storage
@@ -460,7 +466,7 @@ namespace Crazor
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
             this.CurrentView = cardView;
-            this.CurrentView.OnLoadState(cardState);
+            this.CurrentView.LoadState(cardState);
         }
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
@@ -561,7 +567,7 @@ namespace Crazor
             var refresh = new AdaptiveExecuteAction()
             {
                 Title = "Refresh",
-                Verb = Constants.REFRESH_VERB,
+                Verb = Constants.SHOWVIEW_VERB,
                 IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
                 AssociatedInputs = AdaptiveAssociatedInputs.None,
             };
@@ -782,7 +788,7 @@ namespace Crazor
             }
         }
 
-        private void LoadCardState(CardViewState cardState, ICardView cardView)
+        private static void LoadCardState(CardViewState cardState, ICardView cardView)
         {
             foreach (var property in cardView.GetType().GetProperties()
                                                         .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
@@ -796,7 +802,7 @@ namespace Crazor
 
 
 
-        private void SaveCardState(CardViewState state, ICardView cardView)
+        private static void SaveCardState(CardViewState state, ICardView cardView)
         {
             if (cardView != null)
             {

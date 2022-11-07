@@ -151,7 +151,7 @@
         App.WorkOrder.SystemStatus = new SystemStatus("Canceled");
     }
 
-    public void OnInitialized()
+    public override void OnInitialized()
     {
         if(App.WorkOrder.PromisedBy == null)
             App.WorkOrder.PromisedBy = DateTime.UtcNow.AddHours(24);

@@ -24,33 +24,37 @@ namespace Crazor.Interfaces
         bool IsModelValid { get; set; }
 
         /// <summary>
+        /// Get any custom route data for the cardview
+        /// </summary>
+        /// <returns></returns>
+        string GetRoute();
+
+        /// <summary>
         /// Called to load state
         /// </summary>
         /// <param name="cardState"></param>
-        void OnLoadState(CardViewState cardState);
-
-        /// <summary>
-        /// Called to process verb
-        /// </summary>
-        /// <param name="action"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<bool> OnVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Called to procceses resumption
-        /// </summary>
-        /// <param name="screenResult"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task OnCardResumeAsync(CardResult screenResult, CancellationToken cancellationToken);
+        void LoadState(CardViewState cardState);
 
         /// <summary>
         /// Bind the view to the card
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<AdaptiveCard?> BindCard(CancellationToken cancellationToken);
+        Task<AdaptiveCard?> BindView(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Called to process an InvokeAction (aka a verb)
+        /// </summary>
+        /// <param name="action">action payload</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Called to process card result from the resumption of a view.
+        /// </summary>
+        /// <param name="screenResult"></param>
+        /// <param name="cancellationToken"></param>
+        Task OnResumeViewAsync(CardResult screenResult, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to search for choices.
@@ -59,8 +63,6 @@ namespace Crazor.Interfaces
         /// <param name="services"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services, CancellationToken cancellationToken);
-
-        string GetRoute();
+        Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken);
     }
 }

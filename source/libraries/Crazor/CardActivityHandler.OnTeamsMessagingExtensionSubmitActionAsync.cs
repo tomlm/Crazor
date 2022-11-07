@@ -69,7 +69,6 @@ namespace Crazor
                     {
                         return CreatePreviewSendResponse(cardApp, adaptiveCard);
                     }
-                    return new MessagingExtensionActionResponse() { };
 
                 case TaskModuleAction.None:
                 default:
@@ -96,7 +95,7 @@ namespace Crazor
             };
         }
 
-        protected MessagingExtensionActionResponse CreatePreviewSendResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
+        protected static MessagingExtensionActionResponse CreatePreviewSendResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
             // return preview
             return new MessagingExtensionActionResponse

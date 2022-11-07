@@ -57,7 +57,7 @@ namespace Crazor
                 }
             };
 
-            var result = await turnContext.SendActivityAsync(responseActivity);
+            var result = await turnContext.SendActivityAsync(responseActivity, cancellationToken);
             return new MessagingExtensionActionResponse();
         }
     }

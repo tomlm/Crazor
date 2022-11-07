@@ -122,7 +122,7 @@ namespace AdaptiveCards
         /// Title for the card (used when displayed in a dialog).
         /// </summary>
         [JsonProperty(Order = -6, NullValueHandling = NullValueHandling.Ignore)]
-        [Obsolete("The Title property is not officially supported right now and should not be used")]
+        //[Obsolete("The Title property is not officially supported right now and should not be used")]
         public string Title { get; set; }
 
         /// <summary>

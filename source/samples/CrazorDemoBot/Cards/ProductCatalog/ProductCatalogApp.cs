@@ -6,6 +6,9 @@ using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using CrazorDemoBot.Cards.HelloWorld;
 using CrazorDemoBot.Cards.ProductCatalog;
+using System.Reflection;
+using System.Text;
+using System.Threading;
 
 namespace CrazorDemoBot.Cards.ProductCatalog
 {
@@ -14,6 +17,58 @@ namespace CrazorDemoBot.Cards.ProductCatalog
         public ProductCatalogApp(IServiceProvider services)
             : base(services)
         {
+        }
+
+        public async Task<List<ProductCatalogItem>> GetCatalogItems(CancellationToken cancellationToken)
+        {
+            var request = "https://ordersapi.azurewebsites.net/api/orders";
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetStringAsync(request);
+
+                return JsonConvert.DeserializeObject<List<ProductCatalogItem>>(response)!;
+            }
+        }
+
+        public async Task<ProductCatalogItem> GetCatalogItem(string id, CancellationToken cancellationToken)
+        {
+            var request = $"https://ordersapi.azurewebsites.net/api/orders/{id}";
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetStringAsync(request);
+
+                return JsonConvert.DeserializeObject<ProductCatalogItem>(response)!;
+            }
+        }
+
+        public async Task AddCatalogItem(ProductCatalogItem catalogItem, CancellationToken cancellationToken)
+        {
+            // Update in API
+            var request = "https://ordersapi.azurewebsites.net/api/orders";
+            var data = JsonConvert.SerializeObject(catalogItem);
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
+            }
+        }
+
+        public async Task UpdateCatalogItem(ProductCatalogItem catalogItem, CancellationToken cancellationToken)
+        {
+            var request = $"https://ordersapi.azurewebsites.net/api/orders/{catalogItem.Id}";
+            var data = JsonConvert.SerializeObject(catalogItem);
+            using (var client = new HttpClient())
+            {
+                var response = await client.PutAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
+            }
+        }
+
+        public async Task DeleteCatalogItem(string id, CancellationToken cancellationToken)
+        {
+            var request = $"https://ordersapi.azurewebsites.net/api/orders/{id}";
+            using (var client = new HttpClient())
+            {
+                var response = await client.DeleteAsync(request, cancellationToken);
+            }
         }
     }
 }

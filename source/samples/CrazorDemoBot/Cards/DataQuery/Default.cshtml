@@ -3,7 +3,7 @@
 @inherits CardView<DataQueryApp>
 
 <Card Version="1.5">
-    <Input.ChoiceSet Binding="Number" Style="Filtered" >
+    <Input.ChoiceSet Binding="Number" Style="Filtered">
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />
@@ -16,14 +16,19 @@
     [BindProperty]
     public int Number { get; set; }
 
-    public async Task<AdaptiveChoice[]> GetNumbersChoicesAsync(string queryText, int top = 10, int skip = 0)
+    public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        return Enumerable.Range(1, 1000000)
-           .Where(v => v.ToString().StartsWith(queryText?.Trim() ?? String.Empty))
-           .Skip(skip)
-           .Take(top)
-           .Select(v => new AdaptiveChoice() { Title = v.ToString(), Value = v.ToString() })
-           .ToArray();
+
+        if (search.Dataset == "Numbers")
+        {
+            return Enumerable.Range(1, 1000000)
+               .Where(v => v.ToString().StartsWith(search.QueryText?.Trim() ?? String.Empty))
+               .Skip(search.QueryOptions.Skip)
+               .Take(search.QueryOptions.Top)
+               .Select(v => new AdaptiveChoice() { Title = v.ToString(), Value = v.ToString() })
+               .ToArray();
+        }
+        return Array.Empty<AdaptiveChoice>();
     }
 }

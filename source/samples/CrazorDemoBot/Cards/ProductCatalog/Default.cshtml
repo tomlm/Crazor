@@ -1,6 +1,7 @@
 ﻿@using CrazorDemoBot.Cards.ProductCatalog
 @using System.Text;
 @using System.Net.Http;
+@using Microsoft.Bot.Schema
 @using Newtonsoft.Json;
 
 @inherits CardView<ProductCatalogApp>
@@ -57,50 +58,15 @@
 </Card>
 
 @functions {
-    
+
     public List<ProductCatalogItem> CatalogItems { get; set; }
 
-    public async Task OnLoadView()
+    public override async Task OnShowViewAsync(CancellationToken cancellationToken)
     {
-        var request = "https://ordersapi.azurewebsites.net/api/orders";
-        using (var client = new HttpClient())
-        {
-            var response = await client.GetStringAsync(request);
-
-            CatalogItems = JsonConvert.DeserializeObject<List<ProductCatalogItem>>(response)!;
-        }
+        CatalogItems = await App.GetCatalogItems(cancellationToken);
     }
 
-    public void OnAdd()
-    {
-        var item = new ProductCatalogItem();
-        ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = false, Item = item });
-    }
-
-    public void OnDetail(string id)
-    {
-        var item = CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
-        if (item != null)
-        {
-            ShowView("Detail", item);
-        }
-    }
-
-    public void OnEdit(string id)
-    {
-        var item = CatalogItems.SingleOrDefault(a => a.Id == int.Parse(id));
-        if (item != null)
-        {
-            ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
-        }
-    }
-
-    public void OnDelete(string id)
-    {
-        CatalogItems = CatalogItems.Where(a => a.Id != int.Parse(id)).ToList();
-    }
-
-    public async Task OnResume(CardResult cardResult, CancellationToken cancellationToken)
+    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
         if (cardResult.Success)
         {
@@ -109,45 +75,46 @@
                 var model = cardResult.AsResult<EditOrAddProductCatalogItem>()!;
                 if (model.IsEdit)
                 {
-                    var item = CatalogItems.Where(a => a.Id == model.Item?.Id).SingleOrDefault();
-
-                    if (item != null && model.Item != null)
-                    {
-                        // Update local copy
-                        item.Name = model.Item.Name;
-                        item.Description = model.Item.Description;
-                        item.Price = model.Item.Price;
-                        item.PictureUri = model.Item.PictureUri;
-                        AddBannerMessage("Catalog Item successfully updated!", AdaptiveContainerStyle.Good);
-
-                        // Update in API
-                        var request = "https://ordersapi.azurewebsites.net/api/orders";
-                        var data = JsonConvert.SerializeObject(item);
-                        using (var client = new HttpClient())
-                        {
-                            var response = await client.PutAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
-                        }
-                    }
+                    await App.UpdateCatalogItem(model.Item, cancellationToken);
+                    AddBannerMessage("Catalog Item successfully updated!", AdaptiveContainerStyle.Good);
                 }
                 else
                 {
-                    // Add local copy
-                    if (model.Item != null)
-                    {
-                        CatalogItems.Add(model.Item);
-                        AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
-
-                        // Update in API
-                        var request = "https://ordersapi.azurewebsites.net/api/orders";
-                        var data = JsonConvert.SerializeObject(model.Item);
-                        using (var client = new HttpClient())
-                        {
-                            var response = await client.PostAsync(request, new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken);
-                        }
-                    }
+                    await App.AddCatalogItem(model.Item, cancellationToken);
+                    AddBannerMessage("Catalog Item successfully added!", AdaptiveContainerStyle.Good);
                 }
             }
         }
+        CatalogItems = await App.GetCatalogItems(cancellationToken);
     }
 
+    public void OnAdd()
+    {
+        var item = new ProductCatalogItem();
+        ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = false, Item = item });
+    }
+
+    public async Task OnDetail(string id, CancellationToken cancellationToken)
+    {
+        var item = await App.GetCatalogItem(id, cancellationToken);
+        if (item != null)
+        {
+            ShowView("Detail", item);
+        }
+    }
+
+    public async Task OnEdit(string id, CancellationToken cancellationToken)
+    {
+        var item = await App.GetCatalogItem(id, cancellationToken);
+        if (item != null)
+        {
+            ShowView("EditOrAdd", new EditOrAddProductCatalogItem() { IsEdit = true, Item = item });
+        }
+    }
+
+    public async Task OnDelete(string id, CancellationToken cancellationToken)
+    {
+        await App.DeleteCatalogItem(id, cancellationToken);
+        CatalogItems = await App.GetCatalogItems(cancellationToken);
+    }
 }

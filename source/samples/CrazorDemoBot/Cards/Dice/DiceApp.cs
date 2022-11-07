@@ -28,8 +28,6 @@ namespace CrazorDemoBot.Cards.Dice
         [SharedMemory]
         public List<int>? Dice { get; set; }
 
-        public override string? GetSharedId() => this.DiceName;
-
         public void RollDice()
         {
             if (NumberDice.HasValue)

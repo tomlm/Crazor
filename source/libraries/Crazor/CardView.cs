@@ -64,21 +64,28 @@ namespace Crazor
             return Task.CompletedTask;
         }
 
-        public virtual void OnLoadState(CardViewState cardState)
+        /// <summary>
+        /// OnInitialized() - Initalize members
+        /// </summary>
+        /// <remarks>
+        /// This will be called only once to initialize the instance data of the cardview.
+        /// This is effectively like a constructor, with no async support.  If you
+        /// want to look up data to look at OnLoadCardAsync
+        /// </remarks>
+        public virtual void OnInitialized()
         {
-            MethodInfo? method;
-            if (cardState.Initialized == false)
-            {
-                method = GetMethod("OnInitialized");
-                if (method != null)
-                {
-                    method.Invoke(this, null);
-                }
-                cardState.Initialized = true;
-            }
         }
 
-        public async virtual Task<bool> OnVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        /// <summary>
+        /// OnInvokeActionAsync() - Called to process an incoming verb action.
+        /// </summary>
+        /// <remarks>
+        /// The default implementation uses reflection to find the name of the method and invoke it.
+        /// </remarks>
+        /// <param name="action">the action to process</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.App);
             this.Action = action;
@@ -86,20 +93,13 @@ namespace Crazor
             // Process BindProperty tags
             BindProperties();
 
-            var verb = action.Verb;
             var data = JObject.FromObject(this.Action.Data);
 
-            var loadViewMethod = GetMethod("OnLoadView");
-            if (loadViewMethod != null)
-            {
-                await InvokeMethodAsync(loadViewMethod, GetMethodArgs(loadViewMethod, data, cancellationToken));
-            }
-
             MethodInfo? verbMethod = null;
-            if (verb == Constants.LOADROUTE_VERB)
+            if (action.Verb == Constants.LOADROUTE_VERB)
             {
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
-                verbMethod = GetMethod(verb);
+                verbMethod = GetMethod(action.Verb);
                 if (verbMethod != null)
                 {
                     var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
@@ -132,7 +132,7 @@ namespace Crazor
                 }
                 // I *think* the correct behavior is not NOT validate on LoadROUTE
                 // ValidateModel();
-                verb = Constants.REFRESH_VERB;
+                action.Verb = Constants.SHOWVIEW_VERB;
             }
             else
             {
@@ -140,36 +140,335 @@ namespace Crazor
                 ValidateModel();
             }
 
-            verbMethod = GetMethod(verb);
+            // Default implementation of OK and CANCEL calls CloseCard() or CancelCard() appropriately.
+            switch (action.Verb)
+            {
+                case Constants.SHOWVIEW_VERB:
+                    await this.OnShowViewAsync(cancellationToken);
+                    break;
+
+                case Constants.OK_VERB:
+                    if (await InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        if (IsModelValid)
+                        {
+                            this.CloseView(ViewContext.ViewData.Model);
+                        }
+                    }
+                    break;
+
+                case Constants.CANCEL_VERB:
+                    // if there is an OnCancel, call it
+                    if (await InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        // do it
+                        this.CancelView();
+                    }
+                    break;
+
+                default:
+                    // if there is an OnCancel, call it
+                    if (await InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        // Otherwise, if a verb matches a view just navigate to it.
+                        if (App.HasView(action.Verb))
+                        {
+                            ShowView(action.Verb);
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private async Task<bool> InvokeVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        {
+            var verbMethod = GetMethod(action.Verb);
             if (verbMethod != null)
             {
                 await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data, cancellationToken));
                 return true;
             }
-
-            // Default implementation of OK and CANCEL calls CloseCard() or CancelCard() appropriately.
-            switch (verb)
-            {
-                case Constants.OK_VERB:
-                    if (this.IsModelValid)
-                    {
-                        this.CloseView(ViewContext.ViewData.Model);
-                    }
-                    return true;
-
-                case Constants.CANCEL_VERB:
-                    this.CancelView();
-                    return true;
-            }
-
-            // Otherwise, if a verb matches a view just navigate to it.
-            if (App.HasView(verb))
-            {
-                ShowView(verb);
-                return true;
-            }
-
             return false;
+        }
+
+        /// <summary>
+        /// Called to initialize cardState
+        /// </summary>
+        /// <param name="cardState"></param>
+        public virtual void LoadState(CardViewState cardState)
+        {
+            if (cardState.Initialized == false)
+            {
+                OnInitialized();
+                cardState.Initialized = true;
+            }
+        }
+
+        /// <summary>
+        /// GetRoute() - returns custom subpath for the view
+        /// </summary>
+        /// <remarks>
+        /// Override this to define custom subroute
+        /// The default is /Cards/{appName/{viewName}/{result of GetRoute()}
+        /// </remarks>
+        /// <returns>relative path to the card for deep linking</returns>
+        public virtual string GetRoute()
+        {
+            return String.Empty;
+        }
+
+        /// <summary>
+        /// Navigate to card by name
+        /// </summary>
+        /// <param name="cardName">name of card </param>
+        /// <param name="model">model to pass</param>
+        public void ShowView(string cardName, object? model = null)
+        {
+            this.App!.ShowView(cardName, model);
+        }
+
+        /// <summary>
+        /// Navigate to view by type
+        /// </summary>
+        /// <typeparam name="T">type of the object to navigate to</typeparam>
+        /// <param name="model">model</param>
+        public void ShowView<T>(object? model = null)
+        {
+            this.App!.ShowView(typeof(T).FullName!, model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one 
+        /// </summary>
+        /// <param name="cardName"></param>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView(string cardName, object? model = null)
+        {
+            this.App!.ReplaceView(cardName, model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one 
+        /// </summary>
+        /// <typeparam name="T">Type to instantiate</typeparam>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView<T>(object? model = null)
+        {
+            this.App!.ReplaceView(typeof(T).FullName!, model);
+        }
+
+        /// <summary>
+        /// Add a banner message to be displayed to the viewer.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="style"></param>
+        public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
+        {
+            this.App?.AddBannerMessage(text, style);
+        }
+
+        /// <summary>
+        /// Close the current card, optionalling returning the result
+        /// </summary>
+        /// <param name="result">the result to return to the current caller</param>
+        public void CloseView(object? result = null)
+        {
+            this.App?.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Result = result,
+                Success = true
+            });
+        }
+
+        /// <summary>
+        /// Change the taskmodule status
+        /// </summary>
+        /// <param name="status">action to take on closing</param>
+        public void CloseTaskModule(TaskModuleAction status)
+        {
+            App.CloseTaskModule(status);
+        }
+
+        /// <summary>
+        /// Cancel the current card, returning a message
+        /// </summary>
+        /// <param name="message">optional message to return.</param>
+        public void CancelView(string? message = null)
+        {
+            this.App?.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Message = message,
+                Success = false
+            });
+        }
+
+        /// <summary>
+        /// OnShowView() - Called when a your view is started because someon called ShowView()
+        /// </summary>
+        /// <remarks>
+        /// Override this to handle the being shown
+        /// </remarks>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>task</returns>
+        public virtual async Task OnShowViewAsync(CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// OnResumeView() - Called when a CardResult has returned back to this view
+        /// </summary>
+        /// <remarks>
+        /// Override this to handle the result that is returned to the card from a child view.
+        /// When a view is resumed because a child view has completed this method will
+        /// be called giving you an opportunity to do something with the result of the child view.
+        /// </remarks>
+        /// <param name="cardResult">the card result</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>task</returns>
+        public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Override this to provide dynamic choices for Input.ChoiceSet
+        /// </summary>
+        /// <param name="search">request</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>array of choices</returns>
+        public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+            return Array.Empty<AdaptiveChoice>();
+        }
+
+        /// <summary>
+        /// Bind View to an adaptive card
+        /// </summary>
+        /// <remarks>Override this to do custom binding to the adaptive card.</remarks>
+        /// <param name="cancellationToken">cancellationToken</param>
+        /// <returns>bound card</returns>
+        public virtual async Task<AdaptiveCard?> BindView(CancellationToken cancellationToken)
+        {
+            string xml = String.Empty;
+            try
+            {
+                using (StringWriter writer = new StringWriter())
+                {
+                    this.ViewContext.Writer = writer;
+                    await this.RazorView!.RenderAsync(this.ViewContext);
+                    xml = writer.ToString().Trim();
+                }
+
+                if (!String.IsNullOrWhiteSpace(xml))
+                {
+                    if (!xml.StartsWith("<?xml"))
+                    {
+                        xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
+                    }
+                    Diag.Debug.WriteLine(xml);
+
+                    var reader = XmlReader.Create(new StringReader(xml));
+                    var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
+                    return card;
+                }
+                else
+                {
+                    // no card defined in markup
+                    return new AdaptiveCard("1.5");
+                }
+            }
+            catch (Exception err)
+            {
+                var xerr = err as XmlException ?? err.InnerException as XmlException;
+                if (xerr != null)
+                {
+                    var line = String.Join("\n", xml.Trim() + "\n\n".Split("\n").Skip(xerr.LineNumber - 2).Take(2));
+                    throw new XmlException($"{xerr.Message}\n{line}", xerr.InnerException, xerr.LineNumber, xerr.LinePosition);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+
+        private static List<object?>? GetMethodArgs(MethodInfo? method, JObject? data, CancellationToken cancellationToken)
+        {
+            ArgumentNullException.ThrowIfNull(method);
+
+            List<object?> args = new List<object?>();
+            if (data != null)
+            {
+                foreach (var parm in method.GetParameters())
+                {
+                    if (parm.ParameterType == typeof(CancellationToken))
+                    {
+                        args.Add(cancellationToken);
+                    }
+                    //else if (parm.Name?.ToLower() == "id")
+                    //{
+                    //    if (Action!.Id != null)
+                    //    {
+                    //        args.Add(Action.Id);
+                    //    }
+                    //    else if (data.TryGetValue(Constants.IDDATA_KEY, out var id))
+                    //    {
+                    //        args.Add(id.ToString());
+                    //    }
+                    //}
+                    else
+                    {
+                        var prop = data.Properties().Where(p => p.Name.ToLower() == parm?.Name?.ToLower()).SingleOrDefault();
+                        if (prop != null)
+                        {
+                            var arg = prop.Value.ToObject(parm.ParameterType);
+                            args.Add(arg);
+                        }
+                        else
+                        {
+                            args.Add(parm.ParameterType.IsValueType ? Activator.CreateInstance(parm.ParameterType) : null);
+                        }
+                    }
+                }
+            }
+            return args;
+        }
+
+        private async Task<object?> InvokeMethodAsync(MethodInfo? verbMethod, List<object?>? args = null)
+        {
+            ArgumentNullException.ThrowIfNull(verbMethod);
+
+            if (verbMethod.ReturnType.Name == "Task")
+            {
+                await ((Task?)verbMethod.Invoke(this, args?.ToArray()) ?? throw new Exception("Task not returned from async verb!"));
+                return null;
+            }
+            else if (verbMethod.ReturnType.Name == "Task`1")
+            {
+                var task = verbMethod.Invoke(this, args?.ToArray());
+                if (task != null)
+                {
+
+                    await (Task)task;
+                    var result = task!.GetType().GetProperty("Result", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance)!.GetValue(task);
+                    return result;
+                }
+                throw new ArgumentNullException(verbMethod.Name);
+            }
+            else
+            {
+                return verbMethod.Invoke(this, args?.ToArray());
+            }
+        }
+
+        private MethodInfo? GetMethod(string methodName)
+        {
+            return this.GetType().GetMethod($"{methodName}");
         }
 
         private void BindProperties()
@@ -189,7 +488,7 @@ namespace Crazor
                         object obj = this;
                         foreach (var part in parts.Take(parts.Length - 1))
                         {
-                            obj = obj.GetPropertyValue(part);
+                            obj = obj.GetPropertyValue(part)!;
                         }
                         var targetProperty = obj.GetType().GetProperty(parts.Last());
                         obj.SetTargetProperty(targetProperty, property.Value);
@@ -257,276 +556,22 @@ namespace Crazor
             }
         }
 
-        public virtual string GetRoute()
-        {
-            return String.Empty;
-        }
+        //protected virtual JObject GetScopedMemory<MemoryAttributeT>()
+        //        where MemoryAttributeT : Attribute
+        //{
+        //    lock (this)
+        //    {
 
-        /// <summary>
-        /// Navigate to card by name
-        /// </summary>
-        /// <param name="cardName">name of card </param>
-        /// <param name="model">model to pass</param>
-        public void ShowView(string cardName, object? model = null)
-        {
-            this.App!.ShowView(cardName, model);
-        }
+        //        dynamic memory = new JObject();
+        //        foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(MemoryAttributeT))))
+        //        {
+        //            var val = property.GetValue(this);
+        //            memory[property.Name] = val != null ? JToken.FromObject(val) : null;
+        //        }
 
-        public void ShowView<T>(object? model = null)
-        {
-            this.App!.ShowView(typeof(T).FullName!, model);
-        }
-
-        /// <summary>
-        /// Replace this card with another one 
-        /// </summary>
-        /// <param name="cardName"></param>
-        /// <param name="model">model to pass</param>
-        public void ReplaceView(string cardName, object? model = null)
-        {
-            this.App!.ReplaceView(cardName, model);
-        }
-
-        public void ReplaceView<T>(object? model = null)
-        {
-            this.App!.ReplaceView(typeof(T).FullName!, model);
-        }
-
-        /// <summary>
-        /// Add a banner message to be displayed to the viewer.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="style"></param>
-        public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
-        {
-            this.App?.AddBannerMessage(text, style);
-        }
-
-        /// <summary>
-        /// Close the current card, optionalling returning the result
-        /// </summary>
-        /// <param name="result">the result to return to the current caller</param>
-        public void CloseView(object? result = null)
-        {
-            this.App?.CloseView(new CardResult()
-            {
-                Name = this.Name,
-                Result = result,
-                Success = true
-            });
-        }
-
-        /// <summary>
-        /// Change the taskmodule status
-        /// </summary>
-        /// <param name="status">action to take on closing</param>
-        public void CloseTaskModule(TaskModuleAction status)
-        {
-            App.CloseTaskModule(status);
-        }
-
-        /// <summary>
-        /// Cancel the current card, returning a message
-        /// </summary>
-        /// <param name="message">optional message to return.</param>
-        public void CancelView(string? message = null)
-        {
-            this.App?.CloseView(new CardResult()
-            {
-                Name = this.Name,
-                Message = message,
-                Success = false
-            });
-        }
-
-        private List<object?>? GetMethodArgs(MethodInfo? method, JObject? data, CancellationToken cancellationToken)
-        {
-            ArgumentNullException.ThrowIfNull(method);
-
-            List<object?> args = new List<object?>();
-            if (data != null)
-            {
-                foreach (var parm in method.GetParameters())
-                {
-                    if (parm.ParameterType == typeof(CancellationToken))
-                    {
-                        args.Add(cancellationToken);
-                    }
-                    //else if (parm.Name?.ToLower() == "id")
-                    //{
-                    //    if (Action!.Id != null)
-                    //    {
-                    //        args.Add(Action.Id);
-                    //    }
-                    //    else if (data.TryGetValue(Constants.IDDATA_KEY, out var id))
-                    //    {
-                    //        args.Add(id.ToString());
-                    //    }
-                    //}
-                    else
-                    {
-                        var prop = data.Properties().Where(p => p.Name.ToLower() == parm?.Name?.ToLower()).SingleOrDefault();
-                        if (prop != null)
-                        {
-                            var arg = prop.Value.ToObject(parm.ParameterType);
-                            args.Add(arg);
-                        }
-                        else
-                        {
-                            args.Add(parm.ParameterType.IsValueType ? Activator.CreateInstance(parm.ParameterType) : null);
-                        }
-                    }
-                }
-            }
-            return args;
-        }
-
-        public async Task<object?> InvokeMethodAsync(MethodInfo? verbMethod, List<object?>? args = null)
-        {
-            ArgumentNullException.ThrowIfNull(verbMethod);
-
-            if (verbMethod.ReturnType.Name == "Task")
-            {
-                await ((Task?)verbMethod.Invoke(this, args?.ToArray()) ?? throw new Exception("Task not returned from async verb!"));
-                return null;
-            }
-            else if (verbMethod.ReturnType.Name == "Task`1")
-            {
-                var task = verbMethod.Invoke(this, args?.ToArray());
-                if (task != null)
-                {
-
-                    await (Task)task;
-                    var result = task!.GetType().GetProperty("Result", BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance)!.GetValue(task);
-                    return result;
-                }
-                throw new ArgumentNullException(verbMethod.Name);
-            }
-            else
-            {
-                return verbMethod.Invoke(this, args?.ToArray());
-            }
-        }
-
-        /// <summary>
-        /// When a card returns back to this card (aka it's resumed) 
-        /// </summary>
-        /// <param name="cardResult"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task OnCardResumeAsync(CardResult cardResult, CancellationToken cancellationToken)
-        {
-            var loadViewMethod = GetMethod("OnLoadView");
-            if (loadViewMethod != null)
-            {
-                await InvokeMethodAsync(loadViewMethod, GetMethodArgs(loadViewMethod, new JObject(), cancellationToken));
-            }
-
-            MethodInfo? resumeMethod = GetMethod($"OnResume");
-            if (resumeMethod != null)
-            {
-                var args = new List<Object?>() { cardResult };
-                if (resumeMethod.GetParameters().Last().ParameterType == typeof(CancellationToken))
-                {
-                    args.Add(cancellationToken);
-                }
-                await InvokeMethodAsync(resumeMethod, args);
-            }
-        }
-
-        /// <summary>
-        /// Bind View
-        /// </summary>
-        /// <param name="viewName">view name</param>
-        /// <returns>bound card</returns>
-        public virtual async Task<AdaptiveCard?> BindCard(CancellationToken cancellationToken)
-        {
-            string xml = String.Empty;
-            try
-            {
-                using (StringWriter writer = new StringWriter())
-                {
-                    this.ViewContext.Writer = writer;
-                    await this.RazorView!.RenderAsync(this.ViewContext);
-                    xml = writer.ToString().Trim();
-                }
-
-                if (!String.IsNullOrWhiteSpace(xml))
-                {
-                    if (!xml.StartsWith("<?xml"))
-                    {
-                        xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
-                    }
-                    Diag.Debug.WriteLine(xml);
-
-                    var reader = XmlReader.Create(new StringReader(xml));
-                    var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
-                    return card;
-                }
-                else
-                {
-                    // no card defined in markup
-                    return new AdaptiveCard();
-                }
-            }
-            catch (Exception err)
-            {
-                var xerr = err as XmlException ?? err.InnerException as XmlException;
-                if (xerr != null)
-                {
-                    var line = String.Join("\n", xml.Trim() + "\n\n".Split("\n").Skip(xerr.LineNumber - 2).Take(2));
-                    throw new XmlException($"{xerr.Message}\n{line}", xerr.InnerException, xerr.LineNumber, xerr.LinePosition);
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
-        public async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, IServiceProvider services, CancellationToken cancellationToken)
-        {
-            var searchMethod = GetMethod($"Get{search.Dataset}Choices");
-            if (searchMethod != null)
-            {
-                JObject data = JObject.FromObject(new
-                {
-                    queryText = search.QueryText,
-                    top = search.QueryOptions.Top,
-                    skip = search.QueryOptions.Skip
-                });
-
-#pragma warning disable CS8603 // Possible null reference return.
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-                return (AdaptiveChoice[])await InvokeMethodAsync(searchMethod, GetMethodArgs(searchMethod, data, cancellationToken));
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning restore CS8603 // Possible null reference return.
-            }
-
-            throw new Exception($"Get{search.Dataset}Choices or Get{search.Dataset}ChoicesAsync not found!");
-        }
-
-        public MethodInfo? GetMethod(string methodName)
-        {
-            return this.GetType().GetMethod($"{methodName}");
-        }
-
-        protected virtual JObject GetScopedMemory<MemoryAttributeT>()
-                where MemoryAttributeT : Attribute
-        {
-            lock (this)
-            {
-
-                dynamic memory = new JObject();
-                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(MemoryAttributeT))))
-                {
-                    var val = property.GetValue(this);
-                    memory[property.Name] = val != null ? JToken.FromObject(val) : null;
-                }
-
-                return memory;
-            }
-        }
+        //        return memory;
+        //    }
+        //}
 
     }
 
@@ -573,7 +618,7 @@ namespace Crazor
         [RazorInject]
         public ViewDataDictionary<ModelT>? ViewData { get; set; }
 
-        public override void OnLoadState(CardViewState cardViewState)
+        public override void LoadState(CardViewState cardViewState)
         {
             ModelT? model = this.ViewContext.ViewData.Model as ModelT;
             if (model == null)
@@ -589,7 +634,7 @@ namespace Crazor
             }
             this.ViewData = new ViewDataDictionary<ModelT>(this.ViewContext.ViewData);
 
-            base.OnLoadState(cardViewState);
+            base.LoadState(cardViewState);
         }
 
     }

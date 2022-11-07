@@ -15,8 +15,9 @@
         ShowView("Card2");
     }
 
-    public void OnResume(CardResult cardResult)
+    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
+        await Task.CompletedTask;
         if (cardResult.Success == true)
             AddBannerMessage($"{cardResult.Name} completed!", AdaptiveContainerStyle.Good);
         else 

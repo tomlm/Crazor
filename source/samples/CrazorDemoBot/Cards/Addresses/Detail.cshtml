@@ -54,8 +54,9 @@
         }
     }
 
-    public void OnResume(CardResult cardResult)
+    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
+        await Task.CompletedTask;
         if (cardResult.Success)
         {
             this.Model = cardResult.AsResult<Address>()!;

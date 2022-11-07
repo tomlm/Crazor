@@ -18,7 +18,9 @@ namespace Crazor.HostPage.Pages.Cards
         private IServiceByNameFactory<CardApp> _appFactory;
         private IConfiguration _configuration;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardHostModel(IConfiguration configuration, IServiceByNameFactory<CardApp> cardFactory)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _configuration = configuration;
             _appFactory = cardFactory;

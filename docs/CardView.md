@@ -193,13 +193,14 @@ The life cycle of any action is
 * **App.OnLoadAppAsync()**
   * **CardView.OnInitialized()** - Will be called only when a card state is new.
   * **CardView.OnLoadView()** - Will be called when a Verb needs to be processed or Resume needs to be processed
-    * **CardView.OnVerb()** => which invokes to the Verb handler
-    * **CardView.OnResume()** => handles your dialog being resumed.
+    * **CardView.OnInvokeActionAsync()** => which invokes to the Verb handler
+      * **{Verb} Method** - the verb handler
+    * **CardView.OnResumeView()** => handles your being view resumed.
 * **App.OnSaveAppAsync()**
 
 
 
-## OnInitialized
+## OnInitialized()
 
 When a card state is new the **OnInitialized()** method will be called giving you the opportunity to inspect incoming model and/or route to a different cardview. It will only be called once for the lifetime of that view.
 
@@ -211,63 +212,74 @@ When a card state is new the **OnInitialized()** method will be called giving yo
     }
 ```
 
-> NOTE: **OnInitialized()** is only **synchronous**, there is no async version of this method.
+> NOTE: **OnInitialized()** is only **synchronous**, there is no async version of this method, because it is called in a synchronous part of the code.
 
-## OnLoadView()
+## OnShowViewAsync()
 
-**OnLoadView()** is invoked on every action and before **OnResume()** and **OnVerb()**
+**OnShowViewAsync()** is invoked when someone calls **ShowView()** with your card view
 
-It can be synchronous or async
+It is also called for **Refresh** situations or when an unknown verb is processed, effectively treating those situations as a request to bind the data fresh (Aka show a refreshed screen)
+
+```C#
+        /// <summary>
+        /// OnShowView() - Called when a your view is started because someon called ShowView()
+        /// </summary>
+        /// <remarks>
+        /// Override this to handle the being shown
+        /// </remarks>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>task</returns>
+        public virtual async Task OnShowViewAsync(CancellationToken cancellationToken)
+```
+
+## OnResumeViewAsync()
+
+When a child card calls **CloseView()** the parent card view **OnResumeViewAsync()** will be called.
+
+**OnResumeViewAsync()** is passed a CardResult object with the following properties:
+
+| Property    | Type   | Description                                                  |
+| ----------- | ------ | ------------------------------------------------------------ |
+| **Name**    | String | Name of the card that completed                              |
+| **Success** | Bool   | True if CloseView() was called, False if CancelView() was called |
+| **Result**  | Object | the result passed to CloseView()                             |
+| **Message** | String | The message passed to CancelView()                           |
 
 Example:
 
 ```C#
-    public void OnLoadView()
-    {
-        // ... load something.
-    }
+        /// <summary>
+        /// OnResumeView() - Called when a CardResult has returned back to this view
+        /// </summary>
+        /// <remarks>
+        /// Override this to handle the result that is returned to the card from a child view.
+        /// When a view is resumed because a child view has completed this method will
+        /// be called giving you an opportunity to do something with the result of the child view.
+        /// </remarks>
+        /// <param name="cardResult">the card result</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>task</returns>
+        public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+
 ```
 
-and
+## OnSearchChoicesAsync()
 
-```C#
-    public Task OnLoadView(CancellationToken ct)
-    {
-        // .... look up something
-    }
-```
+OnSearchChoicesAsync will be called when a **Input.ChoiceSet** defines a dynamic filted query
 
-# 
+Example Markup:
 
-## OnResume()
 
-When a card is being resumed from another card calling **CancelView()**/**CloseView()** the **OnResume** handler is called. 
 
-OnResume() is passed a CardResult object with the following properties:
+```c#
+        /// <summary>
+        /// Override this to provide dynamic choices for Input.ChoiceSet
+        /// </summary>
+        /// <param name="search">request</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>array of choices</returns>
+        public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
 
-| Property | Type   | Description                                                  |
-| -------- | ------ | ------------------------------------------------------------ |
-| Name     | String | Name of the card that completed                              |
-| Success  | Bool   | True if CloseView() was called, False if CancelView() was called |
-| Result   | Object | the result passed to CloseView()                             |
-| Message  | String | The message passed to CancelView()                           |
-
-Example:
-
-```C#
-    public void OnResume(CardResult result)
-    {
-        // ....
-    }
-```
-
-and
-
-```C#
-    public Task OnResume(CardResult result, CancellationToken ct)
-    {
-        // ....
-    }
 ```
 
 

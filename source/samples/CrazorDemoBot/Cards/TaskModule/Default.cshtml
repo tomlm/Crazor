@@ -7,7 +7,8 @@
 </Card>
 
 @functions {
-    public void OnInitialized() => ShowView("Edit");
+    public override void OnInitialized() 
+        => ShowView("Edit");
 
     public void OnIncrement() => App.Counter++;
 
