@@ -165,7 +165,7 @@ Input controls do 2 things automatically related to validation:
 
 > NOTE: You can disable this validation errors on an input control by setting **ShowErrors="false"**
 
-# Navigation functions
+# Navigation 
 
 ![image](https://user-images.githubusercontent.com/17789481/190312126-9db0ffa6-27ae-4c7a-a311-52df7f4aaaa5.png)
 
@@ -176,7 +176,7 @@ Input controls do 2 things automatically related to validation:
 * **CloseView(result)** This will pop the current card off the stack and the calling cards OnXXXCompleted() will be called with the result of the card.
 * **ReplaceView(cardname, model)** This will replace the current card on to the stack with the named card, passing model as the model for the card.
 
-# Other helper functions
+# Helper functions
 
 * **AddBannerMessage(message, style)** - gives you ability to add a banner message with background style.  
 
@@ -187,18 +187,6 @@ Input controls do 2 things automatically related to validation:
 # Life cycle handlers
 
 In addition to the verb based handlers there are a couple of additional of life cycle handlers which are useful.
-
-The life cycle of any action is 
-
-* **App.OnLoadAppAsync()**
-  * **CardView.OnInitialized()** - Will be called only when a card state is new.
-  * **CardView.OnLoadView()** - Will be called when a Verb needs to be processed or Resume needs to be processed
-    * **CardView.OnInvokeActionAsync()** => which invokes to the Verb handler
-      * **{Verb} Method** - the verb handler
-    * **CardView.OnResumeView()** => handles your being view resumed.
-* **App.OnSaveAppAsync()**
-
-
 
 ## OnInitialized()
 
@@ -219,6 +207,8 @@ When a card state is new the **OnInitialized()** method will be called giving yo
 **OnShowViewAsync()** is invoked when someone calls **ShowView()** with your card view
 
 It is also called for **Refresh** situations or when an unknown verb is processed, effectively treating those situations as a request to bind the data fresh (Aka show a refreshed screen)
+
+A common way to use this is to load fresh data into a view for a given card.
 
 ```C#
         /// <summary>
@@ -269,28 +259,36 @@ OnSearchChoicesAsync will be called when a **Input.ChoiceSet** defines a dynamic
 
 Example Markup:
 
-
-
-```c#
-        /// <summary>
-        /// Override this to provide dynamic choices for Input.ChoiceSet
-        /// </summary>
-        /// <param name="search">request</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>array of choices</returns>
-        public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
-
+```xml
+    <Input.ChoiceSet Binding="Number" Style="Filtered">
+        <Choice Title="1" Value="1" />
+        <Choice Title="2" Value="2" />
+        <Choice Title="3" Value="3" />
+        <Choice Title="4" Value="4" />
+        <Data.Query Dataset="Numbers" />
+    </Input.ChoiceSet>
 ```
 
+And method
 
+```c#
+public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+{
+    if (search.Dataset == "Numbers")
+    {
+        return await myDb.GetNumbersAsnc(...);
+    }
+    return Array.Empty<AdaptiveChoice>();
+}
+```
 
-# Custom binding
+## BindView()
 
-The **CardView** class does not have to use Razor templates. You can implement your own BindView() method.
+The **CardView** class does not have to use Razor templates. You can implement your own BindView() method any way you want.
 
-Simply create a class which derives from **CardView<>** (like @inherits above) and override the **BindView()** method to return an Adaptive Card.
+Simply create a class which derives from **CardView<>** (like @inherits above) and override the **BindView()** method to return an Adaptive Card bound to your data.
 
-## Example:
+Example:
 
 ```C#
 namespace Example
@@ -328,11 +326,13 @@ ShowView<MyCodeView>();
 ReplaceView<MyCodeView>();
 ```
 
->  NOTE: All memory attributes, state management action handlers work, but you do not get the benefit of any of the Razor TagHelpers functionality, specifically 
+>  NOTE: All memory attributes, state management action handlers work, but you do not get the benefit of any of the Razor TagHelpers functionality, specifically: 
 >
-> * Input control **Binding** property 
-> * **Action.OK**/**Action.Cancel**
-> * **Custom TagHelpers** 
+>  * **Input** **control** **Binding** property 
+>  * **Action.OK**/**Action.Cancel** are implemented as tag helpers
+>  * **Custom TagHelpers** 
+>
+>  As Tag Helpers are a extensibility mechanism for the Razor template engine.
 
 
 
