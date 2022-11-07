@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="CrazorExtensions.f49188b7-20b2-46f9-b7b2-b6d0689daaf6" Version="3.1.3" Language="en-US" Publisher="Tom Laird-McConnell" />
+        <Identity Id="CrazorExtensions.f49188b7-20b2-46f9-b7b2-b6d0689daaf6" Version="3.1.4" Language="en-US" Publisher="Tom Laird-McConnell" />
         <DisplayName>CrazorExtensions</DisplayName>
         <Description xml:space="preserve">Adds tooling for Crazor to visual studio:
 * Paste AdaptiveCard JSON as XML
-* Item templates for card application and cards.</Description>
+* templates for card application and cards.</Description>
+        <MoreInfo>https://github.com/microsoft/crazor</MoreInfo>
+        <GettingStartedGuide>https://github.com/microsoft/crazor/blob/main/docs/VSIX.md</GettingStartedGuide>
         <Icon>Icon.ico</Icon>
-        <PreviewImage>l</PreviewImage>
+        <PreviewImage>https://user-images.githubusercontent.com/17789481/197404452-1b7da0b9-72e8-4b84-bcf4-5e03caec0d38.png</PreviewImage>
         <Tags>AdaptiveCards, Crazor</Tags>
         <Preview>true</Preview>
     </Metadata>
