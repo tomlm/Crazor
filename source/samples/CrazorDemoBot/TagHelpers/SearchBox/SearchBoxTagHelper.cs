@@ -20,10 +20,17 @@ namespace CrazorDemoBot.TagHelpers.SearchBox
         public string? Verb { get; set; } = "OnSearch";
 
         /// <summary>
-        /// Binding for Input
+        /// Binding for Input.Id
         /// </summary>
-        [HtmlAttributeName(nameof(Binding))]
-        public string? Binding { get; set; }
+        [HtmlAttributeName(nameof(Id))]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// Binding for Input.Value
+        /// </summary>
+        [HtmlAttributeName(nameof(Value))]
+        public string? Value { get; set; }
+
 
         /// <summary>
         /// Label for Text.Input

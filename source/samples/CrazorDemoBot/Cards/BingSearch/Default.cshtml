@@ -6,7 +6,7 @@
 
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Bing Search</TextBlock>
-    <SearchBox Binding="Query" Placeholder="Enter search terms" Title="Search"/>
+    <SearchBox Id="@nameof(Query)" Value="@Query" Placeholder="Enter search terms" Title="Search"/>
     
     <ColumnSet>
         <Column Width="auto">

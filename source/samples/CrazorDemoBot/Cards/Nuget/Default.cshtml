@@ -3,46 +3,38 @@
 @inherits CardView<NugetApp,NugetPackage>
 
 <Card Version="1.5">
-    <SearchBox Binding="Search" Title="Search" />
+    <SearchBox Id="@nameof(Search)" Value="@Search" Title="Search" />
     <ColumnSet>
         <Column Width="auto">
             @if (Packages.Any() && Skip > 0)
             {
-                <ActionSet>
-                    <Action.Execute Title="<" Verb="@nameof(OnPrevious)" />
-                </ActionSet>
+                <ActionSet><Action.Execute Title="<" Verb="@nameof(OnPrevious)" /></ActionSet>
             }
         </Column>
         <Column Width="stretch" />
         <Column Width="auto">
             @if (Packages.Any())
             {
-                <ActionSet>
-                    <Action.Execute Title=">" Verb="@nameof(OnNext)" />
-                </ActionSet>
+                <ActionSet><Action.Execute Title=">" Verb="@nameof(OnNext)" /></ActionSet>
             }
         </Column>
     </ColumnSet>
-
     @foreach (var package in Packages)
     {
         <Container Separator="true">
             <SelectAction>
-                <Action.Execute Verb="OnDetails">
-                    { "packageId":"@package.Id" }
-                </Action.Execute>
+                <Action.Execute Verb="OnDetails">{ "packageId":"@package.Id" }</Action.Execute>
             </SelectAction>
             <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl)">@package..Description</ThumbnailCard>
             <ActionSet>
-            <Action.OpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@package.Id" />
-            @if (!String.IsNullOrEmpty(package.ProjectUrl) && Uri.IsWellFormedUriString(package.ProjectUrl, UriKind.Absolute))
-            {
-                <Action.OpenUrl Title="Project " Url="@package.ProjectUrl" />
-            }
+                <Action.OpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@package.Id" />
+                @if (!String.IsNullOrEmpty(package.ProjectUrl) && Uri.IsWellFormedUriString(package.ProjectUrl, UriKind.Absolute))
+                {
+                    <Action.OpenUrl Title="Project " Url="@package.ProjectUrl" />
+                }
             </ActionSet>
         </Container>
     }
-
 </Card>
 
 
@@ -50,15 +42,15 @@
 {
     private string GetImageUrl(string url)
     {
-        return (!String.IsNullOrEmpty(url) && Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                ? url
-                : "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
+        if (!String.IsNullOrEmpty(url) && Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            return url;
+        return "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
     }
 
     [SessionMemory]
     [BindProperty]
     [Required]
-    public string Search { get; set; } = "";
+    public string? Search { get; set; }
 
     [SessionMemory]
     [BindProperty]
@@ -72,22 +64,19 @@
 
     public async Task OnSearch(CancellationToken cancellationToken)
     {
-        Packages = await App.SearchNugetPackages(Search, Skip, Take, cancellationToken);
+        Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
     }
 
     public async Task OnNext(CancellationToken cancellationToken)
     {
         Skip += Take;
-        Packages = await App.SearchNugetPackages(Search, Skip, Take, cancellationToken);
+        Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
     }
 
     public async Task OnPrevious(CancellationToken cancellationToken)
     {
-        if (Skip != 0)
-            Skip -= Take;
-        if (Skip < 0)
-            Skip = 0;
-        Packages = await App.SearchNugetPackages(Search, Skip, Take, cancellationToken);
+        Skip = Math.Max(0, Skip - Take);
+        Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
     }
 
     public async Task OnDetails(string packageId, CancellationToken cancellationToken)
