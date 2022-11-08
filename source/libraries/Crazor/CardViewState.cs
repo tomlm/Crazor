@@ -2,12 +2,14 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Crazor
 {
+    [DebuggerDisplay("{Name}")]
     public class CardViewState  
     {
         public CardViewState(string view, object? model=null)

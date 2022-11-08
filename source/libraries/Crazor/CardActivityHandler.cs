@@ -89,7 +89,13 @@ namespace Crazor
         public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
         {
             CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var path);
-            var loadRouteActivity = turnContext.CreateLoadRouteActivity(view, path);
+            var loadRouteActivity = turnContext.Activity;
+            dynamic value = loadRouteActivity.Value;
+            string verb = (string)value.action?.verb!;
+            if (verb != Constants.LOADROUTE_VERB)
+            {
+                loadRouteActivity = turnContext.CreateLoadRouteActivity(view, path);
+            }
 
             var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
 

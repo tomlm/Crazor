@@ -16,13 +16,11 @@ using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.Bot.Schema;
-using System;
 
 namespace Crazor
 {
     public static class Extensions
     {
-
         public static IServiceCollection AddCrazor(this IServiceCollection services)
         {
             services.AddHttpClient();
@@ -62,13 +60,22 @@ namespace Crazor
             foreach (var tabModuleType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)))
             {
                 services.AddScoped(tabModuleType);
-                cardTabModuleServices.Add(tabModuleType.Name, tabModuleType);
+                cardTabModuleServices.Add(tabModuleType.FullName, tabModuleType);
             }
             cardTabModuleServices.Build();
 
+            // add IQueryCommand implementations
+            var queryCommmandServices = services.AddByName<IMessagingExtensionQuery>();
+            foreach (var queryCommandType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(IMessagingExtensionQuery)) && t.IsAbstract == false)))
+            {
+                services.AddScoped(queryCommandType);
+                queryCommmandServices.Add(queryCommandType.FullName, queryCommandType);
+            }
+            queryCommmandServices.Build();
+
             // add Cardviews
             var cardViewServices = services.AddByName<ICardView>();
-            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(ICardView)))))
+            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAbstract == false &&  t.ImplementedInterfaces.Contains(typeof(ICardView)))))
             {
                 var cardViewType = cardView.AsType();
                 if (cardViewType != typeof(CardView<>) && cardViewType != typeof(CardView<,>))

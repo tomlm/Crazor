@@ -34,13 +34,12 @@ namespace Crazor
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
 
             cardApp.IsTaskModule = true;
-            cardApp.MessageExtensionAction = action;
             cardApp.Action = invokeValue.Action;
 
             var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
 
-            switch (cardApp.TaskModuleStatus)
+            switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
                     adaptiveCard.Refresh = null;

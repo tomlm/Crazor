@@ -48,11 +48,22 @@ namespace Crazor
 
         public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
 
+        /// <summary>
+        /// True if the model and properites on the view have passed validation
+        /// </summary>
         public bool IsModelValid { get; set; } = true;
 
         CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
 
+        /// <summary>
+        /// True if the card is inside a taskmodule
+        /// </summary>
         public bool IsTaskModule => App.IsTaskModule;
+
+        /// <summary>
+        /// True if the card is being rendered to be shared with people without session data
+        /// </summary>
+        public bool IsPreview => App.IsPreview;
 
         /// <summary>
         /// ExecuteAsync is disabled because the default writes the output directly to 
@@ -106,7 +117,7 @@ namespace Crazor
                     if (routeAttribute != null)
                     {
                         var loadRoute = data.ToObject<LoadRouteModel>();
-                        data = loadRoute!.GetDataForRoute(routeAttribute);
+                        data = GetDataForRoute(routeAttribute, loadRoute!);
                     }
 
                     try
@@ -556,22 +567,32 @@ namespace Crazor
             }
         }
 
-        //protected virtual JObject GetScopedMemory<MemoryAttributeT>()
-        //        where MemoryAttributeT : Attribute
-        //{
-        //    lock (this)
-        //    {
-
-        //        dynamic memory = new JObject();
-        //        foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(MemoryAttributeT))))
-        //        {
-        //            var val = property.GetValue(this);
-        //            memory[property.Name] = val != null ? JToken.FromObject(val) : null;
-        //        }
-
-        //        return memory;
-        //    }
-        //}
+        private JObject GetDataForRoute(RouteAttribute route, LoadRouteModel loadRoute)
+        {
+            JObject result = new JObject();
+            result["view"] = loadRoute.View;
+            result["path"] = loadRoute.Path;
+            string path = loadRoute.Path.Replace(this.App.GetRoute(), String.Empty);
+    
+            if (!String.IsNullOrEmpty(path))
+            {
+                var dataParts = path!.TrimStart('/').Split('?');
+                var dataPathParts = dataParts.First().Split('/');
+                var dataQuery = dataParts.Skip(1).FirstOrDefault();
+                var templateParts = route.Template.Split('?');
+                int i = 0;
+                foreach (var fragment in templateParts[0].Split('/'))
+                {
+                    if (fragment.StartsWith('{') && fragment.EndsWith('}'))
+                    {
+                        var name = fragment.TrimStart('{').TrimEnd('}', '?');
+                        result[name] = dataPathParts[i];
+                    }
+                    i++;
+                }
+            }
+            return result;
+        }
 
     }
 
@@ -638,4 +659,6 @@ namespace Crazor
         }
 
     }
+
+
 }

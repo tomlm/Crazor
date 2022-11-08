@@ -35,7 +35,7 @@ namespace Crazor
     /// 
     /// LoadState() and SaveState() will be called by the CardBot class automatically.
     /// </remarks>
-    public class CardApp
+    public class CardApp : IMessagingExtensionQuery
     {
         private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
         private static XmlWriterSettings _settings = new XmlWriterSettings()
@@ -44,6 +44,7 @@ namespace Crazor
             Indent = true,
         };
 
+        private bool _isPreview = false;
         protected IConfiguration _configuration;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -63,7 +64,7 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Typoe of the App.
+        /// Type of the App.
         /// </summary>
         public string CardType { get; private set; }
 
@@ -85,7 +86,7 @@ namespace Crazor
 
         /// Session Id for the card
         /// </summary>
-        public string? SessionId { get; private set; }
+        public string? SessionId { get; set; }
 
         /// <summary>
         /// The activity we are processing.
@@ -93,15 +94,13 @@ namespace Crazor
         public Activity? Activity { get; set; }
 
         /// <summary>
-        /// The default view to render
-        /// </summary>
-        public string DefaultView { get; set; } = Constants.DEFAULT_VIEW;
-
-        /// <summary>
         /// The action we are processing.
         /// </summary>
         public AdaptiveCardInvokeAction? Action { get; set; }
 
+        /// <summary>
+        /// Dependency injection services
+        /// </summary>
         public IServiceProvider Services { get; set; }
 
         /// <summary>
@@ -110,10 +109,19 @@ namespace Crazor
         [SessionMemory]
         public List<CardViewState> CallStack { get; set; }
 
+        /// <summary>
+        /// Name of the current card on the stack.
+        /// </summary>
         public string CurrentCard => CallStack.First().Name;
 
+        /// <summary>
+        /// Current bound view 
+        /// </summary>
         public ICardView CurrentView { get; private set; }
 
+        /// <summary>
+        /// Last Card result, set when a card calls CloseView(result)
+        /// </summary>
         public CardResult? LastResult { get; set; }
 
         /// <summary>
@@ -121,15 +129,37 @@ namespace Crazor
         /// </summary>
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
+        /// <summary>
+        /// Map of ids => elements for stylesheet mixins
+        /// </summary>
         public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
 
+        /// <summary>
+        /// IsPreview is true when there is no sessionId because the card is going to be shared. 
+        /// </summary>
+        public bool IsPreview 
+        {
+            get => _isPreview ||
+                TaskModuleAction == TaskModuleAction.Auto ||
+                TaskModuleAction == TaskModuleAction.InsertCard ||
+                TaskModuleAction == TaskModuleAction.PostCard;
+            set => _isPreview = value;  
+        }
+
+        /// <summary>
+        /// IsTaskModule is true when the card is running in a taskModule mode.
+        /// </summary>
         public bool IsTaskModule { get; set; } = false;
 
+        /// <summary>
+        /// IsTabModule is true when the card is running in a teams Tab.
+        /// </summary>
         public bool IsTabModule => this.Activity.ChannelId == Channels.Msteams && this.Activity.Conversation.Id.StartsWith("tab:");
 
-        public TaskModuleAction TaskModuleStatus { get; set; }
-
-        public MessagingExtensionAction MessageExtensionAction { get; set; }
+        /// <summary>
+        /// TaskModuleAction is used to control signal that the taskmodule should be closed and the action to take with the card.
+        /// </summary>
+        public TaskModuleAction TaskModuleAction { get; set; }
 
         public virtual async Task<AdaptiveCard> OnActionExecuteAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
@@ -223,7 +253,7 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Handle search 
+        /// Handle search for dynamic choices query
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -243,6 +273,69 @@ namespace Crazor
         }
 
         /// <summary>
+        /// Implement this to return search results for a Search command
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual Task<SearchResult[]> GetSearchResultsAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// lower level method to handle search command
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<MessagingExtensionResponse> OnMessagingExtensionQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        {
+            // do the search
+            var searchResults = await GetSearchResultsAsync(query, cancellationToken);
+
+            // turn into attachments
+            List<MessagingExtensionAttachment> attachments = new List<MessagingExtensionAttachment>();
+            foreach (var searchResult in searchResults)
+            {
+                this.CallStack[0].Model = searchResult.Model;
+                SetCurrentView(this.CallStack[0]);
+                AdaptiveCard card = await OnActionExecuteAsync(cancellationToken);
+
+                var attachment = new MessagingExtensionAttachment()
+                {
+                    ContentType = AdaptiveCard.ContentType,
+                    Content = card,
+                    Preview = new MessagingExtensionAttachment()
+                    {
+                        ContentType = ThumbnailCard.ContentType,
+                        Content = new ThumbnailCard()
+                        {
+                            Title = searchResult.Title,
+                            Subtitle = searchResult.Subtitle,
+                            Text = searchResult.Text,
+                            Images = !String.IsNullOrEmpty(searchResult.ImageUrl) ?
+                                new List<CardImage>() { new CardImage(searchResult.ImageUrl, alt: searchResult.Title) } :
+                                null
+                        }
+                    }
+                };
+                attachments.Add(attachment);
+            }
+
+            return new MessagingExtensionResponse()
+            {
+                ComposeExtension = new MessagingExtensionResult()
+                {
+                    Type = "result",
+                    AttachmentLayout = "list",
+                    Attachments = attachments
+                }
+            };
+        }
+
+        /// <summary>
         /// Navigate to card by name passing optional model
         /// </summary>
         /// <param name="cardName"></param>
@@ -253,7 +346,7 @@ namespace Crazor
             var cardState = new CardViewState(cardName, model);
             CallStack.Insert(0, cardState);
             Action!.Verb = Constants.SHOWVIEW_VERB;
-            LoadView(cardState);
+            SetCurrentView(cardState);
         }
 
         /// <summary>
@@ -266,7 +359,7 @@ namespace Crazor
             var cardState = new CardViewState(cardName, model);
             this.CallStack[0] = cardState;
             Action!.Verb = Constants.SHOWVIEW_VERB;
-            LoadView(cardState);
+            SetCurrentView(cardState);
         }
 
         public void CloseView(CardResult? result = null)
@@ -285,12 +378,12 @@ namespace Crazor
             }
 
             Action!.Verb = Constants.SHOWVIEW_VERB;
-            LoadView(this.CallStack[0]);
+            SetCurrentView(this.CallStack[0]);
         }
 
         public void CloseTaskModule(TaskModuleAction status)
         {
-            this.TaskModuleStatus = status;
+            this.TaskModuleAction = status;
         }
 
         /// <summary>
@@ -375,13 +468,18 @@ namespace Crazor
                 var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
                 if (loadRoute != null && this.CurrentCard != loadRoute.View)
                 {
-                    ShowView(loadRoute.View!);
+                    // this is ShowCard() embedded, Ick. 
+                    // The issue is we don't want to reset the verb, need to clean this up
+                    SaveCardState(this.CallStack[0], this.CurrentView);
+                    var cardState = new CardViewState(loadRoute.View!);
+                    CallStack.Insert(0, cardState);
+                    SetCurrentView(cardState);
                     return;
                 }
             }
 
             // load current card.
-            LoadView(this.CallStack[0]);
+            SetCurrentView(this.CallStack[0]);
         }
 
         /// <summary>
@@ -425,7 +523,13 @@ namespace Crazor
         /// <param name="viewName"></param>
         /// <returns>view</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public void LoadView(CardViewState cardState)
+        public void SetCurrentView(CardViewState cardState)
+        {
+            this.CurrentView = LoadCardView(cardState);
+            this.CurrentView.LoadState(cardState);
+        }
+
+        public ICardView LoadCardView(CardViewState cardState)
         {
             var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
             var viewPath = $"/Cards/{Name}/{cardState.Name}.cshtml";
@@ -442,7 +546,7 @@ namespace Crazor
             {
                 // This is a non-cshtml view, let's see if we can construct it.
                 cardView = this.Services.GetByName<ICardView>(cardState.Name);
-                view = new ViewStub() ;
+                view = new ViewStub();
                 ArgumentNullException.ThrowIfNull(cardView);
             }
 
@@ -465,14 +569,58 @@ namespace Crazor
 
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
-            this.CurrentView = cardView;
-            this.CurrentView.LoadState(cardState);
+            return cardView;
         }
+
+        //public ICardSearchView LoadCardSearchView(string viewName)
+        //{
+        //    var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
+        //    var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
+        //    var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+        //    IView view;
+        //    ICardSearchView cardSearchView;
+        //    if (viewResult?.View != null)
+        //    {
+        //        view = viewResult?.View!;
+        //        cardSearchView = (ICardSearchView)((RazorView)viewResult.View).RazorPage;
+        //        cardSearchView.RazorView = viewResult.View;
+        //    }
+        //    else
+        //    {
+        //        // This is a non-cshtml view, let's see if we can construct it.
+        //        cardSearchView = this.Services.GetByName<ICardSearchView>(viewName);
+        //        view = new ViewStub();
+        //        ArgumentNullException.ThrowIfNull(cardSearchView);
+        //    }
+
+        //    cardSearchView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
+        //    cardSearchView.App = this;
+        //    cardSearchView.Name = viewName;
+
+        //    ITempDataProvider tempDataProvider;
+        //    ActionContext actionContext;
+        //    var httpContext = new DefaultHttpContext { RequestServices = Services };
+        //    actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+        //    tempDataProvider = Services.GetRequiredService<ITempDataProvider>();
+        //    var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
+        //    {
+        //        Model = null
+        //    };
+
+        //    var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
+        //    cardSearchView.ViewContext = viewContext;
+        //    return cardSearchView;
+        //}
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
+            if (IsPreview)
+            {
+                // clear sessionid as we are going to share this card.
+                this.SessionId = null;
+            }
 
             AddRefresh(outboundCard);
 
@@ -522,8 +670,6 @@ namespace Crazor
 
         private async Task AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(this.SessionId);
-
             var sessionDataToken = await GetSessionDataToken(cancellationToken);
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
@@ -547,7 +693,7 @@ namespace Crazor
                     action.Data = new JObject();
                 }
 
-                var data = (JObject)action.Data;
+                var data = JObject.FromObject(action.Data);
                 data[Constants.SESSIONDATA_KEY] = JToken.FromObject(sessionDataToken);
                 if (action.Id != null)
                     data[Constants.IDDATA_KEY] = action.Id;
@@ -562,16 +708,39 @@ namespace Crazor
             }
         }
 
-        private static void AddRefresh(AdaptiveCard outboundCard)
+        private void AddRefresh(AdaptiveCard outboundCard)
         {
-            var refresh = new AdaptiveExecuteAction()
+            if (outboundCard.Refresh == null)
             {
-                Title = "Refresh",
-                Verb = Constants.SHOWVIEW_VERB,
-                IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
-                AssociatedInputs = AdaptiveAssociatedInputs.None,
-            };
-            outboundCard.Refresh = new AdaptiveRefresh() { Action = refresh };
+                AdaptiveExecuteAction refresh;
+                if (this.IsPreview)
+                {
+                    refresh = new AdaptiveExecuteAction()
+                    {
+                        Title = "Refresh",
+                        Verb = Constants.LOADROUTE_VERB,
+                        IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
+                        AssociatedInputs = AdaptiveAssociatedInputs.None,
+                        Data = JObject.FromObject(new LoadRouteModel()
+                        {
+                            View = this.CurrentCard,
+                            Path = this.GetRoute()
+                        })
+                    };
+                }
+                else
+                {
+                    refresh = new AdaptiveExecuteAction()
+                    {
+                        Title = "Refresh",
+                        Verb = Constants.SHOWVIEW_VERB,
+                        IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
+                        AssociatedInputs = AdaptiveAssociatedInputs.None,
+                        Data = new JObject()
+                    };
+                }
+                outboundCard.Refresh = new AdaptiveRefresh() { Action = refresh };
+            }
         }
 
         private void AddMessageBanner(AdaptiveCard outboundCard)
@@ -838,7 +1007,7 @@ namespace Crazor
         public static void ParseUri(Uri uri, out string app, out string? sharedId, out string view, out string path)
         {
             sharedId = null;
-            var parts = uri.LocalPath.Trim('/').Split('/');
+            var parts = uri.AbsolutePath.Trim('/').Split('/');
             app = parts[1] + "App";
             view = (parts.Length > 2) ? parts[2] : null;
             path = String.Join('/', parts.Skip(3).ToArray());

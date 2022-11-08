@@ -25,7 +25,7 @@ namespace Crazor.TagHelpers
     /// </remarks>
     public class RazorTagHelper : TagHelper
     {
-        private string _viewPath;
+        protected string _viewPath;
 
         public RazorTagHelper()
         {

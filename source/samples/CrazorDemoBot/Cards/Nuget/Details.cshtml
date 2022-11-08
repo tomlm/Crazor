@@ -1,0 +1,47 @@
+﻿@using CrazorDemoBot.Cards.NugetSearch
+@using Microsoft.Bot.Schema.Teams
+@inherits CardView<NugetApp,NugetPackage>
+
+@* This card supports a deep link route *@
+@attribute [Route("{packageId}")]
+
+
+<Card Version="1.5">
+    <ThumbnailCard Title="@Model.Title" Subtitle="@Model.Version" ImageUrl="@ImageUrl">@Model.Description</ThumbnailCard>
+
+    <Action.OpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@Model.Id" />
+    @if (!String.IsNullOrEmpty(Model.ProjectUrl) && Uri.IsWellFormedUriString(Model.ProjectUrl, UriKind.Absolute))
+    {
+        <Action.OpenUrl Title="Project " Url="@Model.ProjectUrl" />
+    }
+</Card>
+
+
+@functions
+{
+    public string ImageUrl => (!String.IsNullOrEmpty(Model.IconUrl) && Uri.IsWellFormedUriString(Model.IconUrl, UriKind.Absolute))
+        ? Model.IconUrl
+        : "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
+
+    public override string GetRoute() => $"{this.Model.Id}";
+
+    public async Task OnLoadRoute(string packageId, CancellationToken cancellationToken)
+    {
+        if (packageId != null)
+        {
+            this.Model = await App.GetNugetPackage(packageId!, cancellationToken);
+        }
+    }
+
+    public async override Task OnShowViewAsync(CancellationToken cancellationToken)
+    {
+        if (this.Model?.Id == null)
+        {
+            var packageId = (string)((dynamic)Action.Data).packageId;
+            if (!String.IsNullOrEmpty(packageId))
+            {
+                this.Model = await App.GetNugetPackage(packageId, cancellationToken);
+            }
+        }
+    }
+}

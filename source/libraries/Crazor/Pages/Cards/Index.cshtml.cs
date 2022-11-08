@@ -1,10 +1,6 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Crazor;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
 using Microsoft.AspNetCore.Mvc;

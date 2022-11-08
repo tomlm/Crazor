@@ -132,17 +132,20 @@ namespace Crazor.TagHelpers
             // Add server side error messages.
             if (ShowErrors == null || ShowErrors.Value == true)
             {
-                if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
+                if (View != null)
                 {
-                    if (errors.Any())
+                    if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
                     {
-                        sb = new StringBuilder();
-                        sb.AppendLine();
-                        foreach (var error in errors)
+                        if (errors.Any())
                         {
-                            sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
+                            sb = new StringBuilder();
+                            sb.AppendLine();
+                            foreach (var error in errors)
+                            {
+                                sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
+                            }
+                            output.PostElement.SetHtmlContent(sb.ToString());
                         }
-                        output.PostElement.SetHtmlContent(sb.ToString());
                     }
                 }
             }

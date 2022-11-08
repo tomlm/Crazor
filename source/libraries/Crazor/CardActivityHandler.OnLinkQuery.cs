@@ -31,7 +31,11 @@ namespace Crazor
             if (uri.Host == hostName)
             {
                 var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+                
+                cardApp.IsPreview = true;
+
                 var card = await cardApp.OnActionExecuteAsync(cancellationToken);
+                
                 await cardApp.SaveAppAsync(cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.

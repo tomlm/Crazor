@@ -4,11 +4,8 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Crazor.Interfaces;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace Crazor
 {
@@ -16,8 +13,20 @@ namespace Crazor
     {
         protected async override Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
-            var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
+            CardApp cardApp = null;
+            if (invokeValue.Action.Verb == Constants.LOADROUTE_VERB)
+            {
+                dynamic data = invokeValue.Action.Data;
+                string path = (string)(data.path);
+                var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), path);
+                cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+                cardApp.SharedId = cardApp.GetSharedId();
+            }
+            else
+            {
+                SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
+                cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
+            }
             var card = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
             return new AdaptiveCardInvokeResponse()

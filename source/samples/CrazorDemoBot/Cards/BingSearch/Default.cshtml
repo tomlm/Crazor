@@ -6,16 +6,8 @@
 
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Bing Search</TextBlock>
-    <ColumnSet>
-        <Column Width="stretch">
-            <Input.Text Binding="Query" Label="" Placeholder="Enter search terms"/>
-        </Column>
-        <Column Width="auto">
-            <ActionSet>
-                <Action.Execute Title="Search" Verb="@nameof(OnSearch)" />
-            </ActionSet>
-        </Column>
-    </ColumnSet>
+    <SearchBox Binding="Query" Placeholder="Enter search terms" Title="Search"/>
+    
     <ColumnSet>
         <Column Width="auto">
             @if (HasPrev())
@@ -35,26 +27,27 @@
             }
         </Column>
     </ColumnSet>
+
     if (Results != null)
     {
-    @foreach (var result in Results)
-    {
-        <Container Separator="true">
-            <ColumnSet>
-                <Column Width="stretch">
-                    <TextBlock Weight="Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
-                    <TextBlock Spacing="None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
-                    <TextBlock Spacing="Small">@result.Snippet</TextBlock>
-                </Column>
-                <Column Width="auto">
-                    @if (!String.IsNullOrEmpty(result.ThumbnailUrl))
-                    {
-                        <Image Url="@result.ThumbnailUrl" Size="Large" />
-                    }
-                </Column>
-            </ColumnSet>
-        </Container>
-    }
+        @foreach (var result in Results)
+        {
+            <Container Separator="true">
+                <ColumnSet>
+                    <Column Width="stretch">
+                        <TextBlock Weight="Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
+                        <TextBlock Spacing="None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
+                        <TextBlock Spacing="Small">@result.Snippet</TextBlock>
+                    </Column>
+                    <Column Width="auto">
+                        @if (!String.IsNullOrEmpty(result.ThumbnailUrl))
+                        {
+                            <Image Url="@result.ThumbnailUrl" Size="Large" />
+                        }
+                    </Column>
+                </ColumnSet>
+            </Container>
+        }
     }
 </Card>
 
