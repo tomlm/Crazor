@@ -28,6 +28,15 @@ namespace CrazorDemoBot.Cards.Wordle
             return guess.ToUpper() == Word;
         }
 
+        public Dictionary<char, string> Glyphs = new Dictionary<char, string>()
+        {
+            { 'A', "🄰" }, {'B', "🄱" }, {'C', "🄲"}, {'D', "🄳" }, {'E', "🄴" }, {'F', "🄵" },
+            { 'G', "🄶" }, {'H', "🄷" }, {'I', "🄸" }, {'J', "🄹" }, {'K', "🄺" }, {'L', "🄻" },
+            { 'M', "🄼" }, {'N', "🄽" }, {'O', "🄾" }, {'P', "🄿" }, {'Q', "🅀" }, {'R', "🅁" },
+            { 'S', "🅂" }, {'T', "🅃" }, {'U', "🅄" }, {'V', "🅅" }, {'W', "🅆" }, {'X', "🅇" },
+            { 'Y', "🅈" }, {'Z', "🅉" },
+        };
+
         public static HashSet<string> Words = new HashSet<string>()
         {
 "ABACK","ABASE","ABATE","ABBEY","ABBOT","ABHOR","ABIDE","ABLED","ABODE","ABORT","ABOUT","ABOVE","ABUSE","ABYSS","ACORN","ACRID","ACTOR","ACUTE","ADAGE","ADAPT",

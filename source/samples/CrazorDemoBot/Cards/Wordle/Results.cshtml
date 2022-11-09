@@ -2,10 +2,12 @@
 @inherits CardView<WordleApp>
 
 <Card Version="1.5">
-    <Refresh/>
+    <Refresh />
 
-    <TextBlock Size="Large" Style="Heading">Wordle Results!</TextBlock>
-    <Table GridStyle="Accent" ShowGridLines="false" FirstRowAsHeaders="false">
+    <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
+    <TextBlock Size="Medium" Style="Heading">in @App.Guesses.Count tries!</TextBlock>
+
+    <Table GridStyle="Default" ShowGridLines="true" FirstRowAsHeaders="false">
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
@@ -16,7 +18,7 @@
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 @foreach (var letter in App.Guesses[iGuess].Letters)
                 {
-                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder">_</TextBlock></TableCell>
+                    <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
                 }
             </TableRow>
         }
@@ -24,11 +26,11 @@
         @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
             </TableRow>
         }
     </Table>
