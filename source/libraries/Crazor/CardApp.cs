@@ -567,7 +567,6 @@ namespace Crazor
             };
 
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
-            cardView.ViewContext = viewContext;
             return cardView;
         }
 
