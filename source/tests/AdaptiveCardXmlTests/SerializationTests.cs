@@ -17,7 +17,6 @@ namespace AdaptiveCardXmlTests
             NullValueHandling = NullValueHandling.Ignore,
             DefaultValueHandling = DefaultValueHandling.Ignore,
         };
-        private static XmlSerializer serializer = new XmlSerializer(typeof(AdaptiveCard));
         private static XmlWriterSettings settings = new XmlWriterSettings()
         {
             Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
@@ -38,7 +37,7 @@ namespace AdaptiveCardXmlTests
             {
                 using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
                 {
-                    serializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
+                    AdaptiveCard.XmlSerializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
                 }
                 return textWriter.ToString(); //This is the output as a string
             }
@@ -70,13 +69,13 @@ namespace AdaptiveCardXmlTests
             var xml = File.ReadAllText(xmlFile);
             var jsonCard = JsonConvert.DeserializeObject<AdaptiveCard>(json, jsonSettings);
             xml = ToXml(jsonCard!);
-            var reader = XmlReader.Create(new StringReader(xml));
-            var xmlCard = serializer.Deserialize(reader);
+            var reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings() { IgnoreWhitespace = false });
+            var xmlCard = AdaptiveCard.XmlSerializer.Deserialize(reader);
             var json2 = JsonConvert.SerializeObject(xmlCard, jsonSettings);
             if (json != json2)
             {
-                //File.WriteAllText(@"foo1.json", json);
-                //File.WriteAllText(@"foo2.json", json2);
+                //File.WriteAllText(@"\scratch\foo1.json", json);
+                //File.WriteAllText(@"\scratch\foo2.json", json2);
                 Debug.WriteLine(json);
                 Debug.WriteLine(json2);
             }

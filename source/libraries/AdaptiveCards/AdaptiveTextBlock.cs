@@ -134,7 +134,7 @@ namespace AdaptiveCards
         /// <inheritdoc />
         [JsonRequired]
 #if !NETSTANDARD1_3
-        [XmlIgnore]
+        [XmlText]
 #endif
         public string Text { get; set; } = "";
 
@@ -148,6 +148,13 @@ namespace AdaptiveCards
             set => Text = string.IsNullOrWhiteSpace(value?.Replace("%20", " ")) ? value?.Replace("%20", " ") : value;
         }
 #endif
+
+//#if !NETSTANDARD1_3
+//        [JsonIgnore]
+//        [XmlAttribute("space", Namespace = "http://www.w3.org/XML/1998/namespace")]
+//        public string Space = "preserve";
+//        public bool ShouldSerializeSpace() => Text != null && Text.Length > 0 && String.IsNullOrWhiteSpace(Text);
+//#endif
 
         /// <inheritdoc />
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]

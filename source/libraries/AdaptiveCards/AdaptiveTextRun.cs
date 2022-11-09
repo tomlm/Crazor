@@ -161,7 +161,18 @@ namespace AdaptiveCards
 #if !NETSTANDARD1_3
         [XmlText]
 #endif
-        public string Text { get; set; } = " ";
+        public string Text { get; set; } = "";
+
+#if !NETSTANDARD1_3
+        [JsonIgnore]
+        [XmlText]
+        public string _Text
+        {
+            // We use %20 to represent an whitespace only string in xml.
+            get => (Text != null && string.IsNullOrWhiteSpace(Text)) ? Text.Replace(" ", "%20") : Text;
+            set => Text = string.IsNullOrWhiteSpace(value?.Replace("%20", " ")) ? value?.Replace("%20", " ") : value;
+        }
+#endif
 
         /// <inheritdoc />
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
