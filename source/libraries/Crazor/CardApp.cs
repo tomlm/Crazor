@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Crazor.Interfaces;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.WebUtilities;
@@ -272,18 +271,6 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Implement this to return search results for a Search command
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public virtual Task<SearchResult[]> GetSearchResultsAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// lower level method to handle search command
         /// </summary>
         /// <param name="query"></param>
@@ -292,14 +279,18 @@ namespace Crazor
         public virtual async Task<MessagingExtensionResponse> OnMessagingExtensionQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
             // do the search
-            var searchResults = await GetSearchResultsAsync(query, cancellationToken);
+            var searchResults = await CurrentView.OnSearchAsync(query, cancellationToken);
 
             // turn into attachments
             List<MessagingExtensionAttachment> attachments = new List<MessagingExtensionAttachment>();
             foreach (var searchResult in searchResults)
             {
-                this.CallStack[0].Model = searchResult.Model;
-                SetCurrentView(this.CallStack[0]);
+                // replaceview with new view
+                var cardState = new CardViewState(this.CurrentCard, searchResult.Model);
+                this.CallStack[0] = cardState;
+                Action!.Verb = Constants.SHOWVIEW_VERB;
+                SetCurrentView(cardState);
+
                 AdaptiveCard card = await OnActionExecuteAsync(cancellationToken);
 
                 var attachment = new MessagingExtensionAttachment()
@@ -567,6 +558,7 @@ namespace Crazor
             };
 
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
+            cardView.ViewContext = viewContext;
             return cardView;
         }
 
@@ -955,6 +947,11 @@ namespace Crazor
             }
         }
 
+        /// <summary>
+        /// Copy data from cardState onto instantiated card.
+        /// </summary>
+        /// <param name="cardState"></param>
+        /// <param name="cardView"></param>
         private static void LoadCardState(CardViewState cardState, ICardView cardView)
         {
             foreach (var property in cardView.GetType().GetProperties()

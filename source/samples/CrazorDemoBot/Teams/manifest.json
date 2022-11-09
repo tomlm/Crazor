@@ -138,6 +138,7 @@
         },
         {
           "id": "/Cards/Nuget/Details",
+          "type": "query",
           "description": "Search Nuget for packages",
           "title": "Search Nuget",
           "initialRun": true,
@@ -148,8 +149,21 @@
               "title": "Package"
             }
           ]
+        },
+        {
+          "id": "/Cards/Nuget/Details2",
+          "type": "query",
+          "description": "Search Nuget2 for packages",
+          "title": "Search Nuget2",
+          "initialRun": true,
+          "parameters": [
+            {
+              "name": "search",
+              "description": "Enter in package you want",
+              "title": "Package"
+            }
+          ]
         }
-
       ],
       "canUpdateConfiguration": true,
       "messageHandlers": [

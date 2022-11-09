@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Schema;
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Bot.Schema.Teams;
 
 namespace Crazor.Interfaces
 {
@@ -55,6 +56,14 @@ namespace Crazor.Interfaces
         /// <param name="screenResult"></param>
         /// <param name="cancellationToken"></param>
         Task OnResumeViewAsync(CardResult screenResult, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Called to get searchresults for a cardview.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<SearchResult[]> OnSearchAsync(MessagingExtensionQuery query, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to search for choices.

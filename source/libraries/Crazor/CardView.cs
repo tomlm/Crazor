@@ -10,12 +10,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using System.Text;
 using System.Xml;
-using System.Xml.Serialization;
 using Diag = System.Diagnostics;
 
 namespace Crazor
@@ -185,6 +184,7 @@ namespace Crazor
             }
         }
 
+
         private async Task<bool> InvokeVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             var verbMethod = GetMethod(action.Verb);
@@ -319,7 +319,7 @@ namespace Crazor
         /// <returns>task</returns>
         public virtual async Task OnShowViewAsync(CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
+            await InvokeVerbAsync(Action, cancellationToken);
         }
 
         /// <summary>
@@ -336,6 +336,20 @@ namespace Crazor
         public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
+        }
+
+
+        /// <summary>
+        /// Implement this to return search results for a Search command for this view.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async virtual Task<SearchResult[]> OnSearchAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+            return Array.Empty<SearchResult>();
         }
 
         /// <summary>
@@ -567,7 +581,7 @@ namespace Crazor
             result["view"] = loadRoute.View;
             result["path"] = loadRoute.Path;
             string path = loadRoute.Path.Replace(this.App.GetRoute(), String.Empty);
-    
+
             if (!String.IsNullOrEmpty(path))
             {
                 var dataParts = path!.TrimStart('/').Split('?');
@@ -651,7 +665,6 @@ namespace Crazor
 
             base.LoadState(cardViewState);
         }
-
     }
 
 
