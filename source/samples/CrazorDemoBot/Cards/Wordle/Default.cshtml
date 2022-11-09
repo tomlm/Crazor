@@ -5,11 +5,11 @@
     <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
 
     <Table GridStyle="Accent" ShowGridLines="false" FirstRowAsHeaders="false">
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
         @for (int iGuess = 0; iGuess < App.Guesses.Count; iGuess++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
@@ -22,11 +22,11 @@
         @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">_</TextBlock></TableCell>
             </TableRow>
         }
     </Table>

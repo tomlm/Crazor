@@ -159,7 +159,7 @@ namespace AdaptiveCards
         /// <inheritdoc />
         [JsonRequired]
 #if !NETSTANDARD1_3
-        [XmlText]
+        [XmlIgnore]
 #endif
         public string Text { get; set; } = "";
 
