@@ -6,7 +6,6 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -21,6 +20,8 @@ namespace AdaptiveCards
 #endif
     public class AdaptiveCard : AdaptiveTypedElement
     {
+        public static XmlSerializer XmlSerializer = new XmlSerializer(typeof(AdaptiveCard));
+
         /// <summary>
         /// AdaptiveCard mimetype.
         /// </summary>

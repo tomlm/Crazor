@@ -41,8 +41,6 @@ namespace AdaptiveCards
 
         public void ReadXml(System.Xml.XmlReader reader)
         {
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(Property));
-
             reader.Read();
             reader.MoveToContent();
             while (reader.IsStartElement())
@@ -71,8 +69,6 @@ namespace AdaptiveCards
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
-            //valueSerializer.Serialize(writer, this.Keys.Select(k => new Property() { Name = k, Value = this[k] }).ToList());
-            //valueSerializer.Serialize(writer, value);
 
             foreach (string key in this.Keys)
             {
@@ -103,8 +99,6 @@ namespace AdaptiveCards
                     writer.WriteAttributeString("Type", valueType);
                 }
 
-                XmlSerializer valueSerializer = new XmlSerializer(value.GetType());
-                // valueSerializer.Serialize(writer, value);
                 writer.WriteValue(value);
                 writer.WriteEndElement();
             }

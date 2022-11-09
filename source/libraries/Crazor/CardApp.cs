@@ -37,7 +37,6 @@ namespace Crazor
     /// </remarks>
     public class CardApp : IMessagingExtensionQuery
     {
-        private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
         private static XmlWriterSettings _settings = new XmlWriterSettings()
         {
             Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
@@ -199,7 +198,7 @@ namespace Crazor
                 {
                     var xml = await File.ReadAllTextAsync(stylesheetPath, cancellationToken);
                     xml = $"<Card Version=\"1.6\">\n{xml}\n</Card>";
-                    var card = (AdaptiveCard)_cardSerializer!.Deserialize(XmlReader.Create(new StringReader(xml!)))!;
+                    var card = (AdaptiveCard)AdaptiveCard.XmlSerializer!.Deserialize(XmlReader.Create(new StringReader(xml!)))!;
                     Stylesheet = card.Body.ToDictionary(el => $"{el.Type}.{el.Id}", StringComparer.OrdinalIgnoreCase);
                 }
             }

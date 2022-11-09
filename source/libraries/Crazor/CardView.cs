@@ -23,12 +23,6 @@ namespace Crazor
     public class CardView<AppT> : RazorPage, ICardView
         where AppT : CardApp
     {
-        private static XmlSerializer _cardSerializer = new XmlSerializer(typeof(AdaptiveCard));
-        private static XmlWriterSettings _settings = new XmlWriterSettings()
-        {
-            Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
-            Indent = true,
-        };
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardView()
@@ -383,7 +377,7 @@ namespace Crazor
                     Diag.Debug.WriteLine(xml);
 
                     var reader = XmlReader.Create(new StringReader(xml));
-                    var card = (AdaptiveCard?)_cardSerializer.Deserialize(reader);
+                    var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
                     return card;
                 }
                 else
