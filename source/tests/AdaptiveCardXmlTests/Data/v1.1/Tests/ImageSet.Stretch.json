@@ -1019,21 +1019,51 @@
     {
       "type": "Action.ToggleVisibility",
       "targetElements": [
-        "id1",
-        "id11",
-        "id111",
-        "id1111",
-        "id11111",
-        "id2",
-        "id22",
-        "id222",
-        "id2222",
-        "id22222",
-        "id3",
-        "id33",
-        "id333",
-        "id3333",
-        "id33333"
+        {
+          "elementId": "id1"
+        },
+        {
+          "elementId": "id11"
+        },
+        {
+          "elementId": "id111"
+        },
+        {
+          "elementId": "id1111"
+        },
+        {
+          "elementId": "id11111"
+        },
+        {
+          "elementId": "id2"
+        },
+        {
+          "elementId": "id22"
+        },
+        {
+          "elementId": "id222"
+        },
+        {
+          "elementId": "id2222"
+        },
+        {
+          "elementId": "id22222"
+        },
+        {
+          "elementId": "id3"
+        },
+        {
+          "elementId": "id33"
+        },
+        {
+          "elementId": "id333"
+        },
+        {
+          "elementId": "id3333"
+        },
+        {
+          "elementId": "id33333"
+        }
       ],
       "title": "Hide"
     }

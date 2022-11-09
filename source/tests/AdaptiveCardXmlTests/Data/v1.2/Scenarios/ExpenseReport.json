@@ -229,9 +229,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "airTravelExpenseDetails",
-              "chevronDown1",
-              "chevronUp1"
+              {
+                "elementId": "airTravelExpenseDetails"
+              },
+              {
+                "elementId": "chevronDown1"
+              },
+              {
+                "elementId": "chevronUp1"
+              }
             ]
           },
           "spacing": "small"
@@ -364,9 +370,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "autoMobileExpenseDetails",
-              "chevronDown2",
-              "chevronUp2"
+              {
+                "elementId": "autoMobileExpenseDetails"
+              },
+              {
+                "elementId": "chevronDown2"
+              },
+              {
+                "elementId": "chevronUp2"
+              }
             ]
           },
           "spacing": "small"
@@ -493,9 +505,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "excessBaggageCostDetails",
-              "chevronDown3",
-              "chevronUp3"
+              {
+                "elementId": "excessBaggageCostDetails"
+              },
+              {
+                "elementId": "chevronDown3"
+              },
+              {
+                "elementId": "chevronUp3"
+              }
             ]
           },
           "spacing": "small"
@@ -676,9 +694,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "cardContent4",
-              "showHistory",
-              "hideHistory"
+              {
+                "elementId": "cardContent4"
+              },
+              {
+                "elementId": "showHistory"
+              },
+              {
+                "elementId": "hideHistory"
+              }
             ]
           }
         }

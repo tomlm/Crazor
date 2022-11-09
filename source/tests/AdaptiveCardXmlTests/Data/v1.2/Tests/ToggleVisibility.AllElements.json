@@ -9,8 +9,12 @@
       "selectAction": {
         "type": "Action.ToggleVisibility",
         "targetElements": [
-          "id2",
-          "id10"
+          {
+            "elementId": "id2"
+          },
+          {
+            "elementId": "id10"
+          }
         ]
       },
       "altText": "Cat"
@@ -43,7 +47,9 @@
       "selectAction": {
         "type": "Action.ToggleVisibility",
         "targetElements": [
-          "id3"
+          {
+            "elementId": "id3"
+          }
         ]
       },
       "spacing": "medium"
@@ -74,7 +80,9 @@
       "selectAction": {
         "type": "Action.ToggleVisibility",
         "targetElements": [
-          "id1"
+          {
+            "elementId": "id1"
+          }
         ]
       },
       "height": "stretch"
@@ -94,7 +102,9 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "id5"
+              {
+                "elementId": "id5"
+              }
             ]
           }
         },
@@ -110,7 +120,9 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "id4"
+              {
+                "elementId": "id4"
+              }
             ]
           }
         }
@@ -280,19 +292,45 @@
     {
       "type": "Action.ToggleVisibility",
       "targetElements": [
-        "id6",
-        "id7",
-        "id8",
-        "id9",
-        "input1",
-        "input2",
-        "input3",
-        "input4",
-        "input5",
-        "input6",
-        "input7",
-        "input8",
-        "input9"
+        {
+          "elementId": "id6"
+        },
+        {
+          "elementId": "id7"
+        },
+        {
+          "elementId": "id8"
+        },
+        {
+          "elementId": "id9"
+        },
+        {
+          "elementId": "input1"
+        },
+        {
+          "elementId": "input2"
+        },
+        {
+          "elementId": "input3"
+        },
+        {
+          "elementId": "input4"
+        },
+        {
+          "elementId": "input5"
+        },
+        {
+          "elementId": "input6"
+        },
+        {
+          "elementId": "input7"
+        },
+        {
+          "elementId": "input8"
+        },
+        {
+          "elementId": "input9"
+        }
       ],
       "title": "Toggle!"
     },

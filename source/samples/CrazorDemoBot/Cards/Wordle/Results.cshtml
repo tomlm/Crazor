@@ -16,7 +16,7 @@
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 @foreach (var letter in App.Guesses[iGuess].Letters)
                 {
-                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder">``` ```</TextBlock></TableCell>
                 }
             </TableRow>
         }
@@ -24,11 +24,11 @@
         @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
             </TableRow>
         }
     </Table>

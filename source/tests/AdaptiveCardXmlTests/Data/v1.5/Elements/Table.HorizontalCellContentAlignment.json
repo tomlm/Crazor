@@ -97,7 +97,7 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeader": false
+                  "firstRowAsHeaders": false
                 }
               ]
             }
@@ -182,7 +182,7 @@
                     }
                   ],
                   "horizontalCellContentAlignment": "center",
-                  "firstRowAsHeader": false
+                  "firstRowAsHeaders": false
                 }
               ]
             }
@@ -267,7 +267,7 @@
                     }
                   ],
                   "horizontalCellContentAlignment": "right",
-                  "firstRowAsHeader": false
+                  "firstRowAsHeaders": false
                 }
               ]
             }
@@ -275,7 +275,7 @@
         }
       ],
       "verticalCellContentAlignment": "center",
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "showGridLines": false
     }
   ]

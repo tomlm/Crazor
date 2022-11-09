@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Card Version="1.5">
   <TextBlock Weight="bolder" Wrap="true">You can configure the horizontal alignment of table content with HorizontalCellContentAlignement</TextBlock>
-  <Table VerticalCellContentAlignment="center" FirstRowAsHeader="false" ShowGridLines="false">
+  <Table VerticalCellContentAlignment="center" FirstRowAsHeaders="false" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="3" />
     <TableRow>
@@ -9,7 +9,7 @@
         <TextBlock Wrap="true">Left</TextBlock>
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false">
+        <Table FirstRowAsHeaders="false">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -36,7 +36,7 @@
         <TextBlock Wrap="true">Center</TextBlock>
       </TableCell>
       <TableCell>
-        <Table HorizontalCellContentAlignment="center" FirstRowAsHeader="false">
+        <Table HorizontalCellContentAlignment="center" FirstRowAsHeaders="false">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -63,7 +63,7 @@
         <TextBlock Wrap="true">Right</TextBlock>
       </TableCell>
       <TableCell>
-        <Table HorizontalCellContentAlignment="right" FirstRowAsHeader="false">
+        <Table HorizontalCellContentAlignment="right" FirstRowAsHeaders="false">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>

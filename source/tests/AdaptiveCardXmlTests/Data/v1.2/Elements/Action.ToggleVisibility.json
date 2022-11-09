@@ -50,9 +50,15 @@
     {
       "type": "Action.ToggleVisibility",
       "targetElements": [
-        "textToToggle",
-        "imageToToggle",
-        "imageToToggle2"
+        {
+          "elementId": "textToToggle"
+        },
+        {
+          "elementId": "imageToToggle"
+        },
+        {
+          "elementId": "imageToToggle2"
+        }
       ],
       "title": "Toggle!"
     },

@@ -17,7 +17,7 @@
         <TextBlock Wrap="true">Good</TextBlock>
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false" GridStyle="good">
+        <Table FirstRowAsHeaders="false" GridStyle="good">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -44,7 +44,7 @@
         <TextBlock Wrap="true">Warning</TextBlock>
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false" GridStyle="warning">
+        <Table FirstRowAsHeaders="false" GridStyle="warning">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>
@@ -71,7 +71,7 @@
         <TextBlock Wrap="true">Attention</TextBlock>
       </TableCell>
       <TableCell>
-        <Table FirstRowAsHeader="false" GridStyle="attention">
+        <Table FirstRowAsHeaders="false" GridStyle="attention">
           <TableColumn Width="1" />
           <TableColumn Width="1" />
           <TableRow>

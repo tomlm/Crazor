@@ -229,9 +229,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "cardContent1",
-              "chevronUp1",
-              "chevronDown1"
+              {
+                "elementId": "cardContent1"
+              },
+              {
+                "elementId": "chevronUp1"
+              },
+              {
+                "elementId": "chevronDown1"
+              }
             ]
           },
           "spacing": "small"
@@ -364,9 +370,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "cardContent2",
-              "chevronUp2",
-              "chevronDown2"
+              {
+                "elementId": "cardContent2"
+              },
+              {
+                "elementId": "chevronUp2"
+              },
+              {
+                "elementId": "chevronDown2"
+              }
             ]
           },
           "spacing": "small"
@@ -493,9 +505,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "cardContent3",
-              "chevronUp3",
-              "chevronDown3"
+              {
+                "elementId": "cardContent3"
+              },
+              {
+                "elementId": "chevronUp3"
+              },
+              {
+                "elementId": "chevronDown3"
+              }
             ]
           },
           "spacing": "small"
@@ -642,7 +660,7 @@
           ]
         }
       ],
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "showGridLines": false,
       "spacing": "large",
       "separator": true
@@ -717,9 +735,15 @@
           "selectAction": {
             "type": "Action.ToggleVisibility",
             "targetElements": [
-              "cardContent4",
-              "showHistory",
-              "hideHistory"
+              {
+                "elementId": "cardContent4"
+              },
+              {
+                "elementId": "showHistory"
+              },
+              {
+                "elementId": "hideHistory"
+              }
             ]
           }
         }

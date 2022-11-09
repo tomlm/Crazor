@@ -9,7 +9,9 @@
       "selectAction": {
         "type": "Action.ToggleVisibility",
         "targetElements": [
-          "id2"
+          {
+            "elementId": "id2"
+          }
         ]
       },
       "altText": "Cat",
@@ -33,7 +35,9 @@
       "selectAction": {
         "type": "Action.ToggleVisibility",
         "targetElements": [
-          "id3"
+          {
+            "elementId": "id3"
+          }
         ]
       },
       "spacing": "large"
@@ -67,7 +71,9 @@
       "selectAction": {
         "type": "Action.ToggleVisibility",
         "targetElements": [
-          "id1"
+          {
+            "elementId": "id1"
+          }
         ]
       },
       "height": "stretch"

@@ -2,6 +2,6 @@
 <Card Version="1.4">
   <TextBlock>This is a card that will be refreshed.</TextBlock>
   <Refresh UserIds="user1 user2">
-    <Action Verb="refreshCard" />
+    <Action.Execute Verb="refreshCard" />
   </Refresh>
 </Card>

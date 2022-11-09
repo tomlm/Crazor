@@ -122,7 +122,7 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeader": false,
+                  "firstRowAsHeaders": false,
                   "gridStyle": "good"
                 }
               ]
@@ -207,7 +207,7 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeader": false,
+                  "firstRowAsHeaders": false,
                   "gridStyle": "warning"
                 }
               ]
@@ -292,7 +292,7 @@
                       ]
                     }
                   ],
-                  "firstRowAsHeader": false,
+                  "firstRowAsHeaders": false,
                   "gridStyle": "attention"
                 }
               ]

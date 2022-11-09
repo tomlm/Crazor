@@ -171,7 +171,7 @@
       </ColumnSet>
     </Container>
   </Container>
-  <Table Spacing="large" Separator="true" FirstRowAsHeader="false" ShowGridLines="false">
+  <Table Spacing="large" Separator="true" FirstRowAsHeaders="false" ShowGridLines="false">
     <TableColumn Width="3" />
     <TableColumn Width="1" />
     <TableRow>

@@ -411,25 +411,63 @@
     {
       "type": "Action.ToggleVisibility",
       "targetElements": [
-        "id1",
-        "id2",
-        "id3",
-        "id4",
-        "id5",
-        "id6",
-        "id7",
-        "id8",
-        "id9",
-        "id10",
-        "id11",
-        "id12",
-        "id13",
-        "id14",
-        "id15",
-        "id16",
-        "id17",
-        "id18",
-        "id19"
+        {
+          "elementId": "id1"
+        },
+        {
+          "elementId": "id2"
+        },
+        {
+          "elementId": "id3"
+        },
+        {
+          "elementId": "id4"
+        },
+        {
+          "elementId": "id5"
+        },
+        {
+          "elementId": "id6"
+        },
+        {
+          "elementId": "id7"
+        },
+        {
+          "elementId": "id8"
+        },
+        {
+          "elementId": "id9"
+        },
+        {
+          "elementId": "id10"
+        },
+        {
+          "elementId": "id11"
+        },
+        {
+          "elementId": "id12"
+        },
+        {
+          "elementId": "id13"
+        },
+        {
+          "elementId": "id14"
+        },
+        {
+          "elementId": "id15"
+        },
+        {
+          "elementId": "id16"
+        },
+        {
+          "elementId": "id17"
+        },
+        {
+          "elementId": "id18"
+        },
+        {
+          "elementId": "id19"
+        }
       ],
       "title": "Toggle!"
     }

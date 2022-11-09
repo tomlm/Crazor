@@ -186,7 +186,7 @@
           ]
         }
       ],
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "showGridLines": false
     },
     {
@@ -370,7 +370,7 @@
           ]
         }
       ],
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "showGridLines": false
     },
     {
@@ -553,7 +553,7 @@
           ]
         }
       ],
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "gridStyle": "accent"
     },
     {
@@ -740,7 +740,7 @@
           ]
         }
       ],
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "showGridLines": false,
       "gridStyle": "accent"
     },
@@ -1016,7 +1016,7 @@
           ]
         }
       ],
-      "firstRowAsHeader": false,
+      "firstRowAsHeaders": false,
       "showGridLines": false,
       "gridStyle": "accent"
     },

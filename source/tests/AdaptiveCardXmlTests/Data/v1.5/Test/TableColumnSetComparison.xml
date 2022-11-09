@@ -18,7 +18,7 @@
       <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
-  <Table FirstRowAsHeader="false" ShowGridLines="false">
+  <Table FirstRowAsHeaders="false" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
@@ -57,7 +57,7 @@
       <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
-  <Table FirstRowAsHeader="false" ShowGridLines="false">
+  <Table FirstRowAsHeaders="false" ShowGridLines="false">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
@@ -96,7 +96,7 @@
       <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
-  <Table FirstRowAsHeader="false" GridStyle="accent">
+  <Table FirstRowAsHeaders="false" GridStyle="accent">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
@@ -135,7 +135,7 @@
       <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
-  <Table FirstRowAsHeader="false" ShowGridLines="false" GridStyle="accent">
+  <Table FirstRowAsHeaders="false" ShowGridLines="false" GridStyle="accent">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />
@@ -174,7 +174,7 @@
       <TextBlock Spacing="none" HorizontalAlignment="right" Wrap="true">right H</TextBlock>
     </Column>
   </ColumnSet>
-  <Table FirstRowAsHeader="false" ShowGridLines="false" GridStyle="accent">
+  <Table FirstRowAsHeaders="false" ShowGridLines="false" GridStyle="accent">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableColumn Width="3" />

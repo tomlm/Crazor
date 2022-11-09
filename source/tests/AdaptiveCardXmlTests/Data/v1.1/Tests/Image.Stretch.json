@@ -693,28 +693,72 @@
     {
       "type": "Action.ToggleVisibility",
       "targetElements": [
-        "id4",
-        "id3",
-        "id24",
-        "id214",
-        "id2114",
-        "id21114",
-        "id111111114",
-        "id111114",
-        "id14",
-        "id1114",
-        "id11114",
-        "id45",
-        "id35",
-        "id245",
-        "id2145",
-        "id21145",
-        "id211145",
-        "id1111111145",
-        "id1111145",
-        "id145",
-        "id11145",
-        "id111145"
+        {
+          "elementId": "id4"
+        },
+        {
+          "elementId": "id3"
+        },
+        {
+          "elementId": "id24"
+        },
+        {
+          "elementId": "id214"
+        },
+        {
+          "elementId": "id2114"
+        },
+        {
+          "elementId": "id21114"
+        },
+        {
+          "elementId": "id111111114"
+        },
+        {
+          "elementId": "id111114"
+        },
+        {
+          "elementId": "id14"
+        },
+        {
+          "elementId": "id1114"
+        },
+        {
+          "elementId": "id11114"
+        },
+        {
+          "elementId": "id45"
+        },
+        {
+          "elementId": "id35"
+        },
+        {
+          "elementId": "id245"
+        },
+        {
+          "elementId": "id2145"
+        },
+        {
+          "elementId": "id21145"
+        },
+        {
+          "elementId": "id211145"
+        },
+        {
+          "elementId": "id1111111145"
+        },
+        {
+          "elementId": "id1111145"
+        },
+        {
+          "elementId": "id145"
+        },
+        {
+          "elementId": "id11145"
+        },
+        {
+          "elementId": "id111145"
+        }
       ],
       "title": "Hide"
     }

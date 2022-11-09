@@ -2,7 +2,7 @@
 @inherits CardView<WordleApp>
 
 <Card Version="1.5">
-    <TextBlock Size="Large" Style="Heading">Wordle for @App.Date.Value.ToShortDateString()!</TextBlock>
+    <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
 
     <Table GridStyle="Accent" ShowGridLines="false" FirstRowAsHeaders="false">
         <TableColumn Width="1" />
@@ -15,18 +15,18 @@
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 @foreach (var letter in App.Guesses[iGuess].Letters)
                 {
-                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" FontType="Monospace">@letter.Value</TextBlock></TableCell>
+                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder" >@letter.Value</TextBlock></TableCell>
                 }
             </TableRow>
         }
         @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
-                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Weight="Bolder" Size="ExtraLarge">``` ```</TextBlock></TableCell>
             </TableRow>
         }
     </Table>

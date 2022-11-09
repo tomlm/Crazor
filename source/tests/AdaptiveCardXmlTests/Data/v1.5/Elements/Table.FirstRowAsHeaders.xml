@@ -30,7 +30,7 @@
     </TableRow>
   </Table>
   <TextBlock Wrap="true">This table does not</TextBlock>
-  <Table FirstRowAsHeader="false">
+  <Table FirstRowAsHeaders="false">
     <TableColumn Width="1" />
     <TableColumn Width="1" />
     <TableRow>
