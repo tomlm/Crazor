@@ -1,0 +1,80 @@
+﻿@using CrazorDemoBot.Cards.Wordle
+@inherits CardView<WordleApp>
+
+<Card Version="1.5">
+    <TextBlock Size="Large" Style="Heading">Wordle for @App.Date.Value.ToShortDateString()!</TextBlock>
+
+    <Table GridStyle="Accent" ShowGridLines="false" FirstRowAsHeaders="false">
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        @for (int iGuess = 0; iGuess < App.Guesses.Count; iGuess++)
+        {
+            <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
+                @foreach (var letter in App.Guesses[iGuess].Letters)
+                {
+                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" FontType="Monospace">@letter.Value</TextBlock></TableCell>
+                }
+            </TableRow>
+        }
+        @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
+        {
+            <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
+                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+                <TableCell Style="Emphasis"><TextBlock Size="ExtraLarge" FontType="Monospace">_</TextBlock></TableCell>
+            </TableRow>
+        }
+    </Table>
+    <ColumnSet>
+        <Column Width="stretch">
+            <Input.Text Id="Guess" Placeholder="Guess" />
+        </Column>
+        <Column Width="Auto">
+            <ActionSet>
+                <Action.Execute Verb="OnSubmit" Title="Submit" />
+            </ActionSet>
+        </Column>
+    </ColumnSet>
+</Card>
+
+@functions
+{
+    [BindProperty]
+    [Required]
+    [StringLength(maximumLength: 5, ErrorMessage = "Word must be 5 chars")]
+    public string Guess { get; set; }
+
+    public override void OnInitialized()
+    {
+        if (String.IsNullOrEmpty(App.Word))
+        {
+            var rnd = new Random();
+            App.Word = WordleApp.Words.Skip(rnd.Next(WordleApp.Words.Count)).First();
+        }
+
+        if (App.Guesses.LastOrDefault()?.Value == App.Word ||
+            App.Guesses.Count == 6)
+        {
+            ShowView("Results");
+        }
+    }
+
+    public void OnSubmit(string guess)
+    {
+        guess = guess.Trim().ToUpper();
+        if (IsModelValid && !WordleApp.Words.Contains(guess))
+        {
+            AddBannerMessage($"{guess} is not a valid wordle word.", AdaptiveContainerStyle.Warning);
+        }
+        else if (App.MakeGuess(guess))
+        {
+            ShowView("Results");
+            CloseTaskModule(TaskModuleAction.Auto);
+        }
+    }
+}

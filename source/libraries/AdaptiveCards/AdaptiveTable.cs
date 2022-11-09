@@ -110,7 +110,7 @@ namespace AdaptiveCards
         [XmlAttribute]
 #endif
         [DefaultValue(true)]
-        public bool FirstRowAsHeader { get; set; } = true;
+        public bool FirstRowAsHeaders { get; set; } = true;
 
         /// <summary>
         /// Specifies whether grid lines should be displayed.

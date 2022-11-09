@@ -18,8 +18,8 @@ namespace Crazor.TagHelpers
     public class TableTagHelper : ReflectionTagHelper
     {
 
-        [HtmlAttributeName(nameof(FirstRowAsHeader))]
-        public Boolean? FirstRowAsHeader { get; set; }  
+        [HtmlAttributeName(nameof(FirstRowAsHeaders))]
+        public Boolean? FirstRowAsHeaders { get; set; }  
 
         [HtmlAttributeName(nameof(GridStyle))]
         [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
