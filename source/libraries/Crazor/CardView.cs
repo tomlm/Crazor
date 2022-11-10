@@ -464,7 +464,7 @@ namespace Crazor
 
         private MethodInfo? GetMethod(string methodName)
         {
-            return this.GetType().GetMethod($"{methodName}");
+            return this.GetType().GetMethod($"{methodName}", BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance);
         }
 
         private void BindProperties()
