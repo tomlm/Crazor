@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Blobs.Models;
 using Crazor;
 using Crazor.Attributes;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 
 namespace CrazorDemoBot.Cards.Wordle
@@ -16,31 +17,41 @@ namespace CrazorDemoBot.Cards.Wordle
         [SharedMemory]
         public string Word { get; set; }
 
-        // when game is done Results and Won are shared memory for the USER who played the game, 
-        // so that the results can be shared.
-        [SharedMemory]
-        public List<Guess> Results { get; set; } = new List<Guess>();
-
         [SharedMemory]
         public bool Won { get; set; } = false;
 
-        // tracks guesses for the session
-        [SessionMemory]
-        public List<Guess>? Guesses { get; set; } = new List<Guess>();
+        [SharedMemory]
+        public List<Guess> Guesses { get; set; } = new List<Guess>();
 
         public override async Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
             // sharedId for the world app is based on the date.
-            sharedId = sharedId ?? DateTime.Now.ToString("yyyyMMdd");
-            
+            if (sharedId == null)
+            {
+                sharedId = $"{DateTime.Now.ToString("yyyyMMdd")}-{activity.From.Id}";
+
+                // look up word of the day.
+                var wordKey = GetKey($"{DateTime.Now.ToString("yyyyMMdd")}-wordofday");
+                var storage = Services.GetRequiredService<IStorage>();
+                var data = await storage.ReadAsync(new[] { wordKey });
+                if (data.TryGetValue(wordKey, out var val))
+                {
+                    Word = val?.ToString();
+                }
+                else 
+                {
+                    var rnd = new Random();
+                    Word = WordleApp.Words.Skip(rnd.Next(WordleApp.Words.Count)).First();
+                    
+                    // save word of the day.
+                    data[wordKey] = Word;
+                    await storage.WriteAsync(data);
+                }
+            }
+
             // load state
             await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
 
-            if (String.IsNullOrEmpty(Word))
-            {
-                var rnd = new Random();
-                Word = WordleApp.Words.Skip(rnd.Next(WordleApp.Words.Count)).First();
-            }
         }
 
         public bool MakeGuess(string guess)

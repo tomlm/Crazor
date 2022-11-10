@@ -33,6 +33,8 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 [Installing Crazor](docs/Install.md) - Installing Crazor into your porject
 
+* [Settings](docs/Settings.md) - settings for crazor
+
 # Walkthroughs
 
 * [HelloWorld](docs/HelloWorldWalkthrough.md) - walkthrough creating your first card application.

@@ -5,7 +5,7 @@
     <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
     @if (App.Won)
     {
-        <TextBlock Size="Medium" Style="Heading">I got it in @App.Results.Count tries! 😄</TextBlock>
+        <TextBlock Size="Medium" Style="Heading">I got it in @App.Guesses.Count tries! 😄</TextBlock>
     }
     else
     {
@@ -18,17 +18,17 @@
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
-        @for (int iGuess = 0; iGuess < App.Results.Count; iGuess++)
+        @for (int iGuess = 0; iGuess < App.Guesses.Count; iGuess++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                @foreach (var letter in App.Results[iGuess].Letters)
+                @foreach (var letter in App.Guesses[iGuess].Letters)
                 {
                     <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
                 }
             </TableRow>
         }
 
-        @for (int guessLeft = App.Results.Count; guessLeft < 6; guessLeft++)
+        @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 <TableCell Style="Emphasis" MinHeight="45px"></TableCell>

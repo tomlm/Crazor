@@ -66,15 +66,54 @@ For each card you want to surface as custom command task module:
 
 ![image-20221104004105515](assets/image-20221104004105515.png)You can add your card as a tab by editing the **staticTabs** section.
 
-![image-20221102151410289](assets/image-20221102151410289.png)
+```json
+ "staticTabs": [
+	...
+     {
+      "entityId": "/Cards/Addresses",
+      "name": "Addresses",
+      "contentBotId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
+      "scopes": [ "personal" ]
+    }
+   ...
+```
 
-For each card you want to have be a tab add a section to **staticTabs**
+For each card you want to have be a tab add a section to **staticTabs** collection:
 
 1. set **name** to the name of the tab
 2. set **entityId** => ***path to your card*** (Example: "**/Cards/Addresses**")
 3. set **contentBotId** => Your **MicrosoftAppId**
 
+## To Add a CardView as a messaging query extension
 
+![image-20221110091940559](assets/image-20221110091940559.png)
+
+Edit team manifest to register a command **type="query"** with CommandId => route to your card.
+
+```json
+{
+    "id": "/Cards/Nuget/Details",
+    "type": "query",
+    "description": "Search Nuget for packages",
+    "title": "Nuget",
+    "initialRun": true,
+    "parameters": [
+        {
+            "name": "search",
+            "description": "Enter in package name you want",
+            "title": "Package"
+        }
+    ]
+},
+```
+
+In your cardview implement **OnSearch()** method to return search results.
+
+
+
+
+
+## 
 
 # Side-loading your teams manifest
 

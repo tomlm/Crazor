@@ -202,11 +202,9 @@ When a card state is new the **OnInitialized()** method will be called giving yo
 
 > NOTE: **OnInitialized()** is only **synchronous**, there is no async version of this method, because it is called in a synchronous part of the code.
 
-## OnShowViewAsync()
+## OnShowView()
 
-**OnShowViewAsync()** is invoked when someone calls **ShowView()** with your card view
-
-It is also called for **Refresh** situations or when an unknown verb is processed, effectively treating those situations as a request to bind the data fresh (Aka show a refreshed screen)
+**OnShowView()** is invoked when someone calls **ShowView()** with your card view, or on as the **Refresh** verb or when an unknown verb is processed, effectively treating those situations as a request to bind the data fresh (Aka show a refreshed screen).
 
 A common way to use this is to load fresh data into a view for a given card.
 
@@ -219,14 +217,17 @@ A common way to use this is to load fresh data into a view for a given card.
         /// </remarks>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>task</returns>
-        public virtual async Task OnShowViewAsync(CancellationToken cancellationToken)
+        public async Task OnShowView(CancellationToken cancellationToken)
+        {
+            ...
+        }
 ```
 
-## OnResumeViewAsync()
+> NOTE: OnShowView()  is like any verb handler and supports **parameter binding**, aka you can add parameters to your OnShowView
 
-When a child card calls **CloseView()** the parent card view **OnResumeViewAsync()** will be called.
+## OnResumeView()
 
-**OnResumeViewAsync()** is passed a CardResult object with the following properties:
+When a **child** card calls **CloseView()** the **parent** card 's **OnResumeView()** will be called with the **CardResult** object:
 
 | Property    | Type   | Description                                                  |
 | ----------- | ------ | ------------------------------------------------------------ |
@@ -249,13 +250,13 @@ Example:
         /// <param name="cardResult">the card result</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>task</returns>
-        public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+        public async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
 
 ```
 
-## OnSearchChoicesAsync()
+## OnSearchChoices()
 
-OnSearchChoicesAsync will be called when a **Input.ChoiceSet** defines a dynamic filted query
+**OnSearchChoices()** will be called when a **Input.ChoiceSet** defines a dynamic filted query
 
 Example Markup:
 
@@ -281,6 +282,83 @@ public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke s
     return Array.Empty<AdaptiveChoice>();
 }
 ```
+
+## OnSearch()
+
+**OnSearch()** is called when your view is the **commandId** for a command in the teams manifest.
+
+1. Implement **OnSearch()** as a method on a CardView
+2. Each **SearchResult.Model** returned from OnSearch will be bound to the view and returned as the **Model** for the view's template
+
+Example: 
+
+```C#
+@using CrazorDemoBot.Cards.NugetSearch
+@using Microsoft.Bot.Schema.Teams
+@inherits CardView<NugetApp,NugetPackage>
+
+@* This card rendering a card which is bound to a nuget package PackageId *@
+@attribute [Route("{packageId}")]
+@functions
+{
+    public override string GetRoute() => $"{this.Model.Id}";
+
+    public async Task OnLoadRoute(string packageId, CancellationToken cancellationToken)
+        => this.Model = await App.GetNugetPackage(packageId!, cancellationToken);
+}
+
+<Card Version="1.5">
+    <TextBlock>@Model.Title</TextBlock
+...
+</Card>
+
+
+@functions
+{
+    // This CardView is registered as a search command, which causes this method will be called to perform the search
+    // Each SearchResult.Model that is returned is bound to this template and returned to the caller as a card.
+    public async override Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
+    {
+		var packages = await myDb.GetPackages(...);
+        return packages.Select(package =>
+        {
+            return new SearchResult()
+                {
+                    Title = package.Title!,
+                    Subtitle = package.Version,
+                    Text = package.Description,
+                    ImageUrl = package.IconUrl,
+                    Model = package
+                };
+        }).ToArray();
+    }
+}
+```
+
+And team manifest register a command **type="query"** 
+
+```json
+        {
+          "id": "/Cards/Nuget/Details",
+          "type": "query",
+          "description": "Search Nuget for packages",
+          "title": "Nuget",
+          "initialRun": true,
+          "parameters": [
+            {
+              "name": "search",
+              "description": "Enter in package name you want",
+              "title": "Package"
+            }
+          ]
+        },
+```
+
+Giving a experience like this:
+
+![image-20221110091940559](assets/image-20221110091940559.png)
+
+
 
 ## BindView()
 

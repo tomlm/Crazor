@@ -5,6 +5,7 @@ using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace Crazor.HostPage.Pages.Cards
 {
@@ -41,10 +42,20 @@ namespace Crazor.HostPage.Pages.Cards
                 app += "App";
             }
 
+            string userId = null;
+            if (this.Request.Cookies.TryGetValue("userId", out var uid))
+            {
+                userId = uid;
+            }
+            else
+            {
+                userId = Utils.GetNewId();
+            }
             var sessionId = Utils.GetNewId();
 
             var token = await CardAppController.GetTokenAsync(_configuration);
             this.Response.Cookies.Append("token", token);
+            this.Response.Cookies.Append("userId", userId);
 
             this.CardApp = _appFactory.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
@@ -55,7 +66,7 @@ namespace Crazor.HostPage.Pages.Cards
                 ServiceUrl = "https://about",
                 ChannelId = this.ChannelId,
                 Id = Guid.NewGuid().ToString("n"),
-                From = new ChannelAccount() { Id = "unknown" },
+                From = new ChannelAccount() { Id = userId },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = sharedId ?? app },
                 Value = new AdaptiveCardInvokeValue()

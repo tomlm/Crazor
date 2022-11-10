@@ -68,13 +68,14 @@
         }
     }
 
+    public void OnShowView()
+    {
+        if (App.Won == true || App.Guesses.Count == 6)
+            ShowResults();
+    }
+
     public void ShowResults()
     {
-        // crete a new shared id (creating a shareable "fixed" result for the user that finished the game)
-        App.SharedId = App.SessionId + (App.Activity!.From.Name ?? App.Activity.From.Id ?? Utils.GetNewId());
-        App.Results = App.Guesses!;
-        App.Guesses = new List<Guess>();
-
         ReplaceView("Results");
         CloseTaskModule(TaskModuleAction.Auto);
     }

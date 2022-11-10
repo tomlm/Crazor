@@ -1010,7 +1010,7 @@ namespace Crazor
             }
         }
 
-        private string GetKey(string? key) => $"{CardType}-{key}";
+        protected string GetKey(string? key) => $"{CardType}-{key}";
 
         /// <summary>
         /// Parse a /cards/{app}/{view}{path} into parts.
