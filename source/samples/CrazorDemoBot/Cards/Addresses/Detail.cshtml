@@ -7,7 +7,10 @@
     => $"{this.Model?.Id}";
 
     public void OnLoadRoute(string addressId)
-        => this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)!;
+    {
+        ArgumentNullException.ThrowIfNull(addressId);
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)!;
+    }
 }
 
 <Card Version="1.5" Title="Address">
@@ -54,7 +57,7 @@
         }
     }
 
-    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+    public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         if (cardResult.Success)

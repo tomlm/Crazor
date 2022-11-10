@@ -49,21 +49,6 @@
     [StringLength(maximumLength: 5, ErrorMessage = "Word must be 5 chars")]
     public string Guess { get; set; }
 
-    public override void OnInitialized()
-    {
-        if (String.IsNullOrEmpty(App.Word))
-        {
-            var rnd = new Random();
-            App.Word = WordleApp.Words.Skip(rnd.Next(WordleApp.Words.Count)).First();
-        }
-
-        if (App.Guesses.LastOrDefault()?.Value == App.Word ||
-            App.Guesses.Count == 6)
-        {
-            ShowView("Results");
-        }
-    }
-
     public void OnSubmit(string guess)
     {
         guess = guess.Trim().ToUpper();
@@ -73,8 +58,24 @@
         }
         else if (App.MakeGuess(guess))
         {
-            ShowView("Results");
-            CloseTaskModule(TaskModuleAction.Auto);
+            App.Won = true;
+            ShowResults();
         }
+        else if (App.Guesses.Count == 6)
+        {
+            App.Won = false;
+            ShowResults();
+        }
+    }
+
+    public void ShowResults()
+    {
+        // crete a new shared id (creating a shareable "fixed" result for the user that finished the game)
+        App.SharedId = App.SessionId + (App.Activity!.From.Name ?? App.Activity.From.Id ?? Utils.GetNewId());
+        App.Results = App.Guesses!;
+        App.Guesses = new List<Guess>();
+
+        ReplaceView("Results");
+        CloseTaskModule(TaskModuleAction.Auto);
     }
 }

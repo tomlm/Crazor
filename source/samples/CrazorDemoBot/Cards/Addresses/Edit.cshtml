@@ -8,7 +8,10 @@
         => $"{this.Model.Id}";
 
     public void OnLoadRoute(string addressId)
-        => this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)! ?? throw new CardRouteNotFoundException($"Address {addressId} not found");
+    {
+        ArgumentNullException.ThrowIfNull(addressId);
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)! ?? throw new CardRouteNotFoundException($"Address {addressId} not found");
+    }
 }
 
 <Card Version="1.5" Title="Edit Address">

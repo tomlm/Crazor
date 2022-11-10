@@ -23,6 +23,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Neleus.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Crazor
 {
@@ -133,15 +134,21 @@ namespace Crazor
         public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
 
         /// <summary>
+        /// Flag to enable/disable automatically assigning a sharedId if there is not one. 
+        /// Default: true
+        /// </summary>
+        public bool AutoSharedId { get; set; } = true;
+
+        /// <summary>
         /// IsPreview is true when there is no sessionId because the card is going to be shared. 
         /// </summary>
-        public bool IsPreview 
+        public bool IsPreview
         {
             get => _isPreview ||
                 TaskModuleAction == TaskModuleAction.Auto ||
                 TaskModuleAction == TaskModuleAction.InsertCard ||
                 TaskModuleAction == TaskModuleAction.PostCard;
-            set => _isPreview = value;  
+            set => _isPreview = value;
         }
 
         /// <summary>
@@ -209,7 +216,7 @@ namespace Crazor
                     await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
                     if (LastResult != null)
                     {
-                        await this.CurrentView.OnResumeViewAsync(LastResult, cancellationToken);
+                        await this.CurrentView.OnResumeView(LastResult, cancellationToken);
                     }
 
                     SaveCardState(this.CallStack[0], this.CurrentView);
@@ -260,7 +267,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(CurrentView);
             Diag.Trace.WriteLine($"------- OnSearch({searchInvoke.Dataset}, {searchInvoke.QueryText})-----");
 
-            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, cancellationToken);
+            var choices = await CurrentView.OnSearchChoices(searchInvoke, cancellationToken);
 
             return new AdaptiveCardInvokeResponse()
             {
@@ -279,7 +286,7 @@ namespace Crazor
         public virtual async Task<MessagingExtensionResponse> OnMessagingExtensionQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
             // do the search
-            var searchResults = await CurrentView.OnSearchAsync(query, cancellationToken);
+            var searchResults = await CurrentView.OnSearch(query, cancellationToken);
 
             // turn into attachments
             List<MessagingExtensionAttachment> attachments = new List<MessagingExtensionAttachment>();
@@ -386,6 +393,11 @@ namespace Crazor
             BannerMessages.Add(new BannerMessage() { Text = text, Style = style });
         }
 
+        public Uri GetCurrentCardUri()
+        {
+            return new Uri(_configuration.GetValue<Uri>("HostUri"), this.GetRoute());
+        }
+
         public virtual string GetRoute()
         {
             UriBuilder uri = new UriBuilder();
@@ -407,12 +419,6 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Override this to set the shared Id when known.
-        /// </summary>
-        /// <returns></returns>
-        public virtual string? GetSharedId() => null;
-
-        /// <summary>
         /// Load state from storage
         /// </summary>
         /// <param name="storage"></param>
@@ -420,7 +426,7 @@ namespace Crazor
         public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(activity);
-            this.SharedId = sharedId ?? GetSharedId();
+            this.SharedId = sharedId ?? ((this.AutoSharedId) ? Utils.GetNewId() : null);
             this.SessionId = sessionId ?? Utils.GetNewId();
             this.Activity = activity;
             var invoke = JToken.FromObject(activity.Value).ToObject<AdaptiveCardInvokeValue>();
@@ -632,7 +638,7 @@ namespace Crazor
             }
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            outboundCard.AdditionalProperties["url"] = GetRoute();
+            outboundCard.AdditionalProperties["url"] = GetCurrentCardUri().AbsoluteUri;
         }
 
         public SessionData GetSessionData()
@@ -700,6 +706,7 @@ namespace Crazor
 
         private void AddRefresh(AdaptiveCard outboundCard)
         {
+            var uri = GetCurrentCardUri();
             if (outboundCard.Refresh == null)
             {
                 AdaptiveExecuteAction refresh;
@@ -709,7 +716,7 @@ namespace Crazor
                     {
                         Title = "Refresh",
                         Verb = Constants.LOADROUTE_VERB,
-                        IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
+                        IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = JObject.FromObject(new LoadRouteModel()
                         {
@@ -724,7 +731,7 @@ namespace Crazor
                     {
                         Title = "Refresh",
                         Verb = Constants.SHOWVIEW_VERB,
-                        IconUrl = "https://powercardbot.azurewebsites.net/refresh.png",
+                        IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = new JObject()
                     };
@@ -800,7 +807,20 @@ namespace Crazor
                 Separator = true
             };
 
-            if (Activity.ChannelId == _configuration.GetValue<Uri>("HostUri").Host && outboundCard.Refresh?.Action != null)
+            var currentUri = GetCurrentCardUri();
+
+            if (Activity!.ChannelId != currentUri.Host)
+            {
+                systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
+                {
+                    Title = "Open",
+                    IconUrl = new Uri(currentUri, _configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
+                    Url = GetCurrentCardUri().AbsoluteUri,
+                    Mode = AdaptiveActionMode.Secondary
+                });
+            }
+
+            if (Activity.ChannelId == currentUri.Host && outboundCard.Refresh?.Action != null)
             {
                 outboundCard.Refresh.Action.Mode = AdaptiveActionMode.Secondary;
                 systemMenu.Actions.Add(outboundCard.Refresh.Action);
@@ -812,7 +832,7 @@ namespace Crazor
                 {
                     Title = Constants.ABOUT_VIEW,
                     Verb = Constants.ABOUT_VIEW,
-                    IconUrl = "https://powercardbot.azurewebsites.net/about.png",
+                    IconUrl = new Uri(currentUri, _configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
                     AssociatedInputs = AdaptiveAssociatedInputs.None,
                     Mode = AdaptiveActionMode.Secondary
                 });
@@ -824,13 +844,13 @@ namespace Crazor
                 {
                     Title = Constants.SETTINGS_VIEW,
                     Verb = Constants.SETTINGS_VIEW,
-                    IconUrl = "https://powercardbot.azurewebsites.net/settings.png",
+                    IconUrl = new Uri(currentUri, _configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
                     AssociatedInputs = AdaptiveAssociatedInputs.None,
                     Mode = AdaptiveActionMode.Secondary
                 });
             }
 
-            if (this.Activity.ChannelId == _configuration.GetValue<Uri>("HostUri").Host)
+            if (this.Activity.ChannelId == currentUri.Host)
             {
                 if (outboundCard.Body.Any())
                 {
@@ -849,7 +869,7 @@ namespace Crazor
                             VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
                             Items = new List<AdaptiveElement>()
                             {
-                                new AdaptiveImage(new Uri(_configuration.GetValue<Uri>("HostUri"), _configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png").AbsoluteUri)
+                                new AdaptiveImage(new Uri(currentUri, _configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png").AbsoluteUri)
                                 {
                                     Size= AdaptiveImageSize.Small
                                 }

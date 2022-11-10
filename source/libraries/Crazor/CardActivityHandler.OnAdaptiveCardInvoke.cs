@@ -20,7 +20,6 @@ namespace Crazor
                 string path = (string)(data.path);
                 var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), path);
                 cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
-                cardApp.SharedId = cardApp.GetSharedId();
             }
             else
             {

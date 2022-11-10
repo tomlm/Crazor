@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "manifestVersion": "1.14",
   "id": "7b042a98-e2b4-428d-a1d0-753b4ddf8c0c",
   "packageName": "com.package.name",
@@ -44,7 +44,7 @@
       "scopes": [ "personal" ]
     },
     {
-      "entityId": "AllCardsTab",
+      "entityId": "CrazorDemoBot.Cards.AllCardsTab",
       "name": "Cards",
       "contentBotId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
       "scopes": [ "personal" ]
@@ -140,12 +140,12 @@
           "id": "/Cards/Nuget/Details",
           "type": "query",
           "description": "Search Nuget for packages",
-          "title": "Search Nuget",
+          "title": "Nuget",
           "initialRun": true,
           "parameters": [
             {
               "name": "search",
-              "description": "Enter in package you want",
+              "description": "Enter in package name you want",
               "title": "Package"
             }
           ]
@@ -154,12 +154,12 @@
           "id": "/Cards/Nuget/Details2",
           "type": "query",
           "description": "Search Nuget2 for packages",
-          "title": "Search Nuget2",
+          "title": "Nuget2",
           "initialRun": true,
           "parameters": [
             {
               "name": "search",
-              "description": "Enter in package you want",
+              "description": "Enter in package name you want",
               "title": "Package"
             }
           ]

@@ -3,7 +3,14 @@
 
 <Card Version="1.5">
     <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
-    <TextBlock Size="Medium" Style="Heading">in @App.Guesses.Count tries!</TextBlock>
+    @if (App.Won)
+    {
+        <TextBlock Size="Medium" Style="Heading">I got it in @App.Results.Count tries! 😄</TextBlock>
+    }
+    else
+    {
+        <TextBlock Size="Medium" Style="Heading">I failed. 😥</TextBlock>
+    }
 
     <Table GridStyle="Default" ShowGridLines="true" FirstRowAsHeaders="false">
         <TableColumn Width="auto" />
@@ -11,17 +18,17 @@
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
-        @for (int iGuess = 0; iGuess < App.Guesses.Count; iGuess++)
+        @for (int iGuess = 0; iGuess < App.Results.Count; iGuess++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                @foreach (var letter in App.Guesses[iGuess].Letters)
+                @foreach (var letter in App.Results[iGuess].Letters)
                 {
                     <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
                 }
             </TableRow>
         }
 
-        @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
+        @for (int guessLeft = App.Results.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 <TableCell Style="Emphasis" MinHeight="45px"></TableCell>

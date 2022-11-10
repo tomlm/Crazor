@@ -49,7 +49,7 @@
 
     // This CardView is registered as a search command, which causes this method will be called to perform the search
     // Each SearchResult.Model that is returned is bound to this template and returned to the caller as a card.
-    public async override Task<SearchResult[]> OnSearchAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+    public async override Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
     {
         var searchTerm = query.Parameters.SingleOrDefault(p => p.Name == "search")?.Value.ToString() ?? String.Empty;
         var packages = await App.SearchNugetPackages(searchTerm, query.QueryOptions.Skip ?? 0, query.QueryOptions.Count ?? 20, cancellationToken);

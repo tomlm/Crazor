@@ -25,8 +25,6 @@ namespace OpBot.Cards.WorkOrder
 
         public List<SystemStatus>? SystemStatuses { get; set; }
 
-        public override string GetSharedId() => Utils.GetNewId();
-
         public async Task<WorkOrder?> LookupWorkOrder(string workOrderName)
         {
             await Task.CompletedTask;

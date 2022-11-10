@@ -61,12 +61,12 @@
 
     public List<ProductCatalogItem> CatalogItems { get; set; }
 
-    public override async Task OnShowViewAsync(CancellationToken cancellationToken)
+    public async Task OnShowView(CancellationToken cancellationToken)
     {
         CatalogItems = await App.GetCatalogItems(cancellationToken);
     }
 
-    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+    public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
     {
         if (cardResult.Success)
         {

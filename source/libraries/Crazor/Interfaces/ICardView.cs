@@ -55,7 +55,7 @@ namespace Crazor.Interfaces
         /// </summary>
         /// <param name="screenResult"></param>
         /// <param name="cancellationToken"></param>
-        Task OnResumeViewAsync(CardResult screenResult, CancellationToken cancellationToken);
+        Task OnResumeView(CardResult screenResult, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to get searchresults for a cardview.
@@ -63,7 +63,7 @@ namespace Crazor.Interfaces
         /// <param name="query"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<SearchResult[]> OnSearchAsync(MessagingExtensionQuery query, CancellationToken cancellationToken);
+        Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to search for choices.
@@ -72,6 +72,6 @@ namespace Crazor.Interfaces
         /// <param name="services"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken);
+        Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken);
     }
 }

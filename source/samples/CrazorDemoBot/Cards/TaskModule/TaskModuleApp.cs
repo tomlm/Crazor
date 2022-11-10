@@ -10,7 +10,7 @@ namespace CrazorDemoBot.Cards.TaskModule
         {
         }
 
-        [SessionMemory]
+        [SharedMemory]
         public int Counter { get; set; }
     }
 }

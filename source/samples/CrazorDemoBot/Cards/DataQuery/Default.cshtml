@@ -16,7 +16,7 @@
     [BindProperty]
     public int Number { get; set; }
 
-    public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+    public override async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
 

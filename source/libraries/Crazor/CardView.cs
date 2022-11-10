@@ -144,46 +144,36 @@ namespace Crazor
                 ValidateModel();
             }
 
-            // Default implementation of OK and CANCEL calls CloseCard() or CancelCard() appropriately.
-            switch (action.Verb)
+            if (await InvokeVerbAsync(action, cancellationToken) == false)
             {
-                case Constants.SHOWVIEW_VERB:
-                    await this.OnShowViewAsync(cancellationToken);
-                    break;
-
-                case Constants.OK_VERB:
-                    if (await InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        if (IsModelValid)
-                        {
-                            this.CloseView(ViewContext.ViewData.Model);
-                        }
-                    }
-                    break;
-
-                case Constants.CANCEL_VERB:
-                    // if there is an OnCancel, call it
-                    if (await InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        // do it
-                        this.CancelView();
-                    }
-                    break;
-
-                default:
-                    // if there is an OnCancel, call it
-                    if (await InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        // Otherwise, if a verb matches a view just navigate to it.
-                        if (App.HasView(action.Verb))
-                        {
-                            ShowView(action.Verb);
-                        }
-                    }
-                    break;
+                // Otherwise, if a verb matches a view just navigate to it.
+                if (App.HasView(action.Verb))
+                {
+                    ShowView(action.Verb);
+                }
             }
         }
 
+        public virtual async Task OnCancel(CancellationToken cancellationToken)
+        {
+            // if there is an OnCancel, call it
+            if (await InvokeVerbAsync(this.Action, cancellationToken) == false)
+            {
+                // default implementation 
+                this.CancelView();
+            }
+        }
+
+        public virtual async Task OnOK(CancellationToken cancellationToken)
+        {
+            if (await InvokeVerbAsync(this.Action, cancellationToken) == false)
+            {
+                if (IsModelValid)
+                {
+                    this.CloseView(ViewContext.ViewData.Model);
+                }
+            }
+        }
 
         private async Task<bool> InvokeVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
@@ -310,19 +300,6 @@ namespace Crazor
         }
 
         /// <summary>
-        /// OnShowView() - Called when a your view is started because someon called ShowView()
-        /// </summary>
-        /// <remarks>
-        /// Override this to handle the being shown
-        /// </remarks>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns>task</returns>
-        public virtual async Task OnShowViewAsync(CancellationToken cancellationToken)
-        {
-            await InvokeVerbAsync(Action, cancellationToken);
-        }
-
-        /// <summary>
         /// OnResumeView() - Called when a CardResult has returned back to this view
         /// </summary>
         /// <remarks>
@@ -333,7 +310,7 @@ namespace Crazor
         /// <param name="cardResult">the card result</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>task</returns>
-        public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+        public virtual async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
         }
@@ -346,7 +323,7 @@ namespace Crazor
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async virtual Task<SearchResult[]> OnSearchAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        public async virtual Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
             return Array.Empty<SearchResult>();
@@ -358,7 +335,7 @@ namespace Crazor
         /// <param name="search">request</param>
         /// <param name="cancellationToken"></param>
         /// <returns>array of choices</returns>
-        public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+        public virtual async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
             return Array.Empty<AdaptiveChoice>();
