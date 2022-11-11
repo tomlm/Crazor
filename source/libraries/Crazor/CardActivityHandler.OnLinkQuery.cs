@@ -30,7 +30,7 @@ namespace Crazor
             // get play page url => envir, cardId, instanceId,
             if (uri.Host == hostName)
             {
-                var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+                var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
                 
                 cardApp.IsPreview = true;
 

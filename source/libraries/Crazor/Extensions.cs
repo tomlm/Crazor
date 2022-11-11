@@ -49,7 +49,7 @@ namespace Crazor
             {
                 if (cardAppType.Name != nameof(CardApp))
                 {
-                    services.AddScoped(cardAppType);
+                    services.AddTransient(cardAppType);
                     cardAppServices.Add(cardAppType.Name, cardAppType);
                 }
             }
@@ -59,7 +59,7 @@ namespace Crazor
             var cardTabModuleServices = services.AddByName<CardTabModule>();
             foreach (var tabModuleType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)))
             {
-                services.AddScoped(tabModuleType);
+                services.AddTransient(tabModuleType);
                 cardTabModuleServices.Add(tabModuleType.FullName, tabModuleType);
             }
             cardTabModuleServices.Build();
@@ -68,19 +68,19 @@ namespace Crazor
             var queryCommmandServices = services.AddByName<IMessagingExtensionQuery>();
             foreach (var queryCommandType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(IMessagingExtensionQuery)) && t.IsAbstract == false)))
             {
-                services.AddScoped(queryCommandType);
+                services.AddTransient(queryCommandType);
                 queryCommmandServices.Add(queryCommandType.FullName, queryCommandType);
             }
             queryCommmandServices.Build();
 
             // add Cardviews
             var cardViewServices = services.AddByName<ICardView>();
-            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAbstract == false &&  t.ImplementedInterfaces.Contains(typeof(ICardView)))))
+            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))))
             {
                 var cardViewType = cardView.AsType();
                 if (cardViewType != typeof(CardView<>) && cardViewType != typeof(CardView<,>))
                 {
-                    services.AddScoped(cardViewType);
+                    services.AddTransient(cardViewType);
                     cardViewServices.Add(cardViewType.FullName, cardViewType);
                 }
             }
@@ -114,25 +114,49 @@ namespace Crazor
             return JsonConvert.DeserializeObject<AdaptiveCard>(json)!;
         }
 
-
-        public static Activity CreateActionInvokeActivity(this ITurnContext turnContext, string? verb)
+        public static Activity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb)
         {
-            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext.Activity));
+            return CreateActionInvokeActivity((Activity)sourceActivity, verb);
+        }
+
+        public static Activity Clone(this IActivity activity)
+        {
+            return JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)activity))!;
+        }
+
+        public static Activity Clone(this Activity activity)
+        {
+            return JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject(activity))!;
+        }
+
+        public static Activity CreateActionInvokeActivity(this Activity sourceActivity, string? verb)
+        {
+            var activity = sourceActivity.Clone();
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
-                    Verb = verb ?? Constants.SHOWVIEW_VERB
+                    Verb = verb ?? Constants.SHOWVIEW_VERB,
+                    Data = new JObject()
                 }
             };
             activity!.Value = invokeValue;
             return activity;
         }
 
-
-        public static Activity CreateLoadRouteActivity(this ITurnContext turnContext, string view, string path)
+        public static Activity CreateReply(this IActivity activity, string? text = null, string? locale = null)
         {
-            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext?.Activity!))!;
+            return ((Activity)activity).CreateReply(text, locale);
+        }
+
+        public static Activity CreateLoadRouteActivity(this IActivity sourceActivity, string view, string path)
+        {
+            return CreateLoadRouteActivity((Activity)sourceActivity, view, path);
+        }
+
+        public static Activity CreateLoadRouteActivity(this Activity sourceActivity, string view, string path)
+        {
+            var activity = sourceActivity.Clone();
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
@@ -245,7 +269,7 @@ namespace Crazor
 
         public static AdaptiveCardInvokeValue CreateInvokeValue(this AdaptiveExecuteAction action, ITurnContext turnContext)
         {
-            var activity = JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject((Activity)turnContext.Activity));
+            var activity = turnContext.Activity.Clone();
             return new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()

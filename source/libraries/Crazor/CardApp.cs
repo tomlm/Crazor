@@ -23,7 +23,6 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Neleus.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Crazor
 {
@@ -213,10 +212,25 @@ namespace Crazor
             {
                 if (!String.IsNullOrEmpty(this.Action.Verb))
                 {
-                    await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
-                    if (LastResult != null)
+                    int ShowViewAttempts = 0;
+                    while (ShowViewAttempts++ < 5)
                     {
-                        await this.CurrentView.OnResumeView(LastResult, cancellationToken);
+                        var currentCard = this.CurrentCard;
+                        await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
+                        if (LastResult != null)
+                        {
+                            await this.CurrentView.OnResumeView(LastResult, cancellationToken);
+                        }
+
+                        if (this.CurrentCard == currentCard)
+                            break;
+
+                        this.Action.Verb = Constants.SHOWVIEW_VERB;
+                    }
+
+                    if (ShowViewAttempts >= 5)
+                    {
+                        System.Diagnostics.Debug.WriteLine("WARNING: 5 ShowViews() in one turn attempted. Loop stopped.");
                     }
 
                     SaveCardState(this.CallStack[0], this.CurrentView);
@@ -395,10 +409,15 @@ namespace Crazor
 
         public Uri GetCurrentCardUri()
         {
-            return new Uri(_configuration.GetValue<Uri>("HostUri"), this.GetRoute());
+            return new Uri(_configuration.GetValue<Uri>("HostUri"), this.GetCurrentCardRoute());
         }
 
-        public virtual string GetRoute()
+        public Uri GetCardUriForRoute(string route)
+        {
+            return new Uri(_configuration.GetValue<Uri>("HostUri"), route);
+        }
+
+        public virtual string GetCurrentCardRoute()
         {
             UriBuilder uri = new UriBuilder();
 
@@ -568,45 +587,18 @@ namespace Crazor
             return cardView;
         }
 
-        //public ICardSearchView LoadCardSearchView(string viewName)
-        //{
-        //    var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
-        //    var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
-        //    var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-        //    IView view;
-        //    ICardSearchView cardSearchView;
-        //    if (viewResult?.View != null)
-        //    {
-        //        view = viewResult?.View!;
-        //        cardSearchView = (ICardSearchView)((RazorView)viewResult.View).RazorPage;
-        //        cardSearchView.RazorView = viewResult.View;
-        //    }
-        //    else
-        //    {
-        //        // This is a non-cshtml view, let's see if we can construct it.
-        //        cardSearchView = this.Services.GetByName<ICardSearchView>(viewName);
-        //        view = new ViewStub();
-        //        ArgumentNullException.ThrowIfNull(cardSearchView);
-        //    }
+        public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
+        {
+            var ah = new CardActivityHandler(Services);
+            var cardApp = await ah.LoadAppAsync(Activity!, uri, cancellationToken);
+            var card = await cardApp.CurrentView.BindView(cancellationToken);
+            await cardApp.SaveAppAsync(cancellationToken);
 
-        //    cardSearchView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
-        //    cardSearchView.App = this;
-        //    cardSearchView.Name = viewName;
+            var botId = _configuration.GetValue<string>("MicrosoftAppId");
+            var appId = _configuration.GetValue<string>("TeamsAppId") ?? botId;
 
-        //    ITempDataProvider tempDataProvider;
-        //    ActionContext actionContext;
-        //    var httpContext = new DefaultHttpContext { RequestServices = Services };
-        //    actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        //    tempDataProvider = Services.GetRequiredService<ITempDataProvider>();
-        //    var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-        //    {
-        //        Model = null
-        //    };
-
-        //    var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
-        //    cardSearchView.ViewContext = viewContext;
-        //    return cardSearchView;
-        //}
+            return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
+        }
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
         {
@@ -721,7 +713,7 @@ namespace Crazor
                         Data = JObject.FromObject(new LoadRouteModel()
                         {
                             View = this.CurrentCard,
-                            Path = this.GetRoute()
+                            Path = this.GetCurrentCardRoute()
                         })
                     };
                 }
@@ -809,7 +801,7 @@ namespace Crazor
 
             var currentUri = GetCurrentCardUri();
 
-            if (Activity!.ChannelId != currentUri.Host)
+            if (Activity!.ChannelId != currentUri.Host && !IsTaskModule && !IsPreview)
             {
                 systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
                 {

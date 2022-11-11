@@ -138,7 +138,7 @@ namespace Crazor
         {
             CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var path);
 
-            var loadRouteActivity = turnContext.CreateLoadRouteActivity(view, path);
+            var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(view, path);
 
             var cardApp = _cardApps.GetRequiredByName(app);
 

@@ -88,7 +88,7 @@ namespace Crazor.HostPage.Pages.Cards
 
             await this.CardApp.SaveAppAsync(cancellationToken);
 
-            this.RouteUrl = this.CardApp.GetRoute();
+            this.RouteUrl = this.CardApp.GetCurrentCardRoute();
         }
     }
 }

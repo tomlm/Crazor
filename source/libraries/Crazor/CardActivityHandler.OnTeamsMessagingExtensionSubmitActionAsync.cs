@@ -39,6 +39,11 @@ namespace Crazor
             var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
 
+            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
+        }
+
+        private MessagingExtensionActionResponse CreateMessagingExtensionActionResponse(string commandContext, CardApp cardApp, AdaptiveCard adaptiveCard)
+        {
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
@@ -60,7 +65,7 @@ namespace Crazor
                     return CreatePreviewSendResponse(cardApp, adaptiveCard);
 
                 case TaskModuleAction.Auto:
-                    if (action.CommandContext == "compose")
+                    if (commandContext == "compose")
                     {
                         return CreateInsertCardResponse(cardApp, adaptiveCard);
                     }
@@ -70,11 +75,12 @@ namespace Crazor
                     }
 
                 case TaskModuleAction.None:
+                    return null;
+
                 default:
-                    return new MessagingExtensionActionResponse() { };
+                    throw new Exception($"Unknown response");
             }
         }
-
 
         protected MessagingExtensionActionResponse CreateInsertCardResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
@@ -84,7 +90,7 @@ namespace Crazor
                 ComposeExtension = new MessagingExtensionResult(attachmentLayout: "list", type: "result")
                 {
                     // url to card
-                    Text = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetRoute()).AbsoluteUri,
+                    Text = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri,
                     Attachments = new List<MessagingExtensionAttachment>()
                     {
                         // card

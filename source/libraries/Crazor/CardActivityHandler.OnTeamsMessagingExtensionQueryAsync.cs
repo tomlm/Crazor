@@ -28,7 +28,7 @@ namespace Crazor
 
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), query.CommandId);
 
-            var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+            var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
 
             cardApp.IsPreview = true;
 

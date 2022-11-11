@@ -134,46 +134,49 @@ namespace Crazor
                         }
                     }
                 }
-                // I *think* the correct behavior is not NOT validate on LoadROUTE
-                // ValidateModel();
                 action.Verb = Constants.SHOWVIEW_VERB;
             }
-            else
+
+            if (action.Verb != Constants.SHOWVIEW_VERB)
             {
                 // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
                 ValidateModel();
             }
 
-            if (await InvokeVerbAsync(action, cancellationToken) == false)
+            switch (Action.Verb)
             {
-                // Otherwise, if a verb matches a view just navigate to it.
-                if (App.HasView(action.Verb))
-                {
-                    ShowView(action.Verb);
-                }
+                case Constants.CANCEL_VERB:
+                    // if there is an OnCancel, call it
+                    if (await InvokeVerbAsync(this.Action, cancellationToken) == false)
+                    {
+                        // default implementation 
+                        this.CancelView();
+                    }
+                    break;
+
+                case Constants.OK_VERB:
+                    if (await InvokeVerbAsync(this.Action, cancellationToken) == false)
+                    {
+                        if (IsModelValid)
+                        {
+                            this.CloseView(ViewContext.ViewData.Model);
+                        }
+                    }
+                    break;
+
+                default:
+                    if (await InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        // Otherwise, if a verb matches a view just navigate to it.
+                        if (App.HasView(action.Verb))
+                        {
+                            ShowView(action.Verb);
+                        }
+                    }
+                    break;
             }
         }
 
-        public virtual async Task OnCancel(CancellationToken cancellationToken)
-        {
-            // if there is an OnCancel, call it
-            if (await InvokeVerbAsync(this.Action, cancellationToken) == false)
-            {
-                // default implementation 
-                this.CancelView();
-            }
-        }
-
-        public virtual async Task OnOK(CancellationToken cancellationToken)
-        {
-            if (await InvokeVerbAsync(this.Action, cancellationToken) == false)
-            {
-                if (IsModelValid)
-                {
-                    this.CloseView(ViewContext.ViewData.Model);
-                }
-            }
-        }
 
         private async Task<bool> InvokeVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
@@ -460,11 +463,12 @@ namespace Crazor
             {
                 return verbMethod.Invoke(this, args?.ToArray());
             }
-        }
 
+        }
         private MethodInfo? GetMethod(string methodName)
         {
-            return this.GetType().GetMethod($"{methodName}", BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance);
+            return this.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                ?? this.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
         }
 
         private void BindProperties()
@@ -557,7 +561,7 @@ namespace Crazor
             JObject result = new JObject();
             result["view"] = loadRoute.View;
             result["path"] = loadRoute.Path;
-            string path = loadRoute.Path.Replace(this.App.GetRoute(), String.Empty);
+            string path = loadRoute.Path.Replace(this.App.GetCurrentCardRoute(), String.Empty);
 
             if (!String.IsNullOrEmpty(path))
             {

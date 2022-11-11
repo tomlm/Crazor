@@ -11,13 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Reflection;
-using System.Text;
-using System.Xml.Serialization;
-using System.Xml;
-using Microsoft.CodeAnalysis;
-using System.Diagnostics;
 
 namespace Crazor
 {
@@ -36,21 +30,14 @@ namespace Crazor
 
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
 
-            var cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+            var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
+            var cardApp = await LoadAppAsync(activity, uri, cancellationToken);
             cardApp.IsTaskModule = true;
 
             var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
             await cardApp.SaveAppAsync(cancellationToken);
-            adaptiveCard.Refresh = null;
-            var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
 
-            return new MessagingExtensionActionResponse()
-            {
-                Task = new TaskModuleContinueResponse()
-                {
-                    Value = GetTaskInfoForCard(cardApp, submitCard)
-                },
-            };
+            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
         }
 
         protected static AdaptiveCard TransformActionExecuteToSubmit(AdaptiveCard card)
@@ -80,7 +67,7 @@ namespace Crazor
                     Height = "medium",
                     Width = "medium"
                 };
-            taskInfo.FallbackUrl = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetRoute()).AbsoluteUri;
+            taskInfo.FallbackUrl = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri;
             // taskInfo.Url = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
             taskInfo.CompletionBotId = _configuration.GetValue<string>("MicrosoftAppId");
             taskInfo.Card = new Attachment()

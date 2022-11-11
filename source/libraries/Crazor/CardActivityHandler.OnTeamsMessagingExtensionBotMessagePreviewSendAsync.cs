@@ -5,6 +5,8 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -32,18 +34,17 @@ namespace Crazor
             var activityPreview = action.BotActivityPreview[0];
             var attachmentContent = activityPreview.Attachments[0].Content;
             var previewedCard = ((JObject)attachmentContent).ToObject<AdaptiveCard>();
-            previewedCard.Version = "1.0";
 
-            var responseActivity = Activity.CreateMessageActivity();
+            var reply = turnContext.Activity.CreateReply();
             Attachment attachment = new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = previewedCard
             };
-            responseActivity.Attachments.Add(attachment);
+            reply.Attachments.Add(attachment);
 
             // Attribute the message to the user on whose behalf the bot is posting
-            responseActivity.ChannelData = new
+            reply.ChannelData = new
             {
                 OnBehalfOf = new[]
                 {
@@ -57,8 +58,9 @@ namespace Crazor
                 }
             };
 
-            var result = await turnContext.SendActivityAsync(responseActivity, cancellationToken);
-            return new MessagingExtensionActionResponse();
+            var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
+            await connectorClient.Conversations.SendToConversationAsync(reply, cancellationToken);
+            return null!;
         }
     }
 }

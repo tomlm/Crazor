@@ -26,7 +26,7 @@ namespace Crazor
                 var app = turnContext.Activity.RemoveRecipientMention()?.Trim() ?? String.Empty;
                 if (app.ToLower().EndsWith("app"))
                 {
-                    var cardApp = await LoadAppAsync(turnContext, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
+                    var cardApp = await LoadAppAsync((Activity)turnContext.Activity, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
                     var card = await cardApp.OnActionExecuteAsync(cancellationToken);
                     await cardApp.SaveAppAsync(cancellationToken);
                     var response = Activity.CreateMessageActivity();

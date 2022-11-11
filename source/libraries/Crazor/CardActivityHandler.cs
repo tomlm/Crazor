@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {
@@ -44,8 +45,6 @@ namespace Crazor
             _logger = _serviceProvider.GetService<ILogger<CardActivityHandler>>();
         }
 
-        protected Dictionary<string, Type> Cards { get; private set; } = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
-
         /// <summary>
         /// CreateCard method for an activity context.
         /// </summary>
@@ -76,29 +75,28 @@ namespace Crazor
         /// <param name="sessionId">instanceId</param>
         /// <param name="cancellationToken">ct</param>
         /// <returns>card with session data.</returns>
-        public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, string app, string? sharedId, string? sessionId, string? view, CancellationToken cancellationToken)
+        public async Task<CardApp> LoadAppAsync(Activity sourceActivity, string app, string? sharedId, string? sessionId, string? view, CancellationToken cancellationToken)
         {
             sessionId = sessionId ?? Utils.GetNewId();
 
-            Activity? activity = turnContext.CreateActionInvokeActivity(view);
+            Activity? activity = sourceActivity.CreateActionInvokeActivity(view);
 
             // create card
             return await this.LoadAppAsync(app, sharedId, sessionId, activity, cancellationToken);
         }
 
-        public async Task<CardApp> LoadAppAsync(ITurnContext turnContext, Uri uri, CancellationToken cancellationToken)
+        public async Task<CardApp> LoadAppAsync(Activity sourceActivity, Uri uri, CancellationToken cancellationToken)
         {
             CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var path);
-            var loadRouteActivity = turnContext.Activity;
-            dynamic value = loadRouteActivity.Value;
-            string verb = (string)value.action?.verb!;
+            dynamic value = JObject.FromObject(sourceActivity.Value);
+            string verb = (string)value?.action?.verb!;
+            var loadRouteActivity = sourceActivity;
             if (verb != Constants.LOADROUTE_VERB)
             {
-                loadRouteActivity = turnContext.CreateLoadRouteActivity(view, path);
+                loadRouteActivity = sourceActivity.CreateLoadRouteActivity(view, path);
             }
 
-            var sessionId = turnContext?.Activity?.Id ?? Utils.GetNewId();
-
+            var sessionId = sourceActivity?.Id ?? Utils.GetNewId();
             return await this.LoadAppAsync(app, sharedId, sessionId, loadRouteActivity, cancellationToken);
         }
     }

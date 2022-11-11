@@ -1,6 +1,6 @@
 ﻿@using CrazorDemoBot.Cards.Wordle
 @inherits CardView<WordleApp>
-
+@attribute [TaskModule(Width = "small", Height ="medium")]
 <Card Version="1.5">
     <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
 
@@ -49,34 +49,30 @@
     [StringLength(maximumLength: 5, ErrorMessage = "Word must be 5 chars")]
     public string Guess { get; set; }
 
-    public void OnSubmit(string guess)
+    public void OnShowView()
     {
-        guess = guess.Trim().ToUpper();
+        // if someone tries to view the card and it's done route to the results page
+        //if (App.Won == true || App.Guesses.Count == 6)
+        //    ReplaceView("Results");
+    }
+
+    public void OnSubmit()
+    {
+        var guess = Guess.Trim().ToUpper();
         if (IsModelValid && !WordleApp.Words.Contains(guess))
         {
-            AddBannerMessage($"{guess} is not a valid wordle word.", AdaptiveContainerStyle.Warning);
+            AddBannerMessage($"{guess} is not a valid wordle word.", AdaptiveContainerStyle.Attention);
         }
         else if (App.MakeGuess(guess))
         {
             App.Won = true;
-            ShowResults();
+            ReplaceView("Results");
         }
         else if (App.Guesses.Count == 6)
         {
             App.Won = false;
-            ShowResults();
+            ReplaceView("Results");
         }
     }
 
-    public void OnShowView()
-    {
-        if (App.Won == true || App.Guesses.Count == 6)
-            ShowResults();
-    }
-
-    public void ShowResults()
-    {
-        ReplaceView("Results");
-        CloseTaskModule(TaskModuleAction.Auto);
-    }
 }

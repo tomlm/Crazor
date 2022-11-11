@@ -1,18 +1,99 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
+﻿using AdaptiveCards;
+using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace Crazor
 {
     /// <summary>
     /// Utility class for generating deeplinks
     /// </summary>
-    public static class DeepLinkHelper
+    public static class DeepLinks
     {
         private static Uri _teamsRoot = new Uri("https://teams.microsoft.com/l");
+
+        /// <summary>
+        /// Create a deep link to a url based taskmodule
+        /// </summary>
+        /// <param name="appId">appId</param>
+        /// <param name="card">card to show</param>
+        /// <param name="title">title for window</param>
+        /// <param name="height">height for window (small/medium/large)</param>
+        /// <param name="width">width for window (small/medium/large)</param>
+        /// <param name="completionBotId">completionBotId (Not needed for url links?)</param>
+        /// <returns></returns>
+        public static string CreateTaskModuleCardLink(string appId, AdaptiveCard card, string? title = null, string? height = null, string? width = null, string? completionBotId = null)
+        {
+            QueryBuilder qb = new QueryBuilder();
+            if (card != null)
+            {
+                qb.Add(nameof(card), JsonConvert.SerializeObject(card));
+
+            }
+
+            if (title != null)
+            {
+                qb.Add(nameof(title), title);
+            }
+
+            if (height != null)
+            {
+                qb.Add(nameof(height), height);
+            }
+
+            if (width != null)
+            {
+                qb.Add(nameof(width), width);
+            }
+
+            if (completionBotId != null)
+            {
+                qb.Add(nameof(completionBotId), completionBotId);
+            }
+
+            return new Uri(_teamsRoot, $"/task/{appId}{qb.ToQueryString()}").AbsoluteUri;
+        }
+
+        /// <summary>
+        /// Create a deep link to a url based taskmodule
+        /// </summary>
+        /// <param name="appId">appId</param>
+        /// <param name="url">taskmodule url</param>
+        /// <param name="title">title for window</param>
+        /// <param name="height">height for window (small/medium/large)</param>
+        /// <param name="width">width for window (small/medium/large)</param>
+        /// <param name="completionBotId">completionBotId (Not needed for url links?)</param>
+        /// <returns></returns>
+        public static string CreateTaskModuleUrlLink(string appId, string? url = null, string? title = null, string? height = null, string? width=null, string? completionBotId = null)
+        {
+            QueryBuilder qb = new QueryBuilder();
+            if (completionBotId != null)
+            {
+                qb.Add(nameof(completionBotId), completionBotId);
+            }
+            if (url != null)
+            {
+                qb.Add(nameof(url), url);
+            }
+            if (title != null)
+            {
+                qb.Add(nameof(title), title);
+            }
+            if (height != null)
+            {
+                qb.Add(nameof(height), height);
+            }
+            if (width != null)
+            {
+                qb.Add(nameof(width), width);
+            }
+
+            return new Uri(_teamsRoot, $"/task/{appId}{qb.ToQueryString()}").AbsoluteUri;
+        }
 
         /// <summary>
         /// Generate deep link to Navigate to a teams chat
@@ -31,7 +112,7 @@ namespace Crazor
         /// </param>
         /// <param name="message">An optional field for the message text that you want to insert into the current user's compose box while the chat is in a draft state.</param>
         /// <returns>url</returns>
-        public static string GetTeamsChatLink(string[] users, string? topicName = null, string? message = null)
+        public static string CreateTeamsChatLink(string[] users, string? topicName = null, string? message = null)
         {
             QueryBuilder qb = new QueryBuilder();
             qb.Add(nameof(users), String.Join(',', users));
@@ -58,7 +139,7 @@ namespace Crazor
         /// <param name="teamName">Name of the team.</param>
         /// <param name="channelName">Name of the team's channel</param>
         /// <returns>url</returns>
-        public static string GetTeamsChannelLink(string channelId, string tenantId, string groupId, string parentMessageId, string teamName, string channelName)
+        public static string CreateTeamsChannelLink(string channelId, string tenantId, string groupId, string parentMessageId, string teamName, string channelName)
         {
             QueryBuilder qb = new QueryBuilder();
             qb.Add(nameof(channelId), channelId);
@@ -78,7 +159,7 @@ namespace Crazor
         /// <param name="subject">An optional field for the meeting subject.</param>  
         /// <param name="content">An optional field for the meeting details field.</param>  
         /// <returns>url</returns>
-        public static string GetTeamsSchedulingDialogLink(string[]? attendees = null, DateTime? startTime = null, DateTime? endTime = null, string? subject = null, string content = null)
+        public static string CreateTeamsSchedulingDialogLink(string[]? attendees = null, DateTime? startTime = null, DateTime? endTime = null, string? subject = null, string content = null)
         {
             QueryBuilder qb = new QueryBuilder();
             if (attendees != null)
@@ -115,7 +196,7 @@ namespace Crazor
         /// <param name="threadId">The threadId is the team ID of the team where the file is stored.It's optional and can't be set for files stored in a user's OneDrive folder. threadId - 19:f8fbfc4d89e24ef5b3b8692538cebeb7@thread.skype.</param>
         /// <param name="groupId">Group ID of the file.For example, ae063b79-5315-4ddb-ba70-27328ba6c31e.</param>
         /// <returns>url</returns>
-        public static string GetTeamsFileLink(string fileId, string tenantId, string fileType, string objectUrl, string baseUrl, string serviceName, string threadId, string groupId)
+        public static string CreateTeamsFileLink(string fileId, string tenantId, string fileType, string objectUrl, string baseUrl, string serviceName, string threadId, string groupId)
         {
             QueryBuilder qb = new QueryBuilder();
             qb.Add(nameof(tenantId), tenantId);
@@ -129,11 +210,11 @@ namespace Crazor
         }
 
         /// <summary>
-        /// Get deep link to teams app 
+        /// Create deep link to teams app 
         /// </summary>
         /// <param name="appId">teams appId</param>
         /// <returns>url</returns>
-        public static string GetTeamsAppLink(string appId)
+        public static string CreateTeamsAppLink(string appId)
         {
             return new Uri(_teamsRoot, $"/app/{appId}").AbsoluteUri;
         }
@@ -143,7 +224,7 @@ namespace Crazor
         /// <param name="entityId">The item ID that you provided when configuring the tab.For example, tasklist123.</param>
         /// <param name="webUrl">An optional field with a fallback URL to use if the client doesn't support rendering of the tab - https://tasklist.example.com/123 or https://tasklist.example.com/list123/task456.</param>
         /// <param name="label">A label for the item in your tab, to use when displaying the deep link, Task List 123 or Task 456.</param>
-        public static string GetTeamsTabLink(string appId, string entityId, string? webUrl = null, string? label = null)
+        public static string CreateTeamsTabLink(string appId, string entityId, string? webUrl = null, string? label = null)
         {
             QueryBuilder qb = new QueryBuilder();
             if (webUrl != null)
@@ -161,7 +242,7 @@ namespace Crazor
         /// <param name="users">The comma-separated list of user IDs representing the participants of the call. Currently, the User ID field supports the Azure AD UserPrincipalName, typically an email address, or in a PSTN call, it supports a pstn mri 4:</param>
         /// <param name="withVideo">This is an optional parameter, which you can use to make a video call. Setting this parameter will only turn on the caller's camera. The receiver of the call has a choice to answer through audio or audio and video call through the Teams call notification window.</param>
         /// <param name="source">This is an optional parameter, which informs about the source of the deep link.</param>
-        public static string GetTeamsCallLink(string[] users, bool? withVideo=null, string? source=null)
+        public static string CreateTeamsCallLink(string[] users, bool? withVideo = null, string? source = null)
         {
             QueryBuilder qb = new QueryBuilder();
             qb.Add(nameof(users), String.Join(',', users));

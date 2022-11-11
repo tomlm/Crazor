@@ -19,7 +19,7 @@ namespace Crazor
                 dynamic data = invokeValue.Action.Data;
                 string path = (string)(data.path);
                 var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), path);
-                cardApp = await LoadAppAsync(turnContext, uri, cancellationToken);
+                cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
             }
             else
             {

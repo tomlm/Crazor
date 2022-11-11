@@ -1,8 +1,12 @@
 ﻿@using CrazorDemoBot.Cards.Wordle
+@using Microsoft.Bot.Connector
+@using Microsoft.Bot.Schema
+@using Newtonsoft.Json
 @inherits CardView<WordleApp>
+@attribute [TaskModule(Width = "small", Height = "medium")]
 
 <Card Version="1.5">
-    <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
+    <TextBlock Size="Large" Style="Heading">Wordle Results for @App.Activity!.From.Name</TextBlock>
     @if (App.Won)
     {
         <TextBlock Size="Medium" Style="Heading">I got it in @App.Guesses.Count tries! 😄</TextBlock>
@@ -39,5 +43,40 @@
             </TableRow>
         }
     </Table>
+
+    @if (!IsPreview)
+    {
+        if (IsTaskModule)
+        {
+            <Action.Execute Title="Share" Verb="OnShare" />
+            <Action.Execute Title="Close" Verb="OnClose" />
+        }
+        else if (App.Activity.ChannelId == Channels.Msteams)
+        {
+            <Action.ShowTaskModule Title="Play" Route="/Cards/Wordle"/>
+        }
+        else
+        {
+            <Action.OpenUrl Title="Play" Url="@App.GetCardUriForRoute("/Cards/Wordle")"/>
+        }
+    }
 </Card>
 
+@functions
+{
+    [SessionMemory]
+    public string PlayUrl { get; set; }
+
+    public void OnShare()
+    {
+        if (IsTaskModule)
+        {
+            CloseTaskModule(TaskModuleAction.Auto);
+        }
+    }
+
+    public void OnClose()
+    {
+        CloseTaskModule(TaskModuleAction.None);
+    }
+}
