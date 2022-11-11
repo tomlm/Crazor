@@ -53,10 +53,6 @@ namespace Crazor.HostPage.Pages.Cards
             }
             var sessionId = Utils.GetNewId();
 
-            var token = await CardAppController.GetTokenAsync(_configuration);
-            this.Response.Cookies.Append("token", token);
-            this.Response.Cookies.Append("userId", userId);
-
             this.CardApp = _appFactory.GetRequiredByName(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
 
@@ -68,7 +64,7 @@ namespace Crazor.HostPage.Pages.Cards
                 Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount() { Id = userId },
                 Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = sharedId ?? app },
+                Conversation = new ConversationAccount() { Id = sharedId },
                 Timestamp = DateTimeOffset.UtcNow,
                 LocalTimestamp = DateTimeOffset.Now,
                 Value = new AdaptiveCardInvokeValue()
@@ -84,6 +80,11 @@ namespace Crazor.HostPage.Pages.Cards
                     }
                 }
             }, cancellationToken); ;
+
+            var token = await CardAppController.GetTokenAsync(_configuration);
+            this.Response.Cookies.Append("token", token);
+            this.Response.Cookies.Append("userId", userId);
+            this.Response.Cookies.Append("sharedId", sharedId ?? String.Empty);
 
             // process Action.Execute
             this.AdaptiveCard = await this.CardApp.OnActionExecuteAsync(cancellationToken);

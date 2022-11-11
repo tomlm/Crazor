@@ -51,19 +51,22 @@
             <Action.Execute Title="Share" Verb="OnShare" />
             <Action.Execute Title="Close" Verb="OnClose" />
         }
-        else if (App.Activity.ChannelId == Channels.Msteams)
+        else if (App.Activity.From.Id != App.Game.Player?.Id) 
         {
-            <Action.ShowTaskModule Title="Play" Route="/Cards/Wordle"/>
-        }
-        else if (App.Activity.From.Id != App.Game.Player.Id)
-        {
-            <Action.OpenUrl Title="Play" Url="@App.GetCardUriForRoute("/Cards/Wordle")"/>
+            // it's not the person who played the game, give them a link to play
+            <Action.OpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
         }
     }
 </Card>
 
 @functions
 {
+    public override void OnInitialized()
+    {
+        if (App.Game == null)
+            CloseView();
+    }
+
     public void OnShare()
     {
         if (IsTaskModule)
