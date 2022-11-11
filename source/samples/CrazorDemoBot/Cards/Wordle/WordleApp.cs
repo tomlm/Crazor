@@ -3,6 +3,7 @@ using Crazor;
 using Crazor.Attributes;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using Newtonsoft.Json.Linq;
 
 namespace CrazorDemoBot.Cards.Wordle
@@ -14,66 +15,23 @@ namespace CrazorDemoBot.Cards.Wordle
         public WordleApp(IServiceProvider services)
             : base(services)
         {
-            this.AutoSharedId = false;
         }
 
-        [SharedMemory]
-        public GameModel Game { get; set; }
+        // shared by all users in the world based on the day of the week
+        [TimeMemory("yyyyMMdd")]
+        public string TodaysWord { get; set; }
 
         [SharedMemory]
-        public bool Won { get; set; } = false;
+        public WordleGame Game { get; set; }
 
-        [SharedMemory]
-        public List<Guess> Guesses { get; set; } = new List<Guess>();
-
-        [SharedMemory]
-        public string PlayerId { get; set; }
-
-        public override async Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+        public override Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
-            // if we don't have a shared ID
             if (sharedId == null)
             {
-                // capture the player 
-                PlayerId = activity.From.Id;           
-
-                // sharedId is today's date + PlayerId
-                sharedId = $"{DateTime.Now.ToString("yyyyMMdd")}-{PlayerId}";
+                var date = activity.LocalTimestamp ?? DateTime.Now;
+                sharedId = $"{date.ToString("yyyyMMdd")}-{activity.From.Id}";
             }
-
-            // load state 
-            await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
-
-            if (Game == null)
-            {
-                var storage = Services.GetRequiredService<IStorage>();
-
-                // look up word of the day, this is a seperate record because it's shared by all games
-                var gameKey = GetKey($"{DateTime.Now.ToString("yyyyMMdd")}-game");
-                var data = await storage.ReadAsync(new[] { gameKey });
-                if (data.TryGetValue(gameKey, out var val))
-                {
-                    Game = JObject.FromObject(val!).ToObject<GameModel>()!;
-                }
-                else
-                {
-                    // set up todays game
-                    data[gameKey] = Game = new GameModel()
-                    {
-                        Word = WordleApp.Words.Skip(_rnd.Next(WordleApp.Words.Count)).First()
-                    };
-
-                    await storage.WriteAsync(data);
-                }
-            }
-        }
-
-        public bool MakeGuess(string guess)
-        {
-            if (guess.Length == 5 && !Guesses.Any(g => g.Value == guess))
-                Guesses.Add(new Guess(guess, Game.Word));
-
-            return guess.ToUpper() == Game.Word;
+            return base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
         }
 
         public Dictionary<char, string> Glyphs = new Dictionary<char, string>()

@@ -6,10 +6,10 @@
 @attribute [TaskModule(Width = "small", Height = "medium")]
 
 <Card Version="1.5">
-    <TextBlock Size="Large" Style="Heading">Wordle Results for @App.Activity!.From.Name</TextBlock>
-    @if (App.Won)
+    <TextBlock Size="Large" Style="Heading">Wordle Results!</TextBlock>
+    @if (App.Game.Won)
     {
-        <TextBlock Size="Medium" Style="Heading">I got it in @App.Guesses.Count tries! 😄</TextBlock>
+        <TextBlock Size="Medium" Style="Heading">I got it in @App.Game.Guesses.Count tries! 😄</TextBlock>
     }
     else
     {
@@ -22,17 +22,17 @@
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
-        @for (int iGuess = 0; iGuess < App.Guesses.Count; iGuess++)
+        @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                @foreach (var letter in App.Guesses[iGuess].Letters)
+                @foreach (var letter in App.Game.Guesses[iGuess].Letters)
                 {
                     <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
                 }
             </TableRow>
         }
 
-        @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
+        @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
@@ -55,7 +55,7 @@
         {
             <Action.ShowTaskModule Title="Play" Route="/Cards/Wordle"/>
         }
-        else
+        else if (App.Activity.From.Id != App.Game.Player.Id)
         {
             <Action.OpenUrl Title="Play" Url="@App.GetCardUriForRoute("/Cards/Wordle")"/>
         }
@@ -64,9 +64,6 @@
 
 @functions
 {
-    [SessionMemory]
-    public string PlayUrl { get; set; }
-
     public void OnShare()
     {
         if (IsTaskModule)

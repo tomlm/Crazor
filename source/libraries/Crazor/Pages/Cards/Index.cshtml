@@ -388,6 +388,9 @@
                         channelId: '@Model.ChannelId',
                         from: { id: '@HttpUtility.JavaScriptStringEncode(Model.CardApp?.SessionId)', name: name },
                         to: { id: 'bot id' },
+                        timestamp: new Date().toISOString(),
+                        localTimestamp: new Date().toLocaleString("en-US", { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone } ),
+                        localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         name: invokeName,
                         value: invokeValue
                     }, null, 2),

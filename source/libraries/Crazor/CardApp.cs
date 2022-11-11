@@ -59,6 +59,7 @@ namespace Crazor
             };
             this.CardType = this.GetType().Name;
             this.Name = CardType.EndsWith("App") ? CardType.Substring(0, CardType.Length - 3) : CardType;
+
         }
 
         /// <summary>
@@ -453,29 +454,20 @@ namespace Crazor
             this.Action = invoke.Action;
 
             var storage = this.Services.GetRequiredService<IStorage>();
-            var sharedKey = (SharedId != null) ? GetKey(SharedId) : null;
-            var sessionKey = (SessionId != null) ? GetKey(SessionId) : null;
 
-            var keys = new List<string>() { };
-            if (sharedKey != null)
-            {
-                keys.Add(sharedKey);
-            }
+            var memoryMap = GetMemoryKeyMap();
 
-            if (sessionKey != null)
-            {
-                keys.Add(sessionKey);
-            }
+            // lookup data
+            var state = await storage.ReadAsync(memoryMap.Keys.ToArray(), cancellationToken);
 
-            var state = await storage.ReadAsync(keys.ToArray(), cancellationToken);
-            if (sharedKey != null && state.ContainsKey(sharedKey))
+            // assign data to the properties.
+            foreach (var key in memoryMap.Keys)
             {
-                SetScopedMemory<SharedMemoryAttribute>((JObject)state[sharedKey]);
-            }
-
-            if (sessionKey != null && state.ContainsKey(sessionKey))
-            {
-                SetScopedMemory<SessionMemoryAttribute>((JObject)state[sessionKey]);
+                if (state.ContainsKey(key))
+                {
+                    var memoryAttribute = memoryMap[key];
+                    SetScopedMemory(memoryAttribute.GetType(), (JObject)state[key]);
+                }
             }
 
             if (Action?.Verb == Constants.LOADROUTE_VERB)
@@ -506,15 +498,15 @@ namespace Crazor
         {
             var storage = this.Services.GetRequiredService<IStorage>();
             var data = new Dictionary<string, object>();
-            if (SharedId != null)
+            // NOTE: we recompute the memoryKeyMap because we might have new memory scopes after executing action.
+            var memoryMap = GetMemoryKeyMap();
+
+            foreach (var key in memoryMap.Keys)
             {
-                data.Add(GetKey(SharedId), GetScopedMemory<SharedMemoryAttribute>());
+                var memoryAttribute = memoryMap[key];
+                data.Add(key, GetScopedMemory(memoryAttribute.GetType()));
             }
 
-            if (SessionId != null)
-            {
-                data.Add(GetKey(SessionId), GetScopedMemory<SessionMemoryAttribute>());
-            }
             await storage.WriteAsync(data, cancellationToken);
         }
 
@@ -924,13 +916,12 @@ namespace Crazor
             }
         }
 
-        private object GetScopedMemory<MemoryAttributeT>()
-                where MemoryAttributeT : Attribute
+        private object GetScopedMemory(Type memoryAttributeType)
         {
             lock (this)
             {
                 dynamic memory = new JObject();
-                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(MemoryAttributeT))))
+                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, memoryAttributeType)))
                 {
                     var val = property.GetValue(this);
                     memory[property.Name] = val != null ? JToken.FromObject(val) : null;
@@ -940,12 +931,14 @@ namespace Crazor
             }
         }
 
-        private void SetScopedMemory<MemoryAttributeT>(JObject memory)
-            where MemoryAttributeT : Attribute
+        private void SetScopedMemory(Type memoryAttributeType, JObject memory)
         {
+            if (memoryAttributeType == typeof(PropertyValueMemoryAttribute))
+                throw new Exception("Can't use PropertyMemoryAttribute directly, you need to create child class to represent the property value.");
+
             lock (this)
             {
-                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(MemoryAttributeT))))
+                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, memoryAttributeType)))
                 {
                     if (memory.ContainsKey(property.Name))
                     {
@@ -1002,7 +995,7 @@ namespace Crazor
             }
         }
 
-        protected string GetKey(string? key) => $"{CardType}-{key}";
+        protected string GetKey(string? key) => (key != null) ? $"{CardType}-{key}" : null;
 
         /// <summary>
         /// Parse a /cards/{app}/{view}{path} into parts.
@@ -1037,5 +1030,26 @@ namespace Crazor
                 return Task.CompletedTask;
             }
         }
+
+        private Dictionary<string, MemoryAttribute> GetMemoryKeyMap()
+        {
+            var attributeMap = new Dictionary<string, MemoryAttribute>();
+
+            var memoryAttributes = GetType().GetProperties()
+                                                .SelectMany(p => p.GetCustomAttributes().Where(a => a.GetType().IsAssignableTo(typeof(MemoryAttribute))))
+                                                .Cast<MemoryAttribute>()
+                                                .ToList();
+            // add keys to lookup
+            foreach (var memoryAttribute in memoryAttributes)
+            {
+                var key = GetKey(memoryAttribute.GetKey(this));
+                if (key != null && !attributeMap.ContainsKey(key))
+                {
+                    attributeMap.Add(key, memoryAttribute);
+                }
+            }
+            return attributeMap;
+        }
+
     }
 }

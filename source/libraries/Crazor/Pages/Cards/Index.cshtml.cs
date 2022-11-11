@@ -69,6 +69,8 @@ namespace Crazor.HostPage.Pages.Cards
                 From = new ChannelAccount() { Id = userId },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = sharedId ?? app },
+                Timestamp = DateTimeOffset.UtcNow,
+                LocalTimestamp = DateTimeOffset.Now,
                 Value = new AdaptiveCardInvokeValue()
                 {
                     Action = new AdaptiveCardInvokeAction()
@@ -76,12 +78,12 @@ namespace Crazor.HostPage.Pages.Cards
                         Verb = Constants.LOADROUTE_VERB,
                         Data = new LoadRouteModel
                         {
-                            View  = viewName ?? Constants.DEFAULT_VIEW,
+                            View = viewName ?? Constants.DEFAULT_VIEW,
                             Path = path
                         }
                     }
                 }
-            }, cancellationToken);
+            }, cancellationToken); ;
 
             // process Action.Execute
             this.AdaptiveCard = await this.CardApp.OnActionExecuteAsync(cancellationToken);

@@ -1,6 +1,6 @@
 ﻿@using CrazorDemoBot.Cards.Wordle
 @inherits CardView<WordleApp>
-@attribute [TaskModule(Width = "small", Height ="medium")]
+@attribute [TaskModule(Width = "small", Height = "medium")]
 <Card Version="1.5">
     <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
 
@@ -10,16 +10,16 @@
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
         <TableColumn Width="auto" />
-        @for (int iGuess = 0; iGuess < App.Guesses.Count; iGuess++)
+        @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                @foreach (var letter in App.Guesses[iGuess].Letters)
+                @foreach (var letter in App.Game.Guesses[iGuess].Letters)
                 {
                     <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder">@letter.Value</TextBlock></TableCell>
                 }
             </TableRow>
         }
-        @for (int guessLeft = App.Guesses.Count; guessLeft < 6; guessLeft++)
+        @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
                 <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
@@ -49,10 +49,28 @@
     [StringLength(maximumLength: 5, ErrorMessage = "Word must be 5 chars")]
     public string Guess { get; set; }
 
+
+    public override void OnInitialized()
+    {
+        // First person to play the game sets Todays word for the world.
+        if (App.TodaysWord == null)
+        {
+            App.TodaysWord = WordleApp.Words.Skip(new Random().Next(WordleApp.Words.Count)).First();
+        }
+
+        if (App.Game == null)
+        {
+            App.Game = new WordleGame(App.TodaysWord, App.Activity?.LocalTimestamp ?? DateTimeOffset.Now)
+            {
+                Player = App.Activity.From,
+            };
+        }
+    }
+
     public void OnShowView()
     {
         // if someone tries to view the card and it's done route to the results page
-        if (App.Won == true || App.Guesses.Count == 6)
+        if (App.Game.IsDone)
             ReplaceView("Results");
     }
 
@@ -63,14 +81,13 @@
         {
             AddBannerMessage($"{guess} is not a valid wordle word.", AdaptiveContainerStyle.Attention);
         }
-        else if (App.MakeGuess(guess))
+        else if (App.Game.MakeGuess(guess))
         {
-            App.Won = true;
+            App.Game.Won = true;
             ReplaceView("Results");
         }
-        else if (App.Guesses.Count == 6)
+        else if (App.Game.IsDone)
         {
-            App.Won = false;
             ReplaceView("Results");
         }
     }
