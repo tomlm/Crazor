@@ -52,8 +52,8 @@
     public void OnShowView()
     {
         // if someone tries to view the card and it's done route to the results page
-        //if (App.Won == true || App.Guesses.Count == 6)
-        //    ReplaceView("Results");
+        if (App.Won == true || App.Guesses.Count == 6)
+            ReplaceView("Results");
     }
 
     public void OnSubmit()
