@@ -36,8 +36,14 @@ namespace Crazor
             cardApp.IsTaskModule = true;
             cardApp.Action = invokeValue.Action;
 
-            var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
+            await cardApp.OnActionExecuteAsync(cancellationToken);
+            
             await cardApp.SaveAppAsync(cancellationToken);
+
+            bool isPreview = cardApp.TaskModuleAction == TaskModuleAction.Auto ||
+                cardApp.TaskModuleAction == TaskModuleAction.PostCard ||
+                cardApp.TaskModuleAction == TaskModuleAction.InsertCard;
+            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: isPreview, cancellationToken);
 
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
         }

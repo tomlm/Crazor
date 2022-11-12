@@ -30,8 +30,6 @@ namespace Crazor
 
             var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
 
-            cardApp.IsPreview = true;
-
             var result = await cardApp.OnMessagingExtensionQueryAsync(query, cancellationToken);
 
             // don't save session data, it's a preview

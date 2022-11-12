@@ -1,6 +1,7 @@
 ﻿@using Crazor
 @using CrazorDemoBot.Cards.Dice
 @inherits CardView<DiceApp>
+@attribute [TaskModule(Title="Change Dice Settings", Width = "small", Height = "small")]
 
 <Card Version="1.5">
     <Input.Text Binding="App.DiceName" />

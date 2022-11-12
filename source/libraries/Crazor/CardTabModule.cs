@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Microsoft.Bot.Schema.Teams;
+using Microsoft.Bot.Connector;
 
 namespace Crazor
 {
@@ -144,9 +145,20 @@ namespace Crazor
 
             await cardApp.LoadAppAsync(sharedId, sessionId, loadRouteActivity, cancellationToken);
 
-            var card = await cardApp.OnActionExecuteAsync(turnContext!, cancellationToken);
+            await cardApp.OnActionExecuteAsync(cancellationToken);
 
             await cardApp.SaveAppAsync(cancellationToken);
+
+            var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+
+            if (turnContext.Activity.ChannelId == Channels.Msteams &&
+    !turnContext.Activity.Conversation.Id.StartsWith("tab:"))
+            {
+                // we need to add refresh userids
+                var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
+                var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
+                card.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
+            }
 
             return card;
         }
@@ -157,8 +169,12 @@ namespace Crazor
 
             await cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, (Activity)turnContext.Activity, cancellationToken);
             cardApp.Action = invokeValue.Action;
-            var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
+            
+            await cardApp.OnActionExecuteAsync(cancellationToken);
+            
             await cardApp.SaveAppAsync(cancellationToken);
+            
+            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
             return adaptiveCard;
         }
     }

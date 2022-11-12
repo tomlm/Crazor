@@ -56,7 +56,7 @@ namespace PhysOpBot.Pages.Cards
                 Id = Utils.GetNewId(),
                 From = new ChannelAccount() { Id = "unknown" },
                 Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = sharedId ?? app },
+                Conversation = new ConversationAccount() { Id = sharedId ?? Utils.GetNewId()},
                 Value = new AdaptiveCardInvokeValue()
                 {
                     Action = new AdaptiveCardInvokeAction()
@@ -72,9 +72,11 @@ namespace PhysOpBot.Pages.Cards
             }, cancellationToken);
 
             // process Action.Execute
-            this.AdaptiveCard = await this.CardApp.OnActionExecuteAsync(cancellationToken);
+            await this.CardApp.OnActionExecuteAsync(cancellationToken);
 
             await this.CardApp.SaveAppAsync(cancellationToken);
+
+            this.AdaptiveCard = await this.CardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
             this.RouteUrl = this.CardApp.GetCurrentCardRoute();
         }

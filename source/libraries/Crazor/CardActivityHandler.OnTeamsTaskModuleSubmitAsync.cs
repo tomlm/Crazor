@@ -56,38 +56,44 @@ namespace Crazor
             else
                 ArgumentNullException.ThrowIfNull(cardApp);
 
-            var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
+            await cardApp.OnActionExecuteAsync(cancellationToken);
 
             await cardApp.SaveAppAsync(cancellationToken);
 
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
-                    adaptiveCard.Refresh = null;
-                    var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
-                    // continue taskModule bound to current card view.
-                    return new TaskModuleResponse()
                     {
-                        Task = new TaskModuleContinueResponse()
+                        var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+
+                        adaptiveCard.Refresh = null;
+                        var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
+                        // continue taskModule bound to current card view.
+                        return new TaskModuleResponse()
                         {
-                            Value = GetTaskInfoForCard(cardApp, submitCard)
-                        },
-                    };
+                            Task = new TaskModuleContinueResponse()
+                            {
+                                Value = GetTaskInfoForCard(cardApp, submitCard)
+                            },
+                        };
+                    }
 
                 case TaskModuleAction.Auto:
                 case TaskModuleAction.PostCard:
-                    var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
-                    var reply = turnContext.Activity.CreateReply();
-                    cardApp.IsTaskModule = false;
-                    reply.Attachments.Add(new Attachment()
                     {
-                        ContentType = AdaptiveCard.ContentType,
-                        Content = adaptiveCard
-                    });
-                    reply.ChannelData = new
-                    {
-                        OnBehalfOf = new[]    
-                        {                  
+                        var adaptiveCard = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
+                        var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
+                        var reply = turnContext.Activity.CreateReply();
+                        cardApp.IsTaskModule = false;
+                        reply.Attachments.Add(new Attachment()
+                        {
+                            ContentType = AdaptiveCard.ContentType,
+                            Content = adaptiveCard
+                        });
+                        reply.ChannelData = new
+                        {
+                            OnBehalfOf = new[]
+                            {
                             new
                             {
                                 ItemId = 0,
@@ -96,9 +102,10 @@ namespace Crazor
                                 DisplayName = turnContext.Activity.From.Name
                             }
                         }
-                    };
+                        };
 
-                    await connectorClient.Conversations.SendToConversationAsync(reply, cancellationToken);
+                        await connectorClient.Conversations.SendToConversationAsync(reply, cancellationToken);
+                    }
                     return null!;
                 case TaskModuleAction.InsertCard:
                 case TaskModuleAction.None:

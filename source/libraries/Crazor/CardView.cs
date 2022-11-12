@@ -56,7 +56,7 @@ namespace Crazor
         /// <summary>
         /// True if the card is being rendered to be shared with people without session data
         /// </summary>
-        public bool IsPreview => App.IsPreview;
+        public bool IsPreview { get; set; }
 
         /// <summary>
         /// ExecuteAsync is disabled because the default writes the output directly to 
@@ -350,8 +350,10 @@ namespace Crazor
         /// <remarks>Override this to do custom binding to the adaptive card.</remarks>
         /// <param name="cancellationToken">cancellationToken</param>
         /// <returns>bound card</returns>
-        public virtual async Task<AdaptiveCard?> BindView(CancellationToken cancellationToken)
+        public virtual async Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
+            this.IsPreview = isPreview;
+
             string xml = String.Empty;
             try
             {

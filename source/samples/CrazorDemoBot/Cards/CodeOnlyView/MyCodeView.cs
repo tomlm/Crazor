@@ -12,7 +12,7 @@ namespace CrazorDemoBot.Cards.CodeOnlyView
         [SessionMemory]
         public int Counter { get; set; }
 
-        public override async Task<AdaptiveCard?> BindView(CancellationToken cancellationToken)
+        public override async Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 

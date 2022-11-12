@@ -1,6 +1,8 @@
 ﻿@using CrazorDemoBot.Cards.Dice
 @inherits CardView<DiceApp>
 
+@attribute [TaskModule(Width = "small", Height = "small")]
+
 <Card Version="1.5">
     <TextBlock Size="Large" Weight="Bolder" Style="Heading">@App.DiceName</TextBlock>
     @if (App.Dice != null)
@@ -18,7 +20,7 @@
 
 
 @functions {
-    public override void OnInitialized() 
+    public override void OnInitialized()
     {
         if (App.Dice == null)
             ShowView("Settings");

@@ -3,18 +3,12 @@
 
 <Card Version="1.5" Title="Test Task Module Functionality">
     <TextBlock>Counter is @App.Counter!</TextBlock>
+    <Input.ChoiceSet Binding="TaskAction" Style="Expanded" />
 
-    @if (IsTaskModule && !IsPreview)
-    {
-        <Input.ChoiceSet Binding="TaskAction" Style="Expanded" />
-    }
     <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />
 
-    @if (IsTaskModule && !IsPreview)
-    {
-        <Action.Cancel />
-        <Action.OK />
-    }
+    <Action.Cancel />
+    <Action.OK />
 </Card>
 
 @functions {

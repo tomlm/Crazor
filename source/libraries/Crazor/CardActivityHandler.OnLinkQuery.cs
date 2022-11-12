@@ -32,11 +32,11 @@ namespace Crazor
             {
                 var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
                 
-                cardApp.IsPreview = true;
+                await cardApp.OnActionExecuteAsync(cancellationToken);
 
-                var card = await cardApp.OnActionExecuteAsync(cancellationToken);
-                
                 await cardApp.SaveAppAsync(cancellationToken);
+
+                var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.
                 var preview = new Attachment(

@@ -41,7 +41,7 @@ namespace Crazor.Interfaces
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<AdaptiveCard?> BindView(CancellationToken cancellationToken);
+        Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to process an InvokeAction (aka a verb)

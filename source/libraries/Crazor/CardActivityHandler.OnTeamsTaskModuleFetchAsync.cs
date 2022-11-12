@@ -34,12 +34,15 @@ namespace Crazor
             var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
             cardApp.IsTaskModule = true;
             
-            var adaptiveCard = await cardApp.OnActionExecuteAsync(cancellationToken);
+            await cardApp.OnActionExecuteAsync(cancellationToken);
+            
             await cardApp.SaveAppAsync(cancellationToken);
 
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
+                    var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+
                     adaptiveCard.Refresh = null;
                     var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
                     // continue taskModule bound to current card view.

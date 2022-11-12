@@ -2,14 +2,15 @@
 @inherits CardView<TaskModuleApp>
 
 <Card Version="1.5">
+    @if (IsPreview)
+    {
+        <TextBlock Size="Large">(PREVIEW)</TextBlock>
+    }
     <TextBlock>Counter is @App.Counter!</TextBlock>
     <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />
 </Card>
 
 @functions {
-    public override void OnInitialized() 
-        => ShowView("Edit");
-
     public void OnIncrement() => App.Counter++;
 
 }

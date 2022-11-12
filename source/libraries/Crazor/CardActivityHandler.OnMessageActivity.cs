@@ -27,10 +27,16 @@ namespace Crazor
                 if (app.ToLower().EndsWith("app"))
                 {
                     var cardApp = await LoadAppAsync((Activity)turnContext.Activity, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
-                    var card = await cardApp.OnActionExecuteAsync(cancellationToken);
+                    
+                    await cardApp.OnActionExecuteAsync(cancellationToken);
+
                     await cardApp.SaveAppAsync(cancellationToken);
+
+                    var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+
                     var response = Activity.CreateMessageActivity();
                     response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
+
                     await turnContext.SendActivityAsync(response, cancellationToken);
                 }
             }

@@ -87,9 +87,11 @@ namespace Crazor.HostPage.Pages.Cards
             this.Response.Cookies.Append("sharedId", sharedId ?? String.Empty);
 
             // process Action.Execute
-            this.AdaptiveCard = await this.CardApp.OnActionExecuteAsync(cancellationToken);
+            await this.CardApp.OnActionExecuteAsync(cancellationToken);
 
             await this.CardApp.SaveAppAsync(cancellationToken);
+
+            this.AdaptiveCard = await this.CardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
             this.RouteUrl = this.CardApp.GetCurrentCardRoute();
         }

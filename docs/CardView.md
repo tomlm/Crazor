@@ -360,13 +360,15 @@ Giving a experience like this:
 
 
 
-## BindView()
+## RenderViewAsync()
 
-The **CardView** class does not have to use Razor templates. You can implement your own BindView() method any way you want.
+The **CardView** class does not have to use Razor templates to create the cards for the view. By overriding **RenderViewAsync()** method you can create an adaptive card any way you would like.
 
-Simply create a class which derives from **CardView<>** (like @inherits above) and override the **BindView()** method to return an Adaptive Card bound to your data.
+Simply create a class which derives from **CardView<>** (like @inherits above) and override the **RenderViewAsync()** method to return an Adaptive Card bound to your data.
 
-Example:
+By deriving from CardView<> you still get Crazor data binding, verb action handling, navigation methods etc. 
+
+## Example:
 
 ```C#
 namespace Example
@@ -376,7 +378,7 @@ namespace Example
         [SessionMemory]
         public int Counter { get; set; }
 
-        public override async Task<AdaptiveCard?> BindCard(CancellationToken cancellationToken)
+        public override async Task<AdaptiveCard?> RenderViewAsync(bool isPreview, CancellationToken cancellationToken)
         {
             return new AdaptiveCard("1.5")
             {
@@ -410,7 +412,7 @@ ReplaceView<MyCodeView>();
 >  * **Action.OK**/**Action.Cancel** are implemented as tag helpers
 >  * **Custom TagHelpers** 
 >
->  As Tag Helpers are a extensibility mechanism for the Razor template engine.
+>  Tag Helpers are purely a feature of the Razor template engine.
 
 
 

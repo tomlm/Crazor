@@ -3,19 +3,11 @@
 //-----------------------------------------------------------------------------
 
 using AdaptiveCards;
-using Crazor.Attributes;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Reflection;
-using System.Security.Policy;
 
 namespace Crazor
 {

@@ -42,7 +42,6 @@ namespace Crazor
             Indent = true,
         };
 
-        private bool _isPreview = false;
         protected IConfiguration _configuration;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -140,18 +139,6 @@ namespace Crazor
         public bool AutoSharedId { get; set; } = true;
 
         /// <summary>
-        /// IsPreview is true when there is no sessionId because the card is going to be shared. 
-        /// </summary>
-        public bool IsPreview
-        {
-            get => _isPreview ||
-                TaskModuleAction == TaskModuleAction.Auto ||
-                TaskModuleAction == TaskModuleAction.InsertCard ||
-                TaskModuleAction == TaskModuleAction.PostCard;
-            set => _isPreview = value;
-        }
-
-        /// <summary>
         /// IsTaskModule is true when the card is running in a taskModule mode.
         /// </summary>
         public bool IsTaskModule { get; set; } = false;
@@ -166,27 +153,12 @@ namespace Crazor
         /// </summary>
         public TaskModuleAction TaskModuleAction { get; set; }
 
-        public virtual async Task<AdaptiveCard> OnActionExecuteAsync(ITurnContext turnContext, CancellationToken cancellationToken)
-        {
-            var result = await OnActionExecuteAsync(cancellationToken);
-
-            if (result is AdaptiveCard adaptiveCard && turnContext.Activity.ChannelId == Channels.Msteams &&
-                !turnContext.Activity.Conversation.Id.StartsWith("tab:"))
-            {
-                // we need to add refresh userids
-                var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
-                var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
-                adaptiveCard.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
-            }
-            return result;
-        }
-
         /// <summary>
         /// Handle action
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public virtual async Task<AdaptiveCard> OnActionExecuteAsync(CancellationToken cancellationToken)
+        public virtual async Task OnActionExecuteAsync(CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Action);
             ArgumentNullException.ThrowIfNull(CurrentView);
@@ -220,6 +192,9 @@ namespace Crazor
                         await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
                         if (LastResult != null)
                         {
+                            // because we are resuming we don't need to execute again unless
+                            // the resumption causes it to happen.
+                            currentCard = this.CurrentCard;
                             await this.CurrentView.OnResumeView(LastResult, cancellationToken);
                         }
 
@@ -243,10 +218,20 @@ namespace Crazor
                 AddBannerMessage(err.Message, AdaptiveContainerStyle.Attention);
             }
 
+        }
+
+        /// <summary>
+        /// Render the current view's card
+        /// </summary>
+        /// <param name="isPreview">if true the card should be a preview anonymous card for sharing</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+        {
             AdaptiveCard? outboundCard;
             try
             {
-                outboundCard = await CurrentView.BindView(cancellationToken);
+                outboundCard = await CurrentView.RenderCardAsync(isPreview, cancellationToken);
                 ArgumentNullException.ThrowIfNull(outboundCard);
             }
             catch (XmlException xerr)
@@ -267,7 +252,7 @@ namespace Crazor
                 AddBannerMessage($"\n{err.Message.Replace("\n", "\n\n")}\n{innerMessage}", AdaptiveContainerStyle.Attention);
             }
 
-            await ApplyCardModificationsAsync(outboundCard, cancellationToken);
+            await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
 
             return outboundCard;
         }
@@ -311,9 +296,10 @@ namespace Crazor
                 var cardState = new CardViewState(this.CurrentCard, searchResult.Model);
                 this.CallStack[0] = cardState;
                 Action!.Verb = Constants.SHOWVIEW_VERB;
+                
                 SetCurrentView(cardState);
 
-                AdaptiveCard card = await OnActionExecuteAsync(cancellationToken);
+                AdaptiveCard card = await this.RenderCardAsync(isPreview: true, cancellationToken);
 
                 var attachment = new MessagingExtensionAttachment()
                 {
@@ -583,8 +569,10 @@ namespace Crazor
         {
             var ah = new CardActivityHandler(Services);
             var cardApp = await ah.LoadAppAsync(Activity!, uri, cancellationToken);
-            var card = await cardApp.CurrentView.BindView(cancellationToken);
+            
             await cardApp.SaveAppAsync(cancellationToken);
+
+            var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
 
             var botId = _configuration.GetValue<string>("MicrosoftAppId");
             var appId = _configuration.GetValue<string>("TeamsAppId") ?? botId;
@@ -592,19 +580,19 @@ namespace Crazor
             return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
         }
 
-        private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
+        private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
 
-            AddRefresh(outboundCard);
+            AddRefresh(outboundCard, isPreview);
 
-            AddMessageBanner(outboundCard);
+            AddMessageBanner(outboundCard, isPreview);
 
-            AddSystemMenu(outboundCard);
+            AddSystemMenu(outboundCard, isPreview);
 
             // add session data to outbound card
-            await AddSessionDataToAdaptiveCardAsync(outboundCard, cancellationToken);
+            await AddSessionDataToAdaptiveCardAsync(outboundCard, isPreview, cancellationToken);
 
 #pragma warning disable CS0618 // Type or member is obsolete
             if (CurrentCard != Constants.DEFAULT_VIEW)
@@ -630,9 +618,8 @@ namespace Crazor
             };
         }
 
-        public async Task<string> GetSessionDataToken(CancellationToken cancellationToken)
+        public async Task<string> GetSessionDataToken(SessionData sessionData, CancellationToken cancellationToken)
         {
-            var sessionData = GetSessionData();
             var sessionDataToken = sessionData.ToString();
 
             var encryptionProvider = this.Services.GetService<IEncryptionProvider>();
@@ -643,9 +630,13 @@ namespace Crazor
             return sessionDataToken;
         }
 
-        private async Task AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, CancellationToken cancellationToken)
+        private async Task AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
-            var sessionDataToken = await GetSessionDataToken(cancellationToken);
+            var sessionData = GetSessionData();
+            if (isPreview)
+                sessionData.SessionId = null;
+
+            var sessionDataToken = await GetSessionDataToken(sessionData, cancellationToken);
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
             {
@@ -683,13 +674,13 @@ namespace Crazor
             }
         }
 
-        private void AddRefresh(AdaptiveCard outboundCard)
+        private void AddRefresh(AdaptiveCard outboundCard, bool isPreview)
         {
             var uri = GetCurrentCardUri();
             if (outboundCard.Refresh == null)
             {
                 AdaptiveExecuteAction refresh;
-                if (IsPreview)
+                if (isPreview)
                 {
                     refresh = new AdaptiveExecuteAction()
                     {
@@ -719,7 +710,7 @@ namespace Crazor
             }
         }
 
-        private void AddMessageBanner(AdaptiveCard outboundCard)
+        private void AddMessageBanner(AdaptiveCard outboundCard, bool isPreview)
         {
             if (this.BannerMessages.Any())
             {
@@ -777,7 +768,7 @@ namespace Crazor
         }
 
 
-        private void AddSystemMenu(AdaptiveCard outboundCard)
+        private void AddSystemMenu(AdaptiveCard outboundCard, bool isPreview)
         {
             var systemMenu = new AdaptiveActionSet()
             {
@@ -788,7 +779,7 @@ namespace Crazor
 
             var currentUri = GetCurrentCardUri();
 
-            if (Activity!.ChannelId != currentUri.Host && !IsTaskModule && !IsPreview)
+            if (Activity!.ChannelId != currentUri.Host && !IsTaskModule && !isPreview)
             {
                 systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
                 {
