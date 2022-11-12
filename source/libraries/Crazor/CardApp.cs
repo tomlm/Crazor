@@ -596,11 +596,6 @@ namespace Crazor
         {
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
-            if (IsPreview)
-            {
-                // clear sessionid as we are going to share this card.
-                this.SessionId = null;
-            }
 
             AddRefresh(outboundCard);
 
@@ -694,7 +689,7 @@ namespace Crazor
             if (outboundCard.Refresh == null)
             {
                 AdaptiveExecuteAction refresh;
-                if (this.IsPreview)
+                if (IsPreview)
                 {
                     refresh = new AdaptiveExecuteAction()
                     {
@@ -921,7 +916,7 @@ namespace Crazor
             lock (this)
             {
                 dynamic memory = new JObject();
-                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, memoryAttributeType)))
+                foreach (var property in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute(memoryAttributeType, true) != null))
                 {
                     var val = property.GetValue(this);
                     memory[property.Name] = val != null ? JToken.FromObject(val) : null;
@@ -938,7 +933,7 @@ namespace Crazor
 
             lock (this)
             {
-                foreach (var property in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, memoryAttributeType)))
+                foreach (var property in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute(memoryAttributeType, true) != null))
                 {
                     if (memory.ContainsKey(property.Name))
                     {
