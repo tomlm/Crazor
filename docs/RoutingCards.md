@@ -45,9 +45,9 @@ Here is an example for the Edit page for Addresses, which is editing the model w
 }
 ```
 
-* The GetRoute() method says that the deep link for Edit.cshtml should be **/cards/Addresses/Edit/{this.Model.Id}**
-* The Route attribute tells us how to get the **{addressId}** out of the url 
-* The **OnLoadRoute(string addressId)** is called with the addressId and loads the appropriate model into the card.
+* The **GetRoute()** method says that the deep link for Edit.cshtml should be **/cards/Addresses/Edit/{this.Model.Id}**
+* The **[Route("{addressId}")]** attribute tells us how to get the **{addressId}** out of the url 
+* The **OnLoadRoute(string addressId)** is called with the **addressId** and loads the appropriate model into the card.
 
 
 
