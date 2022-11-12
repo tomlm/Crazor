@@ -3,49 +3,75 @@
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
 
-# Memory State 
-Cards are inherently about both 1:1 interactions with a user as well as shared interactions among a group of users. 
+# Memory 
+Cards are small light-weight applications but they pack a punch because of the fact that they are designed to be shared and interacted with across many different scopes.
 
-**Crazor** makes it easy to manage the state of your application's memory around these 2 scopes. 
+**Crazor** makes it easy to manage the state of your application's memory by utilizing a common Key-Value store and allowing you to use attributes to define the objects that are stored in that store.
 
-The **CardApp** class represents your application state and is accessible from any **CardView** via the **App** property.
+The **CardApp** class represents the state of your application and is accessible from any **CardView** via the **App** property.
 
-Data on the **CardApp** and **CardView** classes which are marked with **memory scope attributes** are automatically persisted on each round-trip with the server, saving you from the tedium of managing loading and saving properties into a key value store and allowing you to write your application as a stateful application in a stateless server.
+Data on the **CardApp** and **CardView** classes which are marked with **memory scope attributes** that define the keys that are used to persist the properties on every round-trip with the server, saving you from the tedium of managing loading and saving properties into a key value store and allowing you to write your application as a stateful application in a stateless server.
 
-## Memory Scope attributes
+## Memory attributes
 
-Properties which have the **[SessionMemory]** or **[SharedMemory]** will automatically be persisted in the KeyValue **IStorage** provider.
+When you put a memory attribute on a property you are defining the **"scope"** of the value...meaning who will have access to that value. Essentially you are defining the key that is used to persist the value...all properties with a given memory attribute on it will be swept up and stored on a record in the key-value store with the key that is behind the attribute.
 
-* **[SharedMemory]** - The values for these properties are persisted and the same for all users interacting with the app,
-* **[SessionMemory]** - The values for these properties are scoped only to the user interacting with the app.
+
+
+| Attribute                          | Scope                                                | Description                                                  |
+| ---------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| **[SharedMemory]**                 | Bound to the value of **App.SharedId**               | Using **[SharedMemory]** scopes the property to the value for **App.SharedId**, which is built into the Uri and so fixed and shared across all host applications as that same uri is used. |
+| **[SessionMemory]**                | Bound to the value of **App.SessionId**              | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **App.SessionId**. It is managed directly by Crazor. |
+| **[UserMemory]**                   | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
+| **[ConversationMemory]**           | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
+| **[TimeMemory(pattern)]**          | Bound to the current date using **pattern**          | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to a day. |
+| *Coming soon* **[IdentityMemory]** | Bound to the **current authenticated user identity** | When using an authorized SSO application this will be scoped to the user who is logged in...shared across all applications that have the same user identity. |
+
+
+
+**App.SharedId** is automatically managed by Crazor by default. If you set ```CardApp.AutoSharedId =false``` then you are responsible for setting the value for **App.SharedId**.  The default its that ```AutoSharedId=true```
 
 > NOTE: 
 >
-> * **CardApp** supports **[SharedMermory]** and **[SessionMemory]** attributes.
+> * **CardApp** supports all **Memory** attributes
 >
-> * **CardView** supports only **[SessionMemory]** attributes
+> * **CardView** supports only **[SessionMemory]** attributes, because the call stack of cards and their state are stored in application CardStack property which is has session scope attribute on it.
 
 
 
-## Defining the SharedMemoryId
-
-The id which is used to key off of for the **[SharedMemory]** is called the **SharedId**.  The default value for the sharedId is the name of the application, but you can override it by implementing the **GetSharedId()** method.
-
-For example, if you want your shared memory to associated with the id of the record your card is bound to, you might do something like this:
+## Example
 
 ```C#
-public string override GetSharedId() => this.MyRecord.Id;
+public class MyApp : CardApp
+{
+    public MyApp(IServiceProvider services)
+        : base(services)        {        }
+
+    [SharedMemory]
+    public string A { get; set; }
+
+    [SessionMemory]
+    public int B { get; set; }
+
+    [UserMemory]
+    public int C { get; set; }
+    
+    [TimeMemory("yyyyMMdd")]
+    public Game D {get;set;}
+
+    [ConversationMemory]
+    public Game E {get;set;}
+}
 ```
 
-Any properties with **[SharedMemory]** on it will be scoped to the value returned by this.
+
 
 ## Custom State
 
 Every time a an interaction happens with your application the following process happens:
 
-1. The **CardApp** is instantiated
-2. **CardApp.LoadAppAsync(...)** is called.  The default implementation loads state according to **[Memory]** attributes 
-3. **CardApp.OnActionExecutAsync(...)** is called, which dispatches to the current **CardView**, executes verbs, binds template to a card, etc.
+1. **CardApp.LoadAppAsync(...)** is called.  The default implementation loads state according to **[Memory]** attributes 
+3. **CardApp.OnActionExecuteAsync(...)** is called, which dispatches to the current **CardView**, executes verbs, binds template to a card, etc.
 4. **CardApp.SaveAppAsync(...)** is called. The default implementation saves state according to **[Memory]** attributes
 
 To manage your own state from your own data base all you need to do is override **OnLoadAppAsync()** and **OnSaveAppAsync()**.  
@@ -55,8 +81,9 @@ public SomeData MyData {get;set;}
 
 public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
 {
+    // all attribute values are loaded by base.LoadAppAsync()
     await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
-    
+ 
     MyData = await myDB.Load(...);
 }
 
@@ -64,12 +91,13 @@ public async virtual Task SaveAppAsync(CancellationToken cancellationToken)
 {
     await myDB.Save(...);
 
+    // all memory attribute values are persisted by base.SaveAppAsync()
     await base.SaveAppAsync(cancellationToken);
 }
 ```
 
->  NOTE 1: If you want **[SessionMemory]** and **[SharedMemory]** attributes to continue to work you need to call the base implementation when overriding these methods.
+>  NOTE 1: If you want **[Memory] attributes** to continue to work you need to call the **base** implementation when overriding these methods.
 
->  NOTE 2: You should not put **[SessionMemory]** or **[SharedMemory]** attributes on properties which are loaded and saved to external data sources as that will cause the data be persisted twice, once to the custom store and once to the IStorage key value store.
+>  NOTE 2: You should not put **[Memory] attributes** on properties which are backed by external data sources as that will cause the data be persisted twice, once to the custom database and once to the key value store.
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
