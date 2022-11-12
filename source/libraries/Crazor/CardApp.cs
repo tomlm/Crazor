@@ -296,7 +296,7 @@ namespace Crazor
                 var cardState = new CardViewState(this.CurrentCard, searchResult.Model);
                 this.CallStack[0] = cardState;
                 Action!.Verb = Constants.SHOWVIEW_VERB;
-                
+
                 SetCurrentView(cardState);
 
                 AdaptiveCard card = await this.RenderCardAsync(isPreview: true, cancellationToken);
@@ -569,7 +569,7 @@ namespace Crazor
         {
             var ah = new CardActivityHandler(Services);
             var cardApp = await ah.LoadAppAsync(Activity!, uri, cancellationToken);
-            
+
             await cardApp.SaveAppAsync(cancellationToken);
 
             var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
@@ -669,7 +669,10 @@ namespace Crazor
             {
                 if (choiceSet.DataQuery != null)
                 {
-                    choiceSet.DataQuery.Dataset = $"{sessionDataToken}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
+                    if (Activity!.ChannelId == Channels.Msteams && choiceSet.DataQuery.Dataset.StartsWith("graph.microsoft.com/users"))
+                        continue;
+                    else 
+                        choiceSet.DataQuery.Dataset = $"{sessionDataToken}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
                 }
             }
         }
