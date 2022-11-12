@@ -12,22 +12,27 @@ The **CardApp** class represents the state of your application and is accessible
 
 Data on the **CardApp** and **CardView** classes which are marked with **memory scope attributes** that define the keys that are used to persist the properties on every round-trip with the server, saving you from the tedium of managing loading and saving properties into a key value store and allowing you to write your application as a stateful application in a stateless server.
 
+Every time a an interaction happens with your application the following process happens:
+
+1. **CardApp.LoadAppAsync(...)** is called.  The default implementation loads state according to **[Memory]** attributes from the IStorage Provider 
+2. **CardApp.OnActionExecuteAsync(...)** is called, which dispatches to the current **CardView**, executes verbs, binds data to card templates, etc.
+3. **CardApp.SaveAppAsync(...)** is called. The default implementation saves state according to **[Memory]** attributes to the IStorage provider
+
 ## Memory attributes
 
 When you put a memory attribute on a property you are defining the **"scope"** of the value...meaning who will have access to that value. Essentially you are defining the key that is used to persist the value...all properties with a given memory attribute on it will be swept up and stored on a record in the key-value store with the key that is behind the attribute.
 
+| Attribute                                 | Scope                                                | Description                                                  |
+| ----------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| **[SharedMemory]**                        | Bound to the value of **App.SharedId**               | Using **[SharedMemory]** scopes the property to the value for **App.SharedId**, which is built into the Uri and so fixed and shared across all host applications as that same uri is used. |
+| **[SessionMemory]**                       | Bound to the value of **App.SessionId**              | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **App.SessionId**. It is managed directly by Crazor. |
+| **[UserMemory]**                          | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
+| **[ConversationMemory]**                  | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
+| **[TimeMemory(pattern)]**                 | Bound to the **current date** using **pattern**      | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to the pattern 20221108, effectively the day as a key. |
+| **[PropertyValueMemory(*propertyName*)]** | Bound to the value of the **property name**          | Using **[PropertyValueMemory]** will scope the property to be persisted using the value of another named property. |
+| *Coming soon* **[IdentityMemory]**        | Bound to the **current authenticated user identity** | When using an authorized SSO application this will be scoped to the user who is logged in...shared across all applications that have the same user identity. |
 
-
-| Attribute                          | Scope                                                | Description                                                  |
-| ---------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| **[SharedMemory]**                 | Bound to the value of **App.SharedId**               | Using **[SharedMemory]** scopes the property to the value for **App.SharedId**, which is built into the Uri and so fixed and shared across all host applications as that same uri is used. |
-| **[SessionMemory]**                | Bound to the value of **App.SessionId**              | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **App.SessionId**. It is managed directly by Crazor. |
-| **[UserMemory]**                   | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
-| **[ConversationMemory]**           | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
-| **[TimeMemory(pattern)]**          | Bound to the current date using **pattern**          | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to a day. |
-| *Coming soon* **[IdentityMemory]** | Bound to the **current authenticated user identity** | When using an authorized SSO application this will be scoped to the user who is logged in...shared across all applications that have the same user identity. |
-
-
+**App.SessionId** is automatically managed by Crazor by default. You should probably not muck with it directly
 
 **App.SharedId** is automatically managed by Crazor by default. If you set ```CardApp.AutoSharedId =false``` then you are responsible for setting the value for **App.SharedId**.  The default its that ```AutoSharedId=true```
 
@@ -67,12 +72,6 @@ public class MyApp : CardApp
 
 
 ## Custom State
-
-Every time a an interaction happens with your application the following process happens:
-
-1. **CardApp.LoadAppAsync(...)** is called.  The default implementation loads state according to **[Memory]** attributes 
-3. **CardApp.OnActionExecuteAsync(...)** is called, which dispatches to the current **CardView**, executes verbs, binds template to a card, etc.
-4. **CardApp.SaveAppAsync(...)** is called. The default implementation saves state according to **[Memory]** attributes
 
 To manage your own state from your own data base all you need to do is override **OnLoadAppAsync()** and **OnSaveAppAsync()**.  
 
