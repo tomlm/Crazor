@@ -671,7 +671,7 @@ namespace Crazor
                 {
                     if (Activity!.ChannelId == Channels.Msteams && choiceSet.DataQuery.Dataset.StartsWith("graph.microsoft.com/users"))
                         continue;
-                    else 
+                    else
                         choiceSet.DataQuery.Dataset = $"{sessionDataToken}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
                 }
             }
@@ -984,7 +984,7 @@ namespace Crazor
             }
         }
 
-        protected string GetKey(string? key) => (key != null) ? $"{CardType}-{key}" : null;
+        protected string? GetKey(string? key) => String.IsNullOrEmpty(key) ? null : $"{CardType}-{key}";
 
         /// <summary>
         /// Parse a /cards/{app}/{view}{path} into parts.
@@ -998,7 +998,7 @@ namespace Crazor
             sharedId = null;
             var parts = uri.AbsolutePath.Trim('/').Split('/');
             app = parts[1] + "App";
-            view = (parts.Length > 2) ? parts[2] : null;
+            view = (parts.Length > 2) ? parts[2] : null!;
             path = String.Join('/', parts.Skip(3).ToArray());
             if (!String.IsNullOrEmpty(uri.Query))
             {
