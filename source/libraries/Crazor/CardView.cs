@@ -29,24 +29,41 @@ namespace Crazor
         {
         }
 
+        /// <summary>
+        /// UrlHelper for creating links to resources on this service.
+        /// </summary>
         public IUrlHelper UrlHelper { get; set; }
 
+        /// <summary>
+        /// Name of the CardView
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// App for this CardView
+        /// </summary>
         public AppT App { get; set; }
 
+        /// <summary>
+        /// Current action being processed.
+        /// </summary>
         public AdaptiveCardInvokeAction Action { get; set; }
 
+        /// <summary>
+        /// Loaded razor view for the this CardView.
+        /// </summary>
         public IView RazorView { get; set; }
-
-        public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
 
         /// <summary>
         /// True if the model and properites on the view have passed validation
         /// </summary>
         public bool IsModelValid { get; set; } = true;
 
-        CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
+        /// <summary>
+        /// Validation Errors for current input to the cardview.
+        /// </summary>
+        /// <remarks>The key is the id of the input control, the hashset is the error messages.</remarks>
+        public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
 
         /// <summary>
         /// True if the card is inside a taskmodule
@@ -59,25 +76,19 @@ namespace Crazor
         public bool IsPreview { get; set; }
 
         /// <summary>
-        /// ExecuteAsync is disabled because the default writes the output directly to 
+        /// Untyped cardapp for ICardView interface.
+        /// </summary>
+        CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
+
+        #region ---- Core Methods -----
+        /// <summary>
+        /// IView->ExecuteAsync is disabled because the default writes the output directly to 
         /// the response, and we need to process it directly.
         /// </summary>
         /// <returns></returns>
         public override Task ExecuteAsync()
         {
             return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// OnInitialized() - Initalize members
-        /// </summary>
-        /// <remarks>
-        /// This will be called only once to initialize the instance data of the cardview.
-        /// This is effectively like a constructor, with no async support.  If you
-        /// want to look up data to look at OnLoadCardAsync
-        /// </remarks>
-        public virtual void OnInitialized()
-        {
         }
 
         /// <summary>
@@ -178,172 +189,6 @@ namespace Crazor
         }
 
 
-        private async Task<bool> InvokeVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
-        {
-            var verbMethod = GetMethod(action.Verb);
-            if (verbMethod != null)
-            {
-                await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data, cancellationToken));
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Called to initialize cardState
-        /// </summary>
-        /// <param name="cardState"></param>
-        public virtual void LoadState(CardViewState cardState)
-        {
-            if (cardState.Initialized == false)
-            {
-                OnInitialized();
-                cardState.Initialized = true;
-            }
-        }
-
-        /// <summary>
-        /// GetRoute() - returns custom subpath for the view
-        /// </summary>
-        /// <remarks>
-        /// Override this to define custom subroute
-        /// The default is /Cards/{appName/{viewName}/{result of GetRoute()}
-        /// </remarks>
-        /// <returns>relative path to the card for deep linking</returns>
-        public virtual string GetRoute()
-        {
-            return String.Empty;
-        }
-
-        /// <summary>
-        /// Navigate to card by name
-        /// </summary>
-        /// <param name="cardName">name of card </param>
-        /// <param name="model">model to pass</param>
-        public void ShowView(string cardName, object? model = null)
-        {
-            this.App!.ShowView(cardName, model);
-        }
-
-        /// <summary>
-        /// Navigate to view by type
-        /// </summary>
-        /// <typeparam name="T">type of the object to navigate to</typeparam>
-        /// <param name="model">model</param>
-        public void ShowView<T>(object? model = null)
-        {
-            this.App!.ShowView(typeof(T).FullName!, model);
-        }
-
-        /// <summary>
-        /// Replace this view with another one 
-        /// </summary>
-        /// <param name="cardName"></param>
-        /// <param name="model">model to pass</param>
-        public void ReplaceView(string cardName, object? model = null)
-        {
-            this.App!.ReplaceView(cardName, model);
-        }
-
-        /// <summary>
-        /// Replace this view with another one 
-        /// </summary>
-        /// <typeparam name="T">Type to instantiate</typeparam>
-        /// <param name="model">model to pass</param>
-        public void ReplaceView<T>(object? model = null)
-        {
-            this.App!.ReplaceView(typeof(T).FullName!, model);
-        }
-
-        /// <summary>
-        /// Add a banner message to be displayed to the viewer.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="style"></param>
-        public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
-        {
-            this.App?.AddBannerMessage(text, style);
-        }
-
-        /// <summary>
-        /// Close the current card, optionalling returning the result
-        /// </summary>
-        /// <param name="result">the result to return to the current caller</param>
-        public void CloseView(object? result = null)
-        {
-            this.App?.CloseView(new CardResult()
-            {
-                Name = this.Name,
-                Result = result,
-                Success = true
-            });
-        }
-
-        /// <summary>
-        /// Change the taskmodule status
-        /// </summary>
-        /// <param name="status">action to take on closing</param>
-        public void CloseTaskModule(TaskModuleAction status)
-        {
-            App.CloseTaskModule(status);
-        }
-
-        /// <summary>
-        /// Cancel the current card, returning a message
-        /// </summary>
-        /// <param name="message">optional message to return.</param>
-        public void CancelView(string? message = null)
-        {
-            this.App?.CloseView(new CardResult()
-            {
-                Name = this.Name,
-                Message = message,
-                Success = false
-            });
-        }
-
-        /// <summary>
-        /// OnResumeView() - Called when a CardResult has returned back to this view
-        /// </summary>
-        /// <remarks>
-        /// Override this to handle the result that is returned to the card from a child view.
-        /// When a view is resumed because a child view has completed this method will
-        /// be called giving you an opportunity to do something with the result of the child view.
-        /// </remarks>
-        /// <param name="cardResult">the card result</param>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns>task</returns>
-        public virtual async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
-        {
-            await Task.CompletedTask;
-        }
-
-
-        /// <summary>
-        /// Implement this to return search results for a Search command for this view.
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async virtual Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
-        {
-            await Task.CompletedTask;
-            return Array.Empty<SearchResult>();
-        }
-
-        /// <summary>
-        /// Override this to provide dynamic choices for Input.ChoiceSet
-        /// </summary>
-        /// <param name="search">request</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>array of choices</returns>
-        public virtual async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
-        {
-            await Task.CompletedTask;
-            return Array.Empty<AdaptiveChoice>();
-        }
-
         /// <summary>
         /// Bind View to an adaptive card
         /// </summary>
@@ -397,6 +242,191 @@ namespace Crazor
             }
         }
 
+        /// <summary>
+        /// Called to initialize cardState
+        /// </summary>
+        /// <param name="cardState"></param>
+        public virtual void LoadState(CardViewState cardState)
+        {
+            if (cardState.Initialized == false)
+            {
+                // call hook to give cardview opportunity to process data.
+                OnInitialized();
+                cardState.Initialized = true;
+            }
+        }
+
+        /// <summary>
+        /// GetRoute() - returns custom subpath for the view
+        /// </summary>
+        /// <remarks>
+        /// Override this to define custom subroute
+        /// The default is /Cards/{appName/{viewName}/{result of GetRoute()}
+        /// </remarks>
+        /// <returns>relative path to the card for deep linking</returns>
+        public virtual string GetRoute()
+        {
+            return String.Empty;
+        }
+        #endregion -----
+
+        #region  ----- Action Lifecycle Methods ----
+        /// <summary>
+        /// OnInitialized() - Initalize members
+        /// </summary>
+        /// <remarks>
+        /// This will be called only once to initialize the instance data of the cardview.
+        /// This is effectively like a constructor, with no async support.  If you
+        /// want to look up data to look at OnLoadCardAsync
+        /// </remarks>
+        public virtual void OnInitialized()
+        {
+        }
+
+        /// <summary>
+        /// OnResumeView() - Called when a CardResult has returned back to this view
+        /// </summary>
+        /// <remarks>
+        /// Override this to handle the result that is returned to the card from a child view.
+        /// When a view is resumed because a child view has completed this method will
+        /// be called giving you an opportunity to do something with the result of the child view.
+        /// </remarks>
+        /// <param name="cardResult">the card result</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>task</returns>
+        public virtual async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+        }
+
+
+        /// <summary>
+        /// Implement this to return search results for a Search command for this view.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async virtual Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+            return Array.Empty<SearchResult>();
+        }
+
+        /// <summary>
+        /// Override this to provide dynamic choices for Input.ChoiceSet
+        /// </summary>
+        /// <param name="search">request</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>array of choices</returns>
+        public virtual async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+            return Array.Empty<AdaptiveChoice>();
+        }
+        #endregion
+
+        #region ----- Utility Methods -----
+        /// <summary>
+        /// Add a banner message to be displayed to the viewer.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="style"></param>
+        public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
+        {
+            this.App?.AddBannerMessage(text, style);
+        }
+
+        /// <summary>
+        /// Navigate to card by name
+        /// </summary>
+        /// <param name="cardName">name of card </param>
+        /// <param name="model">model to pass</param>
+        public void ShowView(string cardName, object? model = null)
+        {
+            this.App!.ShowView(cardName, model);
+        }
+
+        /// <summary>
+        /// Navigate to view by type
+        /// </summary>
+        /// <typeparam name="T">type of the object to navigate to</typeparam>
+        /// <param name="model">model</param>
+        public void ShowView<T>(object? model = null)
+        {
+            this.App!.ShowView(typeof(T).FullName!, model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one 
+        /// </summary>
+        /// <param name="cardName"></param>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView(string cardName, object? model = null)
+        {
+            this.App!.ReplaceView(cardName, model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one 
+        /// </summary>
+        /// <typeparam name="T">Type to instantiate</typeparam>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView<T>(object? model = null)
+        {
+            this.App!.ReplaceView(typeof(T).FullName!, model);
+        }
+
+        /// <summary>
+        /// Close the current card, optionalling returning the result
+        /// </summary>
+        /// <param name="result">the result to return to the current caller</param>
+        public void CloseView(object? result = null)
+        {
+            this.App?.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Result = result,
+                Success = true
+            });
+        }
+
+        /// <summary>
+        /// Cancel the current card, returning a message
+        /// </summary>
+        /// <param name="message">optional message to return.</param>
+        public void CancelView(string? message = null)
+        {
+            this.App?.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Message = message,
+                Success = false
+            });
+        }
+
+        /// <summary>
+        /// Change the taskmodule status
+        /// </summary>
+        /// <param name="status">action to take on closing</param>
+        public void CloseTaskModule(TaskModuleAction status)
+        {
+            App.CloseTaskModule(status);
+        }
+
+        #endregion
+
+        #region ---- Private Methods ----
+        private async Task<bool> InvokeVerbAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        {
+            var verbMethod = GetMethod(action.Verb);
+            if (verbMethod != null)
+            {
+                await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, (JObject?)this.Action?.Data, cancellationToken));
+                return true;
+            }
+            return false;
+        }
 
         private static List<object?>? GetMethodArgs(MethodInfo? method, JObject? data, CancellationToken cancellationToken)
         {
@@ -509,18 +539,6 @@ namespace Crazor
             this.IsModelValid = validator.TryValidateObject(this, validationResults);
             AddValidationResults(String.Empty, validationResults);
 
-            //var model = ViewContext.ViewData.Model;
-            //if (model != null)
-            //{
-            //    validationResults = new List<ValidationResult>();
-
-            //    if (!validator.TryValidateObjectRecursive(model, validationResults))
-            //    {
-            //        this.IsModelValid = false;
-            //        AddValidationResults($"Model.", validationResults);
-            //    }
-            //}
-
             // for complex types do a recursive deep validation. We can't
             // do this at the root because CardView is too complicated for a deep compare.
             foreach (var property in this.GetType().GetProperties()
@@ -584,7 +602,7 @@ namespace Crazor
             }
             return result;
         }
-
+        #endregion
     }
 
     public class CardView<AppT, ModelT> : CardView<AppT>
