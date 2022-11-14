@@ -60,13 +60,21 @@ namespace Crazor
                 }
             }
 
-            // add in folders with no CardApp
-            foreach (var folder in Directory.EnumerateDirectories(Path.Combine(Environment.CurrentDirectory, $"Cards")))
+            // This slight of hand automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
+            // We do this by enumerating all ICardView implementations 
+            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
             {
-                var appName = Path.GetFileName(folder);
-                if (!cardAppNames.Contains(appName))
+                // .cshtml files class names will be "Cards_{Folder}_{ViewName}" 
+                // we want to register the Folder as the a CardApp if it hasn't been registered already
+                var parts = cardViewType.Name.Split("_");
+                if (parts.Length >= 3 && parts[0].ToLower() == "cards" && parts[2].ToLower() == "default")
                 {
-                    cardAppServices.Add(appName, typeof(CardApp));
+                    var name = parts[1];
+                    if (!cardAppNames.Contains(name))
+                    {
+                        cardAppServices.Add(name, typeof(CardApp));
+                    }
                 }
             }
             cardAppServices.Build();
