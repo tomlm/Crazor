@@ -3,14 +3,14 @@
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
 
-# Data Binding walkthrough
+# Counters example walkthrough
 
-We are going to create a data binding sample application which increments and decrements counters. It will show
+We are going to create a data binding sample application which increments counters. It will show
 
-* [SharedMemory] and [SessionMemory] attributes
-* Hooking up code for verbs
+* **[SharedMemory] and [SessionMemory] attributes**
+* **Hooking verbs to methods**
 
-## 1. Create a folder for your app
+## 1. Create Counters folder for your app in /cards
 
 The **Cards** folder is a special folder that creates an area for your applications to live (just like Pages organizes your web pages). 
 
@@ -18,26 +18,39 @@ The convention is that each app is a sub-folder in the Cards folder, so we creat
 
 ## 2. Create a CountersApp.cs file
 
+On this step we are going to define a **CountersApp** class.  
+
 Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
 
 ```C#
     public class CountersApp : CardApp
     {
-        public CountersApp(IServiceProvider services)
-            : base(services)
-        {
-        }
+        public CountersApp(IServiceProvider services): base(services)
+        { }
 
         [SharedMemory]
         public int SharedCounter { get; set; } = 0;
+
+        [SessionMemory]
+	    public int SessionCounter { get; set; } = 0;
     }
 ```
 
-We have defined a SharedCounter and placed a **[SharedMemory]** attribute on it.  The value for this property will automatically be saved and restored for us with a scope that means all users will see the same value...aka it's shared
+You can see that we have 
+
+* defined a **SharedCounter** property and placed a **[SharedMemory]** attribute on it.  
+* defined a **SessionCounter** property and placed a **[SessionMemory]** attribute on it.
+
+The values defined on the **CountersApp** class are shared by all CardView templates in the folder, and their persistence scope is defined by the attributes we put on it [(go to Memory documentation for more details)](/docs/Memory.md)
 
 ## 3. Create a Default.cshtml file
 
-By default the CountersApp will load the **Default.cshtml** file as the initial view for the application. 
+Just like with HelloWorld, the CountersApp will load the **Default.cshtml** file as the initial view for the application, but this time we are going to 
+
+* Display the value of **App.SharedCounter**  and **App.SessionCounter**
+* Add actions that increment the value of the counter.
+
+You will notice that we use **@inherits CardView<CountersApp>**.  This makes our CardView expose a **App** property as a strongly typed property so we get intellisense over the properties we defined on the class, namely the **SharedCounter** and **SessionCounter** properties.
 
 Create **/Cards/Counters/Default.cshtml**
 
@@ -48,35 +61,21 @@ Create **/Cards/Counters/Default.cshtml**
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
     <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
-
-    <ActionSet>
-        <Action.Execute Title="+ Shared" Verb="OnIncrementShared" />
-    </ActionSet>
-
-    <TextBlock Size="Large">Session Counter:@SessionCounter</TextBlock>
-    <ActionSet>
-        <Action.Execute Title="+ Session" Verb="OnIncrementSession" />
-    </ActionSet>
-
+    <TextBlock Size="Large">Session Counter:@App.SessionCounter</TextBlock>
+    
+    <Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)" />
+    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementSession)" />
 </Card>
 
 @functions {
-    [SessionMemory]
-    public int SessionCounter { get; set; }
-
-    public void OnIncrementSession() => this.SessionCounter++;
-
+    public void OnIncrementSession() => App.SessionCounter++;
     public void OnIncrementShared() => App.SharedCounter++;
 }
 ```
 
 Things to notice:
 
-* We have defined **SessionCounter** as a property of this view
-* We have put a **[SessionMemory]** attribute on it, to say that the value should be persisted with a scope that it is unique for each session.
-* We have methods hooked up to the verbs that simply change the properties.  The method name is the same as the verb name.
-
-
+* We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
 
 That's it.  Now run the application and go to http://localhost:{yourport}/Cards/Counters 
 
@@ -84,4 +83,4 @@ You should see something like this:
 
 ![image-20221103120318266](assets/image-20221103120318266.png)
 
-As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the shared values are shaerd and the session values are per window.
+As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the shared values are shared and the session values are per window.

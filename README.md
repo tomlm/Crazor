@@ -27,7 +27,7 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Rich Data Binding and Validation** - Rich data binding and attribute based validation support.
 * **Built-in Navigation Model** - Crazor implements a navigation model allowing you to do nested calls between screens 
 * **Built-in Teams integrations** - Your card application can be **unfurled via a link**, pop up as a **Task Module**, a **Tab** etc. Just register your app with teams and it just works.
-* **Out of the box card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can follow to interact with your card application.
+* **Built-in Card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can view and interact with the card.
 
 # Installation
 
@@ -42,9 +42,10 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 # Documentation
 
-* [Card Apps](docs/CardApp.md) - How to create a **CardApplication** class
-* [Card Views](docs/CardView.md) - How to define views with **CardView** class and **Razor templates**
-* [Card Memory](docs/Memory.md) - information on persistence and memory model
+* [Card Views](docs/CardView.md) - How to define views with **CardView** and **Razor templates**
+* [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+  * [Card App Memory](docs/Memory.md) - information on persistence and memory model
+
 * [Card Routing](docs/RoutingCards.md) - information on customizing urls to support deep linking into cards
 * [TagHelpers (Advanced)](docs/TagHelpers.md) - How to define reusuable components via custom TagHelpers
 

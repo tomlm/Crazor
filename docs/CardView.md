@@ -22,18 +22,27 @@ To make the .cshtml template a **Crazor template** you insert the **@inherits Ca
 
 ## @inherits CardView<AppT>
 
-The **@inherits CardView<AppT>** defines a **Crazor CardView** template which does not have a **Model** defined.
+The **@inherits CardView** defines a **Crazor CardView** template which does not have a **Model** defined and an untyped **App**.
+
+* It has **App** property of **CardApp**.
+* **Model** is not defined.
+
+
+
+## @inherits CardView<AppT>
+
+The **@inherits CardView<AppT>** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
 
 * It has **App** property of **AppT**.
 
-This allows you to get intellisense and strong type binding to the **CardApp** for your application.
+This allows you to get intellisense and strong type binding over **App** property giving access to custom methods and memory defined on a custom **CardApp** class.
 
 ## @inherits CardView<AppT, ModelT>
 
-The **@inherits CardView<AppT,ModelT>** defines a **Crazor CardView** template with a **Model** defined.
+The **@inherits CardView<AppT,ModelT>** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
 
-* It has an **App property** of **AppT**.
-* It has a **Model property** of **ModelT**
+* It has an **App** property of **AppT**.
+* It has a **Model** property of **ModelT**
 
 This allows you to get intellisense and strong type binding to the **CardApp** for your application and intellisense and strong type binding to a **ModelT** data model.
 
