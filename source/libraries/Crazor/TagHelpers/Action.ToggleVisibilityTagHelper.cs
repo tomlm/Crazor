@@ -14,6 +14,7 @@ namespace Crazor.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("Action.ToggleVisibility")]
+    [RestrictChildren("TargetElement")]
     public class ActionToggleVisibilityTagHelper : ReflectionTagHelper
     {
 
