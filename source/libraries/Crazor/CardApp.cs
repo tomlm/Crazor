@@ -992,7 +992,7 @@ namespace Crazor
         {
             sharedId = null;
             var parts = uri.AbsolutePath.Trim('/').Split('/');
-            app = parts[1] + "App";
+            app = parts[1];
             view = (parts.Length > 2) ? parts[2] : null!;
             path = String.Join('/', parts.Skip(3).ToArray());
             if (!String.IsNullOrEmpty(uri.Query))
