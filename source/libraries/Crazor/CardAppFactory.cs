@@ -14,12 +14,17 @@ namespace Crazor
 
         public CardApp Create(string name)
         {
-            var cardApp = _cardAppFactory.GetByName(name);
-            if (cardApp.GetType() == typeof(CardApp))
+            var cardName = _cardAppFactory.GetNames().SingleOrDefault(cardName => String.Equals(cardName, name, StringComparison.OrdinalIgnoreCase));
+            if (cardName != null)
             {
-                cardApp.Name = name;
+                var cardApp = _cardAppFactory.GetByName(cardName);
+                if (cardApp.GetType() == typeof(CardApp))
+                {
+                    cardApp.Name = cardName;
+                }
+                return cardApp;
             }
-            return cardApp;
+            return null;
         }
     }
 }

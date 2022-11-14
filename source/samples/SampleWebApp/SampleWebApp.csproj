@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Crazor" Version="1.0.0-beta-202211070641" />
+		<PackageReference Include="Crazor" Version="1.0.0-beta-202211141632" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="6.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
