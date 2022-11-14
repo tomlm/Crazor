@@ -80,12 +80,6 @@ namespace Crazor
         public bool IsPreview { get; set; }
 
         /// <summary>
-        /// Untyped cardapp for ICardView interface.
-        /// </summary>
-        CardApp ICardView.App { get => this.App; set => this.App = (AppT)value; }
-
-        #region ---- Core Methods -----
-        /// <summary>
         /// IView->ExecuteAsync is disabled because the default writes the output directly to 
         /// the response, and we need to process it directly.
         /// </summary>
