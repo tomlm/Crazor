@@ -1,17 +1,16 @@
 ﻿@using OpBot.Cards.Planner
-@inherits CardView<PlannerApp>
+@inherits CardView
 
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Hello world!</TextBlock>
-    <Action.Execute Title="Create" Verb="@nameof(OnCreate)"/>
+    <Action.Execute Title="Create" Verb="@nameof(OnCreate)" />
 </Card>
 
 @functions {
 
-    public void OnCreate() {
-        ShowView("Edit", new EditModel {
-            IsEdit = false
-        });
+    public void OnCreate()
+    {
+        ShowView("Edit", new EditModel { IsEdit = false });
     }
 
 }

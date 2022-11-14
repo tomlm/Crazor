@@ -1,9 +1,7 @@
-﻿@using OpBot.Cards.Asset
-@using OpBot.Cards.WorkOrder
-@inherits CardView<AssetApp>
+﻿@using OpBot.Cards.WorkOrder;
+@inherits CardView
 
 <Card Version="1.5">
-    <Version Major="1" Minor="4" />
     <TextBlock Size="Large" Weight="Bolder">Connected Asset</TextBlock>
     <FactSet>
         <Fact Title="Name" Value="Hydraulic Power Unit #3"></Fact>
@@ -19,17 +17,18 @@
         <Action.ShowCard Title="Service History">
             <Card>
                 <TextBlock>3 recent work orders</TextBlock>
-               
+
             </Card>
         </Action.ShowCard>
         <Action.ShowCard Title="Experts">
             <Card>
                 <ColumnSet>
-                    @foreach(var expert in Experts) {
-                    <Column Width="Auto">
-                        <Image Width="50px" Url="@expert.Photo" HorizontalAlignment="Center" />
-                        <TextBlock Wrap="true" Size="Small" HorizontalAlignment="Center">@expert.Name</TextBlock>
-                    </Column>
+                    @foreach (var expert in Experts)
+                    {
+                        <Column Width="Auto">
+                            <Image Width="50px" Url="@expert.Photo" HorizontalAlignment="Center" />
+                            <TextBlock Wrap="true" Size="Small" HorizontalAlignment="Center">@expert.Name</TextBlock>
+                        </Column>
                     }
                 </ColumnSet>
                 <ActionSet>
@@ -38,11 +37,11 @@
             </Card>
         </Action.ShowCard>
     </ActionSet>
-    
+
 </Card>
 
 @functions {
-   
+
 
     public override void OnInitialized()
     {
@@ -51,7 +50,8 @@
 
     public List<Person> Experts { get; set; } = new List<Person>();
 
-    public void ShowHistory() {
+    public void ShowHistory()
+    {
         ShowView("History", this);
     }
 }

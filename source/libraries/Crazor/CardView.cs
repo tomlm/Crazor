@@ -19,12 +19,11 @@ using Diag = System.Diagnostics;
 
 namespace Crazor
 {
-    public class CardView<AppT> : RazorPage, ICardView
+    public class CardViewBase<AppT> : RazorPage, ICardView
         where AppT : CardApp
     {
-
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public CardView()
+        public CardViewBase()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
@@ -43,6 +42,11 @@ namespace Crazor
         /// App for this CardView
         /// </summary>
         public AppT App { get; set; }
+
+        /// <summary>
+        /// IView interface
+        /// </summary>
+        CardApp ICardView.App { get => App; set => App = (AppT)value; }
 
         /// <summary>
         /// Current action being processed.
@@ -91,6 +95,7 @@ namespace Crazor
             return Task.CompletedTask;
         }
 
+        #region ---- Core Methods -----
         /// <summary>
         /// OnInvokeActionAsync() - Called to process an incoming verb action.
         /// </summary>
@@ -605,7 +610,16 @@ namespace Crazor
         #endregion
     }
 
-    public class CardView<AppT, ModelT> : CardView<AppT>
+    public class CardView : CardViewBase<CardApp>
+    {
+    }
+
+    public class CardView<AppT> : CardViewBase<AppT>
+        where AppT : CardApp
+    {
+    }
+
+    public class CardView<AppT, ModelT> : CardViewBase<AppT>
         where AppT : CardApp
         where ModelT : class
     {
@@ -667,6 +681,4 @@ namespace Crazor
             base.LoadState(cardViewState);
         }
     }
-
-
 }

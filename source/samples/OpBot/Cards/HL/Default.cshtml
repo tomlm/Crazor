@@ -132,7 +132,8 @@
 
     public List<string> WorkOrderStatuses { get; set; }
 
-    public void OnStartWork() {
+    public void OnStartWork()
+    {
         App.WorkOrder.SystemStatus = new SystemStatus("In Progress");
         App.WorkOrder.StartTime = DateTime.UtcNow;
         App.WorkOrder.CompleteTime = null;
@@ -153,7 +154,7 @@
 
     public override void OnInitialized()
     {
-        if(App.WorkOrder.PromisedBy == null)
+        if (App.WorkOrder.PromisedBy == null)
             App.WorkOrder.PromisedBy = DateTime.UtcNow.AddHours(24);
 
         WorkOrderStatuses = new List<string> {

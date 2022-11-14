@@ -56,15 +56,10 @@ namespace Crazor
             {
                 new CardViewState(Constants.DEFAULT_VIEW, null)
             };
-            this.CardType = this.GetType().Name;
-            this.Name = CardType.EndsWith("App") ? CardType.Substring(0, CardType.Length - 3) : CardType;
+            this.Name = this.GetType().Name;
+            this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
 
         }
-
-        /// <summary>
-        /// Type of the App.
-        /// </summary>
-        public string CardType { get; private set; }
 
         /// <summary>
         /// Name of the app
@@ -612,7 +607,7 @@ namespace Crazor
         {
             return new SessionData()
             {
-                App = this.CardType,
+                App = this.Name,
                 SharedId = this.SharedId,
                 SessionId = this.SessionId
             };
@@ -984,7 +979,7 @@ namespace Crazor
             }
         }
 
-        protected string? GetKey(string? key) => String.IsNullOrEmpty(key) ? null : $"{CardType}-{key}";
+        protected string? GetKey(string name, string? key) => String.IsNullOrEmpty(key) ? null : $"{this.Name}-{name}-{key}";
 
         /// <summary>
         /// Parse a /cards/{app}/{view}{path} into parts.
@@ -1031,7 +1026,7 @@ namespace Crazor
             // add keys to lookup
             foreach (var memoryAttribute in memoryAttributes)
             {
-                var key = GetKey(memoryAttribute.GetKey(this));
+                var key = GetKey(memoryAttribute.Name, memoryAttribute.GetKey(this));
                 if (key != null && !attributeMap.ContainsKey(key))
                 {
                     attributeMap.Add(key, memoryAttribute);

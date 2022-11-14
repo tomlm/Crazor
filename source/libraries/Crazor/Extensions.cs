@@ -16,6 +16,7 @@ using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.Bot.Schema;
+using System.Xml.Linq;
 
 namespace Crazor
 {
@@ -38,6 +39,7 @@ namespace Crazor
             });
             services.TryAddSingleton<IEncryptionProvider, NoEncryptionProvider>();
             services.TryAddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+            services.TryAddScoped<CardAppFactory>();
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
             services.TryAddScoped<IBot, CardActivityHandler>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -45,12 +47,26 @@ namespace Crazor
 
             // add Apps
             var cardAppServices = services.AddByName<CardApp>();
+            services.AddTransient(typeof(CardApp));
+            HashSet<string> cardAppNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var cardAppType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)))
             {
-                if (cardAppType.Name != nameof(CardApp))
+                if (cardAppType != typeof(CardApp))
                 {
                     services.AddTransient(cardAppType);
-                    cardAppServices.Add(cardAppType.Name, cardAppType);
+                    var name = cardAppType.Name.EndsWith("App") ? cardAppType.Name.Substring(0, cardAppType.Name.Length - 3) : cardAppType.Name;
+                    cardAppNames.Add(name);
+                    cardAppServices.Add(name, cardAppType);
+                }
+            }
+
+            // add in folders with no CardApp
+            foreach (var folder in Directory.EnumerateDirectories(Path.Combine(Environment.CurrentDirectory, $"Cards")))
+            {
+                var appName = Path.GetFileName(folder);
+                if (!cardAppNames.Contains(appName))
+                {
+                    cardAppServices.Add(appName, typeof(CardApp));
                 }
             }
             cardAppServices.Build();
@@ -78,7 +94,7 @@ namespace Crazor
             foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))))
             {
                 var cardViewType = cardView.AsType();
-                if (cardViewType != typeof(CardView<>) && cardViewType != typeof(CardView<,>))
+                if (cardViewType.Name != "CardView`1" && cardViewType.Name != "CardView`2")
                 {
                     services.AddTransient(cardViewType);
                     cardViewServices.Add(cardViewType.FullName, cardViewType);

@@ -1,14 +1,6 @@
-﻿using AdaptiveCards;
-using Microsoft.Bot.Builder;
-using Crazor;
-using Crazor.Attributes;
-using Microsoft.Bot.Schema;
+﻿using Crazor;
 using Newtonsoft.Json;
-using CrazorDemoBot.Cards.HelloWorld;
-using CrazorDemoBot.Cards.ProductCatalog;
-using System.Reflection;
 using System.Text;
-using System.Threading;
 
 namespace CrazorDemoBot.Cards.ProductCatalog
 {

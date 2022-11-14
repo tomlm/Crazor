@@ -4,10 +4,8 @@
 @using Crazor.Attributes
 @using Newtonsoft.Json;
 @using OpBot.Cards.WorkOrder;
-@using OpBot.Cards.WorkOrderDetails
 
-@inherits CardView<WorkOrderDetailsApp>
-
+@inherits CardView
 <Card Version="1.5">
 
     <ColumnSet Style="Emphasis">
@@ -112,14 +110,14 @@
     [BindProperty]
     public string AssignedToUserId { get; set; }
 
-    public void OnAssignTo(bool? assignToSelf) 
+    public void OnAssignTo(bool? assignToSelf)
     {
         WorkOrder.SystemStatus = new SystemStatus("Scheduled");
         if (assignToSelf == true)
         {
             WorkOrder.AssignTo(Person.DEMO_USER);
         }
-        else 
+        else
         {
             WorkOrder.AssignTo(AssignedToUserId);
         }

@@ -18,7 +18,7 @@ namespace Crazor
     {
         protected IServiceProvider _serviceProvider;
         protected IConfiguration _configuration;
-        protected IServiceByNameFactory<CardApp> _cardApps;
+        protected CardAppFactory _cardAppFactory;
         protected IEncryptionProvider _encryptionProvider;
         protected ILogger? _logger;
         protected IStorage _storage;
@@ -27,7 +27,7 @@ namespace Crazor
         {
             _serviceProvider = services;
             _configuration = services.GetRequiredService<IConfiguration>();
-            _cardApps = services.GetRequiredService<IServiceByNameFactory<CardApp>>();
+            _cardAppFactory = services.GetRequiredService<CardAppFactory>();
             _encryptionProvider = services.GetRequiredService<IEncryptionProvider>();
             _logger = services.GetService<ILogger>();
             _storage = services.GetRequiredService<IStorage>();
@@ -141,7 +141,7 @@ namespace Crazor
 
             var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(view, path);
 
-            var cardApp = _cardApps.GetRequiredByName(app);
+            var cardApp = _cardAppFactory.Create(app);
 
             await cardApp.LoadAppAsync(sharedId, sessionId, loadRouteActivity, cancellationToken);
 
@@ -165,7 +165,7 @@ namespace Crazor
 
         protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, SessionData sessionData, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            var cardApp = _cardApps.GetRequiredByName(sessionData.App);
+            var cardApp = _cardAppFactory.Create(sessionData.App);
 
             await cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, (Activity)turnContext.Activity, cancellationToken);
             cardApp.Action = invokeValue.Action;

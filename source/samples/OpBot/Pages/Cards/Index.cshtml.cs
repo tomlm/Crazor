@@ -11,13 +11,13 @@ namespace PhysOpBot.Pages.Cards
     public class CardHostModel : PageModel
     {
         private static HttpClient _httpClient = new HttpClient();
-        private IServiceByNameFactory<CardApp> _appFactory;
+        private CardAppFactory _cardAppFactory;
         private IConfiguration _configuration;
 
-        public CardHostModel(IConfiguration configuration, IServiceByNameFactory<CardApp> cardFactory)
+        public CardHostModel(IConfiguration configuration, CardAppFactory cardAppFactory)
         {
             _configuration = configuration;
-            _appFactory = cardFactory;
+            _cardAppFactory = cardAppFactory;
             BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
             ChannelId = _configuration.GetValue<Uri>("HostUri").Host;
         }
@@ -36,16 +36,11 @@ namespace PhysOpBot.Pages.Cards
 
         public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
-            if (!app.ToLower().EndsWith("app"))
-            {
-                app += "App";
-            }
-
             var sessionId = Utils.GetNewId();
 
             this.Token = await CardAppController.GetTokenAsync(_configuration);
 
-            this.CardApp = _appFactory.GetRequiredByName(app);
+            this.CardApp = _cardAppFactory.Create(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
 
             // create card

@@ -1,26 +1,25 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Bot.Schema;
-using Neleus.DependencyInjection.Extensions;
 using Crazor.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Neleus.DependencyInjection.Extensions;
 
 namespace Crazor.HostPage.Pages.Cards
 {
     public class CardHostModel : PageModel
     {
         private static HttpClient _httpClient = new HttpClient();
-        private IServiceByNameFactory<CardApp> _appFactory;
+        private CardAppFactory _cardAppFactory;
         private IConfiguration _configuration;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public CardHostModel(IConfiguration configuration, IServiceByNameFactory<CardApp> cardFactory)
+        public CardHostModel(IConfiguration configuration, CardAppFactory cardAppFactory)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _configuration = configuration;
-            _appFactory = cardFactory;
+            _cardAppFactory = cardAppFactory;
             BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
             ChannelId = _configuration.GetValue<Uri>("HostUri").Host;
         }
@@ -37,11 +36,6 @@ namespace Crazor.HostPage.Pages.Cards
 
         public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
         {
-            if (!app.ToLower().EndsWith("app"))
-            {
-                app += "App";
-            }
-
             string userId = null;
             if (this.Request.Cookies.TryGetValue("userId", out var uid))
             {
@@ -53,7 +47,7 @@ namespace Crazor.HostPage.Pages.Cards
             }
             var sessionId = Utils.GetNewId();
 
-            this.CardApp = _appFactory.GetRequiredByName(app);
+            this.CardApp = _cardAppFactory.Create(app);
             ArgumentNullException.ThrowIfNull(this.CardApp);
 
             // create card

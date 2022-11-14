@@ -23,7 +23,7 @@ namespace Crazor
         protected readonly IEncryptionProvider _encryptionProvider;
         protected readonly IServiceProvider _serviceProvider;
         protected readonly ILogger<CardActivityHandler>? _logger;
-        protected readonly IServiceByNameFactory<CardApp> _apps;
+        protected readonly CardAppFactory _cardAppFactory;
         protected readonly IServiceByNameFactory<CardTabModule> _tabs;
         protected readonly IConfiguration _configuration;
         
@@ -40,7 +40,7 @@ namespace Crazor
             _serviceProvider = serviceProvider;
             _configuration = _serviceProvider.GetRequiredService<IConfiguration>();
             _encryptionProvider = _serviceProvider.GetService<IEncryptionProvider>();
-            _apps = _serviceProvider.GetRequiredService<IServiceByNameFactory<CardApp>>();
+            _cardAppFactory = _serviceProvider.GetRequiredService<CardAppFactory>();
             _tabs = _serviceProvider.GetRequiredService<IServiceByNameFactory<CardTabModule>>();
             _logger = _serviceProvider.GetService<ILogger<CardActivityHandler>>();
         }
@@ -56,7 +56,7 @@ namespace Crazor
         /// <returns></returns>
         public virtual async Task<CardApp> LoadAppAsync(string app, string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
         {
-            var cardApp = _apps.GetRequiredByName(app);
+            var cardApp = _cardAppFactory.Create(app);
             ArgumentNullException.ThrowIfNull(cardApp);
             await cardApp.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
             return cardApp;
