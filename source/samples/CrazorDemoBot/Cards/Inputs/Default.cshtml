@@ -12,13 +12,11 @@
     <TextBlock>Password: @Data.Password</TextBlock>
     <TextBlock>IsCool: @Data.IsCool</TextBlock>
     <TextBlock>Favorite Pet: @Data.FavoritePet</TextBlock>
-    <TextBlock>Person: @Data.Person</TextBlock>
 
     <Action.Execute Title="Edit" Verb="@nameof(OnEdit)"/>
 </Card>
 
 @functions {
-    [SessionMemory]
     public InputsModel Data { get; set; } = new InputsModel();
 
     public void OnEdit()

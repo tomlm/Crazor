@@ -51,18 +51,17 @@
 </Card>
 
 @functions {
-    [SessionMemory]
     [BindProperty]
     [Required]
     [StringLength(100)]
     public string? Query { get; set; }
 
-    [SessionMemory]
     [BindProperty]
     public int Offset { get; set; }
 
     public const int PageSize = 5;
 
+    [TempMemory]
     public IList<WebPage> Results { get; set; } = new List<WebPage>();
 
     public bool HasNext() 

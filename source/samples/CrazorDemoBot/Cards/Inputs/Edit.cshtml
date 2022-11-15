@@ -12,9 +12,6 @@
     <Input.Text Binding="Model.Password" />
     <Input.Toggle Binding="Model.IsCool" />
     <Input.ChoiceSet Binding="Model.FavoritePet" />
-    <Input.ChoiceSet Binding="Model.Person" IsMultiSelect="false" Style="Filtered">
-        <Data.Query Dataset="graph.microsoft.com/users" />
-    </Input.ChoiceSet>
     
     <Action.Cancel />
     <Action.OK />

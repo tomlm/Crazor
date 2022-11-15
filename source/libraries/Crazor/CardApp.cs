@@ -23,6 +23,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Neleus.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 
 namespace Crazor
 {
@@ -204,7 +205,7 @@ namespace Crazor
                         System.Diagnostics.Debug.WriteLine("WARNING: 5 ShowViews() in one turn attempted. Loop stopped.");
                     }
 
-                    SaveCardState(this.CallStack[0], this.CurrentView);
+                    SaveCardViewState(this.CallStack[0], this.CurrentView);
                 }
             }
             catch (Exception err)
@@ -335,7 +336,7 @@ namespace Crazor
         /// <param name="model"></param>
         public void ShowView(string cardName, object? model = null)
         {
-            SaveCardState(this.CallStack[0], this.CurrentView);
+            SaveCardViewState(this.CallStack[0], this.CurrentView);
             var cardState = new CardViewState(cardName, model);
             CallStack.Insert(0, cardState);
             Action!.Verb = Constants.SHOWVIEW_VERB;
@@ -458,7 +459,7 @@ namespace Crazor
                 {
                     // this is ShowCard() embedded, Ick. 
                     // The issue is we don't want to reset the verb, need to clean this up
-                    SaveCardState(this.CallStack[0], this.CurrentView);
+                    SaveCardViewState(this.CallStack[0], this.CurrentView);
                     var cardState = new CardViewState(loadRoute.View!);
                     CallStack.Insert(0, cardState);
                     SetCurrentView(cardState);
@@ -543,7 +544,7 @@ namespace Crazor
             cardView.Name = cardState.Name;
 
             // rester card SessionMemory properties
-            LoadCardState(cardState, cardView);
+            LoadCardViewState(cardState, cardView);
 
             ITempDataProvider tempDataProvider;
             ActionContext actionContext;
@@ -936,15 +937,22 @@ namespace Crazor
             }
         }
 
+        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>()
+        {
+            "CardView",
+            "CardViewBase`1",
+            "RazorPage",
+            "RazorPageBase"
+        };
+
         /// <summary>
         /// Copy data from cardState onto instantiated card.
         /// </summary>
         /// <param name="cardState"></param>
         /// <param name="cardView"></param>
-        private static void LoadCardState(CardViewState cardState, ICardView cardView)
+        private static void LoadCardViewState(CardViewState cardState, ICardView cardView)
         {
-            foreach (var property in cardView.GetType().GetProperties()
-                                                        .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
+            foreach (var property in cardView.GetType().GetProperties().Where(prop => PersistProperty(prop)))
             {
                 if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
                 {
@@ -952,16 +960,29 @@ namespace Crazor
                 }
             }
         }
+        private static bool PersistProperty(PropertyInfo propertyInfo)
+        {
+            if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
+                return true;
 
+            if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
+                return false;
 
+            if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
+                return false;
 
-        private static void SaveCardState(CardViewState state, ICardView cardView)
+            if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                return false;
+            
+            return true;
+        }
+
+        private static void SaveCardViewState(CardViewState state, ICardView cardView)
         {
             if (cardView != null)
             {
                 // capture all properties on CardView which are not on base type and not ignored.
-                foreach (var property in cardView.GetType().GetProperties()
-                                                            .Where(prop => prop.GetCustomAttribute<SessionMemoryAttribute>() != null))
+                foreach (var property in cardView.GetType().GetProperties().Where(prop => PersistProperty(prop)))
                 {
                     var val = property.GetValue(cardView);
                     if (val != null)

@@ -48,19 +48,17 @@
         return "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
     }
 
-    [SessionMemory]
     [BindProperty]
     [Required]
     public string? Search { get; set; }
 
-    [SessionMemory]
     [BindProperty]
     public int Skip { get; set; }
 
-    [SessionMemory]
     [BindProperty]
     public int Take { get; set; } = 5;
 
+    [TempMemory]
     public NugetPackage[] Packages { get; set; } = Array.Empty<NugetPackage>();
 
     public async Task OnSearch(CancellationToken cancellationToken)

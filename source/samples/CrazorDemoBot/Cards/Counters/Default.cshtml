@@ -10,20 +10,22 @@
         <Action.Execute Title="- Shared" Verb="@nameof(OnDecrementShared)" />
     </ActionSet>
 
-    <TextBlock Size="Large">Session Counter:@App.SessionCounter</TextBlock>
+    <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
     <ActionSet>
-        <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementSession)" />
-        <Action.Execute Title="- Session" Verb="@nameof(OnDecrementSession)" />
+        <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
+        <Action.Execute Title="- Session" Verb="@nameof(OnDecrement)" />
     </ActionSet>
 
 </Card>
 
 @functions {
-    public void OnIncrementSession()
-        => this.App.SessionCounter++;
+    public int Counter { get; set; }
 
-    public void OnDecrementSession()
-        => this.App.SessionCounter--;
+    public void OnIncrement()
+        => this.Counter++;
+
+    public void OnDecrement()
+        => this.Counter--;
 
     public void OnIncrementShared()
         => App.SharedCounter++;

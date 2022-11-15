@@ -52,7 +52,5 @@ namespace CrazorDemoBot.Cards.Inputs
         [Required]
         public Pets? FavoritePet { get; set; }
 
-        [Required]
-        public string Person { get; set; }
     }
 }
