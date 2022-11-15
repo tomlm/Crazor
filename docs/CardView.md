@@ -384,7 +384,6 @@ namespace Example
 {
     public class MyCodeView : CardView<CodeOnlyViewApp>
     {
-        [SessionMemory]
         public int Counter { get; set; }
 
         public override async Task<AdaptiveCard?> RenderViewAsync(bool isPreview, CancellationToken cancellationToken)

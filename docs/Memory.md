@@ -26,6 +26,7 @@ When you put a memory attribute on a property you are defining the **"scope"** o
 | ----------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | **[SharedMemory]**                        | Bound to the value of **App.SharedId**               | Using **[SharedMemory]** scopes the property to the value for **App.SharedId**, which is built into the Uri and so fixed and shared across all host applications as that same uri is used. |
 | **[SessionMemory]**                       | Bound to the value of **App.SessionId**              | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **App.SessionId**. It is managed directly by Crazor. |
+| **[TempMemory]**                          | Not bound                                            | Using **[TempMemory]** makes the property not persist at all, it will be reset to default value on each action. |
 | **[UserMemory]**                          | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
 | **[ConversationMemory]**                  | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
 | **[TimeMemory(pattern)]**                 | Bound to the **current date** using **pattern**      | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to the pattern 20221108, effectively the day as a key. |
@@ -40,7 +41,7 @@ When you put a memory attribute on a property you are defining the **"scope"** o
 >
 > * **CardApp** supports all **Memory** attributes
 >
-> * **CardView** supports only **[SessionMemory]** attributes, because the call stack of cards and their state are stored in application CardStack property which is has session scope attribute on it.
+> * **CardView** the default for properties is **[SessionMemory]**.  You can disable persistence for temporary properties by applying **[TempMemory]** attribute. No other memory attributes are supported on the card view properties.
 
 
 

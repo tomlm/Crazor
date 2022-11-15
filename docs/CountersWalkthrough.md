@@ -30,16 +30,12 @@ Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
 
         [SharedMemory]
         public int SharedCounter { get; set; } = 0;
-
-        [SessionMemory]
-	    public int SessionCounter { get; set; } = 0;
     }
 ```
 
 You can see that we have 
 
 * defined a **SharedCounter** property and placed a **[SharedMemory]** attribute on it.  
-* defined a **SessionCounter** property and placed a **[SessionMemory]** attribute on it.
 
 The values defined on the **CountersApp** class are shared by all CardView templates in the folder, and their persistence scope is defined by the attributes we put on it [(go to Memory documentation for more details)](/docs/Memory.md)
 
@@ -61,20 +57,23 @@ Create **/Cards/Counters/Default.cshtml**
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
     <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
-    <TextBlock Size="Large">Session Counter:@App.SessionCounter</TextBlock>
+    <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
     
     <Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)" />
-    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementSession)" />
+    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementLocal)" />
 </Card>
 
 @functions {
-    public void OnIncrementSession() => App.SessionCounter++;
+    public int Counter { get; set; }
+
+    public void OnIncrementLocal() => Counter++;
     public void OnIncrementShared() => App.SharedCounter++;
 }
 ```
 
 Things to notice:
 
+* The local property **Counter** is automatically persisted with session scope as part of the card view. *All properties on a CardView are persisted as session scope, unless you opt out by using **[TempMemory]** attribute*
 * We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
 
 That's it.  Now run the application and go to http://localhost:{yourport}/Cards/Counters 
