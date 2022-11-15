@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpBot", "Samples\OpBot\OpBot.csproj", "{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor", "Libraries\Crazor\Crazor.csproj", "{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCards", "Libraries\AdaptiveCards\AdaptiveCards.csproj", "{D4643763-0BBF-4729-8F46-837E968940D9}"
@@ -34,18 +32,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Debug|arm64.Build.0 = Debug|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Debug|x86.Build.0 = Debug|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Release|arm64.ActiveCfg = Release|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Release|arm64.Build.0 = Release|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Release|x86.ActiveCfg = Release|Any CPU
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D}.Release|x86.Build.0 = Release|Any CPU
 		{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1}.Debug|arm64.ActiveCfg = Debug|Any CPU
@@ -99,7 +85,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A1EEAC44-3C78-49C8-9B67-B5B77FA0C58D} = {31DF7F00-4530-455D-A982-37E67AA32272}
 		{05B912AE-57FC-4319-B31D-9F5BFA3D4ED1} = {8EBC7F5A-9447-4752-B1C1-557852038A90}
 		{D4643763-0BBF-4729-8F46-837E968940D9} = {8EBC7F5A-9447-4752-B1C1-557852038A90}
 		{16AEE6A2-0D16-424A-8845-D29AA9494474} = {058D5B6C-56D5-4FB8-8141-08C829581193}
