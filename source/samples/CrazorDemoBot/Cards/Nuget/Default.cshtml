@@ -26,7 +26,7 @@
             <SelectAction>
                 <Action.Execute Verb="OnDetails">{ "packageId":"@package.Id" }</Action.Execute>
             </SelectAction>
-            <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl)">@package..Description</ThumbnailCard>
+            <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl!)">@package.Description</ThumbnailCard>
             <ActionSet>
                 <Action.OpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@package.Id" />
                 @if (!String.IsNullOrEmpty(package.ProjectUrl) && Uri.IsWellFormedUriString(package.ProjectUrl, UriKind.Absolute))

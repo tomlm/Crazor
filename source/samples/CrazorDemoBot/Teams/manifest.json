@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
-  "version": "1.0.17",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "version": "1.0.23",
   "manifestVersion": "1.14",
   "id": "7b042a98-e2b4-428d-a1d0-753b4ddf8c0c",
   "packageName": "com.package.name",
   "name": {
-    "short": "CrazorDemoBot",
-    "full": "CrazorDemoBot - Demo Crazor Cards"
+    "short": "Crazor",
+    "full": "Crazor - Demo Crazor Cards"
   },
   "developer": {
     "name": "Microsoft",
@@ -16,8 +16,8 @@
     "termsOfUseUrl": "https://crazordemobot.azurewebsites.net/"
   },
   "description": {
-    "short": "CrazorDemoBot",
-    "full": "CrazorDemoBot - Demo Crazor Cards"
+    "short": "Crazor Demo",
+    "full": "Crazor Demo Sample cards"
   },
   "icons": {
     "outline": "outline.png",
@@ -141,21 +141,7 @@
           "type": "query",
           "description": "Search Nuget for packages",
           "title": "Nuget",
-          "initialRun": true,
-          "parameters": [
-            {
-              "name": "search",
-              "description": "Enter in package name you want",
-              "title": "Package"
-            }
-          ]
-        },
-        {
-          "id": "/Cards/Nuget/Details2",
-          "type": "query",
-          "description": "Search Nuget2 for packages",
-          "title": "Nuget2",
-          "initialRun": true,
+          "initialRun": false,
           "parameters": [
             {
               "name": "search",
@@ -184,7 +170,6 @@
   ],
   "authorization": {
     "permissions": {
-      "orgWide": [],
       "resourceSpecific": []
     }
   }
