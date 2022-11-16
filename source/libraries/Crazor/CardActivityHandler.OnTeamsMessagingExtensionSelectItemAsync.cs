@@ -26,9 +26,40 @@ namespace Crazor
         /// <param name="action"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject query, CancellationToken cancellationToken)
+        protected async override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject value, CancellationToken cancellationToken)
         {
-            return base.OnTeamsMessagingExtensionSelectItemAsync(turnContext, query, cancellationToken);
+            string route = (string)value["route"]!;
+            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), route);
+
+            var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
+
+            await cardApp.OnActionExecuteAsync(cancellationToken);
+
+            await cardApp.SaveAppAsync(cancellationToken);
+
+            var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
+
+            var preview = new Attachment(
+                contentType: "application/vnd.microsoft.card.thumbnail",
+                content: new ThumbnailCard(
+                    title: "Card",
+                    subtitle: "",
+                    buttons: new List<CardAction>()
+                    {
+                        new CardAction() { Type = "openUrl", Title = "View card", Value = uri.AbsoluteUri }
+                    })
+            );
+
+            return new MessagingExtensionResponse(
+                new MessagingExtensionResult()
+                {
+                    Type = "result",
+                    AttachmentLayout = AttachmentLayoutTypes.List,
+                    Attachments = new List<MessagingExtensionAttachment>()
+                    {
+                        new MessagingExtensionAttachment(contentType: AdaptiveCard.ContentType, content: card, preview: preview)
+                    }
+                });
         }
     }
 }

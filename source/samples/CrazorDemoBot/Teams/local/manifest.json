@@ -1,0 +1,190 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "version": "1.0.24",
+  "manifestVersion": "1.14",
+  "id": "31db9f35-0c00-460a-bac4-4d7d64f5ecc8",
+  "packageName": "com.package.name",
+  "name": {
+    "short": "Crazor-Dev",
+    "full": "Crazor Dev - Demo Crazor Cards"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "mpnId": "",
+    "websiteUrl": "https://crazordemobot.azurewebsites.net/",
+    "privacyUrl": "https://crazordemobot.azurewebsites.net/",
+    "termsOfUseUrl": "https://crazordemobot.azurewebsites.net/"
+  },
+  "description": {
+    "short": "Crazor Demo - dev",
+    "full": "Crazor Demo Dev Sample cards"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "/Cards/Addresses",
+      "name": "Addresses",
+      "contentBotId": "31db9f35-0c00-460a-bac4-4d7d64f5ecc8",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "CrazorDemoBot.Cards.AllCardsTab",
+      "name": "Cards",
+      "contentBotId": "31db9f35-0c00-460a-bac4-4d7d64f5ecc8",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "31db9f35-0c00-460a-bac4-4d7d64f5ecc8",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "31db9f35-0c00-460a-bac4-4d7d64f5ecc8",
+      "commands": [
+        {
+          "id": "/Cards/Addresses/Add",
+          "type": "action",
+          "title": "Add new address",
+          "description": "Add an address for today",
+          "initialRun": true,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "taskInfo": {
+            "title": "Add Address",
+            "width": "small",
+            "height": "small"
+          }
+        },
+        {
+          "id": "/Cards/TaskModule/Edit",
+          "type": "action",
+          "title": "Test TaskModule",
+          "description": "Test Task Module",
+          "initialRun": true,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "taskInfo": {
+            "title": "Test TaskModule",
+            "width": "small",
+            "height": "small"
+          }
+        },
+        {
+          "id": "/Cards/Wordle",
+          "type": "action",
+          "title": "Play Wordle",
+          "description": "Play a game of worlde",
+          "initialRun": true,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "taskInfo": {
+            "title": "Wordle",
+            "width": "small",
+            "height": "small"
+          }
+        },
+        {
+          "id": "/Cards/Dice/Settings",
+          "type": "action",
+          "title": "Create Dice card",
+          "description": "Create a dice card to share",
+          "initialRun": true,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "taskInfo": {
+            "title": "Create Dice Card",
+            "width": "small",
+            "height": "small"
+          }
+        },
+        {
+          "id": "/Cards/Cards",
+          "type": "query",
+          "description": "Search cards",
+          "title": "Cards",
+          "initialRun": false,
+          "parameters": [
+            {
+              "name": "search",
+              "description": "Enter in card you want to create",
+              "title": "Card name"
+            }
+          ]
+        },
+        {
+          "id": "/Cards/Nuget",
+          "type": "query",
+          "description": "Search Nuget for packages",
+          "title": "Nuget",
+          "initialRun": false,
+          "parameters": [
+            {
+              "name": "search",
+              "description": "Enter in package name you want",
+              "title": "Package"
+            }
+          ]
+        }
+      ],
+      "canUpdateConfiguration": true,
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "crazordemobot.azurewebsites.net"
+            ],
+            "supportsAnonymizedPayloads": false
+          }
+        }
+      ]
+    }
+  ],
+  "validDomains": [
+    "crazordemobot.azurewebsites.net"
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": []
+    }
+  }
+}

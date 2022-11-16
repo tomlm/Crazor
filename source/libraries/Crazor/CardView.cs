@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
-using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
@@ -298,19 +297,6 @@ namespace Crazor
             await Task.CompletedTask;
         }
 
-
-        /// <summary>
-        /// Implement this to return search results for a Search command for this view.
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async virtual Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
-        {
-            await Task.CompletedTask;
-            return Array.Empty<SearchResult>();
-        }
 
         /// <summary>
         /// Override this to provide dynamic choices for Input.ChoiceSet

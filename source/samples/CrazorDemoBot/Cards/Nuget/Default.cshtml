@@ -24,7 +24,7 @@
     {
         <Container Separator="true">
             <SelectAction>
-                <Action.Execute Verb="OnDetails">{ "packageId":"@package.Id" }</Action.Execute>
+                <Action.Execute Verb="@nameof(OnSelectPackage)">{ "packageId":"@package.Id" }</Action.Execute>
             </SelectAction>
             <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl!)">@package.Description</ThumbnailCard>
             <ActionSet>
@@ -78,9 +78,9 @@
         Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
     }
 
-    public async Task OnDetails(string packageId, CancellationToken cancellationToken)
+    public async Task OnSelectPackage(string packageId, CancellationToken cancellationToken)
     {
         var package = await App.GetNugetPackage(packageId, cancellationToken);
-        ShowView("Details", package);
+        ShowView("Package", package);
     }
 }

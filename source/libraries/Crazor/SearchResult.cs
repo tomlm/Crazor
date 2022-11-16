@@ -30,8 +30,8 @@ namespace Crazor
         public string? ImageUrl { get; set; }
 
         /// <summary>
-        /// Model to bind to the card view
+        /// Route to the card to display if user selects it.
         /// </summary>
-        public object? Model { get; set; }
+        public string Route { get; set; }
     }
 }

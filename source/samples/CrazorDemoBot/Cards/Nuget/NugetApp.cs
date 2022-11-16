@@ -27,5 +27,25 @@ namespace CrazorDemoBot.Cards.NugetSearch
             var searchResult = JsonConvert.DeserializeObject<NugetSearchResponse>(json)!;
             return searchResult.Packages;
         }
+
+        /// <summary>
+        /// Implement search 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async override Task<SearchResult[]> OnSearchQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        {
+            var searchTerm = query.Parameters.SingleOrDefault(p => p.Name == "search")?.Value.ToString() ?? String.Empty;
+            var packages = await SearchNugetPackages(searchTerm, query.QueryOptions.Skip ?? 0, query.QueryOptions.Count ?? 20, cancellationToken);
+            return packages.Select(package => new SearchResult()
+            {
+                Title = package.Title!,
+                Subtitle = package.Version!,
+                Text = package.Description!,
+                ImageUrl = package.IconUrl! ?? "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png",
+                Route = $"/Cards/Nuget/Package/{package.Id}"
+            }).ToArray();
+        }
     }
 }

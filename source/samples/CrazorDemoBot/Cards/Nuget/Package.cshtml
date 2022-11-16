@@ -46,23 +46,4 @@
         return (!String.IsNullOrEmpty(Model.IconUrl) && Uri.IsWellFormedUriString(Model.IconUrl, UriKind.Absolute))
         ? Model.IconUrl : "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
     }
-
-    // This CardView is registered as a search command, which causes this method will be called to perform the search
-    // Each SearchResult.Model that is returned is bound to this template and returned to the caller as a card.
-    public async override Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken)
-    {
-        var searchTerm = query.Parameters.SingleOrDefault(p => p.Name == "search")?.Value.ToString() ?? String.Empty;
-        var packages = await App.SearchNugetPackages(searchTerm, query.QueryOptions.Skip ?? 0, query.QueryOptions.Count ?? 20, cancellationToken);
-        return packages.Select(package =>
-        {
-            return new SearchResult()
-                {
-                    Title = package.Title!,
-                    Subtitle = package.Version!,
-                    Text = package.Description!,
-                    ImageUrl = package.IconUrl! ?? "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png",
-                    Model = package
-                };
-        }).ToArray();
-    }
 }

@@ -58,14 +58,6 @@ namespace Crazor.Interfaces
         Task OnResumeView(CardResult screenResult, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Called to get searchresults for a cardview.
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<SearchResult[]> OnSearch(MessagingExtensionQuery query, CancellationToken cancellationToken);
-
-        /// <summary>
         /// Called to search for choices.
         /// </summary>
         /// <param name="search"></param>

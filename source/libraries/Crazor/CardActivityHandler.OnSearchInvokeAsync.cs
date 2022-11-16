@@ -38,7 +38,7 @@ namespace Crazor
 
             var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
 
-            var result = await cardApp.OnSearchInvokeAsync(searchInvoke, cancellationToken);
+            var result = await cardApp.OnSearchChoicesAsync(searchInvoke, cancellationToken);
 
             await cardApp.SaveAppAsync(cancellationToken);
 

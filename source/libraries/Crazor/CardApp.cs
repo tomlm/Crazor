@@ -258,7 +258,7 @@ namespace Crazor
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public virtual async Task<AdaptiveCardInvokeResponse> OnSearchInvokeAsync(SearchInvoke searchInvoke, CancellationToken cancellationToken)
+        public virtual async Task<AdaptiveCardInvokeResponse> OnSearchChoicesAsync(SearchInvoke searchInvoke, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(CurrentView);
             Diag.Trace.WriteLine($"------- OnSearch({searchInvoke.Dataset}, {searchInvoke.QueryText})-----");
@@ -274,6 +274,18 @@ namespace Crazor
         }
 
         /// <summary>
+        /// Called to get searchresults 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<SearchResult[]> OnSearchQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Array.Empty<SearchResult>());
+        }
+
+
+        /// <summary>
         /// lower level method to handle search command
         /// </summary>
         /// <param name="query"></param>
@@ -282,36 +294,34 @@ namespace Crazor
         public virtual async Task<MessagingExtensionResponse> OnMessagingExtensionQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
             // do the search
-            var searchResults = await CurrentView.OnSearch(query, cancellationToken);
+            var searchResults = await OnSearchQueryAsync(query, cancellationToken);
 
             // turn into attachments
             List<MessagingExtensionAttachment> attachments = new List<MessagingExtensionAttachment>();
             foreach (var searchResult in searchResults)
             {
-                // replaceview with new view
-                var cardState = new CardViewState(this.CurrentCard, searchResult.Model);
-                this.CallStack[0] = cardState;
-                Action!.Verb = Constants.SHOWVIEW_VERB;
-
-                SetCurrentView(cardState);
-
-                AdaptiveCard card = await this.RenderCardAsync(isPreview: true, cancellationToken);
+                //// replaceview with new view
+                //var cardState = new CardViewState(this.CurrentCard, searchResult.Model);
+                //this.CallStack[0] = cardState;
+                //Action!.Verb = Constants.SHOWVIEW_VERB;
+                //SetCurrentView(cardState);
+                //AdaptiveCard card = await this.RenderCardAsync(isPreview: true, cancellationToken);
 
                 var attachment = new MessagingExtensionAttachment()
                 {
-                    ContentType = AdaptiveCard.ContentType,
-                    Content = card,
-                    Preview = new MessagingExtensionAttachment()
+                    ContentType = ThumbnailCard.ContentType,
+                    Content = new ThumbnailCard()
                     {
-                        ContentType = ThumbnailCard.ContentType,
-                        Content = new ThumbnailCard()
-                        {
-                            Title = searchResult.Title,
-                            Subtitle = searchResult.Subtitle,
-                            Text = searchResult.Text,
-                            Images = !String.IsNullOrEmpty(searchResult.ImageUrl) ?
+                        Title = searchResult.Title,
+                        Subtitle = searchResult.Subtitle,
+                        Text = searchResult.Text,
+                        Images = !String.IsNullOrEmpty(searchResult.ImageUrl) ?
                                 new List<CardImage>() { new CardImage(searchResult.ImageUrl, alt: searchResult.Title) } :
-                                null
+                                null,
+                        Tap = new CardAction()
+                        {
+                            Type = "invoke",
+                            Value = JObject.FromObject(new { route = searchResult.Route })
                         }
                     }
                 };
