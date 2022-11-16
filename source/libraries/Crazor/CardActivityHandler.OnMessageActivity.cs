@@ -23,21 +23,26 @@ namespace Crazor
             IMessageActivity message = turnContext.Activity.AsMessageActivity();
             if (message != null)
             {
-                var app = turnContext.Activity.RemoveRecipientMention()?.Trim() ?? String.Empty;
-                if (app.ToLower().EndsWith("app"))
+                var input = turnContext.Activity.RemoveRecipientMention()?.Trim() ?? String.Empty;
+                if (input.Contains("insert"))
                 {
-                    var cardApp = await LoadAppAsync((Activity)turnContext.Activity, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
-                    
-                    await cardApp.OnActionExecuteAsync(cancellationToken);
+                    var app = input.Replace("insert", "").Trim();
 
-                    await cardApp.SaveAppAsync(cancellationToken);
+                    if (_cardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
+                    {
+                        var cardApp = await LoadAppAsync((Activity)turnContext.Activity, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
 
-                    var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+                        await cardApp.OnActionExecuteAsync(cancellationToken);
 
-                    var response = Activity.CreateMessageActivity();
-                    response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
+                        await cardApp.SaveAppAsync(cancellationToken);
 
-                    await turnContext.SendActivityAsync(response, cancellationToken);
+                        var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+
+                        var response = Activity.CreateMessageActivity();
+                        response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
+
+                        await turnContext.SendActivityAsync(response, cancellationToken);
+                    }
                 }
             }
         }

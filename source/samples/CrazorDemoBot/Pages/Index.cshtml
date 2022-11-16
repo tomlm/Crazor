@@ -3,9 +3,17 @@
 @using System.Reflection
 @using Neleus.DependencyInjection.Extensions
 @inject IServiceByNameFactory<CardApp> serviceByName
+@inject IConfiguration configuration
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+}
+@{
+    var hostUri = configuration.GetValue<Uri>("HostUri");
+}
+@if (hostUri.Host.Contains("ngrok"))
+{
+    <h1><a href="@hostUri.AbsoluteUri">Host</a></h1>
 }
 
 <div class="text-center">
