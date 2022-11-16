@@ -39,7 +39,7 @@ namespace Crazor
                     {
                         Cards = cards.Select(card => new TabResponseCard()
                         {
-                            Card = TransformActionExecuteToSubmit(card)
+                            Card = TransformCardNoRefresh(TransformActionExecuteToSubmit(card))
                         }).ToList()
                     }
                 }

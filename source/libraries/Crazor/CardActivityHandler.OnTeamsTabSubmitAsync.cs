@@ -22,7 +22,7 @@ namespace Crazor
         protected override async Task<TabResponse> OnTeamsTabSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TabSubmit tabSubmit, CancellationToken cancellationToken)
         {
             _logger!.LogInformation($"Starting OnTeamsTabSubmitAsync() processing");
-            CardTabModule tabModule = tabSubmit.TabEntityContext.TabEntityId.StartsWith("/Cards") 
+            CardTabModule tabModule = tabSubmit.TabEntityContext.TabEntityId.StartsWith("/Cards")
                 ? new SingleCardTabModule(_serviceProvider, tabSubmit.TabEntityContext.TabEntityId)
                 : _tabs.GetRequiredByName(tabSubmit.TabEntityContext.TabEntityId);
 
@@ -37,7 +37,10 @@ namespace Crazor
 
                     Value = new TabResponseCards()
                     {
-                        Cards = cards.Select(card => new TabResponseCard() { Card = TransformActionExecuteToSubmit(card) }).ToList()
+                        Cards = cards.Select(card => new TabResponseCard()
+                        {
+                            Card = TransformCardNoRefresh(TransformActionExecuteToSubmit(card))
+                        }).ToList()
                     }
                 }
             };

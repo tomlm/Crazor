@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "manifestVersion": "1.14",
   "id": "31db9f35-0c00-460a-bac4-4d7d64f5ecc8",
   "packageName": "com.package.name",
@@ -171,7 +171,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "crazordemobot.azurewebsites.net"
+              "*.ngrok.io"
             ],
             "supportsAnonymizedPayloads": false
           }
@@ -180,7 +180,7 @@
     }
   ],
   "validDomains": [
-    "crazordemobot.azurewebsites.net"
+    "*.ngrok.io"
   ],
   "authorization": {
     "permissions": {

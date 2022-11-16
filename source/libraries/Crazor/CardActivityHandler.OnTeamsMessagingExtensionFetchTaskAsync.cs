@@ -43,6 +43,12 @@ namespace Crazor
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
         }
 
+        protected static AdaptiveCard TransformCardNoRefresh(AdaptiveCard card)
+        {
+            card.Refresh = null;
+            return card;
+        }
+
         protected static AdaptiveCard TransformActionExecuteToSubmit(AdaptiveCard card)
         {
             foreach (var action in card.GetElements<AdaptiveExecuteAction>())
