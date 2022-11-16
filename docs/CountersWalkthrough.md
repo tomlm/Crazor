@@ -57,11 +57,16 @@ As you click on it, the card is refreshing itself and updating the values.  If y
 
 # Adding a Shared counter
 
-Now we will modify the app to have a counter which is shared among all viewers of the card.
+Now we will are going to modify the app to have a counter which is shared among all viewers of the card.
+
+* **Counter** => Is a value which each person who interacts with the card sees.
+* **SharedCounter** => will be a value that all people who interact with the card see and share.
 
 ## 1. Create a CountersApp.cs file
 
-On this step we are going to define a **CountersApp** class.  We use this to define shared memory property which all templates in the folder have access to and it shared by all users who view the card.
+We are going to define a **CountersApp** class.  We use this class to define shared memory property which all templates in the folder have access to. Depending on the MemoryAttribute applied the value will automatically be available according to the scope policy of the memory attribute.
+
+In this case we are going to use **[SharedMemory]** attribute because it scopes the memory to all users who interact with the card.
 
 Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
 
@@ -76,17 +81,13 @@ Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
     }
 ```
 
-You can see that we have 
-
-* defined a **SharedCounter** property and placed a **[SharedMemory]** attribute on it.  
-
 The values defined on the **CountersApp** class are shared by all CardView templates in the folder, and their persistence scope is defined by the attributes we put on it [(go to Memory documentation for more details)](/docs/Memory.md)
 
 ## 2. Update the Default.cshtml file to know about CountersApp
 
 Now we will modify the Default .cshtml to interact with the **CountersApp.**
 
-* Edit the default.cshtml to change **@inherits CardView** to be **@inherits CardView<CountersApp>**
+* Edit the default.cshtml to **@inherits CardView<CountersApp>** .  This tells the template that **App** property is of type **CountersApp**
 
 * Update to bind to **App.SharedCounter** and add a verb handler to increment it.
 
@@ -116,7 +117,7 @@ Now we will modify the Default .cshtml to interact with the **CountersApp.**
 Things to notice:
 
 * The local property **Counter** is automatically persisted with **session scope** as part of the card view. 
-* The **App** property **SharedCounter** is automatically persisted with **shared scope** as part of the card application.
+* The **App** property **SharedCounter** is persisted with **shared scope** as part of the card application.
 
 You should see something like this:
 
