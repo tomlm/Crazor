@@ -534,9 +534,17 @@ namespace Crazor
             else
             {
                 // This is a non-cshtml view, let's see if we can construct it.
-                cardView = this.Services.GetByName<ICardView>(cardState.Name);
-                view = new ViewStub();
-                ArgumentNullException.ThrowIfNull(cardView);
+                try
+                {
+                    cardView = this.Services.GetByName<ICardView>(cardState.Name);
+                    view = new ViewStub();
+                    ArgumentNullException.ThrowIfNull(cardView);
+                }
+                catch (ArgumentException)
+                {
+                    cardView = new EmptyCardView();
+                    view = new ViewStub();
+                }
             }
 
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
@@ -973,7 +981,7 @@ namespace Crazor
 
             if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                 return false;
-            
+
             return true;
         }
 

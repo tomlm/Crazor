@@ -1,45 +1,53 @@
 ﻿@using CrazorDemoBot.Cards.Wordle
 @inherits CardView<WordleApp>
 @attribute [TaskModule(Width = "small", Height = "medium")]
-<Card Version="1.5">
-    <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
+<Card Version="1.5" Title="Play wordle">
+    @if (IsPreview)
+    {
+        // it's not the person who played the game, give them a link to play
+        <Action.OpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+    }
+    else
+    {
+        <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
 
-    <Table GridStyle="Default" ShowGridLines="true" FirstRowAsHeaders="false">
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
-        {
-            <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                @foreach (var letter in App.Game.Guesses[iGuess].Letters)
-                {
-                    <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder">@letter.Value</TextBlock></TableCell>
-                }
-            </TableRow>
-        }
-        @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
-        {
-            <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-            </TableRow>
-        }
-    </Table>
-    <ColumnSet>
-        <Column Width="stretch">
-            <Input.Text Id="Guess" Placeholder="Guess" />
-        </Column>
-        <Column Width="Auto">
-            <ActionSet>
-                <Action.Execute Verb="OnSubmit" Title="Submit" />
-            </ActionSet>
-        </Column>
-    </ColumnSet>
+        <Table GridStyle="Default" ShowGridLines="true" FirstRowAsHeaders="false">
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
+            {
+                <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
+                    @foreach (var letter in App.Game.Guesses[iGuess].Letters)
+                    {
+                        <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder">@letter.Value</TextBlock></TableCell>
+                    }
+                </TableRow>
+            }
+            @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
+            {
+                <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
+                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                </TableRow>
+            }
+        </Table>
+        <ColumnSet>
+            <Column Width="stretch">
+                <Input.Text Id="Guess" Placeholder="Guess" />
+            </Column>
+            <Column Width="Auto">
+                <ActionSet>
+                    <Action.Execute Verb="OnSubmit" Title="Submit" />
+                </ActionSet>
+            </Column>
+        </ColumnSet>
+    }
 </Card>
 
 @functions
@@ -61,9 +69,9 @@
         if (App.Game == null)
         {
             App.Game = new WordleGame(App.TodaysWord, App.Activity?.LocalTimestamp ?? DateTimeOffset.Now)
-            {
-                Player = App.Activity.From,
-            };
+                {
+                    Player = App.Activity.From,
+                };
         }
     }
 
