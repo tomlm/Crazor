@@ -16,22 +16,27 @@ Each card application is made up of 1:N **Card Views**. A card view is a razor t
 
 # The CardApp Class
 
-The **CardApp** class manages the application lifecycle for a card application. 
+The **CardApp** serves a couple of roles in the system.
 
-The **CardApp** class represents your application state and methods.  Any properties and methods you put onto the app class are accessible from all **CardView** objects in the folder via the **App** property.
+* It manages the shared state for all templates in the folder
+* It can receive dependency injected resources (the razor templates don't have direct access to dependency injection)
 
-To define an application you simply derive a class from **CardApp** and put it in the **Cards/{Name}** folder.
+Any properties and methods you put onto the app class are accessible from all **CardView** objects in the folder via the **App** property.
+
+You do not have to define a card application, but to do so you simply create a class which derives from **CardApp**.
+
+ **CardApp** names have a naming convention with the name of the **folder**. The name of the **folder name** is what shows up in the urls, and the name of the class is the name of the folder + App like this: **"{*name of the folder*}App"**
+
+```Cards/Foobar/FoobarApp.cs```
 
 ## Properties
 
-Properties on the **CardApp** are available to all **CardView** in the application.
+Properties on the **CardApp** are available to all **CardView** in the application via the **App** property.
 
 To load and persist the values of any property you have 2 mechanisms:
 
-* Use **[SharedMemory]** and **[SessionMemory]** attributes to automatically persist to a key value store 
-* You override **LoadAppAsync()** and **SaveAppAsync()**
-
-> See [Memory](Memory) for more details 
+* Use **[Memory]** attributes on properties. *See [Memory](Memory) for more details*
+* You can override the **LoadAppAsync()** and **SaveAppAsync()** methods to lookup/save your data.
 
 ## Methods
 
@@ -39,13 +44,35 @@ You can define any methods you like on the **CardApp**.
 
 A useful pattern is to put methods which manipulate your shared state on the app so that you can consolidate data manipulation methods for all **CardView** classes. For example, you can add CRUD methods which manipulate your data to the **CardApp**, and call **App.Create(...)** from a view to manipulate your data directly.
 
-## CardApp Naming Convention
+## Dependency Injection
 
- **CardApp** names have a naming convention with the name of the **folder**. The name of the **folder name** is what shows up in the urls, and the name of the class is the name of the folder + App like this: **"{*name of the folder*}App"**
+The **CardApp** is created via dependency injection and so it can get access to any resources that it needs and expose them as properties to the **CardView** templates.
 
-* Cards
-  * Foobar
-    * FoobarApp.cs
+## 
+
+# Example
+
+```C#
+public class ExampleApp : CardApp
+{
+    public ExampleApp(IServiceProvider services, IConfiguration configuration) : base(services)
+    {
+        this.Configuration = configuration;
+    }
+    
+    public IConfiguration Configuration {get;set;}
+
+    [SharedMemory]
+    public Entity Entity { get; set;}
+    
+    public async Task LookUpEntity(String id)
+    {
+        ... 
+    }
+}
+```
+
+
 
 
 

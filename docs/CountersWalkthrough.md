@@ -16,9 +16,52 @@ The **Cards** folder is a special folder that creates an area for your applicati
 
 The convention is that each app is a sub-folder in the Cards folder, so we create a folder **/Cards/Counters**
 
-## 2. Create a CountersApp.cs file
+## 2. Create a Default.cshtml file
 
-On this step we are going to define a **CountersApp** class.  
+Just like with HelloWorld, the CountersApp will load the **Default.cshtml** file as the initial view for the application, but this time we are going to 
+
+* Display the value of **Counter**  property
+* Add **verb handler** that increment the value of the counter.
+
+Create **/Cards/Counters/Default.cshtml**
+
+```xml
+@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
+    <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
+
+    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
+</Card>
+
+@functions {
+    public int Counter { get; set; }
+
+    public void OnIncrement() => Counter++;
+}
+```
+
+Things to notice:
+
+* The local property **Counter** is automatically persisted with session scope as part of the card view. 
+* We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
+
+That's it.  Now run the application and go to http://localhost:{yourport}/Cards/Counters 
+
+You should see something like this:
+
+![image-20221115162303805](assets/image-20221115162303805.png)
+
+As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the shared values are shared and the session values are per window.
+
+# Adding a Shared counter
+
+Now we will modify the app to have a counter which is shared among all viewers of the card.
+
+## 1. Create a CountersApp.cs file
+
+On this step we are going to define a **CountersApp** class.  We use this to define shared memory property which all templates in the folder have access to and it shared by all users who view the card.
 
 Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
 
@@ -39,16 +82,15 @@ You can see that we have
 
 The values defined on the **CountersApp** class are shared by all CardView templates in the folder, and their persistence scope is defined by the attributes we put on it [(go to Memory documentation for more details)](/docs/Memory.md)
 
-## 3. Create a Default.cshtml file
+## 2. Update the Default.cshtml file to know about CountersApp
 
-Just like with HelloWorld, the CountersApp will load the **Default.cshtml** file as the initial view for the application, but this time we are going to 
+Now we will modify the Default .cshtml to interact with the **CountersApp.**
 
-* Display the value of **App.SharedCounter**  and **App.SessionCounter**
-* Add actions that increment the value of the counter.
+* Edit the default.cshtml to change **@inherits CardView** to be **@inherits CardView<CountersApp>**
 
-You will notice that we use **@inherits CardView<CountersApp>**.  This makes our CardView expose a **App** property as a strongly typed property so we get intellisense over the properties we defined on the class, namely the **SharedCounter** and **SessionCounter** properties.
+* Update to bind to **App.SharedCounter** and add a verb handler to increment it.
 
-Create **/Cards/Counters/Default.cshtml**
+**/Cards/Counters/Default.cshtml** should look like this
 
 ```xml
 @using CrazorDemoBot.Cards.Counters
@@ -56,30 +98,26 @@ Create **/Cards/Counters/Default.cshtml**
 
 <Card Version="1.5">
     <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
-    <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
     <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
+    <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
     
-    <Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)" />
-    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrementLocal)" />
+    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
+	<Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)"/>
 </Card>
 
 @functions {
     public int Counter { get; set; }
 
-    public void OnIncrementLocal() => Counter++;
+    public void OnIncrement() => Counter++;
     public void OnIncrementShared() => App.SharedCounter++;
 }
 ```
 
 Things to notice:
 
-* The local property **Counter** is automatically persisted with session scope as part of the card view. *All properties on a CardView are persisted as session scope, unless you opt out by using **[TempMemory]** attribute*
-* We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
-
-That's it.  Now run the application and go to http://localhost:{yourport}/Cards/Counters 
+* The local property **Counter** is automatically persisted with **session scope** as part of the card view. 
+* The **App** property **SharedCounter** is automatically persisted with **shared scope** as part of the card application.
 
 You should see something like this:
 
 ![image-20221103120318266](assets/image-20221103120318266.png)
-
-As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the shared values are shared and the session values are per window.
