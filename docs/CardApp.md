@@ -48,9 +48,7 @@ A useful pattern is to put methods which manipulate your shared state on the app
 
 The **CardApp** is created via dependency injection and so it can get access to any resources that it needs and expose them as properties to the **CardView** templates.
 
-## 
-
-# Example
+## Example CardApp
 
 ```C#
 public class ExampleApp : CardApp
@@ -72,11 +70,53 @@ public class ExampleApp : CardApp
 }
 ```
 
+## Search extensions
 
+To implement a search extension like this:
 
+![image-20221116110720258](assets/image-20221116110720258.png)
 
+you simply need to:
 
-> 
+* override CardApp.**OnSearchQueryAsync**() to return search results
+
+* Update manifest to have a **query** command pointing to your app route.
+
+```c#
+public async override Task<SearchResult[]> OnSearchQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
+{
+    var results = await ...lookup your data...
+    return results.Select(result => new SearchResult()
+                           {
+                               Title = ...,
+                               Subtitle = ...,
+                               Text = ...,
+                               ImageUrl = ...
+                               Route = $"/Cards/{...route for your search result...}"
+                           }).ToArray();
+}
+```
+
+And in your manifest commands section:
+
+```json
+        {
+          "id": "/Cards/{...your app name...}",
+          "type": "query",
+          "title": "...",
+          "description": "...",
+          "initialRun": false,
+          "parameters": [
+            {
+              "name": "search",
+              "description": "Enter in search terms",
+              "title": "Search"
+            }
+          ]
+        }
+```
+
+The **route** returned in the search result will be used when someone clicks on an entry, unfurling the url into the card and inserting it.
 
 
 

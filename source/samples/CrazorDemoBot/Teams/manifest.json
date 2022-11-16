@@ -151,7 +151,7 @@
           ]
         },
         {
-          "id": "/Cards/Nuget/Details",
+          "id": "/Cards/Nuget",
           "type": "query",
           "description": "Search Nuget for packages",
           "title": "Nuget",
