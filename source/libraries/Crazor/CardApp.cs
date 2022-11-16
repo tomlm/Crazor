@@ -619,7 +619,7 @@ namespace Crazor
             }
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            outboundCard.AdditionalProperties["url"] = GetCurrentCardUri().AbsoluteUri;
+            outboundCard.Metadata = new AdaptiveMetadata() { WebUrl = GetCurrentCardUri().AbsoluteUri };
         }
 
         public SessionData GetSessionData()
