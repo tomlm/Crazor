@@ -45,7 +45,6 @@ namespace Crazor
 
         protected static AdaptiveCard TransformActionExecuteToSubmit(AdaptiveCard card)
         {
-            card.Refresh = null;
             foreach (var action in card.GetElements<AdaptiveExecuteAction>())
             {
                 if (action.Data == null)
