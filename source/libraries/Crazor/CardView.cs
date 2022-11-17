@@ -564,9 +564,10 @@ namespace Crazor
         private JObject GetDataForRoute(RouteAttribute route, LoadRouteModel loadRoute)
         {
             JObject result = new JObject();
+            var path = loadRoute.Path ?? string.Empty;
             result["view"] = loadRoute.View;
-            result["path"] = loadRoute.Path;
-            string path = loadRoute.Path.Replace(this.App.GetCurrentCardRoute(), String.Empty);
+            result["path"] = path;
+            path = path.Replace(this.App.GetCurrentCardRoute(), String.Empty);
 
             if (!String.IsNullOrEmpty(path))
             {

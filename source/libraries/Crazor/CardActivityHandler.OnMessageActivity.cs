@@ -24,9 +24,9 @@ namespace Crazor
             if (message != null)
             {
                 var input = turnContext.Activity.RemoveRecipientMention()?.Trim() ?? String.Empty;
-                if (input.Contains("insert"))
+                if (input.Contains("post"))
                 {
-                    var app = input.Replace("insert", "").Trim();
+                    var app = input.Replace("post", "").Trim();
 
                     if (_cardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
                     {
