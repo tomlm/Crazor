@@ -27,11 +27,23 @@ namespace Crazor
             var attachmentContent = activityPreview.Attachments[0].Content;
             var previewedCard = ((JObject)attachmentContent).ToObject<AdaptiveCard>();
 
+            // Get session data from the invoke payload
+            dynamic data = ((AdaptiveExecuteAction)previewedCard!.Refresh.Action).Data;
+            var sd = (string)data._sessiondata;
+            sd = await _encryptionProvider.DecryptAsync(sd, cancellationToken);
+            var sessionData = SessionData.FromString(sd);
+            var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
+            var cardApp = await this.LoadAppAsync(sessionData, activity, cancellationToken);
+            
+            await cardApp.OnActionExecuteAsync(cancellationToken);
+
+            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
+
             var reply = turnContext.Activity.CreateReply();
             Attachment attachment = new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
-                Content = previewedCard
+                Content = adaptiveCard
             };
             reply.Attachments.Add(attachment);
 

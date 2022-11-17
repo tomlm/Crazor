@@ -2,15 +2,15 @@
 // Licensed under the MIT License.
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Serialization;
 
 namespace AdaptiveCards
 {
+    public class SerializableDictionary<TValue> : Dictionary<string, TValue>
 #if !NETSTANDARD1_3
-    public class SerializableDictionary<TValue> : Dictionary<string, TValue>, IXmlSerializable
+        , IXmlSerializable
+#endif
     {
         public SerializableDictionary()
             : base()
@@ -22,6 +22,7 @@ namespace AdaptiveCards
         {
         }
 
+#if !NETSTANDARD1_3
         #region IXmlSerializable Members
         public System.Xml.Schema.XmlSchema GetSchema()
         {
@@ -76,7 +77,7 @@ namespace AdaptiveCards
                 writer.WriteAttributeString("Name", key);
                 TValue value = this[key];
                 string valueType = "string";
-                switch(value.GetType().Name)
+                switch (value.GetType().Name)
                 {
                     case "Boolean":
                         valueType = "bool";
@@ -95,7 +96,7 @@ namespace AdaptiveCards
                         break;
                 }
                 if (valueType != "string")
-                { 
+                {
                     writer.WriteAttributeString("Type", valueType);
                 }
 
@@ -104,6 +105,6 @@ namespace AdaptiveCards
             }
         }
         #endregion
-    }
 #endif
+    }
 }

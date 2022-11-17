@@ -77,6 +77,7 @@ namespace Crazor
                     }
                     else // if (action.CommandContext.ToLower() == "commandbox")
                     {
+                        adaptiveCard.Refresh = null;
                         return CreatePreviewSendResponse(cardApp, adaptiveCard);
                     }
 
