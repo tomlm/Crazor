@@ -57,15 +57,15 @@
       "botId": "YOURBOTID",
       "commands": [
         {
-          "id": "exampleCmd3",
-          "title": "Example Command 3",
+          "id": "/Cards/HelloWorld",
+          "title": "Hello World",
           "type": "action",
           "context": [
             "compose",
             "commandBox",
             "message"
           ],
-          "description": "Command Description; e.g., Add a customer",
+          "description": "Greet the world",
           "fetchTask": false,
           "taskInfo": {
             "title": "Initial dialog title"
