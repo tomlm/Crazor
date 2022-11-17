@@ -6,9 +6,9 @@
   <RichTextBlock>
     <TextRun>Here is some text! </TextRun>
     <TextRun Highlight="true">Part of it is highlighted!</TextRun>
-    <TextRun> </TextRun>
+    <TextRun>%20</TextRun>
     <TextRun IsSubtle="true" Highlight="true">Subtle highlight!</TextRun>
-    <TextRun> </TextRun>
+    <TextRun>%20</TextRun>
     <TextRun Color="good" Highlight="true">Good highlight!</TextRun>
   </RichTextBlock>
   <RichTextBlock>

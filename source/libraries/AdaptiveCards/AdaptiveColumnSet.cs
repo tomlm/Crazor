@@ -91,7 +91,10 @@ namespace AdaptiveCards
         /// hides default value for xml serialization
         /// </summary>
         public bool ShouldSerialize_VerticalAlignment() => VerticalAlignment != AdaptiveVerticalAlignment.Top;
-
-    }
 #endif
+        public void Add(AdaptiveColumn column)
+        {
+            this.Columns.Add(column);
+        }
+    }
 }

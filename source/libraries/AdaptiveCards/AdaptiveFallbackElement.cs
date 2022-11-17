@@ -15,7 +15,10 @@ namespace AdaptiveCards
     /// Represents the fallback property.
     /// </summary>
     [JsonConverter(typeof(AdaptiveFallbackConverter))]
-    public partial class AdaptiveFallbackElement : IXmlSerializable
+    public partial class AdaptiveFallbackElement
+#if !NETSTANDARD1_3
+        : IXmlSerializable
+#endif
     {
 
         /// <summary>
@@ -64,6 +67,7 @@ namespace AdaptiveCards
 #endif
         public AdaptiveTypedElement Content { get; set; }
 
+#if !NETSTANDARD1_3
         /// <summary>
         /// Convert xml to element.
         /// </summary>
@@ -129,5 +133,6 @@ namespace AdaptiveCards
         {
             return null;
         }
+#endif
     }
 }

@@ -20,7 +20,9 @@ namespace AdaptiveCards
 #endif
     public class AdaptiveCard : AdaptiveTypedElement
     {
+#if !NETSTANDARD1_3
         public static XmlSerializer XmlSerializer = new XmlSerializer(typeof(AdaptiveCard));
+#endif
 
         /// <summary>
         /// AdaptiveCard mimetype.
@@ -175,6 +177,15 @@ namespace AdaptiveCards
 #endif
         [DefaultValue(null)]
         public string MinHeight { get; set; }
+
+        /// <summary>
+        /// PixelMinHeight if height is not auto/stretch
+        /// </summary>
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlIgnore]
+#endif
+        public int PixelMinHeight { get => int.TryParse(MinHeight?.Replace("px", ""), out var val) ? (int)val : 0; set => MinHeight = $"{value}px"; }
 
         /// <summary>
         /// The Body elements for this card.

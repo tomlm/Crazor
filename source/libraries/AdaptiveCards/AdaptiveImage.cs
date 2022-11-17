@@ -202,6 +202,25 @@ namespace AdaptiveCards
         /// <returns>true/false</returns>
         public bool ShouldSerialize_Width() => Width != null;
 #endif
-    }
 
+        /// <summary>
+        /// PixelWidth if width is not auto/stretch
+        /// </summary>
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlIgnore]
+#endif
+        public int PixelWidth { get => Width.Unit ?? 0; set => Width = new AdaptiveDimension($"{value}px"); }
+
+        /// <summary>
+        /// PixelHeight if width is not auto/stretch
+        /// </summary>
+        [JsonIgnore]
+#if !NETSTANDARD1_3
+        [XmlIgnore]
+#endif
+        public int PixelHeight { get => Height.Unit ?? 0; set => Height = new AdaptiveDimension($"{value}px"); }
+    }
 }
+
+

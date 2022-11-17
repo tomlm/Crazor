@@ -154,6 +154,14 @@ namespace AdaptiveCards
         [XmlAttribute]
 #endif
         [DefaultValue(false)]
+        public bool Underline { get; set; }
+
+        /// <inheritdoc />
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+#if !NETSTANDARD1_3
+        [XmlAttribute]
+#endif
+        [DefaultValue(false)]
         public bool Highlight { get; set; }
 
         /// <inheritdoc />
@@ -215,15 +223,5 @@ namespace AdaptiveCards
 #endif
         [DefaultValue(null)]
         public AdaptiveAction SelectAction { get; set; }
-
-        /// <summary>
-        /// Display this text underlined.
-        /// </summary>
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-#if !NETSTANDARD1_3
-        [XmlAttribute]
-#endif
-        [DefaultValue(false)]
-        public bool Underline { get; set; }
     }
 }

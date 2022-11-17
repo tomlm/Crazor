@@ -103,7 +103,9 @@ namespace AdaptiveCards
         ///     Is this action enabled or disabled?
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+#if !NETSTANDARD1_3
         [XmlAttribute]
+#endif
         [DefaultValue(true)]
         public bool IsEnabled { get; set; } = true;
     }

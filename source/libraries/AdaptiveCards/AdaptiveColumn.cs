@@ -1,9 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
-using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace AdaptiveCards
@@ -56,6 +54,12 @@ namespace AdaptiveCards
         /// Ignore Xml Serialization for complex type of AdaptiveColumnWidth when null
         /// </summary>
         public bool ShouldSerialize_Width() => Width != null;
+
 #endif
+
+        public void Add(AdaptiveElement element)
+        {
+            this.Items.Add(element);
+        }
     }
 }

@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AdaptiveCards
 {

@@ -15,8 +15,8 @@
         },
         {
           "type": "TextRun",
-          "text": "This inline must have underline. ",
-          "underline": true
+          "underline": true,
+          "text": "This inline must have underline. "
         },
         {
           "type": "TextRun",

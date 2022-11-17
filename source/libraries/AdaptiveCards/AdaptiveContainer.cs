@@ -98,5 +98,9 @@ namespace AdaptiveCards
         /// </summary>
         public bool ShouldSerialize_HorizontalAlignment() => HorizontalAlignment != AdaptiveHorizontalAlignment.Left;
 #endif
+        public void Add(AdaptiveElement element)
+        {
+            this.Items.Add(element);
+        }
     }
 }
