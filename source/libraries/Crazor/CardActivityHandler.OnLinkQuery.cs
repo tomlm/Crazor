@@ -31,8 +31,10 @@ namespace Crazor
             if (uri.Host == hostName)
             {
                 var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var q);
-                
-                await cardApp.LoadAppAsync(sharedId, null, (Activity)turnContext.Activity, cancellationToken);
+
+                var activity = turnContext.Activity.CreateLoadRouteActivity(uri);
+
+                await cardApp.LoadAppAsync(sharedId, null, activity, cancellationToken);
 
                 await cardApp.OnActionExecuteAsync(cancellationToken);
 
