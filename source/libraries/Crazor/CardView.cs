@@ -577,10 +577,17 @@ namespace Crazor
                     i++;
                 }
             }
-
             // process any FromQuery attributes 
             var query = HttpUtility.ParseQueryString(queryParams);
-            foreach(var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null))
+            foreach (var key in query.Keys)
+            {
+                if ((string)key != "_sid")
+                {
+                    data[key] = query[(string)key];
+                }
+            }
+
+            foreach (var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null))
             {
                 var value = query.GetValues(property.Name)?.FirstOrDefault();
                 if (value != null)

@@ -22,7 +22,7 @@ Routes serve several purposes
 2. The link is used for card **unfurling**. Crazor will automatically turn the HTML URL for a card into the card if it is shared in a card aware app like Teams.
 3. The link supports **deep-linking**, meaning any view that you get to you can save a url and share it.
 
-## Custom Routing
+# Custom Routing
 
 If you want to support deep linking you sometimes need to specify more information beyond the normal route pattern. 
 
@@ -49,7 +49,36 @@ Here is an example for the Edit page for Addresses, which is editing the model w
 * The **[Route("{addressId}")]** attribute tells us how to get the **{addressId}** out of the url 
 * The **OnLoadRoute(string addressId)** is called with the **addressId** and loads the appropriate model into the card.
 
+# Query Parameters
 
+You can initialize your card by building in support for mapping query parameters to properties via the **[FromQuery]** attribute.
+
+For example, in this template we have 2 properties that have **[FromQuery]**
+
+```C#
+[FromQuery]
+public string Name {get;set;}
+
+[FromQuery]
+public string City {get;set;}
+
+public string Zip {get;set;}
+```
+
+If you construct a url with Name or City query parameters they will be bound to the these properties.
+
+```https://.../cards/example?name=John&city=boston```
+
+Only properties with [FromQuery] attribute will be bound.
+
+Query Parameters are also available by naming convention on verb handlers
+
+```c#
+public void OnLoadRoute(string name, string zip, string city)
+{
+
+}
+```
 
 
 
