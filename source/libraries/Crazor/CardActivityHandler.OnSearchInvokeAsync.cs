@@ -35,8 +35,10 @@ namespace Crazor
             var data = await encryptionProvider.DecryptAsync(parts[0], cancellationToken);
             var sessionData = SessionData.FromString(data);
             searchInvoke.Dataset = parts[1];
-
-            var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
+            
+            var cardApp = _cardAppFactory.Create(sessionData.App);
+            
+            await cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, (Activity)turnContext.Activity, cancellationToken);
 
             var result = await cardApp.OnSearchChoicesAsync(searchInvoke, cancellationToken);
 

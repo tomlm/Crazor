@@ -137,11 +137,9 @@ namespace Crazor
 
         protected async Task<AdaptiveCard> LoadTabCardAsync(ITurnContext turnContext, Uri uri, string sessionId, CancellationToken cancellationToken)
         {
-            CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var path);
+            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
 
-            var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(view, path);
-
-            var cardApp = _cardAppFactory.Create(app);
+            var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(uri);
 
             await cardApp.LoadAppAsync(sharedId, sessionId, loadRouteActivity, cancellationToken);
 

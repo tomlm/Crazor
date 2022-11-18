@@ -30,9 +30,13 @@ namespace Crazor
 
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
 
-            var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
-            var cardApp = await LoadAppAsync(activity, uri, cancellationToken);
+            var activity = turnContext.Activity.CreateLoadRouteActivity(uri);
+            
+            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+
             cardApp.IsTaskModule = true;
+
+            await cardApp.LoadAppAsync(sharedId, Utils.GetNewId(), activity, cancellationToken);
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
             

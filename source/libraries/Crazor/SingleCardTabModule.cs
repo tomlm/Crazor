@@ -20,7 +20,7 @@ namespace Crazor
                 this.Path = path;
 
                 uri = uri.IsAbsoluteUri ? uri : new Uri(_configuration.GetValue<Uri>("HostUri"), uri);
-                CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var subPath);
+                CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var subPath, out var query);
                 this.Name = app;
             }
             else

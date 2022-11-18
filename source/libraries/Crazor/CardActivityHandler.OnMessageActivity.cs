@@ -30,7 +30,9 @@ namespace Crazor
 
                     if (_cardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
                     {
-                        var cardApp = await LoadAppAsync((Activity)turnContext.Activity, app, Utils.GetNewId(), Utils.GetNewId(), null, cancellationToken);
+                        var cardApp = _cardAppFactory.Create(app);
+
+                        await cardApp.LoadAppAsync(Utils.GetNewId(), null, (Activity)turnContext.Activity, cancellationToken);
 
                         await cardApp.OnActionExecuteAsync(cancellationToken);
 

@@ -31,9 +31,12 @@ namespace Crazor
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(action.Data));
 
             SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
-            var cardApp = await this.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
-
+            var cardApp = _cardAppFactory.Create(sessionData.App);
+            
             cardApp.IsTaskModule = true;
+
+            await cardApp.LoadAppAsync(sessionData, (Activity)turnContext.Activity, cancellationToken);
+
             cardApp.Action = invokeValue.Action;
 
             await cardApp.OnActionExecuteAsync(cancellationToken);

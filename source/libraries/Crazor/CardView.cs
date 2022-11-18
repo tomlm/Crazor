@@ -13,6 +13,7 @@ using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Web;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -104,24 +105,19 @@ namespace Crazor
             this.Action = action;
 
             // Process BindProperty tags
-            BindProperties();
-
-            var data = JObject.FromObject(this.Action.Data);
+            var data = (JObject)JObject.FromObject(this.Action.Data).DeepClone();
+            BindProperties(data);
 
             MethodInfo? verbMethod = null;
             if (action.Verb == Constants.LOADROUTE_VERB)
             {
+                var loadRoute = ((JObject)this.Action.Data).ToObject<LoadRouteModel>();
+                AddDataFromRoute(data, loadRoute!);
+
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
                 verbMethod = GetMethod(action.Verb);
                 if (verbMethod != null)
                 {
-                    var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
-                    if (routeAttribute != null)
-                    {
-                        var loadRoute = data.ToObject<LoadRouteModel>();
-                        data = GetDataForRoute(routeAttribute, loadRoute!);
-                    }
-
                     try
                     {
                         await InvokeMethodAsync(verbMethod, GetMethodArgs(verbMethod, data, cancellationToken));
@@ -488,9 +484,8 @@ namespace Crazor
                 ?? this.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
         }
 
-        private void BindProperties()
+        private void BindProperties(JObject data)
         {
-            JObject? data = (JObject?)this.Action?.Data;
             if (data != null)
             {
                 foreach (var property in data.Properties())
@@ -561,32 +556,38 @@ namespace Crazor
             }
         }
 
-        private JObject GetDataForRoute(RouteAttribute route, LoadRouteModel loadRoute)
+        private void AddDataFromRoute(JObject data, LoadRouteModel loadRoute)
         {
-            JObject result = new JObject();
-            var path = loadRoute.Path ?? string.Empty;
-            result["view"] = loadRoute.View;
-            result["path"] = path;
-            path = path.Replace(this.App.GetCurrentCardRoute(), String.Empty);
+            CardApp.ParseRoute(loadRoute.Route, out var app, out var sharedId, out var view, out var path, out var queryParams);
 
-            if (!String.IsNullOrEmpty(path))
+            // process route to extra names from path based on RouteAttribute Template
+            var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
+            if (routeAttribute != null)
             {
-                var dataParts = path!.TrimStart('/').Split('?');
-                var dataPathParts = dataParts.First().Split('/');
-                var dataQuery = dataParts.Skip(1).FirstOrDefault();
-                var templateParts = route.Template.Split('?');
+                var pathParts = path.Split('/');
+                var fragments = routeAttribute.Template.Split('/');
                 int i = 0;
-                foreach (var fragment in templateParts[0].Split('/'))
+                foreach (var fragment in fragments)
                 {
                     if (fragment.StartsWith('{') && fragment.EndsWith('}'))
                     {
-                        var name = fragment.TrimStart('{').TrimEnd('}', '?');
-                        result[name] = dataPathParts[i];
+                        var name = fragment.TrimStart('{').TrimEnd('}');
+                        data[name] = pathParts[i];
                     }
                     i++;
                 }
             }
-            return result;
+
+            // process any FromQuery attributes 
+            var query = HttpUtility.ParseQueryString(queryParams);
+            foreach(var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null))
+            {
+                var value = query.GetValues(property.Name)?.FirstOrDefault();
+                if (value != null)
+                {
+                    this.SetTargetProperty(property, value);
+                }
+            }
         }
         #endregion
     }

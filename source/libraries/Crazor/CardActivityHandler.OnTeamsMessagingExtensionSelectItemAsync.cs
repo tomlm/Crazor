@@ -31,7 +31,11 @@ namespace Crazor
             string route = (string)value["route"]!;
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), route);
 
-            var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
+            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+
+            var activity = turnContext.Activity.CreateLoadRouteActivity(uri);
+
+            await cardApp.LoadAppAsync(sharedId, null, activity, cancellationToken);
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
 

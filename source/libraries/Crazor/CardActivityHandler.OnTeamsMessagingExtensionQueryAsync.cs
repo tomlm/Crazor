@@ -28,7 +28,9 @@ namespace Crazor
 
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), query.CommandId);
 
-            var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
+            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var q);
+            
+            await cardApp.LoadAppAsync(sharedId, null, (Activity)turnContext.Activity, cancellationToken);
 
             var result = await cardApp.OnMessagingExtensionQueryAsync(query, cancellationToken);
 

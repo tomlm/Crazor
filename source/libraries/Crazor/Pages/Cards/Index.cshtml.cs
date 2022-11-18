@@ -2,9 +2,8 @@ using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Bot.Schema;
 using Crazor.Controllers;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Neleus.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Crazor.HostPage.Pages.Cards
 {
@@ -34,7 +33,7 @@ namespace Crazor.HostPage.Pages.Cards
 
         public string RouteUrl { get; set; }
 
-        public async Task OnGetAsync(string app, [FromQuery(Name = "id")] string? sharedId, string? viewName, string? path, CancellationToken cancellationToken)
+        public async Task OnGetAsync(CancellationToken cancellationToken)
         {
             string userId = null;
             if (this.Request.Cookies.TryGetValue("userId", out var uid))
@@ -45,13 +44,13 @@ namespace Crazor.HostPage.Pages.Cards
             {
                 userId = Utils.GetNewId();
             }
-            var sessionId = Utils.GetNewId();
 
-            this.CardApp = _cardAppFactory.Create(app);
+            var uri = new Uri(Request.GetDisplayUrl());
+            this.CardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
             ArgumentNullException.ThrowIfNull(this.CardApp);
 
-            // create card
-            await this.CardApp.LoadAppAsync(sharedId: sharedId, sessionId: sessionId, new Activity(ActivityTypes.Invoke)
+            string sessionId = Utils.GetNewId();
+            var loadRouteActivity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
                 ChannelId = this.ChannelId,
@@ -61,24 +60,15 @@ namespace Crazor.HostPage.Pages.Cards
                 Conversation = new ConversationAccount() { Id = sharedId },
                 Timestamp = DateTimeOffset.UtcNow,
                 LocalTimestamp = DateTimeOffset.Now,
-                Value = new AdaptiveCardInvokeValue()
-                {
-                    Action = new AdaptiveCardInvokeAction()
-                    {
-                        Verb = Constants.LOADROUTE_VERB,
-                        Data = new LoadRouteModel
-                        {
-                            View = viewName ?? Constants.DEFAULT_VIEW,
-                            Path = path
-                        }
-                    }
-                }
-            }, cancellationToken); ;
+            }
+            .CreateLoadRouteActivity(uri);
+
+            await this.CardApp.LoadAppAsync(sharedId, sessionId, loadRouteActivity, cancellationToken);
 
             var token = await CardAppController.GetTokenAsync(_configuration);
             this.Response.Cookies.Append("token", token);
             this.Response.Cookies.Append("userId", userId);
-            this.Response.Cookies.Append("sharedId", sharedId ?? String.Empty);
+            this.Response.Cookies.Append("sharedId", CardApp.SharedId ?? String.Empty);
 
             // process Action.Execute
             await this.CardApp.OnActionExecuteAsync(cancellationToken);

@@ -1,5 +1,8 @@
-﻿using Neleus.DependencyInjection.Extensions;
+﻿using Microsoft.AspNetCore.Routing;
+using Microsoft.Bot.Schema;
+using Neleus.DependencyInjection.Extensions;
 using System.Xml.Linq;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace Crazor
 {
@@ -27,6 +30,15 @@ namespace Crazor
                 return cardApp;
             }
             return null;
+        }
+
+
+        public CardApp CreateFromUri(Uri uri, out string? sharedId, out string view, out string path, out string query)
+        {
+            CardApp.ParseUri(uri, out var app, out sharedId, out view, out path, out query);
+
+            var cardApp = Create(app);
+            return cardApp;
         }
     }
 }

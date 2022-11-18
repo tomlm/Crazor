@@ -173,12 +173,12 @@ namespace Crazor
             return ((Activity)activity).CreateReply(text, locale);
         }
 
-        public static Activity CreateLoadRouteActivity(this IActivity sourceActivity, string view, string path)
+        public static Task LoadAppAsync(this CardApp cardApp, SessionData sessionData, Activity activity, CancellationToken cancellationToken)
         {
-            return CreateLoadRouteActivity((Activity)sourceActivity, view, path);
+            return cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, activity, cancellationToken);
         }
 
-        public static Activity CreateLoadRouteActivity(this Activity sourceActivity, string view, string path)
+        public static Activity CreateLoadRouteActivity(this IActivity sourceActivity, Uri uri)
         {
             var activity = sourceActivity.Clone();
             var invokeValue = new AdaptiveCardInvokeValue()
@@ -188,8 +188,7 @@ namespace Crazor
                     Verb = Constants.LOADROUTE_VERB,
                     Data = new LoadRouteModel
                     {
-                        View = view ?? Constants.DEFAULT_VIEW,
-                        Path = path
+                        Route = uri.PathAndQuery
                     }
                 }
             };

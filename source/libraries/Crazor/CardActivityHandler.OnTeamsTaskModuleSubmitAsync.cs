@@ -33,22 +33,26 @@ namespace Crazor
 
             Activity? showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
 
+            SessionData sessionData = null;
             if (sessionToken != null)
             {
                 AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
-                SessionData sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
-                cardApp = await this.LoadAppAsync(sessionData, showViewActivity, cancellationToken);
+                sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
+                cardApp = _cardAppFactory.Create(sessionData.App);
                 cardApp.IsTaskModule = true;
                 cardApp.Action = invokeValue.Action;
             }
             else if (commandId != null)
             {
                 var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), commandId);
-                cardApp = await LoadAppAsync(showViewActivity, uri, cancellationToken);
+                cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
                 cardApp.IsTaskModule = true;
+                sessionData = new SessionData() { App = cardApp.Name, SharedId = sharedId, SessionId = null};
             }
             else
                 ArgumentNullException.ThrowIfNull(cardApp);
+
+            await cardApp.LoadAppAsync(sessionData!, showViewActivity, cancellationToken);
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
 

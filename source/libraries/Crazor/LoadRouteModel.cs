@@ -9,8 +9,6 @@ namespace Crazor
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class LoadRouteModel
     {
-        public string? View { get; set; }
-
-        public string? Path { get; set; }
+        public string Route { get; set; }
     }
 }

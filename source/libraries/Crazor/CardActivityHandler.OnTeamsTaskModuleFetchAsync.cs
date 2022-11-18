@@ -2,16 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-using AdaptiveCards;
-using Crazor.Attributes;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Reflection;
 
 namespace Crazor
 {
@@ -31,7 +27,10 @@ namespace Crazor
             string commandId = data.commandId;
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), commandId);
 
-            var cardApp = await LoadAppAsync((Activity)turnContext.Activity, uri, cancellationToken);
+            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+
+            await cardApp.LoadAppAsync(sharedId, Utils.GetNewId(), (Activity)turnContext.Activity, cancellationToken);
+
             cardApp.IsTaskModule = true;
             
             await cardApp.OnActionExecuteAsync(cancellationToken);

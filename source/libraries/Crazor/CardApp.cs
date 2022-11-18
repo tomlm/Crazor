@@ -24,6 +24,11 @@ using Microsoft.Extensions.Configuration;
 using Neleus.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
+using Microsoft.AspNetCore.Http.Extensions;
+using System.Web;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using System.Collections.Specialized;
+using System;
 
 namespace Crazor
 {
@@ -44,6 +49,7 @@ namespace Crazor
         };
 
         protected IConfiguration _configuration;
+        protected CardAppFactory _cardAppFactory;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardApp(IServiceProvider services)
@@ -53,6 +59,7 @@ namespace Crazor
 
             this.Services = services;
             this._configuration = services.GetRequiredService<IConfiguration>();
+            this._cardAppFactory = services.GetRequiredService<CardAppFactory>();
             this.CallStack = new List<CardViewState>()
             {
                 new CardViewState(Constants.DEFAULT_VIEW, null)
@@ -61,6 +68,7 @@ namespace Crazor
             this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
 
         }
+
 
         /// <summary>
         /// Name of the app
@@ -415,18 +423,22 @@ namespace Crazor
             UriBuilder uri = new UriBuilder();
 
             var viewRoute = this.CurrentView!.GetRoute();
+            var parts = viewRoute.Split('?');
+            var subPath = parts[0];
+            var query = parts.Skip(1).SingleOrDefault() ?? String.Empty;
             if (!viewRoute.StartsWith('/'))
             {
                 if (viewRoute.Length > 0)
-                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}/{viewRoute}";
+                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}/{subPath}";
                 else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
                     uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
                 else
                     uri.Path = $"/Cards/{this.Name}";
             }
 
-            if (!String.IsNullOrEmpty(this.SharedId))
-                uri.Query = $"id={this.SharedId}";
+            var queryVals= HttpUtility.ParseQueryString(query);
+            queryVals.Add("_sid", this.SharedId);
+            uri.Query = queryVals.ToString();
             return uri.Uri.PathAndQuery;
         }
 
@@ -465,12 +477,14 @@ namespace Crazor
             if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
                 var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
-                if (loadRoute != null && this.CurrentCard != loadRoute.View)
+                ParseRoute(loadRoute!.Route, out var app, out var _, out var view, out var path, out var queryParams);
+                
+                if (this.CurrentCard != view)
                 {
                     // this is ShowCard() embedded, Ick. 
                     // The issue is we don't want to reset the verb, need to clean this up
                     SaveCardViewState(this.CallStack[0], this.CurrentView);
-                    var cardState = new CardViewState(loadRoute.View!);
+                    var cardState = new CardViewState(view!);
                     CallStack.Insert(0, cardState);
                     SetCurrentView(cardState);
                     return;
@@ -581,10 +595,9 @@ namespace Crazor
 
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
         {
-            var ah = new CardActivityHandler(Services);
-            var cardApp = await ah.LoadAppAsync(Activity!, uri, cancellationToken);
-
-            await cardApp.SaveAppAsync(cancellationToken);
+            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+            
+            await cardApp.LoadAppAsync(sharedId, null, Activity!, cancellationToken);
 
             var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
 
@@ -707,8 +720,7 @@ namespace Crazor
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = JObject.FromObject(new LoadRouteModel()
                         {
-                            View = this.CurrentCard,
-                            Path = this.GetCurrentCardRoute()
+                            Route = this.GetCurrentCardRoute()
                         })
                     };
                 }
@@ -1027,21 +1039,37 @@ namespace Crazor
         /// <param name="turnContext">Turn context</param>
         /// <param name="app">app from the uri</param>
         /// <param name="sharedId">sharedId from the uri</param>
-        public static void ParseUri(Uri uri, out string app, out string? sharedId, out string view, out string path)
+        /// <param name="path">path</param>
+        /// <param name="queryParams">query params</param>
+        public static void ParseUri(Uri uri, out string app, out string? sharedId, out string view, out string path, out string queryParams)
+        {
+            ParseRoute(uri.PathAndQuery, out app, out sharedId, out view, out path, out queryParams);
+        }
+
+        public static void ParseRoute(string route, out string app, out string? sharedId, out string view, out string path, out string queryParams)
         {
             sharedId = null;
-            var parts = uri.AbsolutePath.Trim('/').Split('/');
+            var parts = route.Split('?');
+            var local = parts[0];
+            var query = parts.Skip(1).FirstOrDefault();
+            parts = local.Trim('/').Split('/');
             app = parts[1];
-            view = (parts.Length > 2) ? parts[2] : null!;
+            view = (parts.Length > 2) ? parts[2] : Constants.DEFAULT_VIEW;
             path = String.Join('/', parts.Skip(3).ToArray());
-            if (!String.IsNullOrEmpty(uri.Query))
+            if (!String.IsNullOrEmpty(query))
             {
-                var dict = QueryHelpers.ParseQuery(uri.Query);
-                if (dict.TryGetValue("id", out var values))
+                var dict = QueryHelpers.ParseQuery(query);
+                if (dict.TryGetValue("_sid", out var values))
+                {
+                    sharedId = values.Single();
+                }
+                // this check can be removed in 2023
+                else if (dict.TryGetValue("id", out values))
                 {
                     sharedId = values.Single();
                 }
             }
+            queryParams = query ?? string.Empty;
         }
 
         private class ViewStub : IView

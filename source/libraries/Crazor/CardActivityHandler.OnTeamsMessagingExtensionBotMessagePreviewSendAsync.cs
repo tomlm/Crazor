@@ -32,8 +32,10 @@ namespace Crazor
             var sd = (string)data._sessiondata;
             sd = await _encryptionProvider.DecryptAsync(sd, cancellationToken);
             var sessionData = SessionData.FromString(sd);
+
             var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
-            var cardApp = await this.LoadAppAsync(sessionData, activity, cancellationToken);
+            var cardApp = _cardAppFactory.Create(sessionData.App);
+            await cardApp.LoadAppAsync(sessionData, activity, cancellationToken);
             
             await cardApp.OnActionExecuteAsync(cancellationToken);
 
