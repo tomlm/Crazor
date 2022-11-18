@@ -4,6 +4,8 @@ using Microsoft.Bot.Schema;
 using Crazor.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Crazor.HostPage.Pages.Cards
 {
@@ -33,12 +35,12 @@ namespace Crazor.HostPage.Pages.Cards
 
         public string RouteUrl { get; set; }
 
-        public async Task OnGetAsync(CancellationToken cancellationToken)
+        public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
         {
-            string userId = null;
+            string userId;
             if (this.Request.Cookies.TryGetValue("userId", out var uid))
             {
-                userId = uid;
+                userId = uid!;
             }
             else
             {
@@ -78,6 +80,28 @@ namespace Crazor.HostPage.Pages.Cards
             this.AdaptiveCard = await this.CardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
             this.RouteUrl = this.CardApp.GetCurrentCardRoute();
+
+
+            var accept = Request.Headers.Accept.FirstOrDefault();
+            if (accept != null)
+            {
+                var contentTypes = accept.Split(',');
+                foreach (var contentType in contentTypes)
+                {
+                    switch (contentType)
+                    {
+                        case AdaptiveCard.ContentType:
+                            Response.ContentType = AdaptiveCard.ContentType;
+                            return Content(JsonConvert.SerializeObject(AdaptiveCard));
+                        case "application/json":
+                            Response.ContentType = "application/json";
+                            return Content(JsonConvert.SerializeObject(AdaptiveCard));
+                        case "text/html":
+                            return null!;
+                    }
+                }
+            }
+            return null!;
         }
     }
 }
