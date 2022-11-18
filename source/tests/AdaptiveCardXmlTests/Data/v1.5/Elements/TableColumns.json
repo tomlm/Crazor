@@ -1,0 +1,25 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Table",
+      "columns": [
+        {
+          "width": "auto"
+        },
+        {
+          "width": "stretch"
+        },
+        {
+          "width": "30px"
+        },
+        {
+          "width": 3
+        }
+      ],
+      "rows": [],
+      "gridStyle": "accent"
+    }
+  ]
+}

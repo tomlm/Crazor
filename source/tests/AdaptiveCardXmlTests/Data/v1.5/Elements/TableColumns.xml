@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card Version="1.5">
+  <Table GridStyle="accent">
+    <TableColumn Width="auto" />
+    <TableColumn Width="stretch" />
+    <TableColumn Width="30px" />
+    <TableColumn Width="3" />
+  </Table>
+</Card>

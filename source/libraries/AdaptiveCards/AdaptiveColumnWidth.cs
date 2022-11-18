@@ -19,11 +19,18 @@ namespace AdaptiveCards
             }
             else
             {
-                var i = Convert.ToInt64(value.Unit.Value);
-                if (i == value.Unit.Value)
-                    writer.WriteValue(i);
+                if (value.IsPixel)
+                {
+                    writer.WriteValue($"{value.Unit.Value}px");
+                }
                 else
-                    writer.WriteValue(value.Unit.Value);
+                {
+                    var i = Convert.ToInt64(value.Unit.Value);
+                    if (i == value.Unit.Value)
+                        writer.WriteValue(i);
+                    else
+                        writer.WriteValue(value.Unit.Value);
+                }
             }
         }
 
@@ -137,7 +144,7 @@ namespace AdaptiveCards
                 // relative unit 1.5
                 return this.Unit.ToString();
             }
-            
+
             // auto or stretch
             return this.WidthType;
         }
