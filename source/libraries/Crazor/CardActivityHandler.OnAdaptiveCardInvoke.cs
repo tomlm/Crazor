@@ -21,7 +21,7 @@ namespace Crazor
             if (invokeValue.Action.Verb == Constants.LOADROUTE_VERB)
             {
                 dynamic data = invokeValue.Action.Data;
-                var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), (string)(data.path));
+                var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), (string)(data.route ?? data.path));
                 cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
                 activity = activity.CreateLoadRouteActivity(uri);
                 await cardApp.LoadAppAsync(sharedId, null, activity, cancellationToken);
