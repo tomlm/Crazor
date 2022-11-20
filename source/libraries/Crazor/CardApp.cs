@@ -256,7 +256,7 @@ namespace Crazor
                 AddBannerMessage($"\n{err.Message.Replace("\n", "\n\n")}\n{innerMessage}", AdaptiveContainerStyle.Attention);
             }
 
-            await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
+            await PostRenderAsync(outboundCard, isPreview, cancellationToken);
 
             return outboundCard;
         }
@@ -607,7 +607,17 @@ namespace Crazor
             return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
         }
 
-        private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
+        /// <summary>
+        /// Opportunity to apply transformations to outbound cards.
+        /// </summary>
+        /// <remarks>
+        /// default implementation adds refresh, message banner, systemmenu, etc.
+        /// </remarks>
+        /// <param name="outboundCard">outbound card to modify</param>
+        /// <param name="isPreview">true if in preview mode</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>task</returns>
+        public virtual async Task PostRenderAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
