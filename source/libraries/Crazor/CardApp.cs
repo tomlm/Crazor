@@ -230,7 +230,7 @@ namespace Crazor
         /// <param name="isPreview">if true the card should be a preview anonymous card for sharing</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+        public virtual async Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
             AdaptiveCard? outboundCard;
             try
