@@ -24,11 +24,7 @@ using Microsoft.Extensions.Configuration;
 using Neleus.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using Microsoft.AspNetCore.Http.Extensions;
 using System.Web;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
-using System.Collections.Specialized;
-using System;
 
 namespace Crazor
 {
@@ -437,7 +433,10 @@ namespace Crazor
             }
 
             var queryVals= HttpUtility.ParseQueryString(query);
-            queryVals.Add("_sid", this.SharedId);
+            if (this.SharedId != null)
+            { 
+                queryVals.Add("_sid", this.SharedId);
+            }
             uri.Query = queryVals.ToString();
             return uri.Uri.PathAndQuery;
         }
