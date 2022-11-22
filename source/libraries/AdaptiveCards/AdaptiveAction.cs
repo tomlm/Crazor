@@ -93,10 +93,29 @@ namespace AdaptiveCards
         /// </remarks>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
 #if !NETSTANDARD1_3
-        [XmlAttribute]
+        [XmlIgnore]
 #endif
         [DefaultValue(typeof(AdaptiveActionMode), "primary")]
         public AdaptiveActionMode Mode { get; set; }
+
+#if !NETSTANDARD1_3
+        /// <summary>
+        /// Controls xml serialization of enum attribute
+        /// </summary>
+        [JsonIgnore]
+        [XmlAttribute(nameof(Mode))]
+        [DefaultValue(null)]
+        public string _Mode
+        {
+            get => JToken.FromObject(Mode).ToString();
+            set => Mode = (AdaptiveActionMode)Enum.Parse(typeof(AdaptiveActionMode), value, true);
+        }
+
+        /// <summary>
+        /// hides default value for xml serialization
+        /// </summary>
+        public bool ShouldSerialize_Mode() => Mode != AdaptiveActionMode.Primary;
+#endif
 
 
         /// <summary>

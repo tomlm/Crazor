@@ -56,8 +56,8 @@ namespace AdaptiveCardXmlTests
                 if (!File.Exists(xmlFile))
                 {
                     File.WriteAllText(jsonFile, json);
-                    File.WriteAllText(xmlFile, ToXml(card!));
                 }
+                File.WriteAllText(xmlFile, ToXml(card!));
             }
             catch (Exception err)
             {
