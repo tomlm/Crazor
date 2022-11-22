@@ -42,6 +42,8 @@ namespace Crazor
 
                 var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 
+                await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
+
                 // for clients that don't support AC you must send a preview card attachment.
                 var preview = new Attachment(
                     contentType: "application/vnd.microsoft.card.thumbnail",

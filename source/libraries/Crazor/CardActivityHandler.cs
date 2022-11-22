@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
+using AdaptiveCards;
+using Microsoft.Bot.Connector;
+using System.Threading;
 
 namespace Crazor
 {
@@ -44,5 +47,18 @@ namespace Crazor
             _logger = _serviceProvider.GetService<ILogger<CardActivityHandler>>();
         }
 
+        public async Task AddRefreshUserIdsAsync(ITurnContext turnContext, AdaptiveCard card, CancellationToken cancellationToken)
+        {
+            if (card.Refresh != null)
+            {
+                if (turnContext.Activity.ChannelId == Channels.Msteams && !turnContext.Activity.Conversation.Id.StartsWith("tab:"))
+                {
+                    // we need to add refresh userids
+                    var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
+                    var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
+                    card.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
+                }
+            }
+        }
     }
 }

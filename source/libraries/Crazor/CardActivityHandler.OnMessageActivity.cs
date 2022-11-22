@@ -40,6 +40,8 @@ namespace Crazor
 
                         var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
+                        await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
+
                         var response = Activity.CreateMessageActivity();
                         response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
 

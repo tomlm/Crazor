@@ -43,6 +43,8 @@ namespace Crazor
 
             var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 
+            await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
+
             var preview = new Attachment(
                 contentType: "application/vnd.microsoft.card.thumbnail",
                 content: new ThumbnailCard(

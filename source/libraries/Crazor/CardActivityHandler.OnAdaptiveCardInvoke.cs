@@ -39,6 +39,8 @@ namespace Crazor
 
             var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
+            await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
+
             return new AdaptiveCardInvokeResponse()
             {
                 StatusCode = 200,

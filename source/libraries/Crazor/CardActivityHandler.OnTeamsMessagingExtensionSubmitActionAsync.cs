@@ -48,6 +48,8 @@ namespace Crazor
                 cardApp.TaskModuleAction == TaskModuleAction.InsertCard;
             var adaptiveCard = await cardApp.RenderCardAsync(isPreview: isPreview, cancellationToken);
 
+            await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
+
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
         }
 

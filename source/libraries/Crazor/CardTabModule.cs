@@ -149,15 +149,6 @@ namespace Crazor
 
             var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
-            if (turnContext.Activity.ChannelId == Channels.Msteams &&
-    !turnContext.Activity.Conversation.Id.StartsWith("tab:"))
-            {
-                // we need to add refresh userids
-                var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
-                var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
-                card.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
-            }
-
             return card;
         }
 

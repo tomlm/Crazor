@@ -44,6 +44,8 @@ namespace Crazor
 
             var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
+            await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
+
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
         }
 

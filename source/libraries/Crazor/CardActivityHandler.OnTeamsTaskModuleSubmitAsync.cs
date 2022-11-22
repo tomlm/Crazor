@@ -80,6 +80,9 @@ namespace Crazor
                 case TaskModuleAction.PostCard:
                     {
                         var adaptiveCard = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
+
+                        await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
+
                         var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
                         var reply = turnContext.Activity.CreateReply();
                         cardApp.IsTaskModule = false;

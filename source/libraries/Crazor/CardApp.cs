@@ -25,6 +25,7 @@ using Neleus.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using System.Web;
+using System.Threading;
 
 namespace Crazor
 {
@@ -432,9 +433,9 @@ namespace Crazor
                     uri.Path = $"/Cards/{this.Name}";
             }
 
-            var queryVals= HttpUtility.ParseQueryString(query);
+            var queryVals = HttpUtility.ParseQueryString(query);
             if (this.SharedId != null)
-            { 
+            {
                 queryVals.Add("_sid", this.SharedId);
             }
             uri.Query = queryVals.ToString();
@@ -477,7 +478,7 @@ namespace Crazor
             {
                 var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
                 ParseRoute(loadRoute!.Route, out var app, out var _, out var view, out var path, out var queryParams);
-                
+
                 if (this.CurrentCard != view)
                 {
                     // this is ShowCard() embedded, Ick. 
@@ -595,7 +596,7 @@ namespace Crazor
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
         {
             var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
-            
+
             await cardApp.LoadAppAsync(sharedId, null, Activity!, cancellationToken);
 
             var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
