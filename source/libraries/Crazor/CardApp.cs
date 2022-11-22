@@ -851,9 +851,16 @@ namespace Crazor
 
             if (this.Activity.ChannelId == currentUri.Host)
             {
+                // INSERT FAKE SYSTEM MENU 
                 if (outboundCard.Body.Any())
                 {
                     outboundCard.Body.First().Separator = false;
+                }
+
+                if (outboundCard.Actions != null)
+                {
+                    systemMenu.Actions.AddRange(outboundCard.Actions.Where(a => a.Mode == AdaptiveActionMode.Secondary));
+                    outboundCard.Actions = outboundCard.Actions.Where(a => a.Mode == AdaptiveActionMode.Primary).ToList();
                 }
 
                 var ellipsis = new AdaptiveColumnSet()
