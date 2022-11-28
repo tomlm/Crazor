@@ -1,19 +1,12 @@
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Crazor.Attributes;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Reflection;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Crazor
 {

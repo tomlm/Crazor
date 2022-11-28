@@ -1,6 +1,6 @@
 ﻿using AdaptiveCards;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using Crazor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CrazorDemoBot.TagHelpers.ThumbnailCard
 {

@@ -1,10 +1,13 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
 using AdaptiveCards;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Bot.Schema;
 using Crazor.Controllers;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace Crazor.HostPage.Pages.Cards

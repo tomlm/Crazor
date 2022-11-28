@@ -1,17 +1,16 @@
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
 
+using AdaptiveCards;
+using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
-using Crazor.Interfaces;
+using Microsoft.Bot.Connector;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
-using Microsoft.Extensions.DependencyInjection;
-using AdaptiveCards;
-using Microsoft.Bot.Connector;
 
 namespace Crazor
 {

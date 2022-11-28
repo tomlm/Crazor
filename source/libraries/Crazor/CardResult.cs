@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {

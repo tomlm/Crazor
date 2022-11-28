@@ -1,6 +1,8 @@
-﻿using Crazor.Interfaces;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+using Crazor.Interfaces;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 

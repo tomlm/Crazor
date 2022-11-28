@@ -1,4 +1,7 @@
-﻿using AdaptiveCards;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
@@ -10,7 +13,6 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.VisualBasic;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

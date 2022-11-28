@@ -1,16 +1,12 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+using Crazor.Interfaces;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
-using System.ComponentModel;
-using System.Reflection;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using System.Reflection.Metadata.Ecma335;
-using Crazor.Attributes;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Crazor.Interfaces;
 
 namespace Crazor.TagHelpers
 {

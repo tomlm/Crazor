@@ -1,11 +1,9 @@
-﻿using AdaptiveCards;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+using AdaptiveCards;
 using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json;
-using System.Security.Policy;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Web;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace Crazor
 {

@@ -1,17 +1,5 @@
-﻿////-----------------------------------------------------------------------------
-//// Copyright (c) Microsoft Corporation.  All rights reserved.
-////-----------------------------------------------------------------------------
-//using AdaptiveCards;
-//using Microsoft.Bot.Builder;
-//using Microsoft.Bot.Builder.Teams;
-//using Microsoft.Bot.Schema;
-//using Microsoft.Bot.Schema.Teams;
-//using Newtonsoft.Json;
-//using Newtonsoft.Json.Linq;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading;
-//using System.Threading.Tasks;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
 
 
 //namespace Crazor

@@ -1,4 +1,7 @@
-﻿namespace Crazor
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+namespace Crazor
 {
     public enum TaskModuleAction
     {

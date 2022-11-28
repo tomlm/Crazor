@@ -1,12 +1,9 @@
-﻿//-----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//-----------------------------------------------------------------------------
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
 
 using AdaptiveCards;
-using AdaptiveCards.Rendering;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace Crazor

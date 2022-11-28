@@ -1,5 +1,4 @@
-﻿using Crazor.Attributes;
-using Microsoft.Bot.Schema;
+﻿using Microsoft.Bot.Schema;
 
 namespace CrazorDemoBot.Cards.Wordle
 {

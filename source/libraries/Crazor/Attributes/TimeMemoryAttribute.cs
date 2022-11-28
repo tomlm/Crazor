@@ -1,4 +1,7 @@
-﻿namespace Crazor.Attributes
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+namespace Crazor.Attributes
 {
     /// <summary>
     /// This memory is keyed off of a time and a pattern.

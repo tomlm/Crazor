@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-
-namespace CrazorDemoBot.Cards.ProductCatalog
+﻿namespace CrazorDemoBot.Cards.ProductCatalog
 {
     public class EditOrAddProductCatalogItem
     {

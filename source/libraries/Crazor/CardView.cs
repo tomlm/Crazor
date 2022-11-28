@@ -1,4 +1,7 @@
-﻿using AdaptiveCards;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
@@ -9,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;

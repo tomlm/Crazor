@@ -1,8 +1,5 @@
 ﻿using Crazor;
 using Crazor.Attributes;
-using Microsoft.AspNetCore.Components;
-using Microsoft.Bot.Schema;
-using System.Reflection;
 
 namespace CrazorDemoBot.Cards.Addresses
 {

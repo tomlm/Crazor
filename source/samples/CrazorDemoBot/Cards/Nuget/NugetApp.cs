@@ -1,5 +1,4 @@
 ﻿using Crazor;
-using Microsoft.Bing.WebSearch.Models;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json;
 

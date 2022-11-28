@@ -39,6 +39,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="D:\Source\github\crazor\source\.editorconfig" />
 		<None Include="icon.png" Pack="True" PackagePath="\" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
@@ -64,6 +65,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EditorConfigFiles Remove="D:\Source\github\crazor\source\.editorconfig" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
-﻿using AdaptiveCards;
+﻿using Crazor.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Crazor.TagHelpers;
 
 namespace CrazorDemoBot.TagHelpers.SearchBox
 {

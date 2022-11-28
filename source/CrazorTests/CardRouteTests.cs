@@ -1,5 +1,4 @@
 using Crazor;
-using Microsoft.AspNetCore.Components;
 
 namespace CrazorTests
 {

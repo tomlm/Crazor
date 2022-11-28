@@ -1,7 +1,5 @@
 using AdaptiveCards;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Diagnostics;
 using System.Text;
 using System.Xml;

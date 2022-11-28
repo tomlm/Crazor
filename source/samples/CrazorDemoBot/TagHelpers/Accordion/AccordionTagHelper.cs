@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using Crazor.TagHelpers;
+﻿using Crazor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CrazorDemoBot.TagHelpers.Accordion
 {

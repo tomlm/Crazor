@@ -1,6 +1,4 @@
 ﻿using AdaptiveCards;
-using Crazor;
-using Newtonsoft.Json.Linq;
 
 namespace CrazorTests
 {

@@ -1,11 +1,6 @@
-﻿using Azure.Storage.Blobs.Models;
-using Crazor;
+﻿using Crazor;
 using Crazor.Attributes;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
-using Newtonsoft.Json.Linq;
 
 namespace CrazorDemoBot.Cards.Wordle
 {

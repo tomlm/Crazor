@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.Features;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crazor
 {

@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Routing;
-using Microsoft.Bot.Schema;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
 using Neleus.DependencyInjection.Extensions;
-using System.Xml.Linq;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace Crazor
 {

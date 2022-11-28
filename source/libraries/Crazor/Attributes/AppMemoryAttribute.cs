@@ -1,4 +1,7 @@
-﻿namespace Crazor.Attributes
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+
+namespace Crazor.Attributes
 {
     /// <summary>
     /// This property will be peristed scoped to the application for all users and all sessions.
