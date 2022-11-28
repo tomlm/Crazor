@@ -1,31 +1,27 @@
 ﻿using AdaptiveCards;
+using Crazor.Attributes;
+using Crazor.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Linq;
-using Diag = System.Diagnostics;
-using Crazor.Attributes;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Crazor.Interfaces;
-using System.Xml;
-using System.Text;
-using System.Reflection;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Neleus.DependencyInjection.Extensions;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using System.Web;
-using System.Threading;
+using Newtonsoft.Json.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml;
+using Diag = System.Diagnostics;
 
 namespace Crazor
 {
@@ -47,6 +43,8 @@ namespace Crazor
 
         protected IConfiguration _configuration;
         protected CardAppFactory _cardAppFactory;
+        protected IEncryptionProvider _encryptionProvider;
+        protected RouteManager _routeManager;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardApp(IServiceProvider services)
@@ -57,6 +55,8 @@ namespace Crazor
             this.Services = services;
             this._configuration = services.GetRequiredService<IConfiguration>();
             this._cardAppFactory = services.GetRequiredService<CardAppFactory>();
+            this._encryptionProvider = services.GetRequiredService<IEncryptionProvider>();
+            this._routeManager = services.GetRequiredService<RouteManager>();
             this.CallStack = new List<CardViewState>()
             {
                 new CardViewState(Constants.DEFAULT_VIEW, null)
@@ -78,14 +78,9 @@ namespace Crazor
         public string IconUrl { get; set; }
 
         /// <summary>
-        /// <summary>
-        /// Instance Id for the card.
+        /// Route for the card.
         /// </summary>
-        public string? SharedId { get; set; }
-
-        /// Session Id for the card
-        /// </summary>
-        public string? SessionId { get; set; }
+        public CardRoute Route { get; set; }
 
         /// <summary>
         /// The activity we are processing.
@@ -155,6 +150,24 @@ namespace Crazor
         public TaskModuleAction TaskModuleAction { get; set; }
 
         /// <summary>
+        /// process the activity
+        /// </summary>
+        /// <param name="invokeActivity"></param>
+        /// <param name="isPreview"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<AdaptiveCard> ProcessInvokeActivity(IInvokeActivity invokeActivity, bool isPreview, CancellationToken cancellationToken)
+        {
+            await LoadAppAsync((Activity)invokeActivity!, cancellationToken);
+
+            await OnActionExecuteAsync(cancellationToken);
+
+            await SaveAppAsync(cancellationToken);
+
+            return await RenderCardAsync(isPreview, cancellationToken);
+        }
+
+        /// <summary>
         /// Handle action
         /// </summary>
         /// <param name="context"></param>
@@ -167,6 +180,12 @@ namespace Crazor
             {
                 this.Action.Verb = Constants.SHOWVIEW_VERB;
             }
+            
+            if (this.Route.SessionId == null)
+            {
+                this.Route.SessionId = Utils.GetNewId();
+            }
+
             Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb})-----");
 
             // Load stylesheet
@@ -203,6 +222,7 @@ namespace Crazor
                             break;
 
                         this.Action.Verb = Constants.SHOWVIEW_VERB;
+                        this.LastResult = null;
                     }
 
                     if (ShowViewAttempts >= 5)
@@ -426,19 +446,14 @@ namespace Crazor
             if (!viewRoute.StartsWith('/'))
             {
                 if (viewRoute.Length > 0)
-                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}/{subPath}";
+                    uri.Path = $"/Cards/{this.Name}/{subPath}";
                 else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
                     uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
                 else
                     uri.Path = $"/Cards/{this.Name}";
             }
 
-            var queryVals = HttpUtility.ParseQueryString(query);
-            if (this.SharedId != null)
-            {
-                queryVals.Add("_sid", this.SharedId);
-            }
-            uri.Query = queryVals.ToString();
+            uri.Query = query;
             return uri.Uri.PathAndQuery;
         }
 
@@ -447,21 +462,41 @@ namespace Crazor
         /// </summary>
         /// <param name="storage"></param>
         /// <returns></returns>
-        public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+        public async virtual Task LoadAppAsync(IInvokeActivity activity, CancellationToken cancellationToken)
         {
+            ArgumentNullException.ThrowIfNull(cancellationToken);
             ArgumentNullException.ThrowIfNull(activity);
-            this.SharedId = sharedId ?? ((this.AutoSharedId) ? Utils.GetNewId() : null);
-            this.SessionId = sessionId ?? Utils.GetNewId();
-            this.Activity = activity;
-            var invoke = JToken.FromObject(activity.Value).ToObject<AdaptiveCardInvokeValue>();
+
+            if (!_routeManager.ResolveRoute(this.Route, out var viewType))
+            {
+                throw new Exception($"{this.Route} is not a valid route");
+            }
+
+            this.Activity = (Activity)activity;
+            var invoke = JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
             ArgumentNullException.ThrowIfNull(invoke);
             this.Action = invoke.Action;
 
-            var storage = this.Services.GetRequiredService<IStorage>();
+            // map FromRoute attributes
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+            {
+                var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                if (dataProperty != null)
+                {
+                    this.SetTargetProperty(targetProperty, dataProperty.Value);
+                }
+            }
 
-            var memoryMap = GetMemoryKeyMap();
+            // map App. routedata to app
+            foreach (var routeProperty in Route.RouteData.Properties().Where(p => p.Name.StartsWith("App.")))
+            {
+                ObjectPath.SetPathValue(this, routeProperty.Name.Substring(4), routeProperty.Value.ToString(), false);
+            }
 
             // lookup data
+            var storage = this.Services.GetRequiredService<IStorage>();
+            var memoryMap = GetMemoryKeyMap();
             var state = await storage.ReadAsync(memoryMap.Keys.ToArray(), cancellationToken);
 
             // assign data to the properties.
@@ -476,15 +511,12 @@ namespace Crazor
 
             if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
-                var loadRoute = JObject.FromObject(Action.Data).ToObject<LoadRouteModel>();
-                ParseRoute(loadRoute!.Route, out var app, out var _, out var view, out var path, out var queryParams);
-
-                if (this.CurrentCard != view)
+                if (this.CurrentCard != Route.View)
                 {
                     // this is ShowCard() embedded, Ick. 
                     // The issue is we don't want to reset the verb, need to clean this up
                     SaveCardViewState(this.CallStack[0], this.CurrentView);
-                    var cardState = new CardViewState(view!);
+                    var cardState = new CardViewState(Route.View!);
                     CallStack.Insert(0, cardState);
                     SetCurrentView(cardState);
                     return;
@@ -544,31 +576,38 @@ namespace Crazor
 
         public ICardView LoadCardView(CardViewState cardState)
         {
-            var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
-            var viewPath = $"/Cards/{Name}/{cardState.Name}.cshtml";
-            var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
             IView view;
             ICardView cardView;
-            if (viewResult?.View != null)
+            // This is a non-cshtml view, let's see if we can construct it.
+            try
             {
-                view = viewResult?.View!;
-                cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
-                cardView.RazorView = viewResult.View;
-            }
-            else
-            {
-                // This is a non-cshtml view, let's see if we can construct it.
-                try
+                if (cardState.Name.Contains('.'))
                 {
                     cardView = this.Services.GetByName<ICardView>(cardState.Name);
                     view = new ViewStub();
-                    ArgumentNullException.ThrowIfNull(cardView);
                 }
-                catch (ArgumentException)
+                else
                 {
-                    cardView = new EmptyCardView();
-                    view = new ViewStub();
+                    var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
+                    var viewPath = Path.Combine("Cards", Name, $"{cardState.Name}.cshtml");
+                    var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+                    view = viewResult?.View;
+                    if (view != null)
+                    {
+                        cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
+                        cardView.RazorView = viewResult.View;
+                    }
+                    else
+                    {
+                        cardView = new EmptyCardView();
+                        view = new ViewStub();
+                    }
                 }
+            }
+            catch (ArgumentException)
+            {
+                cardView = new EmptyCardView();
+                view = new ViewStub();
             }
 
             cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
@@ -581,7 +620,7 @@ namespace Crazor
             ITempDataProvider tempDataProvider;
             ActionContext actionContext;
             var httpContext = new DefaultHttpContext { RequestServices = Services };
-            actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            actionContext = new ActionContext(httpContext, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
             tempDataProvider = Services.GetRequiredService<ITempDataProvider>();
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
@@ -595,9 +634,11 @@ namespace Crazor
 
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
         {
-            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+            var cardRoute = CardRoute.FromUri(uri);
 
-            await cardApp.LoadAppAsync(sharedId, null, Activity!, cancellationToken);
+            var cardApp = _cardAppFactory.Create(cardRoute);
+
+            await cardApp.LoadAppAsync(Activity!, cancellationToken);
 
             var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
 
@@ -619,7 +660,7 @@ namespace Crazor
             AddSystemMenu(outboundCard, isPreview);
 
             // add session data to outbound card
-            await AddSessionDataToAdaptiveCardAsync(outboundCard, isPreview, cancellationToken);
+            await AddMetadataToCard(outboundCard, isPreview, cancellationToken);
 
 #pragma warning disable CS0618 // Type or member is obsolete
             if (CurrentCard != Constants.DEFAULT_VIEW)
@@ -635,35 +676,16 @@ namespace Crazor
             outboundCard.Metadata = new AdaptiveMetadata() { WebUrl = GetCurrentCardUri().AbsoluteUri };
         }
 
-        public SessionData GetSessionData()
+        private async Task AddMetadataToCard(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
-            return new SessionData()
-            {
-                App = this.Name,
-                SharedId = this.SharedId,
-                SessionId = this.SessionId
-            };
-        }
-
-        public async Task<string> GetSessionDataToken(SessionData sessionData, CancellationToken cancellationToken)
-        {
-            var sessionDataToken = sessionData.ToString();
-
+            var sessionId = (isPreview) ? null : this.Route.SessionId;
+            string sessionIdEncrypt = null;
             var encryptionProvider = this.Services.GetService<IEncryptionProvider>();
-            if (encryptionProvider != null)
+            if (!String.IsNullOrEmpty(sessionId) && encryptionProvider != null)
             {
-                sessionDataToken = await encryptionProvider.EncryptAsync(sessionDataToken.ToString(), cancellationToken);
+                sessionIdEncrypt = await encryptionProvider.EncryptAsync(sessionId, cancellationToken);
             }
-            return sessionDataToken;
-        }
-
-        private async Task AddSessionDataToAdaptiveCardAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
-        {
-            var sessionData = GetSessionData();
-            if (isPreview)
-                sessionData.SessionId = null;
-
-            var sessionDataToken = await GetSessionDataToken(sessionData, cancellationToken);
+            var route = GetCurrentCardRoute();
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
             {
@@ -673,7 +695,9 @@ namespace Crazor
                     action.Data = new JObject();
                 }
                 var data = (JObject)action.Data;
-                data[Constants.SESSIONDATA_KEY] = JToken.FromObject(sessionDataToken);
+                data[Constants.ROUTE_KEY] = route;
+                if (sessionId != null)
+                    data[Constants.SESSION_KEY] = sessionIdEncrypt;
                 if (action.Id != null)
                     data[Constants.IDDATA_KEY] = action.Id;
             }
@@ -687,7 +711,9 @@ namespace Crazor
                 }
 
                 var data = JObject.FromObject(action.Data);
-                data[Constants.SESSIONDATA_KEY] = JToken.FromObject(sessionDataToken);
+                data[Constants.ROUTE_KEY] = route;
+                if (sessionId != null)
+                    data[Constants.SESSION_KEY] = sessionId;
                 if (action.Id != null)
                     data[Constants.IDDATA_KEY] = action.Id;
             }
@@ -699,7 +725,7 @@ namespace Crazor
                     if (Activity!.ChannelId == Channels.Msteams && choiceSet.DataQuery.Dataset.StartsWith("graph.microsoft.com/users"))
                         continue;
                     else
-                        choiceSet.DataQuery.Dataset = $"{sessionDataToken}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
+                        choiceSet.DataQuery.Dataset = $"{Route.Route}{AdaptiveDataQuery.Separator}{sessionId}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
                 }
             }
         }
@@ -707,6 +733,7 @@ namespace Crazor
         private void AddRefresh(AdaptiveCard outboundCard, bool isPreview)
         {
             var uri = GetCurrentCardUri();
+
             if (outboundCard.Refresh == null)
             {
                 AdaptiveExecuteAction refresh;
@@ -718,10 +745,11 @@ namespace Crazor
                         Verb = Constants.LOADROUTE_VERB,
                         IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
-                        Data = JObject.FromObject(new LoadRouteModel()
+                        Data = new JObject()
                         {
-                            Route = this.GetCurrentCardRoute()
-                        })
+                            // NO sesion for preview card...{ Constants.SESSION_KEY, this.RouteData.SessionId },
+                            { Constants.ROUTE_KEY, uri.PathAndQuery},
+                        }
                     };
                 }
                 else
@@ -733,6 +761,10 @@ namespace Crazor
                         IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = new JObject()
+                        {
+                            { Constants.SESSION_KEY, this.Route.SessionId },
+                            { Constants.ROUTE_KEY, uri.PathAndQuery },
+                        }
                     };
                 }
                 outboundCard.Refresh = new AdaptiveRefresh() { Action = refresh };
@@ -814,7 +846,7 @@ namespace Crazor
                 {
                     Title = "Open",
                     IconUrl = new Uri(currentUri, _configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
-                    Url = GetCurrentCardUri().AbsoluteUri,
+                    Url = currentUri.AbsoluteUri,
                     Mode = AdaptiveActionMode.Secondary
                 });
             }
@@ -955,9 +987,6 @@ namespace Crazor
 
         private void SetScopedMemory(Type memoryAttributeType, JObject memory)
         {
-            if (memoryAttributeType == typeof(PropertyValueMemoryAttribute))
-                throw new Exception("Can't use PropertyMemoryAttribute directly, you need to create child class to represent the property value.");
-
             lock (this)
             {
                 foreach (var property in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute(memoryAttributeType, true) != null))
@@ -1039,46 +1068,6 @@ namespace Crazor
 
         protected string? GetKey(string name, string? key) => String.IsNullOrEmpty(key) ? null : $"{this.Name}-{name}-{key}";
 
-        /// <summary>
-        /// Parse a /cards/{app}/{view}{path} into parts.
-        /// </summary>
-        /// <param name="uri">uri</param>
-        /// <param name="turnContext">Turn context</param>
-        /// <param name="app">app from the uri</param>
-        /// <param name="sharedId">sharedId from the uri</param>
-        /// <param name="path">path</param>
-        /// <param name="queryParams">query params</param>
-        public static void ParseUri(Uri uri, out string app, out string? sharedId, out string view, out string path, out string queryParams)
-        {
-            ParseRoute(uri.PathAndQuery, out app, out sharedId, out view, out path, out queryParams);
-        }
-
-        public static void ParseRoute(string route, out string app, out string? sharedId, out string view, out string path, out string queryParams)
-        {
-            sharedId = null;
-            var parts = route.Split('?');
-            var local = parts[0];
-            var query = parts.Skip(1).FirstOrDefault();
-            parts = local.Trim('/').Split('/');
-            app = parts[1];
-            view = (parts.Length > 2) ? parts[2] : Constants.DEFAULT_VIEW;
-            path = String.Join('/', parts.Skip(3).ToArray());
-            if (!String.IsNullOrEmpty(query))
-            {
-                var dict = QueryHelpers.ParseQuery(query);
-                if (dict.TryGetValue("_sid", out var values))
-                {
-                    sharedId = values.Single();
-                }
-                // this check can be removed in 2023
-                else if (dict.TryGetValue("id", out values))
-                {
-                    sharedId = values.Single();
-                }
-            }
-            queryParams = query ?? string.Empty;
-        }
-
         private class ViewStub : IView
         {
             public string Path { get; set; } = string.Empty;
@@ -1108,6 +1097,5 @@ namespace Crazor
             }
             return attributeMap;
         }
-
     }
 }

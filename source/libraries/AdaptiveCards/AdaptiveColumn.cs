@@ -57,9 +57,5 @@ namespace AdaptiveCards
 
 #endif
 
-        public void Add(AdaptiveElement element)
-        {
-            this.Items.Add(element);
-        }
     }
 }

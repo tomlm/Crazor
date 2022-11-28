@@ -5,8 +5,7 @@
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
-using System;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {
@@ -14,30 +13,11 @@ namespace Crazor
     {
         protected async override Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            CardApp cardApp = null;
-        
-            var sessionId = turnContext.Activity?.Id ?? Utils.GetNewId();
-            Activity activity = (Activity)turnContext.Activity!;
-            if (invokeValue.Action.Verb == Constants.LOADROUTE_VERB)
-            {
-                dynamic data = invokeValue.Action.Data;
-                var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), (string)(data.route ?? data.path));
-                cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
-                activity = activity.CreateLoadRouteActivity(uri);
-                await cardApp.LoadAppAsync(sharedId, null, activity, cancellationToken);
-            }
-            else
-            {
-                var sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
-                cardApp = _cardAppFactory.Create(sessionData.App);
-                await cardApp.LoadAppAsync(sessionData, activity, cancellationToken);
-            }
+            CardRoute cardRoute = await CardRoute.FromDataAsync((JObject)invokeValue.Action.Data, _encryptionProvider, cancellationToken);
 
-            await cardApp.OnActionExecuteAsync(cancellationToken);
-            
-            await cardApp.SaveAppAsync(cancellationToken);
+            var cardApp = _cardAppFactory.Create(cardRoute);
 
-            var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+            AdaptiveCard card = await cardApp.ProcessInvokeActivity((Activity)turnContext.Activity!, isPreview: false, cancellationToken);
 
             await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
 
@@ -48,7 +28,6 @@ namespace Crazor
                 Value = card
             };
         }
-
 
         protected override Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
             // we extract SSO tokens in Card Adapter where we have information about whether the channel is trusted

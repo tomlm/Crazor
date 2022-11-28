@@ -9,11 +9,12 @@ using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using System.Web;
+using System.Text;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -111,8 +112,23 @@ namespace Crazor
             MethodInfo? verbMethod = null;
             if (action.Verb == Constants.LOADROUTE_VERB)
             {
-                var loadRoute = ((JObject)this.Action.Data).ToObject<LoadRouteModel>();
-                AddDataFromRoute(data, loadRoute!);
+                // process any FromRoute
+                // map FromRoute attributes
+                foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+                {
+                    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                    var dataProperty = App.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
+                }
+
+                // map complex path routedata which is not App data (As it's already been processed early in the memory loading phase)
+                foreach (var routeProperty in App.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
+                {
+                    ObjectPath.SetPathValue(this, routeProperty.Name, routeProperty.Value.ToString(), false);
+                }
 
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
                 verbMethod = GetMethod(action.Verb);
@@ -255,12 +271,30 @@ namespace Crazor
         /// </summary>
         /// <remarks>
         /// Override this to define custom subroute
-        /// The default is /Cards/{appName/{viewName}/{result of GetRoute()}
+        /// The default is to use reflection and [Route] to calculate the route
         /// </remarks>
         /// <returns>relative path to the card for deep linking</returns>
         public virtual string GetRoute()
         {
-            return String.Empty;
+            var routeAttr = this.GetType().GetCustomAttribute<RouteAttribute>();
+            if (routeAttr != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                var parts = routeAttr.Template.Split('/');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    var part = parts[i];
+                    if (part.StartsWith('{') && part.EndsWith('}'))
+                    {
+                        parts[i] = ObjectPath.GetPathValue<string>(this, part.Trim('{', '}', '?'), null);
+                    }
+                }
+                return String.Join('/', parts);
+            }
+            else
+            {
+                return (this.Name != Constants.DEFAULT_VIEW) ? this.Name : String.Empty;
+            }
         }
         #endregion -----
 
@@ -494,16 +528,11 @@ namespace Crazor
 
                     // if root is [BindProperty]
                     var prop = this.GetType().GetProperty(parts[0]);
+                    // only allow binding to Model, App or BindProperty
                     if (prop != null &&
                         (prop.Name == "Model" || prop.Name == "App" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
                     {
-                        object obj = this;
-                        foreach (var part in parts.Take(parts.Length - 1))
-                        {
-                            obj = obj.GetPropertyValue(part)!;
-                        }
-                        var targetProperty = obj.GetType().GetProperty(parts.Last());
-                        obj.SetTargetProperty(targetProperty, property.Value);
+                        ObjectPath.SetPathValue(this, property.Name, property.Value, json: false);
                     }
                 }
             }
@@ -556,46 +585,7 @@ namespace Crazor
             }
         }
 
-        private void AddDataFromRoute(JObject data, LoadRouteModel loadRoute)
-        {
-            CardApp.ParseRoute(loadRoute.Route, out var app, out var sharedId, out var view, out var path, out var queryParams);
-
-            // process route to extra names from path based on RouteAttribute Template
-            var routeAttribute = this.GetType().GetCustomAttribute<RouteAttribute>();
-            if (routeAttribute != null)
-            {
-                var pathParts = path.Split('/');
-                var fragments = routeAttribute.Template.Split('/');
-                int i = 0;
-                foreach (var fragment in fragments)
-                {
-                    if (fragment.StartsWith('{') && fragment.EndsWith('}'))
-                    {
-                        var name = fragment.TrimStart('{').TrimEnd('}');
-                        data[name] = pathParts[i];
-                    }
-                    i++;
-                }
-            }
-            // process any FromQuery attributes 
-            var query = HttpUtility.ParseQueryString(queryParams);
-            foreach (var key in query.Keys)
-            {
-                if ((string)key != "_sid")
-                {
-                    data[key] = query[(string)key];
-                }
-            }
-
-            foreach (var property in this.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null))
-            {
-                var value = query.GetValues(property.Name)?.FirstOrDefault();
-                if (value != null)
-                {
-                    this.SetTargetProperty(property, value);
-                }
-            }
-        }
+    
         #endregion
     }
 

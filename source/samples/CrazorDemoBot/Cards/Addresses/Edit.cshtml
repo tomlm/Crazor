@@ -2,15 +2,13 @@
 @inherits CardView<AddressesApp,Address>
 
 @* This card supports a deep link route *@
-@attribute [Route("{addressId}")]
+@attribute [Route("{Model.Id}/Edit")]
 @functions {
-    public override string GetRoute()
-        => $"{this.Model.Id}";
 
-    public void OnLoadRoute(string addressId)
+    public void OnLoadRoute()
     {
-        ArgumentNullException.ThrowIfNull(addressId);
-        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == addressId)! ?? throw new CardRouteNotFoundException($"Address {addressId} not found");
+        ArgumentNullException.ThrowIfNull(Model.Id);
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == Model.Id)! ?? throw new CardRouteNotFoundException($"Address {Model.Id} not found");
     }
 }
 

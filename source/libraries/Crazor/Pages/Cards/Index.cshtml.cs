@@ -48,10 +48,13 @@ namespace Crazor.HostPage.Pages.Cards
             }
 
             var uri = new Uri(Request.GetDisplayUrl());
-            this.CardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+            var cardRoute = CardRoute.FromUri(uri);
+            cardRoute.SessionId = Utils.GetNewId();
+
+            this.CardApp = _cardAppFactory.Create(cardRoute);
+
             ArgumentNullException.ThrowIfNull(this.CardApp);
 
-            string sessionId = Utils.GetNewId();
             var loadRouteActivity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
@@ -59,25 +62,17 @@ namespace Crazor.HostPage.Pages.Cards
                 Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount() { Id = userId },
                 Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = sharedId },
+                Conversation = new ConversationAccount() { Id = Utils.GetNewId() },
                 Timestamp = DateTimeOffset.UtcNow,
                 LocalTimestamp = DateTimeOffset.Now,
             }
-            .CreateLoadRouteActivity(uri);
-
-            await this.CardApp.LoadAppAsync(sharedId, sessionId, loadRouteActivity, cancellationToken);
+            .CreateLoadRouteActivity(cardRoute.Route);
 
             var token = await CardAppController.GetTokenAsync(_configuration);
             this.Response.Cookies.Append("token", token);
             this.Response.Cookies.Append("userId", userId);
-            this.Response.Cookies.Append("sharedId", CardApp.SharedId ?? String.Empty);
 
-            // process Action.Execute
-            await this.CardApp.OnActionExecuteAsync(cancellationToken);
-
-            await this.CardApp.SaveAppAsync(cancellationToken);
-
-            this.AdaptiveCard = await this.CardApp.RenderCardAsync(isPreview: false, cancellationToken);
+            this.AdaptiveCard = await CardApp.ProcessInvokeActivity(loadRouteActivity, isPreview: false, cancellationToken);
 
             this.RouteUrl = this.CardApp.GetCurrentCardRoute();
 

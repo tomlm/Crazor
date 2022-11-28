@@ -30,18 +30,14 @@ namespace Crazor
             // get play page url => envir, cardId, instanceId,
             if (uri.Host == hostName)
             {
-                var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var q);
+                CardRoute cardRoute = CardRoute.FromUri(uri);
 
-                var activity = turnContext.Activity.CreateLoadRouteActivity(uri);
+                var cardApp = _cardAppFactory.Create(cardRoute);
 
-                await cardApp.LoadAppAsync(sharedId, null, activity, cancellationToken);
+                var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);
 
-                await cardApp.OnActionExecuteAsync(cancellationToken);
-
-                await cardApp.SaveAppAsync(cancellationToken);
-
-                var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
-
+                var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
+                
                 await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.

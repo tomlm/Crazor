@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
+﻿using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Bot.Schema;
-using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Bot.Schema.Teams;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.Bot.Schema;
 
 namespace Crazor.Interfaces
 {

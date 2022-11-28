@@ -30,15 +30,11 @@ namespace Crazor
 
                     if (_cardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
                     {
-                        var cardApp = _cardAppFactory.Create(app);
+                        var cardRoute = CardRoute.Parse($"/Cards/{app}");
 
-                        await cardApp.LoadAppAsync(Utils.GetNewId(), null, (Activity)turnContext.Activity, cancellationToken);
+                        var cardApp = _cardAppFactory.Create(cardRoute);
 
-                        await cardApp.OnActionExecuteAsync(cancellationToken);
-
-                        await cardApp.SaveAppAsync(cancellationToken);
-
-                        var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+                        var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route), isPreview: true, cancellationToken);
 
                         await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
 

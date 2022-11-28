@@ -1,5 +1,4 @@
-﻿using Azure.Storage.Blobs.Models;
-using Crazor;
+﻿using Crazor;
 using Crazor.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
@@ -14,18 +13,20 @@ namespace CrazorDemoBot.Cards.Dice
         {
         }
 
-        [SharedMemory]
+        /// <summary>
+        /// the dice name is in the route, /cards/dice/{dicename}
+        /// </summary>
+        [FromRoute]
         [Required]
-        [StringLength(50, MinimumLength = 1)]
         public string? DiceName { get; set; }
 
-        [SharedMemory]
         [Required]
         [Description("Number of dice")]
         [Range(1, 50, ErrorMessage = "Dice must be between 1 and 50.")]
+        [PathMemory(nameof(DiceName))]
         public int? NumberDice { get; set; }
 
-        [SharedMemory]
+        [PathMemory(nameof(DiceName))]
         public List<int>? Dice { get; set; }
 
         public void RollDice()

@@ -1,5 +1,8 @@
 ﻿namespace Crazor.Attributes
 {
+    /// <summary>
+    /// This memory is keyed off of a time and a pattern.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class TimeMemoryAttribute : MemoryAttribute
     {

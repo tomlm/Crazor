@@ -5,9 +5,8 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Neleus.DependencyInjection.Extensions;
 using Microsoft.Bot.Schema.Teams;
-using Microsoft.Bot.Connector;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {
@@ -49,27 +48,28 @@ namespace Crazor
         {
             List<Task<AdaptiveCard>> taskCards = new List<Task<AdaptiveCard>>();
             var cardUris = await GetCardUrisAsync();
-            var sessionId = turnContext.Activity.Conversation.Id;
-            var key = GetKey(sessionId);
+            string tabSessionId = turnContext.Activity.Conversation.Id;
+            var key = GetKey(tabSessionId);
             var result = await _storage.ReadAsync(new string[] { key }, cancellationToken);
             CardTabModuleState tabState = result.ContainsKey(key) ? result[key] as CardTabModuleState ?? new CardTabModuleState() : new CardTabModuleState();
 
             foreach (var cardUri in cardUris)
             {
-                // if we have a sessiondata for this uri
+                // if we have a refresh action cached for this uri
                 if (tabState.RefreshMap.TryGetValue(cardUri, out var refreshAction))
                 {
-                    // we do a refresh
-                    var sessionData = await refreshAction.GetSessionDataFromActionAsync(_encryptionProvider, cancellationToken);
-                    taskCards.Add(InvokeTabCardAsync(turnContext!, sessionData, refreshAction.CreateInvokeValue(turnContext), cancellationToken));
+                    // we use it to do a refresh
+                    var cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(refreshAction.Data), _encryptionProvider, cancellationToken);
+
+                    taskCards.Add(InvokeTabCardAsync(turnContext!, cardRoute, refreshAction.CreateInvokeValue(turnContext), cancellationToken));
                 }
                 else
                 {
                     if (Uri.TryCreate(cardUri, UriKind.RelativeOrAbsolute, out var uri))
                     {
-                        // we do a load route
+                        // we do a load route on the uri
                         uri = uri.IsAbsoluteUri ? uri : new Uri(_configuration.GetValue<Uri>("HostUri"), uri);
-                        taskCards.Add(LoadTabCardAsync(turnContext!, uri, sessionId, cancellationToken));
+                        taskCards.Add(LoadTabCardAsync(turnContext!, uri, tabSessionId, cancellationToken));
                     }
                 }
             }
@@ -82,19 +82,21 @@ namespace Crazor
                 tabState.RefreshMap[cardUris[i]] = (AdaptiveExecuteAction)cards[i].Refresh.Action;
             }
 
-            await _storage.WriteAsync(new Dictionary<string, object>() { { GetKey(sessionId), tabState } }, cancellationToken);
+            await _storage.WriteAsync(new Dictionary<string, object>() { { GetKey(tabSessionId), tabState } }, cancellationToken);
 
             return cards;
         }
 
-        protected string GetKey(string sessionId) => $"{this.Name}.{sessionId}";
+        protected string GetKey(string tabSessionId) => $"{this.Name}.{tabSessionId}";
 
         public virtual async Task<AdaptiveCard[]> OnTabSubmitAsync(ITurnContext turnContext, TabSubmit tabSubmit, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            SessionData invokeSessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
+            CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), _encryptionProvider, cancellationToken);
+
             var cardUris = await GetCardUrisAsync();
 
-            var key = GetKey(invokeSessionData.SessionId!);
+            string tabSessionId = turnContext.Activity.Conversation.Id;
+            var key = GetKey(tabSessionId);
             var result = await _storage.ReadAsync(new string[] { key }, cancellationToken);
 
             CardTabModuleState tabState = (CardTabModuleState)result[key];
@@ -104,17 +106,17 @@ namespace Crazor
             {
                 if (tabState.RefreshMap.TryGetValue(cardUri, out var refreshAction))
                 {
-                    var sessionData = await refreshAction.GetSessionDataFromActionAsync(_encryptionProvider, cancellationToken);
+                    CardRoute cardRouteData = await CardRoute.FromDataAsync(JObject.FromObject(refreshAction.Data), _encryptionProvider, cancellationToken);
 
-                    if (sessionData.App == invokeSessionData.App)
+                    if (cardRouteData.App == cardRoute.App)
                     {
                         // this is the actual button click
-                        taskCards.Add(InvokeTabCardAsync(turnContext!, sessionData, invokeValue, cancellationToken));
+                        taskCards.Add(InvokeTabCardAsync(turnContext!, cardRoute, invokeValue, cancellationToken));
                     }
                     else
                     {
-                        // this is the refresh action.
-                        taskCards.Add(InvokeTabCardAsync(turnContext!, sessionData, refreshAction.CreateInvokeValue(turnContext), cancellationToken));
+                        // use the refresh action.
+                        taskCards.Add(InvokeTabCardAsync(turnContext!, cardRouteData, refreshAction.CreateInvokeValue(turnContext), cancellationToken));
                     }
                 }
                 else
@@ -137,34 +139,22 @@ namespace Crazor
 
         protected async Task<AdaptiveCard> LoadTabCardAsync(ITurnContext turnContext, Uri uri, string sessionId, CancellationToken cancellationToken)
         {
-            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+            ArgumentNullException.ThrowIfNull(turnContext);
+            ArgumentNullException.ThrowIfNull(uri);
+            ArgumentNullException.ThrowIfNull(cancellationToken);
 
-            var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(uri);
+            var cardApp = _cardAppFactory.Create(CardRoute.FromUri(uri));
 
-            await cardApp.LoadAppAsync(sharedId, sessionId, loadRouteActivity, cancellationToken);
-
-            await cardApp.OnActionExecuteAsync(cancellationToken);
-
-            await cardApp.SaveAppAsync(cancellationToken);
-
-            var card = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
-
+            var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
+            
             return card;
         }
 
-        protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, SessionData sessionData, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
+        protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, CardRoute cardRoute, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            var cardApp = _cardAppFactory.Create(sessionData.App);
-
-            await cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, (Activity)turnContext.Activity, cancellationToken);
-            cardApp.Action = invokeValue.Action;
-            
-            await cardApp.OnActionExecuteAsync(cancellationToken);
-            
-            await cardApp.SaveAppAsync(cancellationToken);
-            
-            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
-            return adaptiveCard;
+            var cardApp = _cardAppFactory.Create(cardRoute);
+            var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateActionInvokeActivity(invokeValue.Action.Verb, JObject.FromObject(invokeValue.Action.Data)), false, cancellationToken);
+            return card;
         }
     }
 }

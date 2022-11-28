@@ -17,9 +17,9 @@ namespace Crazor
 
         public IEnumerable<string> GetNames() => _cardAppByName.GetNames().OrderBy(n => n);
 
-        public CardApp Create(string name)
+        public CardApp Create(CardRoute cardRoute)
         {
-            var cardName = _cardAppByName.GetNames().SingleOrDefault(cardName => String.Equals(cardName, name, StringComparison.OrdinalIgnoreCase));
+            var cardName = _cardAppByName.GetNames().SingleOrDefault(cardName => String.Equals(cardName, cardRoute.App, StringComparison.OrdinalIgnoreCase));
             if (cardName != null)
             {
                 var cardApp = _cardAppByName.GetByName(cardName);
@@ -27,18 +27,10 @@ namespace Crazor
                 {
                     cardApp.Name = cardName;
                 }
+                cardApp.Route = cardRoute;
                 return cardApp;
             }
-            return null;
-        }
-
-
-        public CardApp CreateFromUri(Uri uri, out string? sharedId, out string view, out string path, out string query)
-        {
-            CardApp.ParseUri(uri, out var app, out sharedId, out view, out path, out query);
-
-            var cardApp = Create(app);
-            return cardApp;
+            throw new ArgumentNullException(nameof(cardRoute));
         }
     }
 }

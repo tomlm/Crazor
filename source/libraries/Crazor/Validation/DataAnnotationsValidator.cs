@@ -42,7 +42,7 @@ namespace Crazor.Validation
             {
                 if (property.PropertyType == typeof(string) || property.PropertyType.IsValueType) continue;
 
-                var value = obj.GetPropertyValue(property.Name);
+                var value = ObjectPath.GetPathValue<object>(obj, property.Name);
 
                 if (value == null) continue;
 

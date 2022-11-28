@@ -13,27 +13,25 @@ namespace Crazor
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         { }
 
-        internal SingleCardTabModule(IServiceProvider services, string path) : base(services)
+        internal SingleCardTabModule(IServiceProvider services, string route) : base(services)
         {
-            if (Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out var uri))
+            if (Uri.TryCreate(route, UriKind.RelativeOrAbsolute, out var uri))
             {
-                this.Path = path;
-
-                uri = uri.IsAbsoluteUri ? uri : new Uri(_configuration.GetValue<Uri>("HostUri"), uri);
-                CardApp.ParseUri(uri, out var app, out var sharedId, out var view, out var subPath, out var query);
-                this.Name = app;
+                this.Route = route;
+                var cardRoute = CardRoute.Parse(route);
+                this.Name = cardRoute.App;
             }
             else
             {
-                throw new ArgumentException($"{path} not a uri?");
+                throw new ArgumentException($"{route} not a uri?");
             }
         }
         
-        public string Path { get; set; }
+        public string Route { get; set; }
 
         public override Task<string[]> GetCardUrisAsync()
         {
-            return Task.FromResult(new string[] { Path });
+            return Task.FromResult(new string[] { Route });
         }
     }
 }

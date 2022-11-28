@@ -1,22 +1,22 @@
-﻿using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
+﻿using AdaptiveCards;
+using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.VisualBasic;
 using Neleus.DependencyInjection.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OpBot;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
 using Diag = System.Diagnostics;
-using AdaptiveCards.Rendering;
-using AdaptiveCards;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Microsoft.Bot.Schema;
-using System.Xml.Linq;
 
 namespace Crazor
 {
@@ -45,11 +45,14 @@ namespace Crazor
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.TryAddScoped<IUrlHelper, UrlHelperProxy>();
 
+            RouteManager routeManager = new RouteManager();
+
             // add Apps
             var cardAppServices = services.AddByName<CardApp>();
             services.AddTransient(typeof(CardApp));
             HashSet<string> cardAppNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            foreach (var cardAppType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)))
+            foreach (var cardAppType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                                            .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)))
             {
                 if (cardAppType != typeof(CardApp))
                 {
@@ -60,20 +63,20 @@ namespace Crazor
                 }
             }
 
-            // This slight of hand automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
+            // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
             // We do this by enumerating all ICardView implementations 
             foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
             {
-                // .cshtml files class names will be "Cards_{Folder}_{ViewName}" 
+                // .cshtml files class names will be "Cards_{AppName}_Default" 
                 // we want to register the Folder as the a CardApp if it hasn't been registered already
                 var parts = cardViewType.Name.Split("_");
                 if (parts.Length >= 3 && parts[0].ToLower() == "cards" && parts[2].ToLower() == "default")
                 {
-                    var name = parts[1];
-                    if (!cardAppNames.Contains(name))
+                    var appName = parts[1];
+                    if (!cardAppNames.Contains(appName))
                     {
-                        cardAppServices.Add(name, typeof(CardApp));
+                        cardAppServices.Add(appName, typeof(CardApp));
                     }
                 }
             }
@@ -88,7 +91,7 @@ namespace Crazor
             }
             cardTabModuleServices.Build();
 
-            // add IQueryCommand implementations
+            // add IMessagingExtensionQuery implementations
             var queryCommmandServices = services.AddByName<IMessagingExtensionQuery>();
             foreach (var queryCommandType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(IMessagingExtensionQuery)) && t.IsAbstract == false)))
             {
@@ -97,17 +100,24 @@ namespace Crazor
             }
             queryCommmandServices.Build();
 
-            // add Cardviews
+            // add Cardviews to route manager
             var cardViewServices = services.AddByName<ICardView>();
-            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))))
+            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => 
+                            asm.DefinedTypes.Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))))
             {
                 var cardViewType = cardView.AsType();
-                if (cardViewType.Name != "CardView`1" && cardViewType.Name != "CardView`2")
+                if (cardViewType.Name != "CardView" && 
+                    cardViewType.Name != "CardView`1" && 
+                    cardViewType.Name != "CardView`2" && 
+                    cardViewType.Name != "CardViewBase`1")
                 {
                     services.AddTransient(cardViewType);
                     cardViewServices.Add(cardViewType.FullName, cardViewType);
+                    routeManager.Add(cardViewType);
                 }
             }
+            services.AddSingleton(routeManager);
+
             cardViewServices.Build();
 
             // add card Razor pages support
@@ -153,19 +163,20 @@ namespace Crazor
             return JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject(activity))!;
         }
 
-        public static Activity CreateActionInvokeActivity(this Activity sourceActivity, string? verb)
+        public static IInvokeActivity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb=null, JObject? data=null)
         {
             var activity = sourceActivity.Clone();
+            activity.Type = ActivityTypes.Invoke;
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
                     Verb = verb ?? Constants.SHOWVIEW_VERB,
-                    Data = new JObject()
+                    Data = data ?? new JObject()
                 }
             };
             activity!.Value = invokeValue;
-            return activity;
+            return activity.AsInvokeActivity();
         }
 
         public static Activity CreateReply(this IActivity activity, string? text = null, string? locale = null)
@@ -173,43 +184,20 @@ namespace Crazor
             return ((Activity)activity).CreateReply(text, locale);
         }
 
-        public static Task LoadAppAsync(this CardApp cardApp, SessionData sessionData, Activity activity, CancellationToken cancellationToken)
-        {
-            return cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, activity, cancellationToken);
-        }
-
-        public static Activity CreateLoadRouteActivity(this IActivity sourceActivity, Uri uri)
+        public static IInvokeActivity CreateLoadRouteActivity(this IActivity sourceActivity, string route)
         {
             var activity = sourceActivity.Clone();
+            activity.Type = ActivityTypes.Invoke;
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
                     Verb = Constants.LOADROUTE_VERB,
-                    Data = new LoadRouteModel
-                    {
-                        Route = uri.PathAndQuery
-                    }
+                    Data = new JObject() { { Constants.ROUTE_KEY, route } }
                 }
             };
             activity!.Value = invokeValue;
-            return activity;
-        }
-
-        public static async Task<SessionData> GetSessionDataFromInvokeAsync(this AdaptiveCardInvokeValue invokeValue, IEncryptionProvider encryptionProvider, CancellationToken cancellationToken)
-        {
-            // Get session data from the invoke payload
-            var data = await encryptionProvider.DecryptAsync((string)((dynamic)invokeValue.Action.Data)._sessiondata, cancellationToken);
-            var sessionData = SessionData.FromString(data);
-            return sessionData;
-        }
-
-        public static async Task<SessionData> GetSessionDataFromActionAsync(this AdaptiveExecuteAction action, IEncryptionProvider encryptionProvider, CancellationToken cancellationToken)
-        {
-            // Get session data from the invoke payload
-            var data = await encryptionProvider.DecryptAsync((string)((dynamic)action.Data)._sessiondata, cancellationToken);
-            var sessionData = SessionData.FromString(data);
-            return sessionData;
+            return activity.AsInvokeActivity();
         }
 
         public static IEnumerable<T> GetElements<T>(this AdaptiveTypedElement element)

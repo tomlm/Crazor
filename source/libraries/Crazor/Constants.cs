@@ -7,7 +7,8 @@ namespace Crazor
     public class Constants
     {
         // action.data keys
-        public const string SESSIONDATA_KEY = "_sessiondata";
+        public const string SESSION_KEY = "_session";
+        public const string ROUTE_KEY = "_route";
         public const string IDDATA_KEY = "_id";
 
         // well known verbs

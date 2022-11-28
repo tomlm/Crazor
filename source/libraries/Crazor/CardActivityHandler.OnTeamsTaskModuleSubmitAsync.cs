@@ -26,33 +26,19 @@ namespace Crazor
         {
             _logger!.LogInformation($"Starting OnTeamsTaskModuleSubmitAsync() processing");
 
-            dynamic data = JObject.FromObject(taskModuleRequest.Data);
-            string commandId = data.commandId;
-            string sessionToken = data._sessiondata;
-            CardApp cardApp = null;
+            JObject data = JObject.FromObject(taskModuleRequest.Data);
+            data[Constants.ROUTE_KEY] = (string)data["commandId"];
+            CardRoute cardRoute = await CardRoute.FromDataAsync(data, _encryptionProvider, cancellationToken);
 
             Activity? showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
 
-            SessionData sessionData = null;
-            if (sessionToken != null)
-            {
-                AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
-                sessionData = await invokeValue.GetSessionDataFromInvokeAsync(_encryptionProvider, cancellationToken);
-                cardApp = _cardAppFactory.Create(sessionData.App);
-                cardApp.IsTaskModule = true;
-                cardApp.Action = invokeValue.Action;
-            }
-            else if (commandId != null)
-            {
-                var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), commandId);
-                cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
-                cardApp.IsTaskModule = true;
-                sessionData = new SessionData() { App = cardApp.Name, SharedId = sharedId, SessionId = null};
-            }
-            else
-                ArgumentNullException.ThrowIfNull(cardApp);
+            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
+            
+            var cardApp = _cardAppFactory.Create(cardRoute);
+            cardApp.IsTaskModule = true;
+            cardApp.Action = invokeValue.Action;
 
-            await cardApp.LoadAppAsync(sessionData!, showViewActivity, cancellationToken);
+            await cardApp.LoadAppAsync(showViewActivity, cancellationToken);
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
 

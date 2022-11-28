@@ -1,0 +1,25 @@
+﻿@attribute [Route("{App.DiceName}")]
+
+@using CrazorDemoBot.Cards.Dice
+@inherits CardView<DiceApp>
+
+@attribute [TaskInfo(Width = "small", Height = "small")]
+<Card Version="1.5">
+    <TextBlock Size="Large" Weight="Bolder" Style="Heading">@App.DiceName</TextBlock>
+    @if (App.Dice != null)
+    {
+        <ImageSet>
+            @foreach (var die in App.Dice)
+            {
+                <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
+            }
+        </ImageSet>
+    }
+    <Action.Execute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
+    <Action.Execute Title="Refresh" />
+</Card>
+
+@functions {
+    public void OnRollDice() 
+        => App.RollDice();
+}

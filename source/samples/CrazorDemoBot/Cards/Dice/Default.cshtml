@@ -1,32 +1,26 @@
 ﻿@using CrazorDemoBot.Cards.Dice
 @inherits CardView<DiceApp>
-
-@attribute [TaskModule(Width = "small", Height = "small")]
+@attribute [TaskInfo(Width = "small", Height = "medium")]
 
 <Card Version="1.5">
-    <TextBlock Size="Large" Weight="Bolder" Style="Heading">@App.DiceName</TextBlock>
-    @if (App.Dice != null)
-    {
-        <ImageSet>
-            @foreach (var die in App.Dice)
-            {
-                <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
-            }
-        </ImageSet>
-    }
-    <Action.Execute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
-    <Action.Execute Title="Refresh" />
 </Card>
 
 
 @functions {
-    public override void OnInitialized()
+    public void OnShowView()
     {
-        if (App.Dice == null)
+        if (App.DiceName == null)
             ShowView("Settings");
+        else
+            ShowView("Dice");
     }
 
-    public void OnRollDice()
-        => App.RollDice();
+    public override Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+    {
+        if (App.DiceName == null)
+            ShowView("Settings");
+        else
+            ShowView("Dice");
+        return Task.CompletedTask;
+    }
 }
-

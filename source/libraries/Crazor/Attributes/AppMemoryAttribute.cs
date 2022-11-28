@@ -1,7 +1,7 @@
 ﻿namespace Crazor.Attributes
 {
     /// <summary>
-    /// Global memory scoped to the application class name
+    /// This property will be peristed scoped to the application for all users and all sessions.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class AppMemoryAttribute : MemoryAttribute

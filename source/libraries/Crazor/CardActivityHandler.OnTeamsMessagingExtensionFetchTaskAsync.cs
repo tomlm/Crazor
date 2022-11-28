@@ -28,21 +28,16 @@ namespace Crazor
         {
             _logger!.LogInformation($"Starting OnTeamsMessagingExtensionFetchTaskAsync() processing");
 
-            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
 
-            var activity = turnContext.Activity.CreateLoadRouteActivity(uri);
-            
-            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+            var activity = turnContext.Activity.CreateLoadRouteActivity(action.CommandId);
+            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
+            CardRoute cardRoute = CardRoute.FromUri(uri);
+
+            var cardApp = _cardAppFactory.Create(cardRoute);
 
             cardApp.IsTaskModule = true;
 
-            await cardApp.LoadAppAsync(sharedId, Utils.GetNewId(), activity, cancellationToken);
-
-            await cardApp.OnActionExecuteAsync(cancellationToken);
-            
-            await cardApp.SaveAppAsync(cancellationToken);
-
-            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+            var adaptiveCard = await cardApp.ProcessInvokeActivity(activity, isPreview: false, cancellationToken);
 
             await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
 
@@ -73,7 +68,7 @@ namespace Crazor
 
         protected TaskModuleTaskInfo GetTaskInfoForCard(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
-            var taskModuleAttribute = cardApp.CurrentView.GetType().GetCustomAttribute<TaskModuleAttribute>();
+            var taskModuleAttribute = cardApp.CurrentView.GetType().GetCustomAttribute<TaskInfoAttribute>();
             var taskInfo = taskModuleAttribute?.AsTaskInfo(adaptiveCard?.Title ?? cardApp.Name) ??
                 new TaskModuleTaskInfo()
                 {

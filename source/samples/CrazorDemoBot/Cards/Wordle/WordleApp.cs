@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Blobs.Models;
 using Crazor;
 using Crazor.Attributes;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
@@ -21,18 +22,14 @@ namespace CrazorDemoBot.Cards.Wordle
         [TimeMemory("yyyyMMdd")]
         public string TodaysWord { get; set; }
 
-        [SharedMemory]
+        [PathMemoryAttribute("PlayerGameKey")]
         public WordleGame Game { get; set; }
 
-        public override Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
-        {
-            if (sharedId == null)
-            {
-                var date = activity.LocalTimestamp ?? DateTime.Now;
-                sharedId = $"{date.ToString("yyyyMMdd")}-{activity.From.Id}";
-            }
-            return base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
-        }
+        /// <summary>
+        /// the game ID is 
+        /// </summary>
+        [FromRoute]
+        public string GameId => $"{DateTime.Now.ToString("yyyyMMdd")}-{Game.Player}";
 
         public Dictionary<char, string> Glyphs = new Dictionary<char, string>()
         {

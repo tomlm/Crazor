@@ -28,14 +28,16 @@ namespace Crazor
 
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), query.CommandId);
 
-            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var q);
-            
-            await cardApp.LoadAppAsync(sharedId, null, (Activity)turnContext.Activity, cancellationToken);
+            CardRoute cardRoute = CardRoute.FromUri(uri);
+
+            var cardApp = _cardAppFactory.Create(cardRoute);
+
+            await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
             var result = await cardApp.OnMessagingExtensionQueryAsync(query, cancellationToken);
 
             // don't save session data, it's a preview
-            cardApp.SessionId = null;
+            cardApp.Route.SessionId = null;
             
             await cardApp.SaveAppAsync(cancellationToken);
 

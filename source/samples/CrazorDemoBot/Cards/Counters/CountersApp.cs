@@ -1,8 +1,5 @@
-﻿using AdaptiveCards;
-using Crazor;
+﻿using Crazor;
 using Crazor.Attributes;
-using Microsoft.AspNetCore.Components;
-using Microsoft.Bot.Schema;
 
 namespace CrazorDemoBot.Cards.Counters
 {
@@ -13,8 +10,8 @@ namespace CrazorDemoBot.Cards.Counters
         {
         }
 
-        [SharedMemory]
-        public int SharedCounter { get; set; } = 0;
+        [AppMemory]
+        public int AppCounter { get; set; } 
 
     }
 }

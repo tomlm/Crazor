@@ -1,0 +1,21 @@
+﻿@inherits CardView
+@attribute [Route("{Name?}")]
+<Card Version="1.5">
+    @if (String.IsNullOrEmpty(Name))
+    {
+        <Input.Text Label="Name" Binding="Name"/>
+
+        <Action.Execute Verb="OnSubmit" Title="Submit" />
+    }
+    else
+    {
+        <TextBlock>Hello @Name!</TextBlock>
+    }
+</Card>
+
+@functions
+{
+    [BindProperty]
+    [Required]
+    public string Name { get; set; }
+}

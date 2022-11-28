@@ -27,15 +27,15 @@ namespace Crazor
             var attachmentContent = activityPreview.Attachments[0].Content;
             var previewedCard = ((JObject)attachmentContent).ToObject<AdaptiveCard>();
 
-            // Get session data from the invoke payload
-            dynamic data = ((AdaptiveExecuteAction)previewedCard!.Refresh.Action).Data;
-            var sd = (string)data._sessiondata;
-            sd = await _encryptionProvider.DecryptAsync(sd, cancellationToken);
-            var sessionData = SessionData.FromString(sd);
+            var data = JObject.FromObject(((AdaptiveExecuteAction)previewedCard!.Refresh.Action).Data);
+            
+            var cardRoute = await CardRoute.FromDataAsync(data, _encryptionProvider, cancellationToken);
 
             var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
-            var cardApp = _cardAppFactory.Create(sessionData.App);
-            await cardApp.LoadAppAsync(sessionData, activity, cancellationToken);
+            
+            var cardApp = _cardAppFactory.Create(cardRoute);
+
+            await cardApp.LoadAppAsync(activity, cancellationToken);
             
             await cardApp.OnActionExecuteAsync(cancellationToken);
 

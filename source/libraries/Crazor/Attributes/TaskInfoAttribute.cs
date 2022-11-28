@@ -1,23 +1,15 @@
-﻿using AdaptiveCards;
-using Microsoft.Bot.Schema.Teams;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Bot.Schema.Teams;
 
 namespace Crazor.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class TaskModuleAttribute : Attribute
+    public class TaskInfoAttribute : Attribute
     {
-        public TaskModuleAttribute()
+        public TaskInfoAttribute()
         {
         }
 
-        public TaskModuleAttribute(string? Title = null, string? Width = null, string? Height = null)
+        public TaskInfoAttribute(string? Title = null, string? Width = null, string? Height = null)
         {
             if (Title != null)
                 this.Title = Title;

@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/source/samples/CrazorDemoBot/Teams/manifest.zip
+/source/samples/CrazorDemoBot/Teams/local/manifest.zip

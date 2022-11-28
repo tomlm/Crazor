@@ -1,6 +1,6 @@
 ﻿@using CrazorDemoBot.Cards.TaskModule
 @inherits CardView<TaskModuleApp>
-@attribute [TaskModule(Width ="small", Height ="small", Title ="Test the Task Module")]
+@attribute [TaskInfo(Width ="small", Height ="small", Title ="Test the Task Module")]
 <Card Version="1.5" Title="Test Task Module Functionality">
     <TextBlock>Counter is @App.Counter!</TextBlock>
     <Input.ChoiceSet Binding="TaskAction" Style="Expanded" />

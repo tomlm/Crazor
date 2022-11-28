@@ -27,12 +27,14 @@ namespace Crazor
             string commandId = data.commandId;
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), commandId);
 
-            var cardApp = _cardAppFactory.CreateFromUri(uri, out var sharedId, out var view, out var path, out var query);
+            CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            await cardApp.LoadAppAsync(sharedId, Utils.GetNewId(), (Activity)turnContext.Activity, cancellationToken);
+            var cardApp = _cardAppFactory.Create(cardRoute);
 
             cardApp.IsTaskModule = true;
-            
+
+            await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
+                        
             await cardApp.OnActionExecuteAsync(cancellationToken);
             
             await cardApp.SaveAppAsync(cancellationToken);

@@ -4,7 +4,7 @@ namespace Crazor.Attributes
 {
 
     /// <summary>
-    /// Don't persist property.
+    /// This property will not be persisted at all.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class TempMemoryAttribute : MemoryAttribute

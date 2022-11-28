@@ -4,6 +4,8 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
+using Microsoft.IdentityModel.Tokens;
+using System.Net;
 
 namespace Crazor.Controllers
 {
@@ -28,9 +30,17 @@ namespace Crazor.Controllers
         [HttpPost]
         public async Task PostAsync()
         {
-            // Delegate the processing of the HTTP POST to the adapter.
-            // The adapter will invoke the bot.
-            await Adapter.ProcessAsync(Request, Response, Bot);
+            try
+            {
+                // Delegate the processing of the HTTP POST to the adapter.
+                // The adapter will invoke the bot.
+                await Adapter.ProcessAsync(Request, Response, Bot);
+            }
+            catch (SecurityTokenExpiredException err)
+            {
+                System.Diagnostics.Trace.TraceError(err.Message);
+                Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            }
         }
 
         public static async Task<string> GetTokenAsync(IConfiguration configuration)

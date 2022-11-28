@@ -3,13 +3,11 @@
 @inherits CardView<NugetApp,NugetPackage>
 
 @* This card rendering a card which is bound to a nuget package PackageId *@
-@attribute [Route("{packageId}")]
+@attribute [Route("packages/{Model.Id}")]
 @functions
 {
-    public override string GetRoute() => $"{this.Model.Id}";
-
-    public async Task OnLoadRoute(string packageId, CancellationToken cancellationToken)
-        => this.Model = await App.GetNugetPackage(packageId!, cancellationToken);
+    public async Task OnLoadRoute(CancellationToken cancellationToken)
+        => this.Model = await App.GetNugetPackage(Model.Id, cancellationToken);
 }
 
 <Card Version="1.5">

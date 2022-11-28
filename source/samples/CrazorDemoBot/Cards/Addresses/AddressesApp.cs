@@ -13,16 +13,9 @@ namespace CrazorDemoBot.Cards.Addresses
         {
         }
 
-        [SharedMemory]
+        [TimeMemory("yyyyMMdd")]
         public List<Address> Addresses { get; set; } = new List<Address>();
 
-        public override Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
-        {
-            if (SharedId == null)
-                SharedId = DateTime.Now.ToString("yyyyMMdd");
-
-            return base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
-        }
         public Address? GetAddress(string addressId)
         {
             return Addresses.SingleOrDefault(a => a.Id == addressId);
@@ -30,6 +23,7 @@ namespace CrazorDemoBot.Cards.Addresses
 
         public bool AddAddress(Address address)
         {
+            address.Id = Utils.GetNewId();
             Addresses.Add(address);
             return true;
         }

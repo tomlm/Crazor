@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace Crazor
 {
@@ -30,15 +31,16 @@ namespace Crazor
             _logger!.LogInformation($"Starting application/search processing ");
 
             // Get session data from the invoke payload
-            var parts = searchInvoke!.Dataset!.Split(AdaptiveDataQuery.Separator);
             IEncryptionProvider encryptionProvider = _serviceProvider.GetRequiredService<IEncryptionProvider>();
-            var data = await encryptionProvider.DecryptAsync(parts[0], cancellationToken);
-            var sessionData = SessionData.FromString(data);
-            searchInvoke.Dataset = parts[1];
+
+            var parts = searchInvoke!.Dataset!.Split(AdaptiveDataQuery.Separator);
+            var cardRoute = CardRoute.Parse(parts[0]);
+            cardRoute.SessionId = await encryptionProvider.DecryptAsync(parts[1], cancellationToken);
+            searchInvoke.Dataset = parts[2];
             
-            var cardApp = _cardAppFactory.Create(sessionData.App);
+            var cardApp = _cardAppFactory.Create(cardRoute);
             
-            await cardApp.LoadAppAsync(sessionData.SharedId, sessionData.SessionId, (Activity)turnContext.Activity, cancellationToken);
+            await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
             var result = await cardApp.OnSearchChoicesAsync(searchInvoke, cancellationToken);
 

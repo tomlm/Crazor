@@ -1,0 +1,24 @@
+﻿@using Crazor
+@inherits CardView
+
+<Card Version="1.5">
+    @if (IsPreview)
+    {
+        <TextBlock Id="Preview">PREVIEW</TextBlock>
+    }
+    <TextBlock Id="counter">@Counter</TextBlock>
+    <Action.Execute Id="@nameof(OnSubmit)" Verb="@nameof(OnSubmit)" />
+    <Action.Execute Id="@nameof(OnSubmitAmount)" Verb="@nameof(OnSubmitAmount)">
+        { "amount": 5 }
+    </Action.Execute>
+</Card>
+
+@functions {
+    public int Counter { get; set; }
+
+    public void OnSubmit()
+        => Counter++;
+
+    public void OnSubmitAmount(int amount)
+        => Counter += amount;
+}

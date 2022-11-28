@@ -7,7 +7,7 @@ namespace CrazorDemoBot.Cards.Addresses
 {
     public class Address
     {
-        public string? Id { get; set; } = Utils.GetNewId();
+        public string? Id { get; set; }
         
         //Supported Data Annotations 
         //  [PasswordPropertyText]

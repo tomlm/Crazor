@@ -44,7 +44,7 @@ namespace CrazorDemoBot.Cards.NugetSearch
                 Subtitle = package.Version!,
                 Text = package.Description!,
                 ImageUrl = package.IconUrl! ?? "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png",
-                Route = $"/Cards/Nuget/Package/{package.Id}"
+                Route = $"/Cards/Nuget/Packages/{package.Id}"
             }).ToArray();
         }
     }
