@@ -67,14 +67,16 @@ namespace Crazor
 
         protected TaskModuleTaskInfo GetTaskInfoForCard(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
-            var taskModuleAttribute = cardApp.CurrentView.GetType().GetCustomAttribute<TaskInfoAttribute>();
-            var taskInfo = taskModuleAttribute?.AsTaskInfo(adaptiveCard?.Title ?? cardApp.Name) ??
-                new TaskModuleTaskInfo()
-                {
-                    Title = adaptiveCard?.Title ?? cardApp.Name,
-                    Height = "medium",
-                    Width = "medium"
-                };
+            var viewTaskInfo = cardApp.CurrentView.GetType().GetCustomAttribute<TaskInfoAttribute>();
+            var appTaskInfo =  cardApp.GetType().GetCustomAttribute<TaskInfoAttribute>();
+
+            var taskInfo = new TaskModuleTaskInfo()
+            {
+                Title = viewTaskInfo?.Title ?? appTaskInfo?.Title ?? adaptiveCard?.Title ?? cardApp.Name,
+                Width = viewTaskInfo?.Width ?? appTaskInfo?.Width ?? "medium",
+                Height = viewTaskInfo?.Height ?? appTaskInfo?.Height ?? "medium",
+            };
+
             taskInfo.FallbackUrl = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri;
             // taskInfo.Url = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
             taskInfo.CompletionBotId = _configuration.GetValue<string>("MicrosoftAppId");
