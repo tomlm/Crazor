@@ -63,9 +63,19 @@ namespace CrazorTests
                 .ExecuteAction("OnIncrement")
                     .AssertTextBlock("CodeOnly")
                     .AssertTextBlock("Counter: 1")
-                .ExecuteAction("OnShowView")
+                .ExecuteAction("OnIncrement")
                     .AssertTextBlock("CodeOnly")
-                    .AssertTextBlock("Counter: 1");
+                    .AssertTextBlock("Counter: 2");
+
+            await LoadCard("/Cards/CodeOnlyView/MyCode")
+                    .AssertTextBlock("CodeOnly")
+                    .AssertTextBlock("Counter: 0")
+                .ExecuteAction("OnIncrement")
+                    .AssertTextBlock("CodeOnly")
+                    .AssertTextBlock("Counter: 1")
+                .ExecuteAction("OnIncrement")
+                    .AssertTextBlock("CodeOnly")
+                    .AssertTextBlock("Counter: 2");
         }
 
     }
