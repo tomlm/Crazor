@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCardXmlTests", "tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorDemoBot", "samples\CrazorDemoBot\CrazorDemoBot.csproj", "{C120CB4F-9587-465E-83F6-9FDA54A009E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorTests", "CrazorTests\CrazorTests.csproj", "{CA76AE3D-7EFF-49CC-87D0-28C451A7D8B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorTests", "Tests\CrazorTests\CrazorTests.csproj", "{CA76AE3D-7EFF-49CC-87D0-28C451A7D8B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
