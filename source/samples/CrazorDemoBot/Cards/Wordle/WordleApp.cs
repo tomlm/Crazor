@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CrazorDemoBot.Cards.Wordle
 {
+    [TaskInfo(Width = "small", Height = "medium")]
     public class WordleApp : CardApp
     {
         private static Random _rnd = new Random();
