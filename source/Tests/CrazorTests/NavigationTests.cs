@@ -1,9 +1,10 @@
 ﻿using AdaptiveCards;
+using Crazor.Test;
 
 namespace CrazorTests
 {
     [TestClass]
-    public class NavigationTests  : CardTest
+    public class NavigationTests : CardTest
     {
         [TestMethod]
         public async Task TestShowAndBack()

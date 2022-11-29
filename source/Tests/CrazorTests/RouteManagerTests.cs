@@ -1,4 +1,5 @@
 using Crazor;
+using Crazor.Test;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrazorTests
@@ -56,7 +57,7 @@ namespace CrazorTests
 
 
     [TestClass]
-    public class RouteManagerTests
+    public class RouteManagerTests : CardTest
     {
         [TestMethod]
         public void RouteManagerMatch()
