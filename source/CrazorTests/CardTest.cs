@@ -58,7 +58,7 @@ namespace CrazorTests
         /// <returns></returns>
         public static async Task<AdaptiveCard> LoadCard(string route, string channelId = "test", bool isPreview = false)
         {
-            var cardApp = Factory.Create(CardRoute.Parse("/Cards/ActionTests"));
+            var cardApp = Factory.Create(CardRoute.Parse(route));
 
             return await cardApp.ProcessInvokeActivity(CreateActivity().CreateLoadRouteActivity(route), isPreview, default(CancellationToken));
         }
@@ -70,13 +70,16 @@ namespace CrazorTests
         /// Execute Action by id
         /// </summary>
         /// <param name="cardTask"></param>
-        /// <param name="id">id of the action</param>
+        /// <param name="idOrVerb">id of the action</param>
         /// <param name="data">optional data to merge in to simulate input controls</param>
         /// <returns></returns>
-        public static async Task<AdaptiveCard> ExecuteAction(this Task<AdaptiveCard> cardTask, string id, object data = null)
+        public static async Task<AdaptiveCard> ExecuteAction(this Task<AdaptiveCard> cardTask, string idOrVerb, object data = null)
         {
             var card = await cardTask;
-            var action = card.GetElements<AdaptiveExecuteAction>().Single(a => a.Id == id);
+            
+            var action = card.GetElements<AdaptiveExecuteAction>().SingleOrDefault(a => a.Id == idOrVerb) ??
+                card.GetElements<AdaptiveExecuteAction>().First(a => a.Verb == idOrVerb);
+
             var combined = (JObject)JObject.FromObject(action.Data).DeepClone();
             if (data != null)
                 combined.Merge(JObject.FromObject(data));

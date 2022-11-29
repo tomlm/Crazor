@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -90,7 +91,15 @@ namespace Crazor
                             route.RouteData[property.Name] = property.Value;
                         }
                         type = routeTemplate.Type;
-                        route.View = type.Name.Split('_').Last();
+                        if (type.Name.Contains('_'))
+                        {
+                            route.View = type.Name.Split('_').Last();
+                        }
+                        else
+                        {
+                            // code based view - use full name of the type.
+                            route.View = type.FullName;
+                        }
                         return true;
                     }
                 }
@@ -100,9 +109,11 @@ namespace Crazor
 
         public void Add(Type cardViewType)
         {
+            CardRoute cardRoute;
+            List<RouteTemplate> list;
             if (cardViewType.Name.Contains("_"))
             {
-                var cardRoute = CardRoute.Parse(cardViewType.Name.Replace("_", "/"));
+                cardRoute = CardRoute.Parse(cardViewType.Name.Replace("_", "/"));
 
                 var parts = cardViewType.Name.Split('_').ToList();
                 var cardTemplate = parts.Last();
@@ -112,7 +123,7 @@ namespace Crazor
                 int order = 0;
 
                 var path = $"{String.Join('/', parts.Take(2))}";
-                if (!_routes.TryGetValue(cardRoute.App, out var list))
+                if (!_routes.TryGetValue(cardRoute.App, out list))
                 {
                     list = new List<RouteTemplate>();
                     _routes.Add(cardRoute.App, list);
@@ -147,37 +158,46 @@ namespace Crazor
                         });
                     }
                 }
-                _routes[cardRoute.App] = list.OrderBy(o => o.Order).ThenByDescending(o => o.Template).ToList();
             }
 
             else
             {
-                var route = cardViewType.GetCustomAttribute<RouteAttribute>();
-                if (route != null)
+                string route = $"/{cardViewType.Namespace.Substring(cardViewType.Namespace.IndexOf("Cards")).Replace('.','/')}";
+                var routeAttribute = cardViewType.GetCustomAttribute<RouteAttribute>();
+                if (routeAttribute != null)
                 {
-                    var cardRoute = CardRoute.Parse(route.Template);
-                    int order = 0;
-
-                    if (!_routes.TryGetValue(cardRoute.App, out var list))
+                    if (routeAttribute.Template.StartsWith('/'))
                     {
-                        list = new List<RouteTemplate>();
-                        _routes.Add(cardRoute.App, list);
+                        route = routeAttribute.Template;
                     }
-                    var parts = route.Template.TrimStart('/').Split('/');
-                    var cardTemplate = parts.Skip(2).SingleOrDefault() ?? string.Empty;
-                    if (cardTemplate.ToLower() == "Default")
-                        cardTemplate = String.Empty;
-
-                    list.Add(new RouteTemplate
+                    else
                     {
-                        Type = cardViewType,
-                        App = cardRoute.App,
-                        Route = String.Join('/', parts.Take(2)),
-                        Template = String.Join('/', parts.Skip(2)),
-                        Order = order,
-                    });
+                        route = $"{route}/{routeAttribute.Template}";
+                    }
                 }
+                cardRoute = CardRoute.Parse(route);
+                int order = 0;
+
+                if (!_routes.TryGetValue(cardRoute.App, out list))
+                {
+                    list = new List<RouteTemplate>();
+                    _routes.Add(cardRoute.App, list);
+                }
+                var parts = route.TrimStart('/').Split('/');
+                var cardTemplate = parts.Skip(2).SingleOrDefault() ?? string.Empty;
+                if (cardTemplate.ToLower() == "Default")
+                    cardTemplate = String.Empty;
+
+                list.Add(new RouteTemplate
+                {
+                    Type = cardViewType,
+                    App = cardRoute.App,
+                    Route = String.Join('/', parts.Take(2)),
+                    Template = String.Join('/', parts.Skip(2)),
+                    Order = order,
+                });
             }
+            _routes[cardRoute.App] = list.OrderBy(o => o.Order).ThenByDescending(o => o.Template).ToList();
         }
     }
 }

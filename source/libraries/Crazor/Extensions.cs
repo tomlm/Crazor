@@ -111,7 +111,8 @@ namespace Crazor
                 if (cardViewType.Name != "CardView" && 
                     cardViewType.Name != "CardView`1" && 
                     cardViewType.Name != "CardView`2" && 
-                    cardViewType.Name != "CardViewBase`1")
+                    cardViewType.Name != "CardViewBase`1" &&
+                    cardViewType.Name != "EmptyCardView")
                 {
                     services.AddTransient(cardViewType);
                     cardViewServices.Add(cardViewType.FullName, cardViewType);

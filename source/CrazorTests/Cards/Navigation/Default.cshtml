@@ -1,0 +1,11 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock>Card1</TextBlock>
+    <Action.Execute Verb="@nameof(OnCard2)" />
+    <Action.Execute Verb="Card2" />
+</Card>
+
+@functions {
+    public void OnCard2() => ShowView("Card2");
+}
