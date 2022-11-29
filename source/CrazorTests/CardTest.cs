@@ -76,7 +76,7 @@ namespace CrazorTests
         public static async Task<AdaptiveCard> ExecuteAction(this Task<AdaptiveCard> cardTask, string idOrVerb, object data = null)
         {
             var card = await cardTask;
-            
+
             var action = card.GetElements<AdaptiveExecuteAction>().SingleOrDefault(a => a.Id == idOrVerb) ??
                 card.GetElements<AdaptiveExecuteAction>().First(a => a.Verb == idOrVerb);
 
@@ -125,15 +125,31 @@ namespace CrazorTests
         /// <param name="cardTask"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<AdaptiveCard> AssertHas<T>(this Task<AdaptiveCard> cardTask, string? id = null)
+        public static async Task<AdaptiveCard> AssertElement<T>(this Task<AdaptiveCard> cardTask)
             where T : AdaptiveTypedElement
         {
             var card = await cardTask;
-            if (id != null)
-                Assert.IsTrue(card.GetElements<AdaptiveTypedElement>().Any(el => el.Id == id), $"{typeof(T).Name}[Id={id}] Not found");
-            else
-                Assert.IsTrue(card.GetElements<AdaptiveTypedElement>().Any(), $"{typeof(T).Name} Not found");
+            Assert.IsTrue(card.GetElements<AdaptiveTypedElement>().Any(), $"{typeof(T).Name} Not found");
+            return card;
+        }
 
+        /// <summary>
+        /// Assert card has an element of the given type and optionally id
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cardTask"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<AdaptiveCard> AssertElement<T>(this Task<AdaptiveCard> cardTask, string id, Action<T> callback = null)
+            where T : AdaptiveTypedElement
+        {
+            var card = await cardTask;
+            var element = (T?)card.GetElements<AdaptiveTypedElement>().SingleOrDefault(el => el.Id == id);
+            Assert.IsNotNull(element, $"{typeof(T).Name}[Id={id}] Not found");
+            if (callback != null)
+            {
+                callback(element);
+            }
             return card;
         }
 

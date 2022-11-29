@@ -114,8 +114,14 @@ namespace Crazor
             MethodInfo? verbMethod = null;
             if (action.Verb == Constants.LOADROUTE_VERB)
             {
-                // process any FromRoute
-                // map FromRoute attributes
+                // merge in route and query data since we are in a LOAD ROUTE situation.
+                if (App.Route.RouteData != null)
+                    data.Merge(App.Route.RouteData);
+
+                if (App.Route.QueryData != null)
+                    data.Merge(App.Route.QueryData);
+
+                // process [FromRoute] attributes. This allows [FromRoute] to be placed on a property which doesn't match the RouteData.property name
                 foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
                 {
                     var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
@@ -126,10 +132,20 @@ namespace Crazor
                     }
                 }
 
-                // map complex path routedata which is not App data (As it's already been processed early in the memory loading phase)
+                // Process any Route properties as setters onto target object.
                 foreach (var routeProperty in App.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
                 {
                     ObjectPath.SetPathValue(this, routeProperty.Name, routeProperty.Value.ToString(), false);
+                }
+
+                // process [FromQuery] attributes
+                foreach (var targetProperty in this.GetType().GetProperties().Where(a => a.GetCustomAttribute<FromQueryAttribute>() != null))
+                {
+                    var dataProperty = App.Route.QueryData.Properties().Where(p => p.Name.ToLower() == targetProperty.Name.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
                 }
 
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.

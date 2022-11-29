@@ -1,0 +1,15 @@
+﻿@inherits CardView
+@attribute [Route("LoadRoute/{resource}")]
+<Card Version="1.5">
+    <TextBlock Id="@nameof(Title)">@Title</TextBlock>
+</Card>
+
+@functions 
+{
+    public string Title { get; set; }
+
+    public void OnLoadRoute(string resource, string name)
+    {
+        Title = $"{resource}-{name}";
+    }
+}

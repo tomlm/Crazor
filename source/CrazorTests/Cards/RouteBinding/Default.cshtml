@@ -1,0 +1,21 @@
+﻿@using Crazor
+@using CrazorTests.Cards.RouteBinding;
+@inherits CardView<RouteBindingApp>
+
+<Card Version="1.5">
+    <TextBlock Id="@nameof(ResourceId)">@ResourceId</TextBlock>
+    <TextBlock Id="@nameof(ResourceId2)">@ResourceId2</TextBlock>
+    <TextBlock Id="@nameof(Value)">@Value</TextBlock>
+    <TextBlock Id="AppId">@App.Id</TextBlock>
+</Card>
+
+@functions 
+{
+    public string ResourceId { get; set; }
+
+    [FromRoute(Name="ResourceId")]
+    public string ResourceId2 { get; set; }
+
+    [FromQuery]
+    public string Value { get; set; }
+}
