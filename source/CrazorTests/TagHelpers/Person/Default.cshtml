@@ -1,0 +1,8 @@
+﻿@using CrazorDemoBot.TagHelpers.Person;
+@model CustomTagHelper
+@addTagHelper *, Crazor
+
+<Container>
+    <TextBlock>@Model.Value</TextBlock>
+    @Model.ChildContent
+</Container>

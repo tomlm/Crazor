@@ -24,8 +24,8 @@ namespace CrazorTests
             builder.Services.AddSingleton<IStorage, MemoryStorage>();
             builder.Services.AddCrazor();
             builder.Services.AddMvc()
-                //                .AddRazorOptions((options) => { var x = options; })
-                //                .AddRazorPagesOptions((options) => { var y = options; })
+                // .AddRazorOptions((options) => { var x = options; })
+                // .AddRazorPagesOptions((options) => { var y = options; })
                 .AddRazorRuntimeCompilation();
             var listener = new Diag.DiagnosticListener("Microsoft.AspNetCore");
             builder.Services.AddSingleton<Diag.DiagnosticListener>(listener);
