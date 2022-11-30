@@ -1,0 +1,38 @@
+﻿@using CrazorTests.Validation
+@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Style="Heading">Values!</TextBlock>
+
+    <TextBlock Id="@nameof(Data.Birthday)">@Data.Birthday?.ToShortDateString()</TextBlock>
+    <TextBlock Id="@nameof(Data.ArrivalTime)">@Data.ArrivalTime?.ToString("t")</TextBlock>
+    <TextBlock Id="@nameof(Data.Percent)">@Data.Percent</TextBlock>
+    <TextBlock Id="@nameof(Data.Attendees)">@Data.Attendees</TextBlock>
+    <TextBlock Id="@nameof(Data.PhoneNumber)">@Data.PhoneNumber</TextBlock>
+    <TextBlock Id="@nameof(Data.Password)">@Data.Password</TextBlock>
+    <TextBlock Id="@nameof(Data.IsCool)">@Data.IsCool</TextBlock>
+    <TextBlock Id="@nameof(Data.FavoritePet)">@Data.FavoritePet</TextBlock>
+
+    <Action.Execute Title="Edit" Verb="@nameof(OnEdit)"/>
+</Card>
+
+@functions {
+    public InputsModel Data { get; set; } = new InputsModel();
+
+    public void OnEdit()
+    {
+        // pass data to the the edit view to be edited
+        ShowView("Edit", Data);
+    }
+
+    public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+    {
+        await Task.CompletedTask;
+        if (cardResult.Success)
+        {
+            // when it comes back successfully, update our property.
+            Data = cardResult.AsResult<InputsModel>()!;
+        }
+    }
+}
+

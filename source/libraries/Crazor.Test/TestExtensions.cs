@@ -60,7 +60,20 @@ namespace Crazor.Test
         public static async Task<CardTestContext> AssertTextBlock(this Task<CardTestContext> contextTask, string text)
         {
             var context = await contextTask;
-            Assert.IsTrue(context.Card.GetElements<AdaptiveTextBlock>().Any(el => el.Text == text), $"No TextBlock had expected:'{text}'");
+            Assert.IsTrue(context.Card.GetElements<AdaptiveTextBlock>().Any(el => el.Text == text), $"TextBlock couldn't be found with:'{text}'");
+            return context;
+        }
+
+        /// <summary>
+        /// Assert text block is not there
+        /// </summary>
+        /// <param name="contextTask"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static async Task<CardTestContext> AssertNoTextBlock(this Task<CardTestContext> contextTask, string text)
+        {
+            var context = await contextTask;
+            Assert.IsFalse(context.Card.GetElements<AdaptiveTextBlock>().Any(el => el.Text == text), $"TextBlock found with:'{text}'");
             return context;
         }
 
@@ -71,11 +84,11 @@ namespace Crazor.Test
         /// <param name="contextTask"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<CardTestContext> AssertElement<T>(this Task<CardTestContext> contextTask)
+        public static async Task<CardTestContext> AssertElements<T>(this Task<CardTestContext> contextTask, Action<IEnumerable<T>> callback)
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;
-            Assert.IsTrue(context.Card.GetElements<AdaptiveTypedElement>().Any(), $"{typeof(T).Name} Not found");
+            callback(context.Card.GetElements<T>());
             return context;
         }
 
@@ -100,17 +113,38 @@ namespace Crazor.Test
         }
 
         /// <summary>
+        /// Assert card has an element of the given type 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="contextTask"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<CardTestContext> AssertHas<T>(this Task<CardTestContext> contextTask, string? id = null)
+            where T : AdaptiveTypedElement
+        {
+            var context = await contextTask;
+            if (id != null)
+                Assert.IsTrue(context.Card.GetElements<T>().Any(el => el.Id == id), $"{typeof(T).Name}[{id}] Not found");
+            else
+                Assert.IsTrue(context.Card.GetElements<T>().Any(), $"{typeof(T).Name} Not found");
+            return context;
+        }
+
+        /// <summary>
         /// Assert card has an element of the given type and optionally id
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="contextTask"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<CardTestContext> AssertMissing<T>(this Task<CardTestContext> contextTask, string id)
+        public static async Task<CardTestContext> AssertHasNo<T>(this Task<CardTestContext> contextTask, string? id = null)
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;
-            Assert.IsFalse(context.Card.GetElements<AdaptiveTypedElement>().Any(el => el.Id == id), $"{typeof(T).Name}[Id={id}] should not be found");
+            if (id != null)
+                Assert.IsFalse(context.Card.GetElements<T>().Any(el => el.Id == id), $"{typeof(T).Name}[Id={id}] should not be found");
+            else
+                Assert.IsFalse(context.Card.GetElements<T>().Any(), $"{typeof(T).Name} should not be found");
             return context;
         }
 

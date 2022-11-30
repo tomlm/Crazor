@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace CrazorDemoBot.Cards.Inputs
+namespace CrazorTests.Validation
 {
     public enum Pets
     {
@@ -30,15 +30,15 @@ namespace CrazorDemoBot.Cards.Inputs
 
         [Required]
         [System.ComponentModel.Description("Percentage")]
-        [Range(minimum: 0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
-        public Double? Percent { get; set; }
+        [Range(minimum:0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
+        public Double? Percent  { get; set; }
 
         [Required]
         [Range(minimum: 0, maximum: 100, ErrorMessage = "Attendees must be between 0 and 100.")]
         public int? Attendees { get; set; }
 
         [System.ComponentModel.Description("Cool")]
-        public bool? IsCool { get; set; }
+        public bool? IsCool{ get; set; }
 
         [Required(ErrorMessage = "Phone number is required")]
         [Phone]
@@ -50,6 +50,5 @@ namespace CrazorDemoBot.Cards.Inputs
 
         [Required(ErrorMessage = "Favorite Pet is required")]
         public Pets? FavoritePet { get; set; }
-
     }
 }

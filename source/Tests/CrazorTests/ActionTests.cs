@@ -37,7 +37,7 @@ namespace CrazorTests
 
             await LoadCard("/Cards/ActionTests", isPreview: false)
                     .AssertHasRefresh()
-                    .AssertMissing<AdaptiveTextBlock>("Preview");
+                    .AssertHasNo<AdaptiveTextBlock>("Preview");
         }
 
     }

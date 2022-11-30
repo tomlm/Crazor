@@ -29,19 +29,16 @@ If you want to support deep linking you sometimes need to specify more informati
 To do that with Crazor you do the following 3 things:
 
 1. You add a **[Route]** attribute to tell us how to match a link to your view
-2. You override the **GetRoute()** method to gives us the deep link path when sharing
-3. You override the **OnLoadRoute()** method to process the deep link and load the state for the card.
+2. You override the **OnLoadRoute()** method to process the deep link and load the state for the card.
 
 Here is an example for the Edit page for Addresses, which is editing the model with address with an id **this.Model.Id**.  We add the following to our **Edit.cshtml** to support the deeper link structure
 
 ```c#
-@attribute [Route("{addressId}")]
+@attribute [Route("{Model.Id}")]
 
 @functions {
-    public override string GetRoute() => $"{this.Model.Id}";
-
-    public void OnLoadRoute(string addressId)
-        => this.Model = this.App.LoadAddress(AddressId);
+    public void OnLoadRoute()
+        => this.Model = this.App.LoadAddress(Model.Id);
 }
 ```
 
@@ -59,10 +56,11 @@ For example, in this template we have 2 properties that have **[FromQuery]**
 [FromQuery]
 public string Name {get;set;}
 
-[FromQuery]
+[FromRoute]
 public string City {get;set;}
 
-public string Zip {get;set;}
+[FromRoute("City")]
+public string City2 {get;set;}
 ```
 
 If you construct a url with Name or City query parameters they will be bound to the these properties.

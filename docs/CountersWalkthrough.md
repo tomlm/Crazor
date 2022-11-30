@@ -55,7 +55,7 @@ You should see something like this:
 
 As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the shared values are shared and the session values are per window.
 
-# Adding a Shared counter
+# Adding a CardApp 
 
 Now we will are going to modify the app to have a counter which is shared among all viewers of the card.
 
@@ -64,9 +64,9 @@ Now we will are going to modify the app to have a counter which is shared among 
 
 ## 1. Create a CountersApp.cs file
 
-We are going to define a **CountersApp** class.  We use this class to define shared memory property which all templates in the folder have access to. Depending on the MemoryAttribute applied the value will automatically be available according to the scope policy of the memory attribute.
+We are going to define a **CountersApp** class which derives from **CardApp**.  We use this class to define properties and methods which all templates in the folder have access to. Depending on the **MemoryAttribute** applied the value will automatically be persisted according to the scope policy of the memory attribute.
 
-In this case we are going to use **[SharedMemory]** attribute because it scopes the memory to all users who interact with the card.
+In this case we are going to use **[AppMemory]** attribute because it scopes the memory to all users who interact with the card.
 
 Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
 
@@ -76,7 +76,7 @@ Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
         public CountersApp(IServiceProvider services): base(services)
         { }
 
-        [SharedMemory]
+        [AppMemory]
         public int SharedCounter { get; set; } = 0;
     }
 ```
@@ -117,7 +117,7 @@ Now we will modify the Default .cshtml to interact with the **CountersApp.**
 Things to notice:
 
 * The local property **Counter** is automatically persisted with **session scope** as part of the card view. 
-* The **App** property **SharedCounter** is persisted with **shared scope** as part of the card application.
+* The **App** property **SharedCounter** is persisted with **app scope** as part of the card application.
 
 You should see something like this:
 
