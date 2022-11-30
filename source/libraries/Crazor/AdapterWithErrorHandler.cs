@@ -6,7 +6,7 @@ using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
 
-namespace OpBot
+namespace Crazor
 {
     // Create the Bot Adapter with error handling enabled.
     public class AdapterWithErrorHandler : CloudAdapter
