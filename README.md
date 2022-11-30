@@ -47,6 +47,7 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
   * [Card App Memory](docs/Memory.md) - information on persistence and memory model
 
 * [Card Routing](docs/RoutingCards.md) - information on customizing urls to support deep linking into cards
+* [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
 * [TagHelpers (Advanced)](docs/TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
 # Sample Card Apps
