@@ -38,6 +38,7 @@ namespace CrazorTests.Validation
         public int? Attendees { get; set; }
 
         [System.ComponentModel.Description("Cool")]
+        [Required(ErrorMessage = "Cool is required")]
         public bool? IsCool{ get; set; }
 
         [Required(ErrorMessage = "Phone number is required")]

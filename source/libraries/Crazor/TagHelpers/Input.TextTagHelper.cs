@@ -24,7 +24,7 @@ namespace Crazor.TagHelpers
         public Boolean? IsMultiline { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
-        public Boolean? IsVisible { get; set; } 
+        public Boolean? IsVisible { get; set; }
 
         [HtmlAttributeName(nameof(MaxLength))]
         public Int32? MaxLength { get; set; }
@@ -67,10 +67,10 @@ namespace Crazor.TagHelpers
             {
                 output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
 
-                if (output.Attributes[nameof(ErrorMessage)] == null && regexAttribute?.ErrorMessage != null)
-                {
-                    output.Attributes.SetAttribute(nameof(ErrorMessage), regexAttribute?.ErrorMessage);
-                }
+            }
+            if (output.Attributes[nameof(ErrorMessage)] == null && regexAttribute?.ErrorMessage != null)
+            {
+                output.Attributes.SetAttribute(nameof(ErrorMessage), regexAttribute?.ErrorMessage);
             }
 
             // -- MaxLength 

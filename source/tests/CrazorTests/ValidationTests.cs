@@ -29,6 +29,56 @@ namespace CrazorTests
                     .AssertHas<AdaptiveTimeInput>("Model.ArrivalTime")
                     .AssertHas<AdaptiveChoiceSetInput>("Model.FavoritePet")
                     .AssertHas<AdaptiveToggleInput>("Model.IsCool")
+                    .AssertElement<AdaptiveTextInput>("Model.PhoneNumber", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual(AdaptiveTextInputStyle.Tel, el.Style);
+                        Assert.AreEqual("Phone number is required", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveTextInput>("Model.Password", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual(AdaptiveTextInputStyle.Password, el.Style);
+                        Assert.AreEqual("Password is required", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveNumberInput>("Model.Percent", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual(0f, el.Min);
+                        Assert.AreEqual(100f, el.Max);
+                        Assert.AreEqual("Percentage must be between 0 and 100.", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveNumberInput>("Model.Attendees", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual(0f, el.Min);
+                        Assert.AreEqual(100f, el.Max);
+                        Assert.AreEqual("Attendees must be between 0 and 100.", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveDateInput>("Model.Birthday", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual("1900-01-01", el.Min);
+                        Assert.IsTrue(DateTime.Parse(el.Max) < DateTime.Now);
+                        Assert.AreEqual("Birthday has to be between 1900 and 2022", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveTimeInput>("Model.ArrivalTime", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        // Assert.AreEqual("08:00", el.Min);
+                        Assert.AreEqual("20:00", el.Max);
+                        Assert.AreEqual("Arrival time must be between 8AM and 8PM", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveChoiceSetInput>("Model.FavoritePet", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual("Favorite Pet is required", el.ErrorMessage);
+                    })
+                    .AssertElement<AdaptiveToggleInput>("Model.IsCool", (el) =>
+                    {
+                        Assert.AreEqual(true, el.IsRequired);
+                        Assert.AreEqual("Cool is required", el.ErrorMessage);
+                    })
                 .ExecuteAction("OnOK")
                     .AssertCard((card) => { })
                     .AssertTextBlock("The Birthday field is required.")
@@ -37,6 +87,7 @@ namespace CrazorTests
                     .AssertTextBlock("The Attendees field is required.")
                     .AssertTextBlock("Phone number is required")
                     .AssertTextBlock("Password is required")
+                    .AssertTextBlock("Cool is required")
                     .AssertTextBlock("Favorite Pet is required")
                 .ExecuteAction("OnOK", new JObject()
                 {
@@ -48,6 +99,7 @@ namespace CrazorTests
                     .AssertTextBlock("The Attendees field is required.")
                     .AssertTextBlock("Phone number is required")
                     .AssertTextBlock("Password is required")
+                    .AssertTextBlock("Cool is required")
                     .AssertTextBlock("Favorite Pet is required")
                 .ExecuteAction("OnOK", new JObject()
                 {
@@ -66,6 +118,7 @@ namespace CrazorTests
                     .AssertNoTextBlock("The Attendees field is required.")
                     .AssertNoTextBlock("Phone number is required")
                     .AssertNoTextBlock("Password is required")
+                    .AssertNoTextBlock("Cool is required")
                     .AssertNoTextBlock("Favorite Pet is required")
                     .AssertTextBlock(nameof(InputsModel.PhoneNumber), "123456789")
                     .AssertTextBlock(nameof(InputsModel.Password), "Test")
