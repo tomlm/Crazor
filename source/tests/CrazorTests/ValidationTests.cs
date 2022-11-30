@@ -1,5 +1,6 @@
 ﻿using AdaptiveCards;
 using Crazor.Test;
+using Crazor.Test.MSTest;
 using CrazorTests.Validation;
 using Newtonsoft.Json.Linq;
 
