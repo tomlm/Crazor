@@ -1,0 +1,26 @@
+﻿@using CrazorTests.Cards.TaskModule
+@inherits CardView<TaskModuleApp>
+<Card Version="1.5" Title="Test Task Module Functionality">
+    <TextBlock>Counter: @App.Counter</TextBlock>
+
+    <Action.Execute Id="@nameof(OnIncrement)" Verb="@nameof(OnIncrement)" Title="Increment" />
+
+    <Action.Cancel Id="@nameof(OnCancel)" />
+    <Action.OK Id="@nameof(OnOK)"/>
+</Card>
+
+@functions {
+
+    public void OnIncrement() => App.Counter++;
+
+    public void OnOK()
+    {
+        CloseTaskModule(TaskModuleAction.Auto);
+        CloseView();
+    }
+
+    public void OnCancel()
+    {
+        CloseTaskModule(TaskModuleAction.None);
+    }
+}

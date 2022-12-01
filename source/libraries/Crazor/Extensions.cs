@@ -16,7 +16,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpBot;
 using System.Reflection;
 using Diag = System.Diagnostics;
 
@@ -170,6 +169,7 @@ namespace Crazor
         {
             var activity = sourceActivity.Clone();
             activity.Type = ActivityTypes.Invoke;
+            activity.Name = "adaptiveCard/action";
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
@@ -191,6 +191,7 @@ namespace Crazor
         {
             var activity = sourceActivity.Clone();
             activity.Type = ActivityTypes.Invoke;
+            activity.Name = "adaptiveCard/action";
             var invokeValue = new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()

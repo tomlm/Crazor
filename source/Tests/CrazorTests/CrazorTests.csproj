@@ -24,4 +24,15 @@
 		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="Cards\TaskModule\Default.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Cards\TaskModule\Edit.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
 </Project>

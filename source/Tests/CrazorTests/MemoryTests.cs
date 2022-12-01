@@ -11,7 +11,7 @@ namespace CrazorTests
         public async Task TestInitialize()
         {
             var cardApp = (MemoryApp)Factory.Create(CardRoute.Parse("/Cards/Memory"));
-            await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+            await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
             cardApp.App = "App1";
             cardApp.Session = "Session1";
             cardApp.User = "User1";
@@ -28,7 +28,7 @@ namespace CrazorTests
             // validate load
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
 
                 Assert.AreEqual("App1", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -40,7 +40,7 @@ namespace CrazorTests
             // validate App Save
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
 
                 Assert.AreEqual("App1", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -57,7 +57,7 @@ namespace CrazorTests
             // validate session
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -74,7 +74,7 @@ namespace CrazorTests
             // validate user
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);
@@ -91,7 +91,7 @@ namespace CrazorTests
             // validate Conversation
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
                 Assert.IsNull(cardApp.Temp);
 
                 cardApp.Temp = "Test1";
@@ -108,7 +108,7 @@ namespace CrazorTests
             // validate Path
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);
@@ -125,7 +125,7 @@ namespace CrazorTests
             // validate Path
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);

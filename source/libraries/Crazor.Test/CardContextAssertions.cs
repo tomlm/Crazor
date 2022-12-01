@@ -2,11 +2,10 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Crazor.Test.MSTest
 {
-    public static class MSTestExtensions
+    public static class CardContextAssertions
     {
         /// <summary>
         /// Assert there is a textblock[id] has text
@@ -18,8 +17,7 @@ namespace Crazor.Test.MSTest
         public static async Task<CardTestContext> AssertTextBlock(this Task<CardTestContext> contextTask, string id, string text)
         {
             var context = await contextTask;
-            var actual = context.Card.GetElements<AdaptiveTextBlock>().SingleOrDefault(el => el.Id == id)?.Text;
-            Assert.AreEqual(text, actual, $"TextBlock[{id}] Expected:'{text}' Actual:'{actual}'");
+            context.Card.AssertTextBlock(id, text);
             return context;
         }
 
@@ -32,7 +30,7 @@ namespace Crazor.Test.MSTest
         public static async Task<CardTestContext> AssertTextBlock(this Task<CardTestContext> contextTask, string text)
         {
             var context = await contextTask;
-            Assert.IsTrue(context.Card.GetElements<AdaptiveTextBlock>().Any(el => el.Text == text), $"TextBlock couldn't be found with:'{text}'");
+            context.Card.AssertTextBlock(text);
             return context;
         }
 
@@ -45,7 +43,7 @@ namespace Crazor.Test.MSTest
         public static async Task<CardTestContext> AssertNoTextBlock(this Task<CardTestContext> contextTask, string text)
         {
             var context = await contextTask;
-            Assert.IsFalse(context.Card.GetElements<AdaptiveTextBlock>().Any(el => el.Text == text), $"TextBlock found with:'{text}'");
+            context.Card.AssertNoTextBlock(text);
             return context;
         }
 
@@ -60,7 +58,7 @@ namespace Crazor.Test.MSTest
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;
-            callback(context.Card.GetElements<T>());
+            context.Card.AssertElements<T>(callback);
             return context;
         }
 
@@ -75,12 +73,7 @@ namespace Crazor.Test.MSTest
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;
-            var element = (T?)context.Card.GetElements<AdaptiveTypedElement>().SingleOrDefault(el => el.Id == id);
-            Assert.IsNotNull(element, $"{typeof(T).Name}[Id={id}] Not found");
-            if (callback != null)
-            {
-                callback(element);
-            }
+            context.Card.AssertElement<T>(id, callback);
             return context;
         }
 
@@ -95,10 +88,7 @@ namespace Crazor.Test.MSTest
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;
-            if (id != null)
-                Assert.IsTrue(context.Card.GetElements<T>().Any(el => el.Id == id), $"{typeof(T).Name}[{id}] Not found");
-            else
-                Assert.IsTrue(context.Card.GetElements<T>().Any(), $"{typeof(T).Name} Not found");
+            context.Card.AssertHas<T>(id);
             return context;
         }
 
@@ -113,10 +103,7 @@ namespace Crazor.Test.MSTest
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;
-            if (id != null)
-                Assert.IsFalse(context.Card.GetElements<T>().Any(el => el.Id == id), $"{typeof(T).Name}[Id={id}] should not be found");
-            else
-                Assert.IsFalse(context.Card.GetElements<T>().Any(), $"{typeof(T).Name} should not be found");
+            context.Card.AssertHasNo<T>(id);
             return context;
         }
 
@@ -129,8 +116,7 @@ namespace Crazor.Test.MSTest
         public static async Task<CardTestContext> AssertHasRefresh(this Task<CardTestContext> contextTask)
         {
             var context = await contextTask;
-            Assert.IsNotNull(context.Card.Refresh);
-            Assert.IsNotNull(context.Card.Refresh.Action);
+            context.Card.AssertHasRefresh();
             return context;
         }
 
@@ -143,7 +129,7 @@ namespace Crazor.Test.MSTest
         public static async Task<CardTestContext> AssertHasNoRefresh(this Task<CardTestContext> contextTask)
         {
             var context = await contextTask;
-            Assert.IsNull(context.Card.Refresh);
+            context.Card.AssertHasNoRefresh();
             return context;
         }
 
@@ -156,7 +142,7 @@ namespace Crazor.Test.MSTest
         public static async Task<CardTestContext> AssertCard(this Task<CardTestContext> contextTask, Action<AdaptiveCard> callback)
         {
             var context = await contextTask;
-            callback(context.Card);
+            context.Card.AssertCard(callback);
             return context;
         }
     }

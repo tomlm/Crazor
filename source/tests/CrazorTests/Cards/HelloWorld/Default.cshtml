@@ -1,0 +1,18 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock>@Title</TextBlock>
+    <Action.Execute Verb="OnClick"/>
+</Card>
+
+@functions 
+{
+    public override void OnInitialized()
+    {
+        this.Title = "Hello";
+    }
+
+    public string Title { get; set; }
+
+    public void OnClick() => Title = "Clicked";
+}

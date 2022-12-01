@@ -30,11 +30,7 @@ namespace Crazor
         public T? AsResult<T>()
         {
             ArgumentNullException.ThrowIfNull(Result);
-            if (Result is T)
-            {
-                return (T)Result;
-            }
-            return JToken.FromObject(Result).ToObject<T>();
+            return ObjectPath.MapValueTo<T>(Result);
         }
     }
 }
