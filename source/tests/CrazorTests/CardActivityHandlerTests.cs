@@ -506,15 +506,65 @@ namespace CrazorTests
                 }));
 
             choices = ObjectPath.GetPathValue<List<AdaptiveChoice>>(response, "body.value.results");
-
             Assert.AreEqual(10, choices.Count);
+
             foreach (var choice in choices)
             {
                 Assert.AreEqual(i.ToString(), choice.Title);
                 Assert.AreEqual(i.ToString(), choice.Value);
                 while (!(++i).ToString().StartsWith("1")) ;
             }
+
+            // Search with null results
+            response = await adapter
+                .Invoke(CreateSearchInvokeActivity(new SearchInvoke()
+                {
+                    Dataset = dq.Dataset,
+                    Kind = "search",
+                    QueryOptions = new SearchInvokeOptions()
+                    {
+                        Skip = 0xfffff,
+                        Top = (dq.Count > 0) ? dq.Count : 10
+                    },
+                    QueryText = "1"
+                }));
+
+            choices = ObjectPath.GetPathValue<List<AdaptiveChoice>>(response, "body.value.results");
+            Assert.AreEqual(0, choices.Count);
         }
 
+        [TestMethod]
+        public async Task TestSearch()
+        {
+            var bot = Services.GetRequiredService<IBot>();
+            var configuration = Services.GetService<IConfiguration>();
+            var hostUri = configuration.GetValue<string>("HostUri");
+            var adapter = new CardTestAdapter(bot);
+
+            // Search
+            var response = await adapter.Invoke(CreateMessagingExtensionQueryActivity(commandId:"/Cards/Search", "st"));
+            var mexResponse = ObjectPath.MapValueTo<MessagingExtensionResponse>(response.Body);
+
+            Assert.AreEqual(2, mexResponse.ComposeExtension.Attachments.Count);
+            var cards = mexResponse.ComposeExtension.Attachments.Where(a => a.ContentType == ThumbnailCard.ContentType).Select(a => ObjectPath.MapValueTo<ThumbnailCard>(a.Content)).ToList();
+            Assert.AreEqual(2, cards.Count);
+
+            Assert.AreEqual("steve", cards[0].Title);
+            Assert.AreEqual("stacia", cards[1].Title);
+            foreach (var card in cards)
+            {
+                Assert.IsNotNull(card.Tap);
+                Assert.AreEqual("invoke", card.Tap.Type);
+                Assert.IsTrue(ObjectPath.GetPathValue<string>(card.Tap.Value, "route").StartsWith("/Cards/Search"));
+            }
+
+            // Search past end
+            response = await adapter.Invoke(CreateMessagingExtensionQueryActivity(commandId: "/Cards/Search", "st", 1000, 10000000));
+            mexResponse = ObjectPath.MapValueTo<MessagingExtensionResponse>(response.Body);
+
+            Assert.AreEqual(0, mexResponse.ComposeExtension.Attachments.Count);
+            cards = mexResponse.ComposeExtension.Attachments.Where(a => a.ContentType == ThumbnailCard.ContentType).Select(a => ObjectPath.MapValueTo<ThumbnailCard>(a.Content)).ToList();
+            Assert.AreEqual(0, cards.Count);
+        }
     }
 }

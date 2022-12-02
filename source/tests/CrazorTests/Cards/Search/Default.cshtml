@@ -1,0 +1,11 @@
+﻿@inherits CardView
+
+@attribute [Route("{name}")]
+<Card Version="1.5">
+    <TextBlock>@Name</TextBlock>
+</Card>
+
+@functions
+{
+    public string Name { get; set; }
+}
