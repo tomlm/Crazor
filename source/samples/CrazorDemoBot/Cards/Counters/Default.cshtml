@@ -1,19 +1,11 @@
-﻿@using CrazorDemoBot.Cards.Counters
-@inherits CardView<CountersApp>
+﻿@inherits CardView
 
 <Card Version="1.5">
-    <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
-    <TextBlock Size="Large">App Counter:@App.AppCounter</TextBlock>
-
-    <ActionSet>
-        <Action.Execute Title="+ App" Verb="@nameof(OnIncrementApp)" />
-        <Action.Execute Title="- App" Verb="@nameof(OnDecrementApp)" />
-    </ActionSet>
-
     <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
+
     <ActionSet>
-        <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
-        <Action.Execute Title="- Session" Verb="@nameof(OnDecrement)" />
+        <Action.Execute Title="+ 1" Verb="@nameof(OnIncrement)" />
+        <Action.Execute Title="- 1" Verb="@nameof(OnDecrement)" />
     </ActionSet>
 
 </Card>
@@ -26,15 +18,5 @@
 
     public void OnDecrement()
         => this.Counter--;
-
-    public void OnIncrementApp()
-        => App.AppCounter++;
-
-    // verb handlers can be sync or async.
-    public async Task OnDecrementApp()
-    {
-        await Task.CompletedTask;
-        App.AppCounter--;
-    }
 }
 

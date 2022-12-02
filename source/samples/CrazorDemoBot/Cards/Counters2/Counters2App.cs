@@ -1,11 +1,11 @@
 ﻿using Crazor;
 using Crazor.Attributes;
 
-namespace CrazorDemoBot.Cards.Counters
+namespace CrazorDemoBot.Cards.Counters2
 {
-    public class CountersApp : CardApp
+    public class Counters2App : CardApp
     {
-        public CountersApp(IServiceProvider services)
+        public Counters2App(IServiceProvider services)
             : base(services)
         {
         }
