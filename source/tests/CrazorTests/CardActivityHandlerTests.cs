@@ -23,7 +23,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestQueryLink()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -41,7 +41,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestActionInvoke()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -70,7 +70,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestTaskModule()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -141,7 +141,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestTaskModulePost()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -249,7 +249,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestTaskModulePostEdit()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -360,7 +360,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestTaskModuleCancel()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -402,7 +402,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestTabModule()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
@@ -446,7 +446,7 @@ namespace CrazorTests
         [TestMethod]
         public async Task TestChoiceSetDataQuery()
         {
-            var bot = Services.GetService<IBot>();
+            var bot = Services.GetRequiredService<IBot>();
             var configuration = Services.GetService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
