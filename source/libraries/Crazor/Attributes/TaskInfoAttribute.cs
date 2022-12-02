@@ -34,18 +34,5 @@ namespace Crazor.Attributes
         /// Value is [small, medium, large] or an integer which is px
         /// </summary>
         public string Height { get; set; } = "medium";
-
-        public TaskModuleTaskInfo AsTaskInfo(string title)
-        {
-            object height = int.TryParse(this.Height, out int h) ? h : this.Height;
-            object width = int.TryParse(this.Width, out int w) ? w : this.Width;
-
-            return new TaskModuleTaskInfo()
-            {
-                Height = height,
-                Width = width,
-                Title = this.Title ?? title ?? String.Empty
-            };
-        }
     }
 }

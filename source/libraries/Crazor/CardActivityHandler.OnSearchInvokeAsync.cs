@@ -17,9 +17,6 @@ namespace Crazor
     {
         [JsonProperty]
         public string? Dataset { get; set; }
-
-        [JsonProperty]
-        public string? SessionData { get; set; }
     }
 
     public partial class CardActivityHandler

@@ -442,5 +442,79 @@ namespace CrazorTests
                 .AssertHasSession()
                 .AssertHasOnlySubmitActions();
         }
+
+        [TestMethod]
+        public async Task TestChoiceSetDataQuery()
+        {
+            var bot = Services.GetService<IBot>();
+            var configuration = Services.GetService<IConfiguration>();
+            var hostUri = configuration.GetValue<string>("HostUri");
+            var adapter = new CardTestAdapter(bot);
+
+            // Get card
+            var response = await adapter
+                .Invoke(CreateQueryLinkActivity(new AppBasedLinkQuery($"{hostUri}/Cards/DataQuery")));
+
+            var card = response.GetCardFromResponse<MessagingExtensionResponse>();
+
+
+            AdaptiveDataQuery? dq = null;
+            card.AssertElement<AdaptiveChoiceSetInput>("Number", (cs) =>
+            {
+                Assert.AreEqual(AdaptiveChoiceInputStyle.Filtered, cs.Style);
+                dq = cs.DataQuery;
+            });
+            Assert.IsNotNull(dq);
+
+            // Search
+            response = await adapter
+                .Invoke(CreateSearchInvokeActivity(new SearchInvoke()
+                {
+                    Dataset = dq.Dataset,
+                    Kind = "search",
+                    QueryOptions = new SearchInvokeOptions()
+                    {
+                        Skip = dq.Skip,
+                        Top = (dq.Count > 0) ? dq.Count : 10
+                    },
+                    QueryText = "1"
+                }));
+            
+            var choices = ObjectPath.GetPathValue<List<AdaptiveChoice>>(response, "body.value.results");
+
+            Assert.AreEqual(10, choices.Count);
+            int i = 1;
+            foreach (var choice in choices)
+            {
+                Assert.AreEqual(i.ToString(), choice.Title);
+                Assert.AreEqual(i.ToString(), choice.Value);
+                while (!(++i).ToString().StartsWith("1")) ;
+            }
+
+            // Search again
+            response = await adapter
+                .Invoke(CreateSearchInvokeActivity(new SearchInvoke()
+                {
+                    Dataset = dq.Dataset,
+                    Kind = "search",
+                    QueryOptions = new SearchInvokeOptions()
+                    {
+                        Skip = choices.Count,
+                        Top = (dq.Count > 0) ? dq.Count : 10
+                    },
+                    QueryText = "1"
+                }));
+
+            choices = ObjectPath.GetPathValue<List<AdaptiveChoice>>(response, "body.value.results");
+
+            Assert.AreEqual(10, choices.Count);
+            foreach (var choice in choices)
+            {
+                Assert.AreEqual(i.ToString(), choice.Title);
+                Assert.AreEqual(i.ToString(), choice.Value);
+                while (!(++i).ToString().StartsWith("1")) ;
+            }
+        }
+
     }
 }
