@@ -131,7 +131,7 @@ namespace CrazorTests
             {
                 Assert.IsNotNull(response.ComposeExtension);
             });
-            card.AssertTextBlock("Counter: 1!")
+            card.AssertTextBlock("Counter: 1")
                 .AssertTextBlock("(PREVIEW)")
                 .AssertHasRefresh()
                 .AssertHasNoSession()
@@ -207,7 +207,7 @@ namespace CrazorTests
             });
             ArgumentNullException.ThrowIfNull(preview);
 
-            card.AssertTextBlock("Counter: 1!")
+            card.AssertTextBlock("Counter: 1")
                 .AssertTextBlock("(PREVIEW)")
                 .AssertHasRefresh()
                 .AssertHasNoSession()
@@ -239,12 +239,123 @@ namespace CrazorTests
             var replyActivity = adapter.ActiveQueue.Dequeue();
             var attachment = replyActivity.Attachments.Where(a => a.ContentType == AdaptiveCard.ContentType).First();
             card = ObjectPath.MapValueTo<AdaptiveCard>(attachment.Content);
-            card.AssertTextBlock("Counter: 0!")
+            card.AssertTextBlock("Counter: 0")
                 .AssertTextBlock("(PREVIEW)")
                 .AssertHasRefresh()
                 .AssertHasNoSession()
                 .AssertHasOnlyExecuteActions();
         }
+
+        [TestMethod]
+        public async Task TestTaskModulePostEdit()
+        {
+            var bot = Services.GetService<IBot>();
+            var configuration = Services.GetService<IConfiguration>();
+            var hostUri = configuration.GetValue<string>("HostUri");
+            var adapter = new CardTestAdapter(bot);
+
+            // fetch task module
+            var response = await adapter.Invoke(CreateMessagingExtensionFetchTaskAsync(new MessagingExtensionAction()
+            {
+                CommandId = "/Cards/TaskModule/Edit",
+                CommandContext = "compose",
+                Context = new TaskModuleRequestContext() { Theme = "default" }
+            }));
+            var card = response.GetCardFromResponse<TaskModuleContinueResponse>((response) =>
+            {
+                Assert.AreEqual("continue", response.Type);
+                Assert.AreEqual("Test Task Module", response.Value.Title);
+                Assert.AreEqual("small", response.Value.Width);
+                Assert.AreEqual("medium", response.Value.Height);
+            });
+
+            card.AssertTextBlock("Counter: 0")
+                .AssertHasNoRefresh()
+                .AssertHasSession()
+                .AssertHasOnlySubmitActions();
+
+            // Click OnIncrement button
+            response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
+            {
+                CommandId = "/Cards/TaskModule/Edit",
+                CommandContext = "compose",
+                Context = new TaskModuleRequestContext() { Theme = "default" },
+                Data = card.GetElements<AdaptiveSubmitAction>().First(a => a.Id == "OnIncrement").Data
+            }));
+
+            card = response.GetCardFromResponse<TaskModuleContinueResponse>((response) =>
+            {
+                Assert.AreEqual("continue", response.Type);
+                Assert.AreEqual("Test Task Module", response.Value.Title);
+                Assert.AreEqual("small", response.Value.Width);
+                Assert.AreEqual("medium", response.Value.Height);
+            });
+
+            card.AssertTextBlock("Counter: 1")
+                .AssertHasNoRefresh()
+                .AssertHasSession()
+                .AssertHasOnlySubmitActions();
+
+            // Click OnPost button
+            response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
+            {
+                CommandId = "/Cards/TaskModule/Edit",
+                CommandContext = "compose",
+                Context = new TaskModuleRequestContext() { Theme = "default" },
+                Data = card.GetElements<AdaptiveSubmitAction>().First(a => a.Id == "OnPost").Data
+            }));
+
+            Activity? preview = null;
+            card = response.GetCardFromResponse<MessagingExtensionActionResponse>((response) =>
+            {
+                Assert.AreEqual("botMessagePreview", response.ComposeExtension.Type);
+                Assert.IsNotNull(response.ComposeExtension);
+                Assert.IsNotNull(response.ComposeExtension.ActivityPreview);
+                preview = response.ComposeExtension.ActivityPreview;
+            });
+            ArgumentNullException.ThrowIfNull(preview);
+
+            card.AssertTextBlock("Counter: 1")
+                .AssertTextBlock("(PREVIEW)")
+                .AssertHasRefresh()
+                .AssertHasNoSession()
+                .AssertHasOnlyExecuteActions();
+
+            // Click Edit button
+            JObject data = new JObject();
+            if (card.Refresh.Action is AdaptiveExecuteAction executeAction)
+            {
+                data = JObject.FromObject(executeAction.Data);
+            }
+            else if (card.Refresh.Action is AdaptiveSubmitAction submitAction)
+            {
+                data = JObject.FromObject(submitAction.Data);
+            }
+
+            response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
+            {
+                CommandId = "/Cards/TaskModule/Edit",
+                CommandContext = "compose",
+                BotActivityPreview = new List<Activity>() { preview },
+                Context = new TaskModuleRequestContext() { Theme = "default" },
+                BotMessagePreviewAction = "edit",
+                Data = data
+            }));
+
+            card = response.GetCardFromResponse<TaskModuleContinueResponse>((response) =>
+            {
+                Assert.AreEqual("continue", response.Type);
+                Assert.AreEqual("Test Task Module", response.Value.Title);
+                Assert.AreEqual("small", response.Value.Width);
+                Assert.AreEqual("medium", response.Value.Height);
+            });
+
+            card.AssertTextBlock("Counter: 1")
+                .AssertHasNoRefresh()
+                .AssertHasSession()
+                .AssertHasOnlySubmitActions();
+        }
+
 
         [TestMethod]
         public async Task TestTaskModuleCancel()

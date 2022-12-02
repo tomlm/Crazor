@@ -113,6 +113,11 @@ namespace Crazor
 
         protected static MessagingExtensionActionResponse CreatePreviewSendResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
+            AdaptiveExecuteAction? action = adaptiveCard.Refresh?.Action as AdaptiveExecuteAction;
+            if (action != null)
+            {
+                ObjectPath.SetPathValue(action.Data, Constants.EDITSESSION_KEY, cardApp.Route.SessionId, true);
+            }
             // return preview
             return new MessagingExtensionActionResponse
             {

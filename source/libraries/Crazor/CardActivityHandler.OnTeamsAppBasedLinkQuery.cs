@@ -7,11 +7,17 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {
     public partial class CardActivityHandler
     {
+        protected override Task<MessagingExtensionResponse> OnTeamsAnonymousAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
+        {
+            return base.OnTeamsAppBasedLinkQueryAsync(turnContext, query, cancellationToken);
+        }
+
         /// <summary>
         /// Handle LinkQuery (aka link unfurling) request
         /// </summary>
@@ -35,7 +41,7 @@ namespace Crazor
                 var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);
 
                 var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
-                
+
                 await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.
@@ -54,6 +60,16 @@ namespace Crazor
                     new MessagingExtensionResult()
                     {
                         Type = "result",
+                        SuggestedActions = new MessagingExtensionSuggestedAction()
+                        {
+                            Actions = new List<CardAction>()
+                            {
+                                new CardAction(type:"setCachePolicy")
+                                {
+                                    Value = new JObject() { { "type", "no-cache" } }
+                                }
+                            }
+                        },
                         AttachmentLayout = AttachmentLayoutTypes.List,
                         Attachments = new List<MessagingExtensionAttachment>()
                         {

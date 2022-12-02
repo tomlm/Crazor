@@ -24,7 +24,8 @@ namespace Crazor
             var card = ((JObject)action.BotActivityPreview.First().Attachments.First().Content).ToObject<AdaptiveCard>();
             var actionExecute = ((AdaptiveExecuteAction)card.Refresh.Action);
             action.Data = actionExecute.Data;
-            ((JObject)action.Data)["_verb"] = actionExecute.Verb;
+            ((JObject)action.Data)["_verb"] = "OnEdit";
+            ((JObject)action.Data)[Constants.SESSION_KEY] = ((JObject)action.Data)[Constants.EDITSESSION_KEY];
             return OnTeamsMessagingExtensionSubmitActionAsync(turnContext, action, cancellationToken);
         }
     }

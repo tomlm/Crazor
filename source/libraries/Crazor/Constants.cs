@@ -7,6 +7,7 @@ namespace Crazor
     {
         // action.data keys
         public const string SESSION_KEY = "_session";
+        public const string EDITSESSION_KEY = "_editsessionid";
         public const string ROUTE_KEY = "_route";
         public const string IDDATA_KEY = "_id";
 

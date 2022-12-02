@@ -1,7 +1,7 @@
 ﻿@using CrazorDemoBot.Cards.TaskModule
 @inherits CardView<TaskModuleApp>
 <Card Version="1.5" Title="Test Task Module Functionality">
-    <TextBlock>Counter is @App.Counter!</TextBlock>
+    <TextBlock>Counter: @App.Counter</TextBlock>
     <Input.ChoiceSet Binding="TaskAction" Style="Expanded" Value="Auto"/>
 
     <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />

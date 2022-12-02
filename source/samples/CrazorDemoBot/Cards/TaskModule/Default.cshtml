@@ -11,6 +11,9 @@
 </Card>
 
 @functions {
-    public void OnIncrement() => App.Counter++;
+    public void OnIncrement() 
+        => App.Counter++;
 
+    public void OnEdit()
+        => ShowView("Edit");
 }
