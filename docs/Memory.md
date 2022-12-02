@@ -22,20 +22,18 @@ Every time a an interaction happens with your application the following process 
 
 When you put a memory attribute on a property you are defining the **"scope"** of the value...meaning who will have access to that value. Essentially you are defining the key that is used to persist the value...all properties with a given memory attribute on it will be swept up and stored on a record in the key-value store with the key that is behind the attribute.
 
-| Attribute                                 | Scope                                                | Description                                                  |
-| ----------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| **[SharedMemory]**                        | Bound to the value of **App.SharedId**               | Using **[SharedMemory]** scopes the property to the value for **App.SharedId**, which is built into the Uri and so fixed and shared across all host applications as that same uri is used. |
-| **[SessionMemory]**                       | Bound to the value of **App.SessionId**              | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **App.SessionId**. It is managed directly by Crazor. |
-| **[TempMemory]**                          | Not bound                                            | Using **[TempMemory]** makes the property not persist at all, it will be reset to default value on each action. |
-| **[UserMemory]**                          | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
-| **[ConversationMemory]**                  | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
-| **[TimeMemory(pattern)]**                 | Bound to the **current date** using **pattern**      | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to the pattern 20221108, effectively the day as a key. |
-| **[PropertyValueMemory(*propertyName*)]** | Bound to the value of the **property name**          | Using **[PropertyValueMemory]** will scope the property to be persisted using the value of another named property. |
-| *Coming soon* **[IdentityMemory]**        | Bound to the **current authenticated user identity** | When using an authorized SSO application this will be scoped to the user who is logged in...shared across all applications that have the same user identity. |
+| Attribute                          | Scope                                                | Description                                                  |
+| ---------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| **[AppMemory]**                    | Bound to the **App.Name**                            | Using **[AppName]** scopes the property to be shared for all users interacting with the app. |
+| **[SessionMemory]**                | Bound to the value of **Route.SessionId**            | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **Route.SessionId**. It is managed directly by Crazor. |
+| **[TempMemory]**                   | Not bound                                            | Using **[TempMemory]** makes the property not persist at all, it will be reset to default value on each action. |
+| **[UserMemory]**                   | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
+| **[ConversationMemory]**           | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
+| **[TimeMemory(pattern)]**          | Bound to the **current date** using **pattern**      | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to the pattern 20221108, effectively the day as a key. |
+| **[PathMemory(*propertyPath*)]**   | Bound to the value of the **property path**          | Using **[PathMemory]** will scope the property to be persisted using the value of another named property. |
+| *Coming soon* **[IdentityMemory]** | Bound to the **current authenticated user identity** | When using an authorized SSO application this will be scoped to the user who is logged in...shared across all applications that have the same user identity. |
 
 **App.SessionId** is automatically managed by Crazor by default. You should probably not muck with it directly
-
-**App.SharedId** is automatically managed by Crazor by default. If you set ```CardApp.AutoSharedId =false``` then you are responsible for setting the value for **App.SharedId**.  The default its that ```AutoSharedId=true```
 
 > NOTE: 
 >
@@ -53,7 +51,7 @@ public class MyApp : CardApp
     public MyApp(IServiceProvider services)
         : base(services)        {        }
 
-    [SharedMemory]
+    [AppMemory]
     public string A { get; set; }
 
     [SessionMemory]
@@ -69,8 +67,6 @@ public class MyApp : CardApp
     public Game E {get;set;}
 }
 ```
-
-
 
 ## Custom State
 
@@ -99,5 +95,37 @@ public async virtual Task SaveAppAsync(CancellationToken cancellationToken)
 >  NOTE 1: If you want **[Memory] attributes** to continue to work you need to call the **base** implementation when overriding these methods.
 
 >  NOTE 2: You should not put **[Memory] attributes** on properties which are backed by external data sources as that will cause the data be persisted twice, once to the custom database and once to the key value store.
+
+## Loading data based on route
+
+Let's say you have a Edit.cshtml file which edits a resource route **/Cards/MyApp/{id}/Edit**
+
+* You create a Route attribute which defines the route the view is bound to. 
+* You implement OnLoadRoute() to initialize the local view's state for the route.
+
+```html
+@inherits CardView
+@attribute [Route("{ResourceId}/Edit")]
+<Card>
+   ...
+   <TextBlock>@Resource.Name</TextBlock>
+</Card>
+
+@functions {
+	public string ResourceId {Get;set;}
+
+    public ResourceModel Resource {get;set;}
+
+	public async Task OnLoadRoute(CancellationToken cancellationToken)
+	{
+		// ... lookup resource using resourceId which will be intiailized from the data in the url/route ...
+		this.Resource = await mydb.GetResource(ResourceId);
+	}
+}
+```
+
+Now when someone copies the Url the value in the Url contains the resourceId, and when it is copied into a new environment the OnLoadRoute() method is able to bind to the appropriate data for the url.
+
+
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
