@@ -6,7 +6,8 @@
     <Action.Execute Id="@nameof(OnIncrement)" Verb="@nameof(OnIncrement)" Title="Increment" />
 
     <Action.Cancel Id="@nameof(OnCancel)" />
-    <Action.OK Id="@nameof(OnOK)"/>
+    <Action.OK Id="@nameof(OnOK)" />
+    <Action.Execute Id="@nameof(OnPost)" Verb="@nameof(OnPost)" />
 </Card>
 
 @functions {
@@ -16,6 +17,12 @@
     public void OnOK()
     {
         CloseTaskModule(TaskModuleAction.Auto);
+        CloseView();
+    }
+
+    public void OnPost()
+    {
+        CloseTaskModule(TaskModuleAction.PostCard);
         CloseView();
     }
 

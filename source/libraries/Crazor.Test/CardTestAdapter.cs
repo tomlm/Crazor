@@ -3,13 +3,17 @@
 
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Adapters;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
+using Microsoft.Rest;
+using Newtonsoft.Json;
 using System.Globalization;
 using System.Net;
 using System.Security.Claims;
 
 namespace Crazor.Test
 {
+
     public class CardTestAdapter : TestAdapter
     {
         private readonly object _lock = new object();
@@ -19,6 +23,23 @@ namespace Crazor.Test
         public CardTestAdapter(IBot bot)
         {
             _bot = bot;
+        }
+
+        public Uri BaseUri { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public JsonSerializerSettings SerializationSettings => throw new NotImplementedException();
+
+        public JsonSerializerSettings DeserializationSettings => throw new NotImplementedException();
+
+        public ServiceClientCredentials Credentials => throw new NotImplementedException();
+
+        public IAttachments Attachments => throw new NotImplementedException();
+
+        public IConversations Conversations => throw new NotImplementedException();
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         public async virtual Task<InvokeResponse> Invoke(IInvokeActivity activity, CancellationToken cancellationToken=default)
@@ -60,6 +81,7 @@ namespace Crazor.Test
 
             // note here Dispose is NOT called on the TurnContext because we want to use it later in the test code
             var context = CreateTurnContext((Activity)activity);
+
             await RunPipelineAsync(context, _bot.OnTurnAsync, cancellationToken).ConfigureAwait(false);
 
             if (activity.Type == ActivityTypes.Invoke)

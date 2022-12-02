@@ -28,7 +28,7 @@ namespace Crazor
             data[Constants.ROUTE_KEY] = (string)data["commandId"];
             CardRoute cardRoute = await CardRoute.FromDataAsync(data, _encryptionProvider, cancellationToken);
 
-            Activity? showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
+            var showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
 
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
             

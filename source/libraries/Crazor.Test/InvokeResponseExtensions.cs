@@ -19,10 +19,8 @@ namespace Crazor.Test.MSTest
         /// <param name="id"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static async Task<AdaptiveCard> GetCardFromResponse<T>(this Task<InvokeResponse> task, Action<T>? callback = null)
+        public static AdaptiveCard GetCardFromResponse<T>(this InvokeResponse invokeResponse, Action<T>? callback = null)
         {
-            var invokeResponse = await task;
-
             if (invokeResponse.Body is AdaptiveCardInvokeResponse ac)
             {
                 if (callback != null)
@@ -72,14 +70,14 @@ namespace Crazor.Test.MSTest
             {
                 return continueResponse.GetCardFromResponse();
             }
-            //if (response.Task is TaskModuleCardResponse cardResponse)
-            //{
-            //    return cardResponse.GetCardFromResponse();
-            //}
-            //if (response.Task is TaskModuleMessageResponse messageResponse)
-            //{
-            //    throw new Exception();
-            //}
+
+            if (response.ComposeExtension?.Type == "botMessagePreview")
+            {
+                return response.ComposeExtension.ActivityPreview.Attachments
+                    .Where(a => a.ContentType == AdaptiveCard.ContentType)
+                    .Select(a => ObjectPath.MapValueTo<AdaptiveCard>(a.Content))
+                    .Single()!;;
+            }
 
             return response.ComposeExtension.Attachments
                     .Where(a => a.ContentType == AdaptiveCard.ContentType)

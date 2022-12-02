@@ -24,10 +24,18 @@ namespace Crazor
         {
             var activityPreview = action.BotActivityPreview[0];
             var attachmentContent = activityPreview.Attachments[0].Content;
-            var previewedCard = ((JObject)attachmentContent).ToObject<AdaptiveCard>();
+            var previewedCard = ObjectPath.MapValueTo<AdaptiveCard>(attachmentContent);
 
-            var data = JObject.FromObject(((AdaptiveExecuteAction)previewedCard!.Refresh.Action).Data);
-            
+            JObject data = new JObject();
+            if (previewedCard.Refresh.Action is AdaptiveExecuteAction executeAction)
+            {
+                data = JObject.FromObject(executeAction.Data);
+            }
+            else if (previewedCard.Refresh.Action is AdaptiveSubmitAction submitAction)
+            {
+                data = JObject.FromObject(submitAction.Data);
+            }
+
             var cardRoute = await CardRoute.FromDataAsync(data, _encryptionProvider, cancellationToken);
 
             var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
@@ -65,8 +73,7 @@ namespace Crazor
                 }
             };
 
-            var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
-            await connectorClient.Conversations.SendToConversationAsync(reply, cancellationToken);
+            await turnContext.SendActivityAsync(reply, cancellationToken);
             return null!;
         }
     }

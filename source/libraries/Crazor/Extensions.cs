@@ -150,9 +150,9 @@ namespace Crazor
             return JsonConvert.DeserializeObject<AdaptiveCard>(json)!;
         }
 
-        public static Activity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb)
+        public static IInvokeActivity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb)
         {
-            return CreateActionInvokeActivity((Activity)sourceActivity, verb);
+            return CreateActionInvokeActivity((Activity)sourceActivity, verb, null);
         }
 
         public static Activity Clone(this IActivity activity)
