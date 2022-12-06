@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -27,20 +28,17 @@ namespace Crazor
         {
             _logger!.LogInformation($"Starting OnTeamsMessagingExtensionFetchTaskAsync() processing");
 
-
             var activity = turnContext.Activity.CreateLoadRouteActivity(action.CommandId);
             var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             cardApp.IsTaskModule = true;
 
-            var adaptiveCard = await cardApp.ProcessInvokeActivity(activity, isPreview: false, cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(activity, isPreview: false, cancellationToken);
 
-            await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
-
-            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
+            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);
         }
 
         protected static AdaptiveCard TransformCardNoRefresh(AdaptiveCard card)

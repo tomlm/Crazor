@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -146,7 +147,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(uri);
             ArgumentNullException.ThrowIfNull(cancellationToken);
 
-            var cardApp = _cardAppFactory.Create(CardRoute.FromUri(uri));
+            var cardApp = _cardAppFactory.Create(CardRoute.FromUri(uri), turnContext.TurnState.Get<IConnectorClient>());
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
             
@@ -155,7 +156,7 @@ namespace Crazor
 
         protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, CardRoute cardRoute, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateActionInvokeActivity(invokeValue.Action.Verb, JObject.FromObject(invokeValue.Action.Data)), false, cancellationToken);
             return card;
         }

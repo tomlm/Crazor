@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,8 +34,8 @@ namespace Crazor
             cardRoute.SessionId = await encryptionProvider.DecryptAsync(parts[1], cancellationToken);
             searchInvoke.Dataset = parts[2];
             
-            var cardApp = _cardAppFactory.Create(cardRoute);
-            
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
             var result = await cardApp.OnSearchChoicesAsync(searchInvoke, cancellationToken);

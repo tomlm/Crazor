@@ -2,7 +2,9 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +32,7 @@ namespace Crazor
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(action.Data));
 
             CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), _encryptionProvider, cancellationToken);
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
             
             cardApp.IsTaskModule = true;
 
@@ -40,16 +42,15 @@ namespace Crazor
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
             
-            await cardApp.SaveAppAsync(cancellationToken);
-
             bool isPreview = cardApp.TaskModuleAction == TaskModuleAction.Auto ||
                 cardApp.TaskModuleAction == TaskModuleAction.PostCard ||
                 cardApp.TaskModuleAction == TaskModuleAction.InsertCard;
-            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: isPreview, cancellationToken);
 
-            await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
+            var card = await cardApp.RenderCardAsync(isPreview: isPreview, cancellationToken);
 
-            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, adaptiveCard);
+            await cardApp.SaveAppAsync(cancellationToken);
+
+            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);
         }
 
         private MessagingExtensionActionResponse CreateMessagingExtensionActionResponse(string commandContext, CardApp cardApp, AdaptiveCard adaptiveCard)

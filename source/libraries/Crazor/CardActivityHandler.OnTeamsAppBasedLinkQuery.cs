@@ -3,6 +3,7 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -36,13 +37,11 @@ namespace Crazor
             {
                 CardRoute cardRoute = CardRoute.FromUri(uri);
 
-                var cardApp = _cardAppFactory.Create(cardRoute);
+                var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
                 var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);
 
                 var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
-
-                await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.
                 var preview = new Attachment(

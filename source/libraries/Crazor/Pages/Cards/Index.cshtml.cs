@@ -54,7 +54,7 @@ namespace Crazor.HostPage.Pages.Cards
             var cardRoute = CardRoute.FromUri(uri);
             cardRoute.SessionId = Utils.GetNewId();
 
-            this.CardApp = _cardAppFactory.Create(cardRoute);
+            this.CardApp = _cardAppFactory.Create(cardRoute, null);
 
             ArgumentNullException.ThrowIfNull(this.CardApp);
 

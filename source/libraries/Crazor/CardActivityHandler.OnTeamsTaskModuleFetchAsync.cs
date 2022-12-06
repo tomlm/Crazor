@@ -2,6 +2,7 @@
 //  Licensed under the MIT License.
 
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +29,7 @@ namespace Crazor
 
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             cardApp.IsTaskModule = true;
 
@@ -36,15 +37,16 @@ namespace Crazor
                         
             await cardApp.OnActionExecuteAsync(cancellationToken);
             
-            await cardApp.SaveAppAsync(cancellationToken);
-
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
                     var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
+                    await cardApp.SaveAppAsync(cancellationToken);
+
                     adaptiveCard.Refresh = null;
                     var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
+
                     // continue taskModule bound to current card view.
                     return new TaskModuleResponse()
                     {
@@ -55,6 +57,8 @@ namespace Crazor
                     };
 
                 default:
+                    await cardApp.SaveAppAsync(cancellationToken);
+
                     return new TaskModuleResponse() { };
             }
         }

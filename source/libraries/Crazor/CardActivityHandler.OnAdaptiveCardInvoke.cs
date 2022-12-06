@@ -3,6 +3,7 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 
@@ -14,11 +15,9 @@ namespace Crazor
         {
             CardRoute cardRoute = await CardRoute.FromDataAsync((JObject)invokeValue.Action.Data, _encryptionProvider, cancellationToken);
 
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             AdaptiveCard card = await cardApp.ProcessInvokeActivity((Activity)turnContext.Activity!, isPreview: false, cancellationToken);
-
-            await AddRefreshUserIdsAsync(turnContext, card, cancellationToken);
 
             return new AdaptiveCardInvokeResponse()
             {

@@ -20,9 +20,11 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Neleus.DependencyInjection.Extensions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -66,7 +68,6 @@ namespace Crazor
             };
             this.Name = this.GetType().Name;
             this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
-
         }
 
 
@@ -153,6 +154,20 @@ namespace Crazor
         public TaskModuleAction TaskModuleAction { get; set; }
 
         /// <summary>
+        /// TeamsConversationMembers - UserIds needed for Refresh.UserIds on teams.
+        /// </summary>
+        /// <remarks>
+        /// This is cached at the conversation level
+        /// </remarks>
+        [ConversationMemory]
+        public List<string> TeamsConversationMembers { get; set; }
+
+        /// <summary>
+        /// ConnectorClient for calling outbound.
+        /// </summary>
+        public IConnectorClient ConnectorClient { get; set; }
+
+        /// <summary>
         /// process the activity
         /// </summary>
         /// <param name="invokeActivity"></param>
@@ -165,9 +180,11 @@ namespace Crazor
 
             await OnActionExecuteAsync(cancellationToken);
 
+            var card = await RenderCardAsync(isPreview, cancellationToken);
+
             await SaveAppAsync(cancellationToken);
 
-            return await RenderCardAsync(isPreview, cancellationToken);
+            return card;
         }
 
         /// <summary>
@@ -183,7 +200,7 @@ namespace Crazor
             {
                 this.Action.Verb = Constants.SHOWVIEW_VERB;
             }
-            
+
             if (this.Route.SessionId == null)
             {
                 this.Route.SessionId = Utils.GetNewId();
@@ -639,7 +656,7 @@ namespace Crazor
         {
             var cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, this.ConnectorClient);
 
             await cardApp.LoadAppAsync(Activity!, cancellationToken);
 
@@ -656,7 +673,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
 
-            AddRefresh(outboundCard, isPreview);
+            await AddRefresh(outboundCard, isPreview, cancellationToken);
 
             AddMessageBanner(outboundCard, isPreview);
 
@@ -733,7 +750,7 @@ namespace Crazor
             }
         }
 
-        private void AddRefresh(AdaptiveCard outboundCard, bool isPreview)
+        private async Task AddRefresh(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
             var uri = GetCurrentCardUri();
 
@@ -770,7 +787,28 @@ namespace Crazor
                         }
                     };
                 }
-                outboundCard.Refresh = new AdaptiveRefresh() { Action = refresh };
+                outboundCard.Refresh = new AdaptiveRefresh()
+                {
+                    Action = refresh,
+                };
+            }
+
+            if (this.Activity!.ChannelId == Channels.Msteams && !Activity.Conversation.Id.StartsWith("tab:"))
+            {
+                if (TeamsConversationMembers == null)
+                {
+                    try
+                    {
+                        // we need to add refresh userids
+                        var teamsMembers = await ConnectorClient.Conversations.GetConversationPagedMembersAsync(Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
+                        this.TeamsConversationMembers = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.TraceError($"Failed to get UserIds for conversation.id={this.Activity.Conversation.Id}\n{ex.Message}");
+                    }
+                }
+                outboundCard.Refresh.UserIds = this.TeamsConversationMembers;
             }
         }
 

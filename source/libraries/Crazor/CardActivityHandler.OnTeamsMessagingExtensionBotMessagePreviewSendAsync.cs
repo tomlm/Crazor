@@ -40,21 +40,19 @@ namespace Crazor
 
             var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
             
-            var cardApp = _cardAppFactory.Create(cardRoute);
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
             
             await cardApp.OnActionExecuteAsync(cancellationToken);
 
-            var adaptiveCard = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
-
-            await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
+            var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 
             var reply = turnContext.Activity.CreateReply();
             Attachment attachment = new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
-                Content = adaptiveCard
+                Content = card
             };
             reply.Attachments.Add(attachment);
 

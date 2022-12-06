@@ -6,11 +6,13 @@ using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace Crazor
 {
@@ -42,27 +44,6 @@ namespace Crazor
             _cardAppFactory = _serviceProvider.GetRequiredService<CardAppFactory>();
             _tabs = _serviceProvider.GetRequiredService<IServiceByNameFactory<CardTabModule>>();
             _logger = _serviceProvider.GetService<ILogger<CardActivityHandler>>();
-        }
-
-        public async Task AddRefreshUserIdsAsync(ITurnContext turnContext, AdaptiveCard card, CancellationToken cancellationToken)
-        {
-            if (card.Refresh != null)
-            {
-                if (turnContext.Activity.ChannelId == Channels.Msteams && !turnContext.Activity.Conversation.Id.StartsWith("tab:"))
-                {
-                    try
-                    {
-                        // we need to add refresh userids
-                        var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
-                        var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(turnContext.Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
-                        card.Refresh.UserIds = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Trace.TraceError($"Failed to get UserIds for conversation.id={turnContext.Activity.Conversation.Id}\n{ex.Message}");
-                    }
-                }
-            }
         }
     }
 }

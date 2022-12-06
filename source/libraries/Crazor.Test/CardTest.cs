@@ -165,7 +165,7 @@ namespace Crazor.Test
         /// <returns></returns>
         public async Task<CardTestContext> LoadCard(string route, string channelId = "test", bool isPreview = false)
         {
-            var cardApp = Services.GetRequiredService<CardAppFactory>().Create(CardRoute.Parse(route));
+            var cardApp = Services.GetRequiredService<CardAppFactory>().Create(CardRoute.Parse(route), null);
 
             var card = await cardApp.ProcessInvokeActivity(CreateInvokeActivity().CreateLoadRouteActivity(route), isPreview, default(CancellationToken));
             return new CardTestContext() { Card = card, Services = Services };

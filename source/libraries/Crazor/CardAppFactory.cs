@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Microsoft.Bot.Connector;
 using Neleus.DependencyInjection.Extensions;
 
 namespace Crazor
@@ -16,7 +17,7 @@ namespace Crazor
 
         public IEnumerable<string> GetNames() => _cardAppByName.GetNames().OrderBy(n => n);
 
-        public CardApp Create(CardRoute cardRoute)
+        public CardApp Create(CardRoute cardRoute, IConnectorClient client = null)
         {
             var cardName = _cardAppByName.GetNames().SingleOrDefault(cardName => String.Equals(cardName, cardRoute.App, StringComparison.OrdinalIgnoreCase));
             if (cardName != null)
@@ -27,6 +28,7 @@ namespace Crazor
                     cardApp.Name = cardName;
                 }
                 cardApp.Route = cardRoute;
+                cardApp.ConnectorClient = client;
                 return cardApp;
             }
             throw new ArgumentNullException(nameof(cardRoute));

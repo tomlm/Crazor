@@ -31,8 +31,8 @@ namespace Crazor
             var showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
 
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
-            
-            var cardApp = _cardAppFactory.Create(cardRoute);
+
+            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
             cardApp.IsTaskModule = true;
             cardApp.Action = invokeValue.Action;
 
@@ -40,13 +40,13 @@ namespace Crazor
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
 
-            await cardApp.SaveAppAsync(cancellationToken);
-
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
                     {
                         var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
+
+                        await cardApp.SaveAppAsync(cancellationToken);
 
                         adaptiveCard.Refresh = null;
                         var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
@@ -63,9 +63,9 @@ namespace Crazor
                 case TaskModuleAction.Auto:
                 case TaskModuleAction.PostCard:
                     {
-                        var adaptiveCard = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
+                        var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 
-                        await AddRefreshUserIdsAsync(turnContext, adaptiveCard, cancellationToken);
+                        await cardApp.SaveAppAsync(cancellationToken);
 
                         var connectorClient = turnContext.TurnState.Get<IConnectorClient>();
                         var reply = turnContext.Activity.CreateReply();
@@ -73,7 +73,7 @@ namespace Crazor
                         reply.Attachments.Add(new Attachment()
                         {
                             ContentType = AdaptiveCard.ContentType,
-                            Content = adaptiveCard
+                            Content = card
                         });
                         reply.ChannelData = new
                         {
@@ -95,6 +95,8 @@ namespace Crazor
                 case TaskModuleAction.InsertCard:
                 case TaskModuleAction.None:
                 default:
+                    await cardApp.SaveAppAsync(cancellationToken);
+
                     return null!;
             }
         }
