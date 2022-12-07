@@ -2,7 +2,7 @@
 @using Crazor
 @using System.Reflection
 @using Neleus.DependencyInjection.Extensions
-@inject IServiceByNameFactory<CardApp> serviceByName
+@inject CardAppFactory cardAppFactory
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -14,7 +14,7 @@
 
 <h2>Cards</h2>
 <ul>
-    @foreach (var cardAppType in serviceByName.GetNames().OrderBy(n => n))
+    @foreach (var cardAppType in cardAppFactory.GetNames())
     {
         var appName = cardAppType.Replace("App", String.Empty);
         <li><a href="/Cards/@appName">@appName Card</a></li>

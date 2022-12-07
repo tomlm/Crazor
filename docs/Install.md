@@ -10,7 +10,7 @@ Adding crazor is super easy.  Take a stock Asp.Net Core MVC project and add the 
 
 ## Add Crazor package
 
->  NOTE: Currently Crazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a **nuget.config** in the root of your project with the following:
+>  **NOTE: Currently Crazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a nuget.config in the root of your project with the following:**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -56,31 +56,66 @@ if (storageKey != null)
 
 1. add a **Cards** folder (should be a peer to **Pages** folder)
 
-2. Create a **Cards/_ViewImports.cshtml** file containing this:
+2. Create a **Cards/_ViewImports.cshtml** file containing default namespaces and tag helpers with this content:
 
    ```C#
    @using AdaptiveCards
    @using Crazor
-   @using Crazor.Exceptions
    @using Crazor.Attributes
+   @using System.ComponentModel;
    @using System.ComponentModel.DataAnnotations
    @removeTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
    @removeTagHelper *, Microsoft.AspNetCore.Mvc.Razor
    @addTagHelper *, Crazor
+   @addTagHelper *, ...YOURASSEMBLYNAME...
    ```
 
+# appsettings.json
 
-# Local development 
+Crazor has some settings it needs to service your cards:
 
-* set **BotName**: "{friendly name for your service}",
+``` json
+{
+  ...,
+  "AllowedHosts": "*",
+  "BotName": "...yourBotName...",
+  "HostUri": "https://localhost:7131",
+  "MicrosoftAppType": "MultiTenant",
+  "MicrosoftAppId": "...bot appId...",
+  "TeamsAppId": "...teams appId...",
+}
+```
 
-* set **HostUri** in your project appsettings.json to the appropriate https://localhost:{PORT}
+| Key                  | Optional | Description                                                  | Default              |
+| -------------------- | -------- | ------------------------------------------------------------ | -------------------- |
+| **BotName**          |          | The name of your bot registration (aka FooBot)               |                      |
+| **HostUri**          |          | The root uri for your web site (Exampl: https://localhost:5171) |                      |
+| **MicrosoftAppType** |          | MultiTenant                                                  |                      |
+| **MicrosoftAppId**   |          | The bot appId                                                |                      |
+| **TeamsAppId**       |          | The teams appId used in manifest                             |                      |
+| **BotIcon**          | optional | Icon to use for the bot                                      | /images/boticon.png  |
+| **AboutIcon**        | optional | Icon to use for About links                                  | /images/about.png    |
+| **SettingsIcon**     | optional | Icon to use for Settings Links                               | /images/settings.png |
+| **OpenLinkIcon**     | optional | Icon to use for Open links                                   | /images/openlink.png |
+| **RefreshIcon**      | optional | Icon to use for Refresh links                                | /images/refresh.png  |
 
-* *(Optional)* if you have a multi-tenant bot registration add **MicrosoftAppId** to **appsettings.json**
 
-* *(Optional)* if you have a multi-tenant bot registration store the **MicrosoftAppPassword** in you **user-secrets**
 
-* *(Optional)* If you have azure storage store **AzureStorage** setting in your **user-secrets** 
+# User Secrets
+
+Add to your user secrets.json for your project.
+
+```json
+{
+  "MicrosoftAppPassword": "...",
+  "AzureStorage": "DefaultEndpointsProtocol=..."
+}
+```
+
+| Key                      | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| **MicrosoftAppPassword** | If you have multi-tenant bot registration store your password here |
+| **AzureStorage**         | If you are using AzureStorage store the key here.            |
 
   
 
@@ -92,10 +127,10 @@ Insert into the content of your **Index.html**
 @using Crazor
 @using System.Reflection
 @using Neleus.DependencyInjection.Extensions
-@inject IServiceByNameFactory<CardApp> serviceByName
+@inject CardAppFactory cardAppFactory
 <h2>Cards</h2>
 <ul>
-    @foreach (var cardAppType in serviceByName.GetNames().OrderBy(n => n))
+    @foreach (var cardAppType in cardAppFactory.GetNames())
     {
         var appName = cardAppType.Replace("App", String.Empty);
         <li><a href="/Cards/@appName">@appName Card</a></li>
