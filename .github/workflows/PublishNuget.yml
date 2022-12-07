@@ -34,13 +34,15 @@ jobs:
       # Run dotnet build and package
       # dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d%H%M') source/libraries/Crazor/Crazor.csproj
       - name: dotnet restore
-        run: dotnet restore source/libraries/Crazor/Crazor.csproj
+        run: dotnet restore source/Crazor.sln
 
       - name: dotnet build
-        run: dotnet build -c Debug --no-restore source/libraries/Crazor/Crazor.csproj
+        run: dotnet build -c Debug --no-restore source/Crazor.sln
 
-      - name: dotnet pack
-        run: dotnet pack -c Debug --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" source/libraries/Crazor/Crazor.csproj
+      - name: dotnet pack Crazor
+        run: dotnet pack -c Debug --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" source/Crazor.sln
 
       - name: dotnet push
-        run: dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
+        run: |
+          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
+          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Test/bin/Debug/Crazor.Test.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
