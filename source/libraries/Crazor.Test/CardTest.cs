@@ -7,9 +7,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json.Linq;
-using System;
-using System.ComponentModel.Design;
-using System.Threading;
 using Diag = System.Diagnostics;
 
 namespace Crazor.Test
@@ -32,6 +29,7 @@ namespace Crazor.Test
             builder.Services.AddSingleton<IRazorViewEngine, RazorViewEngine>();
             builder.Services.AddSingleton<IStorage, MemoryStorage>();
             builder.Services.AddCrazor();
+            builder.Services.AddTransient<IHttpContextAccessor>((sp) => new HttpContextAccessor() { HttpContext = new DefaultHttpContext { RequestServices = sp } });
             builder.Services.AddMvc()
                 // .AddRazorOptions((options) => { var x = options; })
                 // .AddRazorPagesOptions((options) => { var y = options; })

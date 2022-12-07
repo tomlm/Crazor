@@ -26,6 +26,7 @@ namespace Crazor
         public static IServiceCollection AddCrazor(this IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddHttpContextAccessor();
             services.TryAddSingleton<IStorage>((sp) =>
             {
                 Diag.Trace.TraceWarning(@"There is no IStorage provider registered for Crazor cards to use.");

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -13,8 +14,9 @@ namespace Crazor
 {
     public class CardAppContext
     {
-        public CardAppContext(IServiceProvider services,
+        public CardAppContext(
             IConfiguration configuration, 
+            IHttpContextAccessor httpContextAccessor,
             IEncryptionProvider encryptionProvider, 
             IStorage storage, 
             IRazorViewEngine razorEngine, 
@@ -24,8 +26,8 @@ namespace Crazor
             IUrlHelper urlHelper, 
             RouteManager routeManager)
         {
-            Services = services;
             Configuration = configuration;
+            HttpContextAccessor = httpContextAccessor;
             EncryptionProvider = encryptionProvider;
             Storage = storage;
             RazorEngine = razorEngine;
@@ -36,9 +38,10 @@ namespace Crazor
             RouteManager = routeManager;
         }
 
-        public IServiceProvider Services { get; }
 
         public IConfiguration Configuration { get; set; }
+
+        public IHttpContextAccessor HttpContextAccessor { get; }
 
         public IEncryptionProvider EncryptionProvider { get; set; }
 
@@ -49,6 +52,7 @@ namespace Crazor
         public ITempDataProvider TempDataProvider { get; set; }
 
         public IUrlHelper UrlHelper { get; set; }
+
         public IServiceByNameFactory<ICardView> CardViewFactory { get; set; }
 
         public CardAppFactory CardAppFactory { get; }

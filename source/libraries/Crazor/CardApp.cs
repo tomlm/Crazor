@@ -614,8 +614,7 @@ namespace Crazor
             LoadCardViewState(cardState, cardView);
 
             ActionContext actionContext;
-            var httpContext = new DefaultHttpContext { RequestServices = Context.Services };
-            actionContext = new ActionContext(httpContext, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
+            actionContext = new ActionContext(Context.HttpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
                 Model = cardState.Model
