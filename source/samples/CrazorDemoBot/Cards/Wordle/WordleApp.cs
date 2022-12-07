@@ -9,8 +9,7 @@ namespace CrazorDemoBot.Cards.Wordle
     {
         private static Random _rnd = new Random();
 
-        public WordleApp(IServiceProvider services)
-            : base(services)
+        public WordleApp(CardAppContext context) : base(context)
         {
         }
 

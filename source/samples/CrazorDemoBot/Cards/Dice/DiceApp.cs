@@ -9,8 +9,7 @@ namespace CrazorDemoBot.Cards.Dice
     [TaskInfo(Title = "Dice", Width = "medium", Height = "medium")]
     public class DiceApp : CardApp
     {
-        public DiceApp(IServiceProvider services) 
-            : base(services)
+        public DiceApp(CardAppContext context) : base(context)
         {
         }
 

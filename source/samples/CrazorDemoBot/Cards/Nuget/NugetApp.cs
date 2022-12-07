@@ -8,8 +8,8 @@ namespace CrazorDemoBot.Cards.NugetSearch
     {
         private static HttpClient _httpClient = new HttpClient();
 
-        public NugetApp(IServiceProvider services)
-            : base(services)
+        public NugetApp(CardAppContext context)
+            : base(context)
         {
         }
 

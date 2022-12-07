@@ -5,8 +5,7 @@ namespace CrazorDemoBot.Cards.Cards
 {
     public class CardsApp : CardApp
     {
-        public CardsApp(IServiceProvider services, CardAppFactory cardFactory)
-            : base(services)
+        public CardsApp(CardAppContext context, CardAppFactory cardFactory) : base(context)
         {
             CardFactory = cardFactory;
         }

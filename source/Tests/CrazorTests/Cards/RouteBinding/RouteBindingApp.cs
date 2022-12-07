@@ -5,7 +5,7 @@ namespace CrazorTests.Cards.RouteBinding
 {
     public class RouteBindingApp : CardApp
     {
-        public RouteBindingApp(IServiceProvider services) : base(services)
+        public RouteBindingApp(CardAppContext context) : base(context)
         {
         }
 

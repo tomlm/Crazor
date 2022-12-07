@@ -13,18 +13,13 @@ using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Neleus.DependencyInjection.Extensions;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -45,23 +40,12 @@ namespace Crazor
             Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
             Indent = true,
         };
-
-        protected IConfiguration _configuration;
-        protected CardAppFactory _cardAppFactory;
-        protected IEncryptionProvider _encryptionProvider;
-        protected RouteManager _routeManager;
-
+        
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public CardApp(IServiceProvider services)
+        public CardApp(CardAppContext context)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            ArgumentNullException.ThrowIfNull(services);
-
-            this.Services = services;
-            this._configuration = services.GetRequiredService<IConfiguration>();
-            this._cardAppFactory = services.GetRequiredService<CardAppFactory>();
-            this._encryptionProvider = services.GetRequiredService<IEncryptionProvider>();
-            this._routeManager = services.GetRequiredService<RouteManager>();
+            Context = context;
             this.CallStack = new List<CardViewState>()
             {
                 new CardViewState(Constants.DEFAULT_VIEW, null)
@@ -95,11 +79,6 @@ namespace Crazor
         /// The action we are processing.
         /// </summary>
         public AdaptiveCardInvokeAction? Action { get; set; }
-
-        /// <summary>
-        /// Dependency injection services
-        /// </summary>
-        public IServiceProvider Services { get; set; }
 
         /// <summary>
         /// Navigation stack
@@ -166,6 +145,7 @@ namespace Crazor
         /// ConnectorClient for calling outbound.
         /// </summary>
         public IConnectorClient ConnectorClient { get; set; }
+        public CardAppContext Context { get; }
 
         /// <summary>
         /// process the activity
@@ -447,12 +427,12 @@ namespace Crazor
 
         public Uri GetCurrentCardUri()
         {
-            return new Uri(_configuration.GetValue<Uri>("HostUri"), this.GetCurrentCardRoute());
+            return new Uri(Context.Configuration.GetValue<Uri>("HostUri"), this.GetCurrentCardRoute());
         }
 
         public Uri GetCardUriForRoute(string route)
         {
-            return new Uri(_configuration.GetValue<Uri>("HostUri"), route);
+            return new Uri(Context.Configuration.GetValue<Uri>("HostUri"), route);
         }
 
         public virtual string GetCurrentCardRoute()
@@ -487,7 +467,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(cancellationToken);
             ArgumentNullException.ThrowIfNull(activity);
 
-            if (!_routeManager.ResolveRoute(this.Route, out var viewType))
+            if (!Context.RouteManager.ResolveRoute(this.Route, out var viewType))
             {
                 throw new Exception($"{this.Route} is not a valid route");
             }
@@ -515,9 +495,8 @@ namespace Crazor
             }
 
             // lookup data
-            var storage = this.Services.GetRequiredService<IStorage>();
             var memoryMap = GetMemoryKeyMap();
-            var state = await storage.ReadAsync(memoryMap.Keys.ToArray(), cancellationToken);
+            var state = await Context.Storage.ReadAsync(memoryMap.Keys.ToArray(), cancellationToken);
 
             // assign data to the properties.
             foreach (var key in memoryMap.Keys)
@@ -554,7 +533,6 @@ namespace Crazor
         /// <returns></returns>
         public async virtual Task SaveAppAsync(CancellationToken cancellationToken)
         {
-            var storage = this.Services.GetRequiredService<IStorage>();
             var data = new Dictionary<string, object>();
             // NOTE: we recompute the memoryKeyMap because we might have new memory scopes after executing action.
             var memoryMap = GetMemoryKeyMap();
@@ -565,7 +543,7 @@ namespace Crazor
                 data.Add(key, GetScopedMemory(memoryAttribute.GetType()));
             }
 
-            await storage.WriteAsync(data, cancellationToken);
+            await Context.Storage.WriteAsync(data, cancellationToken);
         }
 
         /// <summary>
@@ -575,9 +553,8 @@ namespace Crazor
         /// <returns>true or false</returns>
         public bool HasView(string viewName)
         {
-            var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
             var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
-            var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+            var viewResult = Context.RazorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
             return (viewResult?.View != null);
         }
 
@@ -603,14 +580,13 @@ namespace Crazor
             {
                 if (cardState.Name.Contains('.'))
                 {
-                    cardView = this.Services.GetByName<ICardView>(cardState.Name);
+                    cardView = Context.CardViewFactory.GetByName(cardState.Name);
                     view = new ViewStub();
                 }
                 else
                 {
-                    var razorEngine = this.Services.GetRequiredService<IRazorViewEngine>();
                     var viewPath = Path.Combine("Cards", Name, $"{cardState.Name}.cshtml");
-                    var viewResult = razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+                    var viewResult = Context.RazorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
                     view = viewResult?.View;
                     if (view != null)
                     {
@@ -630,24 +606,22 @@ namespace Crazor
                 view = new ViewStub();
             }
 
-            cardView.UrlHelper = this.Services.GetRequiredService<IUrlHelper>();
+            cardView.UrlHelper = Context.UrlHelper;
             cardView.App = this;
             cardView.Name = cardState.Name;
 
             // rester card SessionMemory properties
             LoadCardViewState(cardState, cardView);
 
-            ITempDataProvider tempDataProvider;
             ActionContext actionContext;
-            var httpContext = new DefaultHttpContext { RequestServices = Services };
+            var httpContext = new DefaultHttpContext { RequestServices = Context.Services };
             actionContext = new ActionContext(httpContext, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
-            tempDataProvider = Services.GetRequiredService<ITempDataProvider>();
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
                 Model = cardState.Model
             };
 
-            var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, tempDataProvider), new StringWriter(), new HtmlHelperOptions());
+            var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, Context.TempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
             return cardView;
         }
@@ -656,14 +630,14 @@ namespace Crazor
         {
             var cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute, this.ConnectorClient);
+            var cardApp = Context.CardAppFactory.Create(cardRoute, this.ConnectorClient);
 
             await cardApp.LoadAppAsync(Activity!, cancellationToken);
 
             var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
 
-            var botId = _configuration.GetValue<string>("MicrosoftAppId");
-            var appId = _configuration.GetValue<string>("TeamsAppId") ?? botId;
+            var botId = Context.Configuration.GetValue<string>("MicrosoftAppId");
+            var appId = Context.Configuration.GetValue<string>("TeamsAppId") ?? botId;
 
             return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
         }
@@ -700,10 +674,9 @@ namespace Crazor
         {
             var sessionId = (isPreview) ? null : this.Route.SessionId;
             string sessionIdEncrypt = null;
-            var encryptionProvider = this.Services.GetService<IEncryptionProvider>();
-            if (!String.IsNullOrEmpty(sessionId) && encryptionProvider != null)
+            if (!String.IsNullOrEmpty(sessionId))
             {
-                sessionIdEncrypt = await encryptionProvider.EncryptAsync(sessionId, cancellationToken);
+                sessionIdEncrypt = await Context.EncryptionProvider.EncryptAsync(sessionId, cancellationToken);
             }
             var route = GetCurrentCardRoute();
 
@@ -888,7 +861,7 @@ namespace Crazor
                 systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
                 {
                     Title = "Open",
-                    IconUrl = new Uri(currentUri, _configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
+                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
                     Url = currentUri.AbsoluteUri,
                     Mode = AdaptiveActionMode.Secondary
                 });
@@ -906,7 +879,7 @@ namespace Crazor
                 {
                     Title = Constants.ABOUT_VIEW,
                     Verb = Constants.ABOUT_VIEW,
-                    IconUrl = new Uri(currentUri, _configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
+                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
                     AssociatedInputs = AdaptiveAssociatedInputs.None,
                     Mode = AdaptiveActionMode.Secondary
                 });
@@ -918,7 +891,7 @@ namespace Crazor
                 {
                     Title = Constants.SETTINGS_VIEW,
                     Verb = Constants.SETTINGS_VIEW,
-                    IconUrl = new Uri(currentUri, _configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
+                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
                     AssociatedInputs = AdaptiveAssociatedInputs.None,
                     Mode = AdaptiveActionMode.Secondary
                 });
@@ -950,7 +923,7 @@ namespace Crazor
                             VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
                             Items = new List<AdaptiveElement>()
                             {
-                                new AdaptiveImage(new Uri(currentUri, _configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png").AbsoluteUri)
+                                new AdaptiveImage(new Uri(currentUri, Context.Configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png").AbsoluteUri)
                                 {
                                     Size= AdaptiveImageSize.Small
                                 }
@@ -962,7 +935,7 @@ namespace Crazor
                             VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
                             Items = new List<AdaptiveElement>()
                             {
-                                new AdaptiveTextBlock(_configuration.GetValue<string>("BotName")) { Size= AdaptiveTextSize.Small }
+                                new AdaptiveTextBlock(Context.Configuration.GetValue<string>("BotName")) { Size= AdaptiveTextSize.Small }
                             }
                         },
                         new AdaptiveColumn()

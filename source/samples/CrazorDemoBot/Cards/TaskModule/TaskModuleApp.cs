@@ -6,8 +6,7 @@ namespace CrazorDemoBot.Cards.TaskModule
     [TaskInfo(Width = "small", Height = "medium", Title = "Test the Task Module")]
     public class TaskModuleApp : CardApp
     {
-        public TaskModuleApp(IServiceProvider services)
-            : base(services)
+        public TaskModuleApp(CardAppContext context) : base(context)
         {
         }
 

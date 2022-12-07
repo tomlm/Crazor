@@ -6,8 +6,7 @@ namespace CrazorDemoBot.Cards.ProductCatalog
 {
     public class ProductCatalogApp : CardApp
     {
-        public ProductCatalogApp(IServiceProvider services)
-            : base(services)
+        public ProductCatalogApp(CardAppContext context) : base(context)
         {
         }
 

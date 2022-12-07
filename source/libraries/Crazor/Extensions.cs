@@ -45,6 +45,7 @@ namespace Crazor
             services.TryAddScoped<IBot, CardActivityHandler>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.TryAddScoped<IUrlHelper, UrlHelperProxy>();
+            services.TryAddScoped<CardAppContext>();
 
             RouteManager routeManager = new RouteManager();
 

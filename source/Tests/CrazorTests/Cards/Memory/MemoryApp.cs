@@ -5,7 +5,7 @@ namespace CrazorTests.Cards.Memory
 {
     public class MemoryApp : CardApp
     {
-        public MemoryApp(IServiceProvider services) : base(services)
+        public MemoryApp(CardAppContext context) : base(context)
         {
         }
 

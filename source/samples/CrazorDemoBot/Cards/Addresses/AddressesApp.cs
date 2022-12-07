@@ -5,8 +5,7 @@ namespace CrazorDemoBot.Cards.Addresses
 {
     public class AddressesApp : CardApp
     {
-        public AddressesApp(IServiceProvider services)
-            : base(services)
+        public AddressesApp(CardAppContext context) : base(context)
         {
         }
 

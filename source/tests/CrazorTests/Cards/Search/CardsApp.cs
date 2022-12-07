@@ -10,7 +10,7 @@ namespace CrazorTests.Cards.Search
             "john", "george", "lili", "tom", "scott", "bob", "steve", "frank", "stacia","leslie","emma"
         };
 
-        public SearchApp(IServiceProvider services) : base(services) { }
+        public SearchApp(CardAppContext context) : base(context) { }
 
         /// <summary>
         /// Implement search 
