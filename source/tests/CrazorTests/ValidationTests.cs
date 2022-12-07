@@ -1,4 +1,5 @@
 ﻿using AdaptiveCards;
+using Crazor;
 using Crazor.Test;
 using Crazor.Test.MSTest;
 using CrazorTests.Validation;
@@ -20,7 +21,7 @@ namespace CrazorTests
                     .AssertTextBlock(nameof(InputsModel.Birthday), String.Empty)
                     .AssertTextBlock(nameof(InputsModel.FavoritePet), String.Empty)
                     .AssertTextBlock(nameof(InputsModel.IsCool), String.Empty)
-                .ExecuteAction("OnEdit")
+                .ExecuteAction(Constants.ONEDIT_VERB)
                     .AssertHas<AdaptiveTextInput>("Model.PhoneNumber")
                     .AssertHas<AdaptiveTextInput>("Model.Password")
                     .AssertHas<AdaptiveNumberInput>("Model.Percent")

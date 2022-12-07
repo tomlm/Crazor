@@ -209,20 +209,13 @@ namespace CrazorTests
 
             card.AssertTextBlock("Counter: 1")
                 .AssertTextBlock("(PREVIEW)")
-                .AssertHasRefresh()
+                .AssertHasNoRefresh()
                 .AssertHasNoSession()
-                .AssertHasOnlyExecuteActions();
+                .AssertHasOnlySubmitActions();
 
             // Click Send button
-            JObject data = new JObject();
-            if (card.Refresh.Action is AdaptiveExecuteAction executeAction)
-            {
-                data = JObject.FromObject(executeAction.Data);
-            }
-            else if (card.Refresh.Action is AdaptiveSubmitAction submitAction)
-            {
-                data = JObject.FromObject(submitAction.Data);
-            }
+            var submitAction = card.GetElements<AdaptiveSubmitAction>().FirstOrDefault();
+            var data = JObject.FromObject(submitAction.Data);
 
             response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
             {
@@ -317,20 +310,13 @@ namespace CrazorTests
 
             card.AssertTextBlock("Counter: 1")
                 .AssertTextBlock("(PREVIEW)")
-                .AssertHasRefresh()
+                .AssertHasNoRefresh()
                 .AssertHasNoSession()
-                .AssertHasOnlyExecuteActions();
+                .AssertHasOnlySubmitActions();
 
             // Click Edit button
-            JObject data = new JObject();
-            if (card.Refresh.Action is AdaptiveExecuteAction executeAction)
-            {
-                data = JObject.FromObject(executeAction.Data);
-            }
-            else if (card.Refresh.Action is AdaptiveSubmitAction submitAction)
-            {
-                data = JObject.FromObject(submitAction.Data);
-            }
+            var submitAction = card.GetElements<AdaptiveSubmitAction>().FirstOrDefault();
+            var data = JObject.FromObject(submitAction.Data);
 
             response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
             {
@@ -479,7 +465,7 @@ namespace CrazorTests
                     },
                     QueryText = "1"
                 }));
-            
+
             var choices = ObjectPath.GetPathValue<List<AdaptiveChoice>>(response, "body.value.results");
 
             Assert.AreEqual(10, choices.Count);
@@ -542,7 +528,7 @@ namespace CrazorTests
             var adapter = new CardTestAdapter(bot);
 
             // Search
-            var response = await adapter.Invoke(CreateMessagingExtensionQueryActivity(commandId:"/Cards/Search", "st"));
+            var response = await adapter.Invoke(CreateMessagingExtensionQueryActivity(commandId: "/Cards/Search", "st"));
             var mexResponse = ObjectPath.MapValueTo<MessagingExtensionResponse>(response.Body);
 
             Assert.AreEqual(2, mexResponse.ComposeExtension.Attachments.Count);

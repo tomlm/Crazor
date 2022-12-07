@@ -58,7 +58,7 @@ namespace Crazor
                 {
                     Data = data,
                     Id = (string)d._id,
-                    Verb = (string)d._verb
+                    Verb = (string)d[Constants.SUBMIT_VERB]
                 }
             };
 

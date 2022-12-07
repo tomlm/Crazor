@@ -33,7 +33,7 @@ namespace Crazor
 
             CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), _encryptionProvider, cancellationToken);
             var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
-            
+
             cardApp.IsTaskModule = true;
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
@@ -41,7 +41,7 @@ namespace Crazor
             cardApp.Action = invokeValue.Action;
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
-            
+
             bool isPreview = cardApp.TaskModuleAction == TaskModuleAction.Auto ||
                 cardApp.TaskModuleAction == TaskModuleAction.PostCard ||
                 cardApp.TaskModuleAction == TaskModuleAction.InsertCard;
@@ -58,8 +58,7 @@ namespace Crazor
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
-                    adaptiveCard.Refresh = null;
-                    var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
+                    var submitCard = TransformCardNoRefresh(TransformActionExecuteToSubmit(adaptiveCard));
                     // continue taskModule bound to current card view.
                     return new MessagingExtensionActionResponse()
                     {
@@ -82,7 +81,6 @@ namespace Crazor
                     }
                     else // if (action.CommandContext.ToLower() == "commandbox")
                     {
-                        adaptiveCard.Refresh = null;
                         return CreatePreviewSendResponse(cardApp, adaptiveCard);
                     }
 
@@ -112,13 +110,45 @@ namespace Crazor
             };
         }
 
-        protected static MessagingExtensionActionResponse CreatePreviewSendResponse(CardApp cardApp, AdaptiveCard adaptiveCard)
+        protected static MessagingExtensionActionResponse CreatePreviewSendResponse(CardApp cardApp, AdaptiveCard card)
         {
-            AdaptiveExecuteAction? action = adaptiveCard.Refresh?.Action as AdaptiveExecuteAction;
-            if (action != null)
+            card = TransformActionExecuteToSubmit(card);
+
+            AdaptiveSubmitAction refreshAction = (AdaptiveSubmitAction?)card.Refresh.Action;
+
+            var actions = card.GetElements<AdaptiveSubmitAction>().ToList();
+            foreach (var action in actions)
             {
-                ObjectPath.SetPathValue(action.Data, Constants.EDITSESSION_KEY, cardApp.Route.SessionId, true);
+                ObjectPath.SetPathValue(action, $"data.{Constants.EDITSESSION_KEY}", cardApp.Route.SessionId!, true);
             }
+            card.Refresh = null;
+
+            // make sure there is an action (we have to remove Refresh because teams barfs on refresh.
+            if (!card.GetElements<AdaptiveSubmitAction>().Any())
+            {
+                if (refreshAction == null)
+                {
+                    refreshAction = new AdaptiveSubmitAction()
+                    {
+                        Data = new JObject()
+                        {
+                            { Constants.SUBMIT_VERB, Constants.ONEDIT_VERB },
+                            { Constants.ROUTE_KEY, cardApp.Route.Route },
+                            { Constants.EDITSESSION_KEY, cardApp.Route.SessionId }
+                        }
+                    };
+                }
+
+                card.Body.Add(new AdaptiveActionSet()
+                {
+                    IsVisible = false,
+                    Actions = new List<AdaptiveAction>()
+                    {
+                        refreshAction
+                    }
+                });
+            }
+
             // return preview
             return new MessagingExtensionActionResponse
             {
@@ -126,7 +156,7 @@ namespace Crazor
                 {
                     ActivityPreview = MessageFactory.Attachment(new Attachment
                     {
-                        Content = adaptiveCard,
+                        Content = TransformCardNoRefresh(card),
                         ContentType = AdaptiveCard.ContentType
                     }) as Activity
                 }

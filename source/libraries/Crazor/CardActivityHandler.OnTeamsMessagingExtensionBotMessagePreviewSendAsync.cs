@@ -20,18 +20,19 @@ namespace Crazor
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionBotMessagePreviewSendAsync(
-            ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+            ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction messageAction, CancellationToken cancellationToken)
         {
-            var activityPreview = action.BotActivityPreview[0];
+            var activityPreview = messageAction.BotActivityPreview[0];
             var attachmentContent = activityPreview.Attachments[0].Content;
             var previewedCard = ObjectPath.MapValueTo<AdaptiveCard>(attachmentContent);
 
             JObject data = new JObject();
-            if (previewedCard.Refresh.Action is AdaptiveExecuteAction executeAction)
+            var action = previewedCard.GetElements<AdaptiveAction>().FirstOrDefault();
+            if (action is AdaptiveExecuteAction executeAction)
             {
                 data = JObject.FromObject(executeAction.Data);
             }
-            else if (previewedCard.Refresh.Action is AdaptiveSubmitAction submitAction)
+            else if (action is AdaptiveSubmitAction submitAction)
             {
                 data = JObject.FromObject(submitAction.Data);
             }

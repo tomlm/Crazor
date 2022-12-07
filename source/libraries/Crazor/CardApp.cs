@@ -797,15 +797,17 @@ namespace Crazor
             {
                 if (TeamsConversationMembers == null)
                 {
+                    var teamId = Activity.GetChannelData<TeamsChannelData>().Team?.Id ?? Activity.Conversation.Id;
                     try
                     {
+
                         // we need to add refresh userids
-                        var teamsMembers = await ConnectorClient.Conversations.GetConversationPagedMembersAsync(Activity.Conversation.Id, 60, cancellationToken: cancellationToken);
+                        var teamsMembers = await ConnectorClient.Conversations.GetConversationPagedMembersAsync(teamId, 60, cancellationToken: cancellationToken);
                         this.TeamsConversationMembers = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Trace.TraceError($"Failed to get UserIds for conversation.id={this.Activity.Conversation.Id}\n{ex.Message}");
+                        System.Diagnostics.Trace.TraceError($"Failed to get UserIds for conversation.id={teamId}\n{ex.Message}");
                     }
                 }
                 outboundCard.Refresh.UserIds = this.TeamsConversationMembers;

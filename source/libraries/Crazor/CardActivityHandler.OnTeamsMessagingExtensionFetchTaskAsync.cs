@@ -55,7 +55,7 @@ namespace Crazor
                 {
                     action.Data = new JObject();
                 }
-                ((JObject)action.Data)["_verb"] = action.Verb;
+                ((JObject)action.Data)[Constants.SUBMIT_VERB] = action.Verb;
                 action.Verb = null;
             }
             var json = JsonConvert.SerializeObject(card, _jsonSettings);
