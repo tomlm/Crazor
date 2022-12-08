@@ -10,7 +10,6 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using System.Threading;
 
@@ -21,12 +20,6 @@ namespace Crazor
     /// </summary>
     public partial class CardActivityHandler : TeamsActivityHandler
     {
-        protected readonly IEncryptionProvider _encryptionProvider;
-        protected readonly IServiceProvider _serviceProvider;
-        protected readonly ILogger<CardActivityHandler>? _logger;
-        protected readonly CardAppFactory _cardAppFactory;
-        protected readonly IServiceByNameFactory<CardTabModule> _tabs;
-        protected readonly IConfiguration _configuration;
 
         private static JsonSerializerSettings _jsonSettings = new JsonSerializerSettings()
         {
@@ -35,15 +28,11 @@ namespace Crazor
             DefaultValueHandling = DefaultValueHandling.Ignore,
         };
 
-        public CardActivityHandler(IServiceProvider serviceProvider)
+        public CardActivityHandler(CardAppContext context)
         {
-            ArgumentNullException.ThrowIfNull(serviceProvider);
-            _serviceProvider = serviceProvider;
-            _configuration = _serviceProvider.GetRequiredService<IConfiguration>();
-            _encryptionProvider = _serviceProvider.GetService<IEncryptionProvider>()!;
-            _cardAppFactory = _serviceProvider.GetRequiredService<CardAppFactory>();
-            _tabs = _serviceProvider.GetRequiredService<IServiceByNameFactory<CardTabModule>>();
-            _logger = _serviceProvider.GetService<ILogger<CardActivityHandler>>();
+            Context = context;
         }
+
+        public CardAppContext Context { get; }
     }
 }

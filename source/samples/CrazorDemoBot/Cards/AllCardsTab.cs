@@ -4,7 +4,7 @@ namespace CrazorDemoBot.Cards
 {
     public class AllCardsTab : CardTabModule
     {
-        public AllCardsTab(IServiceProvider services) : base(services) { }
+        public AllCardsTab(CardAppContext context) : base(context) { }
 
         /// <summary>
         /// return /Card/{AppName} for each app 

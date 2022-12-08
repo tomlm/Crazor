@@ -20,10 +20,8 @@ namespace Crazor
         /// <returns></returns>
         protected override async Task<TabResponse> OnTeamsTabSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TabSubmit tabSubmit, CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting OnTeamsTabSubmitAsync() processing");
-            CardTabModule tabModule = tabSubmit.TabEntityContext.TabEntityId.StartsWith("/Cards")
-                ? new SingleCardTabModule(_serviceProvider, tabSubmit.TabEntityContext.TabEntityId)
-                : _tabs.GetRequiredByName(tabSubmit.TabEntityContext.TabEntityId);
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsTabSubmitAsync() processing");
+            CardTabModule tabModule = Context.CardTabModuleFactory.Create(tabSubmit.TabEntityContext.TabEntityId);
 
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(tabSubmit.Data));
             var cards = await tabModule.OnTabSubmitAsync(turnContext, tabSubmit, invokeValue, cancellationToken);

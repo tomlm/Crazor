@@ -26,11 +26,11 @@ namespace Crazor
                 {
                     var app = input.Replace("post", "").Trim();
 
-                    if (_cardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
+                    if (Context.CardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
                     {
                         var cardRoute = CardRoute.Parse($"/Cards/{app}");
 
-                        var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+                        var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
                         var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route), isPreview: true, cancellationToken);
 

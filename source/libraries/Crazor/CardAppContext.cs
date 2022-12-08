@@ -8,23 +8,24 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Configuration;
-using Neleus.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Crazor
 {
     public class CardAppContext
     {
         public CardAppContext(
+            CardAppFactory cardAppFactory,
+            CardViewFactory cardViewFactory,
+            CardTabModuleFactory cardTabModuleFactory,
+            RouteManager routeManager,
             IConfiguration configuration, 
             IHttpContextAccessor httpContextAccessor,
             IEncryptionProvider encryptionProvider, 
-            IStorage storage, 
             IRazorViewEngine razorEngine, 
+            IStorage storage, 
             ITempDataProvider tempDataProvider,
-            CardAppFactory cardAppFactory,
-            IServiceByNameFactory<ICardView> cardViewFactory, 
-            IUrlHelper urlHelper, 
-            RouteManager routeManager)
+            IUrlHelper urlHelper)
         {
             Configuration = configuration;
             HttpContextAccessor = httpContextAccessor;
@@ -34,6 +35,7 @@ namespace Crazor
             TempDataProvider = tempDataProvider;
             CardAppFactory = cardAppFactory;
             CardViewFactory = cardViewFactory;
+            CardTabModuleFactory = cardTabModuleFactory;
             UrlHelper = urlHelper;
             RouteManager = routeManager;
         }
@@ -48,14 +50,16 @@ namespace Crazor
         public IStorage Storage { get; set; }
 
         public IRazorViewEngine RazorEngine { get; set; }
-
+        
         public ITempDataProvider TempDataProvider { get; set; }
 
         public IUrlHelper UrlHelper { get; set; }
 
-        public IServiceByNameFactory<ICardView> CardViewFactory { get; set; }
-
         public CardAppFactory CardAppFactory { get; }
+
+        public CardViewFactory CardViewFactory { get; set; }
+
+        public CardTabModuleFactory CardTabModuleFactory { get; }
 
         public RouteManager RouteManager { get; set; }
     }

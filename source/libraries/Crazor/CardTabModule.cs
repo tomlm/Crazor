@@ -2,14 +2,11 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor
@@ -19,23 +16,14 @@ namespace Crazor
     /// </summary>
     public abstract class CardTabModule
     {
-        protected IServiceProvider _serviceProvider;
-        protected IConfiguration _configuration;
-        protected CardAppFactory _cardAppFactory;
-        protected IEncryptionProvider _encryptionProvider;
-        protected ILogger? _logger;
-        protected IStorage _storage;
 
-        public CardTabModule(IServiceProvider services, string? name = null)
+        public CardTabModule(CardAppContext context, string? name = null)
         {
-            _serviceProvider = services;
-            _configuration = services.GetRequiredService<IConfiguration>();
-            _cardAppFactory = services.GetRequiredService<CardAppFactory>();
-            _encryptionProvider = services.GetRequiredService<IEncryptionProvider>();
-            _logger = services.GetService<ILogger>();
-            _storage = services.GetRequiredService<IStorage>();
+            Context = context;
             Name = name ?? this.GetType().Name;
         }
+
+        public CardAppContext Context { get; }
 
         /// <summary>
         /// Tab Name
@@ -54,7 +42,7 @@ namespace Crazor
             var cardUris = await GetCardUrisAsync();
             string tabSessionId = turnContext.Activity.Conversation.Id;
             var key = GetKey(tabSessionId);
-            var result = await _storage.ReadAsync(new string[] { key }, cancellationToken);
+            var result = await Context.Storage.ReadAsync(new string[] { key }, cancellationToken);
             CardTabModuleState tabState = result.ContainsKey(key) ? result[key] as CardTabModuleState ?? new CardTabModuleState() : new CardTabModuleState();
 
             foreach (var cardUri in cardUris)
@@ -63,7 +51,7 @@ namespace Crazor
                 if (tabState.RefreshMap.TryGetValue(cardUri, out var refreshAction))
                 {
                     // we use it to do a refresh
-                    var cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(refreshAction.Data), _encryptionProvider, cancellationToken);
+                    var cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(refreshAction.Data), Context.EncryptionProvider, cancellationToken);
 
                     taskCards.Add(InvokeTabCardAsync(turnContext!, cardRoute, refreshAction.CreateInvokeValue(turnContext), cancellationToken));
                 }
@@ -72,7 +60,7 @@ namespace Crazor
                     if (Uri.TryCreate(cardUri, UriKind.RelativeOrAbsolute, out var uri))
                     {
                         // we do a load route on the uri
-                        uri = uri.IsAbsoluteUri ? uri : new Uri(_configuration.GetValue<Uri>("HostUri"), uri);
+                        uri = uri.IsAbsoluteUri ? uri : new Uri(Context.Configuration.GetValue<Uri>("HostUri"), uri);
                         taskCards.Add(LoadTabCardAsync(turnContext!, uri, tabSessionId, cancellationToken));
                     }
                 }
@@ -86,7 +74,7 @@ namespace Crazor
                 tabState.RefreshMap[cardUris[i]] = (AdaptiveExecuteAction)cards[i].Refresh.Action;
             }
 
-            await _storage.WriteAsync(new Dictionary<string, object>() { { GetKey(tabSessionId), tabState } }, cancellationToken);
+            await Context.Storage.WriteAsync(new Dictionary<string, object>() { { GetKey(tabSessionId), tabState } }, cancellationToken);
 
             return cards;
         }
@@ -95,13 +83,13 @@ namespace Crazor
 
         public virtual async Task<AdaptiveCard[]> OnTabSubmitAsync(ITurnContext turnContext, TabSubmit tabSubmit, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), _encryptionProvider, cancellationToken);
+            CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), Context.EncryptionProvider, cancellationToken);
 
             var cardUris = await GetCardUrisAsync();
 
             string tabSessionId = turnContext.Activity.Conversation.Id;
             var key = GetKey(tabSessionId);
-            var result = await _storage.ReadAsync(new string[] { key }, cancellationToken);
+            var result = await Context.Storage.ReadAsync(new string[] { key }, cancellationToken);
 
             CardTabModuleState tabState = (CardTabModuleState)result[key];
 
@@ -110,7 +98,7 @@ namespace Crazor
             {
                 if (tabState.RefreshMap.TryGetValue(cardUri, out var refreshAction))
                 {
-                    CardRoute cardRouteData = await CardRoute.FromDataAsync(JObject.FromObject(refreshAction.Data), _encryptionProvider, cancellationToken);
+                    CardRoute cardRouteData = await CardRoute.FromDataAsync(JObject.FromObject(refreshAction.Data), Context.EncryptionProvider, cancellationToken);
 
                     if (cardRouteData.App == cardRoute.App)
                     {
@@ -129,7 +117,7 @@ namespace Crazor
                     {
                         // we do a load route
                         var sessionId = turnContext.Activity.Conversation.Id;
-                        uri = uri.IsAbsoluteUri ? uri : new Uri(_configuration.GetValue<Uri>("HostUri"), uri);
+                        uri = uri.IsAbsoluteUri ? uri : new Uri(Context.Configuration.GetValue<Uri>("HostUri"), uri);
                         taskCards.Add(LoadTabCardAsync(turnContext!, uri, sessionId, cancellationToken));
                     }
                 }
@@ -147,7 +135,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(uri);
             ArgumentNullException.ThrowIfNull(cancellationToken);
 
-            var cardApp = _cardAppFactory.Create(CardRoute.FromUri(uri), turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext.TurnState.Get<IConnectorClient>());
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
             
@@ -156,7 +144,7 @@ namespace Crazor
 
         protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, CardRoute cardRoute, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateActionInvokeActivity(invokeValue.Action.Verb, JObject.FromObject(invokeValue.Action.Data)), false, cancellationToken);
             return card;
         }

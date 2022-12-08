@@ -22,6 +22,7 @@ var mvcBuilder = builder.Services.AddMvc();
 //    mvcBuilder.AddRazorRuntimeCompilation();
 //}
 
+builder.Services.AddLogging();
 builder.Services.AddControllers();
 //builder.Services.AddControllersWithViews(); 
 //builder.Services.AddRazorPages();

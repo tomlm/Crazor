@@ -3,9 +3,8 @@
 <Card Version="1.5">
     @if (String.IsNullOrEmpty(Name))
     {
-        <Input.Text Label="Name" Binding="Name"/>
-
-        <Action.Execute Verb="OnSubmit" Title="Submit" />
+        <TextBlock>[Click here](/Cards/FromQuery?name=joe) to pass name via Query Parameter</TextBlock>
+        <TextBlock>[Click here](/Cards/FromQuery/fred) to pass name via route</TextBlock>
     }
     else
     {
@@ -17,5 +16,6 @@
 {
     [BindProperty]
     [Required]
+    [FromQuery]
     public string Name { get; set; }
 }

@@ -10,11 +10,11 @@ namespace Crazor
     internal class SingleCardTabModule : CardTabModule
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public SingleCardTabModule(IServiceProvider services) : base(services)
+        public SingleCardTabModule(CardAppContext context) : base(context)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         { }
 
-        internal SingleCardTabModule(IServiceProvider services, string route) : base(services)
+        public void SetRoute(string route) 
         {
             if (Uri.TryCreate(route, UriKind.RelativeOrAbsolute, out var uri))
             {

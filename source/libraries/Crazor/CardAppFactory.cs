@@ -2,30 +2,42 @@
 //  Licensed under the MIT License.
 
 using Microsoft.Bot.Connector;
-using Neleus.DependencyInjection.Extensions;
 
 namespace Crazor
 {
     public class CardAppFactory
     {
-        private IServiceByNameFactory<CardApp> _cardAppByName;
+        private Dictionary<string, Type> _cardApps = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
+        private IServiceProvider _serviceProvider;
 
-        public CardAppFactory(IServiceByNameFactory<CardApp> serviceByName)
+        public CardAppFactory(IServiceProvider serviceProvider)
         {
-            _cardAppByName = serviceByName;
+            _serviceProvider = serviceProvider;
         }
 
-        public IEnumerable<string> GetNames() => _cardAppByName.GetNames().OrderBy(n => n);
+        public bool HasRegistration(string name) => _cardApps.ContainsKey(name);
+
+        public void Add(string name, Type type)
+        {
+            ArgumentNullException.ThrowIfNull(name);
+            ArgumentNullException.ThrowIfNull(type);
+            if (!type.IsAssignableTo(typeof(CardApp)))
+                throw new Exception($"{type.Name} is not a card app type");
+
+            _cardApps.Add(name, type);
+        }
+
+        public IEnumerable<string> GetNames() => _cardApps.Keys.OrderBy(n => n);
 
         public CardApp Create(CardRoute cardRoute, IConnectorClient client = null)
         {
-            var cardName = _cardAppByName.GetNames().SingleOrDefault(cardName => String.Equals(cardName, cardRoute.App, StringComparison.OrdinalIgnoreCase));
-            if (cardName != null)
+            if (_cardApps.TryGetValue(cardRoute.App, out var cardAppType))
             {
-                var cardApp = _cardAppByName.GetByName(cardName);
-                if (cardApp.GetType() == typeof(CardApp))
+                var cardApp = (CardApp)_serviceProvider.GetService(cardAppType);
+                if (cardAppType == typeof(CardApp))
                 {
-                    cardApp.Name = cardName;
+                    // this is folder with no app defined
+                    cardApp.Name = cardRoute.App;
                 }
                 cardApp.Route = cardRoute;
                 cardApp.ConnectorClient = client;

@@ -22,17 +22,17 @@ namespace Crazor
         /// <returns></returns>
         protected async override Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting OnTeamsTaskModuleSubmitAsync() processing");
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsTaskModuleSubmitAsync() processing");
 
             JObject data = JObject.FromObject(taskModuleRequest.Data);
             data[Constants.ROUTE_KEY] = (string)data["commandId"];
-            CardRoute cardRoute = await CardRoute.FromDataAsync(data, _encryptionProvider, cancellationToken);
+            CardRoute cardRoute = await CardRoute.FromDataAsync(data, Context.EncryptionProvider, cancellationToken);
 
             var showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
 
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
 
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
             cardApp.IsTaskModule = true;
             cardApp.Action = invokeValue.Action;
 

@@ -13,7 +13,6 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Neleus.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -41,88 +40,111 @@ namespace Crazor
             });
             services.TryAddSingleton<IEncryptionProvider, NoEncryptionProvider>();
             services.TryAddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
-            services.TryAddScoped<CardAppFactory>();
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
             services.TryAddScoped<IBot, CardActivityHandler>();
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.TryAddScoped<IUrlHelper, UrlHelperProxy>();
             services.TryAddScoped<CardAppContext>();
-
-            RouteManager routeManager = new RouteManager();
+            services.AddTransient<CardApp>();
+            services.AddTransient<SingleCardTabModule>();
 
             // add Apps
-            var cardAppServices = services.AddByName<CardApp>();
-            services.AddTransient(typeof(CardApp));
-            HashSet<string> cardAppNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            foreach (var cardAppType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
-                                            .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)))
+            var cardAppTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                                                .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)).ToList();
+            foreach (var cardAppType in cardAppTypes)
             {
-                if (cardAppType != typeof(CardApp))
-                {
-                    services.AddTransient(cardAppType);
-                    var name = cardAppType.Name.EndsWith("App") ? cardAppType.Name.Substring(0, cardAppType.Name.Length - 3) : cardAppType.Name;
-                    cardAppNames.Add(name);
-                    cardAppServices.Add(name, cardAppType);
-                }
+                services.AddTransient(cardAppType);
             }
 
-            // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
-            // We do this by enumerating all ICardView implementations 
-            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
+            services.AddScoped<CardAppFactory>(sp =>
             {
-                // .cshtml files class names will be "Cards_{AppName}_Default" 
-                // we want to register the Folder as the a CardApp if it hasn't been registered already
-                var parts = cardViewType.Name.Split("_");
-                if (parts.Length >= 3 && parts[0].ToLower() == "cards" && parts[2].ToLower() == "default")
+                var cardAppFactory = new CardAppFactory(sp);
+                foreach (var cardAppType in cardAppTypes)
                 {
-                    var appName = parts[1];
-                    if (!cardAppNames.Contains(appName))
+                    if (cardAppType != typeof(CardApp))
                     {
-                        cardAppServices.Add(appName, typeof(CardApp));
+                        var name = cardAppType.Name.EndsWith("App") ? cardAppType.Name.Substring(0, cardAppType.Name.Length - 3) : cardAppType.Name;
+                        cardAppFactory.Add(name, cardAppType);
                     }
                 }
-            }
-            cardAppServices.Build();
-
-            // add TabModules
-            var cardTabModuleServices = services.AddByName<CardTabModule>();
-            foreach (var tabModuleType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)))
-            {
-                services.AddTransient(tabModuleType);
-                cardTabModuleServices.Add(tabModuleType.FullName, tabModuleType);
-            }
-            cardTabModuleServices.Build();
-
-            // add IMessagingExtensionQuery implementations
-            var queryCommmandServices = services.AddByName<IMessagingExtensionQuery>();
-            foreach (var queryCommandType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(IMessagingExtensionQuery)) && t.IsAbstract == false)))
-            {
-                services.AddTransient(queryCommandType);
-                queryCommmandServices.Add(queryCommandType.FullName, queryCommandType);
-            }
-            queryCommmandServices.Build();
+                // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
+                // We do this by enumerating all ICardView implementations 
+                foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
+                {
+                    // .cshtml files class names will be "Cards_{AppName}_Default" 
+                    // we want to register the Folder as the a CardApp if it hasn't been registered already
+                    var parts = cardViewType.Name.Split("_");
+                    if (parts.Length >= 3 && parts[0].ToLower() == "cards" && parts[2].ToLower() == "default")
+                    {
+                        var appName = parts[1];
+                        if (!cardAppFactory.HasRegistration(appName))
+                        {
+                            cardAppFactory.Add(appName, typeof(CardApp));
+                        }
+                    }
+                }
+                return cardAppFactory;
+            });
 
             // add Cardviews to route manager
-            var cardViewServices = services.AddByName<ICardView>();
-            foreach (var cardView in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => 
-                            asm.DefinedTypes.Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))))
+            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
+                            asm.DefinedTypes
+                                .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
+                                .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
+            foreach (var cardViewType in cardViewTypes)
             {
-                var cardViewType = cardView.AsType();
-                if (cardViewType.Name != "CardView" && 
-                    cardViewType.Name != "CardView`1" && 
-                    cardViewType.Name != "CardView`2" && 
-                    cardViewType.Name != "CardViewBase`1" &&
-                    cardViewType.Name != "EmptyCardView")
+                services.AddTransient(cardViewType);
+            }
+
+            services.AddScoped<CardViewFactory>((sp) =>
+            {
+                var factory = new CardViewFactory(sp);
+                foreach (var cardViewType in cardViewTypes)
                 {
-                    services.AddTransient(cardViewType);
-                    cardViewServices.Add(cardViewType.FullName, cardViewType);
+                    factory.Add(cardViewType.FullName, cardViewType);
+                }
+
+                return factory;
+            });
+
+            // add RouteManager
+            services.AddScoped<RouteManager>((sp) =>
+            {
+                RouteManager routeManager = new RouteManager();
+                foreach (var cardViewType in cardViewTypes)
+                {
                     routeManager.Add(cardViewType);
                 }
-            }
-            services.AddSingleton(routeManager);
+                return routeManager;
+            });
 
-            cardViewServices.Build();
+            // add TabModules
+            var tabModules = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)).ToList();
+            foreach (var tabModuleType in tabModules)
+            {
+                services.AddTransient(tabModuleType);
+            }
+
+            services.AddScoped<CardTabModuleFactory>(sp =>
+            {
+                var factory = new CardTabModuleFactory(sp);
+                foreach (var tabModuleType in tabModules)
+                {
+                    factory.Add(tabModuleType.FullName, tabModuleType);
+                }
+                return factory;
+            });
+
+            //// add IMessagingExtensionQuery implementations
+            //var queryCommmandServices = services.AddByName<IMessagingExtensionQuery>();
+            //foreach (var queryCommandType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(IMessagingExtensionQuery)) && t.IsAbstract == false)))
+            //{
+            //    services.AddTransient(queryCommandType);
+            //    queryCommmandServices.Add(queryCommandType.FullName, queryCommandType);
+            //}
+            //queryCommmandServices.Build();
+
 
             // add card Razor pages support
             var mvcBuilder = services.AddRazorPages()
@@ -167,7 +189,7 @@ namespace Crazor
             return JsonConvert.DeserializeObject<Activity>(JsonConvert.SerializeObject(activity))!;
         }
 
-        public static IInvokeActivity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb=null, JObject? data=null)
+        public static IInvokeActivity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb = null, JObject? data = null)
         {
             var activity = sourceActivity.Clone();
             activity.Type = ActivityTypes.Invoke;

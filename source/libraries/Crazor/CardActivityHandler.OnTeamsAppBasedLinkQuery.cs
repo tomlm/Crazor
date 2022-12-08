@@ -29,15 +29,15 @@ namespace Crazor
         protected override async Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
             var uri = new Uri(query.Url);
-            _logger!.LogInformation($"Starting composeExtension/queryLink processing {uri}");
-            var hostName = _configuration.GetValue<Uri>("HostUri").Host ?? uri.Host;
+            System.Diagnostics.Debug.WriteLine($"Starting composeExtension/queryLink processing {uri}");
+            var hostName = Context.Configuration.GetValue<Uri>("HostUri").Host ?? uri.Host;
 
             // get play page url => envir, cardId, instanceId,
             if (uri.Host == hostName)
             {
                 CardRoute cardRoute = CardRoute.FromUri(uri);
 
-                var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+                var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
                 var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);
 

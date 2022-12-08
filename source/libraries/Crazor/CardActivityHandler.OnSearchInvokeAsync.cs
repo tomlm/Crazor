@@ -2,11 +2,9 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -24,17 +22,15 @@ namespace Crazor
     {
         protected virtual async Task<AdaptiveCardInvokeResponse> OnSearchInvokeAsync(ITurnContext<IInvokeActivity> turnContext, SearchInvoke searchInvoke, CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting application/search processing ");
+            System.Diagnostics.Debug.WriteLine($"Starting application/search processing ");
 
             // Get session data from the invoke payload
-            IEncryptionProvider encryptionProvider = _serviceProvider.GetRequiredService<IEncryptionProvider>();
-
             var parts = searchInvoke!.Dataset!.Split(AdaptiveDataQuery.Separator);
             var cardRoute = CardRoute.Parse(parts[0]);
-            cardRoute.SessionId = await encryptionProvider.DecryptAsync(parts[1], cancellationToken);
+            cardRoute.SessionId = await Context.EncryptionProvider.DecryptAsync(parts[1], cancellationToken);
             searchInvoke.Dataset = parts[2];
             
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 

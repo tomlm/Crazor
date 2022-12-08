@@ -33,7 +33,7 @@ namespace Crazor
     /// 
     /// LoadState() and SaveState() will be called by the CardBot class automatically.
     /// </remarks>
-    public class CardApp : IMessagingExtensionQuery
+    public class CardApp  
     {
         private static XmlWriterSettings _settings = new XmlWriterSettings()
         {
@@ -580,7 +580,7 @@ namespace Crazor
             {
                 if (cardState.Name.Contains('.'))
                 {
-                    cardView = Context.CardViewFactory.GetByName(cardState.Name);
+                    cardView = Context.CardViewFactory.Create(cardState.Name);
                     view = new ViewStub();
                 }
                 else

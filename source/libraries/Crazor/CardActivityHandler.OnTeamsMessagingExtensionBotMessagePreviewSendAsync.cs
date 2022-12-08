@@ -37,11 +37,11 @@ namespace Crazor
                 data = JObject.FromObject(submitAction.Data);
             }
 
-            var cardRoute = await CardRoute.FromDataAsync(data, _encryptionProvider, cancellationToken);
+            var cardRoute = await CardRoute.FromDataAsync(data, Context.EncryptionProvider, cancellationToken);
 
             var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
             
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
             

@@ -27,12 +27,12 @@ namespace Crazor
             MessagingExtensionAction action,
             CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting OnTeamsMessagingExtensionSubmitActionAsync() ");
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionSubmitActionAsync() ");
 
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(action.Data));
 
-            CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), _encryptionProvider, cancellationToken);
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), Context.EncryptionProvider, cancellationToken);
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             cardApp.IsTaskModule = true;
 
@@ -100,7 +100,7 @@ namespace Crazor
                 ComposeExtension = new MessagingExtensionResult(attachmentLayout: "list", type: "result")
                 {
                     // url to card
-                    Text = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri,
+                    Text = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri,
                     Attachments = new List<MessagingExtensionAttachment>()
                     {
                         // card

@@ -21,10 +21,8 @@ namespace Crazor
         {
             Diag.Debug.WriteLine($"Activity id:{turnContext.Activity.Id}");
             Diag.Debug.WriteLine($"Conversation id:{turnContext.Activity.Conversation.Id}");
-            _logger!.LogInformation($"Starting OnTeamsTabFetchAsync() processing");
-            CardTabModule tabModule = tabRequest.TabEntityContext.TabEntityId.StartsWith("/Cards") 
-                ? new SingleCardTabModule(_serviceProvider, tabRequest.TabEntityContext.TabEntityId)
-                : _tabs.GetRequiredByName(tabRequest.TabEntityContext.TabEntityId);
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsTabFetchAsync() processing");
+            CardTabModule tabModule = Context.CardTabModuleFactory.Create(tabRequest.TabEntityContext.TabEntityId);
 
             var cards = await tabModule.OnTabFetchAsync(turnContext, tabRequest, cancellationToken);
 

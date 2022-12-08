@@ -24,13 +24,13 @@ namespace Crazor
             MessagingExtensionQuery query, 
             CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting OnTeamsMessagingExtensionQueryAsync() processing");
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionQueryAsync() processing");
 
-            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), query.CommandId);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), query.CommandId);
 
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 

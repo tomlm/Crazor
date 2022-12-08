@@ -22,14 +22,14 @@ namespace Crazor
         /// <returns></returns>
         protected async override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting OnTeamsTaskModuleFetchAsync() processing");
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsTaskModuleFetchAsync() processing");
             dynamic data = JObject.FromObject(taskModuleRequest.Data);
             string commandId = data.commandId;
-            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), commandId);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), commandId);
 
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             cardApp.IsTaskModule = true;
 

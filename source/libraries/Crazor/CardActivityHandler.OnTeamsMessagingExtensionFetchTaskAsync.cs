@@ -26,13 +26,13 @@ namespace Crazor
         /// <returns></returns>
         protected async override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
         {
-            _logger!.LogInformation($"Starting OnTeamsMessagingExtensionFetchTaskAsync() processing");
+            System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionFetchTaskAsync() processing");
 
             var activity = turnContext.Activity.CreateLoadRouteActivity(action.CommandId);
-            var uri = new Uri(_configuration.GetValue<Uri>("HostUri"), action.CommandId);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), action.CommandId);
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = _cardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             cardApp.IsTaskModule = true;
 
@@ -75,9 +75,9 @@ namespace Crazor
                 Height = viewTaskInfo?.Height ?? appTaskInfo?.Height ?? "medium",
             };
 
-            taskInfo.FallbackUrl = new Uri(_configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri;
-            // taskInfo.Url = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
-            taskInfo.CompletionBotId = _configuration.GetValue<string>("MicrosoftAppId");
+            taskInfo.FallbackUrl = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri;
+            // taskInfo.Url = Context.Configuration.GetValue<string>("BotUri") ?? new Uri(Context.Configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
+            taskInfo.CompletionBotId = Context.Configuration.GetValue<string>("MicrosoftAppId");
             taskInfo.Card = new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,

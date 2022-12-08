@@ -16,16 +16,14 @@ namespace Crazor.HostPage.Pages.Cards
     {
         private static HttpClient _httpClient = new HttpClient();
         private CardAppFactory _cardAppFactory;
-        private IConfiguration _configuration;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public CardHostModel(IConfiguration configuration, CardAppFactory cardAppFactory)
+        public CardHostModel(CardAppContext context)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            _configuration = configuration;
-            _cardAppFactory = cardAppFactory;
-            BotUri = configuration.GetValue<string>("BotUri") ?? new Uri(configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
-            ChannelId = _configuration.GetValue<Uri>("HostUri").Host;
+            BotUri = context.Configuration.GetValue<string>("BotUri") ?? new Uri(context.Configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
+            ChannelId = context.Configuration.GetValue<Uri>("HostUri").Host;
+            Context = context;
         }
 
         public string BotUri { get; set; }
@@ -37,6 +35,7 @@ namespace Crazor.HostPage.Pages.Cards
         public AdaptiveCard? AdaptiveCard { get; set; }
 
         public string RouteUrl { get; set; }
+        public CardAppContext Context { get; }
 
         public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
         {
@@ -54,7 +53,7 @@ namespace Crazor.HostPage.Pages.Cards
             var cardRoute = CardRoute.FromUri(uri);
             cardRoute.SessionId = Utils.GetNewId();
 
-            this.CardApp = _cardAppFactory.Create(cardRoute, null);
+            this.CardApp = Context.CardAppFactory.Create(cardRoute, null);
 
             ArgumentNullException.ThrowIfNull(this.CardApp);
 
@@ -71,7 +70,7 @@ namespace Crazor.HostPage.Pages.Cards
             }
             .CreateLoadRouteActivity(cardRoute.Route);
 
-            var token = await CardAppController.GetTokenAsync(_configuration);
+            var token = await CardAppController.GetTokenAsync(Context.Configuration);
             this.Response.Cookies.Append("token", token);
             this.Response.Cookies.Append("userId", userId);
 
