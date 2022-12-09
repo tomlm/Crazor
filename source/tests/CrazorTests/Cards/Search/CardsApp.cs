@@ -1,7 +1,7 @@
 ﻿using Crazor;
 using Microsoft.Bot.Schema.Teams;
 
-namespace CrazorTests.Cards.Search
+namespace Crazor.Mvc.Tests.Cards.Search
 {
     public class SearchApp : CardApp
     {

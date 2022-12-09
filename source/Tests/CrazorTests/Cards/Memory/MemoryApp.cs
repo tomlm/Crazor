@@ -1,7 +1,7 @@
 ﻿using Crazor;
 using Crazor.Attributes;
 
-namespace CrazorTests.Cards.Memory
+namespace Crazor.Mvc.Tests.Cards.Memory
 {
     public class MemoryApp : CardApp
     {

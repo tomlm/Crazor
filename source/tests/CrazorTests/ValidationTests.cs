@@ -2,10 +2,10 @@
 using Crazor;
 using Crazor.Test;
 using Crazor.Test.MSTest;
-using CrazorTests.Validation;
+using Crazor.Mvc.Tests.Validation;
 using Newtonsoft.Json.Linq;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
     [TestClass]
     public class ValidationTests : CardTest

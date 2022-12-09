@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Reflection;
 using Crazor;
+using Crazor.Interfaces;
 
 namespace Crazor.Mvc
 {
-
-    public class RouteManager
+    public class RouteResolver : IRouteResolver
     {
         private Dictionary<string, List<RouteTemplate>> _routes = new Dictionary<string, List<RouteTemplate>>(StringComparer.OrdinalIgnoreCase);
 
-        public RouteManager()
+        public RouteResolver()
         {
         }
 
@@ -49,8 +49,17 @@ namespace Crazor.Mvc
             return false;
         }
 
-        public void Add(Type cardViewType)
+        public void AddCardViewType(Type cardViewType)
         {
+            if (cardViewType == typeof(CardView) ||
+                cardViewType == typeof(CardViewBase) ||
+                cardViewType.Name == "CardView`1" ||
+                cardViewType.Name == "CardView`2")
+            {
+                // don't register base classes.
+                return;
+            }
+
             CardRoute cardRoute;
             List<RouteTemplate> list;
             if (cardViewType.Name.Contains("_"))

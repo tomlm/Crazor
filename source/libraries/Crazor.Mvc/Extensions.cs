@@ -25,7 +25,7 @@ namespace Crazor.Mvc
                 services.AddTransient(cardViewType);
             }
 
-            services.AddScoped<CardViewFactory>((sp) =>
+            services.AddScoped<ICardViewFactory>((sp) =>
             {
                 var factory = new CardViewFactory(sp, 
                     sp.GetRequiredService<IRazorViewEngine>(), 
@@ -39,13 +39,13 @@ namespace Crazor.Mvc
                 return factory;
             });
 
-            // add RouteManager
-            services.AddScoped<RouteManager>((sp) =>
+            // add RouteResolver
+            services.AddScoped<IRouteResolver>((sp) =>
             {
-                RouteManager routeManager = new RouteManager();
+                RouteResolver routeManager = new RouteResolver();
                 foreach (var cardViewType in cardViewTypes)
                 {
-                    routeManager.Add(cardViewType);
+                    routeManager.AddCardViewType(cardViewType);
                 }
                 return routeManager;
             });

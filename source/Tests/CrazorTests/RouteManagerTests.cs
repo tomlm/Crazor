@@ -2,7 +2,7 @@ using Crazor;
 using Crazor.Test;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
 
     public class Cards_Route_Default : CardView
@@ -63,14 +63,14 @@ namespace CrazorTests
         public void RouteManagerMatch()
         {
 
-            RouteManager rm = new RouteManager();
-            rm.Add(typeof(Cards_Route_Path1));
-            rm.Add(typeof(Cards_Route_Path3));
-            rm.Add(typeof(Cards_Route_Path2));
-            rm.Add(typeof(Cards_Route_OptionalPath)); 
-            rm.Add(typeof(Cards_Route_Default));
-            rm.Add(typeof(Cards_Route_PathWithStatic));
-            rm.Add(typeof(Cards_Route_Static)); 
+            RouteResolver rm = new RouteResolver();
+            rm.AddCardViewType(typeof(Cards_Route_Path1));
+            rm.AddCardViewType(typeof(Cards_Route_Path3));
+            rm.AddCardViewType(typeof(Cards_Route_Path2));
+            rm.AddCardViewType(typeof(Cards_Route_OptionalPath)); 
+            rm.AddCardViewType(typeof(Cards_Route_Default));
+            rm.AddCardViewType(typeof(Cards_Route_PathWithStatic));
+            rm.AddCardViewType(typeof(Cards_Route_Static)); 
 
             var cardRoute = CardRoute.Parse("/Cards/Route/Static");
             Assert.IsTrue(rm.ResolveRoute(cardRoute, out var type));
@@ -118,13 +118,13 @@ namespace CrazorTests
         public void RouteManagerMatchQuery()
         {
 
-            RouteManager rm = new RouteManager();
-            rm.Add(typeof(Cards_Route_Path1));
-            rm.Add(typeof(Cards_Route_Path3));
-            rm.Add(typeof(Cards_Route_Path2));
-            rm.Add(typeof(Cards_Route_Default));
-            rm.Add(typeof(Cards_Route_PathWithStatic));
-            rm.Add(typeof(Cards_Route_Static));
+            RouteResolver rm = new RouteResolver();
+            rm.AddCardViewType(typeof(Cards_Route_Path1));
+            rm.AddCardViewType(typeof(Cards_Route_Path3));
+            rm.AddCardViewType(typeof(Cards_Route_Path2));
+            rm.AddCardViewType(typeof(Cards_Route_Default));
+            rm.AddCardViewType(typeof(Cards_Route_PathWithStatic));
+            rm.AddCardViewType(typeof(Cards_Route_Static));
 
             var cardRoute = CardRoute.Parse("/Cards/Route/Static?x=15&y=test");
             Assert.IsTrue(rm.ResolveRoute(cardRoute, out var type));

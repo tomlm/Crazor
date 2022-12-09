@@ -32,5 +32,15 @@ namespace Crazor.Blazor
             }
             throw new ArgumentNullException(route.Route);
         }
+
+        public ICardView Create(string typeName)
+        {
+            if (!_views.TryGetValue(typeName, out var cardViewType))
+            {
+                throw new Exception($"{typeName} is not a known type");
+            }
+
+            return (ICardView)_serviceProvider.GetService(cardViewType);
+        }
     }
 }

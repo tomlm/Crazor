@@ -3,7 +3,7 @@
 
 using Crazor.Test;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
     [TestClass]
     public class AssemblyTest : CardTest

@@ -1,8 +1,8 @@
 using Crazor;
 using Crazor.Test;
-using CrazorTests.Cards.Memory;
+using Crazor.Mvc.Tests.Cards.Memory;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
     [TestClass]
     public class MemoryTests : CardTest

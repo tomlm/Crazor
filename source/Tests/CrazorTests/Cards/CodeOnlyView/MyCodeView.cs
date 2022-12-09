@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Xml;
 
-namespace CrazorTests.Cards.CodeOnlyView
+namespace Crazor.Mvc.Tests.Cards.CodeOnlyView
 {
     /// <summary>
     /// You don't have to use Razor for your view.  Simply derive from CardView and override BindCard() to return the AdaptiveCard

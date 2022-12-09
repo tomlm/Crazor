@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Crazor.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Reflection;
 namespace Crazor.Blazor
 {
 
-    public class RouteManager
+    public class ReouteResolver : IRouteResolver
     {
         private Dictionary<string, List<RouteTemplate>> _routes = new Dictionary<string, List<RouteTemplate>>(StringComparer.OrdinalIgnoreCase);
 
-        public RouteManager()
+        public ReouteResolver()
         {
         }
 
@@ -50,7 +51,7 @@ namespace Crazor.Blazor
             return false;
         }
 
-        public void Add(Type cardViewType)
+        public void AddCardViewType(Type cardViewType)
         {
             CardRoute cardRoute;
             List<RouteTemplate> list;

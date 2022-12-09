@@ -47,33 +47,47 @@ namespace Crazor.Mvc
 
         public ICardView Create(CardRoute route)
         {
-            CardView cardView;
+            CardViewBase cardView;
             IView view;
 
-            if (_views.TryGetValue(route.View, out var cardViewType))
+            var viewPath = Path.Combine("Cards", route.App, $"{route.View}.cshtml");
+            var viewResult = _razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+
+            view = viewResult?.View;
+            if (view != null)
             {
-                cardView = (CardView)_serviceProvider.GetService(cardViewType);
-                view = new ViewStub();
+                cardView = (CardViewBase)((RazorView)viewResult.View).RazorPage;
+                ((CardViewBase)cardView).RazorView = viewResult.View;
             }
             else
             {
-                var viewPath = Path.Combine("Cards", route.App, route.View);
-                var viewResult = _razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-
-                view = viewResult?.View;
-                if (view != null)
-                {
-                    cardView = (CardView)((RazorView)viewResult.View).RazorPage;
-                    ((CardView)cardView).RazorView = viewResult.View;
-                }
-                else
-                {
-                    throw new ArgumentNullException($"Unknown route {route.Route}");
-                }
+                throw new ArgumentNullException($"Unknown route {route.Route}");
             }
 
-            ActionContext actionContext;
-            actionContext = new ActionContext(_httpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
+            PrepView(cardView, view);
+            return cardView;
+        }
+
+        public ICardView Create(string typeName)
+        {
+            CardViewBase cardView;
+            IView view;
+
+            if (!_views.TryGetValue(typeName, out var cardViewType))
+            {
+                throw new Exception($"{typeName} is not a known type");
+            }
+            cardView = (CardViewBase)_serviceProvider.GetService(cardViewType);
+            view = new ViewStub();
+
+            PrepView(cardView, view);
+            return cardView;
+        }
+
+
+        private void PrepView(CardViewBase cardView, IView view)
+        {
+            ActionContext actionContext = new ActionContext(_httpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
                 // Model = cardState.Model
@@ -81,9 +95,8 @@ namespace Crazor.Mvc
 
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, _tempDataProvider), new StringWriter(), new HtmlHelperOptions());
             cardView.ViewContext = viewContext;
-
-            return cardView;
         }
+
 
         private class ViewStub : IView
         {

@@ -1,5 +1,5 @@
 ﻿using AdaptiveCards;
-using Crazor.TagHelpers;
+using Crazor.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CrazorDemoBot.TagHelpers.Person

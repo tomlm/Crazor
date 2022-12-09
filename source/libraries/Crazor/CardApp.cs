@@ -5,14 +5,6 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -477,16 +469,16 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(invoke);
             this.Action = invoke.Action;
 
-            // map FromRoute attributes
-            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
-            {
-                var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
-                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-                if (dataProperty != null)
-                {
-                    this.SetTargetProperty(targetProperty, dataProperty.Value);
-                }
-            }
+            //// map FromRoute attributes
+            //foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+            //{
+            //    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+            //    var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+            //    if (dataProperty != null)
+            //    {
+            //        this.SetTargetProperty(targetProperty, dataProperty.Value);
+            //    }
+            //}
 
             // map App. routedata to app
             foreach (var routeProperty in Route.RouteData.Properties().Where(p => p.Name.StartsWith("App.")))
@@ -573,20 +565,16 @@ namespace Crazor
 
         public ICardView LoadCardView(CardViewState cardState)
         {
-            IView view;
             ICardView cardView;
-            // This is a non-cshtml view, let's see if we can construct it.
             try
             {
                 if (cardState.Name.Contains('.'))
                 {
-                    // cardView = Context.CardViewFactory.Create(cardState.Name);
-                    cardView = new EmptyCardView();
+                    cardView = Context.CardViewFactory.Create(cardState.Name);
                 }
                 else
                 {
-                    var viewPath = Path.Combine("Cards", Name, $"{cardState.Name}");
-                    var cardRoute = CardRoute.Parse(viewPath);
+                    var cardRoute = CardRoute.Parse($"Cards/{Name}/{cardState.Name}");
                     cardView = Context.CardViewFactory.Create(cardRoute);
                 }
             }
@@ -999,8 +987,11 @@ namespace Crazor
 
         private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>()
         {
+            "CardViewBase",
             "CardView",
-            "CardViewBase`1",
+            "CardView`1",
+            "CardView`2",
+            "ComponentBase",
             "RazorPage",
             "RazorPageBase"
         };
@@ -1028,8 +1019,8 @@ namespace Crazor
             if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
                 return false;
 
-            if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
-                return false;
+            //if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
+            //    return false;
 
             if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                 return false;

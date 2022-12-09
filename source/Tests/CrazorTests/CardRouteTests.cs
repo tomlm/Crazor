@@ -1,6 +1,6 @@
 using Crazor;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
 
     [TestClass]
@@ -15,7 +15,7 @@ namespace CrazorTests
             Assert.AreEqual(uri, route.Route);
             Assert.AreEqual("", route.Path);
             Assert.AreEqual("Test", route.App);
-            Assert.IsNull(route.View);
+            Assert.AreEqual("Default", route.View);
             Assert.AreEqual(0, route.RouteData.Properties().Count());
             Assert.AreEqual(0, route.QueryData.Properties().Count());
         }
@@ -29,7 +29,7 @@ namespace CrazorTests
             Assert.AreEqual(uri, route.Route);
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View", route.Path);
-            Assert.IsNull(route.View);
+            Assert.AreEqual("View", route.View);
             Assert.AreEqual(0, route.RouteData.Properties().Count());
             Assert.AreEqual(0, route.QueryData.Properties().Count());
         }
@@ -43,7 +43,7 @@ namespace CrazorTests
             Assert.AreEqual(uri, route.Route);
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View/SubPath", route.Path);
-            Assert.IsNull(route.View);
+            Assert.AreEqual("View", route.View);
             Assert.AreEqual(0, route.RouteData.Properties().Count());
             Assert.AreEqual(0, route.QueryData.Properties().Count());
         }
@@ -57,7 +57,7 @@ namespace CrazorTests
             Assert.AreEqual(uri, route.Route);
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View/SubPath", route.Path);
-            Assert.IsNull(route.View);
+            Assert.AreEqual("View", route.View);
             Assert.AreEqual(1, (int)route.QueryData["x"]);
             Assert.AreEqual("test", (string)route.QueryData["y"]);
         }
@@ -72,7 +72,7 @@ namespace CrazorTests
             Assert.AreEqual(uri, route.Route);
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View/SubPath", route.Path);
-            Assert.IsNull(route.View);
+            Assert.AreEqual("View", route.View);
             Assert.AreEqual(1, (int)route.QueryData["x"]);
             Assert.AreEqual("test", (string)route.QueryData["y"]);
         }
@@ -87,7 +87,7 @@ namespace CrazorTests
             Assert.AreEqual(uri.AbsolutePath, route.Route);
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View", route.Path);
-            Assert.IsNull(route.View);
+            Assert.AreEqual("View", route.View);
             Assert.AreEqual(0, route.RouteData.Properties().Count());
             Assert.AreEqual(0, route.QueryData.Properties().Count());
         }

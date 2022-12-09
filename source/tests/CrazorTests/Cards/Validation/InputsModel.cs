@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace CrazorTests.Validation
+namespace Crazor.Mvc.Tests.Validation
 {
     public enum Pets
     {

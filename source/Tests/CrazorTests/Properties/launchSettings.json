@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "CrazorTests": {
+    "Crazor.Mvc.Tests": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

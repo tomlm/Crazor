@@ -1,7 +1,7 @@
 ﻿using Crazor;
 using Crazor.Attributes;
 
-namespace CrazorTests.Cards.TaskModule
+namespace Crazor.Mvc.Tests.Cards.TaskModule
 {
     [TaskInfo(Width = "small", Height = "medium", Title = "Test Task Module")]
     public class TaskModuleApp : CardApp

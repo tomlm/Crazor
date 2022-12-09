@@ -2,7 +2,7 @@
 using Crazor.Test;
 using Crazor.Test.MSTest;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
     [TestClass]
     public class ParameterBindingTests : CardTest

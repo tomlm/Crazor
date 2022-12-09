@@ -67,6 +67,7 @@ namespace Crazor
                 throw new ArgumentException($"Unknown route {pathAndQuery}");
 
             result.App = pathParts[1].Trim();
+            result.View = pathParts.Skip(2).FirstOrDefault() ?? "Default";
             result.Path = String.Join('/', local.Trim('/').Split('/').Skip(2).ToArray());
             result.RouteData = new JObject();
             result.QueryData = new JObject();

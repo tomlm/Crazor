@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
@@ -24,8 +25,7 @@ namespace Crazor.Mvc
     /// CardView which uses MVC IRazorViewEngine to render adaptive cards.
     /// </summary>
     /// <typeparam name="AppT"></typeparam>
-    public class CardViewBase<AppT> : RazorPage, ICardView, IRazorPage
-        where AppT : CardApp
+    public class CardViewBase : RazorPage, ICardView, IRazorPage
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardViewBase()
@@ -46,7 +46,9 @@ namespace Crazor.Mvc
         /// <summary>
         /// App for this CardView
         /// </summary>
-        public AppT App { get; set; }
+        [JsonIgnore]
+        [TempMemory]
+        public CardApp App { get; set; }
 
         /// <summary>
         /// Razor view
@@ -56,7 +58,7 @@ namespace Crazor.Mvc
         /// <summary>
         /// IView interface
         /// </summary>
-        CardApp ICardView.App { get => App; set => App = (AppT)value; }
+        CardApp ICardView.App { get => App; set => App = value; }
 
         /// <summary>
         /// Current action being processed.
@@ -453,16 +455,17 @@ namespace Crazor.Mvc
 
     }
 
-    public class CardView : CardViewBase<CardApp>
+    public class CardView : CardView<CardApp>
     {
     }
 
-    public class CardView<AppT> : CardViewBase<AppT>
+    public class CardView<AppT> : CardViewBase
         where AppT : CardApp
     {
+        public AppT App { get => (AppT)base.App; set => base.App = value; }
     }
 
-    public class CardView<AppT, ModelT> : CardViewBase<AppT>
+    public class CardView<AppT, ModelT> : CardViewBase
         where AppT : CardApp
         where ModelT : class
     {
@@ -473,6 +476,8 @@ namespace Crazor.Mvc
                 throw new ArgumentException($"{nameof(ModelT)} You can't pass a CardApp as a model");
             }
         }
+
+        public AppT App { get => (AppT)base.App; set => base.App = value; }
 
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData

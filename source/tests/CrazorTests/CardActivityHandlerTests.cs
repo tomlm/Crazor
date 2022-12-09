@@ -7,7 +7,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json.Linq;
 
-namespace CrazorTests
+namespace Crazor.Mvc.Tests
 {
 
 

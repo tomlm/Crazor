@@ -1,7 +1,7 @@
 ﻿using Crazor;
 using Crazor.Attributes;
 
-namespace CrazorTests.Cards.RouteBinding
+namespace Crazor.Mvc.Tests.Cards.RouteBinding
 {
     public class RouteBindingApp : CardApp
     {
