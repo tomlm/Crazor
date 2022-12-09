@@ -52,6 +52,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Libraries\AdaptiveCards\AdaptiveCards.csproj" />
 		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
+		<ProjectReference Include="..\Crazor.Mvc\Crazor.Mvc.csproj" />
 	</ItemGroup>
 
 </Project>

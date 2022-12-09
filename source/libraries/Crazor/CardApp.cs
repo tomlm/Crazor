@@ -467,7 +467,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(cancellationToken);
             ArgumentNullException.ThrowIfNull(activity);
 
-            if (!Context.RouteManager.ResolveRoute(this.Route, out var viewType))
+            if (!Context.RouteResolver.ResolveRoute(this.Route, out var viewType))
             {
                 throw new Exception($"{this.Route} is not a valid route");
             }
@@ -580,48 +580,27 @@ namespace Crazor
             {
                 if (cardState.Name.Contains('.'))
                 {
-                    cardView = Context.CardViewFactory.Create(cardState.Name);
-                    view = new ViewStub();
+                    // cardView = Context.CardViewFactory.Create(cardState.Name);
+                    cardView = new EmptyCardView();
                 }
                 else
                 {
-                    var viewPath = Path.Combine("Cards", Name, $"{cardState.Name}.cshtml");
-                    var viewResult = Context.RazorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-                    view = viewResult?.View;
-                    if (view != null)
-                    {
-                        cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
-                        cardView.RazorView = viewResult.View;
-                    }
-                    else
-                    {
-                        cardView = new EmptyCardView();
-                        view = new ViewStub();
-                    }
+                    var viewPath = Path.Combine("Cards", Name, $"{cardState.Name}");
+                    var cardRoute = CardRoute.Parse(viewPath);
+                    cardView = Context.CardViewFactory.Create(cardRoute);
                 }
             }
             catch (ArgumentException)
             {
                 cardView = new EmptyCardView();
-                view = new ViewStub();
             }
 
-            cardView.UrlHelper = Context.UrlHelper;
+            // cardView.UrlHelper = Context.UrlHelper;
             cardView.App = this;
             cardView.Name = cardState.Name;
 
             // rester card SessionMemory properties
             LoadCardViewState(cardState, cardView);
-
-            ActionContext actionContext;
-            actionContext = new ActionContext(Context.HttpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
-            var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-            {
-                Model = cardState.Model
-            };
-
-            var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, Context.TempDataProvider), new StringWriter(), new HtmlHelperOptions());
-            cardView.ViewContext = viewContext;
             return cardView;
         }
 
@@ -1082,16 +1061,6 @@ namespace Crazor
         }
 
         protected string? GetKey(string name, string? key) => String.IsNullOrEmpty(key) ? null : $"{this.Name}-{name}-{key}";
-
-        private class ViewStub : IView
-        {
-            public string Path { get; set; } = string.Empty;
-
-            public Task RenderAsync(ViewContext context)
-            {
-                return Task.CompletedTask;
-            }
-        }
 
         private Dictionary<string, MemoryAttribute> GetMemoryKeyMap()
         {

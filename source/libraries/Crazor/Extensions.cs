@@ -22,7 +22,7 @@ namespace Crazor
 {
     public static class Extensions
     {
-        public static IServiceCollection AddCrazor(this IServiceCollection services)
+        public static IServiceCollection AddCrazorCore(this IServiceCollection services)
         {
             services.AddHttpClient();
             services.AddHttpContextAccessor();
@@ -87,37 +87,6 @@ namespace Crazor
                 return cardAppFactory;
             });
 
-            // add Cardviews to route manager
-            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
-                            asm.DefinedTypes
-                                .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
-                                .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
-            foreach (var cardViewType in cardViewTypes)
-            {
-                services.AddTransient(cardViewType);
-            }
-
-            services.AddScoped<CardViewFactory>((sp) =>
-            {
-                var factory = new CardViewFactory(sp);
-                foreach (var cardViewType in cardViewTypes)
-                {
-                    factory.Add(cardViewType.FullName, cardViewType);
-                }
-
-                return factory;
-            });
-
-            // add RouteManager
-            services.AddScoped<RouteManager>((sp) =>
-            {
-                RouteManager routeManager = new RouteManager();
-                foreach (var cardViewType in cardViewTypes)
-                {
-                    routeManager.Add(cardViewType);
-                }
-                return routeManager;
-            });
 
             // add TabModules
             var tabModules = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)).ToList();

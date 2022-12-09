@@ -1,4 +1,5 @@
 using Crazor;
+using Crazor.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
 using System.Diagnostics;

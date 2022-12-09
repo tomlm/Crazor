@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
+using Crazor.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;

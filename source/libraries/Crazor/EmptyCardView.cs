@@ -2,12 +2,49 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
+using Crazor.Interfaces;
+using Microsoft.Bot.Schema;
 
 namespace Crazor
 {
-    internal class EmptyCardView : CardView
+    public class EmptyCardView : ICardView
     {
-        public override Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+        public string Name { get; set; }
+
+        public CardApp App { get; set; }
+
+        public AdaptiveCardInvokeAction Action { get; set; }
+
+        public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
+
+        public bool IsModelValid { get; set; }
+
+        public string GetRoute()
+        {
+            return "/Cards/Empty";
+        }
+
+        public void LoadState(CardViewState cardState)
+        {
+            
+        }
+
+        public Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnResumeView(CardResult screenResult, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Array.Empty<AdaptiveChoice>());
+        }
+
+        public Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
             return Task.FromResult(new AdaptiveCard("1.0"))!;
         }

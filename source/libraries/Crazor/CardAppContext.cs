@@ -16,9 +16,9 @@ namespace Crazor
     {
         public CardAppContext(
             CardAppFactory cardAppFactory,
-            CardViewFactory cardViewFactory,
             CardTabModuleFactory cardTabModuleFactory,
-            RouteManager routeManager,
+            ICardViewFactory cardViewFactory,
+            IRouteResolver routeResolver,
             IConfiguration configuration, 
             IHttpContextAccessor httpContextAccessor,
             IEncryptionProvider encryptionProvider, 
@@ -37,7 +37,7 @@ namespace Crazor
             CardViewFactory = cardViewFactory;
             CardTabModuleFactory = cardTabModuleFactory;
             UrlHelper = urlHelper;
-            RouteManager = routeManager;
+            RouteResolver = routeResolver;
         }
 
 
@@ -57,10 +57,11 @@ namespace Crazor
 
         public CardAppFactory CardAppFactory { get; }
 
-        public CardViewFactory CardViewFactory { get; set; }
 
         public CardTabModuleFactory CardTabModuleFactory { get; }
 
-        public RouteManager RouteManager { get; set; }
+        public ICardViewFactory CardViewFactory { get; set; }
+
+        public IRouteResolver RouteResolver { get; set; }
     }
 }

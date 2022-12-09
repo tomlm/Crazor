@@ -1,6 +1,7 @@
 ﻿using AdaptiveCards;
 using Crazor;
 using Crazor.Attributes;
+using Crazor.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrazorDemoBot.Cards.CodeOnlyView

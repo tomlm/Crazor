@@ -2,24 +2,18 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 
 namespace Crazor.Interfaces
 {
-    public interface ICardView : IRazorPage
+    public interface ICardView 
     {
-        IUrlHelper UrlHelper { get; set; }
-
         string Name { get; set; }
 
         CardApp App { get; set; }
 
         AdaptiveCardInvokeAction Action { get; set; }
-
-        IView RazorView { get; set; }
 
         Dictionary<string, HashSet<string>> ValidationErrors { get; set; }
 
