@@ -24,8 +24,11 @@ namespace Crazor.Mvc
     /// CardView which uses MVC IRazorViewEngine to render adaptive cards.
     /// </summary>
     /// <typeparam name="AppT"></typeparam>
-    public class CardViewBase : RazorPage, ICardView, IRazorPage
+    public class CardViewBase<AppT> : RazorPage, IRazorPage, IMvcCardView
+        where AppT : CardApp
     {
+        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "RazorPage", "RazorPageBase" };
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardViewBase()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -33,19 +36,9 @@ namespace Crazor.Mvc
         }
 
         /// <summary>
-        /// UrlHelper for creating links to resources on this service.
-        /// </summary>
-        public IUrlHelper UrlHelper { get; set; }
-
-        /// <summary>
         /// Name of the CardView
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// App for this CardView
-        /// </summary>
-        public CardApp App { get; set; }
 
         /// <summary>
         /// Razor view
@@ -53,9 +46,11 @@ namespace Crazor.Mvc
         public IView RazorView { get; set; }
 
         /// <summary>
-        /// IView interface
+        /// App reference
         /// </summary>
-        CardApp ICardView.App { get => App; set => App = value; }
+        CardApp ICardView.App { get => App; set => App = (AppT)value; }
+
+        public AppT App { get; set; }
 
         /// <summary>
         /// Current action being processed.
@@ -82,6 +77,11 @@ namespace Crazor.Mvc
         /// True if the card is being rendered to be shared with people without session data
         /// </summary>
         public bool IsPreview { get; set; }
+
+        /// <summary>
+        /// UrlHelper for creating links to resources on this service.
+        /// </summary>
+        public IUrlHelper UrlHelper { get; set; }
 
         /// <summary>
         /// IView->ExecuteAsync is disabled because the default writes the output directly to 
@@ -226,14 +226,7 @@ namespace Crazor.Mvc
                     break;
 
                 default:
-                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        // Otherwise, if a verb matches a view just navigate to it.
-                        if (App.Context.CardViewFactory.HasView(action.Verb))
-                        {
-                            this.ShowView(action.Verb);
-                        }
-                    }
+                    await this.InvokeVerbAsync(action, cancellationToken);
                     break;
             }
         }
@@ -298,11 +291,45 @@ namespace Crazor.Mvc
         /// <param name="cardState"></param>
         public virtual void LoadState(CardViewState cardState)
         {
+            if (cardState.Model != null)
+            {
+                this.ViewContext.ViewData.Model = cardState.Model;
+            }
+
+            foreach (var property in this.GetType().GetProperties().Where(prop => PersistProperty(prop)))
+            {
+                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
+                {
+                    this.SetTargetProperty(property, val);
+                }
+            }
+
             if (cardState.Initialized == false)
             {
                 // call hook to give cardview opportunity to process data.
                 OnInitialized();
                 cardState.Initialized = true;
+            }
+        }
+
+
+        public virtual void SaveState(CardViewState state)
+        {
+            // capture all properties on CardView which are not on base type and not ignored.
+            foreach (var property in this.GetType().GetProperties().Where(prop => PersistProperty(prop)))
+            {
+                var val = property.GetValue(this);
+                if (val != null)
+                {
+                    if (property.Name == "Model")
+                    {
+                        state.Model = val;
+                    }
+                    else
+                    {
+                        state.SessionMemory[property.Name] = JToken.FromObject(val);
+                    }
+                }
             }
         }
 
@@ -471,19 +498,34 @@ namespace Crazor.Mvc
         }
         #endregion
 
+        private static bool PersistProperty(PropertyInfo propertyInfo)
+        {
+            if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
+                return true;
+
+            if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
+                return false;
+
+            if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
+                return false;
+
+            if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                return false;
+
+            return true;
+        }
     }
 
-    public class CardView : CardView<CardApp>
+    public class CardView : CardViewBase<CardApp>
     {
     }
 
-    public class CardView<AppT> : CardViewBase
+    public class CardView<AppT> : CardViewBase<AppT>
         where AppT : CardApp
     {
-        public AppT App { get => (AppT)base.App; set => base.App = value; }
     }
 
-    public class CardView<AppT, ModelT> : CardViewBase
+    public class CardView<AppT, ModelT> : CardViewBase<AppT>
         where AppT : CardApp
         where ModelT : class
     {
@@ -494,8 +536,6 @@ namespace Crazor.Mvc
                 throw new ArgumentException($"{nameof(ModelT)} You can't pass a CardApp as a model");
             }
         }
-
-        public AppT App { get => (AppT)base.App; set => base.App = value; }
 
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
@@ -530,21 +570,23 @@ namespace Crazor.Mvc
 
         public override void LoadState(CardViewState cardViewState)
         {
-            ModelT? model = this.ViewContext.ViewData.Model as ModelT;
+            base.LoadState(cardViewState);
+
+            ModelT? model = cardViewState.Model as ModelT;
             if (model == null)
             {
-                if (this.ViewContext.ViewData.Model is JToken jt)
+                if (cardViewState.Model is JToken jt)
                 {
-                    this.ViewContext.ViewData.Model = (ModelT?)jt.ToObject(typeof(ModelT));
+                    model = (ModelT?)jt.ToObject(typeof(ModelT));
                 }
                 else
                 {
-                    this.ViewContext.ViewData.Model = Activator.CreateInstance<ModelT>();
+                    model = Activator.CreateInstance<ModelT>();
                 }
             }
-            this.ViewData = new ViewDataDictionary<ModelT>(this.ViewContext.ViewData);
 
-            base.LoadState(cardViewState);
+            this.ViewContext.ViewData.Model = model;
+            this.ViewData = new ViewDataDictionary<ModelT>(this.ViewContext.ViewData, model);
         }
     }
 }

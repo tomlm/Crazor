@@ -51,8 +51,8 @@ namespace Crazor.Mvc
 
         public void AddCardViewType(Type cardViewType)
         {
-            if (cardViewType == typeof(CardView) ||
-                cardViewType == typeof(CardViewBase) ||
+            if (cardViewType.Name == "CardViewBase`1" || 
+                cardViewType.Name == "CardView" ||
                 cardViewType.Name == "CardView`1" ||
                 cardViewType.Name == "CardView`2")
             {

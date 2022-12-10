@@ -69,7 +69,7 @@ namespace Crazor.Mvc
 
         public ICardView Create(CardRoute route)
         {
-            CardViewBase cardView;
+            IMvcCardView cardView;
             IView view;
 
             var viewPath = Path.Combine("Cards", route.App, $"{route.View}.cshtml");
@@ -78,46 +78,47 @@ namespace Crazor.Mvc
             view = viewResult?.View;
             if (view != null)
             {
-                cardView = (CardViewBase)((RazorView)viewResult.View).RazorPage;
-                ((CardViewBase)cardView).RazorView = viewResult.View;
+                cardView = (IMvcCardView)((RazorView)viewResult.View).RazorPage;
+                cardView.UrlHelper = _urlHelper;
+                cardView.RazorView = viewResult.View;
             }
             else
             {
                 throw new ArgumentNullException($"Unknown route {route.Route}");
             }
 
-            PrepView(cardView, view);
+            PrepView((RazorPage)cardView, view);
             return cardView;
         }
 
         public ICardView Create(string typeName)
         {
-            CardViewBase cardView;
+            IMvcCardView cardView;
             IView view;
 
             if (!_views.TryGetValue(typeName, out var cardViewType))
             {
                 throw new Exception($"{typeName} is not a known type");
             }
-            cardView = (CardViewBase)_serviceProvider.GetService(cardViewType);
+            cardView = (IMvcCardView)_serviceProvider.GetService(cardViewType);
             cardView.UrlHelper = _urlHelper;
             view = new ViewStub();
 
-            PrepView(cardView, view);
+            PrepView((RazorPage)cardView, view);
             return cardView;
         }
 
 
-        private void PrepView(CardViewBase cardView, IView view)
+        private void PrepView(RazorPage razorPage, IView view)
         {
             ActionContext actionContext = new ActionContext(_httpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
-                // Model = cardState.Model
+                 // Model = cardState.Model
             };
 
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, _tempDataProvider), new StringWriter(), new HtmlHelperOptions());
-            cardView.ViewContext = viewContext;
+            razorPage.ViewContext = viewContext;
         }
 
 

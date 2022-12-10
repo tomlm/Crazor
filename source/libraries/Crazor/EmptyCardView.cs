@@ -34,6 +34,9 @@ namespace Crazor
         {
             
         }
+        public void SaveState(CardViewState cardState)
+        {
+        }
 
         public Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
@@ -54,5 +57,6 @@ namespace Crazor
         {
             return Task.FromResult(new AdaptiveCard("1.0"))!;
         }
+
     }
 }

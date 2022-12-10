@@ -191,7 +191,8 @@ namespace Crazor.Blazor
                     {
                         if (IsModelValid)
                         {
-                            this.CloseView();// ViewContext.ViewData.Model);
+                            throw new Exception("fix this");
+                            // this.CloseView(ViewContext.ViewData.Model);
                         }
                     }
                     break;
@@ -420,6 +421,11 @@ namespace Crazor.Blazor
         public void CloseTaskModule(TaskModuleAction status)
         {
             this.App.CloseTaskModule(status);
+        }
+
+        public void SaveState(CardViewState cardState)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -24,14 +25,14 @@ namespace Crazor
     /// 
     /// LoadState() and SaveState() will be called by the CardBot class automatically.
     /// </remarks>
-    public class CardApp  
+    public class CardApp
     {
         private static XmlWriterSettings _settings = new XmlWriterSettings()
         {
             Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
             Indent = true,
         };
-        
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardApp(CardAppContext context)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -221,7 +222,7 @@ namespace Crazor
                         System.Diagnostics.Debug.WriteLine("WARNING: 5 ShowViews() in one turn attempted. Loop stopped.");
                     }
 
-                    SaveCardViewState(this.CallStack[0], this.CurrentView);
+                    this.CurrentView.SaveState(this.CallStack[0]);
                 }
             }
             catch (Exception err)
@@ -362,7 +363,7 @@ namespace Crazor
         /// <param name="model"></param>
         public void ShowView(string cardName, object? model = null)
         {
-            SaveCardViewState(this.CallStack[0], this.CurrentView);
+            this.CurrentView.SaveState(this.CallStack[0]);
             var cardState = new CardViewState(cardName, model);
             CallStack.Insert(0, cardState);
             Action!.Verb = Constants.SHOWVIEW_VERB;
@@ -503,9 +504,7 @@ namespace Crazor
             {
                 if (this.CurrentCard != Route.View)
                 {
-                    // this is ShowCard() embedded, Ick. 
-                    // The issue is we don't want to reset the verb, need to clean this up
-                    SaveCardViewState(this.CallStack[0], this.CurrentView);
+                    this.CurrentView?.SaveState(this.CallStack[0]);
                     var cardState = new CardViewState(Route.View!);
                     CallStack.Insert(0, cardState);
                     SetCurrentView(cardState);
@@ -559,23 +558,28 @@ namespace Crazor
                 {
                     cardView = Context.CardViewFactory.Create(cardState.Name);
                 }
+                else if (cardState.Name.Contains('/'))
+                {
+                    var cardRoute = CardRoute.Parse(cardState.Name);
+                    cardView = Context.CardViewFactory.Create(cardRoute);
+                }
                 else
                 {
                     var cardRoute = CardRoute.Parse($"Cards/{Name}/{cardState.Name}");
                     cardView = Context.CardViewFactory.Create(cardRoute);
                 }
+                ArgumentNullException.ThrowIfNull(cardView);
             }
             catch (ArgumentException)
             {
                 cardView = new EmptyCardView();
             }
 
-            // cardView.UrlHelper = Context.UrlHelper;
             cardView.App = this;
             cardView.Name = cardState.Name;
 
             // rester card SessionMemory properties
-            LoadCardViewState(cardState, cardView);
+            cardView.LoadState(cardState);
             return cardView;
         }
 
@@ -972,71 +976,7 @@ namespace Crazor
             }
         }
 
-        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>()
-        {
-            "CardViewBase",
-            "CardView",
-            "CardView`1",
-            "CardView`2",
-            "ComponentBase",
-            "RazorPage",
-            "RazorPageBase"
-        };
-
-        /// <summary>
-        /// Copy data from cardState onto instantiated card.
-        /// </summary>
-        /// <param name="cardState"></param>
-        /// <param name="cardView"></param>
-        private static void LoadCardViewState(CardViewState cardState, ICardView cardView)
-        {
-            foreach (var property in cardView.GetType().GetProperties().Where(prop => PersistProperty(prop)))
-            {
-                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
-                {
-                    cardView.SetTargetProperty(property, val);
-                }
-            }
-        }
-        private static bool PersistProperty(PropertyInfo propertyInfo)
-        {
-            if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
-                return true;
-
-            if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
-                return false;
-
-            //if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
-            //    return false;
-
-            if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
-                return false;
-
-            return true;
-        }
-
-        private static void SaveCardViewState(CardViewState state, ICardView cardView)
-        {
-            if (cardView != null)
-            {
-                // capture all properties on CardView which are not on base type and not ignored.
-                foreach (var property in cardView.GetType().GetProperties().Where(prop => PersistProperty(prop)))
-                {
-                    var val = property.GetValue(cardView);
-                    if (val != null)
-                    {
-                        if (property.Name == "Model")
-                        {
-                            state.Model = val;
-                        }
-                        else
-                        {
-                            state.SessionMemory[property.Name] = JToken.FromObject(val);
-                        }
-                    }
-                }
-            }
-        }
+     
 
         protected string? GetKey(string name, string? key) => String.IsNullOrEmpty(key) ? null : $"{this.Name}-{name}-{key}";
 

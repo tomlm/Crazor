@@ -48,6 +48,12 @@ namespace Crazor.Interfaces
         void LoadState(CardViewState cardState);
 
         /// <summary>
+        /// Called to save the card state
+        /// </summary>
+        /// <param name="cardState"></param>
+        void SaveState(CardViewState cardState);
+
+        /// <summary>
         /// Bind data to view properties.
         /// </summary>
         /// <param name="data"></param>

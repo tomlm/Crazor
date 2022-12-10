@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 
-namespace Crazor
+namespace Crazor.Mvc
 {
     class UrlHelperProxy : IUrlHelper
     {

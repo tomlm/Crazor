@@ -6,10 +6,10 @@ namespace CrazorDemoBot.TagHelpers.Accordion
     [HtmlTargetElement("Accordion")]
     public class AccordionTagHelper : RazorTagHelper
     {
-        [HtmlAttributeName]
+        [HtmlAttributeName(nameof(Title))]
         public string Title { get; set; } = String.Empty;
 
-        [HtmlAttributeName]
+        [HtmlAttributeName(nameof(IsExpanded))]
         public bool IsExpanded { get; set; } = false;
     }
 }
