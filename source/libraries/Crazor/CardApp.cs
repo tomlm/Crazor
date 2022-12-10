@@ -4,7 +4,6 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -538,18 +537,6 @@ namespace Crazor
             await Context.Storage.WriteAsync(data, cancellationToken);
         }
 
-        /// <summary>
-        /// HasView
-        /// </summary>
-        /// <param name="viewName"></param>
-        /// <returns>true or false</returns>
-        public bool HasView(string viewName)
-        {
-            var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
-            var viewResult = Context.RazorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-            return (viewResult?.View != null);
-        }
-
 
         /// <summary>
         /// Given view name, return the IView object
@@ -839,7 +826,7 @@ namespace Crazor
                 systemMenu.Actions.Add(outboundCard.Refresh.Action);
             }
 
-            if (HasView(Constants.ABOUT_VIEW) && this.CurrentCard != Constants.ABOUT_VIEW)
+            if (Context.CardViewFactory.HasView(Constants.ABOUT_VIEW) && this.CurrentCard != Constants.ABOUT_VIEW)
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
@@ -851,7 +838,7 @@ namespace Crazor
                 });
             }
 
-            if (this.HasView(Constants.SETTINGS_VIEW) && this.CurrentCard != Constants.SETTINGS_VIEW)
+            if (Context.CardViewFactory.HasView(Constants.SETTINGS_VIEW) && this.CurrentCard != Constants.SETTINGS_VIEW)
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {

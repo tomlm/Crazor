@@ -42,5 +42,10 @@ namespace Crazor.Blazor
 
             return (ICardView)_serviceProvider.GetService(cardViewType);
         }
+
+        public bool HasView(string nameOrRoute)
+        {
+            return _views.ContainsKey(nameOrRoute);
+        }
     }
 }

@@ -4,19 +4,35 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor.Interfaces
 {
     public interface ICardView 
     {
+        /// <summary>
+        /// Name of the template
+        /// </summary>
         string Name { get; set; }
 
+        /// <summary>
+        /// App reference
+        /// </summary>
         CardApp App { get; set; }
 
+        /// <summary>
+        /// Current action
+        /// </summary>
         AdaptiveCardInvokeAction Action { get; set; }
 
+        /// <summary>
+        /// Validation errors for the current view.
+        /// </summary>
         Dictionary<string, HashSet<string>> ValidationErrors { get; set; }
 
+        /// <summary>
+        /// Is the current view valid?
+        /// </summary>
         bool IsModelValid { get; set; }
 
         /// <summary>
@@ -30,6 +46,12 @@ namespace Crazor.Interfaces
         /// </summary>
         /// <param name="cardState"></param>
         void LoadState(CardViewState cardState);
+
+        /// <summary>
+        /// Bind data to view properties.
+        /// </summary>
+        /// <param name="data"></param>
+        void BindProperties(JObject data);
 
         /// <summary>
         /// Bind the view to the card

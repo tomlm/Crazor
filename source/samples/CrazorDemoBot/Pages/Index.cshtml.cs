@@ -6,10 +6,13 @@ namespace CrazorDemoBot.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, IConfiguration configuration)
         {
             _logger = logger;
+            HostUri = configuration.GetValue<Uri>("HostUri");
         }
+
+        public Uri HostUri { get; set; }
 
         public void OnGet()
         {

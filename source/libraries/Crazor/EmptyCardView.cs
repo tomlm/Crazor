@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Interfaces;
 using Microsoft.Bot.Schema;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {
@@ -18,6 +19,11 @@ namespace Crazor
         public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
 
         public bool IsModelValid { get; set; }
+
+        public void BindProperties(JObject data)
+        {
+            
+        }
 
         public string GetRoute()
         {

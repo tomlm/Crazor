@@ -12,5 +12,7 @@ namespace Crazor.Interfaces
         ICardView Create(CardRoute route);
 
         ICardView Create(string fullTypeName);
+
+        bool HasView(string nameOrRoute);
     }
 }

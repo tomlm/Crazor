@@ -32,30 +32,6 @@ namespace Crazor.Mvc.Tests
         }
 
         [TestMethod]
-        public async Task TestShowAndBackImplicit()
-        {
-            await LoadCard("/Cards/Navigation")
-                    .AssertTextBlock("Card1")
-                .ExecuteAction("Card2")
-                    .AssertTextBlock("Card2")
-                .ExecuteAction("OnBack")
-                    .AssertTextBlock("Card1");
-        }
-
-        [TestMethod]
-        public async Task TestReplaceImplicit()
-        {
-            await LoadCard("/Cards/Navigation")
-                    .AssertTextBlock("Card1")
-                .ExecuteAction("Card2")
-                    .AssertTextBlock("Card2")
-                .ExecuteAction("OnReplace")
-                    .AssertTextBlock("Card3")
-                .ExecuteAction("OnBack")
-                    .AssertTextBlock("Card1");
-        }
-
-        [TestMethod]
         public async Task TestNavigateCodeOnly()
         {
             await LoadCard("/Cards/CodeOnlyView")

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Http;
+using System.Xml.Linq;
+using Microsoft.AspNetCore.Routing;
 
 namespace Crazor.Mvc
 {
@@ -23,17 +25,20 @@ namespace Crazor.Mvc
         private readonly IRazorViewEngine _razorEngine;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataProvider _tempDataProvider;
+        private readonly IUrlHelper _urlHelper;
 
         public CardViewFactory(
             IServiceProvider serviceProvider,
             IRazorViewEngine engine,
             IHttpContextAccessor httpContextAccessor,
-            ITempDataProvider tempDataProvider)
+            ITempDataProvider tempDataProvider,
+            IUrlHelper urlHelper)
         {
             _serviceProvider = serviceProvider;
             _razorEngine = engine;
             _httpContextAccessor = httpContextAccessor;
             _tempDataProvider = tempDataProvider;
+            _urlHelper = urlHelper;
         }
 
         public void Add(string name, Type type)
@@ -44,6 +49,23 @@ namespace Crazor.Mvc
         }
 
         public IEnumerable<string> GetNames() => _views.Keys.OrderBy(n => n);
+
+        /// <summary>
+        /// HasView
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <returns>true or false</returns>
+        public bool HasView(string nameOrRoute)
+        {
+            if (nameOrRoute.StartsWith("/Cards"))
+            {
+                var cardRoute = CardRoute.Parse(nameOrRoute);
+                var viewPath = Path.Combine("Cards", cardRoute.App, $"{cardRoute.View}.cshtml");
+                var viewResult = _razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+                return (viewResult?.View != null);
+            }
+            return _views.ContainsKey(nameOrRoute);
+        }
 
         public ICardView Create(CardRoute route)
         {
@@ -78,6 +100,7 @@ namespace Crazor.Mvc
                 throw new Exception($"{typeName} is not a known type");
             }
             cardView = (CardViewBase)_serviceProvider.GetService(cardViewType);
+            cardView.UrlHelper = _urlHelper;
             view = new ViewStub();
 
             PrepView(cardView, view);

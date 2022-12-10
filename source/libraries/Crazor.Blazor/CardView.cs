@@ -65,6 +65,27 @@ namespace Crazor.Blazor
         public bool IsPreview { get; set; }
 
         #region ---- Core Methods -----
+
+        public void BindProperties(JObject data)
+        {
+            if (data != null)
+            {
+                foreach (var property in data.Properties())
+                {
+                    var parts = property.Name.Split('.');
+
+                    // if root is [BindProperty]
+                    var prop = this.GetType().GetProperty(parts[0]);
+                    // only allow binding to Model, App or BindProperty
+                    if (prop != null &&
+                        (prop.Name == "Model" || prop.Name == "App"))
+                    {
+                        ObjectPath.SetPathValue(this, property.Name, property.Value, json: false);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// OnInvokeActionAsync() - Called to process an incoming verb action.
         /// </summary>
@@ -151,7 +172,7 @@ namespace Crazor.Blazor
             if (action.Verb != Constants.SHOWVIEW_VERB)
             {
                 // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
-                this.ValidateModel();
+                this.Validate();
             }
 
             switch (Action.Verb)
@@ -176,14 +197,7 @@ namespace Crazor.Blazor
                     break;
 
                 default:
-                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        // Otherwise, if a verb matches a view just navigate to it.
-                        if (App.HasView(action.Verb))
-                        {
-                            this.ShowView(action.Verb);
-                        }
-                    }
+                    await this.InvokeVerbAsync(action, cancellationToken);
                     break;
             }
         }

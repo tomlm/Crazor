@@ -1,19 +1,14 @@
 ﻿@page
 @using Crazor
 @using System.Reflection
-@using Neleus.DependencyInjection.Extensions
 @inject CardAppFactory cardAppFactory
-@inject IConfiguration configuration
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
-@{
-    var hostUri = configuration.GetValue<Uri>("HostUri");
-}
-@if (hostUri.Host.Contains("ngrok"))
+@if (Model.HostUri.Host.Contains("ngrok"))
 {
-    <h1><a href="@hostUri.AbsoluteUri">Host</a></h1>
+    <h1><a href="@Model.HostUri.AbsoluteUri">Host</a></h1>
 }
 
 <div class="text-center">

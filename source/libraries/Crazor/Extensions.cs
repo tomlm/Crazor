@@ -43,7 +43,6 @@ namespace Crazor
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
             services.TryAddScoped<IBot, CardActivityHandler>();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.TryAddScoped<IUrlHelper, UrlHelperProxy>();
             services.TryAddScoped<CardAppContext>();
             services.AddTransient<CardApp>();
             services.AddTransient<SingleCardTabModule>();

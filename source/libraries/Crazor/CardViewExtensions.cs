@@ -101,27 +101,7 @@ namespace Crazor
                 ?? cardView.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
         }
 
-        public static void BindProperties(this ICardView cardView, JObject data)
-        {
-            if (data != null)
-            {
-                foreach (var property in data.Properties())
-                {
-                    var parts = property.Name.Split('.');
-
-                    // if root is [BindProperty]
-                    var prop = cardView.GetType().GetProperty(parts[0]);
-                    // only allow binding to Model, App or BindProperty
-                    if (prop != null &&
-                        (prop.Name == "Model" || prop.Name == "App" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
-                    {
-                        ObjectPath.SetPathValue(cardView, property.Name, property.Value, json: false);
-                    }
-                }
-            }
-        }
-
-        public static void ValidateModel(this ICardView cardView)
+        public static void Validate(this ICardView cardView)
         {
             // validate root object model
             var validator = new DataAnnotationsValidator();
@@ -134,7 +114,7 @@ namespace Crazor
             // for complex types do a recursive deep validation. We can't
             // do this at the root because CardView is too complicated for a deep compare.
             foreach (var property in cardView.GetType().GetProperties()
-                                        .Where(p => (p.GetCustomAttribute<BindPropertyAttribute>() != null || p.GetCustomAttribute<SessionMemoryAttribute>() != null))
+                                        .Where(p => (/*p.GetCustomAttribute<BindPropertyAttribute>() != null || */p.GetCustomAttribute<SessionMemoryAttribute>() != null))
                                         .Where(p => !p.PropertyType.IsValueType && p.PropertyType != typeof(string)))
             {
                 validationResults = new List<ValidationResult>();

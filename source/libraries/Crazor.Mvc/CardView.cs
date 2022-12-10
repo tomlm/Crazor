@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
@@ -46,8 +45,6 @@ namespace Crazor.Mvc
         /// <summary>
         /// App for this CardView
         /// </summary>
-        [JsonIgnore]
-        [TempMemory]
         public CardApp App { get; set; }
 
         /// <summary>
@@ -97,6 +94,27 @@ namespace Crazor.Mvc
         }
 
         #region ---- Core Methods -----
+
+        public void BindProperties(JObject data)
+        {
+            if (data != null)
+            {
+                foreach (var property in data.Properties())
+                {
+                    var parts = property.Name.Split('.');
+
+                    // if root is [BindProperty]
+                    var prop = this.GetType().GetProperty(parts[0]);
+                    // only allow binding to Model, App or BindProperty
+                    if (prop != null &&
+                        (prop.Name == "Model" || prop.Name == "App" || prop.GetCustomAttribute<BindPropertyAttribute>() != null))
+                    {
+                        ObjectPath.SetPathValue(this, property.Name, property.Value, json: false);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// OnInvokeActionAsync() - Called to process an incoming verb action.
         /// </summary>
@@ -183,7 +201,7 @@ namespace Crazor.Mvc
             if (action.Verb != Constants.SHOWVIEW_VERB)
             {
                 // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
-                this.ValidateModel();
+                this.Validate();
             }
 
             switch (Action.Verb)
@@ -211,7 +229,7 @@ namespace Crazor.Mvc
                     if (await this.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         // Otherwise, if a verb matches a view just navigate to it.
-                        if (App.HasView(action.Verb))
+                        if (App.Context.CardViewFactory.HasView(action.Verb))
                         {
                             this.ShowView(action.Verb);
                         }

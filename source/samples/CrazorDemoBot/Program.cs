@@ -18,10 +18,10 @@ builder.Services.AddCrazor();
 
 var mvcBuilder = builder.Services.AddMvc();
 
-//if (builder.Environment.IsDevelopment())
-//{
-//    mvcBuilder.AddRazorRuntimeCompilation();
-//}
+if (Debugger.IsAttached)
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
 
 builder.Services.AddLogging();
 builder.Services.AddControllers();
