@@ -89,6 +89,7 @@
         .CreateActionInvokeActivity(action.Verb, JObject.FromObject(action.Data));
 
         this.Card = await this.CardApp.ProcessInvokeActivity(activity, isPreview: false, default);
+        var json = JsonConvert.SerializeObject(Card);
 
         StateHasChanged();
     }
