@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Crazor.Blazor.ComponentRenderer;
 using Crazor.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Crazor.Blazor
 {
@@ -28,7 +30,9 @@ namespace Crazor.Blazor
         {
             if (_views.TryGetValue(route.View, out var cardViewType))
             {
-                return (ICardView)_serviceProvider.GetService(cardViewType);
+                var card = (ICardView)_serviceProvider.GetService(cardViewType);
+                card.AssignInjectAttributeProperties(_serviceProvider);
+                return card;
             }
             throw new ArgumentNullException(route.Route);
         }
@@ -40,7 +44,9 @@ namespace Crazor.Blazor
                 throw new Exception($"{typeName} is not a known type");
             }
 
-            return (ICardView)_serviceProvider.GetService(cardViewType);
+            var card = (ICardView)_serviceProvider.GetRequiredService(cardViewType);
+            card.AssignInjectAttributeProperties(_serviceProvider);
+            return card;
         }
 
         public bool HasView(string nameOrRoute)

@@ -2,15 +2,14 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using BlazorTemplater;
 using Crazor.Attributes;
+using Crazor.Blazor.ComponentRenderer;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.Bot.Schema;
-using Microsoft.JSInterop;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Xml;
@@ -18,16 +17,13 @@ using Diag = System.Diagnostics;
 
 namespace Crazor.Blazor
 {
-    public class CardViewBase<AppT> : ComponentBase, ICardView
+    public abstract class CardViewBase<AppT> : ComponentBase, ICardView
         where AppT : CardApp
     {
         private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "ComponentBase" };
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public CardViewBase()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        {
-        }
+        [Inject]
+        public IServiceProvider? ServiceProvider { get; set; }
 
         /// <summary>
         /// Name of the CardView
@@ -223,11 +219,10 @@ namespace Crazor.Blazor
             string xml = string.Empty;
             try
             {
-
-                // create a RenderFragment from the component
-                var templater = new Templater();
-                
-                xml = templater.RenderComponent(this.GetType(), new Dictionary<string, object>());
+                // Create a RenderFragment from the component
+                var ctx = new RenderingContext(ServiceProvider);
+                var rendered = ctx.RenderComponent(this);
+                xml = rendered.Markup;
 
                 if (!string.IsNullOrWhiteSpace(xml))
                 {
