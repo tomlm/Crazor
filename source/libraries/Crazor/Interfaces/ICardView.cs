@@ -5,6 +5,7 @@ using AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Crazor.Interfaces
 {
@@ -58,6 +59,12 @@ namespace Crazor.Interfaces
         /// </summary>
         /// <param name="data"></param>
         void BindProperties(JObject data);
+
+        /// <summary>
+        /// Enumerate properties on the view which are bindable and persistent
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PropertyInfo> GetPersistentProperties();
 
         /// <summary>
         /// Bind the view to the card

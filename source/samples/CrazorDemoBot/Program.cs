@@ -1,4 +1,3 @@
-using Crazor;
 using Crazor.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
@@ -11,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
 if (!String.IsNullOrEmpty(storageKey))
 {
-    builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "opbot"));
+    builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorDemoBot).ToLower()));
 }
 builder.Services.AddCrazor();
 // ---- </CRAZOR>

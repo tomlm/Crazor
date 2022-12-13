@@ -296,7 +296,7 @@ namespace Crazor.Mvc
                 this.ViewContext.ViewData.Model = cardState.Model;
             }
 
-            foreach (var property in this.GetType().GetProperties().Where(prop => PersistProperty(prop)))
+            foreach (var property in this.GetPersistentProperties())
             {
                 if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
                 {
@@ -316,7 +316,7 @@ namespace Crazor.Mvc
         public virtual void SaveState(CardViewState state)
         {
             // capture all properties on CardView which are not on base type and not ignored.
-            foreach (var property in this.GetType().GetProperties().Where(prop => PersistProperty(prop)))
+            foreach (var property in this.GetPersistentProperties())
             {
                 var val = property.GetValue(this);
                 if (val != null)
@@ -498,21 +498,25 @@ namespace Crazor.Mvc
         }
         #endregion
 
-        private static bool PersistProperty(PropertyInfo propertyInfo)
+        public IEnumerable<PropertyInfo> GetPersistentProperties()
         {
-            if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
+            return this.GetType().GetProperties().Where(propertyInfo =>
+            {
+                if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
+                    return true;
+
+                if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
+                    return false;
+
+                if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
+                    return false;
+
+                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                    return false;
+
                 return true;
 
-            if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
-                return false;
-
-            if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
-                return false;
-
-            if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
-                return false;
-
-            return true;
+            }).ToList();
         }
     }
 

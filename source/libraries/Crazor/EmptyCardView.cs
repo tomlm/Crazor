@@ -5,6 +5,7 @@ using AdaptiveCards;
 using Crazor.Interfaces;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Crazor
 {
@@ -58,5 +59,9 @@ namespace Crazor
             return Task.FromResult(new AdaptiveCard("1.0"))!;
         }
 
+        public IEnumerable<PropertyInfo> GetPersistentProperties()
+        {
+            return Array.Empty<PropertyInfo>();
+        }
     }
 }

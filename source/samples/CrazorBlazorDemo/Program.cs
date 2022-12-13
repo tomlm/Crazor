@@ -26,7 +26,7 @@ namespace CrazorBlazorDemo
             var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
             if (!String.IsNullOrEmpty(storageKey))
             {
-                builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "opbot"));
+                builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorDemo).ToLower()));
             }
             builder.Services.AddCrazor();
             // ---- </CRAZOR>
