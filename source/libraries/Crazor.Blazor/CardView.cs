@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.Bot.Schema;
+using Microsoft.JSInterop;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Xml;
@@ -267,6 +268,14 @@ namespace Crazor.Blazor
         /// <param name="cardState"></param>
         public virtual void LoadState(CardViewState cardState)
         {
+            foreach (var property in this.GetType().GetProperties().Where(prop => PersistProperty(prop)))
+            {
+                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
+                {
+                    this.SetTargetProperty(property, val);
+                }
+            }
+
             if (cardState.Initialized == false)
             {
                 // call hook to give cardview opportunity to process data.

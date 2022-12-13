@@ -546,7 +546,6 @@ namespace Crazor
         public void SetCurrentView(CardViewState cardState)
         {
             this.CurrentView = LoadCardView(cardState);
-            this.CurrentView.LoadState(cardState);
         }
 
         public ICardView LoadCardView(CardViewState cardState)
