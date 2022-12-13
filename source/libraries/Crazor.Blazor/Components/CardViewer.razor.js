@@ -1,4 +1,4 @@
-﻿function renderCrazorCard(cardId, channelId, botUri, routeUrl, sharedId, viewerRef, cardJson) {
+﻿export function renderCrazorCard(cardId, viewerRef, cardJson) {
     // const name = new URLSearchParams(window.location.search).get("name");
     let cardDiv = document.getElementById(cardId);
 
@@ -15,6 +15,9 @@
                 break;
             case 'Action.Execute':
                 viewerRef.invokeMethodAsync('onExecuteAction', action );
+                break;
+            case 'Action.Submit':
+                viewerRef.invokeMethodAsync('onExecuteAction', action);
                 break;
         }
 

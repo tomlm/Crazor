@@ -11,6 +11,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Components\CardViewer.razor.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Components\CardViewer.razor.js" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
