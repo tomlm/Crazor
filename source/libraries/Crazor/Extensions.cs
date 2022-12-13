@@ -82,6 +82,15 @@ namespace Crazor
                             cardAppFactory.Add(appName, typeof(CardApp));
                         }
                     }
+                    else
+                    {
+                        parts = cardViewType.FullName!.Split('.');
+                        string? appName = parts.SkipWhile(p => p.ToLower() != "cards").Skip(1).FirstOrDefault();
+                        if (appName != null && !cardAppFactory.HasRegistration(appName))
+                        {
+                            cardAppFactory.Add(appName, typeof(CardApp));
+                        }
+                    }
                 }
                 return cardAppFactory;
             });

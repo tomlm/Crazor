@@ -1,0 +1,56 @@
+﻿@using AdaptiveCards;
+@using Crazor.Controllers;
+@using Microsoft.Bot.Schema;
+@using Microsoft.Extensions.Configuration;
+@using Microsoft.JSInterop;
+@using Newtonsoft.Json;
+@using Newtonsoft.Json.Linq;
+@inject IJSRuntime JS
+@inject IConfiguration Configuration;
+@inject CardAppFactory CardAppFactory;
+
+<div id='@CardId' class="cardDiv">
+</div>
+
+@code {
+    public string CardId { get; set; } = $"card{Utils.GetNewId()}";
+
+
+    private string BotUrl;
+
+    private string ChannelId;
+
+    [Parameter]
+    public string Route { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        BotUrl = Configuration.GetValue<string>("BotUri") ?? new Uri(Configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
+        ChannelId = Configuration.GetValue<Uri>("HostUri").Host;
+
+        var cardRoute = CardRoute.Parse(Route);
+
+        var cardApp = CardAppFactory.Create(cardRoute, null);
+        ArgumentNullException.ThrowIfNull(cardApp);
+
+        var loadRouteActivity = new Activity(ActivityTypes.Invoke)
+        {
+            ServiceUrl = "https://about",
+            ChannelId = this.ChannelId,
+            Id = Guid.NewGuid().ToString("n"),
+            From = new ChannelAccount() { Id = String.Empty },
+            Recipient = new ChannelAccount() { Id = "bot" },
+            Conversation = new ConversationAccount() { Id = Utils.GetNewId() },
+            Timestamp = DateTimeOffset.UtcNow,
+            LocalTimestamp = DateTimeOffset.Now,
+        }
+        .CreateLoadRouteActivity(cardRoute.Route);
+
+        var card = await cardApp.ProcessInvokeActivity(loadRouteActivity, isPreview: false, default);
+        this.Route = cardApp.GetCurrentCardRoute();
+        //renderCrazorCard('@CardId', '@ChannelId', '@BotUri', '@RouteUrl', @Microsoft.AspNetCore.Html.Raw(JsonConvert.SerializeObject(AdaptiveCard, Formatting.Indented)));
+        var token = await CardAppController.GetTokenAsync(Configuration);
+        await JS.InvokeVoidAsync("renderCrazorCard", CardId, ChannelId, BotUrl, Route, cardRoute.SessionId, token, JsonConvert.SerializeObject(card));
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

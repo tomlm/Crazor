@@ -2,6 +2,8 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Crazor.Blazor
@@ -15,7 +17,8 @@ namespace Crazor.Blazor
             // add CardViews 
             var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
                             asm.DefinedTypes
-                                .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))).ToList();
+                                .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
+                                .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
             foreach (var cardViewType in cardViewTypes)
             {
                 services.AddTransient(cardViewType);
@@ -35,7 +38,7 @@ namespace Crazor.Blazor
             // add RouteManager
             services.AddScoped<IRouteResolver>((sp) =>
             {
-                ReouteResolver routeResolver = new ReouteResolver();
+                RouteResolver routeResolver = new RouteResolver();
                 foreach (var cardViewType in cardViewTypes)
                 {
                     routeResolver.AddCardViewType(cardViewType);
@@ -45,5 +48,17 @@ namespace Crazor.Blazor
 
             return services;
         }
+
+        public static IApplicationBuilder UseCrazor(this IApplicationBuilder builder)
+        {
+            var fileProvider = new EmbeddedFileProvider2(typeof(CardView).Assembly);
+            builder.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = fileProvider,
+                RequestPath = new PathString("")
+            });
+            return builder;
+        }
+
     }
 }

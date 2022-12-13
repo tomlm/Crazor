@@ -2,10 +2,13 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
+using BlazorTemplater;
+using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -17,6 +20,8 @@ namespace Crazor.Blazor
     public class CardViewBase<AppT> : ComponentBase, ICardView
         where AppT : CardApp
     {
+        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "ComponentBase" };
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardViewBase()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -218,12 +223,10 @@ namespace Crazor.Blazor
             try
             {
 
-                //using (StringWriter writer = new StringWriter())
-                //{
-                //    this.ViewContext.Writer = writer;
-                //    await this.RazorView!.RenderAsync(this.ViewContext);
-                //    xml = writer.ToString().Trim();
-                //}
+                // create a RenderFragment from the component
+                var templater = new Templater();
+                
+                xml = templater.RenderComponent(this.GetType(), new Dictionary<string, object>());
 
                 if (!string.IsNullOrWhiteSpace(xml))
                 {
@@ -299,7 +302,12 @@ namespace Crazor.Blazor
             //}
             //else
             {
-                return Name != Constants.DEFAULT_VIEW ? Name : string.Empty;
+                var parts = Name.Split(".");
+                var routeParts = parts.SkipWhile(p => p.ToLower() != "cards").Skip(2).ToList();
+                if (routeParts.FirstOrDefault() == "Default")
+                    routeParts = routeParts.Skip(1).ToList();
+                string route = String.Join("/", routeParts);
+                return route;
             }
         }
         #endregion -----
@@ -423,10 +431,43 @@ namespace Crazor.Blazor
             this.App.CloseTaskModule(status);
         }
 
-        public void SaveState(CardViewState cardState)
+        public void SaveState(CardViewState state)
         {
-            throw new NotImplementedException();
+            // capture all properties on CardView which are not on base type and not ignored.
+            foreach (var property in this.GetType().GetProperties().Where(prop => PersistProperty(prop)))
+            {
+                var val = property.GetValue(this);
+                if (val != null)
+                {
+                    if (property.Name == "Model")
+                    {
+                        state.Model = val;
+                    }
+                    else
+                    {
+                        state.SessionMemory[property.Name] = JToken.FromObject(val);
+                    }
+                }
+            }
         }
+
+        private static bool PersistProperty(PropertyInfo propertyInfo)
+        {
+            if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
+                return true;
+
+            if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
+                return false;
+
+            if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
+                return false;
+
+            if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                return false;
+
+            return true;
+        }
+
         #endregion
     }
 

@@ -2,11 +2,13 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace Crazor.Mvc
 {
@@ -56,9 +58,20 @@ namespace Crazor.Mvc
                 return routeManager;
             });
 
+            // add embedded content
             return services;
         }
 
+        public static IApplicationBuilder UseCrazor(this IApplicationBuilder builder)
+        {
+            var fileProvider = new EmbeddedFileProvider2(typeof(CardView).Assembly);
+            builder.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = fileProvider,
+                RequestPath = new PathString("")
+            });
+            return builder;
+        }
     }
 
 }

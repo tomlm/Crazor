@@ -24,7 +24,10 @@ namespace Crazor.Mvc.Pages.Cards
             BotUri = context.Configuration.GetValue<string>("BotUri") ?? new Uri(context.Configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
             ChannelId = context.Configuration.GetValue<Uri>("HostUri").Host;
             Context = context;
+            CardId = $"card{Utils.GetNewId()}";
         }
+
+        public string CardId { get; set; }
 
         public string BotUri { get; set; }
 
@@ -35,6 +38,7 @@ namespace Crazor.Mvc.Pages.Cards
         public AdaptiveCard? AdaptiveCard { get; set; }
 
         public string RouteUrl { get; set; }
+
         public CardAppContext Context { get; }
 
         public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
@@ -51,8 +55,6 @@ namespace Crazor.Mvc.Pages.Cards
 
             var uri = new Uri(Request.GetDisplayUrl());
             var cardRoute = CardRoute.FromUri(uri);
-            cardRoute.SessionId = Utils.GetNewId();
-
             this.CardApp = Context.CardAppFactory.Create(cardRoute, null);
 
             ArgumentNullException.ThrowIfNull(this.CardApp);

@@ -43,6 +43,7 @@ if (!Debugger.IsAttached)
     app.UseHttpsRedirection();
 }
 app.UseStaticFiles();
+app.UseCrazor();
 app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();

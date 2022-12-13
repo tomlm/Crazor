@@ -5,6 +5,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="hostconfig.js" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -42,11 +45,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Bot.Schema" Version="4.18.1" />
+	  <EmbeddedResource Include="wwwroot/**/**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
 	</ItemGroup>
+
 </Project>

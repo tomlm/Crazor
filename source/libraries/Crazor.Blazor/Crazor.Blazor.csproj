@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -6,14 +6,17 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <EmbeddedResource Include="wwwroot/**/**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BlazorTemplater" Version="1.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
-		<PackageReference Include="Microsoft.Bot.Schema" Version="4.18.1" />
 	</ItemGroup>
 
 	<ItemGroup>

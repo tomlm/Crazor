@@ -439,10 +439,10 @@ namespace Crazor
             {
                 if (viewRoute.Length > 0)
                     uri.Path = $"/Cards/{this.Name}/{subPath}";
-                else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
-                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
-                else
+                else if (viewRoute.Length == 0)
                     uri.Path = $"/Cards/{this.Name}";
+                else
+                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
             }
 
             uri.Query = query;
