@@ -103,7 +103,6 @@ namespace Crazor.Blazor.Components
             .CreateActionInvokeActivity(action.Verb ?? Constants.SHOWVIEW_VERB, JObject.FromObject(action.Data));
 
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            var json = JsonConvert.SerializeObject(_card);
 
             StateHasChanged();
         }

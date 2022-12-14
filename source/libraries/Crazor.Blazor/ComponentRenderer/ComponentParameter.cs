@@ -4,8 +4,10 @@
 // Source: https://github.com/bUnit-dev/bUnit
 // --------------------------------------------------------------
 
+using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace Crazor.Blazor.ComponentRenderer;
 
@@ -108,9 +110,17 @@ public readonly struct ComponentParameter : IEquatable<ComponentParameter>
 
     public static IEnumerable<ComponentParameter> FromComponent(IComponent component)
     {
-        var props = component.GetType()
+        IEnumerable<PropertyInfo> props;
+        if (component is ICardView cv)
+        {
+            props = cv.GetPersistentProperties();
+        }
+        else
+        {
+            props = component.GetType()
                              .GetProperties()
                              .Where(p => Attribute.IsDefined(p, typeof(ParameterAttribute)));
+        }
 
         return props.Select(p => ComponentParameter.CreateParameter(p.Name, p.GetValue(component, null)));
     }

@@ -88,6 +88,18 @@ namespace Crazor.Blazor
             }
         }
 
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            // we do our own parameter setting because base class will reject any properties 
+            // without [Parameter] on them, but we want to pass all of our state through to the view
+            // that's being rendered
+            foreach (var parm in parameters)
+            {
+                this.SetTargetProperty(this.GetType().GetProperty(parm.Name), parm.Value);
+            }
+            return base.SetParametersAsync(ParameterView.Empty);
+        }
+
         /// <summary>
         /// OnInvokeActionAsync() - Called to process an incoming verb action.
         /// </summary>
