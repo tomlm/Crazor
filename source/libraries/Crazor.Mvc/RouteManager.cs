@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Crazor;
 using Crazor.Interfaces;
+using Crazor.Attributes;
 
 namespace Crazor.Mvc
 {
@@ -80,7 +81,7 @@ namespace Crazor.Mvc
                     _routes.Add(cardRoute.App, list);
                 }
 
-                var routes = cardViewType.GetCustomAttributes<RouteAttribute>();
+                var routes = cardViewType.GetCustomAttributes<CardRouteAttribute>();
                 if (!routes.Any())
                 {
                     list.Add(new RouteTemplate
@@ -114,7 +115,7 @@ namespace Crazor.Mvc
             else
             {
                 string route = $"/{cardViewType.Namespace.Substring(cardViewType.Namespace.IndexOf("Cards")).Replace('.','/')}";
-                var routeAttribute = cardViewType.GetCustomAttribute<RouteAttribute>();
+                var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
                 if (routeAttribute != null)
                 {
                     if (routeAttribute.Template.StartsWith('/'))

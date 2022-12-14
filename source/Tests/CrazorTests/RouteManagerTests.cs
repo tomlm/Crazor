@@ -1,4 +1,5 @@
 using Crazor;
+using Crazor.Attributes;
 using Crazor.Test;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Crazor.Mvc.Tests
     {
     }
 
-    [Route("{value}")]
+    [CardRoute("{value}")]
     public class Cards_Route_Path1 : CardView
     {
         public void OnLoadRoute(string value)
@@ -26,7 +27,7 @@ namespace Crazor.Mvc.Tests
     }
 
 
-    [Route("resource/{resourceId}")]
+    [CardRoute("resource/{resourceId}")]
     public class Cards_Route_Path2 : CardView
     {
         public void OnLoadRoute(string resourceId)
@@ -35,7 +36,7 @@ namespace Crazor.Mvc.Tests
         }
     }
 
-    [Route("resource/{value}/sub/{subvalue}")]
+    [CardRoute("resource/{value}/sub/{subvalue}")]
     public class Cards_Route_Path3 : CardView
     {
         public void OnLoadRoute(string value, string subvalue)
@@ -45,12 +46,12 @@ namespace Crazor.Mvc.Tests
         }
     }
 
-    [Route("resource/delete")]
+    [CardRoute("resource/delete")]
     public class Cards_Route_PathWithStatic : CardView
     {
     }
 
-    [Route("optional/{value?}")]
+    [CardRoute("optional/{value?}")]
     public class Cards_Route_OptionalPath: CardView
     {
     }

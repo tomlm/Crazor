@@ -1,11 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Crazor.Attributes;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace Crazor.Blazor
@@ -50,7 +47,7 @@ namespace Crazor.Blazor
             List<RouteTemplate> list;
 
             string route = $"/{cardViewType.Namespace.Substring(cardViewType.Namespace.IndexOf("Cards")).Replace('.', '/')}";
-            var routeAttribute = cardViewType.GetCustomAttribute<RouteAttribute>();
+            var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
             if (routeAttribute != null)
             {
                 if (routeAttribute.Template.StartsWith('/'))

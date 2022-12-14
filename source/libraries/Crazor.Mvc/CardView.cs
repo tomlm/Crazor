@@ -343,7 +343,7 @@ namespace Crazor.Mvc
         /// <returns>relative path to the card for deep linking</returns>
         public virtual string GetRoute()
         {
-            var routeAttr = this.GetType().GetCustomAttribute<RouteAttribute>();
+            var routeAttr = this.GetType().GetCustomAttribute<CardRouteAttribute>();
             if (routeAttr != null)
             {
                 StringBuilder sb = new StringBuilder();
