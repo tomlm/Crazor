@@ -15,7 +15,7 @@
     <Input.Number Binding="Model.Item.Price" />
     <Input.Text Binding="Model.Item.PictureUri" Label="Picture Url" ErrorMessage="The Picture Url is required." />
 
-    <Action.Cancel />
-    <Action.OK Title="Save" />
+    <Action.Execute Verb="OnCancel" Title="Cancel" />
+    <Action.Execute Verb="OnOK" Title="Save" />
 </Card>
 

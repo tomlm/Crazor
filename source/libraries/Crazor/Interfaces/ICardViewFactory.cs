@@ -5,10 +5,6 @@ namespace Crazor.Interfaces
 {
     public interface ICardViewFactory
     {
-        void Add(string name, Type type);
-
-        IEnumerable<string> GetNames();
-
-        ICardView Create(string fullTypeName);
+        ICardView Create(Type cardViewType);
     }
 }

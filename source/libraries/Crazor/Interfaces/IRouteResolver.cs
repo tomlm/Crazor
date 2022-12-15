@@ -1,11 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.AspNetCore.Components.Web;
+
 namespace Crazor.Interfaces
 {
     public interface IRouteResolver
     {
         void AddCardViewType(Type type);
+
+        bool IsRouteValid(CardRoute route);
 
         bool ResolveRoute(CardRoute route, out Type? cardViewType);
     }

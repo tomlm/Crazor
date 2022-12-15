@@ -6,8 +6,8 @@
 
     <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />
 
-    <Action.Cancel />
-    <Action.OK />
+    <Action.Execute Verb="OnCancel" Title="Cancel" />
+    <Action.Execute Verb="OnOK" Title="OK"/>
 </Card>
 
 @code {

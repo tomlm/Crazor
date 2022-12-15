@@ -8,9 +8,9 @@
 
     @if (IsModelValid)
     {
-        <Action.Cancel />
+        <Action.Execute Verb="OnCancel" Title="Cancel" />
     }
-    <Action.OK />
+    <Action.Execute Verb="OnOK" Title="OK"/>
 </Card>
 
 @code {

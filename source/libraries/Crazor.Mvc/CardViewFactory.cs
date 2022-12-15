@@ -21,7 +21,6 @@ namespace Crazor.Mvc
     /// </summary>
     public class CardViewFactory : ICardViewFactory
     {
-        private readonly Dictionary<string, Type> _views = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
         private readonly IServiceProvider _serviceProvider;
         private readonly IRazorViewEngine _razorEngine;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -37,30 +36,15 @@ namespace Crazor.Mvc
             _razorEngine = engine;
             _httpContextAccessor = httpContextAccessor;
             _tempDataProvider = tempDataProvider;
-
-            foreach (var cardViewType in CardView.GetCardViewTypes())
-            {
-                this.Add(cardViewType.FullName, cardViewType);
-            }
         }
 
-        public void Add(string name, Type type)
-        {
-            ArgumentNullException.ThrowIfNull(name);
-            ArgumentNullException.ThrowIfNull(type);
-            _views[name] = type;
-        }
-
-        public IEnumerable<string> GetNames() => _views.Keys.OrderBy(n => n);
-
-
-        public ICardView Create(string typeName)
+        public ICardView Create(Type cardViewType)
         {
             IMvcCardView cardView = null;
             IView view = null;
 
             // if it is a CSHTML file it will have Cards_ in the name
-            var parts = typeName.Split('.');
+            var parts = cardViewType.FullName.Split('.');
             if (parts.Any(p => p.ToLower().StartsWith("cards_")))
             {
                 parts = parts.Last().Split('_');
@@ -75,7 +59,7 @@ namespace Crazor.Mvc
                     cardView.RazorView = viewResult.View;
                 }
             }
-            else if (_views.TryGetValue(typeName, out var cardViewType))
+            else 
             {
                 cardView = (IMvcCardView)_serviceProvider.GetService(cardViewType);
                 view = new ViewStub();

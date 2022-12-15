@@ -9,8 +9,8 @@
     <Input.Text Binding="Zip" />
     <Input.Text Binding="City" />
 
-    <Action.Cancel />
-    <Action.OK />
+    <Action.Execute Verb="OnCancel" Title="Cancel" />
+    <Action.Execute Verb="OnOK" Title="OK"/>
 </Card>
 
 @code {

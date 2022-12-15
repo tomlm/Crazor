@@ -13,7 +13,7 @@
 }
 
 <Card Version="1.5" Title="Edit Address">
-    <TextBlock Class="H1">Edit Address</TextBlock>
+    <TextBlock >Edit Address</TextBlock>
 
     <Input.Text Binding="Model.Street" />
     <Input.Text Binding="Model.City" />
@@ -21,8 +21,8 @@
     <Input.Text Binding="Model.PostalCode" Regex="" />
     <Input.ChoiceSet Binding="Model.Country" />
 
-    <Action.Cancel />
-    <Action.OK />
+    <Action.Execute Verb="OnCancel" Title="Cancel" />
+    <Action.Execute Verb="OnOK" Title="OK"/>
 </Card>
 
 @code {

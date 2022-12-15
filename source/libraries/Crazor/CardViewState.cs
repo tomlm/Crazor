@@ -5,28 +5,32 @@ using System.Diagnostics;
 
 namespace Crazor
 {
+    /// <summary>
+    /// CardViewState
+    /// </summary>
+    /// <remarks>
+    /// CardViewState contains the persisted state for a route which is pushed onto the callstack.
+    /// The Route is run throuh RouteResolver to instantiate the appropriate CardView 
+    /// </remarks>
     [DebuggerDisplay("{Name}")]
-    public class CardViewState 
+    public class CardViewState
     {
-        public CardViewState() 
-        { 
-        }
+        public CardViewState() { }
 
-        public CardViewState(Type cardViewType, object? model=null)
+        public CardViewState(string route, object? model = null)
         {
-            Name = cardViewType.FullName;
+            Route = CardRoute.Parse(route).Route;
             if (model is CardApp)
             {
                 throw new ArgumentException("CardApp can't be the model");
             }
-            else
-            {
-                Model = model;
-            }
+            Model = model;
         }
 
-        // name of the card view
-        public string Name { get; set; } = String.Empty;
+        /// <summary>
+        /// Route this state represents
+        /// </summary>
+        public string Route { get; set; } = String.Empty;
 
         public bool Initialized { get; set; }
 

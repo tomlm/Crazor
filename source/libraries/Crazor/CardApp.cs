@@ -329,9 +329,9 @@ namespace Crazor
                 route = $"/Cards/{this.Name}/{route}".TrimEnd('/');
             }
 
-            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse(route), out var cardViewType))
+            if (Context.RouteResolver.IsRouteValid(CardRoute.Parse(route)))
             {
-                var cardViewState = new CardViewState(cardViewType, model);
+                var cardViewState = new CardViewState(route, model);
                 CallStack.Insert(0, cardViewState);
                 Action!.Verb = Constants.SHOWVIEW_VERB;
                 SetCurrentView(cardViewState);
@@ -354,9 +354,9 @@ namespace Crazor
                 route = $"/Cards/{this.Name}/{route}".TrimEnd('/');
             }
 
-            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse(route), out var cardViewType))
+            if (Context.RouteResolver.IsRouteValid(CardRoute.Parse(route)))
             {
-                var cardState = new CardViewState(cardViewType!, model);
+                var cardState = new CardViewState(route, model);
                 this.CallStack[0] = cardState;
                 Action!.Verb = Constants.SHOWVIEW_VERB;
                 SetCurrentView(cardState);
@@ -379,8 +379,8 @@ namespace Crazor
             if (!this.CallStack.Any())
             {
                 CardRoute route = CardRoute.Parse($"/Cards/{this.Name}");
-                if (this.Context.RouteResolver.ResolveRoute(route, out var cardViewType))
-                    this.CallStack.Insert(0, new CardViewState(cardViewType));
+                if (Context.RouteResolver.IsRouteValid(route))
+                    this.CallStack.Insert(0, new CardViewState(route.Route));
                 else
                     throw new Exception("No default route!");
             }
@@ -446,7 +446,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(cancellationToken);
             ArgumentNullException.ThrowIfNull(activity);
 
-            if (!Context.RouteResolver.ResolveRoute(this.Route, out var cardViewType))
+            if (!Context.RouteResolver.IsRouteValid(this.Route))
             {
                 throw new Exception($"{this.Route} is not a valid route");
             }
@@ -489,7 +489,7 @@ namespace Crazor
 
             if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
-                var cardState = new CardViewState(cardViewType!);
+                var cardState = new CardViewState(this.Route.Route);
                 CallStack.Insert(0, cardState);
                 SetCurrentView(cardState);
                 return;
@@ -498,7 +498,7 @@ namespace Crazor
             if (!this.CallStack.Any())
             {
                 // initialize view for the route.
-                var cardState = new CardViewState(cardViewType!);
+                var cardState = new CardViewState(this.Route.Route!);
                 CallStack.Insert(0, cardState);
             }
 
@@ -543,7 +543,8 @@ namespace Crazor
             ICardView cardView;
             try
             {
-                cardView = Context.CardViewFactory.Create(cardState.Name);
+                Context.RouteResolver.ResolveRoute(CardRoute.Parse(cardState.Route), out var cardViewType);
+                cardView = Context.CardViewFactory.Create(cardViewType);
                 ArgumentNullException.ThrowIfNull(cardView);
             }
             catch (ArgumentException)

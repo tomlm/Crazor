@@ -20,6 +20,12 @@ namespace Crazor.Blazor
             }
         }
 
+        public bool IsRouteValid(CardRoute route)
+        {
+            return ResolveRoute(route, out var type);
+        }
+
+
         public bool ResolveRoute(CardRoute route, out Type? type)
         {
             type = null;

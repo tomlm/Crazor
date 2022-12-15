@@ -24,6 +24,11 @@ namespace Crazor.Mvc
 
         }
 
+        public bool IsRouteValid(CardRoute route)
+        {
+            return ResolveRoute(route, out var type);
+        }
+
         public bool ResolveRoute(CardRoute route, out Type? type)
         {
             type = null;
@@ -157,5 +162,6 @@ namespace Crazor.Mvc
             }
             _routes[cardRoute.App] = list.OrderBy(o => o.Order).ThenByDescending(o => o.Template).ToList();
         }
+
     }
 }
