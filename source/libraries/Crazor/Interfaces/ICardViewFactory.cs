@@ -9,10 +9,6 @@ namespace Crazor.Interfaces
 
         IEnumerable<string> GetNames();
 
-        ICardView Create(CardRoute route);
-
         ICardView Create(string fullTypeName);
-
-        bool HasView(string nameOrRoute);
     }
 }

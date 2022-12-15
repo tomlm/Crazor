@@ -2,7 +2,6 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -14,17 +13,12 @@ namespace Crazor.Interfaces
         /// <summary>
         /// Name of the template
         /// </summary>
-        string Name { get; set; }
+        string Name { get; }
 
         /// <summary>
         /// App reference
         /// </summary>
         CardApp App { get; set; }
-
-        /// <summary>
-        /// Current action
-        /// </summary>
-        AdaptiveCardInvokeAction Action { get; set; }
 
         /// <summary>
         /// Validation errors for the current view.
@@ -67,8 +61,9 @@ namespace Crazor.Interfaces
         IEnumerable<PropertyInfo> GetPersistentProperties();
 
         /// <summary>
-        /// Bind the view to the card
+        /// Render the card 
         /// </summary>
+        /// <param name="isPreview">IsPreview is signal that anonymous preview card should be returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);

@@ -14,6 +14,10 @@ namespace Crazor.Blazor
 
         public RouteResolver()
         {
+            foreach (var cardViewType in CardView.GetCardViewTypes())
+            {
+                this.AddCardViewType(cardViewType);
+            }
         }
 
         public bool ResolveRoute(CardRoute route, out Type? type)
@@ -59,6 +63,10 @@ namespace Crazor.Blazor
                     route = $"{route}/{routeAttribute.Template}";
                 }
             }
+            else if (cardViewType.Name.ToLower() != "default")
+            {
+                route += $"/{cardViewType.Name}";
+            }
             cardRoute = CardRoute.Parse(route);
             int order = 0;
 
@@ -68,7 +76,7 @@ namespace Crazor.Blazor
                 _routes.Add(cardRoute.App, list);
             }
             var parts = route.TrimStart('/').Split('/');
-            var cardTemplate = parts.Skip(2).SingleOrDefault() ?? string.Empty;
+            var cardTemplate = parts.Skip(2).FirstOrDefault() ?? string.Empty;
             if (cardTemplate.ToLower() == "Default")
                 cardTemplate = String.Empty;
 

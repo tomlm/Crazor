@@ -12,10 +12,5 @@ namespace Crazor.Mvc
 
         IView RazorView { get; set; }
 
-        /// <summary>
-        /// UrlHelper for creating links to resources on this service.
-        /// </summary>
-        public IUrlHelper UrlHelper { get; set; }
-
     }
 }

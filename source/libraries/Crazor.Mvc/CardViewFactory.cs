@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Http;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Crazor.Mvc
 {
@@ -25,20 +26,22 @@ namespace Crazor.Mvc
         private readonly IRazorViewEngine _razorEngine;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataProvider _tempDataProvider;
-        private readonly IUrlHelper _urlHelper;
 
         public CardViewFactory(
             IServiceProvider serviceProvider,
             IRazorViewEngine engine,
             IHttpContextAccessor httpContextAccessor,
-            ITempDataProvider tempDataProvider,
-            IUrlHelper urlHelper)
+            ITempDataProvider tempDataProvider)
         {
             _serviceProvider = serviceProvider;
             _razorEngine = engine;
             _httpContextAccessor = httpContextAccessor;
             _tempDataProvider = tempDataProvider;
-            _urlHelper = urlHelper;
+
+            foreach (var cardViewType in CardView.GetCardViewTypes())
+            {
+                this.Add(cardViewType.FullName, cardViewType);
+            }
         }
 
         public void Add(string name, Type type)
@@ -50,75 +53,44 @@ namespace Crazor.Mvc
 
         public IEnumerable<string> GetNames() => _views.Keys.OrderBy(n => n);
 
-        /// <summary>
-        /// HasView
-        /// </summary>
-        /// <param name="viewName"></param>
-        /// <returns>true or false</returns>
-        public bool HasView(string nameOrRoute)
-        {
-            if (nameOrRoute.StartsWith("/Cards"))
-            {
-                var cardRoute = CardRoute.Parse(nameOrRoute);
-                var viewPath = Path.Combine("Cards", cardRoute.App, $"{cardRoute.View}.cshtml");
-                var viewResult = _razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-                return (viewResult?.View != null);
-            }
-            return _views.ContainsKey(nameOrRoute);
-        }
-
-        public ICardView Create(CardRoute route)
-        {
-            IMvcCardView cardView;
-            IView view;
-
-            var viewPath = Path.Combine("Cards", route.App, $"{route.View}.cshtml");
-            var viewResult = _razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-
-            view = viewResult?.View;
-            if (view != null)
-            {
-                cardView = (IMvcCardView)((RazorView)viewResult.View).RazorPage;
-                cardView.UrlHelper = _urlHelper;
-                cardView.RazorView = viewResult.View;
-            }
-            else
-            {
-                throw new ArgumentNullException($"Unknown route {route.Route}");
-            }
-
-            PrepView((RazorPage)cardView, view);
-            return cardView;
-        }
 
         public ICardView Create(string typeName)
         {
-            IMvcCardView cardView;
-            IView view;
+            IMvcCardView cardView = null;
+            IView view = null;
 
-            if (!_views.TryGetValue(typeName, out var cardViewType))
+            // if it is a CSHTML file it will have Cards_ in the name
+            var parts = typeName.Split('.');
+            if (parts.Any(p => p.ToLower().StartsWith("cards_")))
             {
-                throw new Exception($"{typeName} is not a known type");
+                parts = parts.Last().Split('_');
+                parts[parts.Length - 1] = parts[parts.Length - 1] + ".cshtml";
+                var viewPath = Path.Combine(parts.ToArray());
+                var viewResult = _razorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
+
+                view = viewResult?.View;
+                if (view != null)
+                {
+                    cardView = (IMvcCardView)((RazorView)viewResult.View).RazorPage;
+                    cardView.RazorView = viewResult.View;
+                }
             }
-            cardView = (IMvcCardView)_serviceProvider.GetService(cardViewType);
-            cardView.UrlHelper = _urlHelper;
-            view = new ViewStub();
+            else if (_views.TryGetValue(typeName, out var cardViewType))
+            {
+                cardView = (IMvcCardView)_serviceProvider.GetService(cardViewType);
+                view = new ViewStub();
+            }
+            ArgumentNullException.ThrowIfNull(cardView);
 
-            PrepView((RazorPage)cardView, view);
-            return cardView;
-        }
-
-
-        private void PrepView(RazorPage razorPage, IView view)
-        {
             ActionContext actionContext = new ActionContext(_httpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
             {
-                 // Model = cardState.Model
+                // Model = cardState.Model
             };
 
             var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, _tempDataProvider), new StringWriter(), new HtmlHelperOptions());
-            razorPage.ViewContext = viewContext;
+            ((RazorPage)cardView).ViewContext = viewContext;
+            return cardView;
         }
 
 

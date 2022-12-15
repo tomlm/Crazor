@@ -5,6 +5,7 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
@@ -29,6 +30,14 @@ namespace Crazor.Mvc
     {
         private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "RazorPage", "RazorPageBase" };
 
+        public static IEnumerable<Type> GetCardViewTypes()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
+                asm.DefinedTypes
+                    .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
+                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
+        }
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardViewBase()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -38,7 +47,7 @@ namespace Crazor.Mvc
         /// <summary>
         /// Name of the CardView
         /// </summary>
-        public string Name { get; set; }
+        public string Name => this.GetType().Name.Split('_').Last();
 
         /// <summary>
         /// Razor view
@@ -51,12 +60,6 @@ namespace Crazor.Mvc
         CardApp ICardView.App { get => App; set => App = (AppT)value; }
 
         public AppT App { get; set; }
-
-        /// <summary>
-        /// Current action being processed.
-        /// </summary>
-        public AdaptiveCardInvokeAction Action { get; set; }
-
         /// <summary>
         /// True if the model and properites on the view have passed validation
         /// </summary>
@@ -77,11 +80,6 @@ namespace Crazor.Mvc
         /// True if the card is being rendered to be shared with people without session data
         /// </summary>
         public bool IsPreview { get; set; }
-
-        /// <summary>
-        /// UrlHelper for creating links to resources on this service.
-        /// </summary>
-        public IUrlHelper UrlHelper { get; set; }
 
         /// <summary>
         /// IView->ExecuteAsync is disabled because the default writes the output directly to 
@@ -127,10 +125,9 @@ namespace Crazor.Mvc
         public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.App);
-            this.Action = action;
 
             // Process BindProperty tags
-            var data = (JObject)JObject.FromObject(this.Action.Data).DeepClone();
+            var data = (JObject)JObject.FromObject(action.Data).DeepClone();
             this.BindProperties(data);
 
             MethodInfo? verbMethod = null;
@@ -204,11 +201,11 @@ namespace Crazor.Mvc
                 this.Validate();
             }
 
-            switch (Action.Verb)
+            switch (action.Verb)
             {
                 case Constants.CANCEL_VERB:
                     // if there is an OnCancel, call it
-                    if (await this.InvokeVerbAsync(this.Action, cancellationToken) == false)
+                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         // default implementation 
                         this.CancelView();
@@ -216,7 +213,7 @@ namespace Crazor.Mvc
                     break;
 
                 case Constants.OK_VERB:
-                    if (await this.InvokeVerbAsync(this.Action, cancellationToken) == false)
+                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         if (IsModelValid)
                         {
@@ -374,7 +371,7 @@ namespace Crazor.Mvc
         /// This is effectively like a constructor, with no async support.  If you
         /// want to look up data to look at OnLoadCardAsync
         /// </remarks>
-        public virtual void OnInitialized()
+        protected virtual void OnInitialized()
         {
         }
 
@@ -431,16 +428,6 @@ namespace Crazor.Mvc
         }
 
         /// <summary>
-        /// Navigate to view by type
-        /// </summary>
-        /// <typeparam name="T">type of the object to navigate to</typeparam>
-        /// <param name="model">model</param>
-        public void ShowView<T>(object? model = null)
-        {
-            this.App!.ShowView(typeof(T).FullName!, model);
-        }
-
-        /// <summary>
         /// Replace this view with another one 
         /// </summary>
         /// <param name="cardName"></param>
@@ -448,16 +435,6 @@ namespace Crazor.Mvc
         public void ReplaceView(string cardName, object? model = null)
         {
             this.App!.ReplaceView(cardName, model);
-        }
-
-        /// <summary>
-        /// Replace this view with another one 
-        /// </summary>
-        /// <typeparam name="T">Type to instantiate</typeparam>
-        /// <param name="model">model to pass</param>
-        public void ReplaceView<T>(object? model = null)
-        {
-            this.App!.ReplaceView(typeof(T).FullName!, model);
         }
 
         /// <summary>

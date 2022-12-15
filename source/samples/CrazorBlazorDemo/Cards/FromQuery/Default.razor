@@ -1,0 +1,21 @@
+﻿@inherits CardView
+@attribute [CardRoute("{Name?}")]
+<Card Version="1.5">
+    @if (String.IsNullOrEmpty(Name))
+    {
+        <TextBlock>[Click here](/Cards/FromQuery?name=joe) to pass name via Query Parameter</TextBlock>
+        <TextBlock>[Click here](/Cards/FromQuery/fred) to pass name via route</TextBlock>
+    }
+    else
+    {
+        <TextBlock>Hello @Name!</TextBlock>
+    }
+</Card>
+
+@code
+{
+    [BindProperty]
+    [Required]
+    [FromQuery]
+    public string Name { get; set; }
+}

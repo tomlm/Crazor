@@ -47,6 +47,10 @@ namespace Crazor
                     if (templatePart.StartsWith('{') && templatePart.EndsWith('}'))
                     {
                         propertyName = templatePart.Trim('{', '}');
+                        if (String.IsNullOrEmpty(part) && !propertyName.EndsWith("?"))
+                        {
+                            return false;
+                        }
                         data[propertyName.TrimEnd('?')] = part;
                     }
                     else if (String.IsNullOrEmpty(part))

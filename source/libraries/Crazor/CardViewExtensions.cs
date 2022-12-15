@@ -20,7 +20,7 @@ namespace Crazor
             var verbMethod = cardView.GetMethod(action.Verb);
             if (verbMethod != null)
             {
-                await cardView.InvokeMethodAsync(verbMethod, cardView.GetMethodArgs(verbMethod, (JObject?)cardView.Action?.Data, cancellationToken));
+                await cardView.InvokeMethodAsync(verbMethod, cardView.GetMethodArgs(verbMethod, (JObject?)action?.Data, cancellationToken));
                 return true;
             }
             return false;

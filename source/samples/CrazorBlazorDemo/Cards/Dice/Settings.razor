@@ -1,0 +1,26 @@
+﻿@using Crazor
+@using CrazorBlazorDemo.Cards.Dice
+@inherits CardView<DiceApp>
+
+<Card Version="1.5">
+    <Input.Text Binding="App.DiceName" />
+    <Input.Number Binding="App.NumberDice" />
+
+    @if (IsModelValid)
+    {
+        <Action.Cancel />
+    }
+    <Action.OK />
+</Card>
+
+@code {
+    public void OnOK()
+    {
+        if (this.IsModelValid)
+        {
+            this.App.RollDice();
+            this.CloseTaskModule(TaskModuleAction.Auto);
+            CloseView();
+        }
+    }
+}

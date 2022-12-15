@@ -18,47 +18,14 @@ namespace Crazor.Mvc
         {
             services.AddCrazorCore();
 
-            services.AddScoped<IUrlHelper, UrlHelperProxy>();
-
             // add CardViews 
-            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
-                            asm.DefinedTypes
-                                .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
-                                .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
-            foreach (var cardViewType in cardViewTypes)
+            foreach (var cardViewType in CardView.GetCardViewTypes())
             {
                 services.AddTransient(cardViewType);
             }
 
-            services.AddScoped<ICardViewFactory, CardViewFactory>((sp) =>
-            {
-                // Ugh, why do I suck so bad at factoring DI?
-                var factory = new CardViewFactory(sp, 
-                    sp.GetRequiredService<IRazorViewEngine>(), 
-                    sp.GetRequiredService<IHttpContextAccessor>(), 
-                    sp.GetRequiredService<ITempDataProvider>(),
-                    sp.GetRequiredService<IUrlHelper>());
-
-                foreach (var cardViewType in cardViewTypes)
-                {
-                    factory.Add(cardViewType.FullName, cardViewType);
-                }
-
-                return factory;
-            });
-
-            // add RouteResolver
-            services.AddScoped<IRouteResolver>((sp) =>
-            {
-                RouteResolver routeManager = new RouteResolver();
-                foreach (var cardViewType in cardViewTypes)
-                {
-                    routeManager.AddCardViewType(cardViewType);
-                }
-                return routeManager;
-            });
-
-            // add embedded content
+            services.AddScoped<ICardViewFactory, CardViewFactory>();
+            services.AddScoped<IRouteResolver, RouteResolver>();
             return services;
         }
 

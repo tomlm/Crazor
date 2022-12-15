@@ -7,6 +7,7 @@ using System.Reflection;
 using Crazor;
 using Crazor.Interfaces;
 using Crazor.Attributes;
+using Microsoft.AspNetCore.Identity;
 
 namespace Crazor.Mvc
 {
@@ -16,6 +17,11 @@ namespace Crazor.Mvc
 
         public RouteResolver()
         {
+            foreach (var cardViewType in CardView.GetCardViewTypes())
+            {
+                this.AddCardViewType(cardViewType);
+            }
+
         }
 
         public bool ResolveRoute(CardRoute route, out Type? type)

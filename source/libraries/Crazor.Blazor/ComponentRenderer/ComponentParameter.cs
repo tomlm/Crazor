@@ -113,7 +113,7 @@ public readonly struct ComponentParameter : IEquatable<ComponentParameter>
         IEnumerable<PropertyInfo> props;
         if (component is ICardView cv)
         {
-            props = cv.GetPersistentProperties();
+            props = component.GetType().GetProperties().Where(pi => pi.CanWrite);
         }
         else
         {

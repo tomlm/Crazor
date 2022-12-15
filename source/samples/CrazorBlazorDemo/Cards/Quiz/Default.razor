@@ -1,0 +1,71 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Math Quiz</TextBlock>
+    @if (TotalGuesses > 0)
+    {
+        <Container Style="Emphasis">
+            <TextBlock>You have guessed correct @(((float)CorrectGuesses / (float)TotalGuesses).ToString("0.0%")) of the time.</TextBlock>
+        </Container>
+    }
+    <TextBlock Size="Medium" Wdith="Bolder">What is @Number1 + @Number2?</TextBlock>
+    <Input.Text Id="answer" Label="Your answer?" Placeholder="Enter in your answer as a number."/>
+
+    <Action.Execute Title="Submit" Verb="@nameof(OnSubmit)" />
+
+</Card>
+
+@code {
+
+    public int CorrectGuesses { get; set; } = 0;
+
+    public int TotalGuesses { get; set; } = 0;
+
+    public int Number1 { get; set; }
+
+    public int Number2 { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        NextQuestion();
+    }
+
+    public bool CheckAnswer(int answer)
+    {
+        TotalGuesses++;
+        if (answer == (Number1 + Number2))
+        {
+            CorrectGuesses++;
+            return true;
+        }
+        return false;
+    }
+
+    public void NextQuestion()
+    {
+        Random random = new Random();
+        Number1 = random.Next(100);
+        Number2 = random.Next(100);
+    }
+
+    public void OnSubmit(string answer)
+    {
+        if (!int.TryParse(answer, out int result))
+        {
+            AddBannerMessage($"{answer} is not a integer.", AdaptiveContainerStyle.Attention);
+            return;
+        }
+
+        if (CheckAnswer(result) == false)
+        {
+            AddBannerMessage($"{result} is not correct. The correct answer is {Number1 + Number2}", AdaptiveContainerStyle.Attention);
+        }
+        else
+        {
+            AddBannerMessage($"{result} is correct.", AdaptiveContainerStyle.Good);
+        }
+        NextQuestion();
+    }
+}

@@ -1,0 +1,26 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Screen One</TextBlock>
+    <Image Url="https://cdn2.iconfinder.com/data/icons/animal-vivid-volume-3/256/Tortoise-512.png" />
+
+    <Action.Execute Title="ShowCard(Card2)" Verb="@nameof(OnCard2)" />
+</Card>
+
+@code {
+    public void OnCard2()
+    {
+        ShowView("Card2");
+    }
+
+    public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+    {
+        await Task.CompletedTask;
+        if (cardResult.Success == true)
+            AddBannerMessage($"{cardResult.Name} completed!", AdaptiveContainerStyle.Good);
+        else 
+        {
+            AddBannerMessage($"{cardResult.Name} Canceled!", AdaptiveContainerStyle.Warning);
+        }
+    }
+}

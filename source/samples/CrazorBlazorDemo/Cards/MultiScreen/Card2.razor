@@ -1,0 +1,16 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Size="ExtraLarge" Weight="Bolder">Screen Two</TextBlock>
+    <Image Url="https://th.bing.com/th/id/OIP.RQmtKrmklA7kuJ2idPhDGAHaJ5?pid=ImgDet" />
+    
+    <Action.Execute Title="Cancel" Verb="@nameof(OnCancel)" />
+    <Action.Execute Title="OK" Verb="@nameof(OnOK)" />
+</Card>
+@code{
+    public void OnCancel()
+        => CancelView();
+    public void OnOK()
+        => CloseView();
+}
+

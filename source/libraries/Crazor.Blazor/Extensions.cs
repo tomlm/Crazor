@@ -20,37 +20,13 @@ namespace Crazor.Blazor
             services.AddCrazorCore();
 
             // add CardViews 
-            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
-                            asm.DefinedTypes
-                                .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
-                                .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
-            foreach (var cardViewType in cardViewTypes)
+            foreach (var cardViewType in CardView.GetCardViewTypes())
             {
                 services.AddTransient(cardViewType);
             }
 
-            services.AddScoped<ICardViewFactory>((sp) =>
-            {
-                var factory = new CardViewFactory(sp);
-                foreach (var cardViewType in cardViewTypes)
-                {
-                    factory.Add(cardViewType.FullName, cardViewType);
-                }
-
-                return factory;
-            });
-
-            // add RouteManager
-            services.AddScoped<IRouteResolver>((sp) =>
-            {
-                RouteResolver routeResolver = new RouteResolver();
-                foreach (var cardViewType in cardViewTypes)
-                {
-                    routeResolver.AddCardViewType(cardViewType);
-                }
-                return routeResolver;
-            });
-
+            services.AddScoped<ICardViewFactory, CardViewFactory>();
+            services.AddScoped<IRouteResolver, RouteResolver>();
             return services;
         }
 

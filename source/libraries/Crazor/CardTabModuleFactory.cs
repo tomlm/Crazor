@@ -15,6 +15,11 @@ namespace Crazor
         public CardTabModuleFactory(IServiceProvider serviceProvider)
         {
             _services = serviceProvider;
+
+            foreach (var tabModuleType in CardTabModule.GetTabModuleTypes())
+            {
+                this.Add(tabModuleType.FullName, tabModuleType);
+            }
         }
 
         public void Add(string name, Type type)

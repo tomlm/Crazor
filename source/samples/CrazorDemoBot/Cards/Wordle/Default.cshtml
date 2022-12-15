@@ -57,7 +57,7 @@
     public string Guess { get; set; }
 
 
-    public override void OnInitialized()
+    protected override void OnInitialized()
     {
         // First person to play the game sets Todays word for the world.
         if (App.TodaysWord == null)

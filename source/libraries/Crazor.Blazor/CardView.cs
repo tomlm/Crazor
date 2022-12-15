@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -28,7 +29,7 @@ namespace Crazor.Blazor
         /// <summary>
         /// Name of the CardView
         /// </summary>
-        public string Name { get; set; }
+        public string Name => this.GetType().Name;
 
         /// <summary>
         /// App for this CardView
@@ -36,14 +37,10 @@ namespace Crazor.Blazor
         public AppT App { get; set; }
 
         /// <summary>
-        /// IView interface
+        /// ICardView interface
         /// </summary>
         CardApp ICardView.App { get => App; set => App = (AppT)value; }
 
-        /// <summary>
-        /// Current action being processed.
-        /// </summary>
-        public AdaptiveCardInvokeAction Action { get; set; }
 
         /// <summary>
         /// True if the model and properites on the view have passed validation
@@ -67,7 +64,14 @@ namespace Crazor.Blazor
         public bool IsPreview { get; set; }
 
         #region ---- Core Methods -----
+        public static IEnumerable<Type> GetCardViewTypes()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
+                asm.DefinedTypes
+                    .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
+                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
 
+        }
         public void BindProperties(JObject data)
         {
             if (data != null)
@@ -97,7 +101,9 @@ namespace Crazor.Blazor
             {
                 this.SetTargetProperty(this.GetType().GetProperty(parm.Name), parm.Value);
             }
-            return base.SetParametersAsync(ParameterView.Empty);
+            this.StateHasChanged();
+            return Task.CompletedTask;
+//            return base.SetParametersAsync(ParameterView.Empty);
         }
 
         /// <summary>
@@ -112,10 +118,9 @@ namespace Crazor.Blazor
         public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(App);
-            Action = action;
 
             // Process BindProperty tags
-            var data = (JObject)JObject.FromObject(Action.Data).DeepClone();
+            var data = (JObject)JObject.FromObject(action.Data).DeepClone();
             this.BindProperties(data);
 
             MethodInfo? verbMethod = null;
@@ -189,11 +194,11 @@ namespace Crazor.Blazor
                 this.Validate();
             }
 
-            switch (Action.Verb)
+            switch (action.Verb)
             {
                 case Constants.CANCEL_VERB:
                     // if there is an OnCancel, call it
-                    if (await this.InvokeVerbAsync(Action, cancellationToken) == false)
+                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         // default implementation 
                         this.CancelView();
@@ -201,7 +206,7 @@ namespace Crazor.Blazor
                     break;
 
                 case Constants.OK_VERB:
-                    if (await this.InvokeVerbAsync(Action, cancellationToken) == false)
+                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         if (IsModelValid)
                         {
@@ -301,29 +306,24 @@ namespace Crazor.Blazor
         /// <returns>relative path to the card for deep linking</returns>
         public virtual string GetRoute()
         {
-            //var routeAttr = this.GetType().GetCustomAttribute<CardRouteAttribute>();
-            //if (routeAttr != null)
-            //{
-            //    StringBuilder sb = new StringBuilder();
-            //    var parts = routeAttr.Template.Split('/');
-            //    for (int i = 0; i < parts.Length; i++)
-            //    {
-            //        var part = parts[i];
-            //        if (part.StartsWith('{') && part.EndsWith('}'))
-            //        {
-            //            parts[i] = ObjectPath.GetPathValue<string>(this, part.Trim('{', '}', '?'), null);
-            //        }
-            //    }
-            //    return String.Join('/', parts);
-            //}
-            //else
+            var routeAttr = this.GetType().GetCustomAttribute<CardRouteAttribute>();
+            if (routeAttr != null)
             {
-                var parts = Name.Split(".");
-                var routeParts = parts.SkipWhile(p => p.ToLower() != "cards").Skip(2).ToList();
-                if (routeParts.FirstOrDefault() == "Default")
-                    routeParts = routeParts.Skip(1).ToList();
-                string route = String.Join("/", routeParts);
-                return route;
+                StringBuilder sb = new StringBuilder();
+                var parts = routeAttr.Template.Split('/');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    var part = parts[i];
+                    if (part.StartsWith('{') && part.EndsWith('}'))
+                    {
+                        parts[i] = ObjectPath.GetPathValue<string>(this, part.Trim('{', '}', '?'), null);
+                    }
+                }
+                return String.Join('/', parts);
+            }
+            else
+            {
+                return (this.Name != Constants.DEFAULT_VIEW) ? this.Name : String.Empty;
             }
         }
         #endregion -----
@@ -381,16 +381,6 @@ namespace Crazor.Blazor
         }
 
         /// <summary>
-        /// Navigate to view by type
-        /// </summary>
-        /// <typeparam name="T">type of the object to navigate to</typeparam>
-        /// <param name="model">model</param>
-        public void ShowView<T>(object? model = null)
-        {
-            this.App!.ShowView(typeof(T).FullName!, model);
-        }
-
-        /// <summary>
         /// Replace this view with another one 
         /// </summary>
         /// <param name="cardName"></param>
@@ -398,16 +388,6 @@ namespace Crazor.Blazor
         public void ReplaceView(string cardName, object? model = null)
         {
             this.App!.ReplaceView(cardName, model);
-        }
-
-        /// <summary>
-        /// Replace this view with another one 
-        /// </summary>
-        /// <typeparam name="T">Type to instantiate</typeparam>
-        /// <param name="model">model to pass</param>
-        public void ReplaceView<T>(object? model = null)
-        {
-            this.App!.ReplaceView(typeof(T).FullName!, model);
         }
 
         /// <summary>
@@ -500,66 +480,33 @@ namespace Crazor.Blazor
     {
     }
 
-    //    public class CardView<AppT, ModelT> : CardViewBase<AppT>
-    //        where AppT : CardApp
-    //        where ModelT : class
-    //    {
-    //        public CardView()
-    //        {
-    //            if (typeof(ModelT).IsAssignableTo(typeof(CardApp)))
-    //            {
-    //                throw new ArgumentException($"{nameof(ModelT)} You can't pass a CardApp as a model");
-    //            }
-    //        }
+    public class CardView<AppT, ModelT> : CardViewBase<AppT>
+        where AppT : CardApp
+        where ModelT : class
+    {
+        public CardView()
+        {
+            if (typeof(ModelT).IsAssignableTo(typeof(CardApp)))
+            {
+                throw new ArgumentException($"{nameof(ModelT)} You can't pass a CardApp as a model");
+            }
+        }
 
-    //        // Summary:
-    //        //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
-    //        //     property.
-    //        [SessionMemory]
-    //        public ModelT Model
-    //        {
-    //            get
-    //            {
-    //                if (ViewData?.Model != null)
-    //                {
-    //                    return ViewData.Model;
-    //                }
+        [SessionMemory]
+        public ModelT Model { get; set; } = default!;
 
-    //#pragma warning disable CS8603 // Possible null reference return.
-    //                return default(ModelT);
-    //#pragma warning restore CS8603 // Possible null reference return.
-    //            }
+        public override void LoadState(CardViewState cardViewState)
+        {
+            if (cardViewState.Model is JToken jt)
+            {
+                Model = (ModelT?)jt.ToObject(typeof(ModelT));
+            }
+            else
+            {
+                Model = Activator.CreateInstance<ModelT>();
+            }
 
-    //            set
-    //            {
-    //                this.ViewData!.Model = value;
-    //                this.ViewContext.ViewData.Model = value;
-    //            }
-    //        }
-
-    //        //
-    //        // Summary:
-    //        //     Gets or sets the dictionary for view data.
-    //        [RazorInject]
-    //        public ViewDataDictionary<ModelT>? ViewData { get; set; }
-
-    //        public override void LoadState(CardViewState cardViewState)
-    //        {
-    //            ModelT? model = this.ViewContext.ViewData.Model as ModelT;
-    //            if (model == null)
-    //            {
-    //                if (this.ViewContext.ViewData.Model is JToken jt)
-    //                {
-    //                    this.ViewContext.ViewData.Model = (ModelT?)jt.ToObject(typeof(ModelT));
-    //                }
-    //                else
-    //                {
-    //                    this.ViewContext.ViewData.Model = Activator.CreateInstance<ModelT>();
-    //                }
-    //            }
-    //            this.ViewData = new ViewDataDictionary<ModelT>(this.ViewContext.ViewData);
-
-    //            base.LoadState(cardViewState);
-    //        }
-
+            base.LoadState(cardViewState);
+        }
+    }
 }

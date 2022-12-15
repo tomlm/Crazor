@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Crazor.Interfaces;
 using Microsoft.Bot.Connector;
 
 namespace Crazor
@@ -13,6 +14,40 @@ namespace Crazor
         public CardAppFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            foreach (var cardAppType in CardApp.GetCardAppTypes())
+            {
+                if (cardAppType != typeof(CardApp))
+                {
+                    var name = cardAppType.Name.EndsWith("App") ? cardAppType.Name.Substring(0, cardAppType.Name.Length - 3) : cardAppType.Name;
+                    this.Add(name, cardAppType);
+                }
+            }
+            // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
+            // We do this by enumerating all ICardView implementations 
+            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
+            {
+                // .cshtml files class names will be "Cards_{AppName}_Default" 
+                // we want to register the Folder as the a CardApp if it hasn't been registered already
+                var parts = cardViewType.Name.Split("_");
+                if (parts.Length >= 3 && parts[0].ToLower() == "cards" && parts[2].ToLower() == "default")
+                {
+                    var appName = parts[1];
+                    if (!this.HasRegistration(appName))
+                    {
+                        this.Add(appName, typeof(CardApp));
+                    }
+                }
+                else
+                {
+                    parts = cardViewType.FullName!.Split('.');
+                    string? appName = parts.SkipWhile(p => p.ToLower() != "cards").Skip(1).FirstOrDefault();
+                    if (appName != null && !this.HasRegistration(appName))
+                    {
+                        this.Add(appName, typeof(CardApp));
+                    }
+                }
+            }
         }
 
         public bool HasRegistration(string name) => _cardApps.ContainsKey(name);

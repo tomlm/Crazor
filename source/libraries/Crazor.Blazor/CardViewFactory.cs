@@ -15,6 +15,10 @@ namespace Crazor.Blazor
         public CardViewFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            foreach (var cardViewType in CardView.GetCardViewTypes())
+            {
+                this.Add(cardViewType.FullName, cardViewType);
+            }
         }
 
         public void Add(string name, Type type)
@@ -25,17 +29,6 @@ namespace Crazor.Blazor
         }
 
         public IEnumerable<string> GetNames() => _views.Keys.OrderBy(n => n);
-
-        public ICardView Create(CardRoute route)
-        {
-            if (_views.TryGetValue(route.View, out var cardViewType))
-            {
-                var card = (ICardView)_serviceProvider.GetService(cardViewType);
-                card.AssignInjectAttributeProperties(_serviceProvider);
-                return card;
-            }
-            throw new ArgumentNullException(route.Route);
-        }
 
         public ICardView Create(string typeName)
         {
@@ -49,9 +42,5 @@ namespace Crazor.Blazor
             return card;
         }
 
-        public bool HasView(string nameOrRoute)
-        {
-            return _views.ContainsKey(nameOrRoute);
-        }
     }
 }

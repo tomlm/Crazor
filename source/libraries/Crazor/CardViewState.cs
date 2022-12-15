@@ -6,11 +6,15 @@ using System.Diagnostics;
 namespace Crazor
 {
     [DebuggerDisplay("{Name}")]
-    public class CardViewState  
+    public class CardViewState 
     {
-        public CardViewState(string view, object? model=null)
+        public CardViewState() 
+        { 
+        }
+
+        public CardViewState(Type cardViewType, object? model=null)
         {
-            Name = view;
+            Name = cardViewType.FullName;
             if (model is CardApp)
             {
                 throw new ArgumentException("CardApp can't be the model");

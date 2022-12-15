@@ -48,80 +48,21 @@ namespace Crazor
             services.AddTransient<SingleCardTabModule>();
 
             // add Apps
-            var cardAppTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
-                                                .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false)).ToList();
-            foreach (var cardAppType in cardAppTypes)
+            foreach (var cardAppType in CardApp.GetCardAppTypes())
             {
                 services.AddTransient(cardAppType);
             }
 
-            services.AddScoped<CardAppFactory>(sp =>
-            {
-                var cardAppFactory = new CardAppFactory(sp);
-                foreach (var cardAppType in cardAppTypes)
-                {
-                    if (cardAppType != typeof(CardApp))
-                    {
-                        var name = cardAppType.Name.EndsWith("App") ? cardAppType.Name.Substring(0, cardAppType.Name.Length - 3) : cardAppType.Name;
-                        cardAppFactory.Add(name, cardAppType);
-                    }
-                }
-                // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
-                // We do this by enumerating all ICardView implementations 
-                foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
-                {
-                    // .cshtml files class names will be "Cards_{AppName}_Default" 
-                    // we want to register the Folder as the a CardApp if it hasn't been registered already
-                    var parts = cardViewType.Name.Split("_");
-                    if (parts.Length >= 3 && parts[0].ToLower() == "cards" && parts[2].ToLower() == "default")
-                    {
-                        var appName = parts[1];
-                        if (!cardAppFactory.HasRegistration(appName))
-                        {
-                            cardAppFactory.Add(appName, typeof(CardApp));
-                        }
-                    }
-                    else
-                    {
-                        parts = cardViewType.FullName!.Split('.');
-                        string? appName = parts.SkipWhile(p => p.ToLower() != "cards").Skip(1).FirstOrDefault();
-                        if (appName != null && !cardAppFactory.HasRegistration(appName))
-                        {
-                            cardAppFactory.Add(appName, typeof(CardApp));
-                        }
-                    }
-                }
-                return cardAppFactory;
-            });
+            services.AddScoped<CardAppFactory>();
 
 
             // add TabModules
-            var tabModules = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false)).ToList();
-            foreach (var tabModuleType in tabModules)
+            foreach (var tabModuleType in CardTabModule.GetTabModuleTypes())
             {
                 services.AddTransient(tabModuleType);
             }
 
-            services.AddScoped<CardTabModuleFactory>(sp =>
-            {
-                var factory = new CardTabModuleFactory(sp);
-                foreach (var tabModuleType in tabModules)
-                {
-                    factory.Add(tabModuleType.FullName, tabModuleType);
-                }
-                return factory;
-            });
-
-            //// add IMessagingExtensionQuery implementations
-            //var queryCommmandServices = services.AddByName<IMessagingExtensionQuery>();
-            //foreach (var queryCommandType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(IMessagingExtensionQuery)) && t.IsAbstract == false)))
-            //{
-            //    services.AddTransient(queryCommandType);
-            //    queryCommmandServices.Add(queryCommandType.FullName, queryCommandType);
-            //}
-            //queryCommmandServices.Build();
-
+            services.AddScoped<CardTabModuleFactory>();
 
             // add card Razor pages support
             var mvcBuilder = services.AddRazorPages()

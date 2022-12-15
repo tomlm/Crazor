@@ -11,7 +11,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Components\CardViewer.razor.js" />
+	  <None Remove="Components\CardAppHost.razor.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Components\CardAppHost.razor.js" />
 	</ItemGroup>
 
 	<ItemGroup>

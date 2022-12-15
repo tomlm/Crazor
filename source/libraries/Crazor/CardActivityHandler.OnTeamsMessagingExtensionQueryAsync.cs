@@ -7,6 +7,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Crazor
 {
@@ -34,14 +35,48 @@ namespace Crazor
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
-            var result = await cardApp.OnMessagingExtensionQueryAsync(query, cancellationToken);
+            // do the search
+            var searchResults = await cardApp.OnSearchQueryAsync(query, cancellationToken);
 
             // don't save session data, it's a preview
             cardApp.Route.SessionId = null;
             
             await cardApp.SaveAppAsync(cancellationToken);
 
-            return result;
+            // turn into attachments
+            List<MessagingExtensionAttachment> attachments = new List<MessagingExtensionAttachment>();
+            foreach (var searchResult in searchResults)
+            {
+                var attachment = new MessagingExtensionAttachment()
+                {
+                    ContentType = ThumbnailCard.ContentType,
+                    Content = new ThumbnailCard()
+                    {
+                        Title = searchResult.Title,
+                        Subtitle = searchResult.Subtitle,
+                        Text = searchResult.Text,
+                        Images = !String.IsNullOrEmpty(searchResult.ImageUrl) ?
+                                new List<CardImage>() { new CardImage(searchResult.ImageUrl, alt: searchResult.Title) } :
+                                null,
+                        Tap = new CardAction()
+                        {
+                            Type = "invoke",
+                            Value = JObject.FromObject(new { route = searchResult.Route })
+                        }
+                    }
+                };
+                attachments.Add(attachment);
+            }
+
+            return new MessagingExtensionResponse()
+            {
+                ComposeExtension = new MessagingExtensionResult()
+                {
+                    Type = "result",
+                    AttachmentLayout = "list",
+                    Attachments = attachments
+                }
+            };
         }
     }
 }
