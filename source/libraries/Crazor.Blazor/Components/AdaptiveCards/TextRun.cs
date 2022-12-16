@@ -13,7 +13,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for TextRun
     /// </summary>
 
-    public class TextRun : ItemComponent<IList<AdaptiveTextRun>, AdaptiveTextRun>
+    public class TextRun : ItemComponent<AdaptiveTextRun>
     {
 
         [Parameter]
@@ -46,5 +46,20 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
         public AdaptiveTextWeight Weight { get => Item.Weight; set => Item.Weight = value; }
+
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveRichTextBlock rtb)
+            {
+                rtb.Inlines.Add(Item);
+            }
+            else
+            {
+                throw new Exception("Unknown parent type");
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for BackgroundImage
     /// </summary>
 
-    public class BackgroundImage : ItemComponent<AdaptiveTypedElement, AdaptiveBackgroundImage>
+    public class BackgroundImage : ItemComponent<AdaptiveBackgroundImage>
     {
         [Parameter]
         [DefaultValue(typeof(AdaptiveImageFillMode), "Cover")]
@@ -32,9 +32,10 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
         public AdaptiveVerticalAlignment VerticalAlignment { get => Item.VerticalAlignment; set => Item.VerticalAlignment = value; }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
+            base.OnAfterRender(firstRender);
+
             ArgumentNullException.ThrowIfNull(Parent);
             if (Parent is AdaptiveCard card)
                 card.BackgroundImage = this.Item;

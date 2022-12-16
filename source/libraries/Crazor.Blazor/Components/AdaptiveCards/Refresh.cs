@@ -14,7 +14,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for Refresh
     /// </summary>
 
-    public class Refresh : ItemComponent<AdaptiveCard, AdaptiveRefresh>
+    public class Refresh : ItemComponent<AdaptiveRefresh>
     {
         /// <summary>
         ///    The action to be executed to refresh the card.
@@ -27,6 +27,16 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         ///     Some clients will not run the refresh action automatically unless this property is specified.
         ///     Some clients may ignore this property and always run the refresh action automatically.
         /// </summary>
-        public RenderFragment UserIds { get; set; } 
+        public RenderFragment UserIds { get; set; }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveCard card)
+            {
+                card.Refresh = Item;
+            }
+        }
     }
 }

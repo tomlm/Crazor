@@ -12,13 +12,16 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// <summary>
     /// Component for Fallback
     /// </summary>
-    public class Fallback : ItemComponent<AdaptiveElement, AdaptiveFallbackElement>
+    public class Fallback : ItemComponent<AdaptiveFallbackElement>
     {
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
-            
-            this.Parent.Fallback = Item;
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveElement element)
+            {
+                element.Fallback = Item;
+            }
         }
     }
 }

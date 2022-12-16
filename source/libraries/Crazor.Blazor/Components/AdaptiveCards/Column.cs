@@ -13,7 +13,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for Column
     /// </summary>
 
-    public class Column : TypedElementComponent<IList<AdaptiveColumn>, AdaptiveColumn>
+    public class Column : TypedElementComponent<AdaptiveColumn>
     {
         [Parameter]
         public Boolean? Bleed { get => Item.Bleed; set => Item.Bleed = value ?? false; }
@@ -52,10 +52,22 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Width { get => Item.Width.ToString(); set => Item.Width = value; }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
-            this.Parent.Add(Item);
+            base.OnAfterRender(firstRender);
+
+            if (Parent is AdaptiveContainer collection)
+            {
+                collection.Items.Add(Item);
+            }
+            else if (Parent is AdaptiveCard card)
+            {
+                card.Body.Add(Item);
+            }
+            else
+            {
+                throw new Exception("Unknown parent type");
+            }
         }
     }
 }

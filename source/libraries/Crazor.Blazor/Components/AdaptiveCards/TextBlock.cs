@@ -67,6 +67,6 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         public Boolean? Wrap { get => Item.Wrap; set => Item.Wrap = value ?? false; }
 
         [Parameter]
-        public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
+        public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
     }
 }

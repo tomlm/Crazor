@@ -46,9 +46,9 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            base.OnInitialized();
+            base.OnParametersSet();
 
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();

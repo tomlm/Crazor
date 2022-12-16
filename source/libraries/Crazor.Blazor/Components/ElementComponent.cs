@@ -15,25 +15,16 @@ namespace Crazor.Blazor.Components
     /// <summary>
     /// Shows errors when present for a given input id as TextBlock Attention
     /// </summary>
-    public class ElementComponent<ElementT> : TypedElementComponent<object, ElementT>
+    public class ElementComponent<ElementT> : TypedElementComponent<ElementT>
         where ElementT : AdaptiveElement
     {
         //[Parameter]
         //public string Class { get => Element.Class; set => Element.Class = value; }
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            if (this.Parent is AdaptiveCard card)
-                card.Body.Add(this.Item);
-            else if (this.Parent is AdaptiveContainer container)
-                container.Items.Add(this.Item);
-            else
-                throw new Exception($"{Parent.GetType().Name} is not a known element container type");
-        }
-
         protected override void OnParametersSet()
         {
+            base.OnParametersSet();
+
             var properties = this.GetType().GetProperties().Where(p => p.GetCustomAttribute<ParameterAttribute>() != null);
             StringBuilder sb = new StringBuilder();
             foreach (var property in properties)
@@ -59,6 +50,24 @@ namespace Crazor.Blazor.Components
                     //    output.Attributes.SetAttribute(attributeName, value.ToString());
                     //}
                 }
+            }
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveCard card)
+            {
+                card.Body.Add(this.Item);
+            }
+            if (this.Parent is AdaptiveContainer container)
+            {
+                container.Items.Add(this.Item);
+            }
+            else
+            {
+                throw new Exception($"{Parent.GetType().Name} is not a known element container type");
             }
         }
     }

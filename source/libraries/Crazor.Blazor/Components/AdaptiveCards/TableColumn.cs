@@ -14,10 +14,20 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for TableColumn
     /// </summary>
 
-    public class TableColumn : ItemComponent<IList<AdaptiveTableColumn>, AdaptiveTableColumn>
+    public class TableColumn : ItemComponent<AdaptiveTableColumn>
     {
 
         [Parameter]
-        public String Width { get => Item.Width.ToString(); set => Item.Width = value; } 
+        public String Width { get => Item.Width.ToString(); set => Item.Width = value; }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveTable table)
+            {
+                table.Columns.Add(Item);
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for CaptionSource
     /// </summary>
 
-    public class CaptionSource : ItemComponent<AdaptiveMedia, AdaptiveCaptionSource>
+    public class CaptionSource : ItemComponent<AdaptiveCaptionSource>
     {
         [CascadingParameter]
         public AdaptiveMedia Parent { get; set; } 
@@ -28,11 +28,14 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Url { get => Item.Url; set => Item.Url = value; }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
+            base.OnAfterRender(firstRender);
 
-            this.Parent.CaptionSources.Add(Item);
+            if (this.Parent is AdaptiveMedia media)
+            {
+                media.CaptionSources.Add(Item);
+            }
         }
     }
 }

@@ -12,14 +12,29 @@ namespace Crazor.Blazor.Components
     /// <summary>
     /// Shows errors when present for a given input id as TextBlock Attention
     /// </summary>
-    public class ActionComponent<ActionT> : TypedElementComponent<IList<AdaptiveAction>, ActionT>
+    public class ActionComponent<ActionT> : TypedElementComponent<ActionT>
         where ActionT : AdaptiveAction
     {
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
+            base.OnAfterRender(firstRender);
 
-            this.Parent.Add(this.Item);
+            if (this.Parent is AdaptiveCard card)
+            {
+                card.Actions.Add(this.Item);
+            }
+            else if (this.Parent is AdaptiveActionSet actionSet)
+            {
+                actionSet.Actions.Add(this.Item);
+            }
+            else if (this.Parent is AdaptiveSelectAction selectAction)
+            {
+                selectAction.Action = this.Item;
+            }
+            else
+            {
+                throw new Exception("Unknown parent");
+            }
         }
     }
 }

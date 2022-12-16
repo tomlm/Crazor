@@ -51,9 +51,9 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         public string? BindingDisplayName { get; set; }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            base.OnInitialized();
+            base.OnParametersSet();
 
             var id = this.Id ?? this.Binding;
 

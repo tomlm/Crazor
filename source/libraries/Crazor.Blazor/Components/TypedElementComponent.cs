@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Crazor.Blazor.Components
 {
-    public class TypedElementComponent<ParentT, TypedElementT> : ItemComponent<ParentT, TypedElementT>
+    public class TypedElementComponent<TypedElementT> : ItemComponent<TypedElementT>
         where TypedElementT : AdaptiveTypedElement
     {
         [Binding(BindingType.PropertyName)]

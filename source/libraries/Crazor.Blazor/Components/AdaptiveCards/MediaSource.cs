@@ -14,7 +14,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for MediaSource
     /// </summary>
 
-    public class MediaSource : ItemComponent<IList<AdaptiveMediaSource>, AdaptiveMediaSource>
+    public class MediaSource : ItemComponent<AdaptiveMediaSource>
     {
 
         [Parameter]
@@ -22,5 +22,15 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         [Parameter]
         public String Url { get => Item.Url; set => Item.Url = value; }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveMedia media)
+            {
+                media.Sources.Add(Item);
+            }
+        }
     }
 }

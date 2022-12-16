@@ -14,7 +14,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for Data.Query
     /// </summary>
 
-    public class DataQuery : ItemComponent<AdaptiveChoiceSetInput, AdaptiveDataQuery>
+    public class DataQuery : ItemComponent<AdaptiveDataQuery>
     {
         [Parameter]
         public Int32? Count { get => Item.Count; set => Item.Count = value ?? 10; }
@@ -28,11 +28,14 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Value { get => Item.Value; set => Item.Value = value; }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            base.OnInitialized();
-            
-            this.Parent.DataQuery = Item;
+            base.OnParametersSet();
+
+            if (Parent is AdaptiveChoiceSetInput choiceSet)
+            {
+                choiceSet.DataQuery = Item;
+            }
         }
     }
 }

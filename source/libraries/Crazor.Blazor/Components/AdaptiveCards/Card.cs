@@ -13,7 +13,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for Card
     /// </summary>
 
-    public class Card : TypedElementComponent<AdaptiveShowCardAction, AdaptiveCard>
+    public class Card : TypedElementComponent<AdaptiveCard>
     {
         [Parameter]
         public String FallbackText { get => Item.FallbackText; set => Item.FallbackText = value; }
@@ -47,12 +47,13 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Version { get => Item.Version.ToString(); set => Item.Version = new AdaptiveSchemaVersion(value); }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
-            if (Parent != null)
+            base.OnAfterRender(firstRender);
+
+            if (Parent is AdaptiveShowCardAction action)
             {
-                Parent.Card = Item;
+                action.Card = Item;
             }
         }
     }

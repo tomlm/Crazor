@@ -13,7 +13,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for TableRow
     /// </summary>
 
-    public class TableRow : ItemComponent<IList<AdaptiveTableRow>, AdaptiveTableRow>
+    public class TableRow : ItemComponent<AdaptiveTableRow>
     {
         [Parameter]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
@@ -40,5 +40,15 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
         public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
+        
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveTable table)
+            {
+                table.Rows.Add(Item);
+            }
+        }
     }
 }

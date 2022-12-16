@@ -7,12 +7,12 @@ using Newtonsoft.Json;
 
 namespace Crazor.Blazor.Components
 {
-    public class ItemComponent<ParentT, ItemT> : ComponentBase
+    public class ItemComponent<ItemT> : ComponentBase
     {
         public ItemT Item { get; set; } = Activator.CreateInstance<ItemT>();
 
         [CascadingParameter]
-        public ParentT Parent { get; set; }
+        protected object Parent { get; set; }
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -23,7 +23,7 @@ namespace Crazor.Blazor.Components
             base.BuildRenderTree(builder);
 
             // Add the CascadingValue component
-            builder.OpenComponent<CascadingValue<ParentT>>(i++);
+            builder.OpenComponent<CascadingValue<object>>(i++);
             builder.AddAttribute(i++, "Name", "Parent");
             builder.AddAttribute(i++, "Value", Item);
             builder.AddAttribute(i++, "ChildContent", (RenderFragment)((builder2) => {

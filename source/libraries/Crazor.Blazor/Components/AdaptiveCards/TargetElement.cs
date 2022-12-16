@@ -14,7 +14,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for TargetElement
     /// </summary>
 
-    public class TargetElement : ItemComponent<IList<AdaptiveTargetElement>, AdaptiveTargetElement>
+    public class TargetElement : ItemComponent<AdaptiveTargetElement>
     {
 
         /// <summary>
@@ -30,5 +30,10 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [DefaultValue(null)]
         public bool? IsVisible { get; set; } = null;
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+        }
     }
 }

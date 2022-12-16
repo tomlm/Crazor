@@ -14,7 +14,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for Choice
     /// </summary>
 
-    public class Choice : ItemComponent<IList<AdaptiveChoice>, AdaptiveChoice>
+    public class Choice : ItemComponent<AdaptiveChoice>
     {
         [Parameter]
         public String Title { get => Item.Title; set => Item.Title = value; }
@@ -22,11 +22,14 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Value { get => Item.Value; set => Item.Value = value; }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
-            
-            this.Parent.Add(Item);
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveChoiceSetInput choiceSet)
+            {
+                choiceSet.Choices.Add(Item);
+            }
         }
     }
 }

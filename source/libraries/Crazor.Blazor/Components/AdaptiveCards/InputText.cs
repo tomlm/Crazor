@@ -52,9 +52,9 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            base.OnInitialized();
+            base.OnParametersSet();
 
             // --- Client side validation....
             var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();

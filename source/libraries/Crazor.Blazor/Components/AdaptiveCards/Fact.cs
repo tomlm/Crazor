@@ -14,18 +14,22 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for Fact
     /// </summary>
 
-    public class Fact : ItemComponent<IList<AdaptiveFact>, AdaptiveFact>
+    public class Fact : ItemComponent<AdaptiveFact>
     {
         [Parameter]
-        public String Title { get => Item.Title; set => Item.Title= value; } 
+        public String Title { get => Item.Title; set => Item.Title = value; }
 
         [Parameter]
         public String Value { get => Item.Value; set => Item.Value = value; }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
-            this.Parent.Add(Item);
+            base.OnAfterRender(firstRender);
+
+            if (this.Parent is AdaptiveFactSet factSet)
+            {
+                factSet.Facts.Add(Item);
+            }
         }
     }
 }
