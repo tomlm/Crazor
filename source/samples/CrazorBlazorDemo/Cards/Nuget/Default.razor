@@ -48,14 +48,11 @@
         return "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
     }
 
-    [BindProperty]
     [Required]
     public string? Search { get; set; }
 
-    [BindProperty]
     public int Skip { get; set; }
 
-    [BindProperty]
     public int Take { get; set; } = 5;
 
     [TempMemory]

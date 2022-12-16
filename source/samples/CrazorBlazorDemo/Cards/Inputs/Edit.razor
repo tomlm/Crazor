@@ -4,8 +4,8 @@
 <Card Version="1.5">
     <TextBlock Style="AdaptiveTextBlockStyle.Heading">Edit Values!</TextBlock>
 
-    <InputDate Binding="Model.Birthday" Max="@DateTime.Now.ToString()"/>
-    <InputTime Binding="Model.ArrivalTime" Min="@DateTime.Now.ToString()"/>
+    <InputDate Binding="Model.Birthday" Max="@DateTime.Now"/>
+    <InputTime Binding="Model.ArrivalTime" Min="@DateTime.Now"/>
     <InputNumber Binding="Model.Percent"/>
     <InputNumber Binding="Model.Attendees"/>
     <InputText Binding="Model.PhoneNumber" />

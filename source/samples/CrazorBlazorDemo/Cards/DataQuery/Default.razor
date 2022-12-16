@@ -12,7 +12,6 @@
 </Card>
 
 @code {
-    [BindProperty]
     public int Number { get; set; }
 
     public override async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
