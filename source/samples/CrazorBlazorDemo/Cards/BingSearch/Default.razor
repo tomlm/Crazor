@@ -4,15 +4,19 @@
 @inherits CardView
 
 <Card Version="1.5">
-    <TextBlock Size="ExtraLarge" Weight="Bolder">Bing Search</TextBlock>
-    <SearchBox Id="@nameof(Query)" Value="@Query" Placeholder="Enter search terms" Title="Search"/>
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Bing Search</TextBlock>
+    <InputText Id="@nameof(Query)" Value="@Query" Placeholder="Enter search terms" Label="Search">
+        <InlineAction>
+            <ActionExecute Title="Search" Verb="@nameof(OnSearch)" />
+        </InlineAction>
+    </InputText>
     
     <ColumnSet>
         <Column Width="auto">
             @if (HasPrev())
             {
                 <ActionSet>
-                    <Action.Execute Title="<" Verb="@nameof(OnPrevious)" />
+                    <ActionExecute Title="<" Verb="@nameof(OnPrevious)" />
                 </ActionSet>
             }
         </Column>
@@ -21,7 +25,7 @@
             @if (HasNext())
             {
                 <ActionSet>
-                    <Action.Execute Title=">" Verb="@nameof(OnNext)" />
+                    <ActionExecute Title=">" Verb="@nameof(OnNext)" />
                 </ActionSet>
             }
         </Column>
@@ -34,14 +38,14 @@
             <Container Separator="true">
                 <ColumnSet>
                     <Column Width="stretch">
-                        <TextBlock Weight="Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
-                        <TextBlock Spacing="None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
-                        <TextBlock Spacing="Small">@result.Snippet</TextBlock>
+                        <TextBlock Weight="AdaptiveTextWeight.Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
+                        <TextBlock Spacing="AdaptiveSpacing.None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
+                        <TextBlock Spacing="AdaptiveSpacing.Small">@result.Snippet</TextBlock>
                     </Column>
                     <Column Width="auto">
                         @if (!String.IsNullOrEmpty(result.ThumbnailUrl))
                         {
-                            <Image Url="@result.ThumbnailUrl" Size="Large" />
+                            <Image Url="@result.ThumbnailUrl" Size="AdaptiveImageSize.Large" />
                         }
                     </Column>
                 </ColumnSet>

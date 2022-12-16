@@ -1,10 +1,10 @@
 ﻿@inherits CardView
 
 <Card Version="1.5">
-    <TextBlock Size="ExtraLarge" Weight="Bolder">Screen One</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Screen One</TextBlock>
     <Image Url="https://cdn2.iconfinder.com/data/icons/animal-vivid-volume-3/256/Tortoise-512.png" />
 
-    <Action.Execute Title="ShowCard(Card2)" Verb="@nameof(OnCard2)" />
+    <ActionExecute Title="ShowCard(Card2)" Verb="@nameof(OnCard2)" />
 </Card>
 
 @code {

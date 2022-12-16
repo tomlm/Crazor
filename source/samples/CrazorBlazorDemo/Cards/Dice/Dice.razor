@@ -4,18 +4,18 @@
 @inherits CardView<DiceApp>
 
 <Card Version="1.5">
-    <TextBlock Size="Large" Weight="Bolder" Style="Heading">@App.DiceName</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder" Style="AdaptiveTextBlockStyle.Heading">@App.DiceName</TextBlock>
     @if (App.Dice != null)
     {
         <ImageSet>
             @foreach (var die in App.Dice)
             {
-                <Image Url="@App.GetContentUrl($"~/images/dice{die}.png")" Size="Medium" />
+                <Image Url="@App.GetContentUrl($"~/images/dice{die}.png")" Size="AdaptiveImageSize.Medium" />
             }
         </ImageSet>
     }
-    <Action.Execute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
-    <Action.Execute Title="Refresh" />
+    <ActionExecute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
+    <ActionExecute Title="Refresh" />
 </Card>
 
 @code {

@@ -1,0 +1,16 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Id="Xyz">@Xyz</TextBlock>
+    <Action.Execute Verb="OnSubmit"/>
+</Card>
+
+@functions 
+{
+    public string Xyz { get; set; }
+
+    public void OnSubmit(string title)
+    {
+        Xyz = title;
+    }
+}

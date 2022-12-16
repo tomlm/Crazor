@@ -6,13 +6,13 @@
     @if (IsPreview)
     {
         // it's not the person who played the game, give them a link to play
-        <Action.OpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+        <ActionOpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
     }
     else
     {
-        <TextBlock Size="Large" Style="Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.Large" Style="AdaptiveTextBlockStyle.Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
 
-        <Table GridStyle="Default" ShowGridLines="true" FirstRowAsHeaders="false">
+        <Table GridStyle="AdaptiveContainerStyle.Default" ShowGridLines="true" FirstRowAsHeaders="false">
             <TableColumn Width="auto" />
             <TableColumn Width="auto" />
             <TableColumn Width="auto" />
@@ -20,31 +20,31 @@
             <TableColumn Width="auto" />
             @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
             {
-                <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
+                <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
                     @foreach (var letter in App.Game.Guesses[iGuess].Letters)
                     {
-                        <TableCell Style="@letter.State"><TextBlock Size="ExtraLarge" Weight="Bolder">@letter.Value</TextBlock></TableCell>
+                        <TableCell Style="@letter.State"><TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">@letter.Value</TextBlock></TableCell>
                     }
                 </TableRow>
             }
             @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
             {
-                <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                    <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
                 </TableRow>
             }
         </Table>
         <ColumnSet>
             <Column Width="stretch">
-                <Input.Text Id="Guess" Placeholder="Guess" />
+                <InputText Id="Guess" Placeholder="Guess" />
             </Column>
             <Column Width="Auto">
                 <ActionSet>
-                    <Action.Execute Verb="OnSubmit" Title="Submit" />
+                    <ActionExecute Verb="OnSubmit" Title="Submit" />
                 </ActionSet>
             </Column>
         </ColumnSet>

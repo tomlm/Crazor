@@ -2,18 +2,18 @@
 @inherits CardView<CardApp,InputsModel>
 
 <Card Version="1.5">
-    <TextBlock Style="Heading">Edit Values!</TextBlock>
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Edit Values!</TextBlock>
 
-    <Input.Date Binding="Model.Birthday" Max="@DateTime.Now"/>
-    <Input.Time Binding="Model.ArrivalTime" Min="@DateTime.Now"/>
-    <Input.Number Binding="Model.Percent"/>
-    <Input.Number Binding="Model.Attendees"/>
-    <Input.Text Binding="Model.PhoneNumber" />
-    <Input.Text Binding="Model.Password" />
-    <Input.Toggle Binding="Model.IsCool" />
-    <Input.ChoiceSet Binding="Model.FavoritePet" />
+    <InputDate Binding="Model.Birthday" Max="@DateTime.Now.ToString()"/>
+    <InputTime Binding="Model.ArrivalTime" Min="@DateTime.Now.ToString()"/>
+    <InputNumber Binding="Model.Percent"/>
+    <InputNumber Binding="Model.Attendees"/>
+    <InputText Binding="Model.PhoneNumber" />
+    <InputText Binding="Model.Password" />
+    <InputToggle Binding="Model.IsCool" />
+    <InputChoiceSet Binding="Model.FavoritePet" />
     
-    <Action.Execute Verb="OnCancel" Title="Cancel" />
-    <Action.Execute Verb="OnOK" Title="OK"/>
+    <ActionExecute Verb="OnCancel" Title="Cancel" />
+    <ActionExecute Verb="OnOK" Title="OK"/>
 </Card>
 

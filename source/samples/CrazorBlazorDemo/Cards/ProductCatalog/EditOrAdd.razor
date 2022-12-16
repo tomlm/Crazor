@@ -4,18 +4,18 @@
 <Card Version="1.5">
     @if (Model.IsEdit)
     {
-        <TextBlock Size="ExtraLarge">Edit Catalog Item</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.ExtraLarge">Edit Catalog Item</TextBlock>
     }
     else
     {
-        <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.ExtraLarge">Add Catalog Item</TextBlock>
     }
-    <Input.Text Binding="Model.Item.Name"  />
-    <Input.Text Binding="Model.Item.Description" />
-    <Input.Number Binding="Model.Item.Price" />
-    <Input.Text Binding="Model.Item.PictureUri" Label="Picture Url" ErrorMessage="The Picture Url is required." />
+    <InputText Binding="Model.Item.Name"  />
+    <InputText Binding="Model.Item.Description" />
+    <InputNumber Binding="Model.Item.Price" />
+    <InputText Binding="Model.Item.PictureUri" Label="Picture Url" ErrorMessage="The Picture Url is required." />
 
-    <Action.Execute Verb="OnCancel" Title="Cancel" />
-    <Action.Execute Verb="OnOK" Title="Save" />
+    <ActionExecute Verb="OnCancel" Title="Cancel" />
+    <ActionExecute Verb="OnOK" Title="Save" />
 </Card>
 

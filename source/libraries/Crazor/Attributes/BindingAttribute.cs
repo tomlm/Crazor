@@ -5,8 +5,19 @@ namespace Crazor.Attributes
 {
     public enum BindingType
     {
+        /// <summary>
+        /// The value should be set to the property path's value.
+        /// </summary>
         Value,
+
+        /// <summary>
+        /// The value should be set to the property path itself
+        /// </summary>
         PropertyName,
+
+        /// <summary>
+        /// The value should be set to the property path's display name attribute
+        /// </summary>
         DisplayName
     }
 
@@ -23,7 +34,7 @@ namespace Crazor.Attributes
         }
 
         /// <summary>
-        /// if true instead of binding the the value of the property it will bind to the Name of the property.
+        /// The policy for how to interpret the value of this property.
         /// </summary>
         public BindingType Policy { get; set; } = BindingType.Value;
     }

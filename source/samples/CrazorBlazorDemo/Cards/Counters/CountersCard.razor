@@ -3,11 +3,11 @@
 @inherits CardView
 
 <Card Version="1.5">
-    <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
 
     <ActionSet>
-        <Action.Execute Title="Increment" Verb="@nameof(OnIncrement)" />
-        <Action.Execute Title="Decrement" Verb="@nameof(OnDecrement)" />
+        <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
+        <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
     </ActionSet>
 </Card>
 

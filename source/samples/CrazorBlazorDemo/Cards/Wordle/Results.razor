@@ -5,14 +5,14 @@
 @inherits CardView<WordleApp>
 
 <Card Version="1.5">
-    <TextBlock Size="Large" Style="Heading">Wordle Results!</TextBlock>
+    <TextBlock Size="AdaptiveImageSize.Large" Style="Heading">Wordle Results!</TextBlock>
     @if (App.Game.Won)
     {
-        <TextBlock Size="Medium" Style="Heading">I got it in @App.Game.Guesses.Count tries! 😄</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.Medium" Style="Heading">I got it in @App.Game.Guesses.Count tries! 😄</TextBlock>
     }
     else
     {
-        <TextBlock Size="Medium" Style="Heading">I failed. 😥</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.Medium" Style="Heading">I failed. 😥</TextBlock>
     }
 
     <Table GridStyle="Default" ShowGridLines="true" FirstRowAsHeaders="false">
@@ -34,11 +34,11 @@
         @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
         {
             <TableRow HorizontalCellContentAlignment="Center" VerticalCellContentAlignment="Center">
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
             </TableRow>
         }
     </Table>
@@ -47,13 +47,13 @@
     {
         if (IsTaskModule)
         {
-            <Action.Execute Title="Share" Verb="OnShare" />
-            <Action.Execute Title="Close" Verb="OnClose" />
+            <ActionExecute Title="Share" Verb="OnShare" />
+            <ActionExecute Title="Close" Verb="OnClose" />
         }
         else if (App.Activity.From.Id != App.Game.Player?.Id) 
         {
             // it's not the person who played the game, give them a link to play
-            <Action.OpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+            <ActionOpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
         }
     }
 </Card>

@@ -2,7 +2,7 @@
 @inherits CardView<AddressesApp>
 
 <Card Version="1.5" Title="Addresses for @DateTime.Now.ToShortDateString()">
-    <TextBlock Size="ExtraLarge">Addresses</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge">Addresses</TextBlock>
     @if (App.Addresses.Any())
     {
         @foreach (var address in App.Addresses)
@@ -14,28 +14,28 @@
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
                     </Column>
                     <Column Width="auto">
-                        <Image Url="@App.GetContentUrl("~/images/EditIcon.png")" Size="Small">
+                        <Image Url="@App.GetContentUrl("~/images/EditIcon.png")" Size="AdaptiveImageSize.Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Edit Address" Verb="@nameof(OnEdit)">
+                                <ActionExecute Tooltip="Edit Address" Verb="@nameof(OnEdit)">
                                     { "addressId":"@address.Id" }
-                                </Action.Execute>
+                                </ActionExecute>
                             </SelectAction>
                         </Image>
                     </Column>
                     <Column Width="auto">
-                        <Image Url="@App.GetContentUrl("~/images/DeleteIcon.png")" Size="Small">
+                        <Image Url="@App.GetContentUrl("~/images/DeleteIcon.png")" Size="AdaptiveImageSize.Small">
                             <SelectAction>
-                                <Action.Execute Tooltip="Delete Address" Verb="@nameof(OnDelete)">
+                                <ActionExecute Tooltip="Delete Address" Verb="@nameof(OnDelete)">
                                     { "addressId":"@address.Id" }
-                                </Action.Execute>
+                                </ActionExecute>
                             </SelectAction>
                         </Image>
                     </Column>
                 </ColumnSet>
                 <SelectAction>
-                    <Action.Execute Verb="@nameof(OnDetail)">
+                    <ActionExecute Verb="@nameof(OnDetail)">
                         { "addressId":"@address.Id" }
-                    </Action.Execute>
+                    </ActionExecute>
                 </SelectAction>
             </Container>
         }
@@ -44,7 +44,7 @@
     {
         <TextBlock>No addresses.</TextBlock>
     }
-    <Action.Execute Title="Add Address" Verb="@nameof(OnAdd)" />
+    <ActionExecute Title="Add Address" Verb="@nameof(OnAdd)" />
 </Card>
 
 @code {

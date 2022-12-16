@@ -3,16 +3,16 @@
 
 <Card Version="1.5">
 
-    <TextBlock Size="ExtraLarge" Weight="Bolder">@Model.Name</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">@Model.Name</TextBlock>
 
-    <TextBlock Size="Medium" Id="DescriptionHeading" Label="Description" />
-    <TextBlock Id="Description" Label="DescriptionLabel">@Model.Description</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Medium" Id="DescriptionHeading" Label="Description" />
+    <TextBlock Id="Description">@Model.Description</TextBlock>
 
-    <TextBlock Size="Medium" Id="PriceHeading" Label="Price" />
-    <TextBlock Id="Price" Label="PriceLabel">@Model.Price</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Medium" Id="PriceHeading" Label="Price" />
+    <TextBlock Id="Price">@Model.Price</TextBlock>
 
     <Image Url="@Model.PictureUri" />
 
-    <Action.Execute Verb="OnCancel" Title="Go Back" />
+    <ActionExecute Verb="OnCancel" Title="Go Back" />
 </Card>
 

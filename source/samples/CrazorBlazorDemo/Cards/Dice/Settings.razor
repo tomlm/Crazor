@@ -3,14 +3,14 @@
 @inherits CardView<DiceApp>
 
 <Card Version="1.5">
-    <Input.Text Binding="App.DiceName" />
-    <Input.Number Binding="App.NumberDice" />
+    <InputText Binding="App.DiceName" />
+    <InputNumber Binding="App.NumberDice" />
 
     @if (IsModelValid)
     {
-        <Action.Execute Verb="OnCancel" Title="Cancel" />
+        <ActionExecute Verb="OnCancel" Title="Cancel" />
     }
-    <Action.Execute Verb="OnOK" Title="OK"/>
+    <ActionExecute Verb="OnOK" Title="OK"/>
 </Card>
 
 @code {

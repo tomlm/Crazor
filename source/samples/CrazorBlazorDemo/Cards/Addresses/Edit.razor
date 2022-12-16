@@ -15,14 +15,14 @@
 <Card Version="1.5" Title="Edit Address">
     <TextBlock >Edit Address</TextBlock>
 
-    <Input.Text Binding="Model.Street" />
-    <Input.Text Binding="Model.City" />
-    <Input.ChoiceSet Binding="Model.State" />
-    <Input.Text Binding="Model.PostalCode" Regex="" />
-    <Input.ChoiceSet Binding="Model.Country" />
+    <InputText Binding="Model.Street" />
+    <InputText Binding="Model.City" />
+    <InputChoiceSet Binding="Model.State" />
+    <InputText Binding="Model.PostalCode" Regex="" />
+    <InputChoiceSet Binding="Model.Country" />
 
-    <Action.Execute Verb="OnCancel" Title="Cancel" />
-    <Action.Execute Verb="OnOK" Title="OK"/>
+    <ActionExecute Verb="OnCancel" Title="Cancel" />
+    <ActionExecute Verb="OnOK" Title="OK"/>
 </Card>
 
 @code {
