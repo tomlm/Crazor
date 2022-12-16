@@ -29,7 +29,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         public Int32? MaxLength { get => Item.MaxLength; set => Item.MaxLength = value ?? 0; }
 
         [Parameter]
-        public String Placeholder { get => Item.Placeholder ; set=> Item.Placeholder  = value; }
+        public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
         [Parameter]
         public String Regex { get => Item.Regex; set => Item.Regex = value; }
@@ -43,7 +43,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         [Parameter]
         [DefaultValue(typeof(AdaptiveTextInputStyle), "Text")]
-        public AdaptiveTextInputStyle Style { get; set; }
+        public AdaptiveTextInputStyle? Style { get => Item.Style == AdaptiveTextInputStyle.Text ? null : Item.Style; set => Item.Style = value ?? AdaptiveTextInputStyle.Text; }
 
         [Parameter]
         [Binding(BindingType.Value)]
@@ -52,79 +52,80 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
 
-        public override async Task ProcessAsync(ComponentContext context, ComponentOutput output)
+        protected override void OnInitialized()
         {
-            await base.ProcessAsync(context, output);
+            base.OnInitialized();
 
             // --- Client side validation....
             var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
-            if (output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
+            if (this.Regex == null && regexAttribute?.Pattern != null)
             {
-                output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
+                this.Regex = regexAttribute?.Pattern;
 
             }
-            if (output.Attributes[nameof(ErrorMessage)] == null && regexAttribute?.ErrorMessage != null)
+
+            if (this.ErrorMessage == null && regexAttribute?.ErrorMessage != null)
             {
-                output.Attributes.SetAttribute(nameof(ErrorMessage), regexAttribute?.ErrorMessage);
+                this.ErrorMessage = regexAttribute?.ErrorMessage;
             }
 
             // -- MaxLength 
             var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
-            if (output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
+            if (this.MaxLength == null && stringLengthAttribute != null)
             {
-                output.Attributes.SetAttribute(nameof(MaxLength), stringLengthAttribute?.MaximumLength);
+                this.MaxLength = stringLengthAttribute?.MaximumLength;
             }
 
             // ----  style
             var maxLengthAttribute = BindingProperty?.GetCustomAttribute<MaxLengthAttribute>();
-            if (output.Attributes[nameof(MaxLength)] == null && maxLengthAttribute != null)
+            if (this.MaxLength == null && maxLengthAttribute != null)
             {
-                output.Attributes.SetAttribute(nameof(MaxLength), maxLengthAttribute?.Length);
+                this.MaxLength = maxLengthAttribute?.Length;
             }
 
             var phoneAttribute = BindingProperty?.GetCustomAttribute<PhoneAttribute>();
-            if (output.Attributes[nameof(Style)] == null && phoneAttribute != null)
+            if (this.Style == null && phoneAttribute != null)
             {
-                output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Tel);
+                this.Style = AdaptiveTextInputStyle.Tel;
             }
 
             var emailAttribute = BindingProperty?.GetCustomAttribute<EmailAddressAttribute>();
-            if (output.Attributes[nameof(Style)] == null && emailAttribute != null)
+            if (this.Style == null && emailAttribute != null)
             {
-                output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Email);
+                this.Style = AdaptiveTextInputStyle.Email;
             }
 
             var passwordAttribute = BindingProperty?.GetCustomAttribute<PasswordPropertyTextAttribute>();
-            if (output.Attributes[nameof(Style)] == null && passwordAttribute != null)
+            if (this.Style == null && passwordAttribute != null)
             {
-                output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Password);
+                this.Style = AdaptiveTextInputStyle.Password;
             }
 
             var urlAttribute = BindingProperty?.GetCustomAttribute<UrlAttribute>();
-            if (output.Attributes[nameof(Style)] == null && urlAttribute != null)
+            if (this.Style == null && urlAttribute != null)
             {
-                output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Url);
+                this.Style = AdaptiveTextInputStyle.Url;
             }
 
             var dtAttribute = BindingProperty?.GetCustomAttribute<DataTypeAttribute>();
-            if (output.Attributes[nameof(Style)] == null && dtAttribute != null)
+            if (this.Style == null && dtAttribute != null)
             {
                 switch (dtAttribute.DataType)
                 {
                     case DataType.Text:
-                        output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Text);
+                        this.Style = AdaptiveTextInputStyle.Text;
                         break;
                     case DataType.EmailAddress:
-                        output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Email);
+                        this.Style = AdaptiveTextInputStyle.Email;
                         break;
                     case DataType.PhoneNumber:
-                        output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Tel);
+                        this.Style = AdaptiveTextInputStyle.Tel;
                         break;
                     case DataType.Password:
-                        output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Password);
+                        this.Style = AdaptiveTextInputStyle.Password;
                         break;
                     case DataType.Url:
-                        output.Attributes.SetAttribute(nameof(Style), AdaptiveTextInputStyle.Url);
+                        this.Style = AdaptiveTextInputStyle.Url;
                         break;
                     case DataType.Date:
                     case DataType.DateTime:

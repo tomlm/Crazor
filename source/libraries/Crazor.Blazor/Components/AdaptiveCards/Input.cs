@@ -21,11 +21,11 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     {
 
         [Parameter]
-        public Boolean? IsRequired { get => Item.IsRequired; set => Item.IsRequired = value ?? false; }
+        public Boolean? IsRequired { get; set; }
 
         [Parameter]
         [Binding(BindingType.DisplayName)]
-        public String Label { get => Item.Label; set=>Item.Label = value; }
+        public String Label { get => Item.Label; set => Item.Label = value; }
 
         /// <summary>
         /// Client side verification error message.
@@ -43,7 +43,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         /// Set to false to hide the validation errors
         /// </summary>
         [Parameter]
-        public String ShowErrors { get; set; }
+        public Boolean? ShowErrors { get; set; }
 
         public PropertyInfo? BindingProperty { get; set; }
 
@@ -51,49 +51,39 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         public string? BindingDisplayName { get; set; }
 
-        public override void Init(ComponentContext context)
+        protected override void OnInitialized()
         {
-            base.Init(context);
+            base.OnInitialized();
 
-            if (this.View != null)
+            var id = this.Id ?? this.Binding;
+
+            if (!String.IsNullOrEmpty(this.Binding))
             {
-                var id = this.Id ?? this.Binding;
-
-                if (!String.IsNullOrEmpty(this.Binding))
+                this.BindingValue = this;
+                var parts = this.Binding.Split('.');
+                foreach (var part in parts)
                 {
-                    this.BindingValue = this.View;
-                    var parts = this.Binding.Split('.');
-                    foreach (var part in parts)
+                    this.BindingProperty = this.BindingValue?.GetType().GetProperty(part)!;
+                    if (this.BindingProperty != null)
                     {
-                        this.BindingProperty = this.BindingValue?.GetType().GetProperty(part)!;
-                        if (this.BindingProperty != null)
-                        {
-                            this.BindingValue = this.BindingProperty?.GetValue(this.BindingValue)!;
-                        }
-                        else
-                        {
-                            throw new Exception($"Invalid Binding='{this.Binding}': property '{part}' does not exist");
-                        }
+                        this.BindingValue = this.BindingProperty?.GetValue(this.BindingValue)!;
                     }
-                    var dnAttr = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
-                    var descAttr = this.BindingProperty?.GetCustomAttribute<DescriptionAttribute>();
-                    this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? MakeTitle(parts.Last());
+                    else
+                    {
+                        throw new Exception($"Invalid Binding='{this.Binding}': property '{part}' does not exist");
+                    }
                 }
+                var dnAttr = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
+                var descAttr = this.BindingProperty?.GetCustomAttribute<DescriptionAttribute>();
+                this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? MakeTitle(parts.Last());
             }
-        }
-
-
-        public override async Task ProcessAsync(ComponentContext context, ComponentOutput output)
-        {
-            await base.ProcessAsync(context, output);
 
             // Process BindingAttributes
-            var properties = this.GetType().GetProperties()
-                .Where(p => p.GetCustomAttribute<BindingAttribute>(true) != null);
+            var properties = this.GetType().GetProperties().Where(p => p.GetCustomAttribute<BindingAttribute>(true) != null);
             StringBuilder sb = new StringBuilder();
             foreach (var property in properties)
             {
-                string attributeName = property.GetCustomAttribute<HtmlAttributeNameAttribute>()?.Name ?? property.Name;
+                string attributeName = property.Name;
                 // if there is an BindingAttribute, then we change the value to be the appropriate value
                 // One of: PropertyName | DisplayName | the property value
                 var bindValueAttribute = property.GetCustomAttribute<BindingAttribute>();
@@ -123,42 +113,42 @@ namespace Crazor.Blazor.Components.AdaptiveCards
                         value = value.ToString()!.ToLower();
                     }
 
-                    output.Attributes.SetAttribute(attributeName, value);
+                    this.SetTargetProperty(property, value);
                 }
             }
 
             // if we don't have required, but binding property has [Required] then set it
-            if (output.Attributes[nameof(IsRequired)] == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+            if (this.IsRequired == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
             {
-                output.Attributes.SetAttribute(nameof(IsRequired), "true");
+                this.IsRequired = true;
 
                 // --- Client side validation....
                 var requiredAttribute = BindingProperty?.GetCustomAttribute<RequiredAttribute>();
-                if (output.Attributes[nameof(ErrorMessage)] == null && requiredAttribute?.ErrorMessage != null)
+                if (this.ErrorMessage == null && requiredAttribute?.ErrorMessage != null)
                 {
-                    output.Attributes.SetAttribute(nameof(ErrorMessage), requiredAttribute?.ErrorMessage);
+                    this.ErrorMessage = requiredAttribute.ErrorMessage;
                 }
             }
 
             // Add server side error messages.
             if (ShowErrors == null || ShowErrors.Value == true)
             {
-                if (View != null)
-                {
-                    if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
-                    {
-                        if (errors.Any())
-                        {
-                            sb = new StringBuilder();
-                            sb.AppendLine();
-                            foreach (var error in errors)
-                            {
-                                sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
-                            }
-                            output.PostElement.SetHtmlContent(sb.ToString());
-                        }
-                    }
-                }
+                //if (View != null)
+                //{
+                //    if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
+                //    {
+                //        if (errors.Any())
+                //        {
+                //            sb = new StringBuilder();
+                //            sb.AppendLine();
+                //            foreach (var error in errors)
+                //            {
+                //                sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
+                //            }
+                //            output.PostElement.SetHtmlContent(sb.ToString());
+                //        }
+                //    }
+                //}
             }
         }
 

@@ -24,10 +24,10 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         public Boolean? IsVisible { get => Item.IsVisible ; set => Item.IsVisible = value ?? true; }  
 
         [Parameter]
-        public String Max { get => Item.Max; set => Item.Max = value; }
+        public DateTime? Min { get => Item.Min != null ? DateTime.Parse(Item.Min) : null; set => Item.Min = value.Value.ToString(Format); }
 
         [Parameter]
-        public String Min { get => Item.Min; set => Item.Min = value; }
+        public DateTime? Max { get => Item.Max != null ? DateTime.Parse(Item.Max) : null; set => Item.Max = value.Value.ToString(Format); }
 
         [Parameter]
         public String Placeholder { get => Item.Placeholder ; set=> Item.Placeholder  = value; } 
@@ -42,44 +42,30 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         [Parameter]
         [Binding(BindingType.Value)]
-        public String Value { get => Item.Value; set => Item.Value = value; } 
+        public DateTime? Value { get => Item.Value != null ? DateTime.Parse(Item.Value) : null; set => Item.Value = value.Value.ToString(Format); }
 
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
 
-        public override async Task ProcessAsync(ComponentContext context, ComponentOutput output)
+        protected override void OnInitialized()
         {
-            await base.ProcessAsync(context, output);
-
-            // make sure value is output in correct format 
-            if (output.Attributes[nameof(Value)] != null)
-            {
-                var value = output.Attributes[nameof(Value)].Value;
-                if (value is string str)
-                {
-                    output.Attributes.SetAttribute(nameof(Value), DateTime.Parse(str).ToString(Format));
-                }
-                else if (value is DateTime dt)
-                {
-                    output.Attributes.SetAttribute(nameof(Value), dt.ToString(Format));
-                }
-            }
+            base.OnInitialized();
 
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            if (this.Min == null && rangeAttribute?.Minimum != null)
             {
-                output.Attributes.SetAttribute(nameof(Min), DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format));
+                this.Min = DateTime.Parse((string)rangeAttribute.Minimum);
             }
 
-            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+            if (this.Max == null && rangeAttribute?.Maximum != null)
             {
-                output.Attributes.SetAttribute(nameof(Max), DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format));
+                this.Max = DateTime.Parse((string)rangeAttribute.Maximum);
             }
 
-            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+            if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
             {
-                output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
+                this.ErrorMessage = rangeAttribute?.ErrorMessage;
             }
         }
     }

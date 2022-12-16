@@ -28,7 +28,7 @@
         </Column>
     </ColumnSet>
 
-    <ActionOpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@Model.Id" />
+    <ActionOpenUrl Title="Nuget Package" Url="@($"https://www.nuget.org/packages/{Model.Id}")" />
     @if (!String.IsNullOrEmpty(Model.ProjectUrl) && Uri.IsWellFormedUriString(Model.ProjectUrl, UriKind.Absolute))
     {
         <ActionOpenUrl Title="Project " Url="@Model.ProjectUrl" />

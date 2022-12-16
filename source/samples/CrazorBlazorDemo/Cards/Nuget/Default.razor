@@ -28,7 +28,7 @@
             </SelectAction>
             <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl!)">@package.Description</ThumbnailCard>
             <ActionSet>
-                <ActionOpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@package.Id" />
+                <ActionOpenUrl Title="Nuget Package" Url="@($"https://www.nuget.org/packages/{package.Id}")" />
                 @if (!String.IsNullOrEmpty(package.ProjectUrl) && Uri.IsWellFormedUriString(package.ProjectUrl, UriKind.Absolute))
                 {
                     <ActionOpenUrl Title="Project " Url="@package.ProjectUrl" />

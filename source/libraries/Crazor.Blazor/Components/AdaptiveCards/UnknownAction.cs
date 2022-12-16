@@ -13,30 +13,27 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for UnknownAction
     /// </summary>
 
-    public class UnknownAction : ElementComponent
+    public class UnknownAction : ActionComponent<AdaptiveAction>
     {
 
         [Parameter]
-        public String IconUrl { get; set; } 
+        public String IconUrl { get; set; }
 
         [Parameter]
-        public Boolean? IsEnabled { get; set; }  
+        public Boolean? IsEnabled { get; set; }
 
         [Parameter]
         [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
-        public AdaptiveActionMode Mode { get; set; } 
-
-        [Parameter]
-        public String Speak { get; set; } 
+        public AdaptiveActionMode Mode { get; set; }
 
         [Parameter]
         [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-        public AdaptiveActionStyle Style { get; set; } 
+        public AdaptiveActionStyle Style { get; set; }
 
         [Parameter]
-        public String Title { get => Item.Title; set => Item.Titlte = value; } 
+        public String Title { get => Item.Title; set => Item.Title = value; }
 
         [Parameter]
-        public String Tooltip { get; set; } 
+        public String Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
     }
 }

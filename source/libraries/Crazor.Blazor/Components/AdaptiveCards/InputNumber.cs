@@ -20,7 +20,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     {
 
         [Parameter]
-        public Boolean? IsVisible { get => Item.IsVisible ; set => Item.IsVisible = value ?? true; }  
+        public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
         [Parameter]
         public Double? Max { get => Item.Max == Double.NaN ? null : Item.Max; set => Item.Max = value ?? Double.NaN; }
@@ -29,41 +29,41 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         public Double? Min { get => Item.Min == Double.NaN ? null : Item.Min; set => Item.Min = value ?? Double.NaN; }
 
         [Parameter]
-        public String Placeholder { get => Item.Placeholder ; set=> Item.Placeholder  = value; } 
+        public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
         [Parameter]
-        public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; } 
+        public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
 
         [Parameter]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-        public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; } 
+        public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
         [Parameter]
         [Binding(BindingType.Value)]
-        public Double? Value { get => Item.Value == Double.NaN ? null : Item.Value; set => Item.Value = value ?? Double.NaN; } 
+        public Double? Value { get => Item.Value == Double.NaN ? null : Item.Value; set => Item.Value = value ?? Double.NaN; }
 
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
 
-        public override async Task ProcessAsync(ComponentContext context, ComponentOutput output)
+        protected override void OnInitialized()
         {
-            await base.ProcessAsync(context, output);
+            base.OnInitialized();
 
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            if (this.Min == null && rangeAttribute?.Minimum != null)
             {
-                output.Attributes.SetAttribute(nameof(Min), Convert.ToDouble(rangeAttribute.Minimum));
+                this.Min = Convert.ToDouble(rangeAttribute.Minimum);
             }
 
-            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+            if (this.Max == null && rangeAttribute?.Maximum != null)
             {
-                output.Attributes.SetAttribute(nameof(Max), Convert.ToDouble(rangeAttribute.Maximum));
+                this.Max = Convert.ToDouble(rangeAttribute.Maximum);
             }
 
-            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+            if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
             {
-                output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
+                this.ErrorMessage = rangeAttribute?.ErrorMessage;
             }
         }
 

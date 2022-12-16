@@ -44,16 +44,5 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
-
-        public override async Task ProcessAsync(ComponentContext context, ComponentOutput output)
-        {
-            await base.ProcessAsync(context, output);
-
-            if (output.Attributes.ContainsName(nameof(Label)) && !output.Attributes.ContainsName(nameof(Title)))
-            {
-                output.Attributes.Add(nameof(Title), output.Attributes[nameof(Label)].Value);
-                output.Attributes.RemoveAll(nameof(Label));
-            }
-        }
     }
 }

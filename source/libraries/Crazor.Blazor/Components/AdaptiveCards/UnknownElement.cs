@@ -13,7 +13,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     /// Component for UnknownElement
     /// </summary>
 
-    public class UnknownElement : ElementComponent
+    public class UnknownElement : ElementComponent<AdaptiveElement>
     {
 
         [Parameter]
@@ -25,9 +25,6 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Parameter]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
         public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; } 
-
-        [Parameter]
-        public String Speak { get; set; } 
 
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; } 

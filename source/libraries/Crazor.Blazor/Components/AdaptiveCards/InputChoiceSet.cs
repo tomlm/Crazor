@@ -20,13 +20,13 @@ namespace Crazor.Blazor.Components.AdaptiveCards
     {
 
         [Parameter]
-        public Boolean? IsMultiSelect { get=> Item.IsMultiSelect; set => Item.IsMultiSelect = value ?? false; }
+        public Boolean? IsMultiSelect { get => Item.IsMultiSelect; set => Item.IsMultiSelect = value ?? false; }
 
         [Parameter]
         public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
         [Parameter]
-        public String Placeholder { get => Item.Placeholder ; set=> Item.Placeholder  = value; }
+        public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
         [Parameter]
         public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
@@ -44,15 +44,15 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         public String Value { get => Item.Value; set => Item.Value = value; }
 
         [Parameter]
-        public Boolean? Wrap { get=>Item.Wrap; set => Item.Wrap = value ?? false; }
+        public Boolean? Wrap { get => Item.Wrap; set => Item.Wrap = value ?? false; }
 
         [Parameter]
         public String Height { get => Item.Height.ToString(); set => Item.Height = value; }
 
-        public override async Task ProcessAsync(ComponentContext context, ComponentOutput output)
+        protected override void OnInitialized()
         {
-            await base.ProcessAsync(context, output);
-            
+            base.OnInitialized();
+
             if (BindingProperty != null)
             {
                 var bindingType = BindingProperty.PropertyType;
@@ -62,40 +62,31 @@ namespace Crazor.Blazor.Components.AdaptiveCards
                 }
                 if (bindingType.IsEnum)
                 {
-                    var childContent = await output.GetChildContentAsync();
-                    if (!childContent.GetContent().TrimStart().StartsWith("<Choice"))
+                    // automatically compute choice from enumeration.
+                    foreach (var value in bindingType.GetEnumValues())
                     {
-                        // automatically compute choice from enumeration.
-                        StringBuilder sb = new StringBuilder();
-                        output.TagMode = TagMode.StartTagAndEndTag;
-                        foreach (var value in bindingType.GetEnumValues())
+                        MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
+
+                        // we can then attempt to retrieve the    
+                        // description attribute from the member info    
+                        var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
+                        var displayAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
+                        // if we find the attribute we can access its values    
+                        if (descriptionAttribute != null)
                         {
-                            MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
-
-                            // we can then attempt to retrieve the    
-                            // description attribute from the member info    
-                            var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
-                            var displayAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
-                            // if we find the attribute we can access its values    
-                            if (descriptionAttribute != null)
-                            {
-                                sb.AppendLine($"<Choice Title=\"{descriptionAttribute.Description}\" Value=\"{value}\"/>");
-                            }
-                            else if (displayAttribute != null)
-                            {
-                                sb.AppendLine($"<Choice Title=\"{displayAttribute.DisplayName}\" Value=\"{value}\"/>");
-                            }
-                            else
-                            {
-                                sb.AppendLine($"<Choice Title=\"{value}\" Value=\"{value}\"/>");
-                            }
+                            Item.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString() });
                         }
-
-                        output.Content.SetHtmlContent(sb.ToString());
+                        else if (displayAttribute != null)
+                        {
+                            Item.Choices.Add(new AdaptiveChoice() { Title = displayAttribute.DisplayName, Value = value?.ToString() });
+                        }
+                        else
+                        {
+                            Item.Choices.Add(new AdaptiveChoice() { Title = value.ToString(), Value = value.ToString() });
+                        }
                     }
                 }
             }
         }
-
     }
 }
