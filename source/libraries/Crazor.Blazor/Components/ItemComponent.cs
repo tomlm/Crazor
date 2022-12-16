@@ -11,7 +11,7 @@ namespace Crazor.Blazor.Components
     {
         public ItemT Item { get; set; } = Activator.CreateInstance<ItemT>();
 
-        [CascadingParameter]
+        [CascadingParameter(Name = "Parent")]
         protected object Parent { get; set; }
 
         [Parameter]
