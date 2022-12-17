@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Crazor.Blazor.Components
 {
@@ -16,6 +17,20 @@ namespace Crazor.Blazor.Components
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+
+        protected Dictionary<string, object> GetAttributes()
+        {
+            var attributes = new Dictionary<string, object>();
+            foreach (var property in this.GetType().GetProperties().Where(p => p.PropertyType != typeof(RenderFragment) && p.GetCustomAttribute<ParameterAttribute>() != null))
+            {
+                var val = property.GetValue(this);
+                if (val != null)
+                {
+                    attributes.Add(property.Name, val);
+                }
+            }
+            return attributes;
+        }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
