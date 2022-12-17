@@ -61,7 +61,7 @@ namespace Crazor.Blazor.Components
             {
                 card.Body.Add(this.Item);
             }
-            if (this.Parent is AdaptiveContainer container)
+            else if (this.Parent is AdaptiveContainer container)
             {
                 container.Items.Add(this.Item);
             }
