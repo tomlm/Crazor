@@ -1,0 +1,41 @@
+@using global::AdaptiveCards
+@using Crazor.Attributes;
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@using System.Xml.Linq;
+@inherits ItemComponent<AdaptiveBackgroundImage>
+
+<ac:BackgroundImage @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:BackgroundImage>
+
+@code
+{
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveImageFillMode), "Cover")]
+    public AdaptiveImageFillMode FillMode { get => Item.FillMode; set => Item.FillMode = value; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
+
+    [Parameter]
+    public String Url { get => Item.Url; set => Item.Url = value; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
+    public AdaptiveVerticalAlignment VerticalAlignment { get => Item.VerticalAlignment; set => Item.VerticalAlignment = value; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        ArgumentNullException.ThrowIfNull(Parent);
+        if (Parent is AdaptiveCard card)
+            card.BackgroundImage = this.Item;
+        else if (Parent is AdaptiveContainer container)
+            container.BackgroundImage = this.Item;
+        else
+            throw new Exception($"{Parent.GetType().Name} is not a valid parent for BackgroundImage");
+    }
+}

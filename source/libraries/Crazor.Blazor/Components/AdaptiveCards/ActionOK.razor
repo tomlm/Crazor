@@ -1,0 +1,15 @@
+@inherits ActionExecute
+
+<ac:Action.Execute @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.Execute>
+
+
+@code
+{
+    public ActionOK()
+    {
+        this.Title = "OK";
+        this.Verb = Constants.OK_VERB;
+    }
+}

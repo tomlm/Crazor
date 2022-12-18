@@ -31,6 +31,10 @@ namespace Crazor.Blazor.Components
             {
                 selectAction.Action = this.Item;
             }
+            else if (this.Parent is AdaptiveTextInput textInput)
+            {
+                textInput.InlineAction = this.Item;
+            }
             else
             {
                 throw new Exception("Unknown parent");

@@ -24,31 +24,38 @@ namespace Crazor.Blazor.Components
             foreach (var property in this.GetType().GetProperties().Where(p => p.PropertyType != typeof(RenderFragment) && p.GetCustomAttribute<ParameterAttribute>() != null))
             {
                 var val = property.GetValue(this);
-                if (val != null)
+                var targetProperty = Item!.GetType().GetProperty(property.Name) ?? property;
+                var defValue = (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null;
+                if (val != null && !Object.Equals(val, defValue))
                 {
-                    attributes.Add(property.Name, val);
+                    if (val is bool b)
+                        // HTML serialization used by Blazor will turn raw bool into just attribute name with no value
+                        // we are targeting XML which always must have a value, and bool is represented as string "true"|"false"
+                        attributes.Add(property.Name, b.ToString().ToLower());
+                    else
+                        attributes.Add(property.Name, val);
                 }
             }
             return attributes;
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            int i = 0;
-            base.BuildRenderTree(builder);
+        //protected override void BuildRenderTree(RenderTreeBuilder builder)
+        //{
+        //    int i = 0;
+        //    base.BuildRenderTree(builder);
 
-            // Add the CascadingValue component
-            builder.OpenComponent<CascadingValue<object>>(i++);
-            builder.AddAttribute(i++, "Name", "Parent");
-            builder.AddAttribute(i++, "Value", Item);
-            builder.AddAttribute(i++, "ChildContent", (RenderFragment)((builder2) => {
-                builder2.AddContent(i++, ChildContent);
-            }));
-            builder.CloseComponent();
+        //    // Add the CascadingValue component
+        //    builder.OpenComponent<CascadingValue<object>>(i++);
+        //    builder.AddAttribute(i++, "Name", "Parent");
+        //    builder.AddAttribute(i++, "Value", Item);
+        //    builder.AddAttribute(i++, "ChildContent", (RenderFragment)((builder2) => {
+        //        builder2.AddContent(i++, ChildContent);
+        //    }));
+        //    builder.CloseComponent();
 
-            // Add JSON serialized
-            var json = JsonConvert.SerializeObject(Item);
-            builder.AddContent(i++, (MarkupString)$"{json},");
-        }
+        //    // Add JSON serialized
+        //    var json = JsonConvert.SerializeObject(Item);
+        //    builder.AddContent(i++, (MarkupString)$"{json},");
+        //}
     }
 }

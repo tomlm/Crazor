@@ -1,0 +1,27 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveChoice>
+
+<ac:Choice @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:Choice>
+
+
+@code
+{
+    [Parameter]
+    public String Title { get => Item.Title; set => Item.Title = value; }
+
+    [Parameter]
+    public String Value { get => Item.Value; set => Item.Value = value; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.Parent is AdaptiveChoiceSetInput choiceSet)
+        {
+            choiceSet.Choices.Add(Item);
+        }
+    }
+}

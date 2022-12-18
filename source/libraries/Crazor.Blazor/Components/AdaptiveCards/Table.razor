@@ -1,0 +1,42 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ElementComponent<AdaptiveTable>
+
+<ac:Table @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:Table>
+
+@code
+{
+    [Parameter]
+    public Boolean? FirstRowAsHeaders { get => Item.FirstRowAsHeaders; set => Item.FirstRowAsHeaders = value ?? true; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
+    public AdaptiveContainerStyle GridStyle { get => Item.GridStyle; set => Item.GridStyle = value; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
+    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment; set => Item.HorizontalCellContentAlignment = value; }
+
+    [Parameter]
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+
+    [Parameter]
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+
+    [Parameter]
+    public Boolean? ShowGridLines { get => Item.ShowGridLines; set => Item.ShowGridLines = value ?? true; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveSpacing), "Default")]
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
+    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment; set => Item.VerticalCellContentAlignment = value; }
+
+    [Parameter]
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+}

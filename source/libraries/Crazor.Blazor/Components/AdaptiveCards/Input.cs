@@ -1,21 +1,13 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-//  Licensed under the MIT License.
-
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-using AdaptiveCards;
+using global::AdaptiveCards;
 using Crazor.Attributes;
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Crazor.Blazor.Components.AdaptiveCards
 {
-    /// <summary>
-    /// Shows errors when present for a given input id as TextBlock Attention
-    /// </summary>
     public class Input<AdaptiveInputT> : ElementComponent<AdaptiveInputT>
         where AdaptiveInputT : AdaptiveInput
     {
@@ -27,21 +19,12 @@ namespace Crazor.Blazor.Components.AdaptiveCards
         [Binding(BindingType.DisplayName)]
         public String Label { get => Item.Label; set => Item.Label = value; }
 
-        /// <summary>
-        /// Client side verification error message.
-        /// </summary>
         [Parameter]
         public String ErrorMessage { get => Item.ErrorMessage; set => Item.ErrorMessage = value; }
 
-        /// <summary>
-        /// Binding proeprty name. Set this to the path of the property to bind this tag to.
-        /// </summary>
         [Parameter]
         public string? Binding { get; set; }
 
-        /// <summary>
-        /// Set to false to hide the validation errors
-        /// </summary>
         [Parameter]
         public Boolean? ShowErrors { get; set; }
 

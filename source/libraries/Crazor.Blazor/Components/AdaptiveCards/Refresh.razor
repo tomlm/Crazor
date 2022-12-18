@@ -1,0 +1,23 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveRefresh>
+
+<ac:Refresh @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:Refresh>
+
+@code
+{
+    [Parameter]
+    public String UserIds { get => String.Join(" ", Item.UserIds); set => Item.UserIds = value.Split(' ').ToList(); }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.Parent is AdaptiveCard card)
+        {
+            card.Refresh = Item;
+        }
+    }
+}

@@ -65,6 +65,14 @@ namespace Crazor.Blazor.Components
             {
                 container.Items.Add(this.Item);
             }
+            else if (Item is AdaptiveTableCell cell && this.Parent is AdaptiveTableRow row)
+            {
+                row.Cells.Add(cell);
+            }
+            else if (Item is AdaptiveColumn col && this.Parent is AdaptiveColumnSet colSet )
+            {
+                colSet.Columns.Add(col);
+            }
             else
             {
                 throw new Exception($"{Parent.GetType().Name} is not a known element container type");

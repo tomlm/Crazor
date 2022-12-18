@@ -1,0 +1,29 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ElementComponent<AdaptiveImageSet>
+
+<ac:ImageSet @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:ImageSet>
+
+@code
+{
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveImageSize), "Auto")]
+    public AdaptiveImageSize ImageSize { get => Item.ImageSize; set => Item.ImageSize = value; }
+
+    [Parameter]
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+
+    [Parameter]
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveSpacing), "Default")]
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+
+    [Parameter]
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+}

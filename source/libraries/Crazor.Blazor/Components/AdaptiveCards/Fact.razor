@@ -1,0 +1,26 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveFact>
+
+<ac:Fact @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:Fact>
+
+@code
+{
+    [Parameter]
+    public String Title { get => Item.Title; set => Item.Title = value; }
+
+    [Parameter]
+    public String Value { get => Item.Value; set => Item.Value = value; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.Parent is AdaptiveFactSet factSet)
+        {
+            factSet.Facts.Add(Item);
+        }
+    }
+}

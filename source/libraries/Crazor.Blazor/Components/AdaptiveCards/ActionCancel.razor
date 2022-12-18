@@ -1,0 +1,17 @@
+@using global::AdaptiveCards
+@inherits ActionExecute
+
+<ac:Action.Execute @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.Execute>
+
+
+@code
+{
+    public ActionCancel()
+    {
+        AssociatedInputs = AdaptiveAssociatedInputs.None;
+        Title = "Cancel";
+        Verb = Constants.CANCEL_VERB;
+    }
+}

@@ -1,0 +1,24 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveTableColumn>
+
+<ac:TableColumn @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:TableColumn>
+
+@code
+{
+
+    [Parameter]
+    public String Width { get => Item.Width?.ToString(); set => Item.Width = value; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.Parent is AdaptiveTable table)
+        {
+            table.Columns.Add(Item);
+        }
+    }
+}

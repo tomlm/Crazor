@@ -1,0 +1,58 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ItemComponent<AdaptiveTextRun>
+
+<ac:TextRun @attributes="@GetAttributes()">
+    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+</ac:TextRun>
+
+@code
+{
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveTextColor), "Default")]
+    public AdaptiveTextColor Color { get => Item.Color; set => Item.Color = value; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveFontType), "Default")]
+    public AdaptiveFontType FontType { get => Item.FontType; set => Item.FontType = value; }
+
+    [Parameter]
+    public Boolean? Highlight { get => Item.Highlight; set => Item.Highlight = value ?? false; }
+
+    [Parameter]
+    public Boolean? IsSubtle { get => Item.IsSubtle; set => Item.IsSubtle = value ?? false; }
+
+    [Parameter]
+    public Boolean? Italic { get => Item.Italic; set => Item.Italic = value ?? false; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveTextSize), "Default")]
+    public AdaptiveTextSize Size { get => Item.Size; set => Item.Size = value; }
+
+    [Parameter]
+    public Boolean? Strikethrough { get => Item.Strikethrough; set => Item.Strikethrough = value ?? false; }
+
+    [Parameter]
+    public Boolean? Underline { get => Item.Underline; set => Item.Underline = value ?? false; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
+    public AdaptiveTextWeight Weight { get => Item.Weight; set => Item.Weight = value; }
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.Parent is AdaptiveRichTextBlock rtb)
+        {
+            rtb.Inlines.Add(Item);
+        }
+        else
+        {
+            throw new Exception("Unknown parent type");
+        }
+    }
+}
