@@ -110,18 +110,20 @@ public readonly struct ComponentParameter : IEquatable<ComponentParameter>
 
     public static IEnumerable<ComponentParameter> FromComponent(IComponent component)
     {
-        IEnumerable<PropertyInfo> props;
+        List<ComponentParameter> parms;
         if (component is ICardView cv)
         {
-            props = component.GetType().GetProperties().Where(pi => pi.CanWrite);
+            parms = component.GetType().GetProperties()
+                .Where(pi => pi.CanWrite)
+                .Select(p => ComponentParameter.CreateParameter(p.Name, p.GetValue(component, null))).ToList();
         }
         else
         {
-            props = component.GetType()
+            parms = component.GetType()
                              .GetProperties()
-                             .Where(p => Attribute.IsDefined(p, typeof(ParameterAttribute)));
+                             .Where(p => Attribute.IsDefined(p, typeof(ParameterAttribute)))
+                             .Select(p => ComponentParameter.CreateParameter(p.Name, p.GetValue(component, null))).ToList();
         }
-
-        return props.Select(p => ComponentParameter.CreateParameter(p.Name, p.GetValue(component, null)));
+        return parms;
     }
 }
