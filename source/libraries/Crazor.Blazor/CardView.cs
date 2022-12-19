@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Blazor.ComponentRenderer;
+using Crazor.Blazor.Components;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
@@ -103,7 +104,7 @@ namespace Crazor.Blazor
             }
             this.StateHasChanged();
             return Task.CompletedTask;
-//            return base.SetParametersAsync(ParameterView.Empty);
+            //            return base.SetParametersAsync(ParameterView.Empty);
         }
 
         /// <summary>
@@ -238,7 +239,7 @@ namespace Crazor.Blazor
             {
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
-                var rendered = ctx.RenderComponent(this);
+                var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
                 xml = rendered.Markup;
 
                 if (!string.IsNullOrWhiteSpace(xml))

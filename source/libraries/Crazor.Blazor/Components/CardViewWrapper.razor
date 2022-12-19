@@ -1,0 +1,19 @@
+﻿@using System.Linq;
+@using Crazor.Interfaces;
+<CascadingValue Name="CardView" Value="@CardView">
+    <DynamicComponent Type="@CardView.GetType()" Parameters="GetParameters()"></DynamicComponent>
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public ICardView CardView { get; set; }
+
+    public Dictionary<string, object> GetParameters()
+    {
+        var result = CardView.GetType()
+           .GetProperties()
+           .Where(pi => pi.CanWrite)
+           .ToDictionary(p => p.Name, p => p.GetValue(CardView, null))!;
+        return result!;
+    }
+}

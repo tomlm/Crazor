@@ -5,12 +5,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
+using Crazor.Interfaces;
 
 namespace Crazor.Blazor.Components.AdaptiveCards
 {
     public class Input<AdaptiveInputT> : ElementComponent<AdaptiveInputT>
         where AdaptiveInputT : AdaptiveInput
     {
+        [CascadingParameter(Name ="CardView")]
+        protected ICardView CardView { get; set; }
 
         [Parameter]
         public Boolean? IsRequired { get; set; }
@@ -42,7 +45,7 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
             if (!String.IsNullOrEmpty(this.Binding))
             {
-                this.BindingValue = this;
+                this.BindingValue = CardView;
                 var parts = this.Binding.Split('.');
                 foreach (var part in parts)
                 {
