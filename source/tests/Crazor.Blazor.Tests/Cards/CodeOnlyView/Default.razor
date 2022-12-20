@@ -3,7 +3,7 @@
 <Card Version="1.5">
 
     <TextBlock>This card demonstrates defining a view which is only code (no razor)</TextBlock>
-    <Action.Execute Verb="@nameof(OnShowMyCode)" Title="Show Code Only View" />
+    <ActionExecute Verb="@nameof(OnShowMyCode)" Title="Show Code Only View" />
 </Card>
 @functions {
     public void OnShowMyCode() => ShowView("MyCode");

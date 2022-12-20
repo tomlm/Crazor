@@ -4,6 +4,7 @@
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 using AdaptiveCards;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Newtonsoft.Json;
 using System.ComponentModel;
 
 namespace Crazor.Mvc.TagHelpers
@@ -16,6 +17,9 @@ namespace Crazor.Mvc.TagHelpers
     [HtmlTargetElement("Card")]
     public class CardTagHelper : ReflectionTagHelper
     {
+        [JsonIgnore]
+        [HtmlAttributeName("xmlns")]
+        public string xmlns { get; set; } = AdaptiveCard.ContentType;
 
         [HtmlAttributeName(nameof(FallbackText))]
         public String FallbackText { get; set; } 

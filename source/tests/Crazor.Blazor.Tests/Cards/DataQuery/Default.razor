@@ -2,17 +2,16 @@
 @inherits CardView
 
 <Card Version="1.5">
-    <Input.ChoiceSet Binding="Number" Style="Filtered">
+    <InputChoiceSet Binding="Number" Style="AdaptiveChoiceInputStyle.Filtered">
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />
         <Choice Title="4" Value="4" />
-        <Data.Query Dataset="Numbers" />
-    </Input.ChoiceSet>
+        <DataQuery Dataset="Numbers" />
+    </InputChoiceSet>
 </Card>
 
 @functions {
-    [BindProperty]
     public int Number { get; set; }
 
     public override async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)

@@ -3,11 +3,11 @@
 <Card Version="1.5" Title="Test Task Module Functionality">
     <TextBlock>Counter: @App.Counter</TextBlock>
 
-    <Action.Execute Id="@nameof(OnIncrement)" Verb="@nameof(OnIncrement)" Title="Increment" />
+    <ActionExecute Id="@nameof(OnIncrement)" Verb="@nameof(OnIncrement)" Title="Increment" />
 
-    <Action.Cancel Id="@nameof(OnCancel)" />
-    <Action.OK Id="@nameof(OnOK)" />
-    <Action.Execute Id="@nameof(OnPost)" Verb="@nameof(OnPost)" />
+    <ActionCancel Id="@nameof(OnCancel)" />
+    <ActionOK Id="@nameof(OnOK)" />
+    <ActionExecute Id="@nameof(OnPost)" Verb="@nameof(OnPost)" />
 </Card>
 
 @functions {

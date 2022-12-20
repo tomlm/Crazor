@@ -1,12 +1,12 @@
 ﻿@inherits CardView
 
 <Card Version="1.5">
-    <Input.Text Binding="Abc"/>
-    <Action.Execute Verb="OnSubmit"/>
+    <InputText Binding="Abc"/>
+    <ActionExecute Verb="OnSubmit"/>
 </Card>
 
 @functions 
 {
-    [BindProperty]
+    // [BindProperty]
     public string Abc { get; set; }
 }

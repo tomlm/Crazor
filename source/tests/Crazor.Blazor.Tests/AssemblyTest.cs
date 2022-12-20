@@ -13,6 +13,8 @@ namespace Crazor.Blazor.Tests
         {
             InitCardServices((services) =>
             {
+                services.AddCrazor();
+
                 // add your own dependencies here...
                 // services.Add<IFoo>();
             });

@@ -1,0 +1,15 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Size="AdaptiveTextSize.Large">Counter: @Counter</TextBlock>
+
+    <ActionExecute Title="+ Session" Verb="@nameof(OnIncrement)" Id="@nameof(OnIncrement)" />
+</Card>
+
+@functions {
+    public int Counter { get; set; }
+
+    public void OnIncrement()
+        => this.Counter++;
+}
+

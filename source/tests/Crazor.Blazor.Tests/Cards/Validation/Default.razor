@@ -2,7 +2,7 @@
 @inherits CardView
 
 <Card Version="1.5">
-    <TextBlock Style="Heading">Values!</TextBlock>
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Values!</TextBlock>
 
     <TextBlock Id="@nameof(Data.Birthday)">@Data.Birthday?.ToShortDateString()</TextBlock>
     <TextBlock Id="@nameof(Data.ArrivalTime)">@Data.ArrivalTime?.ToString("t")</TextBlock>
@@ -13,7 +13,7 @@
     <TextBlock Id="@nameof(Data.IsCool)">@Data.IsCool</TextBlock>
     <TextBlock Id="@nameof(Data.FavoritePet)">@Data.FavoritePet</TextBlock>
 
-    <Action.Execute Title="Edit" Verb="@nameof(OnEdit)"/>
+    <ActionExecute Title="Edit" Verb="@nameof(OnEdit)"/>
 </Card>
 
 @functions {

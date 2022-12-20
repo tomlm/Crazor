@@ -26,7 +26,7 @@ namespace Crazor.Blazor
             }
 
             services.AddScoped<ICardViewFactory, CardViewFactory>();
-            services.AddScoped<IRouteResolver, RouteResolver>();
+            services.AddScoped<IRouteResolver, BlazorRouteResolver>();
             return services;
         }
 
