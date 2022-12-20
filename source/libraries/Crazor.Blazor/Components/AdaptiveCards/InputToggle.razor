@@ -5,37 +5,37 @@
 @inherits Input<AdaptiveToggleInput>
 
 <ac:Input.Toggle @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Input.Toggle>
 
 @code
 {
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
 
     [Parameter]
-    public String Title { get => Item.Title; set => Item.Title = value; }
+    public String Title { get => Model.Title; set => Model.Title = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String Value { get => Item.Value; set => Item.Value = value; }
+    public String Value { get => Model.Value; set => Model.Value = value; }
 
     [Parameter]
-    public String ValueOff { get => Item.ValueOff; set => Item.ValueOff = value; }
+    public String ValueOff { get => Model.ValueOff; set => Model.ValueOff = value; }
 
     [Parameter]
-    public String ValueOn { get => Item.ValueOn; set => Item.ValueOn = value; }
+    public String ValueOn { get => Model.ValueOn; set => Model.ValueOn = value; }
 
     [Parameter]
-    public Boolean? Wrap { get => Item.Wrap; set => Item.Wrap = value ?? false; }
+    public Boolean? Wrap { get => Model.Wrap; set => Model.Wrap = value ?? false; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
 }

@@ -2,7 +2,7 @@
 @inherits ItemComponent<AdaptiveFallbackElement>
 
 <ac:FallbackElement @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:FallbackElement>
 
 @code
@@ -11,9 +11,9 @@
     {
         base.OnAfterRender(firstRender);
 
-        if (this.Parent is AdaptiveElement element)
+        if (this.ParentModel is AdaptiveElement element)
         {
-            element.Fallback = Item;
+            element.Fallback = Model;
         }
     }
 }

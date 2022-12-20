@@ -3,25 +3,25 @@
 @inherits ItemComponent<AdaptiveMediaSource>
 
 <ac:MediaSource @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:MediaSource>
 
 @code
 {
 
     [Parameter]
-    public String MimeType { get => Item.MimeType; set => Item.MimeType = value; }
+    public String MimeType { get => Model.MimeType; set => Model.MimeType = value; }
 
     [Parameter]
-    public String Url { get => Item.Url; set => Item.Url = value; }
+    public String Url { get => Model.Url; set => Model.Url = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.Parent is AdaptiveMedia media)
+        if (this.ParentModel is AdaptiveMedia media)
         {
-            media.Sources.Add(Item);
+            media.Sources.Add(Model);
         }
     }
 }

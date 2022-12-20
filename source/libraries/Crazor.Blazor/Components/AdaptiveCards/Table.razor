@@ -4,39 +4,39 @@
 @inherits ElementComponent<AdaptiveTable>
 
 <ac:Table @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Table>
 
 @code
 {
     [Parameter]
-    public Boolean? FirstRowAsHeaders { get => Item.FirstRowAsHeaders; set => Item.FirstRowAsHeaders = value ?? true; }
+    public Boolean? FirstRowAsHeaders { get => Model.FirstRowAsHeaders; set => Model.FirstRowAsHeaders = value ?? true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle GridStyle { get => Item.GridStyle; set => Item.GridStyle = value; }
+    public AdaptiveContainerStyle GridStyle { get => Model.GridStyle; set => Model.GridStyle = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment; set => Item.HorizontalCellContentAlignment = value; }
+    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Model.HorizontalCellContentAlignment; set => Model.HorizontalCellContentAlignment = value; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
 
     [Parameter]
-    public Boolean? ShowGridLines { get => Item.ShowGridLines; set => Item.ShowGridLines = value ?? true; }
+    public Boolean? ShowGridLines { get => Model.ShowGridLines; set => Model.ShowGridLines = value ?? true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment; set => Item.VerticalCellContentAlignment = value; }
+    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Model.VerticalCellContentAlignment; set => Model.VerticalCellContentAlignment = value; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
 }

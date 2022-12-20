@@ -3,22 +3,22 @@
 @inherits ItemComponent<AdaptiveTableColumn>
 
 <ac:TableColumn @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:TableColumn>
 
 @code
 {
 
     [Parameter]
-    public String Width { get => Item.Width?.ToString(); set => Item.Width = value; }
+    public String Width { get => Model.Width?.ToString(); set => Model.Width = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.Parent is AdaptiveTable table)
+        if (this.ParentModel is AdaptiveTable table)
         {
-            table.Columns.Add(Item);
+            table.Columns.Add(Model);
         }
     }
 }

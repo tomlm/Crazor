@@ -4,22 +4,22 @@
 @inherits ElementComponent<AdaptiveElement>
 
 <ac:UnknownElement @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:UnknownElement>
 
 @code
 {
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
 }

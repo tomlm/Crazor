@@ -4,35 +4,35 @@
 @inherits ActionComponent<AdaptiveExecuteAction>
 
 <ac:Action.Execute @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Action.Execute>
 
 @code
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveAssociatedInputs), "Auto")]
-    public AdaptiveAssociatedInputs AssociatedInputs { get => Item.AssociatedInputs; set => Item.AssociatedInputs = value; }
+    public AdaptiveAssociatedInputs AssociatedInputs { get => Model.AssociatedInputs; set => Model.AssociatedInputs = value; }
 
     [Parameter]
-    public String IconUrl { get => Item.IconUrl; set => Item.IconUrl = value; }
+    public String IconUrl { get => Model.IconUrl; set => Model.IconUrl = value; }
 
     [Parameter]
-    public Boolean? IsEnabled { get => Item.IsEnabled; set => Item.IsEnabled = value ?? true; }
+    public Boolean? IsEnabled { get => Model.IsEnabled; set => Model.IsEnabled = value ?? true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
-    public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
+    public AdaptiveActionMode Mode { get => Model.Mode; set => Model.Mode = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-    public AdaptiveActionStyle Style { get => Item.Style; set => Item.Style = value; }
+    public AdaptiveActionStyle Style { get => Model.Style; set => Model.Style = value; }
 
     [Parameter]
-    public String Title { get => Item.Title; set => Item.Title = value; }
+    public String Title { get => Model.Title; set => Model.Title = value; }
 
     [Parameter]
-    public String Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
+    public String Tooltip { get => Model.Tooltip; set => Model.Tooltip = value; }
 
     [Parameter]
-    public String Verb { get => Item.Verb; set => Item.Verb = value; }
+    public String Verb { get => Model.Verb; set => Model.Verb = value; }
     }

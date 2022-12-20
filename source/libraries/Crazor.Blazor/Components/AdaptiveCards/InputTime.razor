@@ -7,7 +7,7 @@
 @inherits Input<AdaptiveTimeInput>
 
 <ac:Input.Time @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Input.Time>
 
 @code
@@ -15,31 +15,31 @@
     internal const string Format = "HH:mm";
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
 
     [Parameter]
-    public DateTime? Min { get => Item.Min != null ? DateTime.Parse(Item.Min) : null; set => Item.Min = value.Value.ToString(Format); }
+    public DateTime? Min { get => Model.Min != null ? DateTime.Parse(Model.Min) : null; set => Model.Min = value.Value.ToString(Format); }
 
     [Parameter]
-    public DateTime? Max { get => Item.Max != null ? DateTime.Parse(Item.Max) : null; set => Item.Max = value.Value.ToString(Format); }
+    public DateTime? Max { get => Model.Max != null ? DateTime.Parse(Model.Max) : null; set => Model.Max = value.Value.ToString(Format); }
 
     [Parameter]
-    public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String Placeholder { get => Model.Placeholder; set => Model.Placeholder = value; }
 
     [Parameter]
     [DefaultValue(false)]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public DateTime? Value { get => Item.Value != null ? DateTime.Parse(Item.Value) : null; set => Item.Value = value.Value.ToString(Format); }
+    public DateTime? Value { get => Model.Value != null ? DateTime.Parse(Model.Value) : null; set => Model.Value = value.Value.ToString(Format); }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
 
     protected override void OnParametersSet()
     {

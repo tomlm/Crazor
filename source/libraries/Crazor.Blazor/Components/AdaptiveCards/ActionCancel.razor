@@ -2,7 +2,7 @@
 @inherits ActionExecute
 
 <ac:Action.Execute @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Action.Execute>
 
 

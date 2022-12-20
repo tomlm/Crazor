@@ -4,7 +4,7 @@
 @inherits ItemComponent<AdaptiveTextRun>
 
 <ac:TextRun @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:TextRun>
 
 @code
@@ -12,43 +12,43 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextColor), "Default")]
-    public AdaptiveTextColor Color { get => Item.Color; set => Item.Color = value; }
+    public AdaptiveTextColor Color { get => Model.Color; set => Model.Color = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveFontType), "Default")]
-    public AdaptiveFontType FontType { get => Item.FontType; set => Item.FontType = value; }
+    public AdaptiveFontType FontType { get => Model.FontType; set => Model.FontType = value; }
 
     [Parameter]
-    public Boolean? Highlight { get => Item.Highlight; set => Item.Highlight = value ?? false; }
+    public Boolean? Highlight { get => Model.Highlight; set => Model.Highlight = value ?? false; }
 
     [Parameter]
-    public Boolean? IsSubtle { get => Item.IsSubtle; set => Item.IsSubtle = value ?? false; }
+    public Boolean? IsSubtle { get => Model.IsSubtle; set => Model.IsSubtle = value ?? false; }
 
     [Parameter]
-    public Boolean? Italic { get => Item.Italic; set => Item.Italic = value ?? false; }
+    public Boolean? Italic { get => Model.Italic; set => Model.Italic = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextSize), "Default")]
-    public AdaptiveTextSize Size { get => Item.Size; set => Item.Size = value; }
+    public AdaptiveTextSize Size { get => Model.Size; set => Model.Size = value; }
 
     [Parameter]
-    public Boolean? Strikethrough { get => Item.Strikethrough; set => Item.Strikethrough = value ?? false; }
+    public Boolean? Strikethrough { get => Model.Strikethrough; set => Model.Strikethrough = value ?? false; }
 
     [Parameter]
-    public Boolean? Underline { get => Item.Underline; set => Item.Underline = value ?? false; }
+    public Boolean? Underline { get => Model.Underline; set => Model.Underline = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
-    public AdaptiveTextWeight Weight { get => Item.Weight; set => Item.Weight = value; }
+    public AdaptiveTextWeight Weight { get => Model.Weight; set => Model.Weight = value; }
 
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.Parent is AdaptiveRichTextBlock rtb)
+        if (this.ParentModel is AdaptiveRichTextBlock rtb)
         {
-            rtb.Inlines.Add(Item);
+            rtb.Inlines.Add(Model);
         }
         else
         {

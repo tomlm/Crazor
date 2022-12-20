@@ -20,10 +20,10 @@ namespace Crazor.Blazor.Components.AdaptiveCards
 
         [Parameter]
         [Binding(BindingType.DisplayName)]
-        public String Label { get => Item.Label; set => Item.Label = value; }
+        public String Label { get => Model.Label; set => Model.Label = value; }
 
         [Parameter]
-        public String ErrorMessage { get => Item.ErrorMessage; set => Item.ErrorMessage = value; }
+        public String ErrorMessage { get => Model.ErrorMessage; set => Model.ErrorMessage = value; }
 
         [Parameter]
         public string? Binding { get; set; }

@@ -3,25 +3,25 @@
 @inherits ItemComponent<AdaptiveChoice>
 
 <ac:Choice @attributes="@GetAttributes()">
-    <CascadingValue Name="Parent" Value="@Item">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Choice>
 
 
 @code
 {
     [Parameter]
-    public String Title { get => Item.Title; set => Item.Title = value; }
+    public String Title { get => Model.Title; set => Model.Title = value; }
 
     [Parameter]
-    public String Value { get => Item.Value; set => Item.Value = value; }
+    public String Value { get => Model.Value; set => Model.Value = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.Parent is AdaptiveChoiceSetInput choiceSet)
+        if (this.ParentModel is AdaptiveChoiceSetInput choiceSet)
         {
-            choiceSet.Choices.Add(Item);
+            choiceSet.Choices.Add(Model);
         }
     }
 }
