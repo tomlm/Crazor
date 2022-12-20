@@ -58,12 +58,10 @@
     [Inject]
     public IConfiguration Configuration { get; set; }
 
-    //[BindProperty]
     [Required]
     [StringLength(100)]
     public string? Query { get; set; }
 
-    //[BindProperty]
     public int Offset { get; set; }
 
     public const int PageSize = 5;

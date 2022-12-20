@@ -63,5 +63,10 @@ namespace Crazor
         {
             return Array.Empty<PropertyInfo>();
         }
+
+        public IEnumerable<PropertyInfo> GetBindableProperties()
+        {
+            return Array.Empty<PropertyInfo>();
+        }
     }
 }

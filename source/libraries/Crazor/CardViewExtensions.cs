@@ -113,8 +113,7 @@ namespace Crazor
 
             // for complex types do a recursive deep validation. We can't
             // do this at the root because CardView is too complicated for a deep compare.
-            foreach (var property in cardView.GetType().GetProperties()
-                                        .Where(p => (/*p.GetCustomAttribute<BindPropertyAttribute>() != null || */p.GetCustomAttribute<SessionMemoryAttribute>() != null))
+            foreach (var property in cardView.GetBindableProperties()
                                         .Where(p => !p.PropertyType.IsValueType && p.PropertyType != typeof(string)))
             {
                 validationResults = new List<ValidationResult>();

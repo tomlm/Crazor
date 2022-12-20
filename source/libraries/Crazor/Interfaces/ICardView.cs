@@ -55,10 +55,17 @@ namespace Crazor.Interfaces
         void BindProperties(JObject data);
 
         /// <summary>
-        /// Enumerate properties on the view which are bindable and persistent
+        /// Enumerate properties on the view which are persistent
         /// </summary>
         /// <returns></returns>
         IEnumerable<PropertyInfo> GetPersistentProperties();
+
+
+        /// <summary>
+        /// Enumerate properties on the view which are bindable and persistent
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PropertyInfo> GetBindableProperties();
 
         /// <summary>
         /// Render the card 

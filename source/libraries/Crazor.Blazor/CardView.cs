@@ -84,8 +84,7 @@ namespace Crazor.Blazor
                     // if root is [BindProperty]
                     var prop = this.GetType().GetProperty(parts[0]);
                     // only allow binding to Model, App or BindProperty
-                    if (prop != null &&
-                        (prop.Name == "Model" || prop.Name == "App"))
+                    if (prop != null && this.GetBindableProperties().Contains(prop))
                     {
                         ObjectPath.SetPathValue(this, property.Name, property.Value, json: false);
                     }
@@ -466,6 +465,23 @@ namespace Crazor.Blazor
 
                 return true;
 
+            }).ToList();
+        }
+
+        public IEnumerable<PropertyInfo> GetBindableProperties()
+        {
+            return this.GetType().GetProperties().Where(propertyInfo =>
+            {
+                if (propertyInfo.Name == "Model")
+                    return true;
+
+                if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
+                    return true;
+
+                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                    return false;
+
+                return true;
             }).ToList();
         }
 
