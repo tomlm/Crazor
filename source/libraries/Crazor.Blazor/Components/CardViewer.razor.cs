@@ -80,15 +80,24 @@ namespace Crazor.Blazor.Components
             {
                 _jsModule = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", JAVASCRIPT_FILE);
             }
+            // Call javascript renderCrazorCard passing the cardId (aka the div) a reference to call back and the card to render
             await _jsModule.InvokeVoidAsync("renderCrazorCard", CardId, this._dotNetObjectRef, JsonConvert.SerializeObject(this._card));
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        [JSInvokable]
-        public async Task onExecuteAction(object actionIn)
-        {
-            var action = JsonConvert.DeserializeObject<AdaptiveCardInvokeAction>(actionIn.ToString()!);
 
+        /// <summary>
+        /// Callback from javascript to handle processing an action.execute
+        /// </summary>
+        /// <param name="jsAction">the payload from the action.execute from js</param>
+        /// <returns>async task</returns>
+        [JSInvokable]
+        public async Task onExecuteAction(object jsAction)
+        {
+            // turn js action into C# action.
+            var action = JsonConvert.DeserializeObject<AdaptiveCardInvokeAction>(jsAction.ToString()!);
+
+            // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
@@ -102,8 +111,10 @@ namespace Crazor.Blazor.Components
             }
             .CreateActionInvokeActivity(action.Verb ?? Constants.SHOWVIEW_VERB, JObject.FromObject(action.Data));
 
+            // process it, giving us a new card
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
 
+            // tell tree to rerender. onrerender the card will be injected back into the html
             StateHasChanged();
         }
         public void Dispose() => _dotNetObjectRef?.Dispose();
