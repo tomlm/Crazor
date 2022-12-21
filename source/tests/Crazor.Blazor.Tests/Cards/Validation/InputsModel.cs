@@ -30,11 +30,11 @@ namespace Crazor.Blazor.Tests.Validation
 
         [Required]
         [System.ComponentModel.Description("Percentage")]
-        [Range(minimum:0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
+        [Range(minimum:1f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
         public Double? Percent  { get; set; }
 
         [Required]
-        [Range(minimum: 0, maximum: 100, ErrorMessage = "Attendees must be between 0 and 100.")]
+        [Range(minimum: 1.4f, maximum: 100.4f, ErrorMessage = "Attendees must be between 1.4 and 100.4.")]
         public int? Attendees { get; set; }
 
         [System.ComponentModel.Description("Cool")]

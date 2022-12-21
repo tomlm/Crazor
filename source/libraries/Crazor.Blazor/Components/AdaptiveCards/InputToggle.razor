@@ -7,6 +7,10 @@
 <ac:Input.Toggle @attributes="@GetAttributes()">
     <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Input.Toggle>
+@if (ShowErrors == null || ShowErrors.Value == true)
+{
+    <ValidationErrors Id="@(Binding ?? Id)" />
+}
 
 @code
 {
@@ -21,7 +25,7 @@
     public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
 
     [Parameter]
-    public String Title { get => Model.Title; set => Model.Title = value; }
+    public String Title { get => Model.Title ?? Model.Label; set => Model.Title = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]

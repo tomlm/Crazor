@@ -1,0 +1,19 @@
+﻿@using Crazor.Interfaces;
+@using global::AdaptiveCards;
+
+@if (CardView.ValidationErrors.TryGetValue(this.Id, out var errors))
+{
+    @foreach (var error in errors)
+    {
+        <TextBlock Spacing="AdaptiveSpacing.None" Color="AdaptiveTextColor.Attention">{error}</TextBlock>
+    }
+}
+
+@code
+{
+    [CascadingParameter(Name = "CardView")]
+    public ICardView CardView { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+}

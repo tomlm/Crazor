@@ -115,27 +115,6 @@ namespace Crazor.Blazor.Components.AdaptiveCards
                     this.ErrorMessage = requiredAttribute.ErrorMessage;
                 }
             }
-
-            // Add server side error messages.
-            if (ShowErrors == null || ShowErrors.Value == true)
-            {
-                //if (View != null)
-                //{
-                //    if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
-                //    {
-                //        if (errors.Any())
-                //        {
-                //            sb = new StringBuilder();
-                //            sb.AppendLine();
-                //            foreach (var error in errors)
-                //            {
-                //                sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
-                //            }
-                //            output.PostElement.SetHtmlContent(sb.ToString());
-                //        }
-                //    }
-                //}
-            }
         }
 
         protected static string MakeTitle(string name)

@@ -45,16 +45,16 @@ namespace Crazor.Blazor.Tests
                     .AssertElement<AdaptiveNumberInput>("Model.Percent", (el) =>
                     {
                         Assert.AreEqual(true, el.IsRequired);
-                        Assert.AreEqual(0f, el.Min);
+                        Assert.AreEqual(1, el.Min);
                         Assert.AreEqual(100f, el.Max);
                         Assert.AreEqual("Percentage must be between 0 and 100.", el.ErrorMessage);
                     })
                     .AssertElement<AdaptiveNumberInput>("Model.Attendees", (el) =>
                     {
                         Assert.AreEqual(true, el.IsRequired);
-                        Assert.AreEqual(0f, el.Min);
-                        Assert.AreEqual(100f, el.Max);
-                        Assert.AreEqual("Attendees must be between 0 and 100.", el.ErrorMessage);
+                        Assert.AreEqual(1.4f, el.Min);
+                        Assert.AreEqual(100.4f, el.Max);
+                        Assert.AreEqual("Attendees must be between 1.4 and 100.4.", el.ErrorMessage);
                     })
                     .AssertElement<AdaptiveDateInput>("Model.Birthday", (el) =>
                     {

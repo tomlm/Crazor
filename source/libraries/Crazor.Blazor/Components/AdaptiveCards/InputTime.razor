@@ -9,6 +9,10 @@
 <ac:Input.Time @attributes="@GetAttributes()">
     <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Input.Time>
+@if (ShowErrors == null || ShowErrors.Value == true)
+{
+    <ValidationErrors Id="@(Binding ?? Id)" />
+}
 
 @code
 {
@@ -62,4 +66,28 @@
             this.ErrorMessage = rangeAttribute?.ErrorMessage;
         }
     }
+
+    protected override Dictionary<string, object> GetAttributes()
+    {
+        var attributes = new Dictionary<string, object>();
+        foreach (var property in this.GetType().GetProperties().Where(p => p.PropertyType != typeof(RenderFragment) && p.GetCustomAttribute<ParameterAttribute>() != null))
+        {
+            var val = property.GetValue(this);
+            var targetProperty = Model!.GetType().GetProperty(property.Name) ?? property;
+            var defValue = (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null;
+            if (val != null && !Object.Equals(val, defValue))
+            {
+                if (val is bool b)
+                    // HTML serialization used by Blazor will turn raw bool into just attribute name with no value
+                    // we are targeting XML which always must have a value, and bool is represented as string "true"|"false"
+                    attributes.Add(property.Name, b.ToString().ToLower());
+                else if (val is DateTime dt)
+                    attributes.Add(property.Name, dt.ToString(Format));
+                else
+                    attributes.Add(property.Name, val);
+            }
+        }
+        return attributes;
+    }
+
 }

@@ -9,6 +9,10 @@
 <ac:Input.ChoiceSet @attributes="@GetAttributes()">
     <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
 </ac:Input.ChoiceSet>
+@if (ShowErrors == null || ShowErrors.Value == true)
+{
+    <ValidationErrors Id="@(Binding ?? Id)" />
+}
 
 @code
 {

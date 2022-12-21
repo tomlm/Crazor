@@ -116,7 +116,7 @@ namespace Crazor
 
             else
             {
-                string route = $"/{cardViewType.Namespace.Substring(cardViewType.Namespace.IndexOf("Cards")).Replace('.', '/')}";
+                string route = $"/{cardViewType.FullName.Substring(cardViewType.FullName.IndexOf("Cards")).Replace('.', '/')}";
                 var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
                 if (routeAttribute != null)
                 {
@@ -139,7 +139,7 @@ namespace Crazor
                 }
                 var parts = route.TrimStart('/').Split('/');
                 var cardTemplate = parts.Skip(2).FirstOrDefault() ?? string.Empty;
-                if (cardTemplate.ToLower() == "Default")
+                if (cardTemplate.ToLower() == "default")
                     cardTemplate = String.Empty;
 
                 list.Add(new RouteTemplate
