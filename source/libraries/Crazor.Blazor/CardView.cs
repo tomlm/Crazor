@@ -210,8 +210,15 @@ namespace Crazor.Blazor
                     {
                         if (IsModelValid)
                         {
-                            throw new Exception("fix this");
-                            // this.CloseView(ViewContext.ViewData.Model);
+                            var propModel = this.GetType().GetProperty("Model");
+                            if (propModel != null)
+                            {
+                                this.CloseView(propModel.GetValue(this));
+                            }
+                            else
+                            {
+                                this.CloseView();
+                            }
                         }
                     }
                     break;
