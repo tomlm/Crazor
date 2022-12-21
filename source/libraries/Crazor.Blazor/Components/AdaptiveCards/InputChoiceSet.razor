@@ -7,7 +7,7 @@
 @inherits Input<AdaptiveChoiceSetInput>
 
 <ac:Input.ChoiceSet @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Input.ChoiceSet>
 @if (ShowErrors == null || ShowErrors.Value == true)
 {
@@ -18,34 +18,34 @@
 {
 
     [Parameter]
-    public Boolean? IsMultiSelect { get => Model.IsMultiSelect; set => Model.IsMultiSelect = value ?? false; }
+    public Boolean? IsMultiSelect { get => Item.IsMultiSelect; set => Item.IsMultiSelect = value ?? false; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
     [Parameter]
-    public String Placeholder { get => Model.Placeholder; set => Model.Placeholder = value; }
+    public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
     [Parameter]
-    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveChoiceInputStyle), "Compact")]
-    public AdaptiveChoiceInputStyle Style { get => Model.Style; set => Model.Style = value; }
+    public AdaptiveChoiceInputStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String Value { get => Model.Value; set => Model.Value = value; }
+    public String Value { get => Item.Value; set => Item.Value = value; }
 
     [Parameter]
-    public Boolean? Wrap { get => Model.Wrap; set => Model.Wrap = value ?? false; }
+    public Boolean? Wrap { get => Item.Wrap; set => Item.Wrap = value ?? false; }
 
     [Parameter]
-    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
 
     protected override void OnParametersSet()
     {
@@ -73,15 +73,15 @@
                     // if we find the attribute we can access its values
                     if (descriptionAttribute != null)
                     {
-                        Model.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString() });
+                        Item.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString() });
                     }
                     else if (displayAttribute != null)
                     {
-                        Model.Choices.Add(new AdaptiveChoice() { Title = displayAttribute.DisplayName, Value = value?.ToString() });
+                        Item.Choices.Add(new AdaptiveChoice() { Title = displayAttribute.DisplayName, Value = value?.ToString() });
                     }
                     else
                     {
-                        Model.Choices.Add(new AdaptiveChoice() { Title = value.ToString(), Value = value.ToString() });
+                        Item.Choices.Add(new AdaptiveChoice() { Title = value.ToString(), Value = value.ToString() });
                     }
                 }
             }

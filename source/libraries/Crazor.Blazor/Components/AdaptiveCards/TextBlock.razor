@@ -4,58 +4,58 @@
 @inherits ElementComponent<AdaptiveTextBlock>
 
 <ac:TextBlock @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:TextBlock>
 
 @code
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextColor), "Default")]
-    public AdaptiveTextColor Color { get => Model.Color; set => Model.Color = value; }
+    public AdaptiveTextColor Color { get => Item.Color; set => Item.Color = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveFontType), "Default")]
-    public AdaptiveFontType FontType { get => Model.FontType; set => Model.FontType = value; }
+    public AdaptiveFontType FontType { get => Item.FontType; set => Item.FontType = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Model.HorizontalAlignment; set => Model.HorizontalAlignment = value; }
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
 
     [Parameter]
-    public Boolean? IsSubtle { get => Model.IsSubtle; set => Model.IsSubtle = value ?? false; }
+    public Boolean? IsSubtle { get => Item.IsSubtle; set => Item.IsSubtle = value ?? false; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
     [Parameter]
-    public Int32? MaxLines { get => Model.MaxLines; set => Model.MaxLines = value ?? 0; }
+    public Int32? MaxLines { get => Item.MaxLines; set => Item.MaxLines = value ?? 0; }
 
     [Parameter]
-    public Int32? MaxWidth { get => Model.MaxWidth; set => Model.MaxWidth = value ?? 0; }
+    public Int32? MaxWidth { get => Item.MaxWidth; set => Item.MaxWidth = value ?? 0; }
 
     [Parameter]
     [DefaultValue(false)]
-    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextSize), "Default")]
-    public AdaptiveTextSize Size { get => Model.Size; set => Model.Size = value; }
+    public AdaptiveTextSize Size { get => Item.Size; set => Item.Size = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextBlockStyle), "Default")]
-    public AdaptiveTextBlockStyle Style { get => Model.Style; set => Model.Style = value; }
+    public AdaptiveTextBlockStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
-    public AdaptiveTextWeight Weight { get => Model.Weight; set => Model.Weight = value; }
+    public AdaptiveTextWeight Weight { get => Item.Weight; set => Item.Weight = value; }
 
     [Parameter]
-    public Boolean? Wrap { get => Model.Wrap; set => Model.Wrap = value ?? false; }
+    public Boolean? Wrap { get => Item.Wrap; set => Item.Wrap = value ?? false; }
 
     [Parameter]
-    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
 }

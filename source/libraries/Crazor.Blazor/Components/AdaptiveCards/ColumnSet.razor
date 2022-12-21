@@ -4,43 +4,43 @@
 @inherits ElementComponent<AdaptiveColumnSet>
 
 <ac:ColumnSet @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:ColumnSet>
 
 @code
 {
     [Parameter]
-    public Boolean? Bleed { get => Model.Bleed; set => Model.Bleed = value ?? false; }
+    public Boolean? Bleed { get => Item.Bleed; set => Item.Bleed = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Model.HorizontalAlignment; set => Model.HorizontalAlignment = value; }
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
     [Parameter]
-    public String MinHeight { get => Model.MinHeight; set => Model.MinHeight = value; }
+    public String MinHeight { get => Item.MinHeight; set => Item.MinHeight = value; }
 
     [Parameter]
-    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle Style { get => Model.Style; set => Model.Style = value; }
+    public AdaptiveContainerStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalAlignment { get => Model.VerticalAlignment; set => Model.VerticalAlignment = value; }
+    public AdaptiveVerticalAlignment VerticalAlignment { get => Item.VerticalAlignment; set => Item.VerticalAlignment = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
-    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Model.VerticalContentAlignment; set => Model.VerticalContentAlignment = value; }
+    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment; set => Item.VerticalContentAlignment = value; }
 
     [Parameter]
-    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
 }

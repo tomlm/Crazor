@@ -3,31 +3,31 @@
 @inherits ItemComponent<AdaptiveDataQuery>
 
 <ac:Data.Query @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Data.Query>
 
 
 @code
 {
     [Parameter]
-    public Int32? Count { get => Model.Count; set => Model.Count = value ?? 10; }
+    public Int32? Count { get => Item.Count; set => Item.Count = value ?? 10; }
 
     [Parameter]
-    public String Dataset { get => Model.Dataset; set => Model.Dataset = value; }
+    public String Dataset { get => Item.Dataset; set => Item.Dataset = value; }
 
     [Parameter]
-    public Int32? Skip { get => Model.Skip; set => Model.Skip = value ?? 0; }
+    public Int32? Skip { get => Item.Skip; set => Item.Skip = value ?? 0; }
 
     [Parameter]
-    public String Value { get => Model.Value; set => Model.Value = value; }
+    public String Value { get => Item.Value; set => Item.Value = value; }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        if (ParentModel is AdaptiveChoiceSetInput choiceSet)
+        if (ParentItem is AdaptiveChoiceSetInput choiceSet)
         {
-            choiceSet.DataQuery = Model;
+            choiceSet.DataQuery = Item;
         }
     }
 }

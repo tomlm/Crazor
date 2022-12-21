@@ -57,25 +57,25 @@ namespace Crazor.Blazor.Components
         {
             base.OnAfterRender(firstRender);
 
-            if (this.ParentModel is AdaptiveCard card)
+            if (this.ParentItem is AdaptiveCard card)
             {
-                card.Body.Add(this.Model);
+                card.Body.Add(this.Item);
             }
-            else if (this.ParentModel is AdaptiveContainer container)
+            else if (this.ParentItem is AdaptiveContainer container)
             {
-                container.Items.Add(this.Model);
+                container.Items.Add(this.Item);
             }
-            else if (Model is AdaptiveTableCell cell && this.ParentModel is AdaptiveTableRow row)
+            else if (Item is AdaptiveTableCell cell && this.ParentItem is AdaptiveTableRow row)
             {
                 row.Cells.Add(cell);
             }
-            else if (Model is AdaptiveColumn col && this.ParentModel is AdaptiveColumnSet colSet )
+            else if (Item is AdaptiveColumn col && this.ParentItem is AdaptiveColumnSet colSet )
             {
                 colSet.Columns.Add(col);
             }
             else
             {
-                throw new Exception($"{ParentModel.GetType().Name} is not a known element container type");
+                throw new Exception($"{ParentItem.GetType().Name} is not a known element container type");
             }
         }
     }

@@ -3,24 +3,24 @@
 @inherits ItemComponent<AdaptiveFact>
 
 <ac:Fact @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Fact>
 
 @code
 {
     [Parameter]
-    public String Title { get => Model.Title; set => Model.Title = value; }
+    public String Title { get => Item.Title; set => Item.Title = value; }
 
     [Parameter]
-    public String Value { get => Model.Value; set => Model.Value = value; }
+    public String Value { get => Item.Value; set => Item.Value = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.ParentModel is AdaptiveFactSet factSet)
+        if (this.ParentItem is AdaptiveFactSet factSet)
         {
-            factSet.Facts.Add(Model);
+            factSet.Facts.Add(Item);
         }
     }
 }

@@ -6,12 +6,12 @@ using System.Reflection;
 
 namespace Crazor.Blazor.Components
 {
-    public class ItemComponent<ModelT> : ComponentBase
+    public class ItemComponent<ItemT> : ComponentBase
     {
-        public ModelT Model { get; set; } = Activator.CreateInstance<ModelT>();
+        public ItemT Item { get; set; } = Activator.CreateInstance<ItemT>();
 
-        [CascadingParameter(Name = "ParentModel")]
-        protected object ParentModel { get; set; }
+        [CascadingParameter(Name = "ParentItem")]
+        protected object ParentItem { get; set; }
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -22,7 +22,7 @@ namespace Crazor.Blazor.Components
             foreach (var property in this.GetType().GetProperties().Where(p => p.PropertyType != typeof(RenderFragment) && p.GetCustomAttribute<ParameterAttribute>() != null))
             {
                 var val = property.GetValue(this);
-                var targetProperty = Model!.GetType().GetProperty(property.Name) ?? property;
+                var targetProperty = Item!.GetType().GetProperty(property.Name) ?? property;
                 var defValue = (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null;
                 if (val != null && !Object.Equals(val, defValue))
                 {

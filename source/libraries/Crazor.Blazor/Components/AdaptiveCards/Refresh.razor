@@ -3,21 +3,21 @@
 @inherits ItemComponent<AdaptiveRefresh>
 
 <ac:Refresh @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Refresh>
 
 @code
 {
     [Parameter]
-    public String UserIds { get => String.Join(" ", Model.UserIds); set => Model.UserIds = value.Split(' ').ToList(); }
+    public String UserIds { get => String.Join(" ", Item.UserIds); set => Item.UserIds = value.Split(' ').ToList(); }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.ParentModel is AdaptiveCard card)
+        if (this.ParentItem is AdaptiveCard card)
         {
-            card.Refresh = Model;
+            card.Refresh = Item;
         }
     }
 }

@@ -4,18 +4,18 @@
 @inherits ItemComponent<AdaptiveTargetElement>
 
 <ac:TargetElement @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:TargetElement>
 
 @code
 {
 
     [Parameter]
-    public string ElementId { get => Model.ElementId; set => Model.ElementId = value; }
+    public string ElementId { get => Item.ElementId; set => Item.ElementId = value; }
 
     [Parameter]
     [DefaultValue(null)]
-    public bool? IsVisible { get=>Model.IsVisible; set=>Model.IsVisible = value ?? true; }
+    public bool? IsVisible { get=>Item.IsVisible; set=>Item.IsVisible = value ?? true; }
 
     protected override void OnAfterRender(bool firstRender)
     {

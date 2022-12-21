@@ -14,6 +14,6 @@ namespace Crazor.Blazor.Components
     {
         [Binding(BindingType.PropertyName)]
         [Parameter]
-        public string? Id { get => Model.Id; set => Model.Id = value; }
+        public string? Id { get => Item.Id; set => Item.Id = value; }
     }
 }

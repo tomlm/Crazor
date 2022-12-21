@@ -3,27 +3,27 @@
 @inherits ItemComponent<AdaptiveCaptionSource>
 
 <ac:CaptionSource @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:CaptionSource>
 
 @code
 {
     [Parameter]
-    public String Label { get => Model.Label; set => Model.Label = value; }
+    public String Label { get => Item.Label; set => Item.Label = value; }
 
     [Parameter]
-    public String MimeType { get => Model.MimeType; set => Model.MimeType = value; }
+    public String MimeType { get => Item.MimeType; set => Item.MimeType = value; }
 
     [Parameter]
-    public String Url { get => Model.Url; set => Model.Url = value; }
+    public String Url { get => Item.Url; set => Item.Url = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (this.ParentModel is AdaptiveMedia media)
+        if (this.ParentItem is AdaptiveMedia media)
         {
-            media.CaptionSources.Add(Model);
+            media.CaptionSources.Add(Item);
         }
     }
 }

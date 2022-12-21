@@ -5,12 +5,12 @@ using Crazor.Test.MSTest;
 namespace Crazor.Blazor.Tests
 {
     [TestClass]
-    public class TagHelperTests : CardTest
+    public class CustomComponentTest : CardTest
     {
         [TestMethod]
         public async Task TestAction()
         {
-            await LoadCard("/Cards/TagHelper")
+            await LoadCard("/Cards/CustomComponent")
                     .AssertHasRefresh()
                     .AssertTextBlock("Test1")
                     .AssertTextBlock("Test2")

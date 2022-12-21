@@ -7,7 +7,7 @@
 @inherits Input<AdaptiveTextInput>
 
 <ac:Input.Text @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Input.Text>
 @if (ShowErrors == null || ShowErrors.Value == true)
 {
@@ -18,37 +18,37 @@
 {
 
     [Parameter]
-    public Boolean? IsMultiline { get => Model.IsMultiline; set => Model.IsMultiline = value ?? false; }
+    public Boolean? IsMultiline { get => Item.IsMultiline; set => Item.IsMultiline = value ?? false; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
     [Parameter]
-    public Int32? MaxLength { get => Model.MaxLength; set => Model.MaxLength = value ?? 0; }
+    public Int32? MaxLength { get => Item.MaxLength; set => Item.MaxLength = value ?? 0; }
 
     [Parameter]
-    public String Placeholder { get => Model.Placeholder; set => Model.Placeholder = value; }
+    public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
     [Parameter]
-    public String Regex { get => Model.Regex; set => Model.Regex = value; }
+    public String Regex { get => Item.Regex; set => Item.Regex = value; }
 
     [Parameter]
-    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextInputStyle), "Text")]
-    public AdaptiveTextInputStyle? Style { get => Model.Style == AdaptiveTextInputStyle.Text ? null : Model.Style; set => Model.Style = value ?? AdaptiveTextInputStyle.Text; }
+    public AdaptiveTextInputStyle? Style { get => Item.Style == AdaptiveTextInputStyle.Text ? null : Item.Style; set => Item.Style = value ?? AdaptiveTextInputStyle.Text; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String Value { get => Model.Value; set => Model.Value = value; }
+    public String Value { get => Item.Value; set => Item.Value = value; }
 
     [Parameter]
-    public String Height { get => Model._Height; set => Model.Height = value; }
+    public String Height { get => Item._Height; set => Item.Height = value; }
 
     protected override void OnParametersSet()
     {

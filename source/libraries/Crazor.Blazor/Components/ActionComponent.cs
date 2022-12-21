@@ -19,21 +19,21 @@ namespace Crazor.Blazor.Components
         {
             base.OnAfterRender(firstRender);
 
-            if (this.ParentModel is AdaptiveCard card)
+            if (this.ParentItem is AdaptiveCard card)
             {
-                card.Actions.Add(this.Model);
+                card.Actions.Add(this.Item);
             }
-            else if (this.ParentModel is AdaptiveActionSet actionSet)
+            else if (this.ParentItem is AdaptiveActionSet actionSet)
             {
-                actionSet.Actions.Add(this.Model);
+                actionSet.Actions.Add(this.Item);
             }
-            else if (this.ParentModel is AdaptiveSelectAction selectAction)
+            else if (this.ParentItem is AdaptiveSelectAction selectAction)
             {
-                selectAction.Action = this.Model;
+                selectAction.Action = this.Item;
             }
-            else if (this.ParentModel is AdaptiveTextInput textInput)
+            else if (this.ParentItem is AdaptiveTextInput textInput)
             {
-                textInput.InlineAction = this.Model;
+                textInput.InlineAction = this.Item;
             }
             else
             {

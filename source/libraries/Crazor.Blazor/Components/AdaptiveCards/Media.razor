@@ -4,28 +4,28 @@
 @inherits ElementComponent<AdaptiveMedia>
 
 <ac:Media @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Media>
 
 @code
 {
 
     [Parameter]
-    public String AltText { get => Model.AltText; set => Model.AltText = value; }
+    public String AltText { get => Item.AltText; set => Item.AltText = value; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Model.IsVisible; set => Model.IsVisible = value ?? true; }
+    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
 
     [Parameter]
-    public String Poster { get => Model.Poster; set => Model.Poster = value; }
+    public String Poster { get => Item.Poster; set => Item.Poster = value; }
 
     [Parameter]
-    public Boolean? Separator { get => Model.Separator; set => Model.Separator = value ?? false; }
+    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Model.Spacing; set => Model.Spacing = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
-    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
 }

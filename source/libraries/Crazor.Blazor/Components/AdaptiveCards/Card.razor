@@ -5,51 +5,51 @@
 @inherits TypedElementComponent<AdaptiveCard>
 
 <ac:Card xmlns="@AdaptiveCard.ContentType" xmlns:ac="@AdaptiveCard.ContentType" @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">
+    <CascadingValue Name="ParentItem" Value="@Item">
         @ChildContent
     </CascadingValue>
 </ac:Card>
 
 @code {
     [Parameter]
-    public String FallbackText { get => Model.FallbackText; set => Model.FallbackText = value; }
+    public String FallbackText { get => Item.FallbackText; set => Item.FallbackText = value; }
 
     [Parameter]
-    public String Lang { get => Model.Lang; set => Model.Lang = value; }
+    public String Lang { get => Item.Lang; set => Item.Lang = value; }
 
     [Parameter]
-    public String MinHeight { get => Model.MinHeight; set => Model.MinHeight = value; }
+    public String MinHeight { get => Item.MinHeight; set => Item.MinHeight = value; }
 
     [Parameter]
-    public Boolean? Rtl { get => Model.Rtl; set => Model.Rtl = value ?? false; }
+    public Boolean? Rtl { get => Item.Rtl; set => Item.Rtl = value ?? false; }
 
     [Parameter]
-    public String Speak { get => Model.Speak; set => Model.Speak = value; }
+    public String Speak { get => Item.Speak; set => Item.Speak = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle Style { get => Model.Style; set => Model.Style = value; }
+    public AdaptiveContainerStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
-    public String Title { get => Model.Title; set => Model.Title = value; }
+    public String Title { get => Item.Title; set => Item.Title = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
-    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Model.VerticalContentAlignment; set => Model.VerticalContentAlignment = value; }
+    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment; set => Item.VerticalContentAlignment = value; }
 
     [Parameter]
-    public String Height { get => Model.Height?.ToString(); set => Model.Height = value; }
+    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
 
     [Parameter]
-    public String Version { get => Model.Version.ToString(); set => Model.Version = new AdaptiveSchemaVersion(value); }
+    public String Version { get => Item.Version.ToString(); set => Item.Version = new AdaptiveSchemaVersion(value); }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (ParentModel is AdaptiveShowCardAction action)
+        if (ParentItem is AdaptiveShowCardAction action)
         {
-            action.Card = Model;
+            action.Card = Item;
         }
     }
     }

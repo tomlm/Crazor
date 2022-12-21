@@ -103,7 +103,7 @@ namespace Crazor
                         cardTemplate = routeAttribute.Template;
 
                         list.Add(new RouteTemplate
-                        {
+                         {
                             Type = cardViewType,
                             App = cardRoute.App,
                             Route = path,
@@ -126,7 +126,8 @@ namespace Crazor
                     }
                     else
                     {
-                        route = $"{route}/{routeAttribute.Template}";
+                        cardRoute = CardRoute.Parse(route);
+                        route = $"/Cards/{cardRoute.App}/{routeAttribute.Template}";
                     }
                 }
                 cardRoute = CardRoute.Parse(route);

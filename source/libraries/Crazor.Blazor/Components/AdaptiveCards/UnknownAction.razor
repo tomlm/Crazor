@@ -4,29 +4,29 @@
 @inherits ActionComponent<AdaptiveAction>
 
 <ac:Action.Unknown @attributes="@GetAttributes()">
-    <CascadingValue Name="ParentModel" Value="@Model">@ChildContent</CascadingValue>
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Action.Unknown>
 
 @code
 {
 
     [Parameter]
-    public String IconUrl { get => Model.IconUrl; set => Model.IconUrl = value; }
+    public String IconUrl { get => Item.IconUrl; set => Item.IconUrl = value; }
 
     [Parameter]
-    public Boolean? IsEnabled { get => Model.IsEnabled; set => Model.IsEnabled = value ?? true; }
+    public Boolean? IsEnabled { get => Item.IsEnabled; set => Item.IsEnabled = value ?? true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
-    public AdaptiveActionMode Mode { get => Model.Mode; set => Model.Mode = value; }
+    public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-    public AdaptiveActionStyle Style { get => Model.Style; set => Model.Style = value; }
+    public AdaptiveActionStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
-    public String Title { get => Model.Title; set => Model.Title = value; }
+    public String Title { get => Item.Title; set => Item.Title = value; }
 
     [Parameter]
-    public String Tooltip { get => Model.Tooltip; set => Model.Tooltip = value; }
+    public String Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
 }
