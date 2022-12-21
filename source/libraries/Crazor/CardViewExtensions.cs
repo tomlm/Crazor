@@ -1,11 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AdaptiveCards;
-using Crazor.Attributes;
 using Crazor.Interfaces;
 using Crazor.Validation;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;

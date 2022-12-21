@@ -40,11 +40,11 @@ namespace Crazor
             var cardRoute = await CardRoute.FromDataAsync(data, Context.EncryptionProvider, cancellationToken);
 
             var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
-            
+
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
-            
+
             await cardApp.OnActionExecuteAsync(cancellationToken);
 
             var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);

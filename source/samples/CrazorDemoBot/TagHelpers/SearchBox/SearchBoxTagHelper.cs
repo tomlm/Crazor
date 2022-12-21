@@ -1,4 +1,7 @@
-﻿using Crazor.Mvc.TagHelpers;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Crazor.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CrazorDemoBot.TagHelpers.SearchBox

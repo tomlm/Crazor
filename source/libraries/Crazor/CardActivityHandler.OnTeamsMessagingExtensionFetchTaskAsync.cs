@@ -8,7 +8,6 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -66,7 +65,7 @@ namespace Crazor
         protected TaskModuleTaskInfo GetTaskInfoForCard(CardApp cardApp, AdaptiveCard adaptiveCard)
         {
             var viewTaskInfo = cardApp.CurrentView.GetType().GetCustomAttribute<TaskInfoAttribute>();
-            var appTaskInfo =  cardApp.GetType().GetCustomAttribute<TaskInfoAttribute>();
+            var appTaskInfo = cardApp.GetType().GetCustomAttribute<TaskInfoAttribute>();
 
             var taskInfo = new TaskModuleTaskInfo()
             {

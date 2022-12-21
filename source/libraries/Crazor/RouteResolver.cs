@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using System.Reflection;
-using Crazor.Interfaces;
 using Crazor.Attributes;
+using Crazor.Interfaces;
+using System.Reflection;
 
 namespace Crazor
 {
@@ -103,7 +103,7 @@ namespace Crazor
                         cardTemplate = routeAttribute.Template;
 
                         list.Add(new RouteTemplate
-                         {
+                        {
                             Type = cardViewType,
                             App = cardRoute.App,
                             Route = path,

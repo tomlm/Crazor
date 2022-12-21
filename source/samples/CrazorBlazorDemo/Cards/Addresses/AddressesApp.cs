@@ -1,5 +1,7 @@
-﻿using Crazor;
-using Crazor.Blazor;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Crazor;
 using Crazor.Attributes;
 
 namespace CrazorBlazorDemo.Cards.Addresses

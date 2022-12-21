@@ -1,4 +1,7 @@
-﻿using Crazor;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Crazor;
 using Newtonsoft.Json;
 using System.Text;
 

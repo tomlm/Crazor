@@ -1,5 +1,5 @@
-﻿using Crazor;
-using Crazor.Attributes;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 namespace Crazor.Blazor.Tests.Cards.RouteBinding
 {

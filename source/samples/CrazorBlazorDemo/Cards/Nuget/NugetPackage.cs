@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace CrazorBlazorDemo.Cards.NugetSearch
@@ -16,15 +19,15 @@ namespace CrazorBlazorDemo.Cards.NugetSearch
     public class NugetPackage
     {
         public string? Title { get; set; }
-        
+
         public string? Id { get; set; }
-        
+
         public string? Version { get; set; }
-        
+
         public string? Description { get; set; }
-        
+
         public string? ProjectUrl { get; set; }
-        
+
         public string? IconUrl { get; set; }
     }
 }

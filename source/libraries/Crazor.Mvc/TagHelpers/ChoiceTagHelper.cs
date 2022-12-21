@@ -11,20 +11,20 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Choice
     /// </summary>
 
-    [HtmlTargetElement("Choice", ParentTag ="Input.ChoiceSet")]
+    [HtmlTargetElement("Choice", ParentTag = "Input.ChoiceSet")]
     public class ChoiceTagHelper : ReflectionTagHelper
     {
 
         [HtmlAttributeName(nameof(IsSelected))]
-        public Boolean? IsSelected { get; set; } 
+        public Boolean? IsSelected { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        public String Speak { get; set; } 
+        public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Title))]
-        public String Title { get; set; } 
+        public String Title { get; set; }
 
         [HtmlAttributeName(nameof(Value))]
-        public String Value { get; set; } 
+        public String Value { get; set; }
     }
 }

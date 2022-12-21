@@ -57,7 +57,7 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
-            
+
             if (BindingProperty != null)
             {
                 var bindingType = BindingProperty.PropertyType;

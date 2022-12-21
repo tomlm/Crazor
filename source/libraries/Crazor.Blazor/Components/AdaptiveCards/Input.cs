@@ -1,18 +1,21 @@
-using global::AdaptiveCards;
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using Crazor.Attributes;
+using Crazor.Interfaces;
+using global::AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
-using Crazor.Interfaces;
 
 namespace Crazor.Blazor.Components.AdaptiveCards
 {
     public class Input<AdaptiveInputT> : ElementComponent<AdaptiveInputT>
         where AdaptiveInputT : AdaptiveInput
     {
-        [CascadingParameter(Name ="CardView")]
+        [CascadingParameter(Name = "CardView")]
         protected ICardView CardView { get; set; }
 
         [Parameter]

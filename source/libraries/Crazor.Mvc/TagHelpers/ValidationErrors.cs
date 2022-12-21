@@ -31,7 +31,7 @@ namespace Crazor.Mvc.TagHelpers
             {
                 output.TagName = null;
             }
-            
+
             return Task.CompletedTask;
         }
     }

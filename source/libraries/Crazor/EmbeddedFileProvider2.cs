@@ -11,7 +11,7 @@ namespace Crazor
     {
         private EmbeddedFileProvider fileProvider;
 
-        public EmbeddedFileProvider2(Assembly assembly) 
+        public EmbeddedFileProvider2(Assembly assembly)
         {
             fileProvider = new EmbeddedFileProvider(assembly);
         }
@@ -25,7 +25,7 @@ namespace Crazor
         public IFileInfo GetFileInfo(string path)
         {
             path = path
-                    .TrimStart('/','\\')
+                    .TrimStart('/', '\\')
                     .Replace('\\', '.')
                     .Replace('/', '.')
                     .Replace('-', '_');

@@ -22,7 +22,7 @@ namespace Crazor.Mvc.TagHelpers
         internal const string Format = "yyyy-MM-dd";
 
         [HtmlAttributeName(nameof(IsVisible))]
-        public Boolean? IsVisible { get; set; } 
+        public Boolean? IsVisible { get; set; }
 
         [HtmlAttributeName(nameof(Max))]
         public DateTime? Max { get; set; }

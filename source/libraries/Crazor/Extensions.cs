@@ -5,7 +5,6 @@ using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace CrazorBlazorDemo.Cards.Addresses
@@ -6,7 +9,7 @@ namespace CrazorBlazorDemo.Cards.Addresses
     public class Address
     {
         public string? Id { get; set; }
-        
+
         //Supported Data Annotations 
         //  [PasswordPropertyText]
         //  [Range]
@@ -37,7 +40,7 @@ namespace CrazorBlazorDemo.Cards.Addresses
         [Required]
         [MaxLength(20)]
         [DisplayName("Zip")]
-        [RegularExpression(@"\d{5}([ \-]\d{4})?", ErrorMessage ="The Zip must match pattern #####-#### or #####.")]
+        [RegularExpression(@"\d{5}([ \-]\d{4})?", ErrorMessage = "The Zip must match pattern #####-#### or #####.")]
         public string? PostalCode { get; set; }
 
         [Required]

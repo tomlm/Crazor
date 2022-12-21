@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System.ComponentModel.DataAnnotations;
 
 namespace Crazor.Mvc.Tests.Validation
@@ -30,8 +32,8 @@ namespace Crazor.Mvc.Tests.Validation
 
         [Required]
         [System.ComponentModel.Description("Percentage")]
-        [Range(minimum:0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
-        public Double? Percent  { get; set; }
+        [Range(minimum: 0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
+        public Double? Percent { get; set; }
 
         [Required]
         [Range(minimum: 0, maximum: 100, ErrorMessage = "Attendees must be between 0 and 100.")]
@@ -39,7 +41,7 @@ namespace Crazor.Mvc.Tests.Validation
 
         [System.ComponentModel.Description("Cool")]
         [Required(ErrorMessage = "Cool is required")]
-        public bool? IsCool{ get; set; }
+        public bool? IsCool { get; set; }
 
         [Required(ErrorMessage = "Phone number is required")]
         [Phone]

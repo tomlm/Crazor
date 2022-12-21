@@ -22,31 +22,31 @@ namespace Crazor.Mvc.TagHelpers
         internal const string Format = "HH:mm";
 
         [HtmlAttributeName(nameof(IsVisible))]
-        public Boolean? IsVisible { get; set; }  
+        public Boolean? IsVisible { get; set; }
 
         [HtmlAttributeName(nameof(Max))]
-        public String Max { get; set; } 
+        public String Max { get; set; }
 
         [HtmlAttributeName(nameof(Min))]
-        public String Min { get; set; } 
+        public String Min { get; set; }
 
         [HtmlAttributeName(nameof(Placeholder))]
-        public String Placeholder { get; set; } 
+        public String Placeholder { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
         [DefaultValue(false)]
-        public Boolean? Separator { get; set; } 
+        public Boolean? Separator { get; set; }
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-        public AdaptiveSpacing Spacing { get; set; } 
+        public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        public String Speak { get; set; } 
+        public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Value))]
         [Binding(BindingType.Value)]
-        public String Value { get; set; } 
+        public String Value { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
         public String Height { get; set; }

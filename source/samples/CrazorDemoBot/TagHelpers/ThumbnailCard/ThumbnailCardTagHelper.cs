@@ -1,4 +1,7 @@
-﻿using AdaptiveCards;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using AdaptiveCards;
 using Crazor.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -17,6 +20,6 @@ namespace CrazorDemoBot.TagHelpers.ThumbnailCard
         public string? Title { get; set; }
 
         [HtmlAttributeName(nameof(Subtitle))]
-        public string? Subtitle { get; set; } 
+        public string? Subtitle { get; set; }
     }
 }

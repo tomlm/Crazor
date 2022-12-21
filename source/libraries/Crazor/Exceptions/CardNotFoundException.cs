@@ -8,8 +8,8 @@ namespace Crazor.Exceptions
     /// </summary>
     public class CardRouteNotFoundException : Exception
     {
-        public CardRouteNotFoundException(string message) : base(message ?? "Card not found") 
-        { 
+        public CardRouteNotFoundException(string message) : base(message ?? "Card not found")
+        {
         }
     }
 }

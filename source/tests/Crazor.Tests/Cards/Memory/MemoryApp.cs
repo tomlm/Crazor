@@ -1,4 +1,6 @@
-﻿using Crazor;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using Crazor.Attributes;
 
 namespace Crazor.Tests.Cards.Memory

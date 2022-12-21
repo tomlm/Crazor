@@ -19,32 +19,32 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(AssociatedInputs))]
         [DefaultValue(typeof(AdaptiveAssociatedInputs), "Auto")]
-        public AdaptiveAssociatedInputs AssociatedInputs { get; set; } 
+        public AdaptiveAssociatedInputs AssociatedInputs { get; set; }
 
         [HtmlAttributeName(nameof(IconUrl))]
-        public String IconUrl { get; set; } 
+        public String IconUrl { get; set; }
 
         [HtmlAttributeName(nameof(IsEnabled))]
-        public Boolean? IsEnabled { get; set; }  
+        public Boolean? IsEnabled { get; set; }
 
         [HtmlAttributeName(nameof(Mode))]
         [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
-        public AdaptiveActionMode Mode { get; set; } 
+        public AdaptiveActionMode Mode { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        public String Speak { get; set; } 
+        public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
         [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-        public AdaptiveActionStyle Style { get; set; } 
+        public AdaptiveActionStyle Style { get; set; }
 
         [HtmlAttributeName(nameof(Title))]
-        public String Title { get; set; } 
+        public String Title { get; set; }
 
         [HtmlAttributeName(nameof(Tooltip))]
-        public String Tooltip { get; set; } 
+        public String Tooltip { get; set; }
 
         [HtmlAttributeName(nameof(Verb))]
-        public String Verb { get; set; } 
+        public String Verb { get; set; }
     }
 }

@@ -1,7 +1,8 @@
-using Crazor;
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using Crazor.Attributes;
 using Crazor.Test;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Crazor.Mvc.Tests
 {
@@ -52,7 +53,7 @@ namespace Crazor.Mvc.Tests
     }
 
     [CardRoute("optional/{value?}")]
-    public class Cards_Route_OptionalPath: CardView
+    public class Cards_Route_OptionalPath : CardView
     {
     }
 
@@ -68,10 +69,10 @@ namespace Crazor.Mvc.Tests
             rm.AddCardViewType(typeof(Cards_Route_Path1));
             rm.AddCardViewType(typeof(Cards_Route_Path3));
             rm.AddCardViewType(typeof(Cards_Route_Path2));
-            rm.AddCardViewType(typeof(Cards_Route_OptionalPath)); 
+            rm.AddCardViewType(typeof(Cards_Route_OptionalPath));
             rm.AddCardViewType(typeof(Cards_Route_Default));
             rm.AddCardViewType(typeof(Cards_Route_PathWithStatic));
-            rm.AddCardViewType(typeof(Cards_Route_Static)); 
+            rm.AddCardViewType(typeof(Cards_Route_Static));
 
             var cardRoute = CardRoute.Parse("/Cards/Route/Static");
             Assert.IsTrue(rm.ResolveRoute(cardRoute, out var type));

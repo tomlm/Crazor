@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace Crazor.Mvc.TagHelpers
 {

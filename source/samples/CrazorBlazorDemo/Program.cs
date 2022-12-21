@@ -3,8 +3,6 @@
 
 using Crazor.Blazor;
 using CrazorBlazorDemo.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
 

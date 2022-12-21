@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-//  Licensed under the MIT License.
+﻿// From https://github.com/reustmd/DataAnnotationsValidatorRecursive
+// MIT License
 
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ namespace Crazor.Validation
 {
     // From https://github.com/reustmd/DataAnnotationsValidatorRecursive
     // MIT License
-    internal class DataAnnotationsValidator 
+    internal class DataAnnotationsValidator
     {
         public bool TryValidateObject(object obj, ICollection<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)
         {

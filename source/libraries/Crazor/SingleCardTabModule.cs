@@ -14,7 +14,7 @@ namespace Crazor
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         { }
 
-        public void SetRoute(string route) 
+        public void SetRoute(string route)
         {
             if (Uri.TryCreate(route, UriKind.RelativeOrAbsolute, out var uri))
             {
@@ -27,7 +27,7 @@ namespace Crazor
                 throw new ArgumentException($"{route} not a uri?");
             }
         }
-        
+
         public string Route { get; set; }
 
         public override Task<string[]> GetCardUrisAsync()

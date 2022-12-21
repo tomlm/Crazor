@@ -25,7 +25,7 @@ namespace Crazor.Mvc.TagHelpers
         public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
-        public Boolean? IsVisible { get; set; } 
+        public Boolean? IsVisible { get; set; }
 
         [HtmlAttributeName(nameof(MinHeight))]
         public String MinHeight { get; set; }

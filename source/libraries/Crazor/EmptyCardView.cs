@@ -23,7 +23,7 @@ namespace Crazor
 
         public void BindProperties(JObject data)
         {
-            
+
         }
 
         public string GetRoute()
@@ -33,7 +33,7 @@ namespace Crazor
 
         public void LoadState(CardViewState cardState)
         {
-            
+
         }
         public void SaveState(CardViewState cardState)
         {

@@ -11,11 +11,11 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for TableColumn
     /// </summary>
 
-    [HtmlTargetElement("TableColumn", ParentTag ="Table")]
+    [HtmlTargetElement("TableColumn", ParentTag = "Table")]
     public class TableColumnTagHelper : ReflectionTagHelper
     {
 
         [HtmlAttributeName(nameof(Width))]
-        public String Width { get; set; } 
+        public String Width { get; set; }
     }
 }

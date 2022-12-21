@@ -11,20 +11,20 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Data.Query
     /// </summary>
 
-    [HtmlTargetElement("Data.Query", ParentTag ="Input.ChoiceSet")]
+    [HtmlTargetElement("Data.Query", ParentTag = "Input.ChoiceSet")]
     public class DataQueryTagHelper : ReflectionTagHelper
     {
 
         [HtmlAttributeName(nameof(Count))]
-        public Int32? Count { get; set; } 
+        public Int32? Count { get; set; }
 
         [HtmlAttributeName(nameof(Dataset))]
-        public String Dataset { get; set; } 
+        public String Dataset { get; set; }
 
         [HtmlAttributeName(nameof(Skip))]
-        public Int32? Skip { get; set; } 
+        public Int32? Skip { get; set; }
 
         [HtmlAttributeName(nameof(Value))]
-        public String Value { get; set; } 
+        public String Value { get; set; }
     }
 }

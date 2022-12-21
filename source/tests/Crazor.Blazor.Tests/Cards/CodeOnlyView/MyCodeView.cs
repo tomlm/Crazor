@@ -1,10 +1,11 @@
-﻿using AdaptiveCards;
-using Crazor;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using AdaptiveCards;
 using Crazor.Attributes;
-using Microsoft.AspNetCore.Mvc;
 using System.Text;
-using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Crazor.Blazor.Tests.Cards.CodeOnlyView
 {

@@ -20,22 +20,22 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(HorizontalAlignment))]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
+        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
         [HtmlAttributeName(nameof(IsVisible))]
-        public Boolean? IsVisible { get; set; }  
+        public Boolean? IsVisible { get; set; }
 
         [HtmlAttributeName(nameof(Separator))]
-        public Boolean? Separator { get; set; } 
+        public Boolean? Separator { get; set; }
 
         [HtmlAttributeName(nameof(Spacing))]
         [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-        public AdaptiveSpacing Spacing { get; set; } 
+        public AdaptiveSpacing Spacing { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        public String Speak { get; set; } 
+        public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
-        public String Height { get; set; } 
+        public String Height { get; set; }
     }
 }

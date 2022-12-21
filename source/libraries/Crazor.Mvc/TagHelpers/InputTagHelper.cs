@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Crazor.Mvc.TagHelpers
 {

@@ -2,17 +2,14 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Http;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Crazor.Mvc
 {
@@ -59,7 +56,7 @@ namespace Crazor.Mvc
                     cardView.RazorView = viewResult.View;
                 }
             }
-            else 
+            else
             {
                 cardView = (IMvcCardView)_serviceProvider.GetService(cardViewType);
                 view = new ViewStub();

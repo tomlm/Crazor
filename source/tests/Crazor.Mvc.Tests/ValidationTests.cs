@@ -1,8 +1,10 @@
-﻿using AdaptiveCards;
-using Crazor;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using AdaptiveCards;
+using Crazor.Mvc.Tests.Validation;
 using Crazor.Test;
 using Crazor.Test.MSTest;
-using Crazor.Mvc.Tests.Validation;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor.Mvc.Tests

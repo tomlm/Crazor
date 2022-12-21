@@ -6,7 +6,6 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor
@@ -21,8 +20,8 @@ namespace Crazor
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         protected async override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(
-            ITurnContext<IInvokeActivity> turnContext, 
-            MessagingExtensionQuery query, 
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionQuery query,
             CancellationToken cancellationToken)
         {
             System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionQueryAsync() processing");
@@ -40,7 +39,7 @@ namespace Crazor
 
             // don't save session data, it's a preview
             cardApp.Route.SessionId = null;
-            
+
             await cardApp.SaveAppAsync(cancellationToken);
 
             // turn into attachments

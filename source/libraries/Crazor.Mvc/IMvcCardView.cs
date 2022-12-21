@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Crazor.Mvc

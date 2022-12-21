@@ -19,17 +19,17 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(FillMode))]
         [DefaultValue(typeof(AdaptiveImageFillMode), "Cover")]
-        public AdaptiveImageFillMode FillMode { get; set; } 
+        public AdaptiveImageFillMode FillMode { get; set; }
 
         [HtmlAttributeName(nameof(HorizontalAlignment))]
         [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; } 
+        public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
         [HtmlAttributeName(nameof(Url))]
-        public String Url { get; set; } 
+        public String Url { get; set; }
 
         [HtmlAttributeName(nameof(VerticalAlignment))]
         [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-        public AdaptiveVerticalAlignment VerticalAlignment { get; set; } 
+        public AdaptiveVerticalAlignment VerticalAlignment { get; set; }
     }
 }

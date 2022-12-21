@@ -22,35 +22,35 @@ namespace Crazor.Mvc.TagHelpers
         public string xmlns { get; set; } = AdaptiveCard.ContentType;
 
         [HtmlAttributeName(nameof(FallbackText))]
-        public String FallbackText { get; set; } 
+        public String FallbackText { get; set; }
 
         [HtmlAttributeName(nameof(Lang))]
-        public String Lang { get; set; } 
+        public String Lang { get; set; }
 
         [HtmlAttributeName(nameof(MinHeight))]
-        public String MinHeight { get; set; } 
+        public String MinHeight { get; set; }
 
         [HtmlAttributeName(nameof(Rtl))]
-        public Boolean? Rtl { get; set; } 
+        public Boolean? Rtl { get; set; }
 
         [HtmlAttributeName(nameof(Speak))]
-        public String Speak { get; set; } 
+        public String Speak { get; set; }
 
         [HtmlAttributeName(nameof(Style))]
         [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-        public AdaptiveContainerStyle Style { get; set; } 
+        public AdaptiveContainerStyle Style { get; set; }
 
         [HtmlAttributeName(nameof(Title))]
-        public String Title { get; set; } 
+        public String Title { get; set; }
 
         [HtmlAttributeName(nameof(VerticalContentAlignment))]
         [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
-        public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; } 
+        public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; }
 
         [HtmlAttributeName(nameof(Height))]
-        public String Height { get; set; } 
+        public String Height { get; set; }
 
         [HtmlAttributeName(nameof(Version))]
-        public String Version { get; set; } 
+        public String Version { get; set; }
     }
 }

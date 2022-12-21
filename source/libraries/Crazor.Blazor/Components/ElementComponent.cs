@@ -69,7 +69,7 @@ namespace Crazor.Blazor.Components
             {
                 row.Cells.Add(cell);
             }
-            else if (Item is AdaptiveColumn col && this.ParentItem is AdaptiveColumnSet colSet )
+            else if (Item is AdaptiveColumn col && this.ParentItem is AdaptiveColumnSet colSet)
             {
                 colSet.Columns.Add(col);
             }

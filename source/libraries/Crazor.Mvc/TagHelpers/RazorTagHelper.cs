@@ -37,7 +37,7 @@ namespace Crazor.Mvc.TagHelpers
         [HtmlAttributeName]
         public string? Id { get; set; }
 
-        public ICardView? View { get; set; } 
+        public ICardView? View { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {

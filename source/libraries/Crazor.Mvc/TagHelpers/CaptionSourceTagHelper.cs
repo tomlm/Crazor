@@ -16,12 +16,12 @@ namespace Crazor.Mvc.TagHelpers
     {
 
         [HtmlAttributeName(nameof(Label))]
-        public String Label { get; set; } 
+        public String Label { get; set; }
 
         [HtmlAttributeName(nameof(MimeType))]
-        public String MimeType { get; set; } 
+        public String MimeType { get; set; }
 
         [HtmlAttributeName(nameof(Url))]
-        public String Url { get; set; } 
+        public String Url { get; set; }
     }
 }

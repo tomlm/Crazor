@@ -15,9 +15,9 @@ namespace Crazor
             CardTabModuleFactory cardTabModuleFactory,
             ICardViewFactory cardViewFactory,
             IRouteResolver routeResolver,
-            IConfiguration configuration, 
+            IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
-            IEncryptionProvider encryptionProvider, 
+            IEncryptionProvider encryptionProvider,
             IStorage storage)
         {
             Configuration = configuration;

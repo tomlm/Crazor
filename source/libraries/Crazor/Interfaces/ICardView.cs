@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Crazor.Interfaces
 {
-    public interface ICardView 
+    public interface ICardView
     {
         /// <summary>
         /// Name of the template

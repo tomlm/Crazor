@@ -5,7 +5,6 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
