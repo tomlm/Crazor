@@ -456,16 +456,16 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(invoke);
             this.Action = invoke.Action;
 
-            //// map FromRoute attributes
-            //foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
-            //{
-            //    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
-            //    var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-            //    if (dataProperty != null)
-            //    {
-            //        this.SetTargetProperty(targetProperty, dataProperty.Value);
-            //    }
-            //}
+            // map FromRoute attributes for app
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<Microsoft.AspNetCore.Mvc.FromRouteAttribute>() != null))
+            {
+                var fromRouteName = targetProperty.GetCustomAttribute<Microsoft.AspNetCore.Mvc.FromRouteAttribute>().Name ?? targetProperty.Name;
+                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                if (dataProperty != null)
+                {
+                    this.SetTargetProperty(targetProperty, dataProperty.Value);
+                }
+            }
 
             // map App. routedata to app
             foreach (var routeProperty in Route.RouteData.Properties().Where(p => p.Name.StartsWith("App.")))

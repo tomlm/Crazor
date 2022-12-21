@@ -1,5 +1,6 @@
 ﻿@using Crazor
 @using Crazor.Blazor.Tests.Cards.RouteBinding;
+@using Microsoft.AspNetCore.Mvc;
 @inherits CardView<RouteBindingApp>
 
 <Card Version="1.5">
@@ -13,9 +14,9 @@
 {
     public string ResourceId { get; set; }
 
-//    [FromRoute(Name="ResourceId")]
+    [FromRoute(Name="ResourceId")]
     public string ResourceId2 { get; set; }
 
-  //  [FromQuery]
+    [FromQuery]
     public string Value { get; set; }
 }
