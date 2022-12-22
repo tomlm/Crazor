@@ -38,10 +38,10 @@
 
     protected override void OnParametersSet()
     {
-        base.OnParametersSet();
-
         this.Title = "Cancel";
         this.Verb = Constants.CANCEL_VERB;
         this.AssociatedInputs = AdaptiveAssociatedInputs.None;
+
+        base.OnParametersSet();
     }
 }
