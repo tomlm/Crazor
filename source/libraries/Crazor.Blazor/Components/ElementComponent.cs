@@ -73,6 +73,10 @@ namespace Crazor.Blazor.Components
             {
                 colSet.Columns.Add(col);
             }
+            else if (Item is AdaptiveImage image && this.ParentItem is AdaptiveImageSet imageSet)
+            {
+                imageSet.Images.Add(image);
+            }
             else
             {
                 throw new Exception($"{ParentItem.GetType().Name} is not a known element container type");
