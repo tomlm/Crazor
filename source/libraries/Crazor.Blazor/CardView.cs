@@ -525,9 +525,9 @@ namespace Crazor.Blazor
             {
                 Model = (ModelT?)jt.ToObject(typeof(ModelT));
             }
-            else if (cardViewState.Model.GetType().IsAssignableTo(typeof(ModelT)))
+            else if (cardViewState.Model != null && cardViewState.Model.GetType().IsAssignableTo(typeof(ModelT)))
             {
-                Model = (ModelT?)cardViewState.Model;
+                Model = (ModelT)cardViewState.Model!;
             }
             else
             {
