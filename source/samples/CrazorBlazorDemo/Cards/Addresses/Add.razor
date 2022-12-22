@@ -21,7 +21,7 @@
         if (IsModelValid)
         {
             App.AddAddress(Model);
-            ReplaceView("Detail", Model);
+            ReplaceView($"{Model.Id}", Model);
 
             if (IsTaskModule)
             {

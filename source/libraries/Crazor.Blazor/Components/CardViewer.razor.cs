@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
+using Crazor.Blazor.Components.AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
@@ -83,8 +84,28 @@ namespace Crazor.Blazor.Components
             {
                 _jsModule = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", JAVASCRIPT_FILE);
             }
+            string json = null;
+            try
+            {
+                json = JsonConvert.SerializeObject(this._card);
+            }
+            catch (Exception err)
+            {
+                json = JsonConvert.SerializeObject(new AdaptiveCard(new AdaptiveSchemaVersion(1, 0))
+                {
+                    Body = new List<AdaptiveElement>()
+                    {
+                        new AdaptiveContainer()
+                        {
+                            Style = AdaptiveContainerStyle.Attention,
+                            Items = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = err.ToString(), Wrap = true, FontType = AdaptiveFontType.Monospace } }
+                        }
+                    }
+                });
+            }
+
             // Call javascript renderCrazorCard passing the cardId (aka the div) a reference to call back and the card to render
-            await _jsModule.InvokeVoidAsync("renderCrazorCard", CardId, this._dotNetObjectRef, JsonConvert.SerializeObject(this._card));
+            await _jsModule.InvokeVoidAsync("renderCrazorCard", CardId, this._dotNetObjectRef, json);
             await base.OnAfterRenderAsync(firstRender);
         }
 

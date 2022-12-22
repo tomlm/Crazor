@@ -7,6 +7,13 @@
 @inherits Input<AdaptiveChoiceSetInput>
 
 <ac:Input.ChoiceSet @attributes="@GetAttributes()">
+    @if (Item.Choices.Any())
+    {
+        @foreach(var choice in Item.Choices)
+        {
+            <Choice Title="@choice.Title" Value="@choice.Value" />
+        }
+    }
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Input.ChoiceSet>
 @if (ShowErrors == null || ShowErrors.Value == true)
@@ -50,7 +57,6 @@
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
 
         if (BindingProperty != null)
         {

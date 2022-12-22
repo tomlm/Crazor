@@ -525,6 +525,10 @@ namespace Crazor.Blazor
             {
                 Model = (ModelT?)jt.ToObject(typeof(ModelT));
             }
+            else if (cardViewState.Model.GetType().IsAssignableTo(typeof(ModelT)))
+            {
+                Model = (ModelT?)cardViewState.Model;
+            }
             else
             {
                 Model = Activator.CreateInstance<ModelT>();

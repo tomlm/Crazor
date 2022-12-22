@@ -20,11 +20,11 @@
     else
     {
         <FactSet>
-            <Fact Title="Street" Value="@Model.Street" />
-            <Fact Title="City" Value="@Model.City" />
-            <Fact Title="State" Value="@Model.State.ToString()" />
-            <Fact Title="PostalCode" Value="@Model.PostalCode" />
-            <Fact Title="Country" Value="@Model.Country.ToString()" />
+            <Fact Title="Street" Value="@(Model.Street)" />
+            <Fact Title="City" Value="@(Model.City)" />
+            <Fact Title="State" Value="@(Model.State.ToString())" />
+            <Fact Title="PostalCode" Value="@(Model.PostalCode)" />
+            <Fact Title="Country" Value="@(Model.Country.ToString())" />
         </FactSet>
 
         <ActionExecute Title="Delete" Verb="@nameof(OnDelete)" />
@@ -36,7 +36,7 @@
 @code {
     public void OnEdit()
     {
-        ShowView("Edit", Model);
+        ShowView($"{Model.Id}/Edit", Model);
     }
 
     public void OnAll()
@@ -56,7 +56,7 @@
     public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        if (cardResult.Success)
+        if (cardResult.Success && cardResult.Result != null)
         {
             this.Model = cardResult.AsResult<Address>()!;
         }

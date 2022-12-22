@@ -1,15 +1,7 @@
-@inherits ActionExecute
+@using global::AdaptiveCards;
+@inherits ActionComponent<AdaptiveExecuteAction>
 
-<ac:Action.Execute @attributes="@GetAttributes()">
+<ActionExecute Title="OK" Verb="@Constants.OK_VERB">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
-</ac:Action.Execute>
+</ActionExecute>
 
-
-@code
-{
-    public ActionOK()
-    {
-        this.Title = "OK";
-        this.Verb = Constants.OK_VERB;
-    }
-}

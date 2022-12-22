@@ -8,7 +8,7 @@
         @foreach (var address in App.Addresses)
         {
             <Container Separator="true">
-                <ColumnSet Padding="none">
+                <ColumnSet Spacing="AdaptiveSpacing.None">
                     <Column Width="stretch">
                         <TextBlock>@address.Street</TextBlock>
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
@@ -59,7 +59,7 @@
         var address = App.GetAddress(addressId);
         if (address != null)
         {
-            ShowView("Detail", address);
+            ShowView($"{address.Id}", address);
         }
     }
 
@@ -68,7 +68,7 @@
         var address = App.GetAddress(addressId);
         if (address != null)
         {
-            ShowView("Edit", address);
+            ShowView($"{address.Id}/Edit", address);
         }
     }
 
