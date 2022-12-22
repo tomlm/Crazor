@@ -11,7 +11,7 @@ namespace CrazorBlazorDemo.Cards.CodeOnlyView
     /// <summary>
     /// You don't have to use Razor for your view.  Simply derive from CardView and override BindCard() to return the AdaptiveCard
     /// </summary>
-    [CardRoute("MyCode")]
+    [CardRoute("MyCard")]
     public class MyCodeView : CardView
     {
         [SessionMemory]
