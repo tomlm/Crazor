@@ -380,21 +380,21 @@ namespace Crazor.Blazor
         /// <summary>
         /// Navigate to card by name
         /// </summary>
-        /// <param name="cardName">name of card </param>
+        /// <param name="cardRoute">route to push on to the callstack</param>
         /// <param name="model">model to pass</param>
-        public void ShowView(string cardName, object? model = null)
+        public void ShowView(string cardRoute, object? model = null)
         {
-            this.App!.ShowView(cardName, model);
+            this.App!.ShowView(cardRoute, model);
         }
 
         /// <summary>
         /// Replace this view with another one 
         /// </summary>
-        /// <param name="cardName"></param>
+        /// <param name="cardRoute">route to switch to.</param>
         /// <param name="model">model to pass</param>
-        public void ReplaceView(string cardName, object? model = null)
+        public void ReplaceView(string cardRoute, object? model = null)
         {
-            this.App!.ReplaceView(cardName, model);
+            this.App!.ReplaceView(cardRoute, model);
         }
 
         /// <summary>
