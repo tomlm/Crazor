@@ -68,5 +68,10 @@ namespace Crazor
         {
             return Array.Empty<PropertyInfo>();
         }
+
+        public object? GetModel()
+        {
+            return null;
+        }
     }
 }

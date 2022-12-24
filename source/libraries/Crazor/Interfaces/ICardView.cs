@@ -49,6 +49,12 @@ namespace Crazor.Interfaces
         void SaveState(CardViewState cardState);
 
         /// <summary>
+        /// Get Model (specificallly @model style model)
+        /// </summary>
+        /// <returns></returns>
+        object? GetModel();
+
+        /// <summary>
         /// Bind data to view properties.
         /// </summary>
         /// <param name="data"></param>

@@ -3,7 +3,9 @@
 
 using AdaptiveCards;
 using Crazor.Attributes;
+using Crazor.Exceptions;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
@@ -369,7 +371,7 @@ namespace Crazor
             }
         }
 
-        public void CloseView(CardResult? result = null)
+        public void CloseView(CardResult result)
         {
             this.LastResult = result;
 
@@ -390,6 +392,34 @@ namespace Crazor
             Action!.Verb = Constants.LOADROUTE_VERB;
             Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
             SetCurrentView(this.CallStack[0]);
+        }
+
+        /// <summary>
+        /// Close the current card, optionalling returning the result
+        /// </summary>
+        /// <param name="result">the result to return to the current caller</param>
+        public void CloseView(object? result = null)
+        {
+            this.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Result = result,
+                Success = true
+            });
+        }
+
+        /// <summary>
+        /// Cancel the current card, returning a message
+        /// </summary>
+        /// <param name="message">optional message to return.</param>
+        public void CancelView(string? message = null)
+        {
+            this.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Message = message,
+                Success = false
+            });
         }
 
         public void CloseTaskModule(TaskModuleAction status)
@@ -542,7 +572,7 @@ namespace Crazor
             Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
 
             this.CurrentView = Context.CardViewFactory.Create(cardViewType) ?? new EmptyCardView();
-            
+
             cardRoute.SessionId = this.Route.SessionId;
             this.Route = cardRoute;
             this.CurrentView.App = this;
@@ -564,6 +594,117 @@ namespace Crazor
             var appId = Context.Configuration.GetValue<string>("TeamsAppId") ?? botId;
 
             return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
+        }
+
+        /// <summary>
+        /// This is a utility function for CardViews to use reflection to handle action verbs
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task OnActionReflectionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        {
+            // Process BindProperty tags
+            var data = (JObject)JObject.FromObject(action.Data).DeepClone();
+            this.CurrentView.BindProperties(data);
+
+            MethodInfo? verbMethod = null;
+            if (action.Verb == Constants.LOADROUTE_VERB)
+            {
+                // merge in route and query data since we are in a LOAD ROUTE situation.
+                if (this.Route.RouteData != null)
+                    data.Merge(this.Route.RouteData);
+
+                if (this.Route.QueryData != null)
+                    data.Merge(this.Route.QueryData);
+
+                // process [FromRoute] attributes. This allows [FromRoute] to be placed on a property which doesn't match the RouteData.property name
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+                {
+                    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                    var dataProperty = this.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
+                }
+
+                // Process any Route properties as setters onto target object.
+                foreach (var routeProperty in this.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
+                {
+                    ObjectPath.SetPathValue(this.CurrentView, routeProperty.Name, routeProperty.Value.ToString(), false);
+                }
+
+                // process [FromQuery] attributes
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(a => a.GetCustomAttribute<FromQueryAttribute>() != null))
+                {
+                    var dataProperty = this.Route.QueryData.Properties().Where(p => p.Name.ToLower() == targetProperty.Name.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
+                }
+
+                // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
+                verbMethod = this.CurrentView.GetMethod(action.Verb);
+                if (verbMethod != null)
+                {
+                    try
+                    {
+                        await this.CurrentView.InvokeMethodAsync(verbMethod, this.CurrentView.GetMethodArgs(verbMethod, data, cancellationToken));
+                    }
+                    catch (CardRouteNotFoundException notFound)
+                    {
+                        this.AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
+                        this.CancelView();
+                    }
+                    catch (Exception err)
+                    {
+                        if (err.InnerException is CardRouteNotFoundException notFound)
+                        {
+                            this.CancelView(notFound.Message);
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                }
+                action.Verb = Constants.SHOWVIEW_VERB;
+            }
+
+            if (action.Verb != Constants.SHOWVIEW_VERB)
+            {
+                // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
+                this.CurrentView.Validate();
+            }
+
+            switch (action.Verb)
+            {
+                case Constants.CANCEL_VERB:
+                    // if there is an OnCancel, call it
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        // default implementation 
+                        this.CancelView();
+                    }
+                    break;
+
+                case Constants.OK_VERB:
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        if (this.CurrentView.IsModelValid)
+                        {
+                            this.CloseView(this.CurrentView.GetModel());
+                        }
+                    }
+                    break;
+
+                default:
+                    await this.CurrentView.InvokeVerbAsync(action, cancellationToken);
+                    break;
+            }
+
         }
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)

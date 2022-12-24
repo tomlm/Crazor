@@ -54,11 +54,15 @@ namespace Crazor.Mvc
         public IView RazorView { get; set; }
 
         /// <summary>
+        /// App for this CardView
+        /// </summary>
+       public AppT App { get; set; }
+
+        /// <summary>
         /// App reference
         /// </summary>
         CardApp ICardView.App { get => App; set => App = (AppT)value; }
 
-        public AppT App { get; set; }
         /// <summary>
         /// True if the model and properites on the view have passed validation
         /// </summary>
@@ -122,110 +126,8 @@ namespace Crazor.Mvc
         /// <returns></returns>
         public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(this.App);
-
-            // Process BindProperty tags
-            var data = (JObject)JObject.FromObject(action.Data).DeepClone();
-            this.BindProperties(data);
-
-            MethodInfo? verbMethod = null;
-            if (action.Verb == Constants.LOADROUTE_VERB)
-            {
-                // merge in route and query data since we are in a LOAD ROUTE situation.
-                if (App.Route.RouteData != null)
-                    data.Merge(App.Route.RouteData);
-
-                if (App.Route.QueryData != null)
-                    data.Merge(App.Route.QueryData);
-
-                // process [FromRoute] attributes. This allows [FromRoute] to be placed on a property which doesn't match the RouteData.property name
-                foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
-                {
-                    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
-                    var dataProperty = App.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-                    if (dataProperty != null)
-                    {
-                        this.SetTargetProperty(targetProperty, dataProperty.Value);
-                    }
-                }
-
-                // Process any Route properties as setters onto target object.
-                foreach (var routeProperty in App.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
-                {
-                    ObjectPath.SetPathValue(this, routeProperty.Name, routeProperty.Value.ToString(), false);
-                }
-
-                // process [FromQuery] attributes
-                foreach (var targetProperty in this.GetType().GetProperties().Where(a => a.GetCustomAttribute<FromQueryAttribute>() != null))
-                {
-                    var dataProperty = App.Route.QueryData.Properties().Where(p => p.Name.ToLower() == targetProperty.Name.ToLower()).SingleOrDefault();
-                    if (dataProperty != null)
-                    {
-                        this.SetTargetProperty(targetProperty, dataProperty.Value);
-                    }
-                }
-
-                // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
-                verbMethod = this.GetMethod(action.Verb);
-                if (verbMethod != null)
-                {
-                    try
-                    {
-                        await this.InvokeMethodAsync(verbMethod, this.GetMethodArgs(verbMethod, data, cancellationToken));
-                    }
-                    catch (CardRouteNotFoundException notFound)
-                    {
-                        this.AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
-                        this.CancelView();
-                    }
-                    catch (Exception err)
-                    {
-                        if (err.InnerException is CardRouteNotFoundException notFound)
-                        {
-                            this.CancelView(notFound.Message);
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                }
-                action.Verb = Constants.SHOWVIEW_VERB;
-            }
-
-            if (action.Verb != Constants.SHOWVIEW_VERB)
-            {
-                // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
-                this.Validate();
-            }
-
-            switch (action.Verb)
-            {
-                case Constants.CANCEL_VERB:
-                    // if there is an OnCancel, call it
-                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        // default implementation 
-                        this.CancelView();
-                    }
-                    break;
-
-                case Constants.OK_VERB:
-                    if (await this.InvokeVerbAsync(action, cancellationToken) == false)
-                    {
-                        if (IsModelValid)
-                        {
-                            this.CloseView(ViewContext.ViewData.Model);
-                        }
-                    }
-                    break;
-
-                default:
-                    await this.InvokeVerbAsync(action, cancellationToken);
-                    break;
-            }
+            await this.App.OnActionReflectionAsync(action, cancellationToken);
         }
-
 
         /// <summary>
         /// Bind View to an adaptive card
@@ -403,7 +305,6 @@ namespace Crazor.Mvc
         }
         #endregion
 
-
         #region Utility
         /// <summary>
         /// Add a banner message to be displayed to the viewer.
@@ -418,21 +319,21 @@ namespace Crazor.Mvc
         /// <summary>
         /// Navigate to card by name
         /// </summary>
-        /// <param name="cardName">name of card </param>
+        /// <param name="cardRoute">route of card </param>
         /// <param name="model">model to pass</param>
-        public void ShowView(string cardName, object? model = null)
+        public void ShowView(string cardRoute, object? model = null)
         {
-            this.App!.ShowView(cardName, model);
+            this.App!.ShowView(cardRoute, model);
         }
 
         /// <summary>
         /// Replace this view with another one 
         /// </summary>
-        /// <param name="cardName"></param>
+        /// <param name="cardRoute">route of card</param>
         /// <param name="model">model to pass</param>
-        public void ReplaceView(string cardName, object? model = null)
+        public void ReplaceView(string cardRoute, object? model = null)
         {
-            this.App!.ReplaceView(cardName, model);
+            this.App!.ReplaceView(cardRoute, model);
         }
 
         /// <summary>
@@ -441,12 +342,7 @@ namespace Crazor.Mvc
         /// <param name="result">the result to return to the current caller</param>
         public void CloseView(object? result = null)
         {
-            this.App?.CloseView(new CardResult()
-            {
-                Name = this.Name,
-                Result = result,
-                Success = true
-            });
+            this.App?.CloseView(result);
         }
 
         /// <summary>
@@ -455,12 +351,7 @@ namespace Crazor.Mvc
         /// <param name="message">optional message to return.</param>
         public void CancelView(string? message = null)
         {
-            this.App?.CloseView(new CardResult()
-            {
-                Name = this.Name,
-                Message = message,
-                Success = false
-            });
+            this.App?.CancelView(message);
         }
 
         /// <summary>
@@ -471,7 +362,6 @@ namespace Crazor.Mvc
         {
             this.App.CloseTaskModule(status);
         }
-        #endregion
 
         public IEnumerable<PropertyInfo> GetPersistentProperties()
         {
@@ -514,6 +404,11 @@ namespace Crazor.Mvc
             }).ToList();
         }
 
+        public object? GetModel()
+        {
+            return ViewContext.ViewData?.Model;
+        }
+        #endregion
     }
 
     public class CardView : CardViewBase<CardApp>
