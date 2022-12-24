@@ -1,21 +1,33 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc;
+
 @inherits CardView
 @attribute [CardRoute("{Name?}")]
 <Card Version="1.5">
-    @if (String.IsNullOrEmpty(Name))
-    {
-        <TextBlock>[Click here](/Cards/FromQuery?name=joe) to pass name via Query Parameter</TextBlock>
-        <TextBlock>[Click here](/Cards/FromQuery/fred) to pass name via route</TextBlock>
-    }
-    else
+    @if (!String.IsNullOrEmpty(Name))
     {
         <TextBlock>Hello @Name!</TextBlock>
     }
+    @if (!String.IsNullOrEmpty(Color))
+    {
+        <TextBlock>Your color is @Color!</TextBlock>
+    }
+    <ActionExecute Verb="OnQuery" Title="pass color via ?color=red query Parameter" />
+    <ActionExecute Verb="OnRoute" Title="pass Fred via /Cards/FromRoute/Joe card route " />
 </Card>
 
 @code
 {
     [Required]
-//    [FromQuery]
     public string Name { get; set; }
+
+    [FromQuery]
+    public string Color { get; set; }
+
+    public void OnQuery()
+        => ShowView("?color=red");
+
+    public void OnRoute()
+        => ShowView("Fred");
+
+
 }
