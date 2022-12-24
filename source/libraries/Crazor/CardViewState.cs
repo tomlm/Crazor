@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Diagnostics;
 
 namespace Crazor
@@ -25,6 +26,11 @@ namespace Crazor
                 throw new ArgumentException("CardApp can't be the model");
             }
             Model = model;
+        }
+
+        public CardViewState(CardRoute route, object? model = null)
+            : this(route.Route, model)
+        {
         }
 
         /// <summary>

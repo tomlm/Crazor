@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -200,20 +201,18 @@ namespace Crazor
                     int ShowViewAttempts = 0;
                     while (ShowViewAttempts++ < 5)
                     {
-                        var currentView = this.CurrentView;
+                        var currentRoute = this.Route;
                         await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
                         if (LastResult != null)
                         {
                             // because we are resuming we don't need to execute again unless
                             // the resumption causes it to happen.
-                            currentView = this.CurrentView;
                             await this.CurrentView.OnResumeView(LastResult, cancellationToken);
                         }
 
-                        if (this.CurrentView == currentView)
+                        if (this.Route == currentRoute)
                             break;
 
-                        this.Action.Verb = Constants.SHOWVIEW_VERB;
                         this.LastResult = null;
                     }
 
@@ -329,11 +328,13 @@ namespace Crazor
                 route = $"/Cards/{this.Name}/{route}".TrimEnd('/');
             }
 
-            if (Context.RouteResolver.IsRouteValid(CardRoute.Parse(route)))
+            var newRoute = CardRoute.Parse(route);
+            if (Context.RouteResolver.IsRouteValid(newRoute))
             {
-                var cardViewState = new CardViewState(route, model);
+                var cardViewState = new CardViewState(newRoute.Route, model);
                 CallStack.Insert(0, cardViewState);
-                Action!.Verb = Constants.SHOWVIEW_VERB;
+                Action!.Verb = Constants.LOADROUTE_VERB;
+                Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
                 SetCurrentView(cardViewState);
             }
             else
@@ -358,7 +359,8 @@ namespace Crazor
             {
                 var cardState = new CardViewState(route, model);
                 this.CallStack[0] = cardState;
-                Action!.Verb = Constants.SHOWVIEW_VERB;
+                Action!.Verb = Constants.LOADROUTE_VERB;
+                Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
                 SetCurrentView(cardState);
             }
             else
@@ -385,7 +387,8 @@ namespace Crazor
                     throw new Exception("No default route!");
             }
 
-            Action!.Verb = Constants.SHOWVIEW_VERB;
+            Action!.Verb = Constants.LOADROUTE_VERB;
+            Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
             SetCurrentView(this.CallStack[0]);
         }
 
@@ -535,28 +538,16 @@ namespace Crazor
         /// <exception cref="ArgumentNullException"></exception>
         public void SetCurrentView(CardViewState cardViewState)
         {
-            this.CurrentView = LoadCardView(cardViewState);
-        }
+            var cardRoute = CardRoute.Parse(cardViewState.Route);
+            Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
 
-        public ICardView LoadCardView(CardViewState cardState)
-        {
-            ICardView cardView;
-            try
-            {
-                Context.RouteResolver.ResolveRoute(CardRoute.Parse(cardState.Route), out var cardViewType);
-                cardView = Context.CardViewFactory.Create(cardViewType);
-                ArgumentNullException.ThrowIfNull(cardView);
-            }
-            catch (ArgumentException)
-            {
-                cardView = new EmptyCardView();
-            }
-
-            cardView.App = this;
-
-            // rester card SessionMemory properties
-            cardView.LoadState(cardState);
-            return cardView;
+            this.CurrentView = Context.CardViewFactory.Create(cardViewType) ?? new EmptyCardView();
+            
+            cardRoute.SessionId = this.Route.SessionId;
+            this.Route = cardRoute;
+            this.CurrentView.App = this;
+            // restore card SessionMemory properties for CardView
+            this.CurrentView.LoadState(cardViewState);
         }
 
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
