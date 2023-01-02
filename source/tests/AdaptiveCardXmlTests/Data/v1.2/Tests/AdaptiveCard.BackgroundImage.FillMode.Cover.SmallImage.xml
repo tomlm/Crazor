@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <ColumnSet>
     <Column Width="stretch">
       <BackgroundImage Url="https://i.picsum.photos/id/741/375/132.jpg?hmac=ERFnNR0i8FOAhUzgI--BoJ6Bvr5aWWb03TltW7R5U8E" HorizontalAlignment="center" VerticalAlignment="center" />

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Spacing="large" Separator="true" Size="extraLarge">**weight = lighter**</TextBlock>
   <Container>
     <TextBlock Size="small" Weight="lighter">The quick brown fox jumps over the lazy dog. (size = small)</TextBlock>

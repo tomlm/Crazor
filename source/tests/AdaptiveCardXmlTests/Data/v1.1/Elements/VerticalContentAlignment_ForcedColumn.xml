@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.1" VerticalContentAlignment="center">
+<Card Version="1.1" VerticalContentAlignment="center" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>Hi,</TextBlock>
   <TextBlock IsSubtle="true">MasterHip</TextBlock>
   <ColumnSet Height="stretch">

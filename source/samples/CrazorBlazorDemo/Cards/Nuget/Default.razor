@@ -3,7 +3,9 @@
 @inherits CardView<NugetApp, NugetPackage>
 
 <Card Version="1.5">
-    <SearchBox Id="@nameof(Search)" Value="@Search" Title="Search" />
+    <InputText Id="@nameof(Search)" Value="@Search" Label="Search" >
+        <ActionExecute Verb="@nameof(OnSearch)" Title="Search"/>
+    </InputText>
 
     <ColumnSet>
         <Column Width="auto">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" Speak="The Seattle Seahawks beat the Carolina Panthers 40-7">
+<Card Version="1.0" Speak="The Seattle Seahawks beat the Carolina Panthers 40-7" xmlns="application/vnd.microsoft.card.adaptive">
   <Container>
     <ColumnSet>
       <Column Width="auto">

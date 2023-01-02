@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" Speak="&lt;s&gt;Su vuelo esta confirmado para usted y 3 pasajeros mas de San Francisco a Amsterdam para el dia {{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}&lt;/s&gt;" Lang="es">
+<Card Version="1.0" Speak="&lt;s&gt;Su vuelo esta confirmado para usted y 3 pasajeros mas de San Francisco a Amsterdam para el dia {{DATE(2017-10-10T08:30:00Z, LONG)}} {{TIME(2017-10-10T08:30:00Z)}}&lt;/s&gt;" Lang="es" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Weight="bolder">Pasajeros</TextBlock>
   <TextBlock Separator="true">Sarah Hum</TextBlock>
   <TextBlock Spacing="none">Jeremy Goldberg</TextBlock>

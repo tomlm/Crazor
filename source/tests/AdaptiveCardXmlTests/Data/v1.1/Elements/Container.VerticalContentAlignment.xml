@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.1" MinHeight="150px">
+<Card Version="1.1" MinHeight="150px" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>I'm a regular TextBlock...</TextBlock>
   <Container Height="stretch" VerticalContentAlignment="center">
     <TextBlock>But I'm centered...</TextBlock>

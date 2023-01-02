@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <Input.Date Id="input1" IsRequired="true" Label="This is a required Input.Date" ErrorMessage="This date is required" />
   <Input.Date Id="input2" Label="Input.Date with valid min date of February 1st, 2012" ErrorMessage="This date must be on or after February 1st, 2012" Min="2012-02-01" />
   <Input.Date Id="input3" Label="Input.Date with valid max date of November 2nd, 2021" ErrorMessage="This date must be on or before November 2nd, 2021" Max="2021-11-02" />

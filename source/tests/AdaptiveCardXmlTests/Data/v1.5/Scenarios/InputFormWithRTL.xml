@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.4">
+<Card Version="1.4" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>Please select your language:</TextBlock>
   <Action.ShowCard Title="English">
     <Card Version="1.4">

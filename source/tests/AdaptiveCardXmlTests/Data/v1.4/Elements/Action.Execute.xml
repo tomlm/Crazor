@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.4">
+<Card Version="1.4" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>Present a form and submit it back to the originator</TextBlock>
   <Input.Text Id="firstName" Label="What is your first name?" />
   <Input.Text Id="lastName" Label="What is your last name?" />

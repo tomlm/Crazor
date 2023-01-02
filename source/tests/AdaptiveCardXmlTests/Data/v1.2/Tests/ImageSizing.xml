@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2">
+<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>(default)</TextBlock>
   <Image Url="https://picsum.photos/id/133/300/200" AltText="Two cars" />
   <TextBlock>Size: Small</TextBlock>

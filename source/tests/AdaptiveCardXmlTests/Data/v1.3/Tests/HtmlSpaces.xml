@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>TextBlock with 4 "space" characters    1</TextBlock>
   <TextBlock>TextBlock with 4 "&amp;-nbsp;" characters&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;1</TextBlock>
   <TextBlock>TextBlock with 4 "&amp;-ensp;" characters&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;1</TextBlock>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" Speak="&lt;s&gt;Your  meeting about &quot;Adaptive Card design session&quot;&lt;break strength='weak'/&gt; is starting at 12:30pm&lt;/s&gt;&lt;s&gt;Do you want to snooze &lt;break strength='weak'/&gt; or do you want to send a late notification to the attendees?&lt;/s&gt;">
+<Card Version="1.0" Speak="&lt;s&gt;Your  meeting about &quot;Adaptive Card design session&quot;&lt;break strength='weak'/&gt; is starting at 12:30pm&lt;/s&gt;&lt;s&gt;Do you want to snooze &lt;break strength='weak'/&gt; or do you want to send a late notification to the attendees?&lt;/s&gt;" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Size="large" Weight="bolder" Wrap="true" Style="heading">Adaptive Card design session</TextBlock>
   <TextBlock IsSubtle="true" Wrap="true">Conf Room 112/3377 (10)</TextBlock>
   <TextBlock Spacing="none" IsSubtle="true" Wrap="true">12:30 PM - 1:30 PM</TextBlock>

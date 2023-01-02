@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Size="medium" Wrap="true">Test scenarios around numbered lists with max values.</TextBlock>
   <TextBlock>Numbered List:</TextBlock>
   <TextBlock>1. One

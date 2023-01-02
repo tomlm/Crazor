@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Size="large">This is some text</TextBlock>
   <TextBlock Weight="bolder">It doesn't wrap by default</TextBlock>
   <TextBlock Wrap="true">So set **wrap** to true if you plan on showing a paragraph of text</TextBlock>

@@ -142,10 +142,12 @@ namespace Crazor.Blazor
                     {
                         xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
                     }
+                    //File.WriteAllText(@"c:\scratch\foo.xml", xml);
                     Diag.Debug.WriteLine(xml);
 
                     var reader = XmlReader.Create(new StringReader(xml));
                     var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
+                    //Diag.Debug.WriteLine(JsonConvert.SerializeObject(card));
                     return card;
                 }
                 else

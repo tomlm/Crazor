@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2" Speak="Calendar">
+<Card Version="1.2" Speak="Calendar" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Wrap="true">This whole card has an Action.OpenUrl select action, and has an ActionSet that has an Action.Submit. Both actions should work</TextBlock>
   <Container>
     <ColumnSet>

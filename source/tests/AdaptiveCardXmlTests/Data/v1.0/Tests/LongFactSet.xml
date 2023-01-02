@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Size="large" Weight="bolder">Nutrition facts</TextBlock>
   <TextBlock>Per 3 cookies (36 g)</TextBlock>
   <TextBlock Weight="bolder">Calories 180</TextBlock>

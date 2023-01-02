@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" Speak="This card requires Adaptive Cards version 99.0, which probably doesn't exist" Lang="en">
+<Card Version="1.0" Speak="This card requires Adaptive Cards version 99.0, which probably doesn't exist" Lang="en" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock>This card requires Adaptive Cards version 99.0, which probably doesn't exist</TextBlock>
 </Card>

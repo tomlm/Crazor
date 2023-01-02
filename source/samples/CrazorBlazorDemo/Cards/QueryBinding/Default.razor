@@ -15,15 +15,12 @@
 </Card>
 
 @code {
-    //[FromQuery]
-    //[BindProperty]
+    [FromQuery]
     public string Name { get; set; }
 
-    //[FromQuery]
-    //[BindProperty]
+    [FromQuery]
     public string Zip { get; set; }
 
-    //[BindProperty]
     public string City { get; set; }
 
     public void OnLoadRoute(string name, string zip, string city)

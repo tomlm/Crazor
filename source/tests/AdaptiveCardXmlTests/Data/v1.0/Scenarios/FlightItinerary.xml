@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" Speak="&lt;s&gt;Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM&lt;/s&gt;">
+<Card Version="1.0" Speak="&lt;s&gt;Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM&lt;/s&gt;" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Weight="bolder" Wrap="true">Passengers</TextBlock>
   <TextBlock Separator="true" Wrap="true">Sarah Hum</TextBlock>
   <TextBlock Spacing="none" Wrap="true">Jeremy Goldberg</TextBlock>

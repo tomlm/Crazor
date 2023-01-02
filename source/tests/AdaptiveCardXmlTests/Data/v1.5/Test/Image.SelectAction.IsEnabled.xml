@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.4">
+<Card Version="1.4" xmlns="application/vnd.microsoft.card.adaptive">
   <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png">
     <SelectAction>
       <Action.OpenUrl Tooltip="This cat button is disabled :(" Url="https://adaptivecards.io/" />
