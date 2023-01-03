@@ -42,7 +42,7 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveChoiceInputStyle), "Compact")]
-    public AdaptiveChoiceInputStyle Style { get => Item.Style; set => Item.Style = value; }
+    public AdaptiveChoiceInputStyle Style { get; set; }
 
     [Parameter]
     [Binding(BindingType.Value)]
