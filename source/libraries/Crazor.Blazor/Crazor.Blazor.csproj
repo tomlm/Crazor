@@ -6,20 +6,43 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<Description>Experimental library for creating Adaptive Cards using ASP.NET MVC style .CSHTML templates.</Description>
+		<Company>Microsoft</Company>
+		<Authors>Microsoft</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/microsoft/crazor</PackageProjectUrl>
+		<PackageIconUrl>https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>adaptivecards</PackageTags>
+		<RepositoryUrl>https://github.com/microsoft/crazor</RepositoryUrl>
+		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
+		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+		<ContentTargetFolders>content</ContentTargetFolders>
+	</PropertyGroup>
+
 	<ItemGroup>
-	  <EmbeddedResource Include="wwwroot/**/**" />
+		<None Include="icon.png" />
+		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Components\CardAppHost.razor.js" />
+		<_ContentIncludedByDefault Remove="Components\CardAppHost.razor.js" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Components\CardAppHost.razor.js" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Components\CardViewer.razor.js" />
+		<EmbeddedResource Include="Components\CardViewer.razor.js" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,6 +51,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
+		<PackageReference Include="Crazor" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
