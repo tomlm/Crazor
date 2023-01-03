@@ -6,11 +6,9 @@
 <Card Version="1.5">
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Bing Search</TextBlock>
     <InputText Id="@nameof(Query)" Value="@Query" Placeholder="Enter search terms" Label="Search">
-        <InlineAction>
-            <ActionExecute Title="Search" Verb="@nameof(OnSearch)" />
-        </InlineAction>
+        <ActionExecute Title="Search" Verb="@nameof(OnSearch)" />
     </InputText>
-    
+
     <ColumnSet>
         <Column Width="auto">
             @if (HasPrev())
@@ -69,10 +67,10 @@
     [TempMemory]
     public IList<WebPage> Results { get; set; } = new List<WebPage>();
 
-    public bool HasNext() 
+    public bool HasNext()
         => Results.Any();
 
-    public bool HasPrev() 
+    public bool HasPrev()
         => Results.Any() && Offset > 0;
 
     public async Task OnSearch()

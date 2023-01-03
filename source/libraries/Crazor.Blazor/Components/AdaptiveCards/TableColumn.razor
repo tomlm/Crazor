@@ -10,7 +10,7 @@
 {
 
     [Parameter]
-    public String Width { get => Item.Width?.ToString(); set => Item.Width = value; }
+    public String? Width { get; set; }
 
     protected override void OnAfterRender(bool firstRender)
     {

@@ -13,18 +13,18 @@
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveImageFillMode), "Cover")]
-    public AdaptiveImageFillMode FillMode { get => Item.FillMode; set => Item.FillMode = value; }
+    public AdaptiveImageFillMode FillMode { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
     [Parameter]
-    public String Url { get => Item.Url; set => Item.Url = value; }
+    public String? Url { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalAlignment { get => Item.VerticalAlignment; set => Item.VerticalAlignment = value; }
+    public AdaptiveVerticalAlignment VerticalAlignment { get; set; }
 
     protected override void OnAfterRender(bool firstRender)
     {

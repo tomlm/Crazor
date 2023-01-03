@@ -12,34 +12,34 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextColor), "Default")]
-    public AdaptiveTextColor Color { get => Item.Color; set => Item.Color = value; }
+    public AdaptiveTextColor Color { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveFontType), "Default")]
-    public AdaptiveFontType FontType { get => Item.FontType; set => Item.FontType = value; }
+    public AdaptiveFontType FontType { get; set; }
 
     [Parameter]
-    public Boolean? Highlight { get => Item.Highlight; set => Item.Highlight = value ?? false; }
+    public String? Highlight { get; set; }
 
     [Parameter]
-    public Boolean? IsSubtle { get => Item.IsSubtle; set => Item.IsSubtle = value ?? false; }
+    public BoolProperty? IsSubtle { get; set; }
 
     [Parameter]
-    public Boolean? Italic { get => Item.Italic; set => Item.Italic = value ?? false; }
+    public String? Italic { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextSize), "Default")]
-    public AdaptiveTextSize Size { get => Item.Size; set => Item.Size = value; }
+    public AdaptiveTextSize Size { get; set; }
 
     [Parameter]
-    public Boolean? Strikethrough { get => Item.Strikethrough; set => Item.Strikethrough = value ?? false; }
+    public BoolProperty? Strikethrough { get; set; }
 
     [Parameter]
-    public Boolean? Underline { get => Item.Underline; set => Item.Underline = value ?? false; }
+    public String? Underline { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
-    public AdaptiveTextWeight Weight { get => Item.Weight; set => Item.Weight = value; }
+    public AdaptiveTextWeight Weight { get; set; }
 
 
     protected override void OnAfterRender(bool firstRender)

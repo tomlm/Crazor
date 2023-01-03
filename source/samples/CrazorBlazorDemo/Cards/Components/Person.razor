@@ -1,0 +1,28 @@
+﻿
+<ColumnSet Id="@Id">
+    <Column Width="Auto" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
+        <Image Style="AdaptiveImageStyle.Person" Url="@Url" Size="@Size" />
+        <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">@Name</TextBlock>
+    </Column>
+    <Column Width="stretch" VerticalContentAlignment="AdaptiveVerticalContentAlignment.Center" >
+        <TextBlock Wrap="true" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">@Text</TextBlock>
+    </Column>
+</ColumnSet>
+
+@code
+{
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public string Url { get; set; } = string.Empty;
+
+    [Parameter]
+    public AdaptiveImageSize Size { get; set; } = AdaptiveImageSize.Small;
+
+    [Parameter]
+    public string? Name { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Text { get; set; } = string.Empty;
+}

@@ -12,36 +12,36 @@
 
 @code {
     [Parameter]
-    public String FallbackText { get => Item.FallbackText; set => Item.FallbackText = value; }
+    public String? FallbackText { get; set; }
 
     [Parameter]
-    public String Lang { get => Item.Lang; set => Item.Lang = value; }
+    public String? Lang { get; set; }
 
     [Parameter]
-    public String MinHeight { get => Item.MinHeight; set => Item.MinHeight = value; }
+    public String? MinHeight { get; set; }
 
     [Parameter]
-    public Boolean? Rtl { get => Item.Rtl; set => Item.Rtl = value ?? false; }
+    public BoolProperty? Rtl { get; set; }
 
     [Parameter]
-    public String Speak { get => Item.Speak; set => Item.Speak = value; }
+    public String? Speak { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle Style { get => Item.Style; set => Item.Style = value; }
+    public AdaptiveContainerStyle Style { get; set; }
 
     [Parameter]
-    public String Title { get => Item.Title; set => Item.Title = value; }
+    public String? Title { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
-    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment; set => Item.VerticalContentAlignment = value; }
+    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String? Height { get; set; }
 
     [Parameter]
-    public String Version { get => Item.Version.ToString(); set => Item.Version = new AdaptiveSchemaVersion(value); }
+    public String? Version { get; set; }
 
     protected override void OnAfterRender(bool firstRender)
     {

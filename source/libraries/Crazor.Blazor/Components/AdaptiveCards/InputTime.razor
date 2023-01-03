@@ -9,7 +9,7 @@
 <ac:Input.Time @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Input.Time>
-@if (ShowErrors == null || ShowErrors.Value == true)
+@if (ShowErrors == null || ShowErrors == true)
 {
     <ValidationErrors Id="@(Binding ?? Id)" />
 }
@@ -19,31 +19,31 @@
     internal const string Format = "HH:mm";
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public BoolProperty? IsVisible { get; set; }
 
     [Parameter]
-    public DateTime? Min { get => Item.Min != null ? DateTime.Parse(Item.Min) : null; set => Item.Min = value.Value.ToString(Format); }
+    public DateTime? Min { get; set; }
 
     [Parameter]
-    public DateTime? Max { get => Item.Max != null ? DateTime.Parse(Item.Max) : null; set => Item.Max = value.Value.ToString(Format); }
+    public DateTime? Max { get; set; }
 
     [Parameter]
-    public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String? Placeholder { get; set; }
 
     [Parameter]
     [DefaultValue(false)]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public BoolProperty? Separator { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get; set; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public DateTime? Value { get => Item.Value != null ? DateTime.Parse(Item.Value) : null; set => Item.Value = value.Value.ToString(Format); }
+    public DateTime? Value { get; set; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String? Height { get; set; }
 
     protected override void OnParametersSet()
     {

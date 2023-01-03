@@ -9,13 +9,13 @@
 @code
 {
     [Parameter]
-    public String Label { get => Item.Label; set => Item.Label = value; }
+    public String? Label { get; set; }
 
     [Parameter]
-    public String MimeType { get => Item.MimeType; set => Item.MimeType = value; }
+    public String? MimeType { get; set; }
 
     [Parameter]
-    public String Url { get => Item.Url; set => Item.Url = value; }
+    public String? Url { get; set; }
 
     protected override void OnAfterRender(bool firstRender)
     {

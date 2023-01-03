@@ -11,39 +11,39 @@
 {
 
     [Parameter]
-    public String AltText { get => Item.AltText; set => Item.AltText = value; }
+    public String? AltText { get; set; }
 
     [Parameter]
-    public String BackgroundColor { get => Item.BackgroundColor; set => Item.BackgroundColor = value; }
+    public String? BackgroundColor { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public BoolProperty? IsVisible { get; set; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public BoolProperty? Separator { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveImageSize), "Auto")]
-    public AdaptiveImageSize Size { get => Item.Size; set => Item.Size = value; }
+    public AdaptiveImageSize Size { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveImageStyle), "Normal")]
-    public AdaptiveImageStyle Style { get => Item.Style; set => Item.Style = value; }
+    public AdaptiveImageStyle Style { get; set; }
 
     [Parameter]
-    public String Url { get => Item.Url; set => Item.Url = value; }
+    public String? Url { get; set; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String? Height { get; set; }
 
     [Parameter]
-    public String Width { get => Item.Width?.ToString(); set => Item.Width = value; }
+    public String? Width { get; set; }
 }

@@ -11,28 +11,28 @@
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveAssociatedInputs), "Auto")]
-    public AdaptiveAssociatedInputs AssociatedInputs { get => Item.AssociatedInputs; set => Item.AssociatedInputs = value; }
+    public AdaptiveAssociatedInputs AssociatedInputs {get;set;}
 
     [Parameter]
-    public String IconUrl { get => Item.IconUrl; set => Item.IconUrl = value; }
+    public String? IconUrl {get;set;}
 
     [Parameter]
-    public Boolean? IsEnabled { get => Item.IsEnabled; set => Item.IsEnabled = value ?? true; }
+    public BoolProperty? IsEnabled {get;set;}
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
-    public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
+    public AdaptiveActionMode Mode { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-    public AdaptiveActionStyle Style { get => Item.Style; set => Item.Style = value; }
+    public AdaptiveActionStyle Style { get; set; }
 
     [Parameter]
-    public String Title { get => Item.Title; set => Item.Title = value; }
+    public String? Title { get; set; }
 
     [Parameter]
-    public String Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
+    public String? Tooltip { get; set; }
 
     [Parameter]
-    public String Verb { get => Item.Verb; set => Item.Verb = value; }
+    public String? Verb { get; set; }
 }

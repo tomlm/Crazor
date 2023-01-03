@@ -9,7 +9,7 @@
 <ac:Input.Text @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Input.Text>
-@if (ShowErrors == null || ShowErrors.Value == true)
+@if (ShowErrors == null || ShowErrors == true)
 {
     <ValidationErrors Id="@(Binding ?? Id)" />
 }
@@ -18,37 +18,37 @@
 {
 
     [Parameter]
-    public Boolean? IsMultiline { get => Item.IsMultiline; set => Item.IsMultiline = value ?? false; }
+    public BoolProperty? IsMultiline { get; set; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public BoolProperty? IsVisible { get; set; }
 
     [Parameter]
-    public Int32? MaxLength { get => Item.MaxLength; set => Item.MaxLength = value ?? 0; }
+    public Int32? MaxLength { get; set; }
 
     [Parameter]
-    public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String? Placeholder { get; set; }
 
     [Parameter]
-    public String Regex { get => Item.Regex; set => Item.Regex = value; }
+    public String? Regex { get; set; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public BoolProperty? Separator { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextInputStyle), "Text")]
-    public AdaptiveTextInputStyle? Style { get => Item.Style == AdaptiveTextInputStyle.Text ? null : Item.Style; set => Item.Style = value ?? AdaptiveTextInputStyle.Text; }
+    public AdaptiveTextInputStyle? Style { get; set; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get; set; }
 
     [Parameter]
-    public String Height { get => Item._Height; set => Item.Height = value; }
+    public String? Height { get; set; }
 
     protected override void OnParametersSet()
     {

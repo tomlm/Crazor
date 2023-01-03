@@ -10,10 +10,10 @@
 @code
 {
     [Parameter]
-    public String Title { get => Item.Title; set => Item.Title = value; }
+    public String? Title { get; set; }
 
     [Parameter]
-    public String Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get; set; }
 
     protected override void OnAfterRender(bool firstRender)
     {

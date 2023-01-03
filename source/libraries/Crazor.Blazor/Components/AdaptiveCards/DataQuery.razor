@@ -10,16 +10,16 @@
 @code
 {
     [Parameter]
-    public Int32? Count { get => Item.Count; set => Item.Count = value ?? 10; }
+    public Int32? Count { get; set; }
 
     [Parameter]
-    public String Dataset { get => Item.Dataset; set => Item.Dataset = value; }
+    public String? Dataset { get; set; }
 
     [Parameter]
-    public Int32? Skip { get => Item.Skip; set => Item.Skip = value ?? 0; }
+    public Int32? Skip { get; set; }
 
     [Parameter]
-    public String Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get; set; }
 
     protected override void OnParametersSet()
     {

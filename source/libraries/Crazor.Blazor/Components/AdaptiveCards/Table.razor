@@ -10,33 +10,33 @@
 @code
 {
     [Parameter]
-    public Boolean? FirstRowAsHeaders { get => Item.FirstRowAsHeaders; set => Item.FirstRowAsHeaders = value ?? true; }
+    public String? FirstRowAsHeaders { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle GridStyle { get => Item.GridStyle; set => Item.GridStyle = value; }
+    public AdaptiveContainerStyle GridStyle { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment; set => Item.HorizontalCellContentAlignment = value; }
+    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public BoolProperty? IsVisible { get; set; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public BoolProperty? Separator { get; set; }
 
     [Parameter]
-    public Boolean? ShowGridLines { get => Item.ShowGridLines; set => Item.ShowGridLines = value ?? true; }
+    public BoolProperty? ShowGridLines { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment; set => Item.VerticalCellContentAlignment = value; }
+    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String? Height { get; set; }
 }

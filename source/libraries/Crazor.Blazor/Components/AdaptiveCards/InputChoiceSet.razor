@@ -16,7 +16,7 @@
     }
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
 </ac:Input.ChoiceSet>
-@if (ShowErrors == null || ShowErrors.Value == true)
+@if (ShowErrors == null || ShowErrors == true)
 {
     <ValidationErrors Id="@(Binding ?? Id)" />
 }
@@ -25,20 +25,20 @@
 {
 
     [Parameter]
-    public Boolean? IsMultiSelect { get => Item.IsMultiSelect; set => Item.IsMultiSelect = value ?? false; }
+    public BoolProperty? IsMultiSelect { get; set; }
 
     [Parameter]
-    public Boolean? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+    public BoolProperty? IsVisible { get; set; }
 
     [Parameter]
-    public String Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String? Placeholder { get; set; }
 
     [Parameter]
-    public Boolean? Separator { get => Item.Separator; set => Item.Separator = value ?? false; }
+    public BoolProperty? Separator { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
+    public AdaptiveSpacing Spacing { get; set; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveChoiceInputStyle), "Compact")]
@@ -46,13 +46,13 @@
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get; set; }
 
     [Parameter]
-    public Boolean? Wrap { get => Item.Wrap; set => Item.Wrap = value ?? false; }
+    public BoolProperty? Wrap { get; set; }
 
     [Parameter]
-    public String Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String? Height { get; set; }
 
     protected override void OnParametersSet()
     {
