@@ -48,15 +48,24 @@ namespace Crazor.Blazor.Components
 
         public string CardId { get; set; } = $"card{Utils.GetNewId()}";
 
+        /// <summary>
+        /// The CardRoute for this viewer.
+        /// </summary>
         [Parameter]
-        public string Route { get; set; }
+        public string CardRoute { get; set; }
+
+        /// <summary>
+        /// Event which fires when card route changes.
+        /// </summary>
+        [Parameter]
+        public EventCallback<string> OnCardRouteChanged { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             this._dotNetObjectRef = DotNetObjectReference.Create(this);
             this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
             this._channelId = _configuration.GetValue<Uri>("HostUri").Host;
-            this._cardRoute = CardRoute.Parse(Route);
+            this._cardRoute = Crazor.CardRoute.Parse(CardRoute);
             this._cardApp = _cardAppFactory.Create(_cardRoute);
 
             var activity = new Activity(ActivityTypes.Invoke)
@@ -73,7 +82,8 @@ namespace Crazor.Blazor.Components
             .CreateLoadRouteActivity(_cardRoute.Route);
 
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.Route = this._cardApp.GetCurrentCardRoute();
+            this.CardRoute = this._cardApp.GetCurrentCardRoute();
+            await OnCardRouteChanged.InvokeAsync(this.CardRoute);
 
             await base.OnInitializedAsync();
         }
@@ -137,6 +147,8 @@ namespace Crazor.Blazor.Components
 
             // process it, giving us a new card
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
+            this.CardRoute = this._cardApp.GetCurrentCardRoute();
+            await OnCardRouteChanged.InvokeAsync(this.CardRoute);
 
             // tell tree to rerender. onrerender the card will be injected back into the html
             StateHasChanged();
