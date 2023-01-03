@@ -82,7 +82,7 @@ namespace Crazor.Blazor.Components
             .CreateLoadRouteActivity(_cardRoute.Route);
 
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.CardRoute = this._cardApp.GetCurrentCardRoute();
+            this.CardRoute = this._cardApp.GetCurrentCardUri().PathAndQuery;
             await OnCardRouteChanged.InvokeAsync(this.CardRoute);
 
             await base.OnInitializedAsync();
@@ -147,7 +147,7 @@ namespace Crazor.Blazor.Components
 
             // process it, giving us a new card
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.CardRoute = this._cardApp.GetCurrentCardRoute();
+            this.CardRoute = this._cardApp.GetCurrentCardUri().PathAndQuery;
             await OnCardRouteChanged.InvokeAsync(this.CardRoute);
 
             // tell tree to rerender. onrerender the card will be injected back into the html

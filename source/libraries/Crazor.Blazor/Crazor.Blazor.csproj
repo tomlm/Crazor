@@ -33,6 +33,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="wwwroot/**/**" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<None Include="icon.png" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>

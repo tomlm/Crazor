@@ -142,7 +142,7 @@ namespace Crazor.Blazor
                     {
                         xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
                     }
-                    File.WriteAllText(@"c:\scratch\foo.xml", xml);
+                    // File.WriteAllText(@"c:\scratch\foo.xml", xml);
                     Diag.Debug.WriteLine(xml);
 
                     var reader = XmlReader.Create(new StringReader(xml));

@@ -5,12 +5,17 @@
 <CardViewer CardRoute="@($"/Cards/{Route}")" OnCardRouteChanged="OnCardRouteChanged" />
 
 @code {
+    // this is only used to "load the cardview" from the page on initial load.
     [Parameter]
     public string? Route { get; set; }
 
-    public void OnCardRouteChanged(string cardRoute)
+    // All CardView navigations will trigger this
+    public void OnCardRouteChanged(string route)
     {
-        MyNavigationManager.NavigateTo(cardRoute);
+        if (route.ToLower() != new Uri(MyNavigationManager.Uri).PathAndQuery.ToLower())
+        {
+            MyNavigationManager.NavigateTo(route);
+        }
     }
 }
 
