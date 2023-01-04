@@ -1,21 +1,68 @@
-﻿@page "/Cards/{*route}"
+﻿@page "/Cards/{*routeFragment}"
 @inject NavigationManager MyNavigationManager
+@implements IDisposable
 @using Crazor.Blazor.Components
 
-<CardViewer CardRoute="@($"/Cards/{Route}")" OnCardRouteChanged="OnCardRouteChanged" />
+<CascadingValue Name="Test" Value="1">
+    <CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
+</CascadingValue>
 
 @code {
     // this is only used to "load the cardview" from the page on initial load.
     [Parameter]
-    public string? Route { get; set; }
+    public string? routeFragment { get; set; }
 
-    // All CardView navigations will trigger this
+    CardRoute Route { get; set; }
+
+    public CardViewer MyCardViewer = default!;
+
+    bool routeLoaded = false;
+
+    protected async override Task OnInitializedAsync()
+    {
+        MyNavigationManager.LocationChanged += OnPageLocationChanged;
+
+        Route = CardRoute.Parse(new Uri(MyNavigationManager.Uri).PathAndQuery);
+        routeLoaded = false;
+
+        await base.OnInitializedAsync();
+    }
+
+    public void OnPageLocationChanged(object sender, LocationChangedEventArgs locationChanged)
+    {
+        System.Diagnostics.Debug.WriteLine($"LOCATION: {locationChanged.Location}");
+        var route = new Uri(locationChanged.Location).PathAndQuery;
+        if (route.StartsWith("/Cards/"))
+        {
+            CardRoute cardRoute = CardRoute.Parse(route);
+            if (cardRoute.App == Route.App)
+            {
+                if (routeLoaded == false && cardRoute.Path != Route.Route)
+                {
+                    base.InvokeAsync(async () =>
+                    {
+                        await MyCardViewer.LoadRouteAsync(route);
+                        StateHasChanged();
+                    });
+                }
+                routeLoaded = false;
+            }
+        }
+    }
+
+    // When CardView changes this will fire.
     public void OnCardRouteChanged(string route)
     {
         if (route.ToLower() != new Uri(MyNavigationManager.Uri).PathAndQuery.ToLower())
         {
+            routeLoaded = true;
             MyNavigationManager.NavigateTo(route);
         }
+    }
+
+    public void Dispose()
+    {
+        MyNavigationManager.LocationChanged -= OnPageLocationChanged;
     }
 }
 

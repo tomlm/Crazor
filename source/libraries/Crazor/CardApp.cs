@@ -536,7 +536,24 @@ namespace Crazor
 
             if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
-                var cardState = new CardViewState(this.Route.Route);
+                var newRoute = ((JObject)Action.Data)[Constants.ROUTE_KEY].ToString();
+                
+                // call stack ALWAYS has default page at root
+                while (CallStack.Count > 1)
+                {
+                    if (CallStack[0].Route.ToLower() != newRoute.ToLower())
+                    {
+                        CancelView();
+                    }
+                    else
+                    {
+                        // found;
+                        SetCurrentView(this.CallStack[0]);
+                        return;
+                    }
+                }
+
+                var cardState = new CardViewState(newRoute);
                 CallStack.Insert(0, cardState);
                 SetCurrentView(cardState);
                 return;

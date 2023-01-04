@@ -13,7 +13,7 @@ namespace Crazor
     /// CardViewState contains the persisted state for a route which is pushed onto the callstack.
     /// The Route is run throuh RouteResolver to instantiate the appropriate CardView 
     /// </remarks>
-    [DebuggerDisplay("{Name}")]
+    [DebuggerDisplay("{Route}")]
     public class CardViewState
     {
         public CardViewState() { }

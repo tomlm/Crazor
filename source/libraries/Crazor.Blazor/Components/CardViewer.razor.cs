@@ -48,11 +48,20 @@ namespace Crazor.Blazor.Components
 
         public string CardId { get; set; } = $"card{Utils.GetNewId()}";
 
-        /// <summary>
-        /// The CardRoute for this viewer.
-        /// </summary>
         [Parameter]
-        public string CardRoute { get; set; }
+        public string Route
+        {
+            get => _cardRoute.Route;
+            set
+            {
+                if (String.Compare(_cardRoute?.Route, value, true) != 0)
+                {
+                    _cardRoute = CardRoute.Parse(value);
+                    StateHasChanged();
+                }
+            }
+        }
+
 
         /// <summary>
         /// Event which fires when card route changes.
@@ -65,25 +74,9 @@ namespace Crazor.Blazor.Components
             this._dotNetObjectRef = DotNetObjectReference.Create(this);
             this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
             this._channelId = _configuration.GetValue<Uri>("HostUri").Host;
-            this._cardRoute = Crazor.CardRoute.Parse(CardRoute);
             this._cardApp = _cardAppFactory.Create(_cardRoute);
 
-            var activity = new Activity(ActivityTypes.Invoke)
-            {
-                ServiceUrl = "https://about",
-                ChannelId = this._channelId,
-                Id = Guid.NewGuid().ToString("n"),
-                From = new ChannelAccount() { Id = String.Empty },
-                Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = Utils.GetNewId() },
-                Timestamp = DateTimeOffset.UtcNow,
-                LocalTimestamp = DateTimeOffset.Now,
-            }
-            .CreateLoadRouteActivity(_cardRoute.Route);
-
-            this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.CardRoute = this._cardApp.GetCurrentCardUri().PathAndQuery;
-            await OnCardRouteChanged.InvokeAsync(this.CardRoute);
+            await LoadRouteAsync(_cardRoute.Route);
 
             await base.OnInitializedAsync();
         }
@@ -147,12 +140,41 @@ namespace Crazor.Blazor.Components
 
             // process it, giving us a new card
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.CardRoute = this._cardApp.GetCurrentCardUri().PathAndQuery;
-            await OnCardRouteChanged.InvokeAsync(this.CardRoute);
+            this.Route = this._cardApp.GetCurrentCardRoute();
+            await OnCardRouteChanged.InvokeAsync(this.Route);
 
             // tell tree to rerender. onrerender the card will be injected back into the html
             StateHasChanged();
         }
+
+        public async Task LoadRouteAsync(string route)
+        {
+           // wrap it in an invoke activity
+            var activity = new Activity(ActivityTypes.Invoke)
+            {
+                ServiceUrl = "https://about",
+                ChannelId = this._channelId,
+                Id = Guid.NewGuid().ToString("n"),
+                From = new ChannelAccount() { Id = String.Empty },
+                Recipient = new ChannelAccount() { Id = "bot" },
+                Conversation = new ConversationAccount() { Id = _cardRoute.SessionId },
+                Timestamp = DateTimeOffset.UtcNow,
+                LocalTimestamp = DateTimeOffset.Now,
+            }
+            .CreateLoadRouteActivity(route);
+
+            // process it, giving us a new card
+            this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
+            this.Route = this._cardApp.GetCurrentCardRoute();
+
+            // tell tree to rerender. onrerender the card will be injected back into the html
+            StateHasChanged();
+
+            // notify host that route is now different
+            await OnCardRouteChanged.InvokeAsync(this.Route);
+        }
+
+
         public void Dispose() => _dotNetObjectRef?.Dispose();
 
     }

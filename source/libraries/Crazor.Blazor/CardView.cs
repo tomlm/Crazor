@@ -348,6 +348,9 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
                     return false;
 
+                if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
+                    return false;
+
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                     return false;
 
