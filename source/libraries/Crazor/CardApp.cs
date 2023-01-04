@@ -5,8 +5,8 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -489,10 +489,24 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(invoke);
             this.Action = invoke.Action;
 
-            // map FromRoute attributes for app
-            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<Microsoft.AspNetCore.Mvc.FromRouteAttribute>() != null))
+            // map Route attributes for app
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
             {
-                var fromRouteName = targetProperty.GetCustomAttribute<Microsoft.AspNetCore.Mvc.FromRouteAttribute>().Name ?? targetProperty.Name;
+                var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                if (dataProperty != null)
+                {
+                    this.SetTargetProperty(targetProperty, dataProperty.Value);
+                }
+            }
+
+            // map query parameters for app.
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromQueryAttribute>() != null ||
+                                                                                        prop.GetCustomAttribute<SupplyParameterFromQueryAttribute>() != null))
+            {
+                var fromRouteName = targetProperty.GetCustomAttribute<SupplyParameterFromQueryAttribute>()?.Name ??
+                    targetProperty.GetCustomAttribute<FromQueryAttribute>()?.Name ??
+                    targetProperty.Name;
                 var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
                 if (dataProperty != null)
                 {
@@ -629,16 +643,20 @@ namespace Crazor
                     }
                 }
 
-                // Process any Route properties as setters onto target object.
+                // Process any Route properties as setters onto current view.
                 foreach (var routeProperty in this.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
                 {
                     ObjectPath.SetPathValue(this.CurrentView, routeProperty.Name, routeProperty.Value.ToString(), false);
                 }
 
-                // process [FromQuery] attributes
-                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(a => a.GetCustomAttribute<FromQueryAttribute>() != null))
+                // process query  attributes as setters onto current view
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null ||
+                                                                                                     p.GetCustomAttribute<SupplyParameterFromQueryAttribute>() != null))
                 {
-                    var dataProperty = this.Route.QueryData.Properties().Where(p => p.Name.ToLower() == targetProperty.Name.ToLower()).SingleOrDefault();
+                    var fromQueryName = targetProperty.GetCustomAttribute<SupplyParameterFromQueryAttribute>()?.Name ??
+                        targetProperty.GetCustomAttribute<FromQueryAttribute>()?.Name ??
+                        targetProperty.Name;
+                    var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
                     if (dataProperty != null)
                     {
                         this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);

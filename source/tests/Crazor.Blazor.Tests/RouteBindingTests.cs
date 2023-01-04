@@ -40,5 +40,38 @@ namespace Crazor.Blazor.Tests
                     .AssertTextBlock("AppId", "app")
                     .AssertTextBlock("Value", "val");
         }
+
+        [TestMethod]
+        public async Task TestRouteBinding2()
+        {
+            await LoadCard("/Cards/RouteBinding2")
+                    .AssertTextBlock("ResourceId", String.Empty)
+                    .AssertTextBlock("ResourceId2", String.Empty)
+                    .AssertTextBlock("AppId", String.Empty)
+                    .AssertTextBlock("Value", String.Empty);
+
+            await LoadCard("/Cards/RouteBinding2/app/resource")
+                    .AssertTextBlock("ResourceId", "resource")
+                    .AssertTextBlock("ResourceId2", "resource")
+                    .AssertTextBlock("AppId", "app")
+                    .AssertTextBlock("Value", String.Empty);
+        }
+
+        [TestMethod]
+        public async Task TestQueryBinding2()
+        {
+            await LoadCard("/Cards/RouteBinding2?value=val")
+                    .AssertTextBlock("ResourceId", String.Empty)
+                    .AssertTextBlock("ResourceId2", String.Empty)
+                    .AssertTextBlock("AppId", String.Empty)
+                    .AssertTextBlock("Value", "val");
+
+            await LoadCard("/Cards/RouteBinding2/app/resource?v=val")
+                    .AssertTextBlock("ResourceId", "resource")
+                    .AssertTextBlock("ResourceId2", "resource")
+                    .AssertTextBlock("AppId", "app")
+                    .AssertTextBlock("Value", "val");
+        }
+
     }
 }

@@ -4,8 +4,12 @@
 namespace Crazor.Blazor.Components
 {
     /// <summary>
-    ///  Boolean serializes weird with XML using Blazor.  This property basically allows us to 
-    ///  make sure that the bool property is serialized as lowercase string in the XML.
+    ///  Boolean serializes weird with XML using Blazor.  
+    /// 
+    /// Blazor is assuming boolean properties serialize as tags with no value using HTML rules but XML requires an attribute value as lowercase for bool 
+    /// 
+    ///  This property basically allows us to make sure that the bool property is serialized as lowercase string in the XML.
+    ///     Example: IsVisible="true" instead of IsVisible
     /// </summary>
     public class BoolProperty
     {
@@ -27,5 +31,15 @@ namespace Crazor.Blazor.Components
         public static implicit operator BoolProperty(string val) => new BoolProperty(Convert.ToBoolean(val));
         public static bool operator ==(BoolProperty lhs, BoolProperty rhs) => lhs?._value == rhs?._value;
         public static bool operator !=(BoolProperty lhs, BoolProperty rhs) => lhs?._value != rhs?._value;
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is BoolProperty b)
+            {
+                return this._value == b._value;
+            }
+
+            return false;
+        }
     }
 }
