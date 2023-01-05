@@ -20,6 +20,8 @@ namespace CrazorBlazorDemo
             builder.Services.AddSingleton<WeatherForecastService>();
 
             // ---- <CRAZOR>
+            builder.Services.AddControllers();
+
             // register blob storage for state management
             var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
             if (!String.IsNullOrEmpty(storageKey))
@@ -39,14 +41,22 @@ namespace CrazorBlazorDemo
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                app.UseHttpsRedirection();
+            }
+
+            // ---- <CRAZOR>
+            app.UseCrazor();
+            app.UseRouting();
+            app.MapControllers();
+            // </CRAZOR>
+
             app.UseStaticFiles();
             app.UseRouting();
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 
-            app.UseCrazor();
-            app.MapControllers();
 
             app.Run();
         }

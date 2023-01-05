@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "version": "1.0.25",
   "manifestVersion": "1.14",
-  "id": "9ad09adf-c85f-43a0-96fe-18b146d1f90e",
+  "id": "b1aa995c-75b7-43aa-a601-645140d0a8ce",
   "packageName": "com.package.name",
   "name": {
-    "short": "Crazor",
-    "full": "Crazor - Demo Crazor Cards"
+    "short": "CrazorBlazor",
+    "full": "Crazor Blazor - Demo Crazor Cards"
   },
   "developer": {
     "name": "Microsoft",
@@ -16,8 +16,8 @@
     "termsOfUseUrl": "https://CrazorBlazorDemo.azurewebsites.net/"
   },
   "description": {
-    "short": "Crazor Demo",
-    "full": "Crazor Demo Sample cards"
+    "short": "Crazor Blazor Demo",
+    "full": "Crazor Blazor Demo Sample cards"
   },
   "icons": {
     "outline": "outline.png",
@@ -40,19 +40,19 @@
     {
       "entityId": "/Cards/Addresses",
       "name": "Addresses",
-      "contentBotId": "9ad09adf-c85f-43a0-96fe-18b146d1f90e",
+      "contentBotId": "b1aa995c-75b7-43aa-a601-645140d0a8ce",
       "scopes": [ "personal" ]
     },
     {
       "entityId": "CrazorBlazorDemo.Cards.AllCardsTab",
       "name": "Cards",
-      "contentBotId": "9ad09adf-c85f-43a0-96fe-18b146d1f90e",
+      "contentBotId": "b1aa995c-75b7-43aa-a601-645140d0a8ce",
       "scopes": [ "personal" ]
     }
   ],
   "bots": [
     {
-      "botId": "9ad09adf-c85f-43a0-96fe-18b146d1f90e",
+      "botId": "b1aa995c-75b7-43aa-a601-645140d0a8ce",
       "scopes": [
         "personal",
         "team",
@@ -66,7 +66,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "9ad09adf-c85f-43a0-96fe-18b146d1f90e",
+      "botId": "b1aa995c-75b7-43aa-a601-645140d0a8ce",
       "commands": [
         {
           "id": "/Cards/Addresses/Add",
