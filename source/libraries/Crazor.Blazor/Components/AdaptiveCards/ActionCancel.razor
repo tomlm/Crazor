@@ -11,7 +11,7 @@
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveAssociatedInputs), "Auto")]
-    public AdaptiveAssociatedInputs AssociatedInputs { get; set; }
+    public AdaptiveAssociatedInputs AssociatedInputs { get; set; } = AdaptiveAssociatedInputs.None;
 
     [Parameter]
     public String? IconUrl { get; set; }
