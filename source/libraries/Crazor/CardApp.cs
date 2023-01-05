@@ -464,6 +464,10 @@ namespace Crazor
                 else
                     uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
             }
+            else
+            {
+                uri.Path = subPath;
+            }
 
             uri.Query = query;
             return uri.Uri.PathAndQuery;
