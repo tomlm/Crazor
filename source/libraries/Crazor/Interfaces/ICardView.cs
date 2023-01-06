@@ -48,12 +48,6 @@ namespace Crazor.Interfaces
         void SetModel(object model);
 
         /// <summary>
-        /// Bind data to view properties.
-        /// </summary>
-        /// <param name="data"></param>
-        void BindProperties(object data);
-
-        /// <summary>
         /// Enumerate properties on the view which are persistent
         /// </summary>
         /// <returns></returns>

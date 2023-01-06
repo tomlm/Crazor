@@ -676,7 +676,7 @@ namespace Crazor
         {
             // Process BindProperty tags
             var data = (JObject)JObject.FromObject(action.Data).DeepClone();
-            this.CurrentView.BindProperties(data);
+            BindProperties(data);
 
             MethodInfo? verbMethod = null;
             if (action.Verb == Constants.LOADROUTE_VERB)
@@ -780,6 +780,28 @@ namespace Crazor
             }
 
         }
+
+        private void BindProperties(object obj)
+        {
+            JObject data = JObject.FromObject(obj);
+            if (data != null)
+            {
+                foreach (var property in data.Properties())
+                {
+                    var parts = property.Name.Split('.');
+
+                    // if root is [BindProperty]
+                    var prop = this.CurrentView.GetType().GetProperty(parts[0]);
+                    // only allow binding to Model, App or BindProperty
+                    if (prop != null && this.CurrentView.GetBindableProperties().Contains(prop))
+                    {
+                        ObjectPath.SetPathValue(this.CurrentView, property.Name, property.Value, json: false);
+                    }
+                }
+            }
+        }
+
+
 
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {

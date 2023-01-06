@@ -93,26 +93,6 @@ namespace Crazor.Mvc
 
         #region ---- Core Methods -----
 
-        public void BindProperties(object obj)
-        {
-            JObject data = JObject.FromObject(obj);
-            if (data != null)
-            {
-                foreach (var property in data.Properties())
-                {
-                    var parts = property.Name.Split('.');
-
-                    // if root is [BindProperty]
-                    var prop = this.GetType().GetProperty(parts[0]);
-                    // only allow binding to Model, App or BindProperty
-                    if (prop != null && this.GetBindableProperties().Contains(prop))
-                    {
-                        ObjectPath.SetPathValue(this, property.Name, property.Value, json: false);
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// OnInvokeActionAsync() - Called to process an incoming verb action.
         /// </summary>

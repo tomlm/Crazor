@@ -72,26 +72,6 @@ namespace Crazor.Blazor
 
         #region ---- Core Methods -----
 
-        public void BindProperties(object obj)
-        {
-            JObject data = JObject.FromObject(obj);
-            if (data != null)
-            {
-                foreach (var property in data.Properties())
-                {
-                    var parts = property.Name.Split('.');
-
-                    // if root is [BindProperty]
-                    var prop = this.GetType().GetProperty(parts[0]);
-                    // only allow binding to Model, App or BindProperty
-                    if (prop != null && this.GetBindableProperties().Contains(prop))
-                    {
-                        ObjectPath.SetPathValue(this, property.Name, property.Value, json: false);
-                    }
-                }
-            }
-        }
-
         public override Task SetParametersAsync(ParameterView parameters)
         {
             // we do our own parameter setting because base class will reject any properties 
