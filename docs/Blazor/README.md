@@ -23,24 +23,24 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 
 # Installation
 
-[Installing Crazor.Blazor](docs/Blazor/Install.md) - Installing Crazor.Blazor into your project
+[Installing Crazor.Blazor](Install.md) - Installing Crazor.Blazor into your project
 
-* [Settings](docs/Settings.md) - Settings for Crazor
+* [Settings](../Settings.md) - Settings for Crazor
 
 # Walkthroughs
 
-* [HelloWorld](docs/Blazor/HelloWorldWalkthrough.md) - Walkthrough creating your first card application.
-* [Counters](docs/Blazor/CountersWalkthrough.md) - Walkthrough showing creating a card with data binding and action handlers.
+* [HelloWorld](HelloWorldWalkthrough.md) - Walkthrough creating your first card application.
+* [Counters](CountersWalkthrough.md) - Walkthrough showing creating a card with data binding and action handlers.
 
 # Documentation
 
-* [Card Views](docs/Blazor/CardView.md) - How to define views with **CardView** and **Razor templates**
-* [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-  * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
+* [Card Views](CardView.md) - How to define views with **CardView** and **Razor templates**
+* [Card Apps](../CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+  * [Card App Memory](../Memory.md) - Information on persistence and memory model
 
-* [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
-* [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
-* [Components (Advanced)](docs/Blazor/Components.md) - How to define reusuable components via Blazor Components
+* [Card Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Writing Unit tests](../UnitTests.md) - Writing unit tests for your cards.
+* [Components (Advanced)](Components.md) - How to define reusuable components via Blazor Components
 
 # Sample Card Apps
 | | |Description|
