@@ -24,10 +24,11 @@ To start you create a MSTest test project
 </configuration>
 ```
 
-Then you can add the **crazor.test** package
+Then you can add the **crazor.test** package, and either **Crazor.Blazor** or **Crazor.MVC** package.
 
 ```shell
-nuget add package crazor.test
+nuget add package Crazor.Test
+nuget add package Crazor.Blazor
 ```
 
 # Modifications to your Web Project
@@ -40,7 +41,9 @@ nuget add package crazor.test
 
 2. add a **Cards** folder (should be a peer to **Pages** folder)
 
-3. add  **Cards/_ViewImports.cshtml** file containing this:
+   ### For MVC Tests
+
+   add  **Cards/_ViewImports.cshtml** file containing this:
 
    ```C#
    @using AdaptiveCards
@@ -56,6 +59,24 @@ nuget add package crazor.test
    @addTagHelper *, {YOUR ASSEMBLY NAME HERE}
    ```
 
+   ### For Blazor Tests
+
+   add **Cards/_Imports.razor** file containing this:
+
+   ```c#
+   @using AdaptiveCards
+   @using Crazor
+   @using Crazor.Blazor
+   @using Crazor.Exceptions
+   @using Crazor.Attributes
+   @using System.Threading;
+   @using System.Threading.Tasks;
+   @using Crazor.Blazor.Components.AdaptiveCards
+   @using System.ComponentModel.DataAnnotations
+   ```
+
+   
+
 # Creating a unit test
 
 Now we will create a card and write a unit tests against the card.
@@ -64,7 +85,8 @@ Now we will create a card and write a unit tests against the card.
 
 1. Create a test card folder in **cards/Foo**
 
-2. Create a **Default.cshtml** file in it
+2. Create Card
+   **(MVC)** - Create a **Default.cshtml** file in it
 
    ```html
    @inherits CardView
@@ -79,6 +101,24 @@ Now we will create a card and write a unit tests against the card.
    	public void OnSubmit() => Counter++;
    }
    ```
+
+   **(Blazor)** - Create a **Default.razor** file in it
+
+   ```html
+   @inherits CardView
+   <Card Version="1.5">
+   	<TextBlock>Counter=@Counter</TextBlock>
+       <Action.Execute Verb="@nameof(OnSubmit)"/>
+   </Card>
+   
+   @code {
+   	public int Counter {get;set;}
+   
+   	public void OnSubmit() => Counter++;
+   }
+   ```
+
+   
 
 3. Now create a unit test for it by creating a .cs file called TestFoo.cs and deriving your class for **CardTest**
 

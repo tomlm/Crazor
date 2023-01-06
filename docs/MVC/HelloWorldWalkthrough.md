@@ -30,5 +30,5 @@ That's it.  Now run the application and go to http://localhost:{yourport}**/Card
 
 You should see something like this:
 
-![image-20221103115603471](assets/image-20221103115603471.png)
+![image-20221103115603471](../assets/image-20221103115603471.png)
 

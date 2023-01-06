@@ -16,14 +16,14 @@ The **Cards** folder is a special folder that creates an area for your applicati
 
 The convention is that each app is a sub-folder in the Cards folder, so we create a folder **/Cards/Counters**
 
-## 2. Create a Default.cshtml file
+## 2. Create a Default.razor file
 
-Just like with HelloWorld, the CountersApp will load the **Default.cshtml** file as the initial view for the application, but this time we are going to 
+Just like with HelloWorld, the CountersApp will load the **Default.razor** file as the initial view for the application, but this time we are going to 
 
 * Display the value of **Counter**  property
 * Add **verb handler** that increment the value of the counter.
 
-Create **/Cards/Counters/Default.cshtml**
+Create **/Cards/Counters/Default.razor**
 
 ```xml
 @inherits CardView
@@ -35,7 +35,7 @@ Create **/Cards/Counters/Default.cshtml**
     <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
 </Card>
 
-@functions {
+@code {
     public int Counter { get; set; }
 
     public void OnIncrement() => Counter++;
@@ -51,9 +51,9 @@ That's it.  Now run the application and go to http://localhost:{yourport}/Cards/
 
 You should see something like this:
 
-![image-20221115162303805](assets/image-20221115162303805.png)
+![image-20221115162303805](../assets/image-20221115162303805.png)
 
-As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the shared values are shared and the session values are per window.
+As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the session values are per window.
 
 # Adding a CardApp 
 
@@ -83,15 +83,15 @@ Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
 
 The values defined on the **CountersApp** class are shared by all CardView templates in the folder, and their persistence scope is defined by the attributes we put on it [(go to Memory documentation for more details)](/docs/Memory.md)
 
-## 2. Update the Default.cshtml file to know about CountersApp
+## 2. Update the Default.razor file to know about CountersApp
 
-Now we will modify the Default .cshtml to interact with the **CountersApp.**
+Now we will modify the **Default.razor** to interact with the **CountersApp.**
 
-* Edit the default.cshtml to **@inherits CardView<CountersApp>** .  This tells the template that **App** property is of type **CountersApp**
+* Change the **default.razor** inherits statement to **@inherits CardView<CountersApp>** .  This tells the CardView that the **App** property is of type **CountersApp**
 
 * Update to bind to **App.SharedCounter** and add a verb handler to increment it.
 
-**/Cards/Counters/Default.cshtml** should look like this
+**/Cards/Counters/Default.razor** should look like this
 
 ```xml
 @using CrazorDemoBot.Cards.Counters
@@ -106,7 +106,7 @@ Now we will modify the Default .cshtml to interact with the **CountersApp.**
 	<Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)"/>
 </Card>
 
-@functions {
+@code {
     public int Counter { get; set; }
 
     public void OnIncrement() => Counter++;
@@ -121,4 +121,4 @@ Things to notice:
 
 You should see something like this:
 
-![image-20221103120318266](assets/image-20221103120318266.png)
+![image-20221103120318266](../assets/image-20221103120318266.png)

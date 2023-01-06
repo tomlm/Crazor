@@ -29,48 +29,20 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Teams integrations** - Your card application can be **unfurled via a link**, pop up as a **Task Module**, a **Tab** etc. Just register your app with teams and it just works.
 * **Built-in Card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can view and interact with the card.
 
-# Installation
+# Pick a templating engine
 
-[Installing Crazor](docs/Install.md) - Installing Crazor into your project
+There are currently 2 Crazor templating implementations
 
-* [Settings](docs/Settings.md) - Settings for Crazor
-
-# Walkthroughs
-
-* [HelloWorld](docs/HelloWorldWalkthrough.md) - Walkthrough creating your first card application.
-* [Counters](docs/CountersWalkthrough.md) - Walkthrough showing creating a card with data binding and action handlers.
+* [Crazor.MVC](docs/MVC) - Implements templating using **.cshtml** files using **MVC** semantics.
+* [Crazor.Blazor](docs/Blazor) - Implements templating using **.razor** files using **Blazor** semantics.
 
 # Documentation
 
-* [Card Views](docs/CardView.md) - How to define views with **CardView** and **Razor templates**
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
   * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
-
+  * [ICard View](docs/ICardView.md) - Information on **ICardView** interface
 * [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
-* [TagHelpers (Advanced)](docs/TagHelpers.md) - How to define reusuable components via custom TagHelpers
-
-# Sample Card Apps
-| | |Description|
-|---|---|---|
-|[HelloWorld](https://crazordemobot.azurewebsites.net/Cards/HelloWorld) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/HelloWorld)| Hello world |
-|[MultiScreen](https://crazordemobot.azurewebsites.net/Cards/MultiScreen) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/MultiScreen)| Shows **ShowView(),** **CloseView(),** **CancelView()** to navigate between multiple screens |
-|[Counters](https://crazordemobot.azurewebsites.net/Cards/Counters) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Counters)| Shows **memory** attributes and **verb handlers** |
-|[Quiz](https://crazordemobot.azurewebsites.net/Cards/Quiz) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Quiz)| Shows **Paramater** binding to **verb handlers** |
-|[Binding](https://crazordemobot.azurewebsites.net/Cards/Binding) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Binding)| Shows 2-way data binding |
-|[Inputs](https://crazordemobot.azurewebsites.net/Cards/Inputs) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Inputs)| Shows using **inputs** with **validation** and **passing models** between screens |
-|[Dice](https://crazordemobot.azurewebsites.net/Cards/Dice) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Dice)| Shows **settings** |
-|[Addresses](https://crazordemobot.azurewebsites.net/Cards/Addresses) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Addresses)| **Full multipage sample** that shows editing a list of addresses |
-|[BingSearch](https://crazordemobot.azurewebsites.net/Cards/BingSearch) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/BingSearch)| Implements bing search, shows calling **3rd party API** and **paging** |
-|[CodeOnlyView](https://crazordemobot.azurewebsites.net/Cards/CodeOnlyView) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/CodeOnlyView)| Sample showing that you can make templates with code only |
-|[DataQuery](https://crazordemobot.azurewebsites.net/Cards/DataQuery) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/DataQuery)| Shows how to implement **OnSearchChoices** for dynamic **ChoiceSet** |
-|[ProductCatalog](https://crazordemobot.azurewebsites.net/Cards/ProductCatalog) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/ProductCatalog)| Shows **calling an external database** for your data |
-|[TagHelper](https://crazordemobot.azurewebsites.net/Cards/TagHelper) | [TagHelper Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/TagHelpers)<br />[Template Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/TagHelper) | Shows how you can use templates to **create custom tags** |
-|[TaskModule](https://crazordemobot.azurewebsites.net/Cards/TaskModule) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/TaskModule) | ***TEAMS*** A teams **taskmodule** that lets you experiment with the **CloseTaskModule**() function. |
-|[Nuget](https://crazordemobot.azurewebsites.net/Cards/Nuget) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Nuget)| ***TEAMS*** Shows **search message extension** |
-|[Wordle](https://crazordemobot.azurewebsites.net/Cards/Wordle) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Wordle)| Wordle game, shows leveraging TaskModule and sharing to make shared ux. |
-|[Table](https://crazordemobot.azurewebsites.net/Cards/Table) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/Table)| Shows Table support |
-|[RichText](https://crazordemobot.azurewebsites.net/Cards/RichText) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/CrazorDemoBot/Cards/RichText)| Shows RichText support |
 
 # Setting up Azure
 

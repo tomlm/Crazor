@@ -3,28 +3,21 @@
 @implements IDisposable
 @using Crazor.Blazor.Components
 
-<CascadingValue Name="Test" Value="1">
-    <CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
-</CascadingValue>
+<CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
 
 @code {
     // this is only used to "load the cardview" from the page on initial load.
     [Parameter]
     public string? routeFragment { get; set; }
-
     CardRoute Route { get; set; }
-
     public CardViewer MyCardViewer = default!;
-
     bool routeLoaded = false;
 
     protected async override Task OnInitializedAsync()
     {
         MyNavigationManager.LocationChanged += OnPageLocationChanged;
-
         Route = CardRoute.Parse(new Uri(MyNavigationManager.Uri).PathAndQuery);
         routeLoaded = false;
-
         await base.OnInitializedAsync();
     }
 
@@ -50,7 +43,6 @@
         }
     }
 
-    // When CardView changes this will fire.
     public void OnCardRouteChanged(string route)
     {
         if (route.ToLower() != new Uri(MyNavigationManager.Uri).PathAndQuery.ToLower())

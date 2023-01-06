@@ -28,13 +28,13 @@ If you want to support deep linking you sometimes need to specify more informati
 
 To do that with Crazor you do the following 3 things:
 
-1. You add a **[Route]** attribute to tell us how to match a link to your view
+1. You add a **[CardRoute]** attribute to tell us how to match a link to your view
 2. You override the **OnLoadRoute()** method to process the deep link and load the state for the card.
 
 Here is an example for the Edit page for Addresses, which is editing the model with address with an id **this.Model.Id**.  We add the following to our **Edit.cshtml** to support the deeper link structure
 
 ```c#
-@attribute [Route("{Model.Id}")]
+@attribute [CardRoute("{Model.Id}")]
 
 @functions {
     public void OnLoadRoute()
@@ -48,7 +48,7 @@ Here is an example for the Edit page for Addresses, which is editing the model w
 
 # Query Parameters
 
-You can initialize your card by building in support for mapping query parameters to properties via the **[FromQuery]** attribute.
+You can initialize your card by building in support for mapping query parameters to properties via the **[FromQuery]** or the **[SupplyParameterFromQuery]** attribute.
 
 For example, in this template we have 2 properties that have **[FromQuery]**
 
@@ -56,7 +56,7 @@ For example, in this template we have 2 properties that have **[FromQuery]**
 [FromQuery]
 public string Name {get;set;}
 
-[FromRoute]
+[SupplyParameterFromQuery]
 public string City {get;set;}
 
 [FromRoute("City")]
@@ -78,6 +78,8 @@ public void OnLoadRoute(string name, string zip, string city)
 }
 ```
 
-
+> NOTE: [FromQuery] is from MVC 
+>
+> [SupplyParameterFromQuery] is from Blazor
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)

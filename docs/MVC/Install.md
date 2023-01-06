@@ -6,7 +6,7 @@
 
 Adding crazor is super easy.  Take a stock Asp.Net Core MVC project and add the Crazor package.
 
-![image-20221104002938261](assets/image-20221104002938261.png)
+![image-20221104002938261](../assets/image-20221104002938261.png)
 
 ## Add Crazor package
 

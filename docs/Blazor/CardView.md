@@ -14,65 +14,46 @@ Your service can host 1:N **Card Applications**.  A card application is a mini a
 
 Each card application is made up of 1:N **Card Views**. A card view is a razor template, binding the data and logic to create a "screen" in the application. 
 
-# The CardApp Class
+# The Blazor CardView Class
 
-The **CardApp** serves a couple of roles in the system.
+The **Blazor CardView** defines a view for the **CardApp** application as a razor template **.razor** file.
 
-* It manages the shared state for all templates in the folder
-* It can receive dependency injected resources (the razor templates don't have direct access to dependency injection)
+To make the .razor template a **Crazor template** you insert the **@inherits CardView** directive defining that CardView is the base class for the view.
 
-Any properties and methods you put onto the app class are accessible from all **CardView** objects in the folder via the **App** property.
+## @inherits CardView
 
-You do not have to define a card application, but to do so you simply create a class which derives from **CardApp**.
+The **@inherits CardView** defines a **Crazor CardView** template which does not have a **Model** defined and an untyped **App**.
 
- **CardApp** names have a naming convention with the name of the **folder**. The name of the **folder name** is what shows up in the urls, and the name of the class is the name of the folder + App like this: **"{*name of the folder*}App"**
+* It has **App** property of **CardApp**.
+* **Model** is not defined.
 
-```Cards/Foobar/FoobarApp.cs```
 
-## Properties
 
-Properties on the **CardApp** are available to all **CardView** in the application via the **App** property.
+## @inherits CardView<AppT>
 
-To load and persist the values of any property you have 2 mechanisms:
+The **@inherits CardView<AppT>** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
 
-* Use **[Memory]** attributes on properties. *See [Memory](Memory) for more details*
-* You can override the **LoadAppAsync()** and **SaveAppAsync()** methods to lookup/save your data.
+* It has **App** property of **AppT**.
 
-## Methods
+This allows you to get intellisense and strong type binding over **App** property giving access to custom methods and memory defined on a custom **CardApp** class.
 
-You can define any methods you like on the **CardApp**.
+## @inherits CardView<AppT, ModelT>
 
-A useful pattern is to put methods which manipulate your shared state on the app so that you can consolidate data manipulation methods for all **CardView** classes. For example, you can add CRUD methods which manipulate your data to the **CardApp**, and call **App.Create(...)** from a view to manipulate your data directly.
+The **@inherits CardView<AppT,ModelT>** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
 
-## Dependency Injection
+* It has a strongly typed **App** property of **AppT**.
+* It has a strongly typed **Model** property of **ModelT**
 
-The **CardApp** is created via dependency injection and so it can get access to any resources that it needs and expose them as properties to the **CardView** templates.
+This allows you to get intellisense and strong type binding to the **CardApp** for your application and intellisense and strong type binding to a **ModelT** data model.
 
-## Example CardApp
-
-```C#
-public class ExampleApp : CardApp
-{
-    public ExampleApp(IServiceProvider services, IConfiguration configuration) : base(services)
-    {
-        this.Configuration = configuration;
-    }
+Example razor template binding to the model and app properties.
+```xml
+@inherits CardView<CountersApp, MyModel>
     
-    public IConfiguration Configuration {get;set;}
-
-    [SharedMemory]
-    public Entity Entity { get; set;}
-    
-    public async Task LookUpEntity(String id)
-    {
-        ... 
-    }
-}
+<Card Version="1.5">
+    <TextBlock>The @App.Name Counter is: @Model.Counter</TextBlock>
+</Card>
 ```
-
-
-
-
 
 # Verb handlers
 
@@ -82,13 +63,11 @@ Adaptive cards **Action.Execute** define a ***verb*** which is a unique string i
 the verb up to a method on the **CardView**.  This method is called an ***Action Handler*** or ***Verb Handler***
 
 For example:
-
 ```xml
 <Action.Execute Title="Do some stuff" Verb="OnDoSomeStuff"/>
 ```
 
 You write the code to respond to it by defining a method with the same name.
-
 ```cs
 @functions {
 	public void OnDoSomeStuff()
@@ -97,7 +76,6 @@ You write the code to respond to it by defining a method with the same name.
 	}
 }
 ```
-
 >  **Recommendation ** is good practive to use @nameof so that your verb and method names stay in sync and you get a build break when you change one without the other.
 
 ```xml
@@ -119,11 +97,9 @@ Any **input** or **Action.Execute Data** payloads will to be automatically bound
 
 
 For example:
-
 ```xml
 <Input.Text Id="Name" .../>
 ```
-
 You can get the value for **"name"** by simply adding **string name** as an argument.
 
 ```C#
@@ -132,9 +108,7 @@ public void OnClick(string name)
 
 }
 ```
-
 Parameters are bound from
-
 * **Id of the Input control** 
 * **Action.Execute data** for the action clicked on
 
@@ -146,7 +120,9 @@ This is accomplished by:
 
 * The input control having the **Id** with the **name** of the property and the **Value** with the **value** of the property
 
-* Defining a property with **[BindProperty]** attribute on it with the same **name**  as the **Id**
+* Defining a property with **[Parameter]** attribute on it 
+
+  > NOTE: For MVC tempaltes the attribute is [BindProperty] for Blazor it's [Parameter]
 
 ![image](https://user-images.githubusercontent.com/17789481/190312063-0de73827-cd0d-4236-98bc-4ab829802a73.png)
 
@@ -167,14 +143,12 @@ Example:
 ![image](https://user-images.githubusercontent.com/17789481/190312095-542518e7-f9bd-4526-86e1-0e014bd0e4bc.png)
 
 You can apply **data validation attributes** to get validation computed on each action handler invocation.
-
 ```C#
 	[BindProperty]
 	[Required]
 	[StringLength(50)]
 	public string Name {get;set;}
 ```
-
 The property **IsModelValid** will be true if all validation attributes are valid. The **ValidationErrors** will contain a map of property name to an array of error messages for that property.
 
 The typical pattern is to only commit and close the data if the validation passes.
@@ -220,54 +194,6 @@ Input controls do 2 things automatically related to validation:
 ![image](https://user-images.githubusercontent.com/17789481/190333148-9cebaef6-978c-4b13-b964-d1092df8bd95.png)
 
 
-
-## Search extensions
-
-To implement a search extension like this:
-
-![image-20221116110720258](assets/image-20221116110720258.png)
-
-you simply need to:
-
-* override CardApp.**OnSearchQueryAsync**() to return search results
-
-* Update manifest to have a **query** command pointing to your app route.
-
-```c#
-public async override Task<SearchResult[]> OnSearchQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
-{
-    var results = await ...lookup your data...
-    return results.Select(result => new SearchResult()
-                           {
-                               Title = ...,
-                               Subtitle = ...,
-                               Text = ...,
-                               ImageUrl = ...
-                               Route = $"/Cards/{...route for your search result...}"
-                           }).ToArray();
-}
-```
-
-And in your manifest commands section:
-
-```json
-        {
-          "id": "/Cards/{...your app name...}",
-          "type": "query",
-          "title": "...",
-          "description": "...",
-          "initialRun": false,
-          "parameters": [
-            {
-              "name": "search",
-              "description": "Enter in search terms",
-              "title": "Search"
-            }
-          ]
-        }
-```
-
-The **route** returned in the search result will be used when someone clicks on an entry, unfurling the url into the card and inserting it.
 
 # Life cycle handlers
 
@@ -335,7 +261,7 @@ Example:
         /// <param name="cardResult">the card result</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>task</returns>
-        public virtual async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+        public async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
 
 ```
 
@@ -368,61 +294,3 @@ public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke s
 }
 ```
 
-## RenderViewAsync()
-
-The **CardView** class does not have to use Razor templates to create the cards for the view. By overriding **RenderViewAsync()** method you can create an adaptive card any way you would like.
-
-Simply create a class which derives from **CardView<>** (like @inherits above) and override the **RenderViewAsync()** method to return an Adaptive Card bound to your data.
-
-By deriving from CardView<> you still get Crazor data binding, verb action handling, navigation methods etc. 
-
-## Example:
-
-```C#
-namespace Example
-{
-    public class MyCodeView : CardView<CodeOnlyViewApp>
-    {
-        public int Counter { get; set; }
-
-        public override async Task<AdaptiveCard?> RenderViewAsync(bool isPreview, CancellationToken cancellationToken)
-        {
-            return new AdaptiveCard("1.5")
-            {
-                Body = new List<AdaptiveElement>() 
-                { 
-                    new AdaptiveTextBlock($"Counter is {this.Counter}") 
-                },
-                Actions = new List<AdaptiveAction>() 
-                {
-                    new AdaptiveExecuteAction(){ Verb = nameof(OnIncrement), Title = "Increment"}
-                }
-            };
-        }
-
-        public void OnIncrement()
-            => this.Counter++;
-    }
-}
-```
-
-To use the view you simply use the generic form of ShowView<>() or ReplaceView<>()
-
-```c#
-ShowView<MyCodeView>();
-ReplaceView<MyCodeView>();
-```
-
->  NOTE: All memory attributes, state management action handlers work, but you do not get the benefit of any of the Razor TagHelpers functionality, specifically: 
->
->  * **Input** **control** **Binding** property 
->  * **Action.OK**/**Action.Cancel** are implemented as tag helpers
->  * **Custom TagHelpers** 
->
->  Tag Helpers are purely a feature of the Razor template engine.
-
-
-
-
-
-![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)

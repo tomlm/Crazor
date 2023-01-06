@@ -78,7 +78,7 @@ namespace Crazor.Interfaces
         void OnInitialized();
 
         /// <summary>
-        /// OnInvokeActionAsync() - Called to process an incoming verb action.
+        /// OnActionAsync() - Called to process an incoming verb action.
         /// </summary>
         /// <remarks>
         /// The default implementation uses reflection to find the name of the method and invoke it.
