@@ -1,11 +1,11 @@
 ﻿@using Crazor.Interfaces;
-@using global::AdaptiveCards;
+@using AC=global::AdaptiveCards;
 
 @if (CardView.ValidationErrors.TryGetValue(this.Id, out var errors))
 {
     @foreach (var error in errors)
     {
-        <TextBlock Spacing="@AdaptiveSpacing.None" Color="@AdaptiveTextColor.Attention">@error</TextBlock>
+        <TextBlock Spacing="@AC.AdaptiveSpacing.None" Color="@AC.AdaptiveTextColor.Attention">@error</TextBlock>
     }
 }
 
