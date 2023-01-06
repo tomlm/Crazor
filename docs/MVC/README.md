@@ -33,11 +33,11 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 # Documentation
 
 * [Card Views](CardView.md) - How to define views with **CardView** and **Razor templates**
-* [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-  * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
+* [Card Apps](../CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+  * [Card App Memory](../Memory.md) - Information on persistence and memory model
 
-* [Card Routing](RoutingCards.md) - Information on customizing urls to support deep linking into cards
-* [Writing Unit tests](UnitTests.md) - Writing unit tests for your cards.
+* [Card Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Writing Unit tests](../UnitTests.md) - Writing unit tests for your cards.
 * [TagHelpers (Advanced)](TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
 # Sample Card Apps
