@@ -21,7 +21,7 @@ namespace Crazor
 
         public bool IsModelValid { get; set; }
 
-        public void BindProperties(JObject data)
+        public void BindProperties(object data)
         {
 
         }
@@ -73,5 +73,14 @@ namespace Crazor
         {
             return null;
         }
+
+        public void SetModel(object model)
+        {
+        }
+
+        public void OnInitialized()
+        {
+        }
+
     }
 }

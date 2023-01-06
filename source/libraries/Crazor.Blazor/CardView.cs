@@ -72,8 +72,9 @@ namespace Crazor.Blazor
 
         #region ---- Core Methods -----
 
-        public void BindProperties(JObject data)
+        public void BindProperties(object obj)
         {
+            JObject data = JObject.FromObject(obj);
             if (data != null)
             {
                 foreach (var property in data.Properties())
@@ -167,49 +168,6 @@ namespace Crazor.Blazor
                 else
                 {
                     throw;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Called to initialize cardState
-        /// </summary>
-        /// <param name="cardState"></param>
-        public virtual void LoadState(CardViewState cardState)
-        {
-            foreach (var property in this.GetPersistentProperties())
-            {
-                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
-                {
-                    this.SetTargetProperty(property, val);
-                }
-            }
-
-            if (cardState.Initialized == false)
-            {
-                // call hook to give cardview opportunity to process data.
-                OnInitialized();
-                cardState.Initialized = true;
-            }
-        }
-
-
-        public virtual void SaveState(CardViewState state)
-        {
-            // capture all properties on CardView which are not on base type and not ignored.
-            foreach (var property in this.GetPersistentProperties())
-            {
-                var val = property.GetValue(this);
-                if (val != null)
-                {
-                    if (property.Name == "Model")
-                    {
-                        state.Model = val;
-                    }
-                    else
-                    {
-                        state.SessionMemory[property.Name] = JToken.FromObject(val);
-                    }
                 }
             }
         }
@@ -353,6 +311,9 @@ namespace Crazor.Blazor
 
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                     return false;
+                
+                if (propertyInfo.Name == "Model")
+                    return false;
 
                 return true;
 
@@ -383,6 +344,17 @@ namespace Crazor.Blazor
         {
             return null;
         }
+
+        public virtual void SetModel(object? model)
+        {
+
+        }
+
+        void ICardView.OnInitialized()
+        {
+            this.OnInitialized();
+        }
+
         #endregion
     }
 
@@ -415,22 +387,16 @@ namespace Crazor.Blazor
             return this.Model;
         }
 
-        public override void LoadState(CardViewState cardViewState)
+        public override void SetModel(object? model)
         {
-            if (cardViewState.Model is JToken jt)
-            {
-                Model = (ModelT?)jt.ToObject(typeof(ModelT));
-            }
-            else if (cardViewState.Model != null && cardViewState.Model.GetType().IsAssignableTo(typeof(ModelT)))
-            {
-                Model = (ModelT)cardViewState.Model!;
-            }
-            else
+            if (model == null)
             {
                 Model = Activator.CreateInstance<ModelT>();
             }
-
-            base.LoadState(cardViewState);
+            else
+            {
+                Model = model as ModelT ?? JObject.FromObject(model).ToObject<ModelT>();
+            }
         }
     }
 }

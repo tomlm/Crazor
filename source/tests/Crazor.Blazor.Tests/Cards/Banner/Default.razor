@@ -5,7 +5,7 @@
     <ActionExecute Verb="@nameof(OnMessage2)" />
 </Card>
 
-@functions{
+@code {
     public void OnMessage(string message)
     {
         AddBannerMessage(message ?? "Unknown", AdaptiveContainerStyle.Accent);

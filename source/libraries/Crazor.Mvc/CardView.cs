@@ -3,12 +3,9 @@
 
 using AdaptiveCards;
 using Crazor.Attributes;
-using Crazor.Exceptions;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
@@ -56,7 +53,7 @@ namespace Crazor.Mvc
         /// <summary>
         /// App for this CardView
         /// </summary>
-       public AppT App { get; set; }
+        public AppT App { get; set; }
 
         /// <summary>
         /// App reference
@@ -96,8 +93,9 @@ namespace Crazor.Mvc
 
         #region ---- Core Methods -----
 
-        public void BindProperties(JObject data)
+        public void BindProperties(object obj)
         {
+            JObject data = JObject.FromObject(obj);
             if (data != null)
             {
                 foreach (var property in data.Properties())
@@ -178,54 +176,6 @@ namespace Crazor.Mvc
                 else
                 {
                     throw;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Called to initialize cardState
-        /// </summary>
-        /// <param name="cardState"></param>
-        public virtual void LoadState(CardViewState cardState)
-        {
-            if (cardState.Model != null)
-            {
-                this.ViewContext.ViewData.Model = cardState.Model;
-            }
-
-            foreach (var property in this.GetPersistentProperties())
-            {
-                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
-                {
-                    this.SetTargetProperty(property, val);
-                }
-            }
-
-            if (cardState.Initialized == false)
-            {
-                // call hook to give cardview opportunity to process data.
-                OnInitialized();
-                cardState.Initialized = true;
-            }
-        }
-
-
-        public virtual void SaveState(CardViewState state)
-        {
-            // capture all properties on CardView which are not on base type and not ignored.
-            foreach (var property in this.GetPersistentProperties())
-            {
-                var val = property.GetValue(this);
-                if (val != null)
-                {
-                    if (property.Name == "Model")
-                    {
-                        state.Model = val;
-                    }
-                    else
-                    {
-                        state.SessionMemory[property.Name] = JToken.FromObject(val);
-                    }
                 }
             }
         }
@@ -404,9 +354,23 @@ namespace Crazor.Mvc
             }).ToList();
         }
 
-        public object? GetModel()
+        public virtual object? GetModel()
         {
-            return ViewContext.ViewData?.Model;
+            return this.ViewContext.ViewData.Model;
+        }
+
+
+        public virtual void SetModel(object? model)
+        {
+            if (model != null)
+            {
+                this.ViewContext.ViewData.Model = model;
+            }
+        }
+
+        void ICardView.OnInitialized()
+        {
+            this.OnInitialized();
         }
         #endregion
     }
@@ -435,7 +399,7 @@ namespace Crazor.Mvc
         // Summary:
         //     Gets the Model property of the Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData
         //     property.
-        [SessionMemory]
+        [TempMemory]
         public ModelT Model
         {
             get
@@ -463,14 +427,12 @@ namespace Crazor.Mvc
         [RazorInject]
         public ViewDataDictionary<ModelT>? ViewData { get; set; }
 
-        public override void LoadState(CardViewState cardViewState)
+        public override void SetModel(object? modelObj)
         {
-            base.LoadState(cardViewState);
-
-            ModelT? model = cardViewState.Model as ModelT;
+            ModelT? model = modelObj as ModelT;
             if (model == null)
             {
-                if (cardViewState.Model is JToken jt)
+                if (modelObj is JToken jt)
                 {
                     model = (ModelT?)jt.ToObject(typeof(ModelT));
                 }

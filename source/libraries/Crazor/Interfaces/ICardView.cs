@@ -3,7 +3,6 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Schema;
-using Newtonsoft.Json.Linq;
 using System.Reflection;
 
 namespace Crazor.Interfaces
@@ -37,35 +36,28 @@ namespace Crazor.Interfaces
         string GetRoute();
 
         /// <summary>
-        /// Called to load state
-        /// </summary>
-        /// <param name="cardState"></param>
-        void LoadState(CardViewState cardState);
-
-        /// <summary>
-        /// Called to save the card state
-        /// </summary>
-        /// <param name="cardState"></param>
-        void SaveState(CardViewState cardState);
-
-        /// <summary>
         /// Get Model (specificallly @model style model)
         /// </summary>
         /// <returns></returns>
         object? GetModel();
 
         /// <summary>
+        /// Set the Model (if returned by GetModel)
+        /// </summary>
+        /// <param name="model"></param>
+        void SetModel(object model);
+
+        /// <summary>
         /// Bind data to view properties.
         /// </summary>
         /// <param name="data"></param>
-        void BindProperties(JObject data);
+        void BindProperties(object data);
 
         /// <summary>
         /// Enumerate properties on the view which are persistent
         /// </summary>
         /// <returns></returns>
         IEnumerable<PropertyInfo> GetPersistentProperties();
-
 
         /// <summary>
         /// Enumerate properties on the view which are bindable and persistent
@@ -82,18 +74,38 @@ namespace Crazor.Interfaces
         Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Called to process an InvokeAction (aka a verb)
+        /// OnInitialized() - Initalize members
         /// </summary>
-        /// <param name="action">action payload</param>
-        /// <param name="cancellationToken">cancellation token</param>
+        /// <remarks>
+        /// This will be called only once to initialize the instance data of the cardview.
+        /// This is effectively like a constructor, with no async support.  If you
+        /// want to look up data to look at OnLoadCardAsync
+        /// </remarks>
+        void OnInitialized();
+
+        /// <summary>
+        /// OnInvokeActionAsync() - Called to process an incoming verb action.
+        /// </summary>
+        /// <remarks>
+        /// The default implementation uses reflection to find the name of the method and invoke it.
+        /// </remarks>
+        /// <param name="action">the action to process</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Called to process card result from the resumption of a view.
+        /// OnResumeView() - Called when a CardResult has returned back to this view
         /// </summary>
-        /// <param name="screenResult"></param>
-        /// <param name="cancellationToken"></param>
-        Task OnResumeView(CardResult screenResult, CancellationToken cancellationToken);
+        /// <remarks>
+        /// Override this to handle the result that is returned to the card from a child view.
+        /// When a view is resumed because a child view has completed this method will
+        /// be called giving you an opportunity to do something with the result of the child view.
+        /// </remarks>
+        /// <param name="cardResult">the card result</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>task</returns>
+        Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to search for choices.

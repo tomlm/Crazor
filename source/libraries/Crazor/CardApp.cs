@@ -223,7 +223,7 @@ namespace Crazor
                         System.Diagnostics.Debug.WriteLine("WARNING: 5 ShowViews() in one turn attempted. Loop stopped.");
                     }
 
-                    this.CurrentView.SaveState(this.CallStack[0]);
+                    SaveCardState();
                 }
             }
             catch (Exception err)
@@ -322,7 +322,7 @@ namespace Crazor
         {
             if (this.CallStack.Any())
             {
-                this.CurrentView.SaveState(this.CallStack[0]);
+                SaveCardState();
             }
 
             if (!route.StartsWith('/'))
@@ -342,6 +342,41 @@ namespace Crazor
             else
             {
                 throw new Exception($"{route} not found");
+            }
+        }
+
+        private void LoadCardState(CardViewState cardState)
+        {
+            foreach (var property in CurrentView.GetPersistentProperties())
+            {
+                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
+                {
+                    CurrentView.SetTargetProperty(property, val);
+                }
+            }
+
+            CurrentView.SetModel(cardState.Model);
+
+            if (cardState.Initialized == false)
+            {
+                // call hook to give cardview opportunity to process data.
+                CurrentView.OnInitialized();
+                cardState.Initialized = true;
+            }
+        }
+
+        private void SaveCardState()
+        {
+            this.CallStack[0].Model = CurrentView.GetModel();
+
+            // capture all properties on CardView which are not on base type and not ignored.
+            foreach (var property in this.CurrentView.GetPersistentProperties())
+            {
+                var val = property.GetValue(this.CurrentView);
+                if (val != null)
+                {
+                    this.CallStack[0].SessionMemory[property.Name] = JToken.FromObject(val);
+                }
             }
         }
 
@@ -541,7 +576,7 @@ namespace Crazor
             if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
                 var newRoute = ((JObject)Action.Data)[Constants.ROUTE_KEY].ToString();
-                
+
                 // call stack ALWAYS has default page at root
                 while (CallStack.Count > 1)
                 {
@@ -612,7 +647,7 @@ namespace Crazor
             this.Route = cardRoute;
             this.CurrentView.App = this;
             // restore card SessionMemory properties for CardView
-            this.CurrentView.LoadState(cardViewState);
+            LoadCardState(cardViewState);
         }
 
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)

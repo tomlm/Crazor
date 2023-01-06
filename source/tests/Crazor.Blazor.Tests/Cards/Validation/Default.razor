@@ -16,7 +16,7 @@
     <ActionExecute Title="Edit" Verb="@nameof(OnEdit)"/>
 </Card>
 
-@functions {
+@code {
     public InputsModel Data { get; set; } = new InputsModel();
 
     public void OnEdit()
