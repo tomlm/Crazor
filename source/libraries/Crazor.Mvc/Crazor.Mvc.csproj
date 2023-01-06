@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Crazor" Version="1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
 	</ItemGroup>
