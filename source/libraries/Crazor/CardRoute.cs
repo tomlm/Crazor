@@ -63,10 +63,14 @@ namespace Crazor
             var local = parts[0];
             result.Query = parts.Skip(1).FirstOrDefault();
             var pathParts = local.Trim('/').Split('/');
+            if (pathParts.Length < 2)
+                return null;
+
             if (pathParts[0].ToLower() != "cards")
                 throw new ArgumentException($"Unknown route {pathAndQuery}");
 
             result.App = pathParts[1].Trim();
+            result.View = pathParts.Skip(2).FirstOrDefault() ?? "Default";
             result.Path = String.Join('/', local.Trim('/').Split('/').Skip(2).ToArray());
             result.RouteData = new JObject();
             result.QueryData = new JObject();

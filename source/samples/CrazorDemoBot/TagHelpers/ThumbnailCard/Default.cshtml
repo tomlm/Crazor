@@ -1,11 +1,10 @@
 ﻿@using AdaptiveCards
 @using CrazorDemoBot.TagHelpers.ThumbnailCard
 @model ThumbnailCardTagHelper
-@addTagHelper *, Crazor
 
 <ColumnSet>
     <Column Width="Auto" HorizontalAlignment="Center">
-        <Image Url="@Model.ImageUrl" Size="@Model?.Size ?? AdaptiveImageSize.Medium" />
+        <Image Url="@Model.ImageUrl" Size="@(Model?.Size ?? AdaptiveImageSize.Medium)" />
     </Column>
     <Column Width="stretch">
         @if (!String.IsNullOrEmpty(Model?.Title))

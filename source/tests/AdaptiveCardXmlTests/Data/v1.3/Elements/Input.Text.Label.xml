@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <Input.Text Id="textLabelId" Label="Default Input.Text label" />
   <Input.Text Id="requiredTextLabelId" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" />
   <Action.Submit Title="Submit" />

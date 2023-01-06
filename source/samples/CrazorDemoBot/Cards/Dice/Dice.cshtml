@@ -1,4 +1,4 @@
-﻿@attribute [Route("{App.DiceName}")]
+﻿@attribute [CardRoute("{App.DiceName}")]
 
 @using CrazorDemoBot.Cards.Dice
 @inherits CardView<DiceApp>
@@ -10,7 +10,7 @@
         <ImageSet>
             @foreach (var die in App.Dice)
             {
-                <Image Url="@UrlHelper.Content($"~/images/dice{die}.png")" Size="Medium" />
+                <Image Url="@App.GetContentUrl($"~/images/dice{die}.png")" Size="Medium" />
             }
         </ImageSet>
     }

@@ -1,0 +1,104 @@
+﻿@using CrazorBlazorDemo.Cards.Wordle
+@using System.ComponentModel.DataAnnotations;
+@using Microsoft.AspNetCore.Mvc;
+@inherits CardView<WordleApp>
+<Card Version="1.5" Title="Play wordle">
+    @if (IsPreview)
+    {
+        // it's not the person who played the game, give them a link to play
+        <ActionOpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+    }
+    else
+    {
+        <TextBlock Size="AdaptiveTextSize.Large" Style="AdaptiveTextBlockStyle.Heading">Wordle for @DateTime.Now.ToShortDateString()!</TextBlock>
+
+        <Table GridStyle="AdaptiveContainerStyle.Default" ShowGridLines="true" FirstRowAsHeaders="false">
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            <TableColumn Width="auto" />
+            @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
+            {
+                <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+                    @foreach (var letter in App.Game.Guesses[iGuess].Letters)
+                    {
+                        <TableCell Style="@letter.State"><TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">@letter.Value</TextBlock></TableCell>
+                    }
+                </TableRow>
+            }
+            @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
+            {
+                <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                </TableRow>
+            }
+        </Table>
+        <ColumnSet>
+            <Column Width="stretch">
+                <InputText Id="Guess" Placeholder="Guess" />
+            </Column>
+            <Column Width="Auto">
+                <ActionSet>
+                    <ActionExecute Verb="OnSubmit" Title="Submit" />
+                </ActionSet>
+            </Column>
+        </ColumnSet>
+    }
+</Card>
+
+@code
+{
+    [BindProperty]
+    [Required]
+    [StringLength(maximumLength: 5, ErrorMessage = "Word must be 5 chars")]
+    public string Guess { get; set; }
+
+    protected override void OnInitialized()
+    {
+        // First person to play the game sets Todays word for the world.
+        if (App.TodaysWord == null)
+        {
+            App.TodaysWord = WordleApp.Words.Skip(new Random().Next(WordleApp.Words.Count)).First();
+        }
+
+        if (App.Game == null)
+        {
+            App.Game = new WordleGame(App.TodaysWord, App.Activity?.LocalTimestamp ?? DateTimeOffset.Now)
+                {
+                    Player = App.Activity.From,
+                };
+        }
+        base.OnInitialized();
+    }
+
+    public void OnShowView()
+    {
+        // if someone tries to view the card and it's done route to the results page
+        if (App.Game.IsDone)
+            ReplaceView("Results");
+    }
+
+    public void OnSubmit()
+    {
+        var guess = Guess.Trim().ToUpper();
+        if (IsModelValid && !WordleApp.Words.Contains(guess))
+        {
+            AddBannerMessage($"{guess} is not a valid wordle word.", AdaptiveContainerStyle.Attention);
+        }
+        else if (App.Game.MakeGuess(guess))
+        {
+            App.Game.Won = true;
+            ReplaceView("Results");
+        }
+        else if (App.Game.IsDone)
+        {
+            ReplaceView("Results");
+        }
+    }
+
+}

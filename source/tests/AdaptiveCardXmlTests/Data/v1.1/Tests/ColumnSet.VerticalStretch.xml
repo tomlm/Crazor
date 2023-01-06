@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <ColumnSet>
     <Column Width="1">
       <TextBlock Wrap="true">The left column has a very, very long text which makes it very tall. Because it is tall, the right column is also very tall. The right column contains two TextBlocks; one is displaying at the top of the column, while the other one is displayed at the bottom. That is achieved by setting the first TextBlock's **height** property to **stretch**.</TextBlock>

@@ -1,5 +1,8 @@
-﻿using AdaptiveCards;
-using Crazor.TagHelpers;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using AdaptiveCards;
+using Crazor.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CrazorDemoBot.TagHelpers.Person

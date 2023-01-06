@@ -1,0 +1,85 @@
+﻿@using CrazorBlazorDemo.Cards.NugetSearch
+@using Microsoft.Bot.Schema.Teams
+@inherits CardView<NugetApp, NugetPackage>
+
+<Card Version="1.5">
+    <InputText Id="@nameof(Search)" Value="@Search" >
+        <ActionExecute Verb="@nameof(OnSearch)" Title="Search"/>
+    </InputText>
+
+    <ColumnSet>
+        <Column Width="auto">
+            @if (Packages.Any() && Skip > 0)
+            {
+                <ActionSet><ActionExecute Title="<" Verb="@nameof(OnPrevious)" /></ActionSet>
+            }
+        </Column>
+        <Column Width="stretch" />
+        <Column Width="auto">
+            @if (Packages.Any())
+            {
+                <ActionSet><ActionExecute Title=">" Verb="@nameof(OnNext)" /></ActionSet>
+            }
+        </Column>
+    </ColumnSet>
+    @foreach (var package in Packages)
+    {
+        <Container Separator="true">
+            <SelectAction>
+                <ActionExecute Verb="@nameof(OnSelectPackage)">{ "packageId":"@package.Id" }</ActionExecute>
+            </SelectAction>
+            <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl!)">@package.Description</ThumbnailCard>
+            <ActionSet>
+                <ActionOpenUrl Title="Nuget Package" Url="@($"https://www.nuget.org/packages/{package.Id}")" />
+                @if (!String.IsNullOrEmpty(package.ProjectUrl) && Uri.IsWellFormedUriString(package.ProjectUrl, UriKind.Absolute))
+                {
+                    <ActionOpenUrl Title="Project " Url="@package.ProjectUrl" />
+                }
+            </ActionSet>
+        </Container>
+    }
+</Card>
+
+
+@code
+{
+    private string GetImageUrl(string url)
+    {
+        if (!String.IsNullOrEmpty(url) && Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            return url;
+        return "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nuget/nuget.png";
+    }
+
+    [Required]
+    public string? Search { get; set; }
+
+    public int Skip { get; set; }
+
+    public int Take { get; set; } = 5;
+
+    [TempMemory]
+    public NugetPackage[] Packages { get; set; } = Array.Empty<NugetPackage>();
+
+    public async Task OnSearch(CancellationToken cancellationToken)
+    {
+        Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
+    }
+
+    public async Task OnNext(CancellationToken cancellationToken)
+    {
+        Skip += Take;
+        Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
+    }
+
+    public async Task OnPrevious(CancellationToken cancellationToken)
+    {
+        Skip = Math.Max(0, Skip - Take);
+        Packages = await App.SearchNugetPackages(Search ?? String.Empty, Skip, Take, cancellationToken);
+    }
+
+    public async Task OnSelectPackage(string packageId, CancellationToken cancellationToken)
+    {
+        var package = await App.GetNugetPackage(packageId, cancellationToken);
+        ShowView("Package", package);
+    }
+}

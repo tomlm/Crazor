@@ -1,0 +1,13 @@
+﻿@using CrazorBlazorDemo.Cards.CodeOnlyView
+@inherits CardView
+<Card Version="1.5">
+
+    <TextBlock>This card demonstrates defining a view which is only code (no razor)</TextBlock>
+    <ActionExecute Verb="@nameof(OnShowMyCard)" Title="Show Code Only View"/>
+</Card>
+@code {
+    public void OnShowMyCard()
+    {
+        ShowView("MyCard");
+    }
+}

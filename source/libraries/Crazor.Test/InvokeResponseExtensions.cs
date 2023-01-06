@@ -6,7 +6,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Linq;
 
 namespace Crazor.Test.MSTest
 {
@@ -76,7 +75,7 @@ namespace Crazor.Test.MSTest
                 return response.ComposeExtension.ActivityPreview.Attachments
                     .Where(a => a.ContentType == AdaptiveCard.ContentType)
                     .Select(a => ObjectPath.MapValueTo<AdaptiveCard>(a.Content))
-                    .Single()!;;
+                    .Single()!; ;
             }
 
             return response.ComposeExtension.Attachments

@@ -1,0 +1,49 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ElementComponent<AdaptiveImage>
+
+<ac:Image @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Image>
+
+@code
+{
+
+    [Parameter]
+    public String? AltText { get; set; }
+
+    [Parameter]
+    public String? BackgroundColor { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
+
+    [Parameter]
+    public BoolProperty? IsVisible { get; set; }
+
+    [Parameter]
+    public BoolProperty? Separator { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveImageSize), "Auto")]
+    public AdaptiveImageSize Size { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveSpacing), "Default")]
+    public AdaptiveSpacing Spacing { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveImageStyle), "Normal")]
+    public AdaptiveImageStyle Style { get; set; }
+
+    [Parameter]
+    public String? Url { get; set; }
+
+    [Parameter]
+    public String? Height { get; set; }
+
+    [Parameter]
+    public String? Width { get; set; }
+}

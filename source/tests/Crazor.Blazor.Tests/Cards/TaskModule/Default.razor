@@ -1,0 +1,18 @@
+﻿@using Crazor.Blazor.Tests.Cards.TaskModule
+@inherits CardView<TaskModuleApp>
+
+<Card Version="1.5">
+    @if (IsPreview)
+    {
+        <TextBlock Size="AdaptiveTextSize.Large">(PREVIEW)</TextBlock>
+    }
+    <TextBlock>Counter: @App.Counter</TextBlock>
+</Card>
+
+@functions{
+    public void OnIncrement()
+        => App.Counter++;
+
+    public void OnEdit()
+        => ShowView("Edit");
+}

@@ -28,12 +28,7 @@ namespace Crazor.Test
             });
             builder.Services.AddSingleton<IRazorViewEngine, RazorViewEngine>();
             builder.Services.AddSingleton<IStorage, MemoryStorage>();
-            builder.Services.AddCrazor();
             builder.Services.AddTransient<IHttpContextAccessor>((sp) => new HttpContextAccessor() { HttpContext = new DefaultHttpContext { RequestServices = sp } });
-            builder.Services.AddMvc()
-                // .AddRazorOptions((options) => { var x = options; })
-                // .AddRazorPagesOptions((options) => { var y = options; })
-                .AddRazorRuntimeCompilation();
             var listener = new Diag.DiagnosticListener("Microsoft.AspNetCore");
             builder.Services.AddSingleton<Diag.DiagnosticListener>(listener);
             builder.Services.AddSingleton<Diag.DiagnosticSource>(listener);

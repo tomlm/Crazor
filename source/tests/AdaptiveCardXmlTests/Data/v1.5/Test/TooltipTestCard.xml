@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.5">
+<Card Version="1.5" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Weight="bolder" Wrap="true">Button with no title or tooltip</TextBlock>
   <ActionSet>
     <Action.Submit IconUrl="https://adaptivecards.io/content/cats/1.png" />

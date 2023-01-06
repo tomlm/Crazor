@@ -16,12 +16,12 @@ namespace AdaptiveCards
     /// </summary>
     [JsonConverter(typeof(AdaptiveCardConverter))]
 #if !NETSTANDARD1_3
-    [XmlRoot(ElementName = "Card")]
+    [XmlRoot(ElementName = "Card", Namespace = AdaptiveCard.ContentType)]
 #endif
     public class AdaptiveCard : AdaptiveTypedElement
     {
 #if !NETSTANDARD1_3
-        public static XmlSerializer XmlSerializer = new XmlSerializer(typeof(AdaptiveCard));
+        public static XmlSerializer XmlSerializer = new XmlSerializer(typeof(AdaptiveCard), defaultNamespace: AdaptiveCard.ContentType);
 #endif
 
         /// <summary>

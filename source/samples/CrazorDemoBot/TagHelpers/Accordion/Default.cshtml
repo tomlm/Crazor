@@ -1,7 +1,6 @@
 ﻿@using Crazor
 @using CrazorDemoBot.TagHelpers.Accordion
 @model AccordionTagHelper
-@addTagHelper *, Crazor
 @{
     var id = Utils.GetNewId(); ;
     var showButtonId = $"{id}Show";
@@ -22,7 +21,7 @@
             <TextBlock Wrap="true" Size="Large">@Model.Title</TextBlock>
         </Column>
         <Column Width="Auto">
-            <Image Id="@showButtonId" IsVisible="@Model.IsExpanded == false" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Collaps_menu-32.png" Size="Auto">
+            <Image Id="@showButtonId" IsVisible="@(Model.IsExpanded == false)" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Collaps_menu-32.png" Size="Auto">
                 <SelectAction>
                     <Action.ToggleVisibility>
                         <TargetElement ElementId="@showButtonId" />
@@ -31,7 +30,7 @@
                     </Action.ToggleVisibility>
                 </SelectAction>
             </Image>
-            <Image Id="@hideButtonId" IsVisible="@Model.IsExpanded" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Expand_menu-32.png" Size="Auto">
+            <Image Id="@hideButtonId" IsVisible="@(Model.IsExpanded)" Url="https://cdn0.iconfinder.com/data/icons/leading-international-corporate-website-app-collec/16/Expand_menu-32.png" Size="Auto">
                 <SelectAction>
                     <Action.ToggleVisibility>
                         <TargetElement ElementId="@showButtonId" />
@@ -42,7 +41,7 @@
             </Image>
         </Column>
     </ColumnSet>
-    <Container Id="@contentId" IsVisible="@Model.IsExpanded" Style="Emphasis" Spacing="None">
+    <Container Id="@contentId" IsVisible="@(Model.IsExpanded)" Style="Emphasis" Spacing="None">
         @Model.ChildContent
     </Container>
 </Container>

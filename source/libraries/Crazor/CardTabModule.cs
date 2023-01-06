@@ -8,6 +8,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Crazor
 {
@@ -35,6 +36,11 @@ namespace Crazor
         /// </summary>
         /// <returns></returns>
         public abstract Task<string[]> GetCardUrisAsync();
+
+        public static IEnumerable<TypeInfo> GetTabModuleTypes()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false));
+        }
 
         public virtual async Task<AdaptiveCard[]> OnTabFetchAsync(ITurnContext turnContext, TabRequest tabRequest, CancellationToken cancellationToken)
         {
@@ -138,7 +144,7 @@ namespace Crazor
             var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext.TurnState.Get<IConnectorClient>());
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
-            
+
             return card;
         }
 

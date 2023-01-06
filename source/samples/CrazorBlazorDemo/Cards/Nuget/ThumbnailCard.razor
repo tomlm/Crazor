@@ -1,0 +1,34 @@
+﻿
+<ColumnSet>
+    <Column Width="Auto" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
+        <Image Url="@ImageUrl" Size="@(Size ?? AdaptiveImageSize.Medium)" />
+    </Column>
+    <Column Width="stretch">
+        @if (!String.IsNullOrEmpty(Title))
+        {
+            <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@Title</TextBlock>
+        }
+        @if (!String.IsNullOrEmpty(Subtitle))
+        {
+            <TextBlock Size="AdaptiveTextSize.Medium" IsSubtle="true">@Subtitle</TextBlock>
+        }
+        <TextBlock Wrap="true" MaxLines="3">@ChildContent</TextBlock>
+    </Column>
+</ColumnSet>
+
+@code {
+    [Parameter]
+    public String? ImageUrl { get; set; }
+
+    [Parameter]
+    public AdaptiveImageSize? Size { get; set; }
+
+    [Parameter]
+    public String? Title { get; set; }
+
+    [Parameter]
+    public String? Subtitle { get; set; }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

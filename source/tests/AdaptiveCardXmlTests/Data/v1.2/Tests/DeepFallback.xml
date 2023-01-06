@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2">
+<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
   <Container>
     <Fallback Type="drop" />
     <Container>
@@ -19,7 +19,7 @@
   <TextBlock Weight="lighter">Message just below ↓</TextBlock>
   <Container>
     <Fallback>
-      <TextBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Weight="bolder" Color="good">If you see this, things are working great!</TextBlock>
+      <TextBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Weight="bolder" Color="good" xmlns="">If you see this, things are working great!</TextBlock>
     </Fallback>
     <Container>
       <ColumnSet>
@@ -37,7 +37,7 @@
   <TextBlock Weight="lighter">There should be another message below ↓</TextBlock>
   <UnknownElement Id="firstGraphVTwo" Type="GraphV2">
     <Fallback>
-      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="thirdGraph" Type="Graph">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="thirdGraph" Type="Graph" xmlns="">
         <Fallback>
           <TextBlock Weight="bolder" Color="good">Multiply-nested fallback works!</TextBlock>
         </Fallback>
@@ -48,7 +48,7 @@
     <TextBlock Weight="lighter" Wrap="true">There should be nothing between here...</TextBlock>
     <UnknownElement Id="secondGraphVTwo" Type="GraphV2">
       <Fallback>
-        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="fourthGraph" Type="Graph">
+        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="fourthGraph" Type="Graph" xmlns="">
           <Fallback>
             <UnknownElement Type="MakeSomethingUp" />
           </Fallback>
@@ -57,7 +57,7 @@
     </UnknownElement>
     <UnknownElement Id="thirdGraphVTwo" Type="GraphV2">
       <Fallback>
-        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="fifthGraph" Type="Graph">
+        <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="fifthGraph" Type="Graph" xmlns="">
           <Fallback>
             <UnknownElement Type="MakeSomethingElseUp">
               <Fallback Type="drop" />
@@ -73,7 +73,7 @@
       <Property Name="coolness">to the max</Property>
     </AdditionalProperties>
     <Fallback>
-      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="MyCoolAction">
+      <UnknownElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="MyCoolAction" xmlns="">
         <AdditionalProperties>
           <Property Name="coolness">pretty cool</Property>
           <Property Name="title">Pretty cool</Property>

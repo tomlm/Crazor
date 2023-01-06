@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <FactSet>
     <Fact Title="This is a long FactSet that should wrap the title" Value="This is a long FactSet that can introduce wrapping for the value" />
     <Fact Title="Fact 2" Value="Value 2" />

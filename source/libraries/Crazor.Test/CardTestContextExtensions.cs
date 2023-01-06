@@ -3,7 +3,6 @@
 
 using AdaptiveCards;
 using Crazor.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor.Test
@@ -31,5 +30,5 @@ namespace Crazor.Test
             var card = await cardApp.ProcessInvokeActivity(CardTest.CreateInvokeActivity().CreateActionInvokeActivity(action.Verb, combined), false, default(CancellationToken));
             return new CardTestContext() { Services = context.Services, Card = card };
         }
-   }
+    }
 }

@@ -1,0 +1,43 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge">Binding Example</TextBlock>
+
+    <TextBlock Size="AdaptiveTextSize.Medium" Weight="AdaptiveTextWeight.Bolder">One-way bindings</TextBlock>
+    <Container Separator="true" Style="AdaptiveContainerStyle.Emphasis">
+        <TextBlock Wrap="true" IsSubtle="true">these are one-way because there is no Value attribute binding the value of the property </TextBlock>
+    </Container>
+
+    <InputText Id="Input1" Label="Input1: One-way binding to argument of OnSubmit()" />
+    <InputText Id="Input2" Label="Input2: One-way binding to Input2 property" />
+
+    <TextBlock Size="AdaptiveTextSize.Medium" Weight="AdaptiveTextWeight.Bolder">Two-way bindings</TextBlock>
+    <Container Separator="true" Style="AdaptiveContainerStyle.Emphasis">
+        <TextBlock Wrap="true">These are two-way because there IS a Value attribute binding the value of the property and sending it to the client</TextBlock>
+    </Container>
+
+    <InputText Id="Input3" Value="@Input3" Label="Input3: Two-way binding to property" />
+    <InputText Binding="Input4" Label="Input4: Two-way binding to property with one attribute instead of two" />
+
+    <ActionExecute Verb="@nameof(OnSubmit)" Title="Submit" />
+</Card>
+
+@code
+{
+    //[BindProperty]
+    public string Input2 { get; set; }
+
+    //[BindProperty]
+    public string Input3 { get; set; }
+
+    //[BindProperty]
+    public string Input4 { get; set; }
+
+    public void OnSubmit(string Input1)
+    {
+        AddBannerMessage($"Input4={Input4}", AdaptiveContainerStyle.Emphasis);
+        AddBannerMessage($"Input3={Input3}", AdaptiveContainerStyle.Emphasis);
+        AddBannerMessage($"Input2={Input2}", AdaptiveContainerStyle.Emphasis);
+        AddBannerMessage($"Input1={Input1}", AdaptiveContainerStyle.Emphasis);
+    }
+}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" Speak="Microsoft stock is trading at $62.30 a share, which is down .32%">
+<Card Version="1.0" Speak="Microsoft stock is trading at $62.30 a share, which is down .32%" xmlns="application/vnd.microsoft.card.adaptive">
   <Container>
     <TextBlock Size="medium" Wrap="true">Microsoft Corporation</TextBlock>
     <TextBlock Spacing="none" IsSubtle="true" Wrap="true">Nasdaq Global Select: MSFT</TextBlock>

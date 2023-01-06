@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2">
+<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Size="large" Weight="bolder">Requires Test</TextBlock>
   <ColumnSet>
     <Column>
@@ -18,7 +18,7 @@
     <Column>
       <TextBlock Color="attention" Wrap="true">
         <Fallback>
-          <TextBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Color="good" Wrap="true">✓:We don't support acTest 2.0</TextBlock>
+          <TextBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Color="good" Wrap="true" xmlns="">✓:We don't support acTest 2.0</TextBlock>
         </Fallback>
         <Requires>
           <Property Name="acTest">2.0</Property>
@@ -33,7 +33,7 @@
     <Column>
       <TextBlock Color="attention" Wrap="true">
         <Fallback>
-          <TextBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Color="good" Wrap="true">✓:We don't support adaptiveCards 5.0</TextBlock>
+          <TextBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Color="good" Wrap="true" xmlns="">✓:We don't support adaptiveCards 5.0</TextBlock>
         </Fallback>
         <Requires>
           <Property Name="adaptiveCards">5</Property>

@@ -1,0 +1,32 @@
+﻿@using AdaptiveCards
+@inherits CardView
+
+<Card Version="1.5">
+    <InputChoiceSet Binding="Number" Style="AdaptiveChoiceInputStyle.Filtered">
+        <Choice Title="1" Value="1" />
+        <Choice Title="2" Value="2" />
+        <Choice Title="3" Value="3" />
+        <Choice Title="4" Value="4" />
+        <DataQuery Dataset="Numbers" />
+    </InputChoiceSet>
+</Card>
+
+@functions {
+    public int Number { get; set; }
+
+    public override async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
+    {
+        await Task.CompletedTask;
+
+        if (search.Dataset == "Numbers")
+        {
+            return Enumerable.Range(1, 1000000)
+               .Where(v => v.ToString().StartsWith(search.QueryText?.Trim() ?? String.Empty))
+               .Skip(search.QueryOptions.Skip)
+               .Take(search.QueryOptions.Top)
+               .Select(v => new AdaptiveChoice() { Title = v.ToString(), Value = v.ToString() })
+               .ToArray();
+        }
+        return Array.Empty<AdaptiveChoice>();
+    }
+}

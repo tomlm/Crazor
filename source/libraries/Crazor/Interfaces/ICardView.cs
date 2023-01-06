@@ -2,27 +2,32 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Bot.Schema;
+using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Crazor.Interfaces
 {
-    public interface ICardView : IRazorPage
+    public interface ICardView
     {
-        IUrlHelper UrlHelper { get; set; }
+        /// <summary>
+        /// Name of the template
+        /// </summary>
+        string Name { get; }
 
-        string Name { get; set; }
-
+        /// <summary>
+        /// App reference
+        /// </summary>
         CardApp App { get; set; }
 
-        AdaptiveCardInvokeAction Action { get; set; }
-
-        IView RazorView { get; set; }
-
+        /// <summary>
+        /// Validation errors for the current view.
+        /// </summary>
         Dictionary<string, HashSet<string>> ValidationErrors { get; set; }
 
+        /// <summary>
+        /// Is the current view valid?
+        /// </summary>
         bool IsModelValid { get; set; }
 
         /// <summary>
@@ -38,8 +43,40 @@ namespace Crazor.Interfaces
         void LoadState(CardViewState cardState);
 
         /// <summary>
-        /// Bind the view to the card
+        /// Called to save the card state
         /// </summary>
+        /// <param name="cardState"></param>
+        void SaveState(CardViewState cardState);
+
+        /// <summary>
+        /// Get Model (specificallly @model style model)
+        /// </summary>
+        /// <returns></returns>
+        object? GetModel();
+
+        /// <summary>
+        /// Bind data to view properties.
+        /// </summary>
+        /// <param name="data"></param>
+        void BindProperties(JObject data);
+
+        /// <summary>
+        /// Enumerate properties on the view which are persistent
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PropertyInfo> GetPersistentProperties();
+
+
+        /// <summary>
+        /// Enumerate properties on the view which are bindable and persistent
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PropertyInfo> GetBindableProperties();
+
+        /// <summary>
+        /// Render the card 
+        /// </summary>
+        /// <param name="isPreview">IsPreview is signal that anonymous preview card should be returned.</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);

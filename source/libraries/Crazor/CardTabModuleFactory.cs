@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Crazor
@@ -15,6 +13,11 @@ namespace Crazor
         public CardTabModuleFactory(IServiceProvider serviceProvider)
         {
             _services = serviceProvider;
+
+            foreach (var tabModuleType in CardTabModule.GetTabModuleTypes())
+            {
+                this.Add(tabModuleType.FullName, tabModuleType);
+            }
         }
 
         public void Add(string name, Type type)

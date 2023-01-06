@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <Input.Toggle Id="acceptTerms" IsRequired="true" Label="Please check the box below to accept the terms and agreements:" ErrorMessage="You must accept the terms to continue." Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="true" />
   <Action.Submit Title="OK" />
 </Card>

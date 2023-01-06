@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Size="medium" Weight="bolder" Wrap="true" Style="heading">Publish Adaptive Card Schema</TextBlock>
   <ColumnSet>
     <Column Width="auto">

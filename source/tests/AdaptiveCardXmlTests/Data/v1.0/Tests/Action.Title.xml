@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0">
+<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Wrap="true">Action.Title is highly recommended, but for the time being not enforced</TextBlock>
   <Action.Submit Title="Good" />
   <Action.Submit />

@@ -1,0 +1,35 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ActionComponent<AdaptiveOpenUrlAction>
+
+<ac:Action.OpenUrl @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.OpenUrl>
+
+@code
+{
+
+    [Parameter]
+    public String? IconUrl {get;set;}
+
+    [Parameter]
+    public BoolProperty? IsEnabled {get;set;}
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
+    public AdaptiveActionMode Mode { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
+    public AdaptiveActionStyle Style { get; set; }
+
+    [Parameter]
+    public String? Title { get; set; }
+
+    [Parameter]
+    public String? Tooltip { get; set; }
+
+    [Parameter]
+    public String? Url { get; set; }
+}

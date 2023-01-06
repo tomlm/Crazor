@@ -1,0 +1,101 @@
+﻿@using Microsoft.Bing.WebSearch
+@using Microsoft.Bing.WebSearch.Models
+@using Microsoft.Extensions.Configuration
+@inherits CardView
+
+<Card Version="1.5">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Bing Search</TextBlock>
+    <InputText Id="@nameof(Query)" Value="@Query" Placeholder="Enter search terms" Label="Search">
+        <ActionExecute Title="Search" Verb="@nameof(OnSearch)" />
+    </InputText>
+
+    <ColumnSet>
+        <Column Width="auto">
+            @if (HasPrev())
+            {
+                <ActionSet>
+                    <ActionExecute Title="<" Verb="@nameof(OnPrevious)" />
+                </ActionSet>
+            }
+        </Column>
+        <Column Width="stretch" />
+        <Column Width="auto">
+            @if (HasNext())
+            {
+                <ActionSet>
+                    <ActionExecute Title=">" Verb="@nameof(OnNext)" />
+                </ActionSet>
+            }
+        </Column>
+    </ColumnSet>
+
+    @if (Results != null)
+    {
+        @foreach (var result in Results)
+        {
+            <Container Separator="true">
+                <ColumnSet>
+                    <Column Width="stretch">
+                        <TextBlock Weight="AdaptiveTextWeight.Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
+                        <TextBlock Spacing="AdaptiveSpacing.None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
+                        <TextBlock Spacing="AdaptiveSpacing.Small">@result.Snippet</TextBlock>
+                    </Column>
+                    <Column Width="auto">
+                        @if (!String.IsNullOrEmpty(result.ThumbnailUrl))
+                        {
+                            <Image Url="@result.ThumbnailUrl" Size="AdaptiveImageSize.Large" />
+                        }
+                    </Column>
+                </ColumnSet>
+            </Container>
+        }
+    }
+</Card>
+
+@code {
+    [Inject]
+    public IConfiguration Configuration { get; set; }
+
+    [Required]
+    [StringLength(100)]
+    public string? Query { get; set; }
+
+    public int Offset { get; set; }
+
+    public const int PageSize = 5;
+
+    [TempMemory]
+    public IList<WebPage> Results { get; set; } = new List<WebPage>();
+
+    public bool HasNext()
+        => Results.Any();
+
+    public bool HasPrev()
+        => Results.Any() && Offset > 0;
+
+    public async Task OnSearch()
+    {
+        if (!String.IsNullOrWhiteSpace(Query))
+        {
+            var apiKey = Configuration.GetValue<string>("BingKey");
+            var search = new WebSearchClient(new ApiKeyServiceClientCredentials(apiKey));
+
+            var searchResult = await search.Web.SearchAsync(query: Query, count: PageSize, offset: Offset);
+
+            Results = searchResult.WebPages.Value!;
+        }
+    }
+
+    public async Task OnNext()
+    {
+        Offset += PageSize;
+        await OnSearch();
+    }
+
+    public async Task OnPrevious()
+    {
+        if (Offset != 0)
+            Offset -= PageSize;
+        await OnSearch();
+    }
+}

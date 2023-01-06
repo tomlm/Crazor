@@ -1,0 +1,32 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ActionComponent<AdaptiveAction>
+
+<ac:Action.Unknown @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.Unknown>
+
+@code
+{
+
+    [Parameter]
+    public String? IconUrl {get;set;}
+
+    [Parameter]
+    public BoolProperty? IsEnabled {get;set;}
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
+    public AdaptiveActionMode Mode { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
+    public AdaptiveActionStyle Style { get; set; }
+
+    [Parameter]
+    public String? Title { get; set; }
+
+    [Parameter]
+    public String? Tooltip { get; set; }
+}

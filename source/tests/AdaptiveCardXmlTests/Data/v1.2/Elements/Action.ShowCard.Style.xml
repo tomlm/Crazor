@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2">
+<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Wrap="true">This card has four ShowCard actions. The styles from left to right are "Default", "Positive", "Destructive" and "Other".</TextBlock>
   <Action.ShowCard Title="Default">
     <Card Version="1.0" />

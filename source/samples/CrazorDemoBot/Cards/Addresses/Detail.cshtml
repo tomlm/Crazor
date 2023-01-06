@@ -1,7 +1,7 @@
 ﻿@using CrazorDemoBot.Cards.Addresses
 @inherits CardView<AddressesApp,Address>
 @* This card supports a deep link route *@
-@attribute [Route("{Model.Id}")]
+@attribute [CardRoute("{Model.Id}")]
 @functions {
     public void OnLoadRoute()
     {
@@ -36,7 +36,7 @@
 @functions {
     public void OnEdit()
     {
-        ShowView("Edit", Model);
+        ShowView($"{Model.Id}/Edit", Model);
     }
 
     public void OnAll()

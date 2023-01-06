@@ -1,0 +1,19 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <ActionExecute Verb="@nameof(OnMessage)" />
+    <ActionExecute Verb="@nameof(OnMessage2)" />
+</Card>
+
+@functions{
+    public void OnMessage(string message)
+    {
+        AddBannerMessage(message ?? "Unknown", AdaptiveContainerStyle.Accent);
+    }
+
+    public void OnMessage2(string message)
+    {
+        AddBannerMessage(message ?? "Unknown1", AdaptiveContainerStyle.Accent);
+        AddBannerMessage(message ?? "Unknown2", AdaptiveContainerStyle.Attention);
+    }
+}

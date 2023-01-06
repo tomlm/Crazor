@@ -3,16 +3,10 @@
 
 using AdaptiveCards;
 using Crazor.Attributes;
+using Crazor.Exceptions;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -33,25 +27,25 @@ namespace Crazor
     /// 
     /// LoadState() and SaveState() will be called by the CardBot class automatically.
     /// </remarks>
-    public class CardApp  
+    public class CardApp
     {
         private static XmlWriterSettings _settings = new XmlWriterSettings()
         {
             Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
             Indent = true,
         };
-        
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardApp(CardAppContext context)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Context = context;
-            this.CallStack = new List<CardViewState>()
+            this.CallStack = new List<CardViewState>();
+            if (this.GetType() != typeof(CardApp))
             {
-                new CardViewState(Constants.DEFAULT_VIEW, null)
-            };
-            this.Name = this.GetType().Name;
-            this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
+                this.Name = this.GetType().Name;
+                this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
+            }
         }
 
 
@@ -85,11 +79,6 @@ namespace Crazor
         /// </summary>
         [SessionMemory]
         public List<CardViewState> CallStack { get; set; }
-
-        /// <summary>
-        /// Name of the current card on the stack.
-        /// </summary>
-        public string CurrentCard => CallStack.First().Name;
 
         /// <summary>
         /// Current bound view 
@@ -146,6 +135,12 @@ namespace Crazor
         /// </summary>
         public IConnectorClient ConnectorClient { get; set; }
         public CardAppContext Context { get; }
+
+        public static IEnumerable<TypeInfo> GetCardAppTypes()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                                                            .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false));
+        }
 
         /// <summary>
         /// process the activity
@@ -208,20 +203,18 @@ namespace Crazor
                     int ShowViewAttempts = 0;
                     while (ShowViewAttempts++ < 5)
                     {
-                        var currentCard = this.CurrentCard;
+                        var currentRoute = this.Route;
                         await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
                         if (LastResult != null)
                         {
                             // because we are resuming we don't need to execute again unless
                             // the resumption causes it to happen.
-                            currentCard = this.CurrentCard;
                             await this.CurrentView.OnResumeView(LastResult, cancellationToken);
                         }
 
-                        if (this.CurrentCard == currentCard)
+                        if (this.Route == currentRoute)
                             break;
 
-                        this.Action.Verb = Constants.SHOWVIEW_VERB;
                         this.LastResult = null;
                     }
 
@@ -230,7 +223,7 @@ namespace Crazor
                         System.Diagnostics.Debug.WriteLine("WARNING: 5 ShowViews() in one turn attempted. Loop stopped.");
                     }
 
-                    SaveCardViewState(this.CallStack[0], this.CurrentView);
+                    this.CurrentView.SaveState(this.CallStack[0]);
                 }
             }
             catch (Exception err)
@@ -239,6 +232,17 @@ namespace Crazor
                 AddBannerMessage(err.Message, AdaptiveContainerStyle.Attention);
             }
 
+        }
+
+        /// <summary>
+        /// Resolve content url to the card app.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public virtual string GetContentUrl(string path)
+        {
+            var uri = Context.Configuration.GetValue<Uri>("HostUri");
+            return new Uri(uri, path.TrimStart('~')).AbsoluteUri;
         }
 
         /// <summary>
@@ -309,91 +313,66 @@ namespace Crazor
             return Task.FromResult(Array.Empty<SearchResult>());
         }
 
-
-        /// <summary>
-        /// lower level method to handle search command
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<MessagingExtensionResponse> OnMessagingExtensionQueryAsync(MessagingExtensionQuery query, CancellationToken cancellationToken)
-        {
-            // do the search
-            var searchResults = await OnSearchQueryAsync(query, cancellationToken);
-
-            // turn into attachments
-            List<MessagingExtensionAttachment> attachments = new List<MessagingExtensionAttachment>();
-            foreach (var searchResult in searchResults)
-            {
-                //// replaceview with new view
-                //var cardState = new CardViewState(this.CurrentCard, searchResult.Model);
-                //this.CallStack[0] = cardState;
-                //Action!.Verb = Constants.SHOWVIEW_VERB;
-                //SetCurrentView(cardState);
-                //AdaptiveCard card = await this.RenderCardAsync(isPreview: true, cancellationToken);
-
-                var attachment = new MessagingExtensionAttachment()
-                {
-                    ContentType = ThumbnailCard.ContentType,
-                    Content = new ThumbnailCard()
-                    {
-                        Title = searchResult.Title,
-                        Subtitle = searchResult.Subtitle,
-                        Text = searchResult.Text,
-                        Images = !String.IsNullOrEmpty(searchResult.ImageUrl) ?
-                                new List<CardImage>() { new CardImage(searchResult.ImageUrl, alt: searchResult.Title) } :
-                                null,
-                        Tap = new CardAction()
-                        {
-                            Type = "invoke",
-                            Value = JObject.FromObject(new { route = searchResult.Route })
-                        }
-                    }
-                };
-                attachments.Add(attachment);
-            }
-
-            return new MessagingExtensionResponse()
-            {
-                ComposeExtension = new MessagingExtensionResult()
-                {
-                    Type = "result",
-                    AttachmentLayout = "list",
-                    Attachments = attachments
-                }
-            };
-        }
-
         /// <summary>
         /// Navigate to card by name passing optional model
         /// </summary>
-        /// <param name="cardName"></param>
+        /// <param name="route"></param>
         /// <param name="model"></param>
-        public void ShowView(string cardName, object? model = null)
+        public void ShowView(string route, object? model = null)
         {
-            SaveCardViewState(this.CallStack[0], this.CurrentView);
-            var cardState = new CardViewState(cardName, model);
-            CallStack.Insert(0, cardState);
-            Action!.Verb = Constants.SHOWVIEW_VERB;
-            SetCurrentView(cardState);
+            if (this.CallStack.Any())
+            {
+                this.CurrentView.SaveState(this.CallStack[0]);
+            }
+
+            if (!route.StartsWith('/'))
+            {
+                route = $"/Cards/{this.Name}/{route}".TrimEnd('/');
+            }
+
+            var newRoute = CardRoute.Parse(route);
+            if (Context.RouteResolver.IsRouteValid(newRoute))
+            {
+                var cardViewState = new CardViewState(newRoute.Route, model);
+                CallStack.Insert(0, cardViewState);
+                Action!.Verb = Constants.LOADROUTE_VERB;
+                Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
+                SetCurrentView(cardViewState);
+            }
+            else
+            {
+                throw new Exception($"{route} not found");
+            }
         }
 
         /// <summary>
         /// Replace current card with a different card by name passing optional model
         /// </summary>
-        /// <param name="cardName">card to switch to</param>
+        /// <param name="route">card to switch to</param>
         /// <param name="model">model to pass card</param>
-        public void ReplaceView(string cardName, object? model = null)
+        public void ReplaceView(string route, object? model = null)
         {
-            var cardState = new CardViewState(cardName, model);
-            this.CallStack[0] = cardState;
-            Action!.Verb = Constants.SHOWVIEW_VERB;
-            SetCurrentView(cardState);
+            if (!route.StartsWith('/'))
+            {
+                route = $"/Cards/{this.Name}/{route}".TrimEnd('/');
+            }
+
+            if (Context.RouteResolver.IsRouteValid(CardRoute.Parse(route)))
+            {
+                var cardState = new CardViewState(route, model);
+                this.CallStack[0] = cardState;
+                Action!.Verb = Constants.LOADROUTE_VERB;
+                Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
+                SetCurrentView(cardState);
+            }
+            else
+            {
+                throw new Exception($"{route} not found");
+            }
         }
 
-        public void CloseView(CardResult? result = null)
+        public void CloseView(CardResult result)
         {
-            var lastCard = this.CurrentCard;
             this.LastResult = result;
 
             if (this.CallStack.Any())
@@ -403,11 +382,44 @@ namespace Crazor
 
             if (!this.CallStack.Any())
             {
-                this.CallStack.Insert(0, new CardViewState(Constants.DEFAULT_VIEW));
+                CardRoute route = CardRoute.Parse($"/Cards/{this.Name}");
+                if (Context.RouteResolver.IsRouteValid(route))
+                    this.CallStack.Insert(0, new CardViewState(route.Route));
+                else
+                    throw new Exception("No default route!");
             }
 
-            Action!.Verb = Constants.SHOWVIEW_VERB;
+            Action!.Verb = Constants.LOADROUTE_VERB;
+            Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
             SetCurrentView(this.CallStack[0]);
+        }
+
+        /// <summary>
+        /// Close the current card, optionalling returning the result
+        /// </summary>
+        /// <param name="result">the result to return to the current caller</param>
+        public void CloseView(object? result = null)
+        {
+            this.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Result = result,
+                Success = true
+            });
+        }
+
+        /// <summary>
+        /// Cancel the current card, returning a message
+        /// </summary>
+        /// <param name="message">optional message to return.</param>
+        public void CancelView(string? message = null)
+        {
+            this.CloseView(new CardResult()
+            {
+                Name = this.Name,
+                Message = message,
+                Success = false
+            });
         }
 
         public void CloseTaskModule(TaskModuleAction status)
@@ -447,10 +459,14 @@ namespace Crazor
             {
                 if (viewRoute.Length > 0)
                     uri.Path = $"/Cards/{this.Name}/{subPath}";
-                else if (this.CurrentView.Name != Constants.DEFAULT_VIEW)
-                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
-                else
+                else if (viewRoute.Length == 0)
                     uri.Path = $"/Cards/{this.Name}";
+                else
+                    uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
+            }
+            else
+            {
+                uri.Path = subPath;
             }
 
             uri.Query = query;
@@ -467,7 +483,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(cancellationToken);
             ArgumentNullException.ThrowIfNull(activity);
 
-            if (!Context.RouteManager.ResolveRoute(this.Route, out var viewType))
+            if (!Context.RouteResolver.IsRouteValid(this.Route))
             {
                 throw new Exception($"{this.Route} is not a valid route");
             }
@@ -477,10 +493,24 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(invoke);
             this.Action = invoke.Action;
 
-            // map FromRoute attributes
+            // map Route attributes for app
             foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
             {
                 var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                if (dataProperty != null)
+                {
+                    this.SetTargetProperty(targetProperty, dataProperty.Value);
+                }
+            }
+
+            // map query parameters for app.
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromQueryAttribute>() != null ||
+                                                                                        prop.GetCustomAttribute<SupplyParameterFromQueryAttribute>() != null))
+            {
+                var fromRouteName = targetProperty.GetCustomAttribute<SupplyParameterFromQueryAttribute>()?.Name ??
+                    targetProperty.GetCustomAttribute<FromQueryAttribute>()?.Name ??
+                    targetProperty.Name;
                 var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
                 if (dataProperty != null)
                 {
@@ -510,19 +540,37 @@ namespace Crazor
 
             if (Action?.Verb == Constants.LOADROUTE_VERB)
             {
-                if (this.CurrentCard != Route.View)
+                var newRoute = ((JObject)Action.Data)[Constants.ROUTE_KEY].ToString();
+                
+                // call stack ALWAYS has default page at root
+                while (CallStack.Count > 1)
                 {
-                    // this is ShowCard() embedded, Ick. 
-                    // The issue is we don't want to reset the verb, need to clean this up
-                    SaveCardViewState(this.CallStack[0], this.CurrentView);
-                    var cardState = new CardViewState(Route.View!);
-                    CallStack.Insert(0, cardState);
-                    SetCurrentView(cardState);
-                    return;
+                    if (CallStack[0].Route.ToLower() != newRoute.ToLower())
+                    {
+                        CancelView();
+                    }
+                    else
+                    {
+                        // found;
+                        SetCurrentView(this.CallStack[0]);
+                        return;
+                    }
                 }
+
+                var cardState = new CardViewState(newRoute);
+                CallStack.Insert(0, cardState);
+                SetCurrentView(cardState);
+                return;
             }
 
-            // load current card.
+            if (!this.CallStack.Any())
+            {
+                // initialize view for the route.
+                var cardState = new CardViewState(this.Route.Route!);
+                CallStack.Insert(0, cardState);
+            }
+
+            // load current view
             SetCurrentView(this.CallStack[0]);
         }
 
@@ -546,18 +594,6 @@ namespace Crazor
             await Context.Storage.WriteAsync(data, cancellationToken);
         }
 
-        /// <summary>
-        /// HasView
-        /// </summary>
-        /// <param name="viewName"></param>
-        /// <returns>true or false</returns>
-        public bool HasView(string viewName)
-        {
-            var viewPath = $"/Cards/{Name}/{viewName}.cshtml";
-            var viewResult = Context.RazorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-            return (viewResult?.View != null);
-        }
-
 
         /// <summary>
         /// Given view name, return the IView object
@@ -565,64 +601,18 @@ namespace Crazor
         /// <param name="viewName"></param>
         /// <returns>view</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public void SetCurrentView(CardViewState cardState)
+        public void SetCurrentView(CardViewState cardViewState)
         {
-            this.CurrentView = LoadCardView(cardState);
-            this.CurrentView.LoadState(cardState);
-        }
+            var cardRoute = CardRoute.Parse(cardViewState.Route);
+            Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
 
-        public ICardView LoadCardView(CardViewState cardState)
-        {
-            IView view;
-            ICardView cardView;
-            // This is a non-cshtml view, let's see if we can construct it.
-            try
-            {
-                if (cardState.Name.Contains('.'))
-                {
-                    cardView = Context.CardViewFactory.Create(cardState.Name);
-                    view = new ViewStub();
-                }
-                else
-                {
-                    var viewPath = Path.Combine("Cards", Name, $"{cardState.Name}.cshtml");
-                    var viewResult = Context.RazorEngine.GetView(Environment.CurrentDirectory, viewPath, false);
-                    view = viewResult?.View;
-                    if (view != null)
-                    {
-                        cardView = (ICardView)((RazorView)viewResult.View).RazorPage;
-                        cardView.RazorView = viewResult.View;
-                    }
-                    else
-                    {
-                        cardView = new EmptyCardView();
-                        view = new ViewStub();
-                    }
-                }
-            }
-            catch (ArgumentException)
-            {
-                cardView = new EmptyCardView();
-                view = new ViewStub();
-            }
+            this.CurrentView = Context.CardViewFactory.Create(cardViewType) ?? new EmptyCardView();
 
-            cardView.UrlHelper = Context.UrlHelper;
-            cardView.App = this;
-            cardView.Name = cardState.Name;
-
-            // rester card SessionMemory properties
-            LoadCardViewState(cardState, cardView);
-
-            ActionContext actionContext;
-            actionContext = new ActionContext(Context.HttpContextAccessor.HttpContext!, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
-            var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-            {
-                Model = cardState.Model
-            };
-
-            var viewContext = new ViewContext(actionContext, view, viewDictionary, new TempDataDictionary(actionContext.HttpContext, Context.TempDataProvider), new StringWriter(), new HtmlHelperOptions());
-            cardView.ViewContext = viewContext;
-            return cardView;
+            cardRoute.SessionId = this.Route.SessionId;
+            this.Route = cardRoute;
+            this.CurrentView.App = this;
+            // restore card SessionMemory properties for CardView
+            this.CurrentView.LoadState(cardViewState);
         }
 
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
@@ -641,6 +631,121 @@ namespace Crazor
             return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
         }
 
+        /// <summary>
+        /// This is a utility function for CardViews to use reflection to handle action verbs
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task OnActionReflectionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        {
+            // Process BindProperty tags
+            var data = (JObject)JObject.FromObject(action.Data).DeepClone();
+            this.CurrentView.BindProperties(data);
+
+            MethodInfo? verbMethod = null;
+            if (action.Verb == Constants.LOADROUTE_VERB)
+            {
+                // merge in route and query data since we are in a LOAD ROUTE situation.
+                if (this.Route.RouteData != null)
+                    data.Merge(this.Route.RouteData);
+
+                if (this.Route.QueryData != null)
+                    data.Merge(this.Route.QueryData);
+
+                // process [FromRoute] attributes. This allows [FromRoute] to be placed on a property which doesn't match the RouteData.property name
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+                {
+                    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                    var dataProperty = this.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
+                }
+
+                // Process any Route properties as setters onto current view.
+                foreach (var routeProperty in this.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
+                {
+                    ObjectPath.SetPathValue(this.CurrentView, routeProperty.Name, routeProperty.Value.ToString(), false);
+                }
+
+                // process query  attributes as setters onto current view
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null ||
+                                                                                                     p.GetCustomAttribute<SupplyParameterFromQueryAttribute>() != null))
+                {
+                    var fromQueryName = targetProperty.GetCustomAttribute<SupplyParameterFromQueryAttribute>()?.Name ??
+                        targetProperty.GetCustomAttribute<FromQueryAttribute>()?.Name ??
+                        targetProperty.Name;
+                    var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
+                }
+
+                // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
+                verbMethod = this.CurrentView.GetMethod(action.Verb);
+                if (verbMethod != null)
+                {
+                    try
+                    {
+                        await this.CurrentView.InvokeMethodAsync(verbMethod, this.CurrentView.GetMethodArgs(verbMethod, data, cancellationToken));
+                    }
+                    catch (CardRouteNotFoundException notFound)
+                    {
+                        this.AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
+                        this.CancelView();
+                    }
+                    catch (Exception err)
+                    {
+                        if (err.InnerException is CardRouteNotFoundException notFound)
+                        {
+                            this.CancelView(notFound.Message);
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                }
+                action.Verb = Constants.SHOWVIEW_VERB;
+            }
+
+            if (action.Verb != Constants.SHOWVIEW_VERB)
+            {
+                // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
+                this.CurrentView.Validate();
+            }
+
+            switch (action.Verb)
+            {
+                case Constants.CANCEL_VERB:
+                    // if there is an OnCancel, call it
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        // default implementation 
+                        this.CancelView();
+                    }
+                    break;
+
+                case Constants.OK_VERB:
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        if (this.CurrentView.IsModelValid)
+                        {
+                            this.CloseView(this.CurrentView.GetModel());
+                        }
+                    }
+                    break;
+
+                default:
+                    await this.CurrentView.InvokeVerbAsync(action, cancellationToken);
+                    break;
+            }
+
+        }
+
         private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Activity);
@@ -656,14 +761,7 @@ namespace Crazor
             await AddMetadataToCard(outboundCard, isPreview, cancellationToken);
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            if (CurrentCard != Constants.DEFAULT_VIEW)
-            {
-                outboundCard.Title = $"{this.Name} - {CurrentCard}";
-            }
-            else
-            {
-                outboundCard.Title = $"{this.Name}";
-            }
+            outboundCard.Title = $"{this.Name}";
 #pragma warning restore CS0618 // Type or member is obsolete
 
             outboundCard.Metadata = new AdaptiveMetadata() { WebUrl = GetCurrentCardUri().AbsoluteUri };
@@ -839,6 +937,8 @@ namespace Crazor
                     outboundCard.Body.Insert(0, banner);
                     iMessage++;
                 }
+
+                this.BannerMessages.Clear();
 #endif
             }
         }
@@ -872,7 +972,7 @@ namespace Crazor
                 systemMenu.Actions.Add(outboundCard.Refresh.Action);
             }
 
-            if (HasView(Constants.ABOUT_VIEW) && this.CurrentCard != Constants.ABOUT_VIEW)
+            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
@@ -884,7 +984,7 @@ namespace Crazor
                 });
             }
 
-            if (this.HasView(Constants.SETTINGS_VIEW) && this.CurrentCard != Constants.SETTINGS_VIEW)
+            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
             {
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
@@ -1018,80 +1118,9 @@ namespace Crazor
             }
         }
 
-        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>()
-        {
-            "CardView",
-            "CardViewBase`1",
-            "RazorPage",
-            "RazorPageBase"
-        };
 
-        /// <summary>
-        /// Copy data from cardState onto instantiated card.
-        /// </summary>
-        /// <param name="cardState"></param>
-        /// <param name="cardView"></param>
-        private static void LoadCardViewState(CardViewState cardState, ICardView cardView)
-        {
-            foreach (var property in cardView.GetType().GetProperties().Where(prop => PersistProperty(prop)))
-            {
-                if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
-                {
-                    cardView.SetTargetProperty(property, val);
-                }
-            }
-        }
-        private static bool PersistProperty(PropertyInfo propertyInfo)
-        {
-            if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
-                return true;
-
-            if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
-                return false;
-
-            if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
-                return false;
-
-            if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
-                return false;
-
-            return true;
-        }
-
-        private static void SaveCardViewState(CardViewState state, ICardView cardView)
-        {
-            if (cardView != null)
-            {
-                // capture all properties on CardView which are not on base type and not ignored.
-                foreach (var property in cardView.GetType().GetProperties().Where(prop => PersistProperty(prop)))
-                {
-                    var val = property.GetValue(cardView);
-                    if (val != null)
-                    {
-                        if (property.Name == "Model")
-                        {
-                            state.Model = val;
-                        }
-                        else
-                        {
-                            state.SessionMemory[property.Name] = JToken.FromObject(val);
-                        }
-                    }
-                }
-            }
-        }
 
         protected string? GetKey(string name, string? key) => String.IsNullOrEmpty(key) ? null : $"{this.Name}-{name}-{key}";
-
-        private class ViewStub : IView
-        {
-            public string Path { get; set; } = string.Empty;
-
-            public Task RenderAsync(ViewContext context)
-            {
-                return Task.CompletedTask;
-            }
-        }
 
         private Dictionary<string, MemoryAttribute> GetMemoryKeyMap()
         {

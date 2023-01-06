@@ -1,0 +1,27 @@
+@using global::AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveMediaSource>
+
+<ac:MediaSource @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:MediaSource>
+
+@code
+{
+
+    [Parameter]
+    public String? MimeType { get; set; }
+
+    [Parameter]
+    public String? Url { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.ParentItem is AdaptiveMedia media)
+        {
+            media.Sources.Add(Item);
+        }
+    }
+}

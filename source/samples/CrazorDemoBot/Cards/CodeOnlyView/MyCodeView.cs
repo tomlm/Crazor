@@ -1,14 +1,17 @@
-﻿using AdaptiveCards;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using AdaptiveCards;
 using Crazor;
 using Crazor.Attributes;
-using Microsoft.AspNetCore.Mvc;
+using Crazor.Mvc;
 
 namespace CrazorDemoBot.Cards.CodeOnlyView
 {
     /// <summary>
     /// You don't have to use Razor for your view.  Simply derive from CardView and override BindCard() to return the AdaptiveCard
     /// </summary>
-    [Route("MyCode")]
+    [CardRoute("MyCode")]
     public class MyCodeView : CardView
     {
         [SessionMemory]
@@ -20,11 +23,11 @@ namespace CrazorDemoBot.Cards.CodeOnlyView
 
             return new AdaptiveCard("1.5")
             {
-                Body = new List<AdaptiveElement>() 
-                { 
-                    new AdaptiveTextBlock($"Counter is {this.Counter}") 
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveTextBlock($"Counter is {this.Counter}")
                 },
-                Actions = new List<AdaptiveAction>() 
+                Actions = new List<AdaptiveAction>()
                 {
                     new AdaptiveExecuteAction(){ Verb = nameof(OnIncrement), Title = "Increment"}
                 }

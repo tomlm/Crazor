@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.3">
+<Card Version="1.3" xmlns="application/vnd.microsoft.card.adaptive">
   <RichTextBlock>
     <TextRun>This is the text<Action.Submit Title="Click me" /></TextRun>
   </RichTextBlock>

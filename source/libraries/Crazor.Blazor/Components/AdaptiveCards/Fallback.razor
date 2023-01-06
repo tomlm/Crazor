@@ -1,0 +1,19 @@
+@using global::AdaptiveCards
+@inherits ItemComponent<AdaptiveFallbackElement>
+
+<ac:FallbackElement @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:FallbackElement>
+
+@code
+{
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.ParentItem is AdaptiveElement element)
+        {
+            element.Fallback = Item;
+        }
+    }
+}

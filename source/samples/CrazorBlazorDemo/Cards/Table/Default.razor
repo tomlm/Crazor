@@ -1,0 +1,80 @@
+﻿@inherits CardView
+
+<Card Version="1.5">
+    <Table GridStyle="AdaptiveContainerStyle.Accent" FirstRowAsHeaders="true">
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="3" />
+        <TableRow Style="AdaptiveContainerStyle.Accent">
+            <TableCell>
+                <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">Name</TextBlock>
+            </TableCell>
+            <TableCell>
+                <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">Type</TextBlock>
+            </TableCell>
+            <TableCell>
+                <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">Description</TextBlock>
+            </TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell Style="AdaptiveContainerStyle.Good">
+                <TextBlock Wrap="true">columns</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Warning">
+                <TextBlock Wrap="true">ColumnDefinition[]</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Accent">
+                <TextBlock Wrap="true">Defines the table's columns (number of columns, and column sizes).</TextBlock>
+            </TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell Style="AdaptiveContainerStyle.Good">
+                <TextBlock Wrap="true">rows</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Accent">
+                <TextBlock Wrap="true">TableRow[]</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Attention">
+                <TextBlock Wrap="true">Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.</TextBlock>
+            </TableCell>
+        </TableRow>
+    </Table>
+    <Table ShowGridLines="false" GridStyle="AdaptiveContainerStyle.Accent" FirstRowAsHeaders="true">
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="3" />
+        <TableRow Style="AdaptiveContainerStyle.Accent">
+            <TableCell>
+                <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">Name</TextBlock>
+            </TableCell>
+            <TableCell>
+                <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">Type</TextBlock>
+            </TableCell>
+            <TableCell>
+                <TextBlock Weight="AdaptiveTextWeight.Bolder" Wrap="true">Description</TextBlock>
+            </TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell Style="AdaptiveContainerStyle.Good">
+                <TextBlock Wrap="true">columns</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Warning">
+                <TextBlock Wrap="true">ColumnDefinition[]</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Accent">
+                <TextBlock Wrap="true">Defines the table's columns (number of columns, and column sizes).</TextBlock>
+            </TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell Style="AdaptiveContainerStyle.Good">
+                <TextBlock Wrap="true">rows</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Accent">
+                <TextBlock Wrap="true">TableRow[]</TextBlock>
+            </TableCell>
+            <TableCell Style="AdaptiveContainerStyle.Attention">
+                <TextBlock Wrap="true">Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.</TextBlock>
+            </TableCell>
+        </TableRow>
+    </Table>
+</Card>

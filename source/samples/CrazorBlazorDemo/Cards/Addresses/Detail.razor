@@ -1,0 +1,64 @@
+﻿@using CrazorBlazorDemo.Cards.Addresses
+@inherits CardView<AddressesApp,Address>
+@* This card supports a deep link route *@
+@attribute [CardRoute("{Model.Id}")]
+@code {
+    public void OnLoadRoute()
+    {
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == Model.Id)!;
+    }
+}
+
+<Card Version="1.5" Title="Address">
+    <TextBlock >Address</TextBlock>
+
+    @if (this.Model == null)
+    {
+        <TextBlock>This address does not exist anymore.</TextBlock>
+        <ActionExecute Verb="@nameof(OnAll)" Title="Show Addresses" />
+    }
+    else
+    {
+        <FactSet>
+            <Fact Title="Street" Value="@(Model.Street)" />
+            <Fact Title="City" Value="@(Model.City)" />
+            <Fact Title="State" Value="@(Model.State.ToString())" />
+            <Fact Title="PostalCode" Value="@(Model.PostalCode)" />
+            <Fact Title="Country" Value="@(Model.Country.ToString())" />
+        </FactSet>
+
+        <ActionExecute Title="Delete" Verb="@nameof(OnDelete)" />
+        <ActionExecute Title="Edit" Verb="@nameof(OnEdit)" />
+        <ActionExecute Title="All Addresses" Verb="@nameof(OnAll)" />
+    }
+</Card>
+
+@code {
+    public void OnEdit()
+    {
+        ShowView($"{Model.Id}/Edit", Model);
+    }
+
+    public void OnAll()
+    {
+        CloseView();
+    }
+
+    public void OnDelete()
+    {
+        if (Model.Id != null)
+        {
+            App.DeleteAddress(Model.Id);
+            CloseView();
+        }
+    }
+
+    public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+    {
+        await Task.CompletedTask;
+        if (cardResult.Success && cardResult.Result != null)
+        {
+            this.Model = cardResult.AsResult<Address>()!;
+        }
+    }
+}

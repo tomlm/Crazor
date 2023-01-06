@@ -1,0 +1,11 @@
+﻿@*@page "/Cards/{*route}"
+@using Crazor.Blazor.Components
+
+<CardViewer Route="@($"/Cards/{Route}")"/>
+
+@code {
+    [Parameter]
+    public string? Route { get; set; }
+}
+
+*@

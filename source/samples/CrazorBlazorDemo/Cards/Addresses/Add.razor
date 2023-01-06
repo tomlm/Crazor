@@ -1,0 +1,42 @@
+﻿@using CrazorBlazorDemo.Cards.Addresses
+@inherits CardView<AddressesApp,Address>
+
+<Card Version="1.5" Title="Add Address">
+    <TextBlock>Add Address</TextBlock>
+
+    <InputText Binding="Model.Street" />
+    <InputText Binding="Model.City" />
+    <InputChoiceSet Binding="Model.State" />
+    <InputText Binding="Model.PostalCode" Regex="" />
+    <InputChoiceSet Binding="Model.Country" />
+
+    <ActionCancel />
+    <ActionOK />
+</Card>
+
+@code {
+
+    public void OnOK()
+    {
+        if (IsModelValid)
+        {
+            App.AddAddress(Model);
+            ReplaceView($"{Model.Id}", Model);
+
+            if (IsTaskModule)
+            {
+                CloseTaskModule(TaskModuleAction.Auto);
+            }
+            else
+            {
+                AddBannerMessage("Address added", AdaptiveContainerStyle.Good);
+            }
+        }
+    }
+
+    public void OnCancel()
+    {
+        CloseTaskModule(TaskModuleAction.None);
+        CancelView();
+    }
+}

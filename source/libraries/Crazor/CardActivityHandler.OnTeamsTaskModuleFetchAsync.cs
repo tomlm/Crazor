@@ -6,7 +6,6 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor
@@ -34,9 +33,9 @@ namespace Crazor
             cardApp.IsTaskModule = true;
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
-                        
+
             await cardApp.OnActionExecuteAsync(cancellationToken);
-            
+
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:

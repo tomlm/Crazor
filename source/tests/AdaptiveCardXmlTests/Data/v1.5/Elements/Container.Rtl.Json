@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.5">
-  <Container Rtl="true">
-    <TextBlock Wrap="true">يتم عرض هذه الحاوية من اليمين إلى اليسار</TextBlock>
-  </Container>
-</Card>

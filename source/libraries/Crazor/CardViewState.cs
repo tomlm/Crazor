@@ -1,28 +1,42 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Diagnostics;
 
 namespace Crazor
 {
-    [DebuggerDisplay("{Name}")]
-    public class CardViewState  
+    /// <summary>
+    /// CardViewState
+    /// </summary>
+    /// <remarks>
+    /// CardViewState contains the persisted state for a route which is pushed onto the callstack.
+    /// The Route is run throuh RouteResolver to instantiate the appropriate CardView 
+    /// </remarks>
+    [DebuggerDisplay("{Route}")]
+    public class CardViewState
     {
-        public CardViewState(string view, object? model=null)
+        public CardViewState() { }
+
+        public CardViewState(string route, object? model = null)
         {
-            Name = view;
+            Route = CardRoute.Parse(route).Route;
             if (model is CardApp)
             {
                 throw new ArgumentException("CardApp can't be the model");
             }
-            else
-            {
-                Model = model;
-            }
+            Model = model;
         }
 
-        // name of the card view
-        public string Name { get; set; } = String.Empty;
+        public CardViewState(CardRoute route, object? model = null)
+            : this(route.Route, model)
+        {
+        }
+
+        /// <summary>
+        /// Route this state represents
+        /// </summary>
+        public string Route { get; set; } = String.Empty;
 
         public bool Initialized { get; set; }
 

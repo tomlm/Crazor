@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2" MinHeight="100px">
+<Card Version="1.2" MinHeight="100px" xmlns="application/vnd.microsoft.card.adaptive">
   <TextBlock Wrap="true">This card has a minHeight of 100px</TextBlock>
 </Card>

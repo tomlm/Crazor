@@ -5,7 +5,6 @@ using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -29,7 +28,7 @@ namespace Crazor
             var cardRoute = CardRoute.Parse(parts[0]);
             cardRoute.SessionId = await Context.EncryptionProvider.DecryptAsync(parts[1], cancellationToken);
             searchInvoke.Dataset = parts[2];
-            
+
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);

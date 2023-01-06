@@ -1,0 +1,47 @@
+﻿@page "/Cards/{app}/{viewName?}/{*path}"
+
+@using System.Net
+@using System.Web
+@using Newtonsoft.Json
+@model Crazor.Mvc.Pages.Cards.CardHostModel
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>@Model.CardApp.Name</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
+    <script src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/hostconfig.js"></script>
+    <script type="text/javascript" src="~/js/crazor.js"></script>
+    <style>
+        .cardDiv {
+            width: 640px;
+            padding: 10px;
+            width: 600px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
+</head>
+
+<body class="container">
+    <br />
+    <br />
+    <div id='@Model.CardId' class="cardDiv">
+    </div>
+    <script type="text/javascript">
+        renderCrazorCard('@Model.CardId', '@Model.ChannelId', '@Model.BotUri', '@Model.RouteUrl', @Html.Raw(JsonConvert.SerializeObject(Model.AdaptiveCard, Formatting.Indented)));
+    </script>
+    <br />
+    <br />
+
+</body>
+
+</html>
