@@ -31,7 +31,7 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_ARTIFACTS_PAT }} 
 
-      # Run dotnet build and package
+        # Run dotnet build and package
       # dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d%H%M') source/libraries/Crazor/Crazor.csproj
       - name: dotnet restore
         run: dotnet restore source/Crazor.sln
@@ -46,3 +46,5 @@ jobs:
         run: |
           dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
           dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Test/bin/Debug/Crazor.Test.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
+          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Mvc/bin/Debug/Crazor.Mvc.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
+          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Blazor/bin/Debug/Crazor.Blazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
