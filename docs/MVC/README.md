@@ -21,24 +21,24 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 
 * **AdaptiveCard Tag Helpers** - for intellisense and auto completion.
 
-[Installing Crazor.MVC](docs/MVC/Install.md) - Installing Crazor into your project
+[Installing Crazor.MVC](Install.md) - Installing Crazor into your project
 
-* [Settings](docs/Settings.md) - Settings for Crazor
+* [Settings](../Settings.md) - Settings for Crazor
 
 # Walkthroughs
 
-* [HelloWorld](docs/HelloWorldWalkthrough.md) - Walkthrough creating your first card application.
-* [Counters](docs/CountersWalkthrough.md) - Walkthrough showing creating a card with data binding and action handlers.
+* [HelloWorld](HelloWorldWalkthrough.md) - Walkthrough creating your first card application.
+* [Counters](CountersWalkthrough.md) - Walkthrough showing creating a card with data binding and action handlers.
 
 # Documentation
 
-* [Card Views](docs/CardView.md) - How to define views with **CardView** and **Razor templates**
+* [Card Views](CardView.md) - How to define views with **CardView** and **Razor templates**
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
   * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
 
-* [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
-* [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
-* [TagHelpers (Advanced)](docs/TagHelpers.md) - How to define reusuable components via custom TagHelpers
+* [Card Routing](RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Writing Unit tests](UnitTests.md) - Writing unit tests for your cards.
+* [TagHelpers (Advanced)](TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
 # Sample Card Apps
 | | |Description|

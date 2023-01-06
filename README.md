@@ -33,8 +33,10 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 There are currently 2 Crazor templating implementations
 
-* [Crazor.MVC](docs/MVC) - Implements templating using **.cshtml** files using **MVC** semantics.
-* [Crazor.Blazor](docs/Blazor) - Implements templating using **.razor** files using **Blazor** semantics.
+* [Crazor.MVC](docs/MVC/README.md) - Implements templating using **.cshtml** files using **MVC** semantics.
+* [Crazor.Blazor](docs/Blazor/README.md) - Implements templating using **.razor** files using **Blazor** semantics.
+
+[Read more about MVC vs Blazor](docs/MVCVsBlazor.md) 
 
 # Documentation
 
