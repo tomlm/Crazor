@@ -2,18 +2,6 @@
 
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
-# Conceptual Model
-
-The web services hosts multiple **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
-
-## Card Applications
-
-Your service can host 1:N **Card Applications**.  A card application is a mini application which is based on AdaptiveCards, using Razor as the templating engine. 
-
-## Card Views
-
-Each card application is made up of 1:N **Card Views**. A card view is a razor template, binding the data and logic to create a "screen" in the application. 
-
 # The Blazor CardView Class
 
 The **Blazor CardView** defines a view for the **CardApp** application as a razor template **.razor** file.
