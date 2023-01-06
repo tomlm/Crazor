@@ -1,0 +1,25 @@
+@using AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ElementComponent<AdaptiveFactSet>
+
+<ac:FactSet @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:FactSet>
+
+@code
+{
+
+    [Parameter]
+    public BoolProperty? IsVisible { get; set; }
+
+    [Parameter]
+    public BoolProperty? Separator { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveSpacing), "Default")]
+    public AdaptiveSpacing Spacing { get; set; }
+
+    [Parameter]
+    public String? Height { get; set; }
+}

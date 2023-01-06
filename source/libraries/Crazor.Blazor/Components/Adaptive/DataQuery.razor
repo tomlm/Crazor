@@ -1,0 +1,33 @@
+@using AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveDataQuery>
+
+<ac:Data.Query @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Data.Query>
+
+
+@code
+{
+    [Parameter]
+    public Int32? Count { get; set; }
+
+    [Parameter]
+    public String? Dataset { get; set; }
+
+    [Parameter]
+    public Int32? Skip { get; set; }
+
+    [Parameter]
+    public String? Value { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (ParentItem is AdaptiveChoiceSetInput choiceSet)
+        {
+            choiceSet.DataQuery = Item;
+        }
+    }
+}

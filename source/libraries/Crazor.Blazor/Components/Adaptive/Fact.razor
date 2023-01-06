@@ -1,0 +1,26 @@
+@using AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@inherits ItemComponent<AdaptiveFact>
+
+<ac:Fact @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Fact>
+
+@code
+{
+    [Parameter]
+    public String? Title { get; set; }
+
+    [Parameter]
+    public String? Value { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.ParentItem is AdaptiveFactSet factSet)
+        {
+            factSet.Facts.Add(Item);
+        }
+    }
+}

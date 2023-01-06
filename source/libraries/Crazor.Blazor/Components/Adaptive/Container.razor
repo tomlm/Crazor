@@ -1,0 +1,47 @@
+@using AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ElementComponent<AdaptiveContainer>
+
+<ac:Container @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Container>
+
+
+@code
+{
+
+    [Parameter]
+    public BoolProperty? Bleed { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get; set; }
+
+    [Parameter]
+    public BoolProperty? IsVisible { get; set; }
+
+    [Parameter]
+    public String? MinHeight { get; set; }
+
+    [Parameter]
+    public BoolProperty? Rtl { get; set; }
+
+    [Parameter]
+    public BoolProperty? Separator { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveSpacing), "Default")]
+    public AdaptiveSpacing Spacing { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
+    public AdaptiveContainerStyle Style { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
+    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get; set; }
+
+    [Parameter]
+    public String? Height { get; set; }
+}

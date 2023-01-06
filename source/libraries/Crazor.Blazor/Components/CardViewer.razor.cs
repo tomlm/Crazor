@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
-using Crazor.Blazor.Components.AdaptiveCards;
+using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;

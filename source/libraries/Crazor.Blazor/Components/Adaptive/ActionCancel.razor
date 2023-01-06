@@ -1,0 +1,47 @@
+@using AdaptiveCards
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@inherits ActionComponent<AdaptiveExecuteAction>
+
+<ac:Action.Execute @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.Execute>
+
+@code
+{
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveAssociatedInputs), "Auto")]
+    public AdaptiveAssociatedInputs AssociatedInputs { get; set; } = AdaptiveAssociatedInputs.None;
+
+    [Parameter]
+    public String? IconUrl { get; set; }
+
+    [Parameter]
+    public BoolProperty? IsEnabled { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
+    public AdaptiveActionMode Mode { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
+    public AdaptiveActionStyle Style { get; set; }
+
+    [Parameter]
+    public String? Title { get; set; }
+
+    [Parameter]
+    public String? Tooltip { get; set; }
+
+    [Parameter]
+    public String? Verb { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        this.Title = "Cancel";
+        this.Verb = Constants.CANCEL_VERB;
+        this.AssociatedInputs = AdaptiveAssociatedInputs.None;
+
+        base.OnParametersSet();
+    }
+}

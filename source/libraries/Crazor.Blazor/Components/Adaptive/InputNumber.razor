@@ -1,0 +1,67 @@
+@using AdaptiveCards
+@using Crazor.Attributes;
+@using Microsoft.AspNetCore.Components;
+@using System.ComponentModel;
+@using System.ComponentModel.DataAnnotations;
+@using System.Reflection;
+@inherits Input<AdaptiveNumberInput>
+
+<ac:Input.Number @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Input.Number>
+@if (ShowErrors == null || ShowErrors == true)
+{
+    <ValidationErrors Id="@(Binding ?? Id)" />
+}
+
+@code
+{
+
+    [Parameter]
+    public BoolProperty? IsVisible { get; set; }
+
+    [Parameter]
+    public Double? Max { get; set; }
+
+    [Parameter]
+    public Double? Min { get; set; }
+
+    [Parameter]
+    public String? Placeholder { get; set; }
+
+    [Parameter]
+    public BoolProperty? Separator { get; set; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveSpacing), "Default")]
+    public AdaptiveSpacing Spacing { get; set; }
+
+    [Parameter]
+    [Binding(BindingType.Value)]
+    public Double? Value { get; set; }
+
+    [Parameter]
+    public String? Height { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+        if (this.Min == null && rangeAttribute?.Minimum != null)
+        {
+            this.Min = Convert.ToDouble(rangeAttribute.Minimum);
+        }
+
+        if (this.Max == null && rangeAttribute?.Maximum != null)
+        {
+            this.Max = Convert.ToDouble(rangeAttribute.Maximum);
+        }
+
+        if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+        {
+            this.ErrorMessage = rangeAttribute?.ErrorMessage;
+        }
+    }
+
+}
