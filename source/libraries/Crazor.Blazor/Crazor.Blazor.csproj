@@ -35,9 +35,9 @@
 	<ItemGroup>
 		<EmbeddedResource Include="wwwroot/**/**" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
-		<None Include="icon.png" />
+		<None Include="icon.png" Pack="True" PackagePath="\" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
