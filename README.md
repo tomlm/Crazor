@@ -20,7 +20,7 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 * **Razor based card templates** - Define your Adaptive Card views using Razor templating markup with logic, leveraging all of the years of tooling built into Visual Studio to make it super productive to author your experience:
   * **Strong-Typing** - you can refactor and get build errors when working with your models
-  * **Intellisense** - Visual studio shows errors and auto-completion f
+  * **Intellisense** - Visual studio shows errors and auto-completion
   * **Debugger** - Visual studio debugging allows you to set breakpoints in your templates, etc.
 * **No need to understand bots** - Crazor comes with the all of the bot protocol implemented, you just write cards.
 * **Automatic state management** - no need to worry about the complexity of coming up with a persistence model
@@ -31,22 +31,22 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 # Installation
 
-[Installing Crazor](docs/Install.md) - Installing Crazor into your porject
+[Installing Crazor](docs/Install.md) - Installing Crazor into your project
 
-* [Settings](docs/Settings.md) - settings for crazor
+* [Settings](docs/Settings.md) - Settings for Crazor
 
 # Walkthroughs
 
-* [HelloWorld](docs/HelloWorldWalkthrough.md) - walkthrough creating your first card application.
-* [Counters](docs/CountersWalkthrough.md) - walkthrough showing creating a card with data binding and action handlers.
+* [HelloWorld](docs/HelloWorldWalkthrough.md) - Walkthrough creating your first card application.
+* [Counters](docs/CountersWalkthrough.md) - Walkthrough showing creating a card with data binding and action handlers.
 
 # Documentation
 
 * [Card Views](docs/CardView.md) - How to define views with **CardView** and **Razor templates**
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-  * [Card App Memory](docs/Memory.md) - information on persistence and memory model
+  * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
 
-* [Card Routing](docs/RoutingCards.md) - information on customizing urls to support deep linking into cards
+* [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
 * [TagHelpers (Advanced)](docs/TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
