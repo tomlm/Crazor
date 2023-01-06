@@ -4,7 +4,7 @@
 
 # Crazor Settings
 
-
+Settings of course are in any asp.net settings provider, typically they are in appsettings.json.
 
 ## Core Service Settings
 
