@@ -140,4 +140,4 @@ Insert into the content of your **Index.html**
 
 This will give you an easy way to interacting with your cards:
 
-![image-20221104003206930](assets/image-20221104003206930.png)
+![image-20221104003206930](../assets/image-20221104003206930.png)
