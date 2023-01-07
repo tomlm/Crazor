@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AnalysisLevel>6.0-minimum</AnalysisLevel>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<PropertyGroup>
