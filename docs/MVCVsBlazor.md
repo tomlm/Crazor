@@ -6,22 +6,22 @@ MVC
 
 There are 2 crazor packages
 
-* **Crazor.MVC** - implements ICardView using .cshtml files and ASP.NET MVC semantics (TagHelpers, etc.)
-* **Crazor.Blazor** - implements ICardView using .razor files and Blazor semantics (Components, etc.)
+* **Crazor.MVC** - implements ICardView using .cshtml files and ASP.NET MVC semantics (TagHelpers)
+* **Crazor.Blazor** - implements ICardView using .razor files and Blazor semantics (Blazor Components)
 
 ## Differences
 
 The 2 templating systems work almost the same, but there are some sublte differences between them.  
 
-| Feature                 | MVC                                         | Blazor                                      | Comments                                                     |
-| ----------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------ |
-| Routing                 | [CardRoute(...)]                            | [CardRoute(...)]                            | *identical*                                                  |
-| code beind              | @functions { ... }                          | @code { ... }                               | MVC only supports @functions, Blazor supports both @code and @functions |
-| Data-Binding attributes | [BindProperty]                              | [Parameter]                                 |                                                              |
-| Action handlers         | Verb="OnFoo"                                | Verb = "OnFoo"                              | *identical*                                                  |
-| Route binding           | [CardRoute("/{xxx}")]<br />[FromRoute]      | [CardRoute("/{xxx}")]<br />[FromRoute]      | *identical*                                                  |
-| Query Binding           | [FromQuery]<br />[SupplyParameterFromQuery] | [FromQuery]<br />[SupplyParameterFromQuery] | *identical*                                                  |
-| Validation Attributes   | [Required]                                  | [Required]                                  | *identical*                                                  |
+| Feature                 | MVC                | Blazor           | Comments                                                     |
+| ----------------------- | ------------------ | ---------------- | ------------------------------------------------------------ |
+| Routing                 | [CardRoute(...)]   | [CardRoute(...)] | *identical*                                                  |
+| code behind             | @functions { ... } | @code { ... }    | MVC only supports @**functions**, Blazor supports both @**code** and @**functions** |
+| Data-Binding attributes | [BindProperty]     | [Parameter]      |                                                              |
+| Action handlers         | Verb="OnFoo"       | Verb = "OnFoo"   | *identical*                                                  |
+| Route binding           | [FromCardRoute]    | [FromCardRoute]  | *identical*                                                  |
+| Query Binding           | [FromCardQuery]    | [FromCardQuery]  | *identical*                                                  |
+| Validation Attributes   | [Required]         | [Required]       | *identical*                                                  |
 
 ## Why use one over the other?
 
