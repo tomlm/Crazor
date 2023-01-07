@@ -60,6 +60,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
 	</ItemGroup>
 

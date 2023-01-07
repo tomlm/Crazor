@@ -15,6 +15,7 @@ namespace Crazor.Tests
             InitCardServices((services) =>
             {
                 services.AddCrazor();
+                services.AddCrazorMvc();
                 services.AddMvc()
                     // .AddRazorOptions((options) => { var x = options; })
                     // .AddRazorPagesOptions((options) => { var y = options; })

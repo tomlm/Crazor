@@ -26,7 +26,7 @@ namespace CrazorBlazorDemo.Cards.Wordle
         /// <summary>
         /// the game ID is 
         /// </summary>
-        [FromRoute]
+        [FromCardRoute]
         public string GameId => $"{DateTime.Now.ToString("yyyyMMdd")}-{Game.Player}";
 
         public Dictionary<char, string> Glyphs = new Dictionary<char, string>()

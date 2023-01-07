@@ -7,7 +7,6 @@ using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -283,9 +282,6 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<TempMemoryAttribute>() != null)
                     return false;
 
-                if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
-                    return false;
-
                 if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
                     return false;
 
@@ -310,7 +306,7 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<SessionMemoryAttribute>() != null)
                     return true;
 
-                if (propertyInfo.GetCustomAttribute<RazorInjectAttribute>() != null)
+                if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
                     return false;
 
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))

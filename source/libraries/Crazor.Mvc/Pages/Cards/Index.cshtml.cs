@@ -2,7 +2,7 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Crazor.Controllers;
+using Crazor.Server.Controllers;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

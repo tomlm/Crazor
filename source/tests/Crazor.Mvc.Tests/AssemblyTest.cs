@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor.Server;
 using Crazor.Test;
 
 namespace Crazor.Mvc.Tests
@@ -14,6 +15,8 @@ namespace Crazor.Mvc.Tests
             InitCardServices((services) =>
             {
                 services.AddCrazor();
+                services.AddCrazorServer();
+                services.AddCrazorMvc();
                 services.AddMvc()
                     // .AddRazorOptions((options) => { var x = options; })
                     // .AddRazorPagesOptions((options) => { var y = options; })

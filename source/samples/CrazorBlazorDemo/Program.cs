@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor;
 using Crazor.Blazor;
+using Crazor.Server;
 using CrazorBlazorDemo.Data;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
@@ -29,6 +31,8 @@ namespace CrazorBlazorDemo
                 builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorDemo).ToLower()));
             }
             builder.Services.AddCrazor();
+            builder.Services.AddCrazorServer();
+            builder.Services.AddCrazorBlazor();
             // ---- </CRAZOR>
 
             var app = builder.Build();
@@ -48,6 +52,9 @@ namespace CrazorBlazorDemo
 
             // ---- <CRAZOR>
             app.UseCrazor();
+            app.UseCrazorBlazor();
+            app.UseCrazorServer<CardView>();
+
             app.UseRouting();
             app.MapControllers();
             // </CRAZOR>

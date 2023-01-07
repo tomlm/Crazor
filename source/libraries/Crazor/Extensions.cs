@@ -5,10 +5,8 @@ using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -21,10 +19,17 @@ namespace Crazor
 {
     public static class Extensions
     {
-        public static IServiceCollection AddCrazorCore(this IServiceCollection services)
+        public static IServiceCollection AddCrazor(this IServiceCollection services, params string[] sharedAssemblies)
         {
+            if (sharedAssemblies != null)
+            {
+                foreach (var assembly in sharedAssemblies)
+                {
+                    Assembly.LoadWithPartialName(assembly);
+                }
+            }
+
             services.AddHttpClient();
-            services.AddHttpContextAccessor();
             services.TryAddSingleton<IStorage>((sp) =>
             {
                 Diag.Trace.TraceWarning(@"There is no IStorage provider registered for Crazor cards to use.");
@@ -38,10 +43,6 @@ namespace Crazor
                 return new MemoryStorage();
             });
             services.TryAddSingleton<IEncryptionProvider, NoEncryptionProvider>();
-            services.TryAddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
-            services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
-            services.TryAddScoped<IBot, CardActivityHandler>();
-            services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.TryAddScoped<CardAppContext>();
             services.AddTransient<CardApp>();
             services.AddTransient<SingleCardTabModule>();
@@ -62,17 +63,12 @@ namespace Crazor
             }
 
             services.AddScoped<CardTabModuleFactory>();
-
-            // add card Razor pages support
-            var mvcBuilder = services.AddRazorPages()
-                 .AddRazorOptions(options =>
-                 {
-                     options.ViewLocationFormats.Add("/Cards/{0}.cshtml");
-                 });
-
-            HttpHelper.BotMessageSerializerSettings.Formatting = Formatting.None;
-            HttpHelper.BotMessageSerializer.Formatting = Formatting.None;
             return services;
+        }
+
+        public static IApplicationBuilder UseCrazor(this IApplicationBuilder builder)
+        {
+            return builder;
         }
 
         public static AdaptiveCard TransformActionExecuteToSubmit(this AdaptiveCard card)

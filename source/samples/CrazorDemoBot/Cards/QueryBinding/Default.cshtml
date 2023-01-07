@@ -3,7 +3,7 @@
 <Card Version="1.5" Title="Query Binding">
     <TextBlock Style="Heading">Query Binding</TextBlock>
     <TextBlock>This card shows how you can initialize parameters in your view from query parameters</TextBlock>
-    <TextBlock Wrap="true">Name and Zip have [FromQuery] attribute which allows it to be initialized from query paraemter ?name=&amp;zip=</TextBlock>
+    <TextBlock Wrap="true">Name and Zip have [FromCardQuery] attribute which allows it to be initialized from query paraemter ?name=&amp;zip=</TextBlock>
 
     <Input.Text Binding="Name" />
     <Input.Text Binding="Zip" />
@@ -14,11 +14,11 @@
 </Card>
 
 @functions {
-    [FromQuery]
+    [FromCardQuery]
     [BindProperty]
     public string Name { get; set; }
 
-    [FromQuery]
+    [FromCardQuery]
     [BindProperty]
     public string Zip { get; set; }
 

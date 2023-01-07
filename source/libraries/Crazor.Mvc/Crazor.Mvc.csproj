@@ -5,9 +5,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 	</PropertyGroup>
-	<ItemGroup>
-	  <None Remove="hostconfig.js" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -54,6 +51,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
+		<ProjectReference Include="..\Crazor.Server\Crazor.Server.csproj" />
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
 	</ItemGroup>
 

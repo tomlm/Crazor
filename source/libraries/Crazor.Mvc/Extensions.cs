@@ -10,10 +10,8 @@ namespace Crazor.Mvc
 {
     public static class Extensions
     {
-        public static IServiceCollection AddCrazor(this IServiceCollection services)
+        public static IServiceCollection AddCrazorMvc(this IServiceCollection services)
         {
-            services.AddCrazorCore();
-
             // add CardViews 
             foreach (var cardViewType in CardView.GetCardViewTypes())
             {
@@ -22,19 +20,20 @@ namespace Crazor.Mvc
 
             services.AddScoped<ICardViewFactory, CardViewFactory>();
             services.AddScoped<IRouteResolver, MvcRouteResolver>();
+
+            // add card home pages support
+            var mvcBuilder = services.AddRazorPages()
+                 .AddRazorOptions(options =>
+                 {
+                     options.ViewLocationFormats.Add("/Cards/{0}.cshtml");
+                 });
+
             return services;
         }
 
-        public static IApplicationBuilder UseCrazor(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseCrazorMvc(this IApplicationBuilder builder)
         {
-            var fileProvider = new EmbeddedFileProvider2(typeof(CardView).Assembly);
-            builder.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = fileProvider,
-                RequestPath = new PathString("")
-            });
             return builder;
         }
     }
-
 }

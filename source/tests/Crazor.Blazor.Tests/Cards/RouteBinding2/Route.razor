@@ -16,9 +16,9 @@
 
     public string ResourceId { get; set; }
 
-    [FromRoute(Name="ResourceId")]
+    [FromCardRoute(Name="ResourceId")]
     public string ResourceId2 { get; set; }
 
-    [SupplyParameterFromQueryAttribute(Name = "v")]
+    [FromCardQueryAttribute(Name = "v")]
     public string Value { get; set; }
 }

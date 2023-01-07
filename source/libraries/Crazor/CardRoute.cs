@@ -2,7 +2,6 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
@@ -76,10 +75,10 @@ namespace Crazor
             result.QueryData = new JObject();
             if (result.Query != null)
             {
-                var qp = QueryHelpers.ParseQuery(result.Query);
+                var qp = QueryString.Parse(result.Query.TrimStart('?'));
                 foreach (var kv in qp)
                 {
-                    result.QueryData[kv.Key] = kv.Value.FirstOrDefault();
+                    result.QueryData[kv.Name] = kv.Value;
                 }
             }
 

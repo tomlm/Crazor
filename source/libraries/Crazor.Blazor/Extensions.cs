@@ -15,10 +15,8 @@ namespace Crazor.Blazor
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCrazor(this IServiceCollection services)
+        public static IServiceCollection AddCrazorBlazor(this IServiceCollection services)
         {
-            services.AddCrazorCore();
-
             // add CardViews 
             foreach (var cardViewType in CardView.GetCardViewTypes())
             {
@@ -30,21 +28,9 @@ namespace Crazor.Blazor
             return services;
         }
 
-        /// <summary>
-        /// Add support for Crazor embedded content.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public static IApplicationBuilder UseCrazor(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseCrazorBlazor(this IApplicationBuilder builder)
         {
-            var fileProvider = new EmbeddedFileProvider2(typeof(CardView).Assembly);
-            builder.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = fileProvider,
-                RequestPath = new PathString("")
-            });
             return builder;
         }
-
     }
 }

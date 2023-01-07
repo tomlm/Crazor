@@ -5,8 +5,6 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -138,8 +136,16 @@ namespace Crazor
 
         public static IEnumerable<TypeInfo> GetCardAppTypes()
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
-                                                            .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false));
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (var type in assembly.DefinedTypes)
+                {
+                    if (type.IsAssignableTo(typeof(CardApp)) && type.IsAbstract == false)
+                    {
+                        yield return type;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -529,27 +535,31 @@ namespace Crazor
             this.Action = invoke.Action;
 
             // map Route attributes for app
-            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
             {
-                var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
-                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-                if (dataProperty != null)
+                var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>()?.Name ?? targetProperty.Name;
+                if (fromRouteName != null)
                 {
-                    this.SetTargetProperty(targetProperty, dataProperty.Value);
+                    var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
                 }
             }
 
             // map query parameters for app.
-            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromQueryAttribute>() != null ||
-                                                                                        prop.GetCustomAttribute<SupplyParameterFromQueryAttribute>() != null))
+            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardQueryAttribute>() != null))
             {
-                var fromRouteName = targetProperty.GetCustomAttribute<SupplyParameterFromQueryAttribute>()?.Name ??
-                    targetProperty.GetCustomAttribute<FromQueryAttribute>()?.Name ??
+                var fromQueryName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ??
                     targetProperty.Name;
-                var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-                if (dataProperty != null)
+                if (fromQueryName != null)
                 {
-                    this.SetTargetProperty(targetProperty, dataProperty.Value);
+                    var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
                 }
             }
 
@@ -688,10 +698,10 @@ namespace Crazor
                 if (this.Route.QueryData != null)
                     data.Merge(this.Route.QueryData);
 
-                // process [FromRoute] attributes. This allows [FromRoute] to be placed on a property which doesn't match the RouteData.property name
-                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromRouteAttribute>() != null))
+                // process [FromCardRoute] attributes. This allows [FromCardRoute] to be placed on a property which doesn't match the RouteData.property name
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
                 {
-                    var fromRouteName = targetProperty.GetCustomAttribute<FromRouteAttribute>().Name ?? targetProperty.Name;
+                    var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>().Name ?? targetProperty.Name;
                     var dataProperty = this.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
                     if (dataProperty != null)
                     {
@@ -706,16 +716,17 @@ namespace Crazor
                 }
 
                 // process query  attributes as setters onto current view
-                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromQueryAttribute>() != null ||
-                                                                                                     p.GetCustomAttribute<SupplyParameterFromQueryAttribute>() != null))
+                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromCardQueryAttribute>() != null))
                 {
-                    var fromQueryName = targetProperty.GetCustomAttribute<SupplyParameterFromQueryAttribute>()?.Name ??
-                        targetProperty.GetCustomAttribute<FromQueryAttribute>()?.Name ??
+                    var fromQueryName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ??
                         targetProperty.Name;
-                    var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
-                    if (dataProperty != null)
+                    if (fromQueryName != null)
                     {
-                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                        var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
+                        if (dataProperty != null)
+                        {
+                            this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                        }
                     }
                 }
 

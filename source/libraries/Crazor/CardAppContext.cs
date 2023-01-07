@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Configuration;
 
@@ -16,12 +15,10 @@ namespace Crazor
             ICardViewFactory cardViewFactory,
             IRouteResolver routeResolver,
             IConfiguration configuration,
-            IHttpContextAccessor httpContextAccessor,
             IEncryptionProvider encryptionProvider,
             IStorage storage)
         {
             Configuration = configuration;
-            HttpContextAccessor = httpContextAccessor;
             EncryptionProvider = encryptionProvider;
             Storage = storage;
             CardAppFactory = cardAppFactory;
@@ -31,8 +28,6 @@ namespace Crazor
         }
 
         public IConfiguration Configuration { get; set; }
-
-        public IHttpContextAccessor HttpContextAccessor { get; }
 
         public IEncryptionProvider EncryptionProvider { get; set; }
 
