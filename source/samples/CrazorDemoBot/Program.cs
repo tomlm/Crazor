@@ -48,12 +48,13 @@ if (!Debugger.IsAttached)
 {
     app.UseHttpsRedirection();
 }
-app.UseStaticFiles();
 app.UseCrazor();
 app.UseCrazorMvc();
 app.UseCrazorServer<CardView>();
+
 app.UseRouting();
 app.UseAuthorization();
+app.UseStaticFiles();
 app.MapRazorPages();
 app.MapControllers();
 //app.UseMvc();

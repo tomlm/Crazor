@@ -40,6 +40,7 @@ There are currently 2 Crazor templating implementations
 
 # Documentation
 
+* [Architecture](docs/Architecture.md) - Describes overall structure of a Crazor hosting environment.
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
   * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
   * [ICard View](docs/ICardView.md) - Information on **ICardView** interface

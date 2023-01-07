@@ -22,17 +22,27 @@ Adding crazor is super easy.  Take a stock Asp.Net Core MVC project and add the 
 </configuration>
 ```
 
-Then you can add the **crazor** package
+Then you can add the **crazor** packages
 
 ```shell
-nuget add package crazor
+nuget add package Crazor
+nuget add package Crazor.Mvc
+nuget add package Crazor.Server
 ```
 
 And register crazor in your **program.cs** :
 
 ```c#
 builder.Services.AddCrazor();
+builder.Services.AddCrazorMVc();
+builder.Services.AddCrazorServer();
+...
+app.UseCrazor();
+app.UseCrazorMvc();
+app.UseCrazorServer<CardView>();
 ```
+
+
 
 ## Adding IStorage provider
 
@@ -51,6 +61,25 @@ var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
 if (storageKey != null)
 	builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "mybot"));
 ```
+
+## Add Bot Controller to Server
+
+Crazor requires that a bot controller for integrating with Teams/Office, etc. To do that in a blazor project you need to add:
+
+```C#
+builder.Services.AddControllers();
+var mvcBuilder = builder.Services.AddMvc();
+if (Debugger.IsAttached)
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
+...
+app.UseStaticFiles();
+app.MapRazorPages();
+app.MapControllers();
+```
+
+# 
 
 # Modifications to your Web Project
 

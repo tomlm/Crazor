@@ -8,7 +8,7 @@ Adding **Crazor.Blazor** is super easy.  Take a stock Blazor Server project and 
 
 ![image-20230106113527616](assets/image-20230106113527616.png)
 
-## Add Crazor.Blazor package
+## Add Crazor.Blazor package to Server
 
 >  **NOTE: Currently Crazor.Blazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a nuget.config in the root of your project with the following:**
 
@@ -25,14 +25,24 @@ Adding **Crazor.Blazor** is super easy.  Take a stock Blazor Server project and 
 Then you can add the **Crazor.Blazor** package
 
 ```shell
+nuget add package Crazor
 nuget add package Crazor.Blazor
+nuget add package Crazor.Server
 ```
 
 And register crazor in your **program.cs** :
 
 ```c#
 builder.Services.AddCrazor();
+builder.Services.AddCrazorServer();
+builder.Services.AddCrazorBlazor();
+...
+app.UseCrazor();
+app.UseCrazorBlazor();
+app.UseCrazorServer<CardView>();
 ```
+
+
 
 ## Add IStorage provider
 
@@ -54,13 +64,14 @@ if (storageKey != null)
 
 
 
-## Add Bot Controller 
+## Add Bot Controller on Blazor Server
 
 Crazor requires that a bot controller for integrating with Teams/Office, etc. To do that in a blazor project you need to add:
 
 ```C#
 builder.Services.AddControllers();
 ...
+app.UseStaticFiles();
 app.UseRouting();
 app.MapControllers();
 ```
