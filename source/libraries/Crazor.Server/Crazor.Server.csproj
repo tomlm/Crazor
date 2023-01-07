@@ -22,7 +22,7 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<VersionPrefix>1.0.0</VersionPrefix>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<Description>Experimental library for hosting Crazor Adaptive Cards .</Description>
+		<Description>Experimental library for hosting Crazor Adaptive Cards on a AspNetCore server.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
