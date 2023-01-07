@@ -24,7 +24,7 @@ if (!String.IsNullOrEmpty(storageKey))
 {
     builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorClientDemo).ToLower()));
 }
-builder.Services.AddCrazor();
+builder.Services.AddCrazor("CrazorBlazorClientDemo.Shared");
 builder.Services.AddCrazorServer();
 builder.Services.AddCrazorBlazor();
 // ---- </CRAZOR>
@@ -48,8 +48,12 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
-app.UseRouting();
+// ---- <CRAZOR>
+app.UseCrazor();
+app.UseCrazorBlazor();
+// </CRAZOR>
 
+app.UseRouting();
 
 app.MapRazorPages();
 app.MapControllers();

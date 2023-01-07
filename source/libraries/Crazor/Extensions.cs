@@ -19,8 +19,16 @@ namespace Crazor
 {
     public static class Extensions
     {
-        public static IServiceCollection AddCrazor(this IServiceCollection services)
+        public static IServiceCollection AddCrazor(this IServiceCollection services, params string[] sharedAssemblies)
         {
+            if (sharedAssemblies != null)
+            {
+                foreach (var assembly in sharedAssemblies)
+                {
+                    Assembly.LoadWithPartialName(assembly);
+                }
+            }
+
             services.AddHttpClient();
             services.TryAddSingleton<IStorage>((sp) =>
             {

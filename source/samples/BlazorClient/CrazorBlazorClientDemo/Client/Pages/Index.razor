@@ -1,9 +1,16 @@
 ﻿@page "/"
+@using Crazor;
+@using Microsoft.AspNetCore.Components.Forms
 
-<PageTitle>Index</PageTitle>
+@inject CardAppFactory CardAppFactory
 
-<h1>Hello, world!</h1>
+<PageTitle>Cards</PageTitle>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h2>Cards</h2>
+<ul>
+    @foreach (var cardAppType in CardAppFactory.GetNames().OrderBy(n => n))
+    {
+        var appName = cardAppType.Replace("App", String.Empty);
+        <li><a href="/Cards/@appName">@appName Card</a></li>
+    }
+</ul>

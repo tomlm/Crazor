@@ -19,9 +19,5 @@
     <ProjectReference Include="..\Shared\CrazorBlazorClientDemo.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Cards\" />
-  </ItemGroup>
-
 
 </Project>

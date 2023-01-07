@@ -136,8 +136,16 @@ namespace Crazor
 
         public static IEnumerable<TypeInfo> GetCardAppTypes()
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
-                                                            .Where(t => t.IsAssignableTo(typeof(CardApp)) && t.IsAbstract == false));
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (var type in assembly.DefinedTypes)
+                {
+                    if (type.IsAssignableTo(typeof(CardApp)) && type.IsAbstract == false)
+                    {
+                        yield return type;
+                    }
+                }
+            }
         }
 
         /// <summary>
