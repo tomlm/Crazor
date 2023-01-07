@@ -19,7 +19,7 @@ namespace CrazorDemoBot.Cards.Dice
         /// <summary>
         /// the dice name is in the route, /cards/dice/{dicename}
         /// </summary>
-        [FromRoute]
+        [FromCardRoute]
         [Required]
         public string? DiceName { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor.Server;
 using Crazor.Test;
 
 namespace Crazor.Blazor.Tests
@@ -14,6 +15,8 @@ namespace Crazor.Blazor.Tests
             InitCardServices((services) =>
             {
                 services.AddCrazor();
+                services.AddCrazorServer();
+                services.AddCrazorBlazor();
 
                 // add your own dependencies here...
                 // services.Add<IFoo>();

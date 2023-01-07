@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor;
 using Crazor.Mvc;
+using Crazor.Server;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
 using System.Diagnostics;
@@ -16,6 +18,8 @@ if (!String.IsNullOrEmpty(storageKey))
     builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorDemoBot).ToLower()));
 }
 builder.Services.AddCrazor();
+builder.Services.AddCrazorMvc();
+builder.Services.AddCrazorServer();
 // ---- </CRAZOR>
 
 var mvcBuilder = builder.Services.AddMvc();
@@ -46,6 +50,8 @@ if (!Debugger.IsAttached)
 }
 app.UseStaticFiles();
 app.UseCrazor();
+app.UseCrazorMvc();
+app.UseCrazorServer<CardView>();
 app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
