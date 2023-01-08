@@ -3,6 +3,7 @@
 
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Streaming.Transport;
 using Microsoft.Extensions.Configuration;
 
 namespace Crazor
@@ -10,22 +11,24 @@ namespace Crazor
     public class CardAppContext
     {
         public CardAppContext(
+            IServiceProvider servicesProvider,
             CardAppFactory cardAppFactory,
             CardTabModuleFactory cardTabModuleFactory,
-            ICardViewFactory cardViewFactory,
             IRouteResolver routeResolver,
             IConfiguration configuration,
             IEncryptionProvider encryptionProvider,
             IStorage storage)
         {
+            ServiceProvider = servicesProvider;
             Configuration = configuration;
             EncryptionProvider = encryptionProvider;
             Storage = storage;
             CardAppFactory = cardAppFactory;
-            CardViewFactory = cardViewFactory;
             CardTabModuleFactory = cardTabModuleFactory;
             RouteResolver = routeResolver;
         }
+
+        public IServiceProvider ServiceProvider { get; set; }
 
         public IConfiguration Configuration { get; set; }
 
@@ -36,8 +39,6 @@ namespace Crazor
         public CardAppFactory CardAppFactory { get; }
 
         public CardTabModuleFactory CardTabModuleFactory { get; }
-
-        public ICardViewFactory CardViewFactory { get; set; }
 
         public IRouteResolver RouteResolver { get; set; }
     }

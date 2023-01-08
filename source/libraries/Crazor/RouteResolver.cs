@@ -3,6 +3,7 @@
 
 using Crazor.Attributes;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Components;
 using System.Reflection;
 
 namespace Crazor
@@ -13,6 +14,10 @@ namespace Crazor
 
         public RouteResolver()
         {
+            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes().Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)))))
+            {
+                this.AddCardViewType(cardViewType);
+            }
         }
 
         public bool IsRouteValid(CardRoute route)
@@ -54,7 +59,8 @@ namespace Crazor
 
         public void AddCardViewType(Type cardViewType)
         {
-            if (cardViewType.Name == "CardViewBase`1" ||
+            if (cardViewType.Name == "CustomCardView" ||
+                cardViewType.Name == "CardViewBase`1" ||
                 cardViewType.Name == "CardView" ||
                 cardViewType.Name == "CardView`1" ||
                 cardViewType.Name == "CardView`2")
@@ -116,7 +122,12 @@ namespace Crazor
 
             else
             {
-                string route = $"/{cardViewType.FullName.Substring(cardViewType.FullName.IndexOf("Cards")).Replace('.', '/')}";
+                string route = null;
+                var iCards = cardViewType.FullName.IndexOf("Cards");
+                if (iCards > 0)
+                {
+                    route = $"/{cardViewType.FullName.Substring(cardViewType.FullName.IndexOf("Cards")).Replace('.', '/')}";
+                }
                 var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
                 if (routeAttribute != null)
                 {
@@ -129,6 +140,10 @@ namespace Crazor
                         cardRoute = CardRoute.Parse(route);
                         route = $"/Cards/{cardRoute.App}/{routeAttribute.Template}";
                     }
+                }
+                if (route == null)
+                {
+                    return; // skip this
                 }
                 cardRoute = CardRoute.Parse(route);
                 int order = 0;

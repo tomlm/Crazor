@@ -27,21 +27,4 @@ public static class BlazorExtensions
         return
             builder => builder.AddMarkupContent(0, markup);
     }
-
-    public static void AssignInjectAttributeProperties<T>(this T value, IServiceProvider services)
-    {
-        if (value == null)
-        {
-            return;
-        }
-
-        var props = value.GetType()
-                         .GetProperties()
-                         .Where(p => p.CanWrite && Attribute.IsDefined(p, typeof(InjectAttribute)));
-
-        foreach (var prop in props)
-        {            
-            prop.SetValue(value, services.GetService(prop.PropertyType), null);
-        }
-    }
 }

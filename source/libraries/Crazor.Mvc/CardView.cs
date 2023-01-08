@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
@@ -25,14 +26,6 @@ namespace Crazor.Mvc
         where AppT : CardApp
     {
         private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "RazorPage", "RazorPageBase" };
-
-        public static IEnumerable<Type> GetCardViewTypes()
-        {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
-                asm.DefinedTypes
-                    .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
-                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
-        }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public CardViewBase()

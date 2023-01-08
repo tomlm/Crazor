@@ -651,7 +651,8 @@ namespace Crazor
             var cardRoute = CardRoute.Parse(cardViewState.Route);
             Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
 
-            this.CurrentView = Context.CardViewFactory.Create(cardViewType) ?? new EmptyCardView();
+            this.CurrentView = (ICardView)this.Context.ServiceProvider.GetService(cardViewType);
+            ArgumentNullException.ThrowIfNull(this.CurrentView, $"View {cardViewState.Route} not found");
 
             cardRoute.SessionId = this.Route.SessionId;
             this.Route = cardRoute;

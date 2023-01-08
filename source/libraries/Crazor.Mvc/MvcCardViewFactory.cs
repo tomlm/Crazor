@@ -16,14 +16,14 @@ namespace Crazor.Mvc
     /// <summary>
     /// CardViewFactory which instantiates cardviews for Mvc razor templates.
     /// </summary>
-    public class CardViewFactory : ICardViewFactory
+    public class MvcCardViewFactory
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IRazorViewEngine _razorEngine;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataProvider _tempDataProvider;
 
-        public CardViewFactory(
+        public MvcCardViewFactory(
             IServiceProvider serviceProvider,
             IRazorViewEngine engine,
             IHttpContextAccessor httpContextAccessor,
@@ -55,11 +55,6 @@ namespace Crazor.Mvc
                     cardView = (IMvcCardView)((RazorView)viewResult.View).RazorPage;
                     cardView.RazorView = viewResult.View;
                 }
-            }
-            else
-            {
-                cardView = (IMvcCardView)_serviceProvider.GetService(cardViewType);
-                view = new ViewStub();
             }
             ArgumentNullException.ThrowIfNull(cardView);
 

@@ -22,7 +22,7 @@ namespace Crazor.Interfaces
         /// <summary>
         /// Validation errors for the current view.
         /// </summary>
-        Dictionary<string, HashSet<string>> ValidationErrors { get; set; }
+        Dictionary<string, HashSet<string>> ValidationErrors { get;  }
 
         /// <summary>
         /// Is the current view valid?

@@ -43,9 +43,11 @@ namespace Crazor
                 return new MemoryStorage();
             });
             services.TryAddSingleton<IEncryptionProvider, NoEncryptionProvider>();
+            services.AddSingleton<CardViewFactory>();
             services.TryAddScoped<CardAppContext>();
             services.AddTransient<CardApp>();
             services.AddTransient<SingleCardTabModule>();
+            services.AddScoped<IRouteResolver, RouteResolver>();
 
             // add Apps
             foreach (var cardAppType in CardApp.GetCardAppTypes())
@@ -66,9 +68,29 @@ namespace Crazor
             return services;
         }
 
-        public static IApplicationBuilder UseCrazor(this IApplicationBuilder builder)
+        /// <summary>
+        /// Add a CardView
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="cardViewType"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCardView(this IServiceCollection services, Type cardViewType)
         {
-            return builder;
+            services.AddTransient(cardViewType, (sp) => sp.GetRequiredService<CardViewFactory>().Create(cardViewType));
+            return services;
+        }
+
+        /// <summary>
+        /// Add a CardView
+        /// </summary>
+        /// <typeparam name="CardViewT"></typeparam>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCardView<CardViewT>(this IServiceCollection services)
+            where CardViewT : ICardView
+        {
+            services.AddTransient(typeof(CardViewT), (sp) => sp.GetRequiredService<CardViewFactory>().Create(typeof(CardViewT)));
+            return services;
         }
 
         public static AdaptiveCard TransformActionExecuteToSubmit(this AdaptiveCard card)

@@ -2,6 +2,7 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
+using Crazor.Attributes;
 using Crazor.Interfaces;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
@@ -9,78 +10,12 @@ using System.Reflection;
 
 namespace Crazor
 {
-    public class EmptyCardView : ICardView
+    [CardRoute("/Cards/Empty")]
+    public class EmptyCardView : CustomCardView
     {
-        public string Name { get; set; }
-
-        public CardApp App { get; set; }
-
-        public AdaptiveCardInvokeAction Action { get; set; }
-
-        public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
-
-        public bool IsModelValid { get; set; }
-
-        public void BindProperties(object data)
-        {
-
-        }
-
-        public string GetRoute()
-        {
-            return "/Cards/Empty";
-        }
-
-        public void LoadState(CardViewState cardState)
-        {
-
-        }
-        public void SaveState(CardViewState cardState)
-        {
-        }
-
-        public Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task OnResumeView(CardResult screenResult, CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
-        {
-            return Task.FromResult(Array.Empty<AdaptiveChoice>());
-        }
-
-        public Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+        public override Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
             return Task.FromResult(new AdaptiveCard("1.0"))!;
         }
-
-        public IEnumerable<PropertyInfo> GetPersistentProperties()
-        {
-            return Array.Empty<PropertyInfo>();
-        }
-
-        public IEnumerable<PropertyInfo> GetBindableProperties()
-        {
-            return Array.Empty<PropertyInfo>();
-        }
-
-        public object? GetModel()
-        {
-            return null;
-        }
-
-        public void SetModel(object model)
-        {
-        }
-
-        public void OnInitialized()
-        {
-        }
-
     }
 }

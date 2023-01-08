@@ -3,6 +3,7 @@
 
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,20 +18,18 @@ namespace Crazor.Blazor
         /// <returns></returns>
         public static IServiceCollection AddCrazorBlazor(this IServiceCollection services)
         {
+            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                    .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(ComponentBase)))
+                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
+
             // add CardViews 
-            foreach (var cardViewType in CardView.GetCardViewTypes())
+            foreach (var cardViewType in cardViewTypes)
             {
-                services.AddTransient(cardViewType);
+                services.AddCardView(cardViewType);
             }
 
-            services.AddScoped<ICardViewFactory, CardViewFactory>();
-            services.AddScoped<IRouteResolver, BlazorRouteResolver>();
             return services;
         }
 
-        public static IApplicationBuilder UseCrazorBlazor(this IApplicationBuilder builder)
-        {
-            return builder;
-        }
     }
 }

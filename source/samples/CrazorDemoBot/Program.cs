@@ -4,6 +4,7 @@
 using Crazor;
 using Crazor.Mvc;
 using Crazor.Server;
+using CrazorDemoBot.Cards.CodeOnlyView;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
 using System.Diagnostics;
@@ -20,6 +21,8 @@ if (!String.IsNullOrEmpty(storageKey))
 builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
 builder.Services.AddCrazorServer();
+
+builder.Services.AddCardView<MyCodeView>();
 // ---- </CRAZOR>
 
 var mvcBuilder = builder.Services.AddMvc();
@@ -48,8 +51,6 @@ if (!Debugger.IsAttached)
 {
     app.UseHttpsRedirection();
 }
-app.UseCrazor();
-app.UseCrazorMvc();
 app.UseCrazorServer<CardView>();
 
 app.UseRouting();

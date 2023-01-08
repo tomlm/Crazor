@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor.Mvc.Tests.Cards.CodeOnlyView;
 using Crazor.Server;
 using Crazor.Test;
 
@@ -17,6 +18,7 @@ namespace Crazor.Mvc.Tests
                 services.AddCrazor();
                 services.AddCrazorServer();
                 services.AddCrazorMvc();
+                services.AddCardView<MyCodeView>();
                 services.AddMvc()
                     // .AddRazorOptions((options) => { var x = options; })
                     // .AddRazorPagesOptions((options) => { var y = options; })

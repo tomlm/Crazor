@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor.Blazor.Tests.Cards.CodeOnlyView;
 using Crazor.Server;
 using Crazor.Test;
 
@@ -17,6 +18,7 @@ namespace Crazor.Blazor.Tests
                 services.AddCrazor();
                 services.AddCrazorServer();
                 services.AddCrazorBlazor();
+                services.AddCardView<MyCodeView>();
 
                 // add your own dependencies here...
                 // services.Add<IFoo>();

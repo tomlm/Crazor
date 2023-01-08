@@ -4,6 +4,7 @@
 using Crazor;
 using Crazor.Blazor;
 using Crazor.Server;
+using CrazorBlazorDemo.Cards.CodeOnlyView;
 using CrazorBlazorDemo.Data;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
@@ -29,6 +30,8 @@ namespace CrazorBlazorDemo
             {
                 builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorDemo).ToLower()));
             }
+            builder.Services.AddCardView<MyCodeView>();
+
             builder.Services.AddCrazor();
             builder.Services.AddCrazorServer();
             builder.Services.AddCrazorBlazor();
@@ -50,8 +53,6 @@ namespace CrazorBlazorDemo
             }
 
             // ---- <CRAZOR>
-            app.UseCrazor();
-            app.UseCrazorBlazor();
             app.UseCrazorServer<CardView>();
 
             app.UseStaticFiles();

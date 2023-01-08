@@ -21,14 +21,6 @@ namespace Crazor.Blazor
     {
         private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "ComponentBase" };
 
-        public static IEnumerable<Type> GetCardViewTypes()
-        {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
-                asm.DefinedTypes
-                    .Where(t => t.IsAbstract == false && t.ImplementedInterfaces.Contains(typeof(ICardView)))
-                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
-
-        }
 
         [Inject]
         public IServiceProvider? ServiceProvider { get; set; }
