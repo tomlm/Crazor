@@ -3,9 +3,6 @@
 
 using Microsoft.Bot.Builder;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Json;
-using System.Text.Json.Nodes;
 using System.Text;
 
 namespace CrazorBlazorClientDemo.Client
@@ -35,9 +32,7 @@ namespace CrazorBlazorClientDemo.Client
 
         public async Task WriteAsync(IDictionary<string, object> changes, CancellationToken cancellationToken = default)
         {
-            var json = JsonConvert.SerializeObject(changes);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await httpClient.PostAsync($"api/state", content, cancellationToken);
+            await httpClient.PostAsync($"api/state", new StringContent(JsonConvert.SerializeObject(changes), Encoding.UTF8, "application/json"), cancellationToken);
         }
     }
 }
