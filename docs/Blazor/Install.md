@@ -37,8 +37,6 @@ builder.Services.AddCrazor();
 builder.Services.AddCrazorServer();
 builder.Services.AddCrazorBlazor();
 ...
-app.UseCrazor();
-app.UseCrazorBlazor();
 app.UseCrazorServer<CardView>();
 ```
 
