@@ -64,15 +64,16 @@ nuget add package Crazor.Blazor
    add **Cards/_Imports.razor** file containing this:
 
    ```c#
-   @using AdaptiveCards
-   @using Crazor
-   @using Crazor.Blazor
-   @using Crazor.Exceptions
-   @using Crazor.Attributes
-   @using System.Threading;
-   @using System.Threading.Tasks;
-   @using Crazor.Blazor.Components.AdaptiveCards
-   @using System.ComponentModel.DataAnnotations
+@using System.ComponentModel.DataAnnotations;
+@using AdaptiveCards
+@using Crazor
+@using Crazor.Blazor
+@using Crazor.Exceptions
+@using Crazor.Attributes
+@using System.Threading;
+@using System.Threading.Tasks;
+@using Crazor.Blazor.Components.Adaptive;
+
    ```
 
    
