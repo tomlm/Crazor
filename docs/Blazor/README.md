@@ -66,11 +66,11 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 
 # Setting up Azure
 
-[Setting up your azure web deployment](docs/Deployment.md)  
+[Setting up your azure web deployment](../Deployment.md)  
 
 # Teams
 
-[Installing your card applications into teams](docs/Teams.md) 
+[Installing your card applications into teams](../Teams.md) 
 
 # Contributing
 
