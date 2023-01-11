@@ -31,15 +31,19 @@ namespace Crazor.Server
             return services;
         }
 
-        public static IApplicationBuilder UseCrazorServer<CardViewT>(this IApplicationBuilder builder)
-            where CardViewT : ICardView
+        public static IApplicationBuilder UseCrazorServer(this IApplicationBuilder builder)
         {
-            var fileProvider = new EmbeddedFileProvider2(typeof(CardViewT).Assembly);
-            builder.UseStaticFiles(new StaticFileOptions()
+            // mount any assembly with wwwroot.
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(asm => asm.GetManifestResourceNames().Any(name => name.Split('.').Contains("wwwroot"))))
             {
-                FileProvider = fileProvider,
-                RequestPath = new PathString("")
-            });
+                var fileProvider = new EmbeddedFileProvider2(assembly);
+                builder.UseStaticFiles(new StaticFileOptions()
+                {
+                    FileProvider = fileProvider,
+                    RequestPath = new PathString("")
+                });
+            }
 
             return builder;
         }

@@ -37,7 +37,7 @@ builder.Services.AddCrazor();
 builder.Services.AddCrazorServer();
 builder.Services.AddCrazorBlazor();
 ...
-app.UseCrazorServer<CardView>();
+app.UseCrazorServer();
 ```
 
 
@@ -86,7 +86,14 @@ app.MapControllers();
 
    ```C#
    @using System.ComponentModel.DataAnnotations;
-   @using Crazor.Blazor.Components.AdaptiveCards;
+   @using AdaptiveCards
+   @using Crazor
+   @using Crazor.Blazor
+   @using Crazor.Exceptions
+   @using Crazor.Attributes
+   @using System.Threading;
+   @using System.Threading.Tasks;
+   @using Crazor.Blazor.Components.Adaptive;
    ```
 
 ## Settings

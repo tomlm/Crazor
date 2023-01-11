@@ -37,7 +37,7 @@ builder.Services.AddCrazor();
 builder.Services.AddCrazorMVc();
 builder.Services.AddCrazorServer();
 ...
-app.UseCrazorServer<CardView>();
+app.UseCrazorServer();
 ```
 
 
@@ -62,22 +62,18 @@ if (storageKey != null)
 
 ## Add Bot Controller to Server
 
-Crazor requires that a bot controller for integrating with Teams/Office, etc. To do that in a blazor project you need to add:
+Crazor requires that a bot controller for integrating with Teams/Office, etc. To do that in a blazor project you need to make sure that following is there:
 
 ```C#
 builder.Services.AddControllers();
 var mvcBuilder = builder.Services.AddMvc();
 if (Debugger.IsAttached)
-{
     mvcBuilder.AddRazorRuntimeCompilation();
-}
 ...
 app.UseStaticFiles();
 app.MapRazorPages();
 app.MapControllers();
 ```
-
-# 
 
 # Modifications to your Web Project
 
@@ -93,7 +89,7 @@ app.MapControllers();
    @using System.ComponentModel.DataAnnotations
    @removeTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
    @removeTagHelper *, Microsoft.AspNetCore.Mvc.Razor
-   @addTagHelper *, Crazor
+   @addTagHelper *, Crazor.Mvc
    @addTagHelper *, ...YOURASSEMBLYNAME...
    ```
 
