@@ -49,7 +49,7 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 // ---- <CRAZOR>
-app.UseCrazorServer<CardView>();
+app.UseCrazorServer();
 // </CRAZOR>
 
 app.UseRouting();

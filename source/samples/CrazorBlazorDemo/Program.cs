@@ -24,17 +24,17 @@ namespace CrazorBlazorDemo
             builder.Services.AddControllers();
 
             // ---- <CRAZOR>
+            builder.Services.AddCrazor();
+            builder.Services.AddCrazorServer();
+            builder.Services.AddCrazorBlazor();
+            builder.Services.AddCardView<MyCodeView>();
+
             // register blob storage for state management
             var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
             if (!String.IsNullOrEmpty(storageKey))
             {
                 builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorDemo).ToLower()));
             }
-            builder.Services.AddCardView<MyCodeView>();
-
-            builder.Services.AddCrazor();
-            builder.Services.AddCrazorServer();
-            builder.Services.AddCrazorBlazor();
             // ---- </CRAZOR>
 
             var app = builder.Build();
@@ -53,7 +53,7 @@ namespace CrazorBlazorDemo
             }
 
             // ---- <CRAZOR>
-            app.UseCrazorServer<CardView>();
+            app.UseCrazorServer();
 
             app.UseStaticFiles();
             app.UseRouting();

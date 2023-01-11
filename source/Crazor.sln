@@ -45,11 +45,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.Server", "Libraries\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorClient", "BlazorClient", "{0B9D8389-6A79-4FE7-B5E7-F0CFE2F379A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorBlazorClientDemo.Server", "Samples\BlazorClient\CrazorBlazorClientDemo\Server\CrazorBlazorClientDemo.Server.csproj", "{A927CEFF-AC51-49A5-988C-34C6CEB6A4C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorBlazorClientDemo.Server", "Samples\BlazorClient\CrazorBlazorClientDemo\Server\CrazorBlazorClientDemo.Server.csproj", "{A927CEFF-AC51-49A5-988C-34C6CEB6A4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorBlazorClientDemo.Client", "Samples\BlazorClient\CrazorBlazorClientDemo\Client\CrazorBlazorClientDemo.Client.csproj", "{3BD1A2BC-3773-4936-9F17-D84B7473A14A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorBlazorClientDemo.Client", "Samples\BlazorClient\CrazorBlazorClientDemo\Client\CrazorBlazorClientDemo.Client.csproj", "{3BD1A2BC-3773-4936-9F17-D84B7473A14A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazorBlazorClientDemo.Shared", "Samples\BlazorClient\CrazorBlazorClientDemo\Shared\CrazorBlazorClientDemo.Shared.csproj", "{21F43D90-F992-4896-9AFA-F3FB0ABB4416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorBlazorClientDemo.Shared", "Samples\BlazorClient\CrazorBlazorClientDemo\Shared\CrazorBlazorClientDemo.Shared.csproj", "{21F43D90-F992-4896-9AFA-F3FB0ABB4416}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
