@@ -20,7 +20,12 @@ if (!String.IsNullOrEmpty(storageKey))
 }
 builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
-builder.Services.AddCrazorServer();
+builder.Services.AddCrazorServer((conf, man) =>
+{
+    man.Description.Short = "<TBD>";
+    man.Description.Full = "This is the long description";
+});
+
 
 builder.Services.AddCardView<MyCodeView>();
 // ---- </CRAZOR>
@@ -51,7 +56,7 @@ if (!Debugger.IsAttached)
 {
     app.UseHttpsRedirection();
 }
-app.UseCrazorServer<CardView>();
+app.UseCrazorServer();
 
 app.UseRouting();
 app.UseAuthorization();

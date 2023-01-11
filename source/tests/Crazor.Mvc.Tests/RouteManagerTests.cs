@@ -66,13 +66,6 @@ namespace Crazor.Mvc.Tests
         {
 
             RouteResolver rm = new RouteResolver();
-            rm.AddCardViewType(typeof(Cards_Route_Path1));
-            rm.AddCardViewType(typeof(Cards_Route_Path3));
-            rm.AddCardViewType(typeof(Cards_Route_Path2));
-            rm.AddCardViewType(typeof(Cards_Route_OptionalPath));
-            rm.AddCardViewType(typeof(Cards_Route_Default));
-            rm.AddCardViewType(typeof(Cards_Route_PathWithStatic));
-            rm.AddCardViewType(typeof(Cards_Route_Static));
 
             var cardRoute = CardRoute.Parse("/Cards/Route/Static");
             Assert.IsTrue(rm.ResolveRoute(cardRoute, out var type));
@@ -121,12 +114,6 @@ namespace Crazor.Mvc.Tests
         {
 
             RouteResolver rm = new RouteResolver();
-            rm.AddCardViewType(typeof(Cards_Route_Path1));
-            rm.AddCardViewType(typeof(Cards_Route_Path3));
-            rm.AddCardViewType(typeof(Cards_Route_Path2));
-            rm.AddCardViewType(typeof(Cards_Route_Default));
-            rm.AddCardViewType(typeof(Cards_Route_PathWithStatic));
-            rm.AddCardViewType(typeof(Cards_Route_Static));
 
             var cardRoute = CardRoute.Parse("/Cards/Route/Static?x=15&y=test");
             Assert.IsTrue(rm.ResolveRoute(cardRoute, out var type));

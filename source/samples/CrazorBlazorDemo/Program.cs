@@ -25,7 +25,12 @@ namespace CrazorBlazorDemo
 
             // ---- <CRAZOR>
             builder.Services.AddCrazor();
-            builder.Services.AddCrazorServer();
+            builder.Services.AddCrazorServer((configuration, manifest) =>
+            {
+                var hostUri = configuration.GetValue<Uri>("HostUri");
+                manifest.Developer.Name = "Tom Laird-McConnell";
+                manifest.Developer.PrivacyUrl = new Uri(hostUri, "/privacy").AbsoluteUri;
+            });
             builder.Services.AddCrazorBlazor();
             builder.Services.AddCardView<MyCodeView>();
 

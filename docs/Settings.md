@@ -25,10 +25,11 @@ Core service settings:
 
 There are some icons that get injected into your card, and these settings allow you to point to url to use for the icons
 
-| Name             | Required | Default Value        | Example              | Description                             |
-| ---------------- | -------- | -------------------- | -------------------- | --------------------------------------- |
-| **BotIcon**      | Yes      | /images/boticon.png  | /images/boticon.png  | image used for the bot                  |
-| **AboutIcon**    | No       | /images/about.png    | /images/about.png    | image used for about command in menu    |
-| **SettingsIcon** | No       | /images/settings.png | /images/settings.png | image used for settings command in menu |
-| **RefreshIcon**  | No       | /images/refresh.png  | /images/refresh.png  | Image used for refresh command in menu  |
-| **OpenLinkIcon** | No       | /images/OpenLink.png | /images/OpenLink.png | image used for openlink command in menu |
+| Name             | Required | Default Value        | Example              | Description                                                  |
+| ---------------- | -------- | -------------------- | -------------------- | ------------------------------------------------------------ |
+| **BotIcon**      | Yes      | /images/boticon.png  | /images/boticon.png  | full color image used for the bot 192x192                    |
+| **OutlineIcon**  | Yes      | /images/outline.png  | /images/outline.png  | transparent PNG outline icon. The border color needs to be white. Size 32x32 |
+| **AboutIcon**    | No       | /images/about.png    | /images/about.png    | image used for about command in menu                         |
+| **SettingsIcon** | No       | /images/settings.png | /images/settings.png | image used for settings command in menu                      |
+| **RefreshIcon**  | No       | /images/refresh.png  | /images/refresh.png  | Image used for refresh command in menu                       |
+| **OpenLinkIcon** | No       | /images/OpenLink.png | /images/OpenLink.png | image used for openlink command in menu                      |

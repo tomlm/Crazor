@@ -47,7 +47,7 @@ namespace Crazor
             services.TryAddScoped<CardAppContext>();
             services.AddTransient<CardApp>();
             services.AddTransient<SingleCardTabModule>();
-            services.AddScoped<IRouteResolver, RouteResolver>();
+            services.AddSingleton<IRouteResolver, RouteResolver>();
 
             // add Apps
             foreach (var cardAppType in CardApp.GetCardAppTypes())

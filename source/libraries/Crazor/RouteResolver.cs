@@ -4,6 +4,7 @@
 using Crazor.Attributes;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
+using System.IO;
 using System.Reflection;
 
 namespace Crazor
@@ -11,6 +12,7 @@ namespace Crazor
     public class RouteResolver : IRouteResolver
     {
         private Dictionary<string, List<RouteTemplate>> _routes = new Dictionary<string, List<RouteTemplate>>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<Type, string> _card2Routes = new Dictionary<Type, string>();
 
         public RouteResolver()
         {
@@ -23,6 +25,11 @@ namespace Crazor
         public bool IsRouteValid(CardRoute route)
         {
             return ResolveRoute(route, out var type);
+        }
+
+        public bool GetRouteForCardViewType(Type cardViewType, out string route)
+        {
+            return _card2Routes.TryGetValue(cardViewType, out route);
         }
 
         public bool ResolveRoute(CardRoute route, out Type? type)
@@ -57,8 +64,9 @@ namespace Crazor
             return false;
         }
 
-        public void AddCardViewType(Type cardViewType)
+        private void AddCardViewType(Type cardViewType)
         {
+            System.Diagnostics.Debug.WriteLine(cardViewType.FullName);
             if (cardViewType.Name == "CustomCardView" ||
                 cardViewType.Name == "CardViewBase`1" ||
                 cardViewType.Name == "CardView" ||
@@ -89,9 +97,12 @@ namespace Crazor
                     _routes.Add(cardRoute.App, list);
                 }
 
-                var routes = cardViewType.GetCustomAttributes<CardRouteAttribute>();
-                if (!routes.Any())
+                var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
+                if (routeAttribute != null)
                 {
+                    order = routeAttribute.Order;
+                    cardTemplate = routeAttribute.Template;
+
                     list.Add(new RouteTemplate
                     {
                         Type = cardViewType,
@@ -103,21 +114,16 @@ namespace Crazor
                 }
                 else
                 {
-                    foreach (var routeAttribute in routes)
+                    list.Add(new RouteTemplate
                     {
-                        order = routeAttribute.Order;
-                        cardTemplate = routeAttribute.Template;
-
-                        list.Add(new RouteTemplate
-                        {
-                            Type = cardViewType,
-                            App = cardRoute.App,
-                            Route = path,
-                            Template = cardTemplate,
-                            Order = order,
-                        });
-                    }
+                        Type = cardViewType,
+                        App = cardRoute.App,
+                        Route = path,
+                        Template = cardTemplate,
+                        Order = order,
+                    });
                 }
+                _card2Routes.Add(cardViewType, $"/{path.TrimStart('/')}");
             }
 
             else
@@ -158,14 +164,16 @@ namespace Crazor
                 if (cardTemplate.ToLower() == "default")
                     cardTemplate = String.Empty;
 
+                var path = String.Join('/', parts.Take(2));
                 list.Add(new RouteTemplate
                 {
                     Type = cardViewType,
                     App = cardRoute.App,
-                    Route = String.Join('/', parts.Take(2)),
+                    Route = path,
                     Template = String.Join('/', parts.Skip(2)),
                     Order = order,
                 });
+                _card2Routes.Add(cardViewType, $"/{path.TrimStart('/')}");
             }
             _routes[cardRoute.App] = list.OrderBy(o => o.Order).ThenByDescending(o => o.Template).ToList();
         }

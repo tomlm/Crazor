@@ -3,7 +3,7 @@
 
 namespace Crazor.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class TaskInfoAttribute : Attribute
     {
         public TaskInfoAttribute()
