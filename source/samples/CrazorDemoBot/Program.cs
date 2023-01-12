@@ -20,10 +20,10 @@ if (!String.IsNullOrEmpty(storageKey))
 }
 builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
-builder.Services.AddCrazorServer((conf, man) =>
+builder.Services.AddCrazorServer((conf, manifest) =>
 {
-    man.Description.Short = "<TBD>";
-    man.Description.Full = "This is the long description";
+    manifest.Description.Short = "CrazorDemoBot";
+    manifest.Description.Full = "This is a demo of using MVC templates to create a bot for crazor apps.";
 });
 
 

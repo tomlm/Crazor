@@ -123,7 +123,8 @@ namespace Crazor
                         Order = order,
                     });
                 }
-                _card2Routes.Add(cardViewType, $"/{path.TrimStart('/')}");
+                path = cardRoute.Path == "Default" ? String.Empty : cardRoute.Path;
+                _card2Routes.Add(cardViewType, $"/Cards/{cardRoute.App}/{path}".TrimEnd('/'));
             }
 
             else
@@ -173,7 +174,8 @@ namespace Crazor
                     Template = String.Join('/', parts.Skip(2)),
                     Order = order,
                 });
-                _card2Routes.Add(cardViewType, $"/{path.TrimStart('/')}");
+                path = cardRoute.Path == "Default" ? String.Empty : cardRoute.Path;
+                _card2Routes.Add(cardViewType, $"/Cards/{cardRoute.App}/{path}".TrimEnd('/'));
             }
             _routes[cardRoute.App] = list.OrderBy(o => o.Order).ThenByDescending(o => o.Template).ToList();
         }

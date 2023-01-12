@@ -1,5 +1,7 @@
 ﻿@using CrazorBlazorDemo.Cards.Addresses
 @inherits CardView<AddressesApp,Address>
+@attribute [CommandInfo("Add Address", "Add a new address")]
+@attribute [TaskInfo("Add Address", Width = "medium", Height ="medium")]
 
 <Card Version="1.5" Title="Add Address">
     <TextBlock>Add Address</TextBlock>

@@ -1,6 +1,8 @@
 ﻿@using CrazorDemoBot.Cards.NugetSearch
 @using Microsoft.Bot.Schema.Teams
 @inherits CardView<NugetApp, NugetPackage>
+@attribute [CommandInfo("Nuget", "Search for nuget packages", Type = CommandType.Query)]
+@attribute [QueryParameter("search", "Enter in package name you want", "Package")]
 
 <Card Version="1.5">
     <SearchBox Id="@nameof(Search)" Value="@Search" Title="Search" />

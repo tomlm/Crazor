@@ -1,5 +1,7 @@
 ﻿@using CrazorDemoBot.Cards.Wordle
 @inherits CardView<WordleApp>
+@attribute [CommandInfo("Play Wordle", "Play a game of wordle")]
+
 <Card Version="1.5" Title="Play wordle">
     @if (IsPreview)
     {

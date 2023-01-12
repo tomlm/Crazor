@@ -1,5 +1,6 @@
 ﻿using Crazor.Attributes;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -17,7 +18,10 @@ namespace Crazor.Server.Teams
             var hostUri = configuration.GetValue<Uri>("HostUri") ?? throw new ArgumentNullException("HostUri setting");
             var botId = configuration.GetValue<String>("MicrosoftAppId") ?? throw new ArgumentNullException("MicrosoftAppId");
             Id = botId;
-            PackageName = String.Join(".", hostUri.Host.Split('.').Reverse());
+            if (hostUri.Host != "localhost")
+                PackageName = String.Join(".", hostUri.Host.Split('.').Reverse());
+            else
+                PackageName = String.Join(".", AppDomain.CurrentDomain.FriendlyName.Split('.').Reverse());
             ValidDomains = new List<string> { hostUri.Host };
             Developer.WebsiteUrl = hostUri.AbsoluteUri;
             Developer.PrivacyUrl = new Uri(hostUri, "/Privacy").AbsoluteUri;
@@ -35,6 +39,13 @@ namespace Crazor.Server.Teams
                 Scopes = new List<BotScope>() { BotScope.Personal, BotScope.Groupchat, BotScope.Team },
 
             });
+
+            StaticTabs.Add(new StaticTab()
+            {
+                EntityId = "about",
+                Scopes = new List<StaticTabScope>() { StaticTabScope.Personal }
+            });
+
             ComposeExtensions.Add(new ComposeExtension()
             {
                 BotId = botId,
@@ -66,22 +77,45 @@ namespace Crazor.Server.Teams
                         {
                             throw new ArgumentOutOfRangeException($"You cannot define a command on a CardView with a dynamic route {entityId}.  The route must be static.");
                         }
+                        List<Parameter> parameters = null;
+
+                        if (commandInfoAttribute.Type == CommandType.Query)
+                        {
+                            var teamsParameterAttributes = cardViewType.GetCustomAttributes<QueryParameterAttribute>();
+                            if (teamsParameterAttributes != null)
+                            {
+                                parameters = new List<Parameter>();
+
+                                foreach (var attr in teamsParameterAttributes)
+                                {
+                                    parameters.Add(new Parameter()
+                                    {
+                                        Name = attr.Name,
+                                        Title = attr.Description,
+                                        Description = attr.Description,
+                                        InputType = attr.InputType,
+                                        Value = attr.Value,
+                                    });
+                                }
+                            }
+                        }
 
                         ComposeExtensions[0].Commands.Add(new Command()
                         {
                             Id = entityId,
                             Type = commandInfoAttribute.Type,
                             Title = commandInfoAttribute.Title,
-                            Context = commandInfoAttribute.Context,
+                            Context = commandInfoAttribute.Context?.Split(',').Select(t => Enum.Parse<CommandContext>(t.Trim(), ignoreCase:true)).ToList(),
                             Description = commandInfoAttribute.Description,
                             FetchTask = true,
                             InitialRun = true,
                             TaskInfo = new TaskInfo()
                             {
-                                Title = taskInfoAttribute?.Title ?? cardViewType.Name,
+                                Title = taskInfoAttribute?.Title ?? commandInfoAttribute.Title,
                                 Width = taskInfoAttribute?.Width ?? "medium",
                                 Height = taskInfoAttribute?.Height ?? "medium"
-                            }
+                            },
+                            Parameters = parameters
                         });
                     }
 
@@ -99,8 +133,8 @@ namespace Crazor.Server.Teams
                             ContentBotId = botId,
                             EntityId = entityId,
                             Name = tabInfoAttribute.Name,
-                            Scopes = tabInfoAttribute.Scopes,
-                            Context = tabInfoAttribute.Context,
+                            Scopes = tabInfoAttribute.Scopes?.Split(',').Select(t => Enum.Parse<StaticTabScope>(t.Trim(), ignoreCase: true)).ToList(),
+                            Context = tabInfoAttribute.Context?.Split(',').Where(t => !String.IsNullOrWhiteSpace(t)).Select(t => Enum.Parse<TabContext>(t.Trim(), ignoreCase: true)).ToList(),
                         });
                     }
                 }
@@ -188,8 +222,8 @@ namespace Crazor.Server.Teams
         /// <summary>
         /// The set of compose extensions for this app. Currently only one compose extension per app is supported.
         /// </summary>
-        [JsonProperty("composeExtensions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)] 
-        public List<ComposeExtension> ComposeExtensions { get; set; } = new List<ComposeExtension>(); 
+        [JsonProperty("composeExtensions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public List<ComposeExtension> ComposeExtensions { get; set; } = new List<ComposeExtension>();
 
         /// <summary>
         /// Specifies the permissions the app requests from users.
@@ -200,7 +234,7 @@ namespace Crazor.Server.Teams
         /// <summary>
         /// Specify the native features on a user's device that your app may request access to.
         /// </summary>
-        [JsonProperty("devicePermissions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)] 
+        [JsonProperty("devicePermissions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public List<DevicePermission> DevicePermissions { get; set; } = new List<DevicePermission>();
 
         /// <summary>

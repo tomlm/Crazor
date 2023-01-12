@@ -33,9 +33,13 @@ namespace Crazor.Attributes
         public CommandType Type { get; set; } = CommandType.Action;
 
         /// <summary>
-        /// Context where the command would apply
+        /// Comma delmited list of Context where the command would apply
         /// </summary>
-        public List<CommandContext> Context { get; set; } = new List<CommandContext>() { CommandContext.Message, CommandContext.Compose };
+        /// <remarks>
+        /// Comma delimited "message, compose"
+        /// Default is "message,compose"
+        /// </remarks>
+        public string Context { get; set; } = "message, compose";
 
         /// <summary>
         /// Description of the command.
