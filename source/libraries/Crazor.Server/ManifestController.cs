@@ -2,7 +2,7 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
-using Crazor.Server.Teams;
+using Crazor.Teams;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;

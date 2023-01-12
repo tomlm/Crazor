@@ -2,7 +2,7 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
-using Crazor.Server.Teams;
+using Crazor.Teams;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
