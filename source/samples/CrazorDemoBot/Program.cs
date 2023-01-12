@@ -22,8 +22,9 @@ builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
 builder.Services.AddCrazorServer((conf, manifest) =>
 {
+    manifest.Developer.Name = "Tom Laird-McConnell";
     manifest.Description.Short = "CrazorDemoBot";
-    manifest.Description.Full = "This is a demo of using MVC templates to create a bot for crazor apps.";
+    manifest.Description.Full = "This is a demo of using MVC templates for crazor apps.";
 });
 
 

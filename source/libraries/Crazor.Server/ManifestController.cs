@@ -1,17 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using AdaptiveCards;
 using Crazor.Teams;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using System.Net;
-using System.Net.Http.Headers;
+using System.IO;
+using System.IO.Compression;
 
 namespace Crazor.Server.Controllers
 {
@@ -22,17 +18,60 @@ namespace Crazor.Server.Controllers
     [ApiController]
     public class ManifestController : ControllerBase
     {
-        private string _manifest;
+        private FileContentResult _zip;
 
-        public ManifestController(Manifest manifest)
+        public ManifestController(IConfiguration configuration, IWebHostEnvironment environment, Manifest manifest)
         {
-            _manifest = JsonConvert.SerializeObject(manifest, Formatting.Indented);
+            var botIcon = configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png";
+            var botIconPath = Path.Combine(environment.WebRootPath, botIcon.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
+
+            var outline = configuration.GetValue<string>("OutlineIcon") ?? "/images/outline.png";
+            var outlinePath = Path.Combine(environment.WebRootPath, outline.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    var entry = archive.CreateEntry("manifest.json");
+                    using (var stream = entry.Open())
+                    {
+                        using (var streamWriter = new StreamWriter(stream))
+                        {
+                            streamWriter.Write(JsonConvert.SerializeObject(manifest, Formatting.Indented));
+                        }
+                    }
+                    
+
+                    entry = archive.CreateEntry(Path.GetFileName(botIconPath));
+                    using (var inputStream = System.IO.File.OpenRead(botIconPath))
+                    {
+                        using (var outputStream = entry.Open())
+                        {
+                            inputStream.CopyTo(outputStream);
+                        }
+                    }
+
+                    entry = archive.CreateEntry(Path.GetFileName(outlinePath));
+                    using (var inputStream = System.IO.File.OpenRead(outlinePath))
+                    {
+                        using (var outputStream = entry.Open())
+                        {
+                            inputStream.CopyTo(outputStream);
+                        }
+                    }
+                }
+
+
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                _zip = new FileContentResult(memoryStream.GetBuffer(), "application/zip");
+            }
         }
 
         [HttpGet]
-        public IActionResult GetAsync()
+        public FileContentResult GetAsync()
         {
-            return Content(_manifest, "application/json");
+            return _zip;
         }
     }
 }
+

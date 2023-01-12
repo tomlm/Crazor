@@ -21,16 +21,17 @@ namespace Crazor.Teams
             else
                 PackageName = String.Join(".", AppDomain.CurrentDomain.FriendlyName.Split('.').Reverse());
             ValidDomains = new List<string> { hostUri.Host };
+            Developer.Name = "TBD";
             Developer.WebsiteUrl = hostUri.AbsoluteUri;
             Developer.PrivacyUrl = new Uri(hostUri, "/Privacy").AbsoluteUri;
             Developer.TermsOfUseUrl = new Uri(hostUri, "/TermsOfUse").AbsoluteUri;
             Name.Full = AppDomain.CurrentDomain.FriendlyName;
             Name.Short = AppDomain.CurrentDomain.FriendlyName;
-            Description.Short = "tbd";
-            Description.Full = "tbd";
-            Icons.Color = new Uri(hostUri, configuration.GetValue<string>("BotIcon") ?? "/icons/boticon.png").AbsoluteUri;
-            Icons.Outline = new Uri(hostUri, configuration.GetValue<string>("OutlineIcon") ?? "/icons/outline.png").AbsoluteUri;
-            AccentColor = "#FFFFF";
+            Description.Short = "TBD";
+            Description.Full = "TBD";
+            Icons.Color = Path.GetFileName(configuration.GetValue<string>("BotIcon") ?? "BotIcon.png");
+            Icons.Outline = Path.GetFileName(configuration.GetValue<string>("OutlineIcon") ?? "Outline.png");
+            AccentColor = "#FFFFFFF";
             Bots.Add(new Bot()
             {
                 BotId = botId,
