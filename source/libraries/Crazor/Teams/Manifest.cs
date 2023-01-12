@@ -29,8 +29,8 @@ namespace Crazor.Teams
             Name.Short = AppDomain.CurrentDomain.FriendlyName;
             Description.Short = "TBD";
             Description.Full = "TBD";
-            Icons.Color = Path.GetFileName(configuration.GetValue<string>("BotIcon") ?? "BotIcon.png");
-            Icons.Outline = Path.GetFileName(configuration.GetValue<string>("OutlineIcon") ?? "Outline.png");
+            Icons.Color = Path.GetFileName(configuration.GetValue<string>("BotIcon")?.ToLower() ?? "boticon.png");
+            Icons.Outline = Path.GetFileName(configuration.GetValue<string>("OutlineIcon")?.ToLower() ?? "outline.png");
             AccentColor = "#FFFFFF";
             Bots.Add(new Bot()
             {

@@ -42,7 +42,7 @@ namespace Crazor.Server.Controllers
                     }
                     
 
-                    entry = archive.CreateEntry(Path.GetFileName(botIconPath));
+                    entry = archive.CreateEntry(Path.GetFileName(botIconPath).ToLower());
                     using (var inputStream = System.IO.File.OpenRead(botIconPath))
                     {
                         using (var outputStream = entry.Open())
@@ -51,7 +51,7 @@ namespace Crazor.Server.Controllers
                         }
                     }
 
-                    entry = archive.CreateEntry(Path.GetFileName(outlinePath));
+                    entry = archive.CreateEntry(Path.GetFileName(outlinePath).ToLower());
                     using (var inputStream = System.IO.File.OpenRead(outlinePath))
                     {
                         using (var outputStream = entry.Open())
