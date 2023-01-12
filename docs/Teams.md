@@ -21,6 +21,12 @@ builder.Services.AddCrazorServer((configuration, manifest) =>
     manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
 });
 ```
+## Icons
+There are 2 required icons for a manifest. By default the auto generated manifest will use settings/conventions to find the icon
+| Setting | Default               |
+| ------------- | --------------------- |
+| **"BotIcon"**       | "/images/boticon.png" | 
+| **"OutlineIcon"** |   "/images/outline.png" |
 
 
 
@@ -118,7 +124,6 @@ To pin a card to as a static Tab you add the **TabInfo** attribute to your Card 
 | Property  | Description      | Default      | Example     |
 | --------- | ---------------- | ------------ | ----------- |
 | **Title** | The title of tab | Name of card | "Addresses" |
-
 
 
 # Side-loading your teams manifest
