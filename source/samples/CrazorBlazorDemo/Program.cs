@@ -27,6 +27,9 @@ namespace CrazorBlazorDemo
             builder.Services.AddCrazor();
             builder.Services.AddCrazorServer((configuration, manifest) =>
             {
+                manifest.Version = "1.0";
+                manifest.Name.Short = "CrazorDemoBot";
+                manifest.Name.Full = "This is a demo of using Blazor templates for crazor apps.";
                 manifest.Developer.Name = "Tom Laird-McConnell";
                 manifest.Description.Short = "CrazorBlazorDemo";
                 manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";

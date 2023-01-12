@@ -2,8 +2,8 @@
 @using Microsoft.Bot.Schema.Teams
 @inherits CardView<NugetApp, NugetPackage>
 
-@attribute [CommandInfo("Nuget", "Search for nuget packages", Type = CommandType.Query)]
-@attribute [QueryParameter("search", "Enter in package name you want", "Package")]
+@attribute [CommandInfo(title: "Nuget", description: "Search for nuget packages", Type = CommandType.Query)]
+@attribute [QueryParameter(name: "search", description:  "Enter in package name you want", title: "Package")]
 
 <Card Version="1.5">
     <InputText Id="@nameof(Search)" Value="@Search" >

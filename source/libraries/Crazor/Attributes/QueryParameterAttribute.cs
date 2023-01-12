@@ -18,15 +18,18 @@ namespace Crazor.Attributes
             this.Title = title;
         }
 
+        /// <summary>
+        /// The name of the parameter (This is the name of the value that will be passed to your function for consumption)
+        /// </summary>
         public string? Name { get; set; }
 
         /// <summary>
-        /// Value is [small, medium, large] or an integer which is px
+        /// The description of the parameter
         /// </summary>
         public string Description { get; set; } = "medium";
 
         /// <summary>
-        /// Value is [small, medium, large] or an integer which is px
+        /// The title of the paramter
         /// </summary>
         public string Title { get; set; } = "medium";
 

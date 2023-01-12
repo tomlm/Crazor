@@ -2,127 +2,138 @@
 
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
-# Teams stuff
+# Teams Integration
 
-In the **Teams** folder there are 3 files
+Teams integration is accomplished through a complex manifest.json file.  With crazor, you don't have to learn a complex json format and deal with the complexities of changing it for different deployements.  With Crazor, the manifest is **auto-generated** for you using all of the information from settings, reflection and attributes to build the manifest.
 
-* **color.png** - the colorful icon that teams will display for your bot on cards
-* **outline.png** - 1 transparency that will be used to pin your icon to the side channel
-* **manifest.json** - the metadata about your bot that teams wants
+# Manifest metadata
 
-# manifest.json 
+In program.cs, when you call **AddCrazorServer()** you are given the opportunity to make modifications to the auto-generated manifest. This is the point to supply general metadata like the name of your bot, the developer and description information.
 
-The manifest describes all of the data teams needs to interact with your crazor based bot.
-
-## Edit extension metadata
-
-The extension metadata describes your bot and information about you as a developer
-
-![image-20221103082948629](assets/image-20221103082948629.png)
-
-1. **Set the $.id to your bot Id **
-2. **update name, developer info**
-
-## **Add your bot**
-
-This enables your bot to receive and response to messages. 
-
-![image-20221102145809634](assets/image-20221102145809634-1667489426324-2.png)
-
-1. update botId with your **BotId** = ***your MicrosoftAppId***
-
-## To add link unfurling for your cards
-
-![image-20221104004207183](assets/image-20221104004207183.png)This enables your bot to unfurl your web site links into cards.
-
-![image-20221102145929240](assets/image-20221102145929240.png)
-
-1. update **BotId** =  ***your MicrosoftAppId***
-2. update the **composeExtensions[].messageHandlers.domains** => domain for your web site to link unfurl
-3. add your web site domain to **validDomains**
+```c#
+builder.Services.AddCrazorServer((configuration, manifest) =>
+{
+    manifest.Version = "1.0";
+    manifest.Name.Short = "MyBot";
+    manifest.Name.Full = "MyBot is cool.";
+    manifest.Developer.Name = "Contoso";
+    manifest.Description.Short = "MyBot Cards";
+    manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
+});
+```
 
 
 
-## To add a card as a Task Module
+## To add a Teams Command
+
+To register a card as a Action Command you add a **CommandInfo** attribute to a CardView.
 
 ![image-20221104003856059](assets/image-20221104003856059.png)
 
+You add a **[CommandInfo()]** attribute into your template like this:
+
+```asp
+@attribute [CommandInfo(title: "Add Address", description: "Add a new address")]
+
+<Card Version="1.5">
+...
+</Card>
+```
+
+When the action is invoked the card will be shown in a TaskModule window like this:
+
 ![image-20221104004023935](assets/image-20221104004023935.png)
 
-To add your card as a Task Module you edit the **composeExtensions** section to add **commands**
+| Property        | Description                                                 | Default            | Example              |
+| --------------- | ----------------------------------------------------------- | ------------------ | -------------------- |
+| **Title**       | The name of the command in the menu                         |                    | *Add*                |
+| **Description** | The description of the command in the menu                  |                    | *Add a address*      |
+| **Context**     | Comma delimited list of where the command should be exposed | "message, compose" | *"message, compose"* |
+| **Type**        | The type of command ["action","query"]                      | "action"           | "action"             |
 
-![image-20221102150248160](assets/image-20221102150248160.png)
+## To Add a Teams Query command
 
-For each card you want to surface as custom command task module:
+To register a card as a Query Command you add a **CommandInfo** attribute to a CardView with **Type = CommandType.Query**. Then you add one more **[QueryParameter]** attributes to define the inputs to the query.
 
-1. Set **Id = ** ***path to your card*** (Example: "**/Cards/Addresses**")
-2. Set **context** to define where the card shows up
-   1. **compose** (for inserting card into edit box)
-   2. **commandBox** (for starting card from command box)
-   3. **message** (for starting card from context of a message)
-3. Update the title, taskinfo etc. appropriately.
+```asp
+@attribute [CommandInfo(title: "Nuget", description: "Search for nuget packages", Type = CommandType.Query)]
+@attribute [QueryParameter(name: "search", description:  "Enter in package name you want", title: "Package")]
 
-## To add a card as a Tab Module
-
-![image-20221104004105515](assets/image-20221104004105515.png)You can add your card as a tab by editing the **staticTabs** section.
-
-```json
- "staticTabs": [
-	...
-     {
-      "entityId": "/Cards/Addresses",
-      "name": "Addresses",
-      "contentBotId": "26dcf7b5-ee37-4a9f-95ad-ea80feecf39e",
-      "scopes": [ "personal" ]
-    }
-   ...
+<Card Version="1.5">
+...
+</Card>
 ```
 
-For each card you want to have be a tab add a section to **staticTabs** collection:
+And it will create UX like this:
 
-1. set **name** to the name of the tab
-2. set **entityId** => ***path to your card*** (Example: "**/Cards/Addresses**")
-3. set **contentBotId** => Your **MicrosoftAppId**
+![image-20230112135441599](assets/image-20230112135441599.png)
 
-## To Add a CardView as a messaging query extension
+The **QueryParameter** attribute has the following definition:
 
-![image-20221110091940559](assets/image-20221110091940559.png)
+| Property        | Description                                                  | Default | Example                 |
+| --------------- | ------------------------------------------------------------ | ------- | ----------------------- |
+| **Name**        | The name of the input that you will process in  your binding |         | "packageName"           |
+| **Title**       | The title of the tab                                         |         | "Nuget"                 |
+| **Description** | The description of the input field                           |         | "Enter in package name" |
+| **InputType**   | One of [Text\|TextArea\|Number\|Date\|Time\|Toggle]          | "Text"  | "Text"                  |
+| **Value**       | The default value for the command. This is what is submited as the value for Name if no input is received from the user. |         |                         |
 
-Edit team manifest to register a command **type="query"** with CommandId => route to your card.
+You can add multiple attributes to define multiple input fields. 
 
-```json
-{
-    "id": "/Cards/Nuget/Details",
-    "type": "query",
-    "description": "Search Nuget for packages",
-    "title": "Nuget",
-    "initialRun": true,
-    "parameters": [
-        {
-            "name": "search",
-            "description": "Enter in package name you want",
-            "title": "Package"
-        }
-    ]
-},
+## To control the look and feel of TaskModule window
+
+To control the look and feel of the task module window you add the **[TaskInfo]** attribute to the card view like this:
+
+```asp
+@attribute [TaskInfo(title: "Add Address", width: "medium", height: "medium")]
+
+<Card Version="1.5">
+...
+</Card>
 ```
 
-In your cardview implement **OnSearch()** method to return search results.
+![image-20230112134617380](assets/image-20230112134617380.png)
 
 
+| Property   | Description                                                  | Default      | Example       |
+| ---------- | ------------------------------------------------------------ | ------------ | ------------- |
+| **Title**  | The title of the task module dialog                          | Name of card | "Add Address" |
+| **Width**  | The desired width of the dialog either ["small" \| "medium" \| "large"] or px | "medium"     | "600px"       |
+| **Height** | The desired height of the dialog either ["small" \| "medium" \| "large"] or px | "medium"     | "600px"       |
+
+## To pin a card as a Static Tab
+
+To pin a card to as a static Tab you add the **TabInfo** attribute to your Card View template.
+
+```asp
+@attribute [TabInfo("Addresses")]
+
+<Card Version="1.5" >
+...
+</Card>
+```
+
+![image-20230112134723796](assets/image-20230112134723796.png)
+
+| Property  | Description      | Default      | Example     |
+| --------- | ---------------- | ------------ | ----------- |
+| **Title** | The title of tab | Name of card | "Addresses" |
 
 
-
-## 
 
 # Side-loading your teams manifest
 
-Zip **all 3 files** up into a .zip file and **import** into **teams** 
+When you web service is deployed the teams manifest is available from the web service itself.  The manifest will reflect all of the correct information to connect to the web service you get the manifest from.
+
+For example, if your web service is https://contoso.com, the teams manifest will  be **https://contoso.com/teams.zip** 
+
+To side load in teams
 
 1. go to **Store** in teams![image-20221103094440162](assets/image-20221103094440162.png)
 2. Click on **Manage your Apps**![image-20221102161013896](assets/image-20221102161013896.png)
-3. Click on Upload an App![image-20221102161035140](assets/image-20221102161035140.png)
-4. When it comes up, click on **ADD TO TEAMS**
+3. Click on **Upload an App**![image-20221102161035140](assets/image-20221102161035140.png)
+4. Paste in your manifest link (Ex: https://contoso.com/teams.zip)
+5. If it is correct you will see a screen like this.  Click the **ADD** button to add the integration to teams.![image-20230112140444071](assets/image-20230112140444071.png)
 
 You should now be able to do link unfurling and commands for your crazor based project.
 

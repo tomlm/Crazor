@@ -27,8 +27,8 @@ There are some icons that get injected into your card, and these settings allow 
 
 | Name             | Required | Default Value        | Example              | Description                                                  |
 | ---------------- | -------- | -------------------- | -------------------- | ------------------------------------------------------------ |
-| **BotIcon**      | Yes      | /images/boticon.png  | /images/boticon.png  | full color image used for the bot 192x192                    |
-| **OutlineIcon**  | Yes      | /images/outline.png  | /images/outline.png  | transparent PNG outline icon. The border color needs to be white. Size 32x32 |
+| **BotIcon**      | **Yes**  | /images/boticon.png  | /images/boticon.png  | full color image used for the bot 192x192                    |
+| **OutlineIcon**  | **Yes**  | /images/outline.png  | /images/outline.png  | transparent PNG outline icon. The border color needs to be white. Size 32x32 |
 | **AboutIcon**    | No       | /images/about.png    | /images/about.png    | image used for about command in menu                         |
 | **SettingsIcon** | No       | /images/settings.png | /images/settings.png | image used for settings command in menu                      |
 | **RefreshIcon**  | No       | /images/refresh.png  | /images/refresh.png  | Image used for refresh command in menu                       |
