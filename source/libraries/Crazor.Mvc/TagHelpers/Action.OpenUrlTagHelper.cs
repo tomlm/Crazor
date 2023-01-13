@@ -13,7 +13,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Action.OpenUrl
     /// </summary>
 
-    [HtmlTargetElement("Action.OpenUrl")]
+    [HtmlTargetElement("ActionOpenUrl")]
     public class ActionOpenUrlTagHelper : ReflectionTagHelper
     {
 
@@ -42,5 +42,12 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(Url))]
         public String Url { get; set; }
+        public async override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            await base.ProcessAsync(context, output);
+
+            output.TagName = "Action.OpenUrl";
+        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Input.Time
     /// </summary>
 
-    [HtmlTargetElement("Input.Time")]
+    [HtmlTargetElement("InputTime")]
     public class InputTimeTagHelper : InputTagHelper
     {
         internal const string Format = "HH:mm";
@@ -54,6 +54,8 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
+
+            output.TagName = "Input.Time";
 
             // make sure value is output in correct format 
             if (output.Attributes[nameof(Value)] != null)

@@ -13,7 +13,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Action.Execute
     /// </summary>
 
-    [HtmlTargetElement("Action.Execute")]
+    [HtmlTargetElement("ActionExecute")]
     public class ActionExecuteTagHelper : ReflectionTagHelper
     {
 
@@ -46,5 +46,13 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(Verb))]
         public String Verb { get; set; }
+
+        public async override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            await base.ProcessAsync(context, output);
+
+            output.TagName = "Action.Execute";
+        }
+
     }
 }

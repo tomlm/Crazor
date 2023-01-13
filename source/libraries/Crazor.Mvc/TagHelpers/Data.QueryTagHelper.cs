@@ -11,7 +11,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Data.Query
     /// </summary>
 
-    [HtmlTargetElement("Data.Query", ParentTag = "Input.ChoiceSet")]
+    [HtmlTargetElement("DataQuery", ParentTag = "Input.ChoiceSet")]
     public class DataQueryTagHelper : ReflectionTagHelper
     {
 
@@ -26,5 +26,11 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(Value))]
         public String Value { get; set; }
+        public async override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            await base.ProcessAsync(context, output);
+
+            output.TagName = "Data.Query";
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Input.Toggle
     /// </summary>
 
-    [HtmlTargetElement("Input.Toggle")]
+    [HtmlTargetElement("InputToggle")]
     public class InputToggleTagHelper : InputTagHelper
     {
         [HtmlAttributeName(nameof(IsVisible))]
@@ -52,6 +52,8 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
+
+            output.TagName = "Input.Toggle";
 
             if (output.Attributes.ContainsName(nameof(Label)) && !output.Attributes.ContainsName(nameof(Title)))
             {

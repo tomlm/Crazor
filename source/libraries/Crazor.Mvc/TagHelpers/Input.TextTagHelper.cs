@@ -16,7 +16,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Input.Text
     /// </summary>
 
-    [HtmlTargetElement("Input.Text")]
+    [HtmlTargetElement("InputText")]
     public class InputTextTagHelper : InputTagHelper
     {
 
@@ -60,6 +60,8 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
+
+            output.TagName = "Input.Text";
 
             // --- Client side validation....
             var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();

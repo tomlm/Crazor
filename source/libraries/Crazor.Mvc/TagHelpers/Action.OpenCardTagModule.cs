@@ -12,7 +12,7 @@ namespace Crazor.Mvc.TagHelpers
     /// <summary>
     /// TagHelper for opening a card appropriate to channel (either openUrl or Submit to show task module)
     /// </summary>
-    [HtmlTargetElement("Action.OpenCard")]
+    [HtmlTargetElement("ActionOpenCard")]
     public class ActionOpenCardTagHelper : ActionOpenUrlTagHelper
     {
         public ActionOpenCardTagHelper()

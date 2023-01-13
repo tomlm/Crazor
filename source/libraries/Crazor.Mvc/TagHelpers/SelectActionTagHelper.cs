@@ -12,7 +12,7 @@ namespace Crazor.Mvc.TagHelpers
     /// </summary>
 
     [HtmlTargetElement("SelectAction")]
-    [RestrictChildren("Action.Execute", "Action.Submit", "Action.OpenUrl", "Action.ShowCard", "Action.ToggleVisibility", "Action.Unknown")]
+    [RestrictChildren("ActionExecute", "ActionSubmit", "ActionOpenUrl", "ActionShowCard", "ActionToggleVisibility", "ActionUnknown")]
     public class SelectActionTagHelper : ReflectionTagHelper
     {
     }

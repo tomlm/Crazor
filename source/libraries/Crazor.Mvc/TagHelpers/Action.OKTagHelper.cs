@@ -11,7 +11,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Action.Execute to close current view and return the results to caller.
     /// </summary>
     /// <remarks>Default behavior is to call CloseView(GetModel()) </remarks>
-    [HtmlTargetElement("Action.OK")]
+    [HtmlTargetElement("ActionOK")]
     public class ActionOKTagHelper : ActionExecuteTagHelper
     {
         public ActionOKTagHelper()

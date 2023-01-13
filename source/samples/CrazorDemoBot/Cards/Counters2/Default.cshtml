@@ -6,14 +6,14 @@
     <TextBlock Size="Large">App Counter:@App.AppCounter</TextBlock>
 
     <ActionSet>
-        <Action.Execute Title="+ App" Verb="@nameof(OnIncrementApp)" />
-        <Action.Execute Title="- App" Verb="@nameof(OnDecrementApp)" />
+        <ActionExecute Title="+ App" Verb="@nameof(OnIncrementApp)" />
+        <ActionExecute Title="- App" Verb="@nameof(OnDecrementApp)" />
     </ActionSet>
 
     <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
     <ActionSet>
-        <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
-        <Action.Execute Title="- Session" Verb="@nameof(OnDecrement)" />
+        <ActionExecute Title="+ Session" Verb="@nameof(OnIncrement)" />
+        <ActionExecute Title="- Session" Verb="@nameof(OnDecrement)" />
     </ActionSet>
 
 </Card>

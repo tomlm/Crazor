@@ -16,7 +16,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Input.Number
     /// </summary>
 
-    [HtmlTargetElement("Input.Number")]
+    [HtmlTargetElement("InputNumber")]
     public class InputNumberTagHelper : InputTagHelper
     {
 
@@ -52,6 +52,8 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
+
+            output.TagName = "Input.Number";
 
             // if we don't have required, but binding property has [Required] then set it
             var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();

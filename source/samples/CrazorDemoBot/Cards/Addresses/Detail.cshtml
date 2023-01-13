@@ -15,7 +15,7 @@
     @if (this.Model == null)
     {
         <TextBlock>This address does not exist anymore.</TextBlock>
-        <Action.Execute Verb="@nameof(OnAll)" Title="Show Addresses" />
+        <ActionExecute Verb="@nameof(OnAll)" Title="Show Addresses" />
     }
     else
     {
@@ -27,9 +27,9 @@
             <Fact Title="Country" Value="@Model.Country" />
         </FactSet>
 
-        <Action.Execute Title="Delete" Verb="@nameof(OnDelete)" />
-        <Action.Execute Title="Edit" Verb="@nameof(OnEdit)" />
-        <Action.Execute Title="All Addresses" Verb="@nameof(OnAll)" />
+        <ActionExecute Title="Delete" Verb="@nameof(OnDelete)" />
+        <ActionExecute Title="Edit" Verb="@nameof(OnEdit)" />
+        <ActionExecute Title="All Addresses" Verb="@nameof(OnAll)" />
     }
 </Card>
 

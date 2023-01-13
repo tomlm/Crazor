@@ -47,8 +47,8 @@
     {
         if (IsTaskModule)
         {
-            <Action.Execute Title="Share" Verb="OnShare" />
-            <Action.Execute Title="Close" Verb="OnClose" />
+            <ActionExecute Title="Share" Verb="OnShare" />
+            <ActionExecute Title="Close" Verb="OnClose" />
         }
         else if (App.Activity.From.Id != App.Game.Player?.Id) 
         {

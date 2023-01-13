@@ -11,7 +11,7 @@ namespace Crazor.Mvc.TagHelpers
     /// <summary>
     /// TagHelper for showing a card in a task module
     /// </summary>
-    [HtmlTargetElement("Action.ShowTaskModule")]
+    [HtmlTargetElement("ActionShowTaskModule")]
     public class ActionShowTaskModuleTagHelper : ActionSubmitTagHelper
     {
         public ActionShowTaskModuleTagHelper()

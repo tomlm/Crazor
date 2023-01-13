@@ -10,10 +10,10 @@
     {
         <TextBlock Size="ExtraLarge">Add Catalog Item</TextBlock>
     }
-    <Input.Text Binding="Model.Item.Name"  />
-    <Input.Text Binding="Model.Item.Description" />
-    <Input.Number Binding="Model.Item.Price" />
-    <Input.Text Binding="Model.Item.PictureUri" Label="Picture Url" ErrorMessage="The Picture Url is required." />
+    <InputText Binding="Model.Item.Name"  />
+    <InputText Binding="Model.Item.Description" />
+    <InputNumber Binding="Model.Item.Price" />
+    <InputText Binding="Model.Item.PictureUri" Label="Picture Url" ErrorMessage="The Picture Url is required." />
 
     <Action.Cancel />
     <Action.OK Title="Save" />

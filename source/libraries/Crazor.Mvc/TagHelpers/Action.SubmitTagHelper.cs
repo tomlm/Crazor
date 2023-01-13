@@ -13,7 +13,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Action.Submit
     /// </summary>
 
-    [HtmlTargetElement("Action.Submit")]
+    [HtmlTargetElement("ActionSubmit")]
     public class ActionSubmitTagHelper : ReflectionTagHelper
     {
 
@@ -43,5 +43,13 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(Tooltip))]
         public String Tooltip { get; set; }
+
+        public async override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            await base.ProcessAsync(context, output);
+
+            output.TagName = "Action.Submit";
+        }
+
     }
 }

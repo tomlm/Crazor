@@ -16,7 +16,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Input.Date
     /// </summary>
 
-    [HtmlTargetElement("Input.Date")]
+    [HtmlTargetElement("InputDate")]
     public class InputDateTagHelper : InputTagHelper
     {
         internal const string Format = "yyyy-MM-dd";
@@ -53,6 +53,9 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
+            
+            output.TagName = "Input.Date";
+
 
             // make sure value is output in correct format 
             if (output.Attributes[nameof(Value)] != null)

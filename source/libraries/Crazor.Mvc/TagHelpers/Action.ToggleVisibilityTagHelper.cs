@@ -13,7 +13,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Action.ToggleVisibility
     /// </summary>
 
-    [HtmlTargetElement("Action.ToggleVisibility")]
+    [HtmlTargetElement("ActionToggleVisibility")]
     [RestrictChildren("TargetElement")]
     public class ActionToggleVisibilityTagHelper : ReflectionTagHelper
     {
@@ -40,5 +40,13 @@ namespace Crazor.Mvc.TagHelpers
 
         [HtmlAttributeName(nameof(Tooltip))]
         public String Tooltip { get; set; }
+
+        public async override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            await base.ProcessAsync(context, output);
+
+            output.TagName = "Action.ToggleVisibility";
+        }
+
     }
 }

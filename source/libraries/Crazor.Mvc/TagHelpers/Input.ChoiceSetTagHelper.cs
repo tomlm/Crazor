@@ -16,8 +16,8 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Input.ChoiceSet
     /// </summary>
 
-    [HtmlTargetElement("Input.ChoiceSet")]
-    [RestrictChildren("Choice", "Data.Query")]
+    [HtmlTargetElement("InputChoiceSet")]
+    [RestrictChildren("Choice", "DataQuery")]
     public class InputChoiceSetTagHelper : InputTagHelper
     {
 
@@ -57,6 +57,8 @@ namespace Crazor.Mvc.TagHelpers
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             await base.ProcessAsync(context, output);
+
+            output.TagName = "Input.ChoiceSet";
 
             if (BindingProperty != null)
             {

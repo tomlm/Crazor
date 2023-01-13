@@ -2,9 +2,9 @@
 @inherits CardView<TaskModuleApp>
 <Card Version="1.5" Title="Test Task Module Functionality">
     <TextBlock>Counter: @App.Counter</TextBlock>
-    <Input.ChoiceSet Binding="TaskAction" Style="Expanded" Value="Auto"/>
+    <InputChoiceSet Binding="TaskAction" Style="Expanded" Value="Auto"/>
 
-    <Action.Execute Verb="@nameof(OnIncrement)" Title="Increment" />
+    <ActionExecute Verb="@nameof(OnIncrement)" Title="Increment" />
 
     <Action.Cancel />
     <Action.OK />

@@ -11,14 +11,14 @@
         <Column Width="auto">
             @if (Packages.Any() && Skip > 0)
             {
-                <ActionSet><Action.Execute Title="<" Verb="@nameof(OnPrevious)" /></ActionSet>
+                <ActionSet><ActionExecute Title="<" Verb="@nameof(OnPrevious)" /></ActionSet>
             }
         </Column>
         <Column Width="stretch" />
         <Column Width="auto">
             @if (Packages.Any())
             {
-                <ActionSet><Action.Execute Title=">" Verb="@nameof(OnNext)" /></ActionSet>
+                <ActionSet><ActionExecute Title=">" Verb="@nameof(OnNext)" /></ActionSet>
             }
         </Column>
     </ColumnSet>
@@ -26,14 +26,14 @@
     {
         <Container Separator="true">
             <SelectAction>
-                <Action.Execute Verb="@nameof(OnSelectPackage)">{ "packageId":"@package.Id" }</Action.Execute>
+                <ActionExecute Verb="@nameof(OnSelectPackage)">{ "packageId":"@package.Id" }</ActionExecute>
             </SelectAction>
             <ThumbnailCard Title="@package.Title" Subtitle="@package.Version" ImageUrl="@GetImageUrl(package.IconUrl!)">@package.Description</ThumbnailCard>
             <ActionSet>
-                <Action.OpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@package.Id" />
+                <ActionOpenUrl Title="Nuget Package" Url="https://www.nuget.org/packages/@package.Id" />
                 @if (!String.IsNullOrEmpty(package.ProjectUrl) && Uri.IsWellFormedUriString(package.ProjectUrl, UriKind.Absolute))
                 {
-                    <Action.OpenUrl Title="Project " Url="@package.ProjectUrl" />
+                    <ActionOpenUrl Title="Project " Url="@package.ProjectUrl" />
                 }
             </ActionSet>
         </Container>

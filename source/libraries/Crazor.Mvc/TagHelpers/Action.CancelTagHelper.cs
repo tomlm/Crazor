@@ -12,7 +12,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Action.Execute with Cancel verb (associatedInputs = None and
     /// </summary>
 
-    [HtmlTargetElement("Action.Cancel")]
+    [HtmlTargetElement("ActionCancel")]
     public class ActionCancelTagHelper : ActionExecuteTagHelper
     {
         public ActionCancelTagHelper()

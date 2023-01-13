@@ -7,10 +7,10 @@
         <TextBlock Id="Preview">PREVIEW</TextBlock>
     }
     <TextBlock Id="counter">@Counter</TextBlock>
-    <Action.Execute Id="@nameof(OnSubmit)" Verb="@nameof(OnSubmit)" />
-    <Action.Execute Id="@nameof(OnSubmitAmount)" Verb="@nameof(OnSubmitAmount)">
+    <ActionExecute Id="@nameof(OnSubmit)" Verb="@nameof(OnSubmit)" />
+    <ActionExecute Id="@nameof(OnSubmitAmount)" Verb="@nameof(OnSubmitAmount)">
         { "amount": 5 }
-    </Action.Execute>
+    </ActionExecute>
 </Card>
 
 @functions {

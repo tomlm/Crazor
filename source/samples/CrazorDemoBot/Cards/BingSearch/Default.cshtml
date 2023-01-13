@@ -12,7 +12,7 @@
             @if (HasPrev())
             {
                 <ActionSet>
-                    <Action.Execute Title="<" Verb="@nameof(OnPrevious)" />
+                    <ActionExecute Title="<" Verb="@nameof(OnPrevious)" />
                 </ActionSet>
             }
         </Column>
@@ -21,7 +21,7 @@
             @if (HasNext())
             {
                 <ActionSet>
-                    <Action.Execute Title=">" Verb="@nameof(OnNext)" />
+                    <ActionExecute Title=">" Verb="@nameof(OnNext)" />
                 </ActionSet>
             }
         </Column>
