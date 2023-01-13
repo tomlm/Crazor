@@ -52,7 +52,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" />
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
 	</ItemGroup>
 </Project>

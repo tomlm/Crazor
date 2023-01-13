@@ -50,9 +50,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
-		<ProjectReference Include="..\Crazor.Server\Crazor.Server.csproj" />
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
+		<ProjectReference Include="..\Crazor.Server\Crazor.Server.csproj" />
 	</ItemGroup>
 
 </Project>

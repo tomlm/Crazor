@@ -34,6 +34,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="D:\Source\github\crazor\source\.editorconfig" />
 		<None Include="icon.png" Pack="True" PackagePath="\" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
@@ -44,18 +45,124 @@
 		<PackageReference Include="Microsoft.Bot.Builder" Version="4.18.1" />
 		<PackageReference Include="Microsoft.Bot.Schema" Version="4.18.1" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.1" />
-		<PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\AdaptiveCards\AdaptiveCards.csproj" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EditorConfigFiles Remove="D:\Source\github\crazor\source\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Adaptive\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EditorConfigFiles Remove="D:\Source\github\crazor\source\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\AdaptiveCards\ActivatorConverter.cs" Link="Adaptive\ActivatorConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveAction.cs" Link="Adaptive\AdaptiveAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveActionMode.cs" Link="Adaptive\AdaptiveActionMode.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveActionSet.cs" Link="Adaptive\AdaptiveActionSet.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveActionStyle.cs" Link="Adaptive\AdaptiveActionStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveAssociatedInputs.cs" Link="Adaptive\AdaptiveAssociatedInputs.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveAuthCardButton.cs" Link="Adaptive\AdaptiveAuthCardButton.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveAuthentication.cs" Link="Adaptive\AdaptiveAuthentication.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveBackgroundImage.cs" Link="Adaptive\AdaptiveBackgroundImage.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveBackgroundImageConverter.cs" Link="Adaptive\AdaptiveBackgroundImageConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveCaptionSource.cs" Link="Adaptive\AdaptiveCaptionSource.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveCard.cs" Link="Adaptive\AdaptiveCard.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveCardConverter.cs" Link="Adaptive\AdaptiveCardConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveCardParseResult.cs" Link="Adaptive\AdaptiveCardParseResult.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveChoice.cs" Link="Adaptive\AdaptiveChoice.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveChoiceInputStyle.cs" Link="Adaptive\AdaptiveChoiceInputStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveChoiceSetInput.cs" Link="Adaptive\AdaptiveChoiceSetInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveCollectionElement.cs" Link="Adaptive\AdaptiveCollectionElement.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveColumn.cs" Link="Adaptive\AdaptiveColumn.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveColumnSet.cs" Link="Adaptive\AdaptiveColumnSet.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveColumnSize.cs" Link="Adaptive\AdaptiveColumnSize.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveColumnWidth.cs" Link="Adaptive\AdaptiveColumnWidth.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveContainer.cs" Link="Adaptive\AdaptiveContainer.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveContainerStyle.cs" Link="Adaptive\AdaptiveContainerStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveDataQuery.cs" Link="Adaptive\AdaptiveDataQuery.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveDateInput.cs" Link="Adaptive\AdaptiveDateInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveDimension.cs" Link="Adaptive\AdaptiveDimension.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveElement.cs" Link="Adaptive\AdaptiveElement.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveException.cs" Link="Adaptive\AdaptiveException.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveExecuteAction.cs" Link="Adaptive\AdaptiveExecuteAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFact.cs" Link="Adaptive\AdaptiveFact.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFactSet.cs" Link="Adaptive\AdaptiveFactSet.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFallbackConverter.cs" Link="Adaptive\AdaptiveFallbackConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFallbackElement.cs" Link="Adaptive\AdaptiveFallbackElement.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFallbackException.cs" Link="Adaptive\AdaptiveFallbackException.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFallbackType.cs" Link="Adaptive\AdaptiveFallbackType.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFeatureRegistration.cs" Link="Adaptive\AdaptiveFeatureRegistration.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveFontStyle.cs" Link="Adaptive\AdaptiveFontStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveHorizontalAlignment.cs" Link="Adaptive\AdaptiveHorizontalAlignment.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveImage.cs" Link="Adaptive\AdaptiveImage.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveImageFillMode.cs" Link="Adaptive\AdaptiveImageFillMode.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveImageSet.cs" Link="Adaptive\AdaptiveImageSet.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveImageSize.cs" Link="Adaptive\AdaptiveImageSize.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveImageStyle.cs" Link="Adaptive\AdaptiveImageStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveInline.cs" Link="Adaptive\AdaptiveInline.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveInlinesConverter.cs" Link="Adaptive\AdaptiveInlinesConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveInput.cs" Link="Adaptive\AdaptiveInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveInternalID.cs" Link="Adaptive\AdaptiveInternalID.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveMedia.cs" Link="Adaptive\AdaptiveMedia.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveMediaSource.cs" Link="Adaptive\AdaptiveMediaSource.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveMetadata.cs" Link="Adaptive\AdaptiveMetadata.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveNumberInput.cs" Link="Adaptive\AdaptiveNumberInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveOpenUrlAction.cs" Link="Adaptive\AdaptiveOpenUrlAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveRefresh.cs" Link="Adaptive\AdaptiveRefresh.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveRichTextBlock.cs" Link="Adaptive\AdaptiveRichTextBlock.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveSchemaVersion.cs" Link="Adaptive\AdaptiveSchemaVersion.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveSelectAction.cs" Link="Adaptive\AdaptiveSelectAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveSelectActionConverter.cs" Link="Adaptive\AdaptiveSelectActionConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveSerializationException.cs" Link="Adaptive\AdaptiveSerializationException.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveShowCardAction.cs" Link="Adaptive\AdaptiveShowCardAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveSpacing.cs" Link="Adaptive\AdaptiveSpacing.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveSubmitAction.cs" Link="Adaptive\AdaptiveSubmitAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTable.cs" Link="Adaptive\AdaptiveTable.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTableCell.cs" Link="Adaptive\AdaptiveTableCell.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTableColumn.cs" Link="Adaptive\AdaptiveTableColumn.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTableRow.cs" Link="Adaptive\AdaptiveTableRow.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTargetElement.cs" Link="Adaptive\AdaptiveTargetElement.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextBlock.cs" Link="Adaptive\AdaptiveTextBlock.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextBlockStyle.cs" Link="Adaptive\AdaptiveTextBlockStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextColor.cs" Link="Adaptive\AdaptiveTextColor.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextInput.cs" Link="Adaptive\AdaptiveTextInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextInputStyle.cs" Link="Adaptive\AdaptiveTextInputStyle.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextRun.cs" Link="Adaptive\AdaptiveTextRun.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextSize.cs" Link="Adaptive\AdaptiveTextSize.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTextWeight.cs" Link="Adaptive\AdaptiveTextWeight.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTimeInput.cs" Link="Adaptive\AdaptiveTimeInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveToggleInput.cs" Link="Adaptive\AdaptiveToggleInput.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveToggleVisibilityAction.cs" Link="Adaptive\AdaptiveToggleVisibilityAction.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTokenExchangeResource.cs" Link="Adaptive\AdaptiveTokenExchangeResource.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTypedBaseElementConverter.cs" Link="Adaptive\AdaptiveTypedBaseElementConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTypedElement.cs" Link="Adaptive\AdaptiveTypedElement.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveTypedElementConverter.cs" Link="Adaptive\AdaptiveTypedElementConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveUnknownElement.cs" Link="Adaptive\AdaptiveUnknownElement.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveVerticalAlignment.cs" Link="Adaptive\AdaptiveVerticalAlignment.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveVerticalContentAlignment.cs" Link="Adaptive\AdaptiveVerticalContentAlignment.cs" />
+	  <Compile Include="..\AdaptiveCards\AdaptiveWarning.cs" Link="Adaptive\AdaptiveWarning.cs" />
+	  <Compile Include="..\AdaptiveCards\ColorUtil.cs" Link="Adaptive\ColorUtil.cs" />
+	  <Compile Include="..\AdaptiveCards\Globals.cs" Link="Adaptive\Globals.cs" />
+	  <Compile Include="..\AdaptiveCards\HashColorConverter.cs" Link="Adaptive\HashColorConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\IAdaptiveTextElement.cs" Link="Adaptive\IAdaptiveTextElement.cs" />
+	  <Compile Include="..\AdaptiveCards\IgnoreDefaultStringEnumConverter.cs" Link="Adaptive\IgnoreDefaultStringEnumConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\IgnoreEmptyItemsConverter.cs" Link="Adaptive\IgnoreEmptyItemsConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\IgnoreNullEnumConverter.cs" Link="Adaptive\IgnoreNullEnumConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\ILogWarnings.cs" Link="Adaptive\ILogWarnings.cs" />
+	  <Compile Include="..\AdaptiveCards\ParseContext.cs" Link="Adaptive\ParseContext.cs" />
+	  <Compile Include="..\AdaptiveCards\RemoteResourceInformation.cs" Link="Adaptive\RemoteResourceInformation.cs" />
+	  <Compile Include="..\AdaptiveCards\Rendering\AdaptiveVisitor.cs" Link="Adaptive\AdaptiveVisitor.cs" />
+	  <Compile Include="..\AdaptiveCards\Rendering\RendererUtilities.cs" Link="Adaptive\RendererUtilities.cs" />
+	  <Compile Include="..\AdaptiveCards\SerializableDictionary.cs" Link="Adaptive\SerializableDictionary.cs" />
+	  <Compile Include="..\AdaptiveCards\StrictIntConverter.cs" Link="Adaptive\StrictIntConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\ToggleElementsConverter.cs" Link="Adaptive\ToggleElementsConverter.cs" />
+	  <Compile Include="..\AdaptiveCards\TypedEventHandler.cs" Link="Adaptive\TypedEventHandler.cs" />
+	  <Compile Include="..\AdaptiveCards\WarningLoggingContractResolver.cs" Link="Adaptive\WarningLoggingContractResolver.cs" />
 	</ItemGroup>
 
 </Project>

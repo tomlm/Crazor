@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\AdaptiveCards\AdaptiveCards.csproj" />
+    <Folder Include="Data\v1.6\Tests\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\v1.6\Tests\" />
+    <ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties data_4v1_12_4elements_4actionfallback_1json__JsonSchema="https://github.com/go-vela/types/releases/latest/download/schema.json" /></VisualStudio></ProjectExtensions>
