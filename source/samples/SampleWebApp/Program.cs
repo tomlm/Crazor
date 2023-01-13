@@ -1,11 +1,25 @@
 using Microsoft.Bot.Builder.Azure.Blobs;
 using Microsoft.Bot.Builder;
 using Crazor;
+using Crazor.Server;
+using Crazor.Mvc;
+using Crazor.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ---- <CRAZOR>
 builder.Services.AddCrazor();
+builder.Services.AddCrazorMvc();
+builder.Services.AddCrazorBlazor();
+builder.Services.AddCrazorServer((options) =>
+{
+    options.Manifest.Version = "1.0";
+    options.Manifest.Name.Short = "CrazorDemoBot";
+    options.Manifest.Name.Full = "This is a demo of using MVC templates for crazor apps.";
+    options.Manifest.Developer.Name = "Tom Laird-McConnell";
+    options.Manifest.Description.Short = "CrazorDemoBot";
+    options.Manifest.Description.Full = "This is a demo of using MVC templates for crazor apps.";
+});
 
 var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
 if (!String.IsNullOrEmpty(storageKey))
@@ -32,6 +46,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 
+// ---- <CRAZOR>
+app.UseCrazorServer();
+// </CRAZOR>
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
