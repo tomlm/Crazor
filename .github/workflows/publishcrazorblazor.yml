@@ -1,10 +1,14 @@
 name: Publish CrazorBlazorDemo
+# on:
+#   push:
+#     branches:
+#     - main
+#     paths:
+#     - source/**
 on:
-  push:
-    branches:
-    - main
-    paths:
-    - source/**
+  workflow_dispatch:
+    branches: [ "main" ]
+
 env:
   AZURE_WEBAPP_NAME: CrazorBlazorDemo
   AZURE_WEBAPP_PACKAGE_PATH: source\samples\CrazorBlazorDemo\published
