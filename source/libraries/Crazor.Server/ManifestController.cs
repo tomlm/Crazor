@@ -20,7 +20,7 @@ namespace Crazor.Server.Controllers
     {
         private FileContentResult _zip;
 
-        public ManifestController(IConfiguration configuration, IWebHostEnvironment environment, Manifest manifest)
+        public ManifestController(IConfiguration configuration, IWebHostEnvironment environment, CrazorServerOptions crazorServerOptions)
         {
             var botIcon = configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png";
             var botIconPath = Path.Combine(environment.WebRootPath, botIcon.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
@@ -37,7 +37,7 @@ namespace Crazor.Server.Controllers
                     {
                         using (var streamWriter = new StreamWriter(stream))
                         {
-                            streamWriter.Write(JsonConvert.SerializeObject(manifest, Formatting.Indented));
+                            streamWriter.Write(JsonConvert.SerializeObject(crazorServerOptions.Manifest, Formatting.Indented));
                         }
                     }
                     

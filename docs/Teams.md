@@ -11,14 +11,14 @@ Teams integration is accomplished through a complex manifest.json file.  With cr
 In program.cs, when you call **AddCrazorServer()** you are given the opportunity to make modifications to the auto-generated manifest. This is the point to supply general metadata like the name of your bot, the developer and description information.
 
 ```c#
-builder.Services.AddCrazorServer((configuration, manifest) =>
+builder.Services.AddCrazorServer((options) =>
 {
-    manifest.Version = "1.0";
-    manifest.Name.Short = "MyBot";
-    manifest.Name.Full = "MyBot is cool.";
-    manifest.Developer.Name = "Contoso";
-    manifest.Description.Short = "MyBot Cards";
-    manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
+    options.Manifest.Version = "1.0";
+    options.Manifest.Name.Short = "MyBot";
+    options.Manifest.Name.Full = "MyBot is cool.";
+    options.Manifest.Developer.Name = "Contoso";
+    options.Manifest.Description.Short = "MyBot Cards";
+    options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
 });
 ```
 ## Icons
