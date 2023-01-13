@@ -270,12 +270,12 @@ namespace Crazor
         }
     }
 
-    internal class ReplaceElement<ElementT> : AdaptiveVisitor
+    public class ReplaceElement<ElementT> : AdaptiveVisitor
         where ElementT : AdaptiveTypedElement
     {
         Func<ElementT, AdaptiveTypedElement> _transformer;
 
-        internal ReplaceElement(Func<ElementT, AdaptiveTypedElement> transformer)
+        public ReplaceElement(Func<ElementT, AdaptiveTypedElement> transformer)
         {
             _transformer = transformer;
         }
