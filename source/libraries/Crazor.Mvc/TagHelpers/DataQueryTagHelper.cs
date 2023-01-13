@@ -11,7 +11,7 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for Data.Query
     /// </summary>
 
-    [HtmlTargetElement("DataQuery", ParentTag = "Input.ChoiceSet")]
+    [HtmlTargetElement("DataQuery", ParentTag = "InputChoiceSet")]
     public class DataQueryTagHelper : ReflectionTagHelper
     {
 

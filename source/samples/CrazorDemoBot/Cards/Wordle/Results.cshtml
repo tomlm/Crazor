@@ -53,7 +53,7 @@
         else if (App.Activity.From.Id != App.Game.Player?.Id) 
         {
             // it's not the person who played the game, give them a link to play
-            <Action.OpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+            <ActionOpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
         }
     }
 </Card>
