@@ -32,7 +32,7 @@ Create **/Cards/Counters/Default.cshtml**
     <TextBlock Size="ExtraLarge" Weight="Bolder">Counters</TextBlock>
     <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
 
-    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
+    <ActionExecute Title="+ Session" Verb="@nameof(OnIncrement)" />
 </Card>
 
 @functions {
@@ -102,8 +102,8 @@ Now we will modify the Default .cshtml to interact with the **CountersApp.**
     <TextBlock Size="Large">Session Counter:@Counter</TextBlock>
     <TextBlock Size="Large">Shared Counter:@App.SharedCounter</TextBlock>
     
-    <Action.Execute Title="+ Session" Verb="@nameof(OnIncrement)" />
-	<Action.Execute Title="+ Shared" Verb="@nameof(OnIncrementShared)"/>
+    <ActionExecute Title="+ Session" Verb="@nameof(OnIncrement)" />
+	<ActionExecute Title="+ Shared" Verb="@nameof(OnIncrementShared)"/>
 </Card>
 
 @functions {

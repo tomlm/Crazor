@@ -84,13 +84,18 @@ app.MapControllers();
    ```C#
    @using AdaptiveCards
    @using Crazor
+   @using Crazor.Mvc
    @using Crazor.Attributes
-   @using System.ComponentModel;
+   @using Crazor.Mvc.TagHelpers
+   @using Crazor.Blazor.Components;
+   @using Crazor.Blazor.Components.Adaptive;
+   @using System.ComponentModel
    @using System.ComponentModel.DataAnnotations
    @removeTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
    @removeTagHelper *, Microsoft.AspNetCore.Mvc.Razor
+   @addTagHelper *, Crazor
    @addTagHelper *, Crazor.Mvc
-   @addTagHelper *, ...YOURASSEMBLYNAME...
+   @addTagHelper *, ...{YOURASSEMBLYNAME}...
    ```
 
 # appsettings.json

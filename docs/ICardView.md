@@ -195,12 +195,12 @@ namespace Example
 Example Markup:
 
 ```xml
-    <Input.ChoiceSet Binding="Number" Style="Filtered">
+    <InputChoiceSet Binding="Number" Style="Filtered">
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />
         <Choice Title="4" Value="4" />
-        <Data.Query Dataset="Numbers" />
+        <DataQuery Dataset="Numbers" />
     </Input.ChoiceSet>
 ```
 

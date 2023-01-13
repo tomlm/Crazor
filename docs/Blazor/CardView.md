@@ -52,7 +52,7 @@ the verb up to a method on the **CardView**.  This method is called an ***Action
 
 For example:
 ```xml
-<Action.Execute Title="Do some stuff" Verb="OnDoSomeStuff"/>
+<ActionExecute Title="Do some stuff" Verb="OnDoSomeStuff"/>
 ```
 
 You write the code to respond to it by defining a method with the same name.
@@ -67,7 +67,7 @@ You write the code to respond to it by defining a method with the same name.
 >  **Recommendation ** is good practive to use @nameof so that your verb and method names stay in sync and you get a build break when you change one without the other.
 
 ```xml
-<Action.Execute Title="Do some stuff" Verb="@nameof(OnDoSomeStuff)"/>
+<ActionExecute Title="Do some stuff" Verb="@nameof(OnDoSomeStuff)"/>
 ```
 
 
@@ -86,7 +86,7 @@ Any **input** or **Action.Execute Data** payloads will to be automatically bound
 
 For example:
 ```xml
-<Input.Text Id="Name" .../>
+<InputText Id="Name" .../>
 ```
 You can get the value for **"name"** by simply adding **string name** as an argument.
 
@@ -121,7 +121,7 @@ The input controls all support smart two-way binding via the **Binding** propert
 Example:
 
 ```xml
-<Input.Text Binding="Model.Name"  .../>
+<InputText Binding="Model.Name"  .../>
 ```
 
 ***Binding="Model.Name"*** is a shortcut for ***Id="Model.Name"*** and ***Value="@Model.Name"*** 
@@ -260,12 +260,12 @@ Example:
 Example Markup:
 
 ```xml
-    <Input.ChoiceSet Binding="Number" Style="Filtered">
+    <InputChoiceSet Binding="Number" Style="Filtered">
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />
         <Choice Title="4" Value="4" />
-        <Data.Query Dataset="Numbers" />
+        <DataQuery Dataset="Numbers" />
     </Input.ChoiceSet>
 ```
 

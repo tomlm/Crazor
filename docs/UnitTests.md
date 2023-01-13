@@ -93,7 +93,7 @@ Now we will create a card and write a unit tests against the card.
    @inherits CardView
    <Card Version="1.5">
    	<TextBlock>Counter=@Counter</TextBlock>
-       <Action.Execute Verb="@nameof(OnSubmit)"/>
+       <ActionExecute Verb="@nameof(OnSubmit)"/>
    </Card>
    
    @functions {
@@ -109,7 +109,7 @@ Now we will create a card and write a unit tests against the card.
    @inherits CardView
    <Card Version="1.5">
    	<TextBlock>Counter=@Counter</TextBlock>
-       <Action.Execute Verb="@nameof(OnSubmit)"/>
+       <ActionExecute Verb="@nameof(OnSubmit)"/>
    </Card>
    
    @code {
