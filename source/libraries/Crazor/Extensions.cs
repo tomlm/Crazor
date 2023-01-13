@@ -5,7 +5,6 @@ using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
@@ -255,75 +254,7 @@ namespace Crazor
             };
         }
 
-        /// <summary>
-        /// Helper extension to replace elements of a given type.
-        /// </summary>
-        /// <typeparam name="ElementT"></typeparam>
-        /// <param name="card"></param>
-        /// <param name="transformer"></param>
-        /// <returns></returns>
-        public static AdaptiveCard ReplaceElement<ElementT>(this AdaptiveCard card, Func<ElementT, AdaptiveTypedElement> transformer)
-            where ElementT : AdaptiveTypedElement
-        {
-            new ReplaceElement<ElementT>(transformer).Visit(card);
-            return card;
-        }
     }
 
-    public class ReplaceElement<ElementT> : AdaptiveVisitor
-        where ElementT : AdaptiveTypedElement
-    {
-        Func<ElementT, AdaptiveTypedElement> _transformer;
-
-        public ReplaceElement(Func<ElementT, AdaptiveTypedElement> transformer)
-        {
-            _transformer = transformer;
-        }
-
-        protected override void Visit(AdaptiveCard card)
-        {
-            ReplaceElements(card.Body);
-            ReplaceActions(card.Actions);
-            base.Visit(card);
-        }
-
-        protected override void Visit(AdaptiveContainer container)
-        {
-            ReplaceElements(container.Items);
-            base.Visit(container);
-        }
-
-        protected override void Visit(AdaptiveActionSet actionSet)
-        {
-            ReplaceActions(actionSet.Actions);
-            base.Visit(actionSet);
-        }
-
-
-        private void ReplaceElements(List<AdaptiveElement> elements)
-        {
-            for (int i = 0; i < elements.Count; i++)
-            {
-                var element = elements[i];
-                if (element is ElementT el)
-                {
-                    elements[i] = (AdaptiveElement)_transformer(el);
-                }
-            }
-        }
-
-        private void ReplaceActions(List<AdaptiveAction> actions)
-        {
-            for (int i = 0; i < actions.Count; i++)
-            {
-                var element = actions[i];
-                if (element is ElementT el)
-                {
-                    actions[i] = (AdaptiveAction)_transformer(el);
-                }
-            }
-        }
-
-    }
 
 }
