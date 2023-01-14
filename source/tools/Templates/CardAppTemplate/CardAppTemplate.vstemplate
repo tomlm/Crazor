@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
 	<TemplateData>
-		<Name>AdaptiveCard template and model (Crazor)</Name>
-		<Description>Adds a crazor cshtml card with model class</Description>
-		<Icon>CrazorCardAndModelTemplate.ico</Icon>
-		<TemplateID>2036c482-52d4-4841-99c6-03584abd3cd2</TemplateID>
+		<Name>Crazor Card Application</Name>
+		<Description>Create a new Crazor Card Application folder with a CardApp class.</Description>
+		<Icon>CardAppTemplate.ico</Icon>
+		<TemplateID>10BDA6C7-2AE3-405A-8032-83A610FB4AD3</TemplateID>
 		<ProjectType>CSharp</ProjectType>
 		<TemplateGroupID>AspNetCore</TemplateGroupID>
-		<CreateInPlace>true</CreateInPlace>
 		<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
 		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
-		<DefaultName>Card</DefaultName>
+		<CreateInPlace>true</CreateInPlace>
+		<DefaultName>Hello</DefaultName>
 	</TemplateData>
 	<TemplateContent>
 		<References>
@@ -18,8 +18,7 @@
 				<Assembly>System</Assembly>
 			</Reference>
 		</References>
-		<ProjectItem TargetFileName="$fileinputname$.cshtml" ReplaceParameters="true">Card.cshtml</ProjectItem>
-		<ProjectItem TargetFileName="$fileinputname$Model.cs" ReplaceParameters="true">CardModel.cs</ProjectItem>
+		<ProjectItem TargetFileName="\Cards\$fileinputname$\$fileinputname$App.cs" ReplaceParameters="true">CardApp.cs</ProjectItem>
 		<CustomParameters>
 			<CustomParameter Name="$InputName$" Value="$fileinputname$"/>
 		</CustomParameters>

@@ -9,11 +9,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{BFE27180-78FA-46F7-B280-0149A4370EEB}</ProjectGuid>
+    <ProjectGuid>{D882DE79-E704-4823-9910-56EEC16182E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrazorAppTemplate</RootNamespace>
-    <AssemblyName>CrazorAppTemplate</AssemblyName>
+    <RootNamespace>BlazorCardTemplate</RootNamespace>
+    <AssemblyName>BlazorCardTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
@@ -54,16 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefaultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Default.cshtml" />
-    <None Include="CardApp.cs" />
-    <None Include="CrazorAppTemplate.ico" />
+    <None Include="Card.razor" />
+    <None Include="BlazorCardTemplate.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="CrazorAppTemplate.vstemplate" />
+    <VSTemplate Include="BlazorCardTemplate.vstemplate" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

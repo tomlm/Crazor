@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CrazorItemTemplates")]
+[assembly: AssemblyTitle("CrazorCardTemplate")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft IT")]
-[assembly: AssemblyProduct("CrazorItemTemplates")]
+[assembly: AssemblyProduct("CrazorCardTemplate")]
 [assembly: AssemblyCopyright("Copyright © Microsoft IT 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5847aa90-9d21-4368-ab1b-59be96edc944")]
+[assembly: Guid("d882de79-e704-4823-9910-56eec16182e6")]
 
 // Version information for an assembly consists of the following four values:
 //

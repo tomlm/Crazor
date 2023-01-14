@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="CrazorExtensions.f49188b7-20b2-46f9-b7b2-b6d0689daaf6" Version="3.1.4" Language="en-US" Publisher="Tom Laird-McConnell" />
+        <Identity Id="CrazorExtensions.f49188b7-20b2-46f9-b7b2-b6d0689daaf6" Version="4.0.0" Language="en-US" Publisher="Tom Laird-McConnell" />
         <DisplayName>CrazorExtensions</DisplayName>
         <Description xml:space="preserve">Adds tooling for Crazor to visual studio:
 * Paste AdaptiveCard JSON as XML
@@ -41,8 +41,8 @@
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="CrazorAppTemplate" d:TargetPath="|CrazorAppTemplate;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" TargetVersion="[17.0,18.0]" />
-        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="CrazorCardAndModelTemplate" d:TargetPath="|CrazorCardAndModelTemplate;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" TargetVersion="[17.0,18.0]" />
-        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="CrazorCardTemplate" TargetVersion="[17.0,18.0]" d:TargetPath="|CrazorCardTemplate;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MvcCardTemplate" TargetVersion="[17.0, 18.0]" d:TargetPath="|MvcCardTemplate;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="BlazorCardTemplate" TargetVersion="[17.0, 18.0]" d:TargetPath="|BlazorCardTemplate;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="CardAppTemplate" TargetVersion="[17.0, 18.0]" d:TargetPath="|CardAppTemplate;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
     </Assets>
 </PackageManifest>

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
 	<TemplateData>
-		<Name>AdaptiveCard App (Crazor)</Name>
-		<Description>Create a new card app folder with a new CardApp and default card view for a folder.</Description>
-		<Icon>CrazorAppTemplate.ico</Icon>
-		<TemplateID>50d273a5-7c81-4143-9ff3-594118534f5a</TemplateID>
+		<Name>Crazor.Blazor Card</Name>
+		<Description>Adds a Crazor.Blazor (.razor) card template to folder.</Description>
+		<Icon>BlazorCardTemplate.ico</Icon>
+		<TemplateID>F7DAB17D-801D-44D7-9122-43899A5A045D</TemplateID>
 		<ProjectType>CSharp</ProjectType>
 		<TemplateGroupID>AspNetCore</TemplateGroupID>
+		<CreateInPlace>true</CreateInPlace>
 		<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
 		<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
-		<CreateInPlace>true</CreateInPlace>
-		<DefaultName>Hello</DefaultName>
+		<DefaultName>Card</DefaultName>
 	</TemplateData>
 	<TemplateContent>
 		<References>
@@ -18,9 +18,7 @@
 				<Assembly>System</Assembly>
 			</Reference>
 		</References>
-		<ProjectItem TargetFileName="\Cards\$fileinputname$\$fileinputname$App.cs" ReplaceParameters="true">CardApp.cs</ProjectItem>
-		<ProjectItem TargetFileName="\Cards\$fileinputname$\DefaultModel.cs" ReplaceParameters="true">DefaultModel.cs</ProjectItem>
-		<ProjectItem TargetFileName="\Cards\$fileinputname$\Default.cshtml" ReplaceParameters="true">Default.cshtml</ProjectItem>
+		<ProjectItem TargetFileName="$fileinputname$.razor" ReplaceParameters="true">Card.razor</ProjectItem>
 		<CustomParameters>
 			<CustomParameter Name="$InputName$" Value="$fileinputname$"/>
 		</CustomParameters>

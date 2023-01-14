@@ -87,23 +87,23 @@
       <Project>{88adc9eb-2308-464c-898a-e99faa09da08}</Project>
       <Name>AdaptiveCards</Name>
     </ProjectReference>
-    <ProjectReference Include="..\templates\CrazorAppTemplate\CrazorAppTemplate.csproj">
+    <ProjectReference Include="..\Templates\BlazorCardTemplate\BlazorCardTemplate.csproj">
+      <Project>{d882de79-e704-4823-9910-56eec16182e6}</Project>
+      <Name>BlazorCardTemplate</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Templates\CardAppTemplate\CardAppTemplate.csproj">
       <Project>{BFE27180-78FA-46F7-B280-0149A4370EEB}</Project>
-      <Name>CrazorAppTemplate</Name>
+      <Name>CardAppTemplate</Name>
       <VSIXSubPath>ItemTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
-    <ProjectReference Include="..\Templates\CrazorCardAndModelTemplate\CrazorCardAndModelTemplate.csproj">
-      <Project>{5847AA90-9D21-4368-AB1B-59BE96EDC944}</Project>
-      <Name>CrazorCardAndModelTemplate</Name>
-      <VSIXSubPath>ItemTemplates</VSIXSubPath>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-    </ProjectReference>
-    <ProjectReference Include="..\Templates\CrazorCardTemplate\CrazorCardTemplate.csproj">
-      <Project>{D882DE79-E704-4823-9910-56EEC16182E6}</Project>
-      <Name>CrazorCardTemplate</Name>
+    <ProjectReference Include="..\Templates\MvcCardTemplate\MvcCardTemplate.csproj">
+      <Project>{188820f1-14ed-412a-9658-910f98a22eaa}</Project>
+      <Name>MvcCardTemplate</Name>
       <VSIXSubPath>ItemTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>

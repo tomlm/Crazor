@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
 	<TemplateData>
-		<Name>AdaptiveCard template (Crazor)</Name>
-		<Description>Adds a crazor cshtml card</Description>
-		<Icon>CrazorCardTemplate.ico</Icon>
-		<TemplateID>7e5ce020-2dc3-4480-bba0-a7ced6981967</TemplateID>
+		<Name>Crazor.Mvc Card</Name>
+		<Description>Adds a Crazor.Mvc (.cshtml) card template to folder.</Description>
+		<Icon>MvcCardTemplate.ico</Icon>
+		<TemplateID>8064A1A2-5C90-4148-AA4D-3085134B2F69</TemplateID>
 		<ProjectType>CSharp</ProjectType>
 		<TemplateGroupID>AspNetCore</TemplateGroupID>
 		<CreateInPlace>true</CreateInPlace>

@@ -100,13 +100,15 @@ namespace CrazorExtensions
             ThreadHelper.ThrowIfNotOnUIThread();
             var json = Clipboard.GetText(TextDataFormat.UnicodeText);
             var card = JsonConvert.DeserializeObject<AdaptiveCard>(json);
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add(string.Empty, AdaptiveCard.ContentType);
             var serializer = new XmlSerializer(typeof(AdaptiveCard));
 
             using (StringWriter textWriter = new StringWriter())
             {
                 using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, new XmlWriterSettings() { Indent = true }))
                 {
-                    serializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
+                    serializer.Serialize(xmlWriter, card, namespaces);
                 }
 
                 var xml = MassageXml(textWriter.ToString());
@@ -130,6 +132,15 @@ namespace CrazorExtensions
                     }
                 }
             }
+            xml = xml
+                .Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", String.Empty)
+                .Replace("xmlns=\"application/vnd.microsoft.card.adaptive\"", String.Empty)
+                .Replace("<Input.", "<Input")
+                .Replace("</Input.", "</Input")
+                .Replace("<Action.", "<Action")
+                .Replace("</Action.", "</Action")
+                .Replace("<Data.", "<Data")
+                .Replace("</Data.", "</Data");
             return xml;
         }
     }
