@@ -12,6 +12,6 @@
 
 ![image](https://user-images.githubusercontent.com/17789481/196826860-263d6bfa-093c-4ae3-9c88-8205d316a205.png)
 
-To install it download and install [CrazorExtensions.vsix](https://github.com/microsoft/crazor/releases/download/CrazorExtensions3.1.3)
+To install it download and install [CrazorExtensions.vsix](https://github.com/microsoft/crazor/releases/tag/v4.0.0)
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
