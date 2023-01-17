@@ -820,6 +820,13 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
 
+            if (String.IsNullOrWhiteSpace(outboundCard.Title))
+            {
+#pragma warning disable CS0618 // Type or member is obsolete
+                outboundCard.Title = $"{this.Name}";
+#pragma warning restore CS0618 // Type or member is obsolete
+            }
+
             await AddRefresh(outboundCard, isPreview, cancellationToken);
 
             AddMessageBanner(outboundCard, isPreview);
@@ -828,10 +835,6 @@ namespace Crazor
 
             // add session data to outbound card
             await AddMetadataToCard(outboundCard, isPreview, cancellationToken);
-
-#pragma warning disable CS0618 // Type or member is obsolete
-            outboundCard.Title = $"{this.Name}";
-#pragma warning restore CS0618 // Type or member is obsolete
 
             outboundCard.Metadata = new AdaptiveMetadata() { WebUrl = GetCurrentCardUri().AbsoluteUri };
         }
@@ -1103,7 +1106,7 @@ namespace Crazor
                             VerticalContentAlignment = AdaptiveVerticalContentAlignment.Center,
                             Items = new List<AdaptiveElement>()
                             {
-                                new AdaptiveTextBlock(Context.Configuration.GetValue<string>("BotName")) { Size= AdaptiveTextSize.Small }
+                                new AdaptiveTextBlock($"{Context.Configuration.GetValue<string>("BotName")} - {outboundCard.Title}") { Size= AdaptiveTextSize.Small }
                             }
                         },
                         new AdaptiveColumn()
