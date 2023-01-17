@@ -54,7 +54,7 @@ namespace Crazor
                 services.AddTransient(cardAppType);
             }
 
-            services.AddScoped<CardAppFactory>();
+            services.AddTransient<CardAppFactory>();
 
 
             // add TabModules
@@ -63,7 +63,7 @@ namespace Crazor
                 services.AddTransient(tabModuleType);
             }
 
-            services.AddScoped<CardTabModuleFactory>();
+            services.AddTransient<CardTabModuleFactory>();
             return services;
         }
 

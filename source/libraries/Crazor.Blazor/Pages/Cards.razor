@@ -2,6 +2,7 @@
 @inject NavigationManager MyNavigationManager
 @implements IDisposable
 @using Crazor.Blazor.Components
+@using Microsoft.AspNetCore.Components.Routing;
 
 <CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
 

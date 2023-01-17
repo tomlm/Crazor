@@ -97,79 +97,22 @@ app.MapControllers();
    @using System.Threading.Tasks;
    ```
 
+## Modify /App.razor 
+
+You need to add a reference to **Crazor.Blazor** assembly by setting **AdditionalAssemblies** in your App.Razor file:
+
+```html
+<Router AppAssembly="@typeof(App).Assembly" 
+        AdditionalAssemblies="@(new[] { typeof(Crazor.Blazor.Pages.Cards).Assembly})">
+```
+
+This adds razor pages defined **Crazor.Blazor** package, specifically the page that hosts a card for a given route.
+
 ## Settings
 
 Look at [Settings](../Settings.md) page for information settings for your project 
 
-# (Optional) Create a cards.razor host file
-
-Create a **Pages/cards.razor** file with this content.  This will give you a "landing page" which is bound to the card url that matches it.
-
-```c#
-@page "/Cards/{*routeFragment}"
-@inject NavigationManager MyNavigationManager
-@implements IDisposable
-@using Crazor.Blazor.Components
-
-<CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
-
-@code {
-    // this is only used to "load the cardview" from the page on initial load.
-    [Parameter]
-    public string? routeFragment { get; set; }
-    CardRoute Route { get; set; }
-    public CardViewer MyCardViewer = default!;
-    bool routeLoaded = false;
-
-    protected async override Task OnInitializedAsync()
-    {
-        MyNavigationManager.LocationChanged += OnPageLocationChanged;
-        Route = CardRoute.Parse(new Uri(MyNavigationManager.Uri).PathAndQuery);
-        routeLoaded = false;
-        await base.OnInitializedAsync();
-    }
-
-    public void OnPageLocationChanged(object sender, LocationChangedEventArgs locationChanged)
-    {
-        System.Diagnostics.Debug.WriteLine($"LOCATION: {locationChanged.Location}");
-        var route = new Uri(locationChanged.Location).PathAndQuery;
-        if (route.StartsWith("/Cards/"))
-        {
-            CardRoute cardRoute = CardRoute.Parse(route);
-            if (cardRoute.App == Route.App)
-            {
-                if (routeLoaded == false && cardRoute.Path != Route.Route)
-                {
-                    base.InvokeAsync(async () =>
-                    {
-                        await MyCardViewer.LoadRouteAsync(route);
-                        StateHasChanged();
-                    });
-                }
-                routeLoaded = false;
-            }
-        }
-    }
-
-    public void OnCardRouteChanged(string route)
-    {
-        if (route.ToLower() != new Uri(MyNavigationManager.Uri).PathAndQuery.ToLower())
-        {
-            routeLoaded = true;
-            MyNavigationManager.NavigateTo(route);
-        }
-    }
-
-    public void Dispose()
-    {
-        MyNavigationManager.LocationChanged -= OnPageLocationChanged;
-    }
-}	
-```
-
-
-
-# (Optional) Change index.razor to enumerate your cards
+# (Optional) Modify index.razor to enumerate your card apps
 
 Insert this the content of your **Index.razor**
 

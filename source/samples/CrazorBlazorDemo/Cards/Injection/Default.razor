@@ -1,9 +1,8 @@
 ﻿@inherits CardView
-@inject CardAppFactory cardAppFactory;
-
+@inject CardAppFactory AppFactory;
 <Card Version="1.5">
     <TextBlock>
-        @foreach(var name in cardAppFactory.GetNames()) { @($"* {name}\n") }
+        @foreach(var name in AppFactory.GetNames()) { @($"* {name}\n") }
     </TextBlock>
 </Card>
 

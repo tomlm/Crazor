@@ -187,7 +187,7 @@ namespace Crazor
                 this.Route.SessionId = Utils.GetNewId();
             }
 
-            Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb})-----");
+            Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb}) {this.Route.Route}-----");
 
             // Load stylesheet
             if (Stylesheet == null)
