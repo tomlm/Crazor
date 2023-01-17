@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Bot.Builder;
 using Newtonsoft.Json;
 using System.Text;
@@ -26,13 +27,22 @@ namespace CrazorBlazorClientDemo.Client
 
         public async Task<IDictionary<string, object>> ReadAsync(string[] keys, CancellationToken cancellationToken = default)
         {
-            var result = await httpClient.GetStringAsync($"api/state?keys={String.Join(',', keys)}", cancellationToken);
+
+            string result = "{}";
+            if (keys.Any())
+            {
+                result = await httpClient.GetStringAsync($"api/state?keys={String.Join(',', keys)}", cancellationToken);
+            }
+
             return JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
         }
 
         public async Task WriteAsync(IDictionary<string, object> changes, CancellationToken cancellationToken = default)
         {
-            await httpClient.PostAsync($"api/state", new StringContent(JsonConvert.SerializeObject(changes), Encoding.UTF8, "application/json"), cancellationToken);
+            if (changes.Any())
+            {
+                await httpClient.PostAsync($"api/state", new StringContent(JsonConvert.SerializeObject(changes), Encoding.UTF8, "application/json"), cancellationToken);
+            }
         }
     }
 }
