@@ -4,13 +4,34 @@
 @inject CardAppFactory CardAppFactory
 
 <PageTitle>All Cards</PageTitle>
-
-<div style="display: flex; flex-wrap:wrap;padding:10px'">
-@foreach (var cardAppType in CardAppFactory.GetNames().OrderBy(n => n))
-{
-    <div style="padding:10px">
-        <CardViewer Route="@($"/Cards/{cardAppType.Replace("App", String.Empty)}")" />
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var column in Columns)
+        {
+            <div class="column">
+                @foreach (var cardAppType in column)
+                {
+                    <CardViewer Route="@($"/Cards/{cardAppType.Replace("App", String.Empty)}")" />
+                }
+            </div>
+        }
     </div>
-}
-
 </div>
+@code
+{
+    List<List<string>> Columns { get; set; } = new List<List<string>>()
+    {
+        new List<string>(),
+        new List<string>(),
+        new List<string>(),
+   };
+
+    protected override void OnInitialized()
+    {
+        int x = 0;
+        foreach (var item in CardAppFactory.GetNames())
+        {
+            Columns[x++ % 3].Add(item);
+        }
+    }
+}
