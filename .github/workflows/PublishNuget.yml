@@ -1,9 +1,14 @@
 name: Publish Nuget
 
+#on:
+#  workflow_dispatch:
+#    branches: [ "main" ]
 on:
-  workflow_dispatch:
-    branches: [ "main" ]
-
+  push:
+    branches:
+    - main
+    paths:
+    - source/libraries/**
 
 env:
   AZURE_ARTIFACTS_FEED_URL:   https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json
