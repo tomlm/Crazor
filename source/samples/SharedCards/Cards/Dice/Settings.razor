@@ -1,0 +1,43 @@
+﻿@using Crazor
+@using SharedCards.Cards.Dice
+@using System.ComponentModel;
+@inherits CardView<DiceApp>
+
+<Card Version="1.5">
+    <InputText Binding="DiceName" />
+    <InputNumber Binding="NumberDice" />
+
+    @if (IsModelValid)
+    {
+        <ActionCancel />
+    }
+    <ActionOK />
+</Card>
+
+@code {
+    [Required]
+    public string DiceName { get; set; }
+
+    [Required]
+    [Description("Number of dice")]
+    [Range(1, 50, ErrorMessage = "Dice must be between 1 and 50.")]
+    public int? NumberDice { get; set; }
+
+    protected override void OnInitialized()
+    {
+        DiceName = App.DiceName;
+        NumberDice = App.NumberDice;
+    }
+
+    public void OnOK()
+    {
+        if (this.IsModelValid)
+        {
+            App.DiceName = DiceName;
+            App.NumberDice = NumberDice;
+            App.RollDice();
+            this.CloseTaskModule(TaskModuleAction.Auto);
+            CloseView();
+        }
+    }
+}

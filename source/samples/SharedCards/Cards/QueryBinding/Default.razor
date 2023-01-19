@@ -1,0 +1,33 @@
+﻿@inherits CardView
+
+<Card Version="1.5" Title="Query Binding">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Query Binding</TextBlock>
+    <TextBlock>This card shows how you can initialize parameters in your view from query parameters</TextBlock>
+    <TextBlock Wrap="true">Name and Zip have [FromCardQuery] attribute which allows it to be initialized from query paraemter ?name=&amp;zip=</TextBlock>
+
+    <InputText Binding="Name" />
+    <InputText Binding="Zip" />
+    <InputText Binding="City" />
+
+    <ActionCancel />
+    <ActionOK />
+</Card>
+
+@code {
+    [FromCardQuery]
+    public string Name { get; set; }
+
+    [FromCardQuery]
+    public string Zip { get; set; }
+
+    public string City { get; set; }
+
+    public void OnLoadRoute(string name, string zip, string city)
+    {
+        
+    }
+
+    public void OnOK()
+    {
+    }
+}

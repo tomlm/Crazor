@@ -4,10 +4,10 @@
 using Crazor;
 using Crazor.Blazor;
 using Crazor.Server;
-using CrazorBlazorDemo.Cards.CodeOnlyView;
 using CrazorBlazorDemo.Data;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
+using SharedCards.Cards.CodeOnlyView;
 
 namespace CrazorBlazorDemo
 {
@@ -24,7 +24,7 @@ namespace CrazorBlazorDemo
             builder.Services.AddControllers();
 
             // ---- <CRAZOR>
-            builder.Services.AddCrazor();
+            builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
                 options.Manifest.Version = "1.0";

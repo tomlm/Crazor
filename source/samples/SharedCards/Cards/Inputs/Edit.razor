@@ -1,0 +1,19 @@
+﻿@using SharedCards.Cards.Inputs
+@inherits CardView<CardApp,InputsModel>
+
+<Card Version="1.5">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Edit Values!</TextBlock>
+
+    <InputDate Binding="Model.Birthday" Max="@DateTime.Now" />
+    <InputTime Binding="Model.ArrivalTime" Min="@DateTime.Now" />
+    <InputNumber Binding="Model.Percent" />
+    <InputNumber Binding="Model.Attendees" />
+    <InputText Binding="Model.PhoneNumber" />
+    <InputText Binding="Model.Password" />
+    <InputToggle Binding="Model.IsCool" />
+    <InputChoiceSet Binding="Model.FavoritePet" />
+
+    <ActionCancel />
+    <ActionOK />
+</Card>
+

@@ -1,0 +1,24 @@
+﻿@attribute [CardRoute("{App.DiceName}")]
+
+@using SharedCards.Cards.Dice
+@inherits CardView<DiceApp>
+
+<Card Version="1.5">
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder" Style="AdaptiveTextBlockStyle.Heading">@App.DiceName</TextBlock>
+    @if (App.Dice != null)
+    {
+        <ImageSet>
+            @foreach (var die in App.Dice)
+            {
+                <Image Url="@App.GetContentUrl($"~/images/dice{die}.png")" Size="AdaptiveImageSize.Medium" />
+            }
+        </ImageSet>
+    }
+    <ActionExecute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
+    <ActionExecute Title="Refresh" />
+</Card>
+
+@code {
+    public void OnRollDice() 
+        => App.RollDice();
+}

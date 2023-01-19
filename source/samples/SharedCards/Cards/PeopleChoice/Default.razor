@@ -1,0 +1,20 @@
+﻿@using SharedCards.Cards.Inputs
+@inherits CardView<CardApp,InputsModel>
+
+<Card Version="1.5" Title="People Picker Card">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Pick a person!</TextBlock>
+
+    <InputChoiceSet Label="Person" Binding="Choice" Style="AdaptiveChoiceInputStyle.Filtered">
+        <DataQuery Dataset="graph.microsoft.com/users" />
+    </InputChoiceSet>
+
+    <TextBlock>Person: @Choice</TextBlock>
+    
+    <ActionExecute Verb="Refresh" />
+</Card>
+
+@code
+{
+    public string Choice{get;set;}
+}
+

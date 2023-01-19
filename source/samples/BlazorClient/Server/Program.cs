@@ -22,7 +22,7 @@ if (!String.IsNullOrEmpty(storageKey))
 {
     builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorClientDemo).ToLower()));
 }
-builder.Services.AddCrazor("CrazorBlazorClientDemo.Shared");
+builder.Services.AddCrazor("SharedCards");
 builder.Services.AddCrazorServer();
 builder.Services.AddCrazorBlazor();
 // ---- </CRAZOR>
