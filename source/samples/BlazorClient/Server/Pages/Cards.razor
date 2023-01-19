@@ -1,0 +1,8 @@
+﻿@page "/Cards/{*RouteFragment}"
+<Crazor.Blazor.Pages.Cards routeFragment="@RouteFragment" />
+
+@code
+{
+    [Parameter]
+    public string? RouteFragment { get; set; }
+}

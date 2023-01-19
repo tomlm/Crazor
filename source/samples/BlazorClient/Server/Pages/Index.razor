@@ -1,0 +1,14 @@
+﻿@page "/"
+@inject CardAppFactory CardAppFactory
+@using Crazor;
+
+<PageTitle>Cards</PageTitle>
+<h2>Cards</h2>
+
+<ul>
+    @foreach (var cardAppType in CardAppFactory.GetNames().OrderBy(n => n))
+    {
+        var appName = cardAppType.Replace("App", String.Empty);
+        <li><a href="/Cards/@appName">@appName Card</a></li>
+    }
+</ul>

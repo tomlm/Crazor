@@ -17,8 +17,6 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
                   --password <GENERATED_PAT>
      ```
 
-> ⚠️ Optional if you cloned the [github.com/Microsoft/Crazor](https://github.com/Microsoft/Crazor) repo.
-
 ## 1. Creating Adaptive Cards in a Blazor Server project
 
   1. Open **Visual Studio** and create a **new project** named *"MyBlazorAdaptiveProject"*.
@@ -28,10 +26,7 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      - Crazor.Server
      - Crazor.Blazor
 
-> ⚠️ Currently, due to NuGet updates to AdaptiveCards, during the development phases, 
-> clone the [github.com/Microsoft/Crazor](https://github.com/Microsoft/Crazor) 
-> and add equivalent projects references in your projects.
-> ![Project References](./Projects-References.png)
+     ![Project References](./Projects-References.png)
 
   4. Open the **Program.cs** file and add this code before `builder.build()` command.
      ```csharp
@@ -54,8 +49,7 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
 
 	 And this code before `app.Run()`.
      ```csharp
-     app.UseCrazor();
-     app.UseCrazorBlazor();
+     app.UseCrazorServer();
      app.MapControllers();
      ```
 
@@ -80,12 +74,12 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      </style>
      <link rel="stylesheet" type="text/css" 
            href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
-	 ```
+	  ```
 
      Add this **hostconfig.js** file into the folder **wwwroot/js**, with this content.
      ```js
-	 const adaptiveHostConfig = new AdaptiveCards.HostConfig({ XXX });
-	 ```
+	  const adaptiveHostConfig = new AdaptiveCards.HostConfig({ XXX });
+	  ```
 	 
 	 Where the `{ XXX }` is a JSON object. A sample is downloadable on the [GitHub site](https://github.com/Microsoft/AdaptiveCards/blob/master/samples/HostConfig/sample.json).
 
@@ -101,7 +95,20 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      "TeamsAppId": ""
 	 ```
 
-  8. Add a sample file **Default.razor** in a folder named **Cards/HelloWorld**.
+  8. Add a new page **Cards.razor**, in the folder Pages, with this content:
+
+     ```xml
+     @page "/Cards/{*RouteFragment}"
+     <Crazor.Blazor.Pages.Cards routeFragment="@RouteFragment" />
+
+     @code
+     {
+        [Parameter]
+        public string? RouteFragment { get; set; }
+     }
+     ```
+
+  9. Add a sample file **Default.razor** in a folder named **Cards/HelloWorld**.
 
      ```xml
      @inherits CardView
@@ -120,7 +127,7 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      }
 	 ```
 
-  9. Run your project and display this card: `https://localhost:7105/Cards/HelloWorld`.
+  10. Run your project and display this card: `https://localhost:7105/Cards/HelloWorld`.
      ![Card sample](./CardSample.png)
 	 
 
@@ -168,13 +175,13 @@ Next, create a Microsoft Teams manifest to define all parameters of your applica
   7. Copy the **App ID** value to set the **AppSettings.json / TeamsAppId**.
   
   8. Write **required** fields:
-	  a. **Short description** like ´My Blazor AdaptiveCards`.
-	  b. **Developer** like `Microsoft`.
-	  c. **Developer website** URL like `https://mysite.com`.
-	  d. **Privacy policy** URL like `https://mysite.com/privacy`.
-	  e. **Terms of use** URL like `https://mysite.com/termofuse`.
+	   - **Short description** like `My Blazor AdaptiveCards`.
+	   - **Developer** like `Microsoft`.
+	   - **Developer website** URL like `https://mysite.com`.
+	   - **Privacy policy** URL like `https://mysite.com/privacy`.
+	   - **Terms of use** URL like `https://mysite.com/termofuse`.
 	  
-  9. Click on the **Save** button.
+  9. Click the **Save** button.
   
   10. Go to the **Configure / App features** panel and, in the **module Bot**, select the bot created previously.
       ![Developer Portal - App Features](DevPortal-Apps.png)
