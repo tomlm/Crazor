@@ -32,7 +32,7 @@ using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
 
 // register blob storage for state management
-builder.Services.AddCrazor("CrazorBlazorClientDemo.Shared");
+builder.Services.AddCrazor("SharedCards");
 builder.Services.AddCrazorBlazor();
 
 // If you're using the StateController.cs file, to save and load state.

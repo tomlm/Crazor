@@ -1,0 +1,30 @@
+﻿@using SharedCards.Cards.TaskModule
+@inherits CardView<TaskModuleApp>
+<Card Version="1.5" Title="Test Task Module Functionality">
+    <TextBlock>Counter: @App.Counter</TextBlock>
+    <InputChoiceSet Binding="TaskAction" Style="AdaptiveChoiceInputStyle.Expanded" Value="Auto"/>
+
+    <ActionExecute Verb="@nameof(OnIncrement)" Title="Increment" />
+
+    <ActionCancel />
+    <ActionOK />
+</Card>
+
+@code {
+
+    // [BindProperty]
+    public TaskModuleAction TaskAction { get; set; }
+
+    public void OnIncrement() => App.Counter++;
+
+    public void OnOK()
+    {
+        CloseTaskModule(TaskAction);
+        CloseView();
+    }
+
+    public void OnCancel()
+    {
+        CloseTaskModule(TaskModuleAction.None);
+    }
+}

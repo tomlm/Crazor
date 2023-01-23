@@ -66,7 +66,6 @@ namespace Crazor
 
         private void AddCardViewType(Type cardViewType)
         {
-            System.Diagnostics.Debug.WriteLine(cardViewType.FullName);
             if (cardViewType.Name == "CustomCardView" ||
                 cardViewType.Name == "CardViewBase`1" ||
                 cardViewType.Name == "CardView" ||
@@ -76,6 +75,7 @@ namespace Crazor
                 // don't register base classes.
                 return;
             }
+            System.Diagnostics.Debug.WriteLine(cardViewType.FullName);
 
             CardRoute cardRoute;
             List<RouteTemplate> list;
@@ -130,10 +130,10 @@ namespace Crazor
             else
             {
                 string route = null;
-                var iCards = cardViewType.FullName.IndexOf("Cards");
+                var iCards = cardViewType.FullName.IndexOf(".Cards.");
                 if (iCards > 0)
                 {
-                    route = $"/{cardViewType.FullName.Substring(cardViewType.FullName.IndexOf("Cards")).Replace('.', '/')}";
+                    route = $"{cardViewType.FullName.Substring(cardViewType.FullName.IndexOf(".Cards.")).Replace('.', '/')}";
                 }
                 var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
                 if (routeAttribute != null)

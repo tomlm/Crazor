@@ -1,0 +1,37 @@
+﻿@using SharedCards.Cards.Addresses
+@inherits CardView<AddressesApp,Address>
+
+@* This card supports a deep link route *@
+@attribute [CardRoute("{Model.Id}/Edit")]
+@code {
+
+    public void OnLoadRoute()
+    {
+        ArgumentNullException.ThrowIfNull(Model.Id);
+        this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == Model.Id)! ?? throw new Crazor.Exceptions.CardRouteNotFoundException($"Address {Model.Id} not found");
+    }
+}
+
+<Card Version="1.5" Title="Edit Address">
+    <TextBlock >Edit Address</TextBlock>
+
+    <InputText Binding="Model.Street" />
+    <InputText Binding="Model.City" />
+    <InputChoiceSet Binding="Model.State" />
+    <InputText Binding="Model.PostalCode" Regex="" />
+    <InputChoiceSet Binding="Model.Country" />
+
+    <ActionCancel />
+    <ActionOK />
+</Card>
+
+@code {
+    public void OnOK()
+    {
+        if (IsModelValid)
+        {
+            App.UpdateAddress(Model);
+            CloseView(Model);
+        }
+    }
+}

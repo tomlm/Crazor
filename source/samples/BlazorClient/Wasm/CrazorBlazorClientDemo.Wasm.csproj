@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\CrazorBlazorClientDemo.Shared.csproj" />
+    <ProjectReference Include="..\..\SharedCards\SharedCards.csproj" />
   </ItemGroup>
 
 </Project>

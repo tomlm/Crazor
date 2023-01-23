@@ -1,0 +1,80 @@
+﻿@using SharedCards.Cards.Addresses
+@inherits CardView<AddressesApp>
+@attribute [TabInfo("Addresses")]
+
+<Card Version="1.5" Title="Addresses">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge">Addresses</TextBlock>
+    @if (App.Addresses.Any())
+    {
+        @foreach (var address in App.Addresses)
+        {
+            <Container Separator="true">
+                <ColumnSet Spacing="AdaptiveSpacing.None">
+                    <Column Width="stretch">
+                        <TextBlock>@address.Street</TextBlock>
+                        <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="@App.GetContentUrl("~/images/EditIcon.png")" Size="AdaptiveImageSize.Small">
+                            <SelectAction>
+                                <ActionExecute Tooltip="Edit Address" Verb="@nameof(OnEdit)">
+                                    { "addressId":"@address.Id" }
+                                </ActionExecute>
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                    <Column Width="auto">
+                        <Image Url="@App.GetContentUrl("~/images/DeleteIcon.png")" Size="AdaptiveImageSize.Small">
+                            <SelectAction>
+                                <ActionExecute Tooltip="Delete Address" Verb="@nameof(OnDelete)">
+                                    { "addressId":"@address.Id" }
+                                </ActionExecute>
+                            </SelectAction>
+                        </Image>
+                    </Column>
+                </ColumnSet>
+                <SelectAction>
+                    <ActionExecute Verb="@nameof(OnDetail)">
+                        { "addressId":"@address.Id" }
+                    </ActionExecute>
+                </SelectAction>
+            </Container>
+        }
+    }
+    else
+    {
+        <TextBlock>No addresses.</TextBlock>
+    }
+    <ActionExecute Title="Add Address" Verb="@nameof(OnAdd)" />
+</Card>
+
+@code {
+
+    public void OnAdd()
+    {
+        ShowView("Add");
+    }
+
+    public void OnDetail(string addressId)
+    {
+        var address = App.GetAddress(addressId);
+        if (address != null)
+        {
+            ShowView($"{address.Id}", address);
+        }
+    }
+
+    public void OnEdit(string addressId)
+    {
+        var address = App.GetAddress(addressId);
+        if (address != null)
+        {
+            ShowView($"{address.Id}/Edit", address);
+        }
+    }
+
+    public void OnDelete(string addressId)
+    {
+        App.Addresses = App.Addresses.Where(a => a.Id != addressId).ToList();
+    }
+}

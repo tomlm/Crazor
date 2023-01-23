@@ -1,0 +1,81 @@
+﻿@using SharedCards.Cards.Wordle
+@using Microsoft.Bot.Connector
+@using Microsoft.Bot.Schema
+@using Newtonsoft.Json
+@inherits CardView<WordleApp>
+
+<Card Version="1.5">
+    <TextBlock Size="AdaptiveTextSize.Large" Style="AdaptiveTextBlockStyle.Heading">Wordle Results!</TextBlock>
+    @if (App.Game.Won)
+    {
+        <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">I got it in @App.Game.Guesses.Count tries! 😄</TextBlock>
+    }
+    else
+    {
+        <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">I failed. 😥</TextBlock>
+    }
+
+    <Table GridStyle="AdaptiveContainerStyle.Default" ShowGridLines="true" FirstRowAsHeaders="false">
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        <TableColumn Width="auto" />
+        @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
+        {
+            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+                @foreach (var letter in App.Game.Guesses[iGuess].Letters)
+                {
+                    <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
+                }
+            </TableRow>
+        }
+
+        @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
+        {
+            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
+            </TableRow>
+        }
+    </Table>
+
+    @if (!IsPreview)
+    {
+        if (IsTaskModule)
+        {
+            <ActionExecute Title="Share" Verb="OnShare" />
+            <ActionExecute Title="Close" Verb="OnClose" />
+        }
+        else if (App.Activity.From.Id != App.Game.Player?.Id) 
+        {
+            // it's not the person who played the game, give them a link to play
+            <ActionOpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+        }
+    }
+</Card>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (App.Game == null)
+            CloseView();
+    }
+
+    public void OnShare()
+    {
+        if (IsTaskModule)
+        {
+            CloseTaskModule(TaskModuleAction.Auto);
+        }
+    }
+
+    public void OnClose()
+    {
+        CloseTaskModule(TaskModuleAction.None);
+    }
+}
