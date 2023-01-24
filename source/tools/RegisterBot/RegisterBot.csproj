@@ -1,14 +1,40 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>RegisterBot</ToolCommandName>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<VersionPrefix>1.0.1</VersionPrefix>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<Description>Command line tool for registering a bot.</Description>
+		<Company>Microsoft</Company>
+		<Authors>Microsoft</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/microsoft/crazor</PackageProjectUrl>
+		<PackageIconUrl>https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png</PackageIconUrl>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>crazor</PackageTags>
+		<RepositoryUrl>https://github.com/microsoft/crazor</RepositoryUrl>
+		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
+		<RootNamespace>Crazor</RootNamespace>
+		<ContentTargetFolders>content</ContentTargetFolders>
+		<Title>Azure Bot Registration tool</Title>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CShell" Version="1.2.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CShell" Version="1.2.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="icon.png" Pack="True" PackagePath="\" />
+		<None Include="readme.md" Pack="True" PackagePath="\" />
+	</ItemGroup>
 
 </Project>
