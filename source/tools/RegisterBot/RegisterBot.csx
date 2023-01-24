@@ -1,16 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
+#r "nuget: Newtonsoft.Json, 13.0.1"
+#r "nuget: MedallionShell, 1.6.2"
+#r "nuget: CShell, 1.2.4"
+
 using System.IO;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using CShellNet;
 using Medallion.Shell;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-// new Script().Main(Args).Wait();
+await new Script().Main(Args);
 
 // goto https://github.com/tomlm/CShell/blob/master/README.md for documentation
 
@@ -20,11 +19,6 @@ using Newtonsoft.Json.Linq;
 
 class Script : CShell
 {
-    static async Task Main(string[] args)
-    {
-        await new Script().Main(args);
-    }
-
     public async Task Main(IList<string> args)
     {
         dynamic output = await Cmd("az account show").AsJson();

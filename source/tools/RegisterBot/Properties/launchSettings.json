@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RegisterBot": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Source\\github\\crazor\\source\\samples\\CrazorDemoBot"
+    }
+  }
+}
