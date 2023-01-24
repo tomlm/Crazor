@@ -19,6 +19,8 @@ class Script : CShell
 
     public async Task Main(IList<string> args)
     {
+        ThrowOnError = false;
+        
         if (args.Any(a => a == "--help" || a == "-h"))
         {
             Console.WriteLine("RegisterBot --resource-group [groupName] --name [botName] -endpoint [endpoint]");
@@ -36,9 +38,9 @@ class Script : CShell
         dynamic output = await Cmd("az account show").AsJson();
         Console.WriteLine($"==== Subscription: {output.name} =====");
 
-        string groupName = args.SkipWhile(arg => arg != "--resource-group").FirstOrDefault();
-        string botName = args.SkipWhile(arg => arg != "--name").FirstOrDefault();
-        string endpoint = args.SkipWhile(arg => arg != "--endpoint").FirstOrDefault();
+        string groupName = args.SkipWhile(arg => arg != "--resource-group").Skip(1).FirstOrDefault();
+        string botName = args.SkipWhile(arg => arg != "--name").Skip(1).FirstOrDefault();
+        string endpoint = args.SkipWhile(arg => arg != "--endpoint").Skip(1).FirstOrDefault();
         botName = botName ?? await GetBotName();
         endpoint = endpoint ?? await GetEndpoint();
         groupName = groupName ?? await GetGroupName(botName);
@@ -76,9 +78,24 @@ class Script : CShell
         string password = (string)output.password;
         string tenantId = (string)output.tenant;
 
-        Console.WriteLine($"==== Creating bot registration for {botName}");
-        output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password}").AsJson();
-        output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
+        Console.WriteLine($"==== looking up {botName}");
+        var cmd = await Cmd($"az bot show -g {groupName} --name {botName}").AsResult();
+        if (!cmd.Success)
+        {
+            Console.WriteLine($"==== Creating bot registration for {botName}");
+            output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password}").AsJson();
+            output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
+        }
+        else
+        {
+            output = cmd.AsJson();
+            if (output.properties.endpoint != uri.AbsoluteUri)
+            {
+                Console.WriteLine($"==== Updating bot endpoint for {botName}");
+                cmd = await Cmd($"az bot update --resource-group {groupName} --name {botName} --endpoint {uri.AbsoluteUri}").Execute();
+            }
+        }
+
         //         output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
         Console.WriteLine("Settings information for bot registration:");
         dynamic result = new JObject();
@@ -112,11 +129,11 @@ class Script : CShell
             settings.TeamsAppId = appId;
             File.WriteAllText("appsettings.Development.json", ((JObject)settings).ToString());
 
-            await Cmd($"dotnet user-secrets set MicrosoftAppPassword \"{password}\"").AsString();
+            await Cmd($"dotnet user-secrets set MicrosoftAppPassword {password}").AsString();
         }
 
         Console.WriteLine();
-        Console.WriteLine($"{botName} - {appId} successfully created for {uri.AbsoluteUri}!");
+        Console.WriteLine($"{botName} - {appId} successfully configured for {uri.AbsoluteUri}!");
     }
 
     private async Task<string> GetBotName()
