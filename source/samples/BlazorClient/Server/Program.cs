@@ -22,7 +22,12 @@ if (!String.IsNullOrEmpty(storageKey))
 {
     builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorClientDemo).ToLower()));
 }
-builder.Services.AddCrazor("SharedCards");
+builder.Services.AddCrazor(options =>
+{
+    options.LoadCardAssembly("SharedCards");
+    options.Logger.Request = (activiy) => Console.WriteLine($"REQUEST: {DateTime.Now} - {activiy.Id}\n\nActivity = {activiy.ToJson()}");
+    options.Logger.Response = (activiy, card) => Console.WriteLine($"RESPONSE: {DateTime.Now} - {activiy.Id}\n\nCard = {card.ToJson()}");
+});
 builder.Services.AddCrazorServer();
 builder.Services.AddCrazorBlazor();
 // ---- </CRAZOR>

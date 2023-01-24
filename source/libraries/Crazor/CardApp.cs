@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -43,9 +44,8 @@ namespace Crazor
             {
                 this.Name = this.GetType().Name;
                 this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
-            }
+            }            
         }
-
 
         /// <summary>
         /// Name of the app
@@ -187,6 +187,12 @@ namespace Crazor
                 this.Route.SessionId = Utils.GetNewId();
             }
 
+            // Tracing
+            if (Context.ServiceOptions != null && this.Activity != null)
+            {
+                Context.ServiceOptions.Logger.Request?.Invoke(this.Activity);
+            }
+
             Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb}) {this.Route.Route}-----");
 
             // Load stylesheet
@@ -284,6 +290,12 @@ namespace Crazor
             }
 
             await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
+
+            // Tracing
+            if (Context.ServiceOptions != null && outboundCard != null && this.Activity != null)
+            {
+                Context.ServiceOptions.Logger.Response?.Invoke(this.Activity, outboundCard);
+            }
 
             return outboundCard;
         }

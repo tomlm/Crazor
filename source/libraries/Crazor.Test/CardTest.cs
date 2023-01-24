@@ -30,6 +30,7 @@ namespace Crazor.Test
                 { "HostUri", "http://localhost" },
                 { "BotId", "00000000-0000-0000-0000-000000000000" }
             });
+            builder.Services.AddTransient<ServiceOptions>();
             builder.Services.AddSingleton<IRazorViewEngine, RazorViewEngine>();
             builder.Services.AddSingleton<IStorage, MemoryStorage>();
             builder.Services.AddTransient<IHttpContextAccessor>((sp) => new HttpContextAccessor() { HttpContext = new DefaultHttpContext { RequestServices = sp } });
