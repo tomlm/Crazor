@@ -12,21 +12,42 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Text.Json;
 using Diag = System.Diagnostics;
 
 namespace Crazor
 {
     public static class Extensions
     {
+        private static readonly JsonSerializerOptions DEFAULT_JSON_SERIALIZER_OPTIONS = new()
+        {
+            WriteIndented = true,
+        };
+
         public static IServiceCollection AddCrazor(this IServiceCollection services, params string[] sharedAssemblies)
         {
-            if (sharedAssemblies != null)
-            {
-                foreach (var assembly in sharedAssemblies)
+            return AddCrazor(
+                services,
+                options =>
                 {
-                    Assembly.LoadWithPartialName(assembly);
-                }
-            }
+                    if (sharedAssemblies != null)
+                    {
+                        foreach (var assembly in sharedAssemblies)
+                        {
+                            options.LoadCardAssembly(assembly);
+                        }
+                    }
+                });
+        }
+
+        public static IServiceCollection AddCrazor(this IServiceCollection services, Action<ServiceOptions> options)
+        {
+            // Get custom options from users
+            var config = new ServiceOptions();
+            options.Invoke(config);
+
+            // Add ServiceOptions
+            services.AddTransient<ServiceOptions>(provider => config);
 
             services.AddHttpClient();
             services.TryAddSingleton<IStorage>((sp) =>
@@ -254,6 +275,10 @@ namespace Crazor
             };
         }
 
+        public static string ToJson(this Activity activity)
+        {
+            return System.Text.Json.JsonSerializer.Serialize(activity, DEFAULT_JSON_SERIALIZER_OPTIONS);
+        }
     }
 
 

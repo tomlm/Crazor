@@ -17,7 +17,8 @@ namespace Crazor
             IRouteResolver routeResolver,
             IConfiguration configuration,
             IEncryptionProvider encryptionProvider,
-            IStorage storage)
+            IStorage storage,
+            ServiceOptions options)
         {
             ServiceProvider = servicesProvider;
             Configuration = configuration;
@@ -26,6 +27,7 @@ namespace Crazor
             CardAppFactory = cardAppFactory;
             CardTabModuleFactory = cardTabModuleFactory;
             RouteResolver = routeResolver;
+            ServiceOptions = options;
         }
 
         public IServiceProvider ServiceProvider { get; set; }
@@ -41,5 +43,7 @@ namespace Crazor
         public CardTabModuleFactory CardTabModuleFactory { get; }
 
         public IRouteResolver RouteResolver { get; set; }
+
+        public ServiceOptions ServiceOptions { get; }
     }
 }
