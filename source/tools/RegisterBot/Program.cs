@@ -20,7 +20,7 @@ class Script : CShell
     public async Task Main(IList<string> args)
     {
         ThrowOnError = false;
-        
+
         if (args.Any(a => a == "--help" || a == "-h"))
         {
             Console.WriteLine("RegisterBot --resource-group [groupName] --name [botName] -endpoint [endpoint]");
@@ -41,9 +41,10 @@ class Script : CShell
         string groupName = args.SkipWhile(arg => arg != "--resource-group").Skip(1).FirstOrDefault();
         string botName = args.SkipWhile(arg => arg != "--name").Skip(1).FirstOrDefault();
         string endpoint = args.SkipWhile(arg => arg != "--endpoint").Skip(1).FirstOrDefault();
-        botName = botName ?? await GetBotName();
-        endpoint = endpoint ?? await GetEndpoint();
-        groupName = groupName ?? await GetGroupName(botName);
+        botName = String.IsNullOrEmpty(botName) ? botName : await GetBotName();
+        endpoint = String.IsNullOrEmpty(endpoint) ? endpoint : await GetEndpoint();
+        groupName = String.IsNullOrEmpty(groupName) ? groupName : await GetGroupName(botName);
+
         Uri uri = new Uri(endpoint);
         // validate groupname exists
         var commandResult = await Cmd($"az group show --resource-group {groupName}").AsResult();
@@ -96,13 +97,14 @@ class Script : CShell
             }
         }
 
-        //         output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
-        Console.WriteLine("Settings information for bot registration:");
+        Console.WriteLine("Settings:");
         dynamic result = new JObject();
         result.BotName = botName;
+        result.HostUri = uri.AbsoluteUri;
         result.MicrosoftAppType = "MultiTenant";
         result.MicrosoftAppId = appId;
         result.MicrosoftAppPassword = password;
+        result.TeamsAppId = appId;
         Console.WriteLine(result.ToString());
 
         if (uri.Host.EndsWith("azurewebsites.net"))

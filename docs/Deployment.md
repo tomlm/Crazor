@@ -7,8 +7,12 @@
 To make your projectwork you need
 
 * A Web Site
-* A Azure Bot registration
+* An azure Bot registration
 * An Azure Storage account
+
+## Create Resource Group
+
+Create a resource group
 
 ## Create an Azure Storage account
 
@@ -18,38 +22,19 @@ Create an **Azure Storage** account for your service to use.
 
 Create an **Azure Web Service** to deploy your service to.
 
-## Create a Bot Registration
+Update your service to have AzureStorage configuration key:
 
-To deploy you will need a bot registration.  In azure portal go to [Create an Azure Bot - Microsoft Azure](https://ms.portal.azure.com/#create/Microsoft.AzureBot)
-1. Create a **MultiTenant** ***registration only bot***, this will give you an appid which you should put into appsettings.json as **"MicrosoftAppId"**
-2. Go to mananage keys (there is a link on the bot registration page) **create a new client secret**.  
-3. **Copy and save it** off someplace safe (don't check it in!) 
-4. **Configure the bot** **endpoint** to be **https://{YOURWEBSITE}/api/cardapps** were YOURWEBSITE is obiovusly your web site
+| key              | description                                          | example                           |
+| ---------------- | ---------------------------------------------------- | --------------------------------- |
+| **AzureStorage** | The connection string for your azure storage account | ... ya know what it looks like... |
 
+## Create Bot Registration
 
+To deploy you will need register a bot for your service,  see [Register Bot](RegisterBot.md) for details.
 
-## Update Azure Web Service configuration
+## Publish Web Service
 
-Update the web service configuration with the following settings.
-
-| key                      | description                                                  | example                              |
-| ------------------------ | ------------------------------------------------------------ | ------------------------------------ |
-| **MicrosoftAppType**     | The apptype for your bot registration                        | MultiTenant                          |
-| **MicrosoftAppId**       | The AppID for your bot                                       | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx |
-| **MicrosoftAppPassword** | The super secret password you kept from the bot registration | ...                                  |
-| **HostUri**              | The root url for your web site (Crazor needs this to know what urls to support link unfurling) | https://mywebsite.azurewebsites.net  |
-| **BotName**              | A user friendly name for your bot (Crazor needs this to create appropriate title for cards) | My Cool Bot                          |
-| **AzureStorage**         | The connection string for your azure storage account         | ... ya know what it looks like...    |
-
-
-
-
-
-# Deploying
-
-The web app is jsut a normal Azure web app, just deploy it to the cloud.
-
-> 
+The web app is just a normal Azure web app, just deploy it to the cloud using any of the standard publishing mechanisms.
 
 
 

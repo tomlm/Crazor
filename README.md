@@ -47,13 +47,10 @@ There are currently 2 Crazor templating implementations
 * [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
 
-# Setting up Azure
+# Setting up your service
 
-[Setting up your azure web deployment](docs/Deployment.md)  
-
-# Teams
-
-[Installing your card applications into teams](docs/Teams.md) 
+* [Setting up your azure web deployment](docs/Deployment.md)  
+* [Installing your card applications into teams](docs/Teams.md) 
 
 # Visual Studio Extension 
 
