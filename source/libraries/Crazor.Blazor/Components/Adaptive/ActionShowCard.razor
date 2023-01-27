@@ -3,6 +3,11 @@
 @using System.ComponentModel;
 @inherits ActionComponent<AdaptiveShowCardAction>
 
+<ac:Action.ShowCard @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.ShowCard>
+
+
 @code
 {
 

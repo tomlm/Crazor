@@ -44,5 +44,14 @@ namespace Crazor.Blazor.Tests
                     .AssertHasNo<AdaptiveTextBlock>("Preview");
         }
 
+        [TestMethod]
+        public async Task TestShowCard()
+        {
+            await LoadCard("/Cards/ShowCard", isPreview: true)
+                    .AssertElement<AdaptiveShowCardAction>("showCard")
+                    .AssertTextBlock("Hello")
+                    .AssertTextBlock("Hi!");
+        }
+
     }
 }

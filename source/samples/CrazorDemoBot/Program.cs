@@ -20,14 +20,14 @@ if (!String.IsNullOrEmpty(storageKey))
 }
 builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
- builder.Services.AddCrazorServer((options) =>
+builder.Services.AddCrazorServer((options) =>
 {
-    options.Manifest.Version = "1.0";
-    options.Manifest.Name.Short = "CrazorDemoBot";
-    options.Manifest.Name.Full = "This is a demo of using MVC templates for crazor apps.";
-    options.Manifest.Developer.Name = "Tom Laird-McConnell";
-    options.Manifest.Description.Short = "CrazorDemoBot";
-    options.Manifest.Description.Full = "This is a demo of using MVC templates for crazor apps.";
+   options.Manifest.Version = "1.0";
+   options.Manifest.Name.Short = "CrazorDemoBot";
+   options.Manifest.Name.Full = "This is a demo of using MVC templates for crazor apps.";
+   options.Manifest.Developer.Name = "Tom Laird-McConnell";
+   options.Manifest.Description.Short = "CrazorDemoBot";
+   options.Manifest.Description.Full = "This is a demo of using MVC templates for crazor apps.";
 });
 
 

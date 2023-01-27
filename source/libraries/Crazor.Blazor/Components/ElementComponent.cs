@@ -4,6 +4,7 @@
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 using AdaptiveCards;
 using Crazor.Attributes;
+using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.Reflection;
@@ -60,6 +61,10 @@ namespace Crazor.Blazor.Components
             if (this.ParentItem is AdaptiveCard card)
             {
                 card.Body.Add(this.Item);
+            }
+            else if (ParentItem is AdaptiveShowCardAction showCard && this.Item is AdaptiveCard ac)
+            {
+                showCard.Card = ac;
             }
             else if (this.ParentItem is AdaptiveContainer container)
             {
