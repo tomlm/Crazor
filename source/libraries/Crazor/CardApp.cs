@@ -44,7 +44,7 @@ namespace Crazor
             {
                 this.Name = this.GetType().Name;
                 this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
-            }            
+            }
         }
 
         /// <summary>
@@ -253,8 +253,12 @@ namespace Crazor
         /// <returns></returns>
         public virtual string GetContentUrl(string path)
         {
-            var uri = Context.Configuration.GetValue<Uri>("HostUri");
-            return new Uri(uri, path.TrimStart('~')).AbsoluteUri;
+            if (path.StartsWith("~") || path.StartsWith("/"))
+            {
+                var uri = Context.Configuration.GetValue<Uri>("HostUri");
+                return new Uri(uri, path.TrimStart('~')).AbsoluteUri;
+            }
+            return new Uri(path).AbsoluteUri;
         }
 
         /// <summary>
