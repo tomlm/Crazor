@@ -19,14 +19,14 @@ namespace Crazor.Blazor.Components.Adaptive
         protected ICardView CardView { get; set; }
 
         [Parameter]
-        public BoolProperty? IsRequired { get; set; }
+        public BoolProperty? IsRequired { get => Item.IsRequired; set => Item.IsRequired = value == true; }
 
         [Parameter]
         [Binding(BindingType.DisplayName)]
-        public String Label { get; set; }
+        public String Label { get => Item.Label; set => Item.Label = value; }
 
         [Parameter]
-        public String ErrorMessage { get; set; }
+        public String ErrorMessage { get => Item.ErrorMessage; set => Item.ErrorMessage = value; }
 
         [Parameter]
         public string? Binding { get; set; }

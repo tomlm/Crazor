@@ -1,12 +1,17 @@
 ﻿@using System.Linq;
+@using AdaptiveCards;
 @using Crazor.Interfaces;
 <CascadingValue Name="CardView" Value="@CardView">
-    <DynamicComponent Type="@CardView.GetType()" Parameters="GetParameters()"></DynamicComponent>
+    <CascadingValue Name="ParentItem" Value="@this">
+        <DynamicComponent Type="@CardView.GetType()" Parameters="GetParameters()"></DynamicComponent>
+    </CascadingValue>
 </CascadingValue>
 
 @code {
     [Parameter]
     public ICardView CardView { get; set; }
+
+    public AdaptiveCard Card { get; set; }
 
     public Dictionary<string, object> GetParameters()
     {

@@ -18,30 +18,30 @@
 {
 
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public Double? Max { get; set; }
+    public Double? Max { get => Item.Max == double.NaN ? null : Item.Max; set => Item.Max = value ?? double.NaN; }
 
     [Parameter]
-    public Double? Min { get; set; }
+    public Double? Min { get => Item.Min == double.NaN ? null : Item.Min; set => Item.Min = value ?? double.NaN; }
 
     [Parameter]
-    public String? Placeholder { get; set; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public Double? Value { get; set; }
+    public Double? Value { get => Item.Value == double.NaN ? null : Item.Value; set => Item.Value = value ?? double.NaN; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
     protected override void OnParametersSet()
     {

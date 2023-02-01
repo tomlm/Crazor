@@ -19,30 +19,30 @@
     internal const string Format = "yyyy-MM-dd";
 
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public DateTime? Min { get; set; }
+    public DateTime? Min { get => Item.Min != null ? DateTime.Parse(Item.Min) : null; set => Item.Min = value?.ToString("yyyy-MM-dd")!; }
 
     [Parameter]
-    public DateTime? Max { get; set; }
+    public DateTime? Max { get => Item.Max != null ? DateTime.Parse(Item.Max) : null; set => Item.Max = value?.ToString("yyyy-MM-dd")!; }
 
     [Parameter]
-    public String? Placeholder { get; set; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public DateTime? Value { get; set; }
+    public DateTime? Value { get => Item.Value != null ? DateTime.Parse(Item.Value) : null; set => Item.Value = value?.ToString("yyyy-MM-dd")!; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
     protected override void OnParametersSet()
     {

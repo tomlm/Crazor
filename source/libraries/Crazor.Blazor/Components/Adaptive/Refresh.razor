@@ -9,7 +9,7 @@
 @code
 {
     [Parameter]
-    public String? UserIds { get; set; }
+    public String? UserIds { get => String.Join(",", Item.UserIds); set => Item.UserIds = value!.Split(",").ToList(); }
 
     protected override void OnAfterRender(bool firstRender)
     {

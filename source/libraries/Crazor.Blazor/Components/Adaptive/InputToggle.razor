@@ -15,31 +15,31 @@
 @code
 {
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     public String? Title { get => this.Label; set => this.Label = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String? Value { get; set; }
+    public String? Value { get => Item.Value; set => Item.Value = value; }
 
     [Parameter]
-    public String? ValueOff { get; set; }
+    public String? ValueOff { get => Item.ValueOff; set => Item.ValueOff = value; }
 
     [Parameter]
-    public String? ValueOn { get; set; }
+    public String? ValueOn { get => Item.ValueOn; set => Item.ValueOn = value; }
 
     [Parameter]
-    public BoolProperty? Wrap { get; set; }
+    public BoolProperty? Wrap { get => Item.Wrap; set => Item.Wrap = value == true; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value); }
 }

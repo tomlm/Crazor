@@ -10,22 +10,22 @@
 @code
 {
     [Parameter]
-    public String? IconUrl {get;set;}
+    public String? IconUrl { get => Item.IconUrl; set => Item.IconUrl = value; }
 
     [Parameter]
-    public BoolProperty? IsEnabled {get;set;}
+    public BoolProperty? IsEnabled { get => Item.IsEnabled; set => Item.IsEnabled = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
-    public AdaptiveActionMode Mode { get; set; }
+    public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-    public AdaptiveActionStyle Style { get; set; }
+    public AdaptiveActionStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
-    public String? Title { get; set; }
+    public String? Title { get => Item.Title; set => Item.Title = value; }
 
     [Parameter]
-    public String? Tooltip { get; set; }
+    public String? Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
 }

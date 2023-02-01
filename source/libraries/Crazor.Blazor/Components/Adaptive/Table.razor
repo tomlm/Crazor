@@ -10,33 +10,33 @@
 @code
 {
     [Parameter]
-    public String? FirstRowAsHeaders { get; set; }
+    public BoolProperty? FirstRowAsHeaders { get => Item.FirstRowAsHeaders; set => Item.FirstRowAsHeaders = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle GridStyle { get; set; }
+    public AdaptiveContainerStyle GridStyle { get => Item.GridStyle ; set => Item.GridStyle  = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get; set; }
+    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment ; set => Item.HorizontalCellContentAlignment  = value; }
 
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
-    public BoolProperty? ShowGridLines { get; set; }
+    public BoolProperty? ShowGridLines { get => Item.ShowGridLines; set => Item.ShowGridLines = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing ; set => Item.Spacing  = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get; set; }
+    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment ; set => Item.VerticalCellContentAlignment  = value; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height ?.ToString(); set => Item.Height  = new AdaptiveDimension(value!); }
 }

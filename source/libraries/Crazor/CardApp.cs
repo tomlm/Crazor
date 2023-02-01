@@ -867,11 +867,23 @@ namespace Crazor
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
             {
-                if ((action.Data == null) ||
-                    (action.Data is string text && string.IsNullOrWhiteSpace(text)))
+                if (action.Data == null)
                 {
                     action.Data = new JObject();
                 }
+                else if (action.Data is string text)
+                {
+                    text = text.Trim();
+                    if (String.IsNullOrEmpty(text))
+                    {
+                        action.Data = new JObject();
+                    }
+                    else 
+                    {
+                        action.Data = JObject.Parse(text);
+                    }
+                }
+
                 var data = (JObject)action.Data;
                 data[Constants.ROUTE_KEY] = route;
                 if (sessionId != null)
@@ -883,9 +895,21 @@ namespace Crazor
             foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
             {
                 // YAML authoring errors - "data:" without children properties is an empty string
-                if (action.Data == null || (action.Data is string text && string.IsNullOrWhiteSpace(text)))
+                if (action.Data == null)
                 {
                     action.Data = new JObject();
+                }
+                else if (action.Data is string text)
+                {
+                    text = text.Trim();
+                    if (String.IsNullOrEmpty(text))
+                    {
+                        action.Data = new JObject();
+                    }
+                    else
+                    {
+                        action.Data = JObject.Parse(text);
+                    }
                 }
 
                 var data = JObject.FromObject(action.Data);

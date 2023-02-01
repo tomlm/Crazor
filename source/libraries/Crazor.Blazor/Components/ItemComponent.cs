@@ -2,6 +2,7 @@
 //  Licensed under the MIT License.
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using System.Reflection;
 
 namespace Crazor.Blazor.Components
@@ -36,24 +37,5 @@ namespace Crazor.Blazor.Components
             }
             return attributes;
         }
-
-        //protected override void BuildRenderTree(RenderTreeBuilder builder)
-        //{
-        //    int i = 0;
-        //    base.BuildRenderTree(builder);
-
-        //    // Add the CascadingValue component
-        //    builder.OpenComponent<CascadingValue<object>>(i++);
-        //    builder.AddAttribute(i++, "Name", "Parent");
-        //    builder.AddAttribute(i++, "Value", Item);
-        //    builder.AddAttribute(i++, "ChildContent", (RenderFragment)((builder2) => {
-        //        builder2.AddContent(i++, ChildContent);
-        //    }));
-        //    builder.CloseComponent();
-
-        //    // Add JSON serialized
-        //    var json = JsonConvert.SerializeObject(Item);
-        //    builder.AddContent(i++, (MarkupString)$"{json},");
-        //}
     }
 }

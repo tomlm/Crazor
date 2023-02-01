@@ -29,8 +29,8 @@ namespace Crazor.Blazor.Components
 
         public static implicit operator BoolProperty(bool val) => new BoolProperty(val);
         public static implicit operator BoolProperty(string val) => new BoolProperty(Convert.ToBoolean(val));
-        public static bool operator ==(BoolProperty lhs, BoolProperty rhs) => lhs?._value == rhs?._value;
-        public static bool operator !=(BoolProperty lhs, BoolProperty rhs) => lhs?._value != rhs?._value;
+        public static bool operator ==(BoolProperty? lhs, BoolProperty? rhs) => lhs?._value == rhs?._value;
+        public static bool operator !=(BoolProperty? lhs, BoolProperty? rhs) => lhs?._value != rhs?._value;
 
         public override bool Equals(object? obj)
         {

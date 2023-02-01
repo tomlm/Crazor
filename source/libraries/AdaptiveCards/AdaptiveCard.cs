@@ -3,9 +3,8 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -512,5 +511,25 @@ namespace AdaptiveCards
 
             return resourceInformationList;
         }
+
+#if !NETSTANDARD1_3
+        public string ToXml()
+        {
+            XmlWriterSettings settings = new XmlWriterSettings()
+            {
+                Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
+                Indent = true,
+            };
+
+            using (StringWriter textWriter = new StringWriter())
+            {
+                using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
+                {
+                    AdaptiveCard.XmlSerializer.Serialize(xmlWriter, this, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
+                }
+                return textWriter.ToString(); //This is the output as a string
+            }
+        }
+#endif
     }
 }

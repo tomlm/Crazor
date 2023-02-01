@@ -35,31 +35,12 @@ namespace Crazor.Blazor.Tests.Cards.CodeOnlyView
                     new AdaptiveExecuteAction(){ Verb = nameof(OnIncrement), Title = "Increment"}
                 }
             };
-            System.Diagnostics.Debug.WriteLine(ToXml(card));
+            System.Diagnostics.Debug.WriteLine(card.ToXml());
             return card;
         }
 
         public void OnIncrement()
             => this.Counter++;
-
-        public static string ToXml(AdaptiveCard card)
-        {
-            XmlWriterSettings settings = new XmlWriterSettings()
-            {
-                Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
-                Indent = true,
-            };
-
-            using (StringWriter textWriter = new StringWriter())
-            {
-                using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
-                {
-                    AdaptiveCard.XmlSerializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
-                }
-                return textWriter.ToString(); //This is the output as a string
-            }
-        }
-
 
     }
 }

@@ -5,6 +5,7 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
+using Crazor.Blazor.Components.Adaptive;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
@@ -12,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 using Diag = System.Diagnostics;
 
 namespace Crazor.Blazor
@@ -106,6 +108,13 @@ namespace Crazor.Blazor
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
                 var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
+                var cardWrapper = rendered.Instance as CardViewWrapper;
+                if (cardWrapper?.Card != null)
+                {
+                    System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                    return cardWrapper.Card;
+                }
+                
                 xml = rendered.Markup;
 
                 if (!String.IsNullOrWhiteSpace(xml))
@@ -119,7 +128,6 @@ namespace Crazor.Blazor
 
                     var reader = XmlReader.Create(new StringReader(xml));
                     var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
-                    //Diag.Debug.WriteLine(JsonConvert.SerializeObject(card));
                     return card;
                 }
                 else
