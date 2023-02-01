@@ -7,6 +7,7 @@ using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
 using Crazor.Blazor.Components.Adaptive;
 using Crazor.Interfaces;
+using Crazor.Teams;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
@@ -108,33 +109,10 @@ namespace Crazor.Blazor
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
                 var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
-                var cardWrapper = rendered.Instance as CardViewWrapper;
-                if (cardWrapper?.Card != null)
-                {
-                    System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
-                    return cardWrapper.Card;
-                }
                 
-                xml = rendered.Markup;
-
-                if (!String.IsNullOrWhiteSpace(xml))
-                {
-                    if (!xml.StartsWith("<?xml"))
-                    {
-                        xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
-                    }
-                    // File.WriteAllText(@"c:\scratch\foo.xml", xml);
-                    Diag.Debug.WriteLine(xml);
-
-                    var reader = XmlReader.Create(new StringReader(xml));
-                    var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
-                    return card;
-                }
-                else
-                {
-                    // no card defined in markup
-                    return new AdaptiveCard("1.5");
-                }
+                var cardWrapper = rendered.Instance as CardViewWrapper;
+                //System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                return cardWrapper.Card;
             }
             catch (Exception err)
             {
@@ -287,7 +265,7 @@ namespace Crazor.Blazor
 
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                     return false;
-                
+
                 if (propertyInfo.Name == "Model")
                     return false;
 

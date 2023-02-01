@@ -23,10 +23,10 @@ namespace Crazor.Blazor.Components.Adaptive
 
         [Parameter]
         [Binding(BindingType.DisplayName)]
-        public String Label { get => Item.Label; set => Item.Label = value; }
+        public String? Label { get => Item.Label; set => Item.Label = value!; }
 
         [Parameter]
-        public String ErrorMessage { get => Item.ErrorMessage; set => Item.ErrorMessage = value; }
+        public String? ErrorMessage { get => Item.ErrorMessage; set => Item.ErrorMessage = value!; }
 
         [Parameter]
         public string? Binding { get; set; }
@@ -40,9 +40,9 @@ namespace Crazor.Blazor.Components.Adaptive
 
         public string? BindingDisplayName { get; set; }
 
-        protected override void OnParametersSet()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnParametersSet();
+            base.OnAfterRender(firstRender);
 
             var id = this.Id ?? this.Binding;
 
@@ -107,7 +107,7 @@ namespace Crazor.Blazor.Components.Adaptive
             }
 
             // if we don't have required, but binding property has [Required] then set it
-            if (this.IsRequired == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+            if (BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
             {
                 this.IsRequired = true;
 

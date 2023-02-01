@@ -21,11 +21,17 @@
     [Parameter]
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
+    /// <summary>
+    /// Format of "HH:MM"
+    /// </summary>
     [Parameter]
-    public DateTime? Min { get => Item.Min != null ? DateTime.Parse(Item.Min) : null; set => Item.Min = value?.ToString("HH:MM")!; }
+    public string? Min { get => Item.Min!; set => Item.Min = DateTime.Parse(value!).ToString(Format)!; }
 
+    /// <summary>
+    /// Format of HH:MM
+    /// </summary>
     [Parameter]
-    public DateTime? Max { get => Item.Max != null ? DateTime.Parse(Item.Max) : null; set => Item.Max = value?.ToString("HH:MM")!; }
+    public string? Max { get => Item.Max!; set => Item.Max = DateTime.Parse(value!).ToString(Format)!; }
 
     [Parameter]
     public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
@@ -38,27 +44,30 @@
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
     public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
+    /// <summary>
+    /// Format of "HH:MM"
+    /// </summary>
     [Parameter]
     [Binding(BindingType.Value)]
-    public DateTime? Value { get => Item.Value != null ? DateTime.Parse(Item.Value) : null; set => Item.Value = value?.ToString("HH:MM")!; }
+    public string? Value { get => Item.Value!; set => Item.Value = DateTime.Parse(value!).ToString(Format)!; }
 
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value); }
 
-    protected override void OnParametersSet()
+    protected override void OnAfterRender(bool firstRender)
     {
-        base.OnParametersSet();
+        base.OnAfterRender(firstRender);
 
         // if we don't have required, but binding property has [Required] then set it
         var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
         if (this.Min == null && rangeAttribute?.Minimum != null)
         {
-            this.Min = DateTime.Parse((string)rangeAttribute.Minimum);
+            this.Min = DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format);
         }
 
         if (this.Max == null && rangeAttribute?.Maximum != null)
         {
-            this.Max = DateTime.Parse((string)rangeAttribute.Maximum);
+            this.Max = DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format);
         }
 
         if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)

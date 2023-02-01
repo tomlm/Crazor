@@ -21,10 +21,10 @@
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public Double? Max { get => Item.Max == double.NaN ? null : Item.Max; set => Item.Max = value ?? double.NaN; }
+    public Double? Min { get => Double.IsNaN(Item.Min) ? null : Item.Min; set => Item.Min = value ?? double.NaN; }
 
     [Parameter]
-    public Double? Min { get => Item.Min == double.NaN ? null : Item.Min; set => Item.Min = value ?? double.NaN; }
+    public Double? Max { get => Double.IsNaN(Item.Max) ? null : Item.Max; set => Item.Max = value ?? double.NaN; }
 
     [Parameter]
     public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
@@ -38,14 +38,14 @@
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public Double? Value { get => Item.Value == double.NaN ? null : Item.Value; set => Item.Value = value ?? double.NaN; }
+    public Double? Value { get => Double.IsNaN(Item.Value) ? null : Item.Value; set => Item.Value = value ?? double.NaN; }
 
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
-    protected override void OnParametersSet()
+    protected override void OnAfterRender(bool firstRender)
     {
-        base.OnParametersSet();
+        base.OnAfterRender(firstRender);
 
         var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
         if (this.Min == null && rangeAttribute?.Minimum != null)

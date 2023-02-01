@@ -50,9 +50,9 @@
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
-    protected override void OnParametersSet()
+    protected override void OnAfterRender(bool firstRender)
     {
-        base.OnParametersSet();
+        base.OnAfterRender(firstRender);
 
         // --- Client side validation....
         var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
@@ -82,31 +82,31 @@
         }
 
         var phoneAttribute = BindingProperty?.GetCustomAttribute<PhoneAttribute>();
-        if (this.Style == null && phoneAttribute != null)
+        if (phoneAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Tel;
         }
 
         var emailAttribute = BindingProperty?.GetCustomAttribute<EmailAddressAttribute>();
-        if (this.Style == null && emailAttribute != null)
+        if (emailAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Email;
         }
 
         var passwordAttribute = BindingProperty?.GetCustomAttribute<PasswordPropertyTextAttribute>();
-        if (this.Style == null && passwordAttribute != null)
+        if (passwordAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Password;
         }
 
         var urlAttribute = BindingProperty?.GetCustomAttribute<UrlAttribute>();
-        if (this.Style == null && urlAttribute != null)
+        if (urlAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Url;
         }
 
         var dtAttribute = BindingProperty?.GetCustomAttribute<DataTypeAttribute>();
-        if (this.Style == null && dtAttribute != null)
+        if (dtAttribute != null)
         {
             switch (dtAttribute.DataType)
             {

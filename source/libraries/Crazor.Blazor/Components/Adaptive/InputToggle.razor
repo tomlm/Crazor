@@ -25,7 +25,7 @@
     public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
-    public String? Title { get => this.Label; set => this.Label = value; }
+    public String? Title { get => Item.Title; set => Item.Title = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
@@ -42,4 +42,14 @@
 
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value); }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (this.Title == null)
+        {
+            this.Title = this.Label;
+        }
+    }
 }
