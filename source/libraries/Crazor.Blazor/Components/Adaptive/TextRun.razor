@@ -1,4 +1,5 @@
 @using AdaptiveCards
+@using Crazor.Blazor.ComponentRenderer;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ItemComponent<AdaptiveTextRun>
@@ -41,10 +42,17 @@
     [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
     public AdaptiveTextWeight Weight { get => Item.Weight ; set => Item.Weight  = value; }
 
+    [Parameter]
+    public String? Text { get => Item.Text; set => Item.Text = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
+
+        if (String.IsNullOrEmpty(Text) && ChildContent != null)
+        {
+            Text = ChildContent.GetStringContent();
+        }
 
         if (this.ParentItem is AdaptiveRichTextBlock rtb)
         {

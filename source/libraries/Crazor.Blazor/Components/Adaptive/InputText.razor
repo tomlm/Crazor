@@ -50,9 +50,9 @@
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnParametersSet()
     {
-        base.OnAfterRender(firstRender);
+        base.OnParametersSet();
 
         // --- Client side validation....
         var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();

@@ -54,9 +54,9 @@
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value); }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnParametersSet()
     {
-        base.OnAfterRender(firstRender);
+        base.OnParametersSet();
 
         // if we don't have required, but binding property has [Required] then set it
         var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();

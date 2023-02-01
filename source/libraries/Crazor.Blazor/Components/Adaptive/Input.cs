@@ -40,9 +40,9 @@ namespace Crazor.Blazor.Components.Adaptive
 
         public string? BindingDisplayName { get; set; }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override void OnParametersSet()
         {
-            base.OnAfterRender(firstRender);
+            base.OnParametersSet();
 
             var id = this.Id ?? this.Binding;
 

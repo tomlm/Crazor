@@ -5,17 +5,13 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
-using Crazor.Blazor.Components.Adaptive;
 using Crazor.Interfaces;
-using Crazor.Teams;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Xml.Serialization;
-using Diag = System.Diagnostics;
 
 namespace Crazor.Blazor
 {
@@ -109,10 +105,35 @@ namespace Crazor.Blazor
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
                 var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
-                
+#if XML
+                xml = rendered.Markup;
+
+                if (!String.IsNullOrWhiteSpace(xml))
+                {
+                    if (!xml.StartsWith("<?xml"))
+                    {
+                        xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
+                    }
+                    // File.WriteAllText(@"c:\scratch\foo.xml", xml);
+                    System.Diagnostics.Debug.WriteLine(xml);
+
+                    var reader = XmlReader.Create(new StringReader(xml));
+                    var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
+                    //Diag.Debug.WriteLine(JsonConvert.SerializeObject(card));
+                    return card;
+                }
+                else
+                {
+                    // no card defined in markup
+                    return new AdaptiveCard("1.5");
+                }
+#else
+                // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
+                // which has the adaptive card already instantiated in memory and ready to go.
                 var cardWrapper = rendered.Instance as CardViewWrapper;
                 //System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
                 return cardWrapper.Card;
+#endif
             }
             catch (Exception err)
             {
