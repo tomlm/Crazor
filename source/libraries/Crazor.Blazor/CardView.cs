@@ -105,7 +105,7 @@ namespace Crazor.Blazor
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
                 var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
-#if XML
+#if XML_SERIALIZATION
                 xml = rendered.Markup;
 
                 if (!String.IsNullOrWhiteSpace(xml))
