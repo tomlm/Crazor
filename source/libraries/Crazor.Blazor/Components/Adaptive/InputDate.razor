@@ -19,30 +19,30 @@
     internal const string Format = "yyyy-MM-dd";
 
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public DateTime? Min { get; set; }
+    public string? Min { get => Item.Min!; set => Item.Min = DateTime.Parse(value!).ToString(Format)!; }
 
     [Parameter]
-    public DateTime? Max { get; set; }
+    public string? Max { get => Item.Max!; set => Item.Max = DateTime.Parse(value!).ToString(Format)!; }
 
     [Parameter]
-    public String? Placeholder { get; set; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public DateTime? Value { get; set; }
+    public string? Value { get => Item.Value!; set => Item.Value = DateTime.Parse(value!).ToString(Format)!; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
     protected override void OnParametersSet()
     {
@@ -52,12 +52,12 @@
         var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
         if (this.Min == null && rangeAttribute?.Minimum != null)
         {
-            this.Min = DateTime.Parse((string)rangeAttribute.Minimum);
+            this.Min = (string)rangeAttribute.Minimum;
         }
 
         if (this.Max == null && rangeAttribute?.Maximum != null)
         {
-            this.Max = DateTime.Parse((string)rangeAttribute.Maximum);
+            this.Max = (string)rangeAttribute.Maximum;
         }
 
         if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)

@@ -67,9 +67,14 @@ namespace AdaptiveCards
         /// Initialize a adaptivedimension instance from a string.
         /// </summary>
         /// <param name="value">value of string ("auto","stretch","100px")</param>
-        public AdaptiveDimension(string value)
+        public AdaptiveDimension(string? value)
         {
-            if (value.EndsWith("px"))
+            if (value == null)
+            {
+                this.DimensionType = AdaptiveDimensionType.Auto;
+                
+            }
+            else  if (value.EndsWith("px"))
             {
                 value = value.Substring(0, value.Length - 2);
                 this.Unit = int.Parse(value);

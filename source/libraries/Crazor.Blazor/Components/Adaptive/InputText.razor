@@ -18,37 +18,37 @@
 {
 
     [Parameter]
-    public BoolProperty? IsMultiline { get; set; }
+    public BoolProperty? IsMultiline { get => Item.IsMultiline; set => Item.IsMultiline = value == true; }
 
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public Int32? MaxLength { get; set; }
+    public Int32? MaxLength { get => Item.MaxLength; set => Item.MaxLength = value ?? 0; }
 
     [Parameter]
-    public String? Placeholder { get; set; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
     [Parameter]
-    public String? Regex { get; set; }
+    public String? Regex { get => Item.Regex; set => Item.Regex = value; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveTextInputStyle), "Text")]
-    public AdaptiveTextInputStyle? Style { get; set; }
+    public AdaptiveTextInputStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String? Value { get; set; }
+    public String? Value { get => Item.Value; set => Item.Value = value; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
     protected override void OnParametersSet()
     {
@@ -82,31 +82,31 @@
         }
 
         var phoneAttribute = BindingProperty?.GetCustomAttribute<PhoneAttribute>();
-        if (this.Style == null && phoneAttribute != null)
+        if (phoneAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Tel;
         }
 
         var emailAttribute = BindingProperty?.GetCustomAttribute<EmailAddressAttribute>();
-        if (this.Style == null && emailAttribute != null)
+        if (emailAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Email;
         }
 
         var passwordAttribute = BindingProperty?.GetCustomAttribute<PasswordPropertyTextAttribute>();
-        if (this.Style == null && passwordAttribute != null)
+        if (passwordAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Password;
         }
 
         var urlAttribute = BindingProperty?.GetCustomAttribute<UrlAttribute>();
-        if (this.Style == null && urlAttribute != null)
+        if (urlAttribute != null)
         {
             this.Style = AdaptiveTextInputStyle.Url;
         }
 
         var dtAttribute = BindingProperty?.GetCustomAttribute<DataTypeAttribute>();
-        if (this.Style == null && dtAttribute != null)
+        if (dtAttribute != null)
         {
             switch (dtAttribute.DataType)
             {

@@ -12,7 +12,6 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-using Diag = System.Diagnostics;
 
 namespace Crazor.Blazor
 {
@@ -106,6 +105,7 @@ namespace Crazor.Blazor
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
                 var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
+#if XML_SERIALIZATION
                 xml = rendered.Markup;
 
                 if (!String.IsNullOrWhiteSpace(xml))
@@ -115,7 +115,7 @@ namespace Crazor.Blazor
                         xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
                     }
                     // File.WriteAllText(@"c:\scratch\foo.xml", xml);
-                    Diag.Debug.WriteLine(xml);
+                    System.Diagnostics.Debug.WriteLine(xml);
 
                     var reader = XmlReader.Create(new StringReader(xml));
                     var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
@@ -127,6 +127,13 @@ namespace Crazor.Blazor
                     // no card defined in markup
                     return new AdaptiveCard("1.5");
                 }
+#else
+                // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
+                // which has the adaptive card already instantiated in memory and ready to go.
+                var cardWrapper = rendered.Instance as CardViewWrapper;
+                //System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                return cardWrapper.Card;
+#endif
             }
             catch (Exception err)
             {
@@ -279,7 +286,7 @@ namespace Crazor.Blazor
 
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                     return false;
-                
+
                 if (propertyInfo.Name == "Model")
                     return false;
 

@@ -11,21 +11,21 @@
 {
 
     [Parameter]
-    public String? AltText { get; set; }
+    public String? AltText { get => Item.AltText; set => Item.AltText = value; }
 
     [Parameter]
-    public BoolProperty? IsVisible { get; set; }
+    public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public String? Poster { get; set; }
+    public String? Poster { get => Item.Poster; set => Item.Poster = value; }
 
     [Parameter]
-    public BoolProperty? Separator { get; set; }
+    public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get; set; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 }

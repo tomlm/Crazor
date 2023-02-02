@@ -10,7 +10,7 @@
 {
 
     [Parameter]
-    public String? Width { get; set; }
+    public String? Width { get => Item.Width?.ToString(); set => Item.Width = new AdaptiveColumnWidth(value); }
 
     protected override void OnAfterRender(bool firstRender)
     {

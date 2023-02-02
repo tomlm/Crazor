@@ -83,28 +83,35 @@ namespace AdaptiveCards
         /// Initializes an AdaptiveColumnWidth instance with the given width as ("auto","stretch", "100px", "1.5" /*relative size*/}
         /// </summary>
         /// <param name="width">The device-independent pixel size to use.</param>
-        public AdaptiveColumnWidth(string width)
+        public AdaptiveColumnWidth(string? width)
         {
-            switch (width.ToLower())
+            if (width == null)
             {
-                case AdaptiveColumnWidthType.Auto:
-                    WidthType = AdaptiveColumnWidthType.Auto;
-                    break;
-                case AdaptiveColumnWidthType.Stretch:
-                    WidthType = AdaptiveColumnWidthType.Stretch;
-                    break;
-                default:
-                    if (width.EndsWith("px"))
-                    {
-                        width = width.Substring(0, width.Length - 2);
-                        IsPixel = true;
-                        Unit = uint.Parse(width);
-                    }
-                    else
-                    {
-                        Unit = float.Parse(width);
-                    }
-                    break;
+                WidthType = AdaptiveColumnWidthType.Auto;
+            }
+            else
+            {
+                switch (width.ToLower())
+                {
+                    case AdaptiveColumnWidthType.Auto:
+                        WidthType = AdaptiveColumnWidthType.Auto;
+                        break;
+                    case AdaptiveColumnWidthType.Stretch:
+                        WidthType = AdaptiveColumnWidthType.Stretch;
+                        break;
+                    default:
+                        if (width.EndsWith("px"))
+                        {
+                            width = width.Substring(0, width.Length - 2);
+                            IsPixel = true;
+                            Unit = uint.Parse(width);
+                        }
+                        else
+                        {
+                            Unit = float.Parse(width);
+                        }
+                        break;
+                }
             }
         }
 

@@ -269,6 +269,9 @@ namespace Crazor
         /// <returns></returns>
         public virtual async Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
+            Diag.Stopwatch sw = new Diag.Stopwatch();
+            sw.Start();
+
             AdaptiveCard? outboundCard;
             try
             {
@@ -291,6 +294,13 @@ namespace Crazor
                 outboundCard = new AdaptiveCard("1.3");
                 var innerMessage = err.InnerException?.Message ?? String.Empty;
                 AddBannerMessage($"\n{err.Message.Replace("\n", "\n\n")}\n{innerMessage}", AdaptiveContainerStyle.Attention);
+            }
+            sw.Stop();
+
+            var host = this.Context.Configuration.GetValue<Uri>("HostUri").Host.ToLower();
+            if (host == "localhost" || host.EndsWith("ngrok.io"))
+            {
+                outboundCard.Title = $"{this.Name} [{sw.Elapsed.ToString()}]";
             }
 
             await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
@@ -836,13 +846,6 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
 
-            if (String.IsNullOrWhiteSpace(outboundCard.Title))
-            {
-#pragma warning disable CS0618 // Type or member is obsolete
-                outboundCard.Title = $"{this.Name}";
-#pragma warning restore CS0618 // Type or member is obsolete
-            }
-
             await AddRefresh(outboundCard, isPreview, cancellationToken);
 
             AddMessageBanner(outboundCard, isPreview);
@@ -867,11 +870,23 @@ namespace Crazor
 
             foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
             {
-                if ((action.Data == null) ||
-                    (action.Data is string text && string.IsNullOrWhiteSpace(text)))
+                if (action.Data == null)
                 {
                     action.Data = new JObject();
                 }
+                else if (action.Data is string text)
+                {
+                    text = text.Trim();
+                    if (String.IsNullOrEmpty(text))
+                    {
+                        action.Data = new JObject();
+                    }
+                    else
+                    {
+                        action.Data = JObject.Parse(text);
+                    }
+                }
+
                 var data = (JObject)action.Data;
                 data[Constants.ROUTE_KEY] = route;
                 if (sessionId != null)
@@ -883,9 +898,21 @@ namespace Crazor
             foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
             {
                 // YAML authoring errors - "data:" without children properties is an empty string
-                if (action.Data == null || (action.Data is string text && string.IsNullOrWhiteSpace(text)))
+                if (action.Data == null)
                 {
                     action.Data = new JObject();
+                }
+                else if (action.Data is string text)
+                {
+                    text = text.Trim();
+                    if (String.IsNullOrEmpty(text))
+                    {
+                        action.Data = new JObject();
+                    }
+                    else
+                    {
+                        action.Data = JObject.Parse(text);
+                    }
                 }
 
                 var data = JObject.FromObject(action.Data);

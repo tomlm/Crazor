@@ -19,14 +19,14 @@ namespace Crazor.Blazor.Components.Adaptive
         protected ICardView CardView { get; set; }
 
         [Parameter]
-        public BoolProperty? IsRequired { get; set; }
+        public BoolProperty? IsRequired { get => Item.IsRequired; set => Item.IsRequired = value == true; }
 
         [Parameter]
         [Binding(BindingType.DisplayName)]
-        public String Label { get; set; }
+        public String? Label { get => Item.Label; set => Item.Label = value!; }
 
         [Parameter]
-        public String ErrorMessage { get; set; }
+        public String? ErrorMessage { get => Item.ErrorMessage; set => Item.ErrorMessage = value!; }
 
         [Parameter]
         public string? Binding { get; set; }
@@ -107,7 +107,7 @@ namespace Crazor.Blazor.Components.Adaptive
             }
 
             // if we don't have required, but binding property has [Required] then set it
-            if (this.IsRequired == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+            if (BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
             {
                 this.IsRequired = true;
 

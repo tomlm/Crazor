@@ -8,9 +8,12 @@
         <DataQuery Dataset="graph.microsoft.com/users" />
     </InputChoiceSet>
 
-    <TextBlock>Person: @Choice</TextBlock>
+    @if (Choice != null)
+    {
+        <TextBlock>Person: @Choice</TextBlock>
+    }
     
-    <ActionExecute Verb="Refresh" />
+    <ActionExecute Verb="Refresh" Title="Refresh"/>
 </Card>
 
 @code
