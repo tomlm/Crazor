@@ -1,7 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
-@inherits TypedElementComponent<AdaptiveColumn>
+@inherits ElementComponent<AdaptiveColumn>
 
 <ac:Column @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>

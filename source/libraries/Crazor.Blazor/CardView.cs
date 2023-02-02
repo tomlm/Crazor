@@ -119,7 +119,10 @@ namespace Crazor.Blazor
 
                     var reader = XmlReader.Create(new StringReader(xml));
                     var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
-                    //Diag.Debug.WriteLine(JsonConvert.SerializeObject(card));
+                    if (System.Diagnostics.Debugger.IsAttached)
+                    {
+                        System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                    }
                     return card;
                 }
                 else
@@ -131,7 +134,10 @@ namespace Crazor.Blazor
                 // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
                 // which has the adaptive card already instantiated in memory and ready to go.
                 var cardWrapper = rendered.Instance as CardViewWrapper;
-                //System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                }
                 return cardWrapper.Card;
 #endif
             }
