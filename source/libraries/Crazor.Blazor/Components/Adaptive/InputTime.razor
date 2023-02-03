@@ -25,13 +25,13 @@
     /// Format of "HH:MM"
     /// </summary>
     [Parameter]
-    public string? Min { get => Item.Min!; set => Item.Min = DateTime.Parse(value!).ToString(Format)!; }
+    public string? Min { get => Item.Min!; set => Item.Min = (value != null) ? DateTime.Parse(value!).ToString(Format)! : null!; }
 
     /// <summary>
     /// Format of HH:MM
     /// </summary>
     [Parameter]
-    public string? Max { get => Item.Max!; set => Item.Max = DateTime.Parse(value!).ToString(Format)!; }
+    public string? Max { get => Item.Max!; set => Item.Max = (value != null) ? DateTime.Parse(value!).ToString(Format)! : null!; }
 
     [Parameter]
     public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
@@ -49,7 +49,7 @@
     /// </summary>
     [Parameter]
     [Binding(BindingType.Value)]
-    public string? Value { get => Item.Value!; set => Item.Value = DateTime.Parse(value!).ToString(Format)!; }
+    public string? Value { get => Item.Value!; set => Item.Value = (value != null) ? DateTime.Parse(value!).ToString(Format)! : null!; }
 
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value); }

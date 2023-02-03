@@ -69,6 +69,10 @@ namespace Crazor.Blazor.Components.Adaptive
                 var descAttr = this.BindingProperty?.GetCustomAttribute<DescriptionAttribute>();
                 this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? MakeTitle(parts.Last());
             }
+            else
+            {
+                this.BindingDisplayName = id;
+            }
 
             // Process BindingAttributes
             var properties = this.GetType().GetProperties().Where(p => p.GetCustomAttribute<BindingAttribute>(true) != null);
@@ -80,7 +84,7 @@ namespace Crazor.Blazor.Components.Adaptive
                 // One of: PropertyName | DisplayName | the property value
                 var bindValueAttribute = property.GetCustomAttribute<BindingAttribute>();
                 var value = property?.GetValue(this);
-                if (value == null && Binding != null && bindValueAttribute != null)
+                if (value == null && bindValueAttribute != null)
                 {
                     switch (bindValueAttribute.Policy)
                     {

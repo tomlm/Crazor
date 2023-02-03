@@ -49,7 +49,7 @@
 
         if (this.Title == null)
         {
-            this.Title = this.Label;
+            this.Title = this.Label ?? this.Id ?? String.Empty;
         }
     }
 }
