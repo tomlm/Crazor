@@ -71,21 +71,24 @@ namespace Crazor.Mvc.TagHelpers
                 }
             }
 
-            // if we don't have required, but binding property has [Required] then set it
-            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            if (ClientValidation == null || ClientValidation == true)
             {
-                output.Attributes.SetAttribute(nameof(Min), DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format));
-            }
+                // if we don't have required, but binding property has [Required] then set it
+                var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+                if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+                {
+                    output.Attributes.SetAttribute(nameof(Min), DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format));
+                }
 
-            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
-            {
-                output.Attributes.SetAttribute(nameof(Max), DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format));
-            }
+                if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+                {
+                    output.Attributes.SetAttribute(nameof(Max), DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format));
+                }
 
-            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
-            {
-                output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
+                if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+                {
+                    output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
+                }
             }
         }
     }

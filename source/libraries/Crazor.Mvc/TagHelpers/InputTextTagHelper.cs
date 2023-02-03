@@ -63,23 +63,27 @@ namespace Crazor.Mvc.TagHelpers
 
             output.TagName = "Input.Text";
 
-            // --- Client side validation....
-            var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
-            if (output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
+            if (ClientValidation == null || ClientValidation == true)
             {
-                output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
 
-            }
-            if (output.Attributes[nameof(ErrorMessage)] == null && regexAttribute?.ErrorMessage != null)
-            {
-                output.Attributes.SetAttribute(nameof(ErrorMessage), regexAttribute?.ErrorMessage);
-            }
+                // --- Client side validation....
+                var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
+                if (output.Attributes[nameof(Regex)] == null && regexAttribute?.Pattern != null)
+                {
+                    output.Attributes.SetAttribute(nameof(Regex), regexAttribute?.Pattern);
 
-            // -- MaxLength 
-            var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
-            if (output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
-            {
-                output.Attributes.SetAttribute(nameof(MaxLength), stringLengthAttribute?.MaximumLength);
+                }
+                if (output.Attributes[nameof(ErrorMessage)] == null && regexAttribute?.ErrorMessage != null)
+                {
+                    output.Attributes.SetAttribute(nameof(ErrorMessage), regexAttribute?.ErrorMessage);
+                }
+
+                // -- MaxLength 
+                var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
+                if (output.Attributes[nameof(MaxLength)] == null && stringLengthAttribute != null)
+                {
+                    output.Attributes.SetAttribute(nameof(MaxLength), stringLengthAttribute?.MaximumLength);
+                }
             }
 
             // ----  style

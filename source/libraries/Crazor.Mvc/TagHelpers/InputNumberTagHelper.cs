@@ -55,23 +55,25 @@ namespace Crazor.Mvc.TagHelpers
 
             output.TagName = "Input.Number";
 
-            // if we don't have required, but binding property has [Required] then set it
-            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+            if (ClientValidation == null || ClientValidation == true)
             {
-                output.Attributes.SetAttribute(nameof(Min), Convert.ToDouble(rangeAttribute.Minimum));
-            }
+                // if we don't have required, but binding property has [Required] then set it
+                var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+                if (output.Attributes[nameof(Min)] == null && rangeAttribute?.Minimum != null)
+                {
+                    output.Attributes.SetAttribute(nameof(Min), Convert.ToDouble(rangeAttribute.Minimum));
+                }
 
-            if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
-            {
-                output.Attributes.SetAttribute(nameof(Max), Convert.ToDouble(rangeAttribute.Maximum));
-            }
+                if (output.Attributes[nameof(Max)] == null && rangeAttribute?.Maximum != null)
+                {
+                    output.Attributes.SetAttribute(nameof(Max), Convert.ToDouble(rangeAttribute.Maximum));
+                }
 
-            if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
-            {
-                output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
+                if (output.Attributes[nameof(ErrorMessage)] == null && rangeAttribute?.ErrorMessage != null)
+                {
+                    output.Attributes.SetAttribute(nameof(ErrorMessage), rangeAttribute?.ErrorMessage);
+                }
             }
         }
-
     }
 }

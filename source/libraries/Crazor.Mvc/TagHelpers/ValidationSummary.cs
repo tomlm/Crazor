@@ -12,25 +12,23 @@ namespace Crazor.Mvc.TagHelpers
     /// TagHelper for ActionSet
     /// </summary>
 
-    [HtmlTargetElement("ValidationErrors")]
-    public class ValidationErrorsTagHelper : InputTagHelper
+    [HtmlTargetElement("ValidationSummary")]
+    public class ValidationSummaryTagHelper : ReflectionTagHelper
     {
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var validationError in View.ValidationErrors)
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (var error in errors)
+                foreach (var error in validationError.Value)
                 {
                     sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
                 }
-                output.TagName = null;
-                output.Content.SetHtmlContent(sb.ToString());
             }
-            else
-            {
-                output.TagName = null;
-            }
+
+            output.TagName = null;
+            output.Content.SetHtmlContent(sb.ToString());
 
             return Task.CompletedTask;
         }

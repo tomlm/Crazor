@@ -44,6 +44,13 @@ namespace Crazor.Mvc.TagHelpers
         [HtmlAttributeIgnore]
         public bool? ShowErrors { get; set; }
 
+        /// <summary>
+        /// Set to false to disable client side validation
+        /// </summary>
+        [HtmlAttributeName(nameof(ClientValidation))]
+        [HtmlAttributeIgnore]
+        public bool? ClientValidation { get; set; }
+
         public PropertyInfo? BindingProperty { get; set; }
 
         public object? BindingValue { get; set; }
@@ -125,77 +132,79 @@ namespace Crazor.Mvc.TagHelpers
                     output.Attributes.SetAttribute(attributeName, value);
                 }
             }
-
-            // if we don't have required, but binding property has [Required] then set it
-            if (output.Attributes[nameof(IsRequired)] == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+            // --- Client side validation....
+            if (ClientValidation == null || ClientValidation == true)
             {
-                output.Attributes.SetAttribute(nameof(IsRequired), "true");
-
-                // --- Client side validation....
-                var requiredAttribute = BindingProperty?.GetCustomAttribute<RequiredAttribute>();
-                if (output.Attributes[nameof(ErrorMessage)] == null && requiredAttribute?.ErrorMessage != null)
+                // if we don't have required, but binding property has [Required] then set it
+                if (output.Attributes[nameof(IsRequired)] == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
                 {
-                    output.Attributes.SetAttribute(nameof(ErrorMessage), requiredAttribute?.ErrorMessage);
-                }
-            }
+                    output.Attributes.SetAttribute(nameof(IsRequired), "true");
 
-            // Add server side error messages.
-            if (ShowErrors == null || ShowErrors.Value == true)
-            {
-                if (View != null)
-                {
-                    if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
+                    var requiredAttribute = BindingProperty?.GetCustomAttribute<RequiredAttribute>();
+                    if (output.Attributes[nameof(ErrorMessage)] == null && requiredAttribute?.ErrorMessage != null)
                     {
-                        if (errors.Any())
+                        output.Attributes.SetAttribute(nameof(ErrorMessage), requiredAttribute?.ErrorMessage);
+                    }
+                }
+            } 
+
+                // Add server side error messages.
+                if (ShowErrors == null || ShowErrors.Value == true)
+                {
+                    if (View != null)
+                    {
+                        if (View.ValidationErrors.TryGetValue(this.Binding ?? this.Id ?? String.Empty, out var errors))
                         {
-                            sb = new StringBuilder();
-                            sb.AppendLine();
-                            foreach (var error in errors)
+                            if (errors.Any())
                             {
-                                sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
+                                sb = new StringBuilder();
+                                sb.AppendLine();
+                                foreach (var error in errors)
+                                {
+                                    sb.AppendLine($"<TextBlock Spacing=\"None\" Color=\"Attention\">{error}</TextBlock>");
+                                }
+                                output.PostElement.SetHtmlContent(sb.ToString());
                             }
-                            output.PostElement.SetHtmlContent(sb.ToString());
                         }
                     }
                 }
             }
-        }
 
-        protected static string MakeTitle(string name)
-        {
-            if (String.IsNullOrEmpty(name))
+            protected static string MakeTitle(string name)
             {
-                return String.Empty;
+                if (String.IsNullOrEmpty(name))
+                {
+                    return String.Empty;
+                }
+
+                name = $"{Char.ToUpper(name[0])}{name.Substring(1)}";
+                StringBuilder sb = new StringBuilder();
+                bool isLower = false;
+                bool endIsSpace = false;
+                foreach (var ch in name)
+                {
+                    if (isLower && Char.IsUpper(ch))
+                    {
+                        sb.Append($" {ch}");
+                    }
+                    else if (Char.IsLetterOrDigit(ch))
+                    {
+                        if (endIsSpace)
+                            sb.Append(Char.ToUpper(ch));
+                        else
+                            sb.Append(ch);
+                        endIsSpace = false;
+                    }
+                    else if (!sb.ToString().EndsWith(' '))
+                    {
+                        sb.Append(' ');
+                        endIsSpace = true;
+                    }
+                    isLower = Char.IsLower(ch);
+                }
+
+                return sb.ToString();
             }
 
-            name = $"{Char.ToUpper(name[0])}{name.Substring(1)}";
-            StringBuilder sb = new StringBuilder();
-            bool isLower = false;
-            bool endIsSpace = false;
-            foreach (var ch in name)
-            {
-                if (isLower && Char.IsUpper(ch))
-                {
-                    sb.Append($" {ch}");
-                }
-                else if (Char.IsLetterOrDigit(ch))
-                {
-                    if (endIsSpace)
-                        sb.Append(Char.ToUpper(ch));
-                    else
-                        sb.Append(ch);
-                    endIsSpace = false;
-                }
-                else if (!sb.ToString().EndsWith(' '))
-                {
-                    sb.Append(' ');
-                    endIsSpace = true;
-                }
-                isLower = Char.IsLower(ch);
-            }
-
-            return sb.ToString();
         }
-
     }
-}
