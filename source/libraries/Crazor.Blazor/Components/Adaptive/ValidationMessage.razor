@@ -1,0 +1,42 @@
+﻿@using Crazor.Interfaces;
+@using AC=global::AdaptiveCards;
+@using System.Linq.Expressions;
+@using Microsoft.AspNetCore.Components.Forms;
+
+@if (this.Id != null && CardView.ValidationErrors.TryGetValue(this.Id, out var errors))
+{
+    @foreach (var error in errors)
+    {
+        <TextBlock Spacing="@AC.AdaptiveSpacing.None" Color="@AC.AdaptiveTextColor.Attention">@error</TextBlock>
+    }
+}
+
+@code
+{
+    [CascadingParameter(Name = "CardView")]
+    public ICardView CardView { get; set; }
+
+    /// <summary>
+    /// Specifies the field for which validation messages should be displayed.
+    /// </summary>
+    [Parameter] 
+    public Expression<Func<object>>? For { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    /// <inheritdoc />
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (Id == null && For != null)
+        {
+            var fieldIdentifier = FieldIdentifier.Create<object>(For);
+            if (ObjectPath.TryGetPathValue<string>(fieldIdentifier.Model, fieldIdentifier.FieldName, out var val))
+            {
+                this.Id = val;
+            }
+        }
+    }
+}

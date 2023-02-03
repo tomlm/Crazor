@@ -1,6 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveMediaSource>
+@implements IChildItem
 
 <ac:MediaSource @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -10,14 +11,14 @@
 {
 
     [Parameter]
-    public String? MimeType { get => Item.MimeType ; set => Item.MimeType  = value; }
+    public String? MimeType { get => Item.MimeType; set => Item.MimeType = value; }
 
     [Parameter]
-    public String? Url { get => Item.Url ; set => Item.Url  = value; }
+    public String? Url { get => Item.Url; set => Item.Url = value; }
 
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (this.ParentItem is AdaptiveMedia media)
         {

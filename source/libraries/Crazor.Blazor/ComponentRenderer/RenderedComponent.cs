@@ -6,16 +6,17 @@ namespace Crazor.Blazor.ComponentRenderer;
 
 using Microsoft.AspNetCore.Components;
 using Crazor.Blazor.ComponentRenderer.Internals;
+using AdaptiveCards;
 
 // Adapted from BlazorUnitTestingPrototype (Steve Sanderson)
 public class RenderedComponent<TComponent> where TComponent : IComponent
 {
-    private readonly HtmlRenderer _renderer;
+    private readonly CustomRenderer _renderer;
     private ContainerComponent _containerTestRootComponent { get; }
     private int _componentId;
     private Type _componentType;
 
-    internal RenderedComponent(HtmlRenderer renderer, IEnumerable<ComponentParameter>? parameters, Type? componentType = null)
+    internal RenderedComponent(CustomRenderer renderer, IEnumerable<ComponentParameter>? parameters, Type? componentType = null)
     {
         _renderer = renderer;
         _componentType = componentType ?? typeof(TComponent);
@@ -27,10 +28,10 @@ public class RenderedComponent<TComponent> where TComponent : IComponent
 
         var item = this.SetParametersAndRender(GetParameterView(parameters));
         _componentId = item.Id;
-        this.Instance = item.Instance;
+        // this.Instance = item.Instance;
     }
 
-    public virtual TComponent? Instance { get; }
+    public virtual AdaptiveCard Card => Cardizer.GetCard(_renderer, _componentId);
 
     public virtual string Markup => Htmlizer.GetHtml(_renderer, _componentId);
 

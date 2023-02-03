@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿//#define XML_SERIALIZATION
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
@@ -104,7 +105,7 @@ namespace Crazor.Blazor
             {
                 // Create a RenderFragment from the component
                 var ctx = new RenderingContext(ServiceProvider);
-                var rendered = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
+                var renderer = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
 #if XML_SERIALIZATION
                 xml = rendered.Markup;
 
@@ -121,7 +122,7 @@ namespace Crazor.Blazor
                     var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
                     if (System.Diagnostics.Debugger.IsAttached)
                     {
-                        System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                        System.Diagnostics.Debug.WriteLine(card.ToXml());
                     }
                     return card;
                 }
@@ -133,12 +134,12 @@ namespace Crazor.Blazor
 #else
                 // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
                 // which has the adaptive card already instantiated in memory and ready to go.
-                var cardWrapper = rendered.Instance as CardViewWrapper;
+                var card = renderer.Card;
                 if (System.Diagnostics.Debugger.IsAttached)
                 {
-                    System.Diagnostics.Debug.WriteLine(cardWrapper.Card.ToXml());
+                    System.Diagnostics.Debug.WriteLine(card.ToXml());
                 }
-                return cardWrapper.Card;
+                return card;
 #endif
             }
             catch (Exception err)

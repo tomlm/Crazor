@@ -10,13 +10,11 @@ namespace Crazor.Blazor.Components
     /// <summary>
     /// Shows errors when present for a given input id as TextBlock Attention
     /// </summary>
-    public class ActionComponent<ActionT> : TypedElementComponent<ActionT>
+    public class ActionComponent<ActionT> : TypedElementComponent<ActionT>, IChildItem
         where ActionT : AdaptiveAction
     {
-        protected override void OnAfterRender(bool firstRender)
+        public virtual void AddToParent()
         {
-            base.OnAfterRender(firstRender);
-
             if (this.ParentItem is AdaptiveCard card)
             {
                 card.Actions.Add(this.Item);

@@ -1,6 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveSelectAction>
+@implements IChildItem
 
 <ac:SelectAction @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -8,9 +9,9 @@
 
 @code
 {
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (this.ParentItem is AdaptiveCard card)
         {

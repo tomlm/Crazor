@@ -1,6 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveFact>
+@implements IChildItem
 
 <ac:Fact @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -14,9 +15,9 @@
     [Parameter]
     public String? Value { get => Item.Value ; set => Item.Value  = value; }
 
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (this.ParentItem is AdaptiveFactSet factSet)
         {

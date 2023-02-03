@@ -11,7 +11,7 @@
 </ac:Input.Date>
 @if (ShowErrors == null || ShowErrors == true)
 {
-    <ValidationErrors Id="@(Binding ?? Id)" />
+    <ValidationMessage Id="@(Binding ?? Id)" />
 }
 
 @code
@@ -48,21 +48,24 @@
     {
         base.OnParametersSet();
 
-        // if we don't have required, but binding property has [Required] then set it
-        var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-        if (this.Min == null && rangeAttribute?.Minimum != null)
+        if (ClientValidation == null || ClientValidation == true)
         {
-            this.Min = (string)rangeAttribute.Minimum;
-        }
+            // if we don't have required, but binding property has [Required] then set it
+            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+            if (this.Min == null && rangeAttribute?.Minimum != null)
+            {
+                this.Min = (string)rangeAttribute.Minimum;
+            }
 
-        if (this.Max == null && rangeAttribute?.Maximum != null)
-        {
-            this.Max = (string)rangeAttribute.Maximum;
-        }
+            if (this.Max == null && rangeAttribute?.Maximum != null)
+            {
+                this.Max = (string)rangeAttribute.Maximum;
+            }
 
-        if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
-        {
-            this.ErrorMessage = rangeAttribute?.ErrorMessage;
+            if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+            {
+                this.ErrorMessage = rangeAttribute?.ErrorMessage;
+            }
         }
     }
 

@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ItemComponent<AdaptiveTextRun>
+@implements IChildItem
 
 <ac:TextRun @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -45,14 +46,9 @@
     [Parameter]
     public String? Text { get => Item.Text; set => Item.Text = value; }
 
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
-
-        if (String.IsNullOrEmpty(Text) && ChildContent != null)
-        {
-            Text = ChildContent.GetStringContent();
-        }
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (this.ParentItem is AdaptiveRichTextBlock rtb)
         {
@@ -61,6 +57,16 @@
         else
         {
             throw new Exception("Unknown parent type");
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (String.IsNullOrEmpty(Text) && ChildContent != null)
+        {
+            Text = ChildContent.GetStringContent();
         }
     }
 }

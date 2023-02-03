@@ -10,7 +10,7 @@ using System.Text.Encodings.Web;
 namespace Crazor.Blazor.ComponentRenderer.Internals;
 
 // Adapted from BlazorUnitTestingPrototype (Steve Sanderson)
-// and https://source.dot.net/#Microsoft.AspNetCore.Mvc.ViewFeatures/RazorComponents/HtmlRenderer.cs
+// and https://source.dot.net/#Microsoft.AspNetCore.Mvc.ViewFeatures/RazorComponents/CustomRenderer.cs
 [SuppressMessage("Usage", "BL0006:Do not use RenderTree types", Justification = "Not change at this moment")]
 internal static class Htmlizer
 {
@@ -21,7 +21,7 @@ internal static class Htmlizer
             "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"
         };
 
-    public static string GetHtml(HtmlRenderer renderer, int componentId)
+    public static string GetHtml(CustomRenderer renderer, int componentId)
     {
         var frames = renderer.GetCurrentRenderTreeFrames(componentId);
         var context = new HtmlRenderingContext(renderer);
@@ -231,14 +231,14 @@ internal static class Htmlizer
     }
     private class HtmlRenderingContext
     {
-        public HtmlRenderingContext(HtmlRenderer renderer)
+        public HtmlRenderingContext(CustomRenderer renderer)
         {
             Renderer = renderer;
         }
 
         public string? ClosestSelectValueAsString { get; set; }
 
-        public HtmlRenderer Renderer { get; }
+        public CustomRenderer Renderer { get; }
 
         public List<string> Result { get; } = new List<string>();
     }
