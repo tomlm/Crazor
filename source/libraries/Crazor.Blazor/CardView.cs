@@ -134,12 +134,12 @@ namespace Crazor.Blazor
 #else
                 // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
                 // which has the adaptive card already instantiated in memory and ready to go.
-                var card = renderer.Card;
+                var adaptiveCard = renderer.GetComponent<Components.Adaptive.Card>().Item;
                 if (System.Diagnostics.Debugger.IsAttached)
                 {
-                    System.Diagnostics.Debug.WriteLine(card.ToXml());
+                    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToXml());
                 }
-                return card;
+                return adaptiveCard;
 #endif
             }
             catch (Exception err)

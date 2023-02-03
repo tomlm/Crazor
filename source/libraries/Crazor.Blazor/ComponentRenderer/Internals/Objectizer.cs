@@ -14,19 +14,19 @@ namespace Crazor.Blazor.ComponentRenderer.Internals;
 // Adapted from BlazorUnitTestingPrototype (Steve Sanderson)
 // and https://source.dot.net/#Microsoft.AspNetCore.Mvc.ViewFeatures/RazorComponents/HtmlRenderer.cs
 [SuppressMessage("Usage", "BL0006:Do not use RenderTree types", Justification = "Not change at this moment")]
-internal static class Cardizer
+internal static class Objectizer<ObjectT>
 {
-    public static AdaptiveCard GetCard(CustomRenderer renderer, int componentId)
+    public static ObjectT GetObject(CustomRenderer renderer, int componentId)
     {
         var frames = renderer.GetCurrentRenderTreeFrames(componentId);
-        var context = new CardRenderingContext(renderer);
+        var context = new ObjectRenderingContext(renderer);
         var newPosition = RenderFrames(context, frames, 0, frames.Count);
         Debug.Assert(newPosition == frames.Count);
-        return context.Card;
+        return (ObjectT)context.Object;
     }
 
     private static int RenderChildComponent(
-        CardRenderingContext context,
+        ObjectRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
         int position)
     {
@@ -37,10 +37,10 @@ internal static class Cardizer
             ci.AddToParent();
         }
 
-        if (context.Card == null && frame.Component is Card card)
+        if (context.Object == null && frame.Component.GetType() == typeof(ObjectT))
         {
             // capture first card as result
-            context.Card = card.Item;
+            context.Object = frame.Component;
         }
 
         var childFrames = context.Renderer.GetCurrentRenderTreeFrames(frame.ComponentId);
@@ -48,7 +48,7 @@ internal static class Cardizer
         return position + frame.ComponentSubtreeLength;
     }
 
-    private static int RenderChildren(CardRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private static int RenderChildren(ObjectRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
     {
         if (maxElements == 0)
         {
@@ -59,7 +59,7 @@ internal static class Cardizer
     }
 
     private static int RenderCore(
-        CardRenderingContext context,
+        ObjectRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
         int position)
     {
@@ -96,13 +96,13 @@ internal static class Cardizer
     }
 
     private static int RenderElement(
-        CardRenderingContext context,
+        ObjectRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
         int position)
     {
         ref var frame = ref frames.Array[position];
         var afterAttributes = RenderAttributes(context, frames, position + 1, frame.ElementSubtreeLength - 1, out var capturedValueAttribute);
-        
+
         var remainingElements = frame.ElementSubtreeLength + position - afterAttributes;
         if (remainingElements > 0)
         {
@@ -120,7 +120,7 @@ internal static class Cardizer
 
 
     private static int RenderAttributes(
-        CardRenderingContext context,
+        ObjectRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
         int position,
         int maxElements,
@@ -146,7 +146,7 @@ internal static class Cardizer
         return position + maxElements;
     }
 
-    private static int RenderFrames(CardRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private static int RenderFrames(ObjectRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
     {
         var nextPosition = position;
         var endPosition = position + maxElements;
@@ -163,9 +163,9 @@ internal static class Cardizer
         return nextPosition;
     }
 
-    private class CardRenderingContext
+    private class ObjectRenderingContext
     {
-        public CardRenderingContext(CustomRenderer renderer)
+        public ObjectRenderingContext(CustomRenderer renderer)
         {
             Renderer = renderer;
         }
@@ -174,6 +174,6 @@ internal static class Cardizer
 
         public CustomRenderer Renderer { get; }
 
-        public AdaptiveCard? Card { get; set; } 
+        public object Object { get; set; }
     }
 }

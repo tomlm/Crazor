@@ -2,12 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // --------------------------------------------------------------
 
-namespace Crazor.Blazor.ComponentRenderer;
 
 using Microsoft.AspNetCore.Components;
 using Crazor.Blazor.ComponentRenderer.Internals;
-using AdaptiveCards;
 
+namespace Crazor.Blazor.ComponentRenderer;
 // Adapted from BlazorUnitTestingPrototype (Steve Sanderson)
 public class RenderedComponent<TComponent> where TComponent : IComponent
 {
@@ -31,7 +30,7 @@ public class RenderedComponent<TComponent> where TComponent : IComponent
         // this.Instance = item.Instance;
     }
 
-    public virtual AdaptiveCard Card => Cardizer.GetCard(_renderer, _componentId);
+    public virtual ObjectT GetComponent<ObjectT>() => Objectizer<ObjectT>.GetObject(_renderer, _componentId);
 
     public virtual string Markup => Htmlizer.GetHtml(_renderer, _componentId);
 
