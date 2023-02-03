@@ -11,7 +11,7 @@
 </ac:Input.Number>
 @if (ShowErrors == null || ShowErrors == true)
 {
-    <ValidationErrors Id="@(Binding ?? Id)" />
+    <ValidationMessage Id="@(Binding ?? Id)" />
 }
 
 @code
@@ -47,21 +47,23 @@
     {
         base.OnParametersSet();
 
-        var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-        if (this.Min == null && rangeAttribute?.Minimum != null)
+        if (ClientValidation == null || ClientValidation == true)
         {
-            this.Min = Convert.ToDouble(rangeAttribute.Minimum);
-        }
+            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+            if (this.Min == null && rangeAttribute?.Minimum != null)
+            {
+                this.Min = Convert.ToDouble(rangeAttribute.Minimum);
+            }
 
-        if (this.Max == null && rangeAttribute?.Maximum != null)
-        {
-            this.Max = Convert.ToDouble(rangeAttribute.Maximum);
-        }
+            if (this.Max == null && rangeAttribute?.Maximum != null)
+            {
+                this.Max = Convert.ToDouble(rangeAttribute.Maximum);
+            }
 
-        if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
-        {
-            this.ErrorMessage = rangeAttribute?.ErrorMessage;
+            if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+            {
+                this.ErrorMessage = rangeAttribute?.ErrorMessage;
+            }
         }
     }
-
 }

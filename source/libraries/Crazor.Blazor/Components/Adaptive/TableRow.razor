@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ItemComponent<AdaptiveTableRow>
+@implements IChildItem
 
 <ac:TableRow @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -12,11 +13,11 @@
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment ; set => Item.HorizontalAlignment  = value; }
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment ; set => Item.HorizontalCellContentAlignment  = value; }
+    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment; set => Item.HorizontalCellContentAlignment = value; }
 
     [Parameter]
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
@@ -26,19 +27,19 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing ; set => Item.Spacing  = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle Style { get => Item.Style ; set => Item.Style  = value; }
+    public AdaptiveContainerStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment ; set => Item.VerticalCellContentAlignment  = value; }
+    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment; set => Item.VerticalCellContentAlignment = value; }
 
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (this.ParentItem is AdaptiveTable table)
         {

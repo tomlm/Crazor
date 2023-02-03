@@ -1,6 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveChoice>
+@implements IChildItem
 
 <ac:Choice @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -10,15 +11,13 @@
 @code
 {
     [Parameter]
-    public String? Title { get => Item.Title ; set => Item.Title  = value; }
+    public String? Title { get => Item.Title; set => Item.Title = value; }
 
     [Parameter]
-    public String? Value { get => Item.Value ; set => Item.Value  = value; }
+    public String? Value { get => Item.Value; set => Item.Value = value; }
 
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
-
         if (this.ParentItem is AdaptiveChoiceSetInput choiceSet)
         {
             choiceSet.Choices.Add(Item);

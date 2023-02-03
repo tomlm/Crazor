@@ -32,6 +32,9 @@ namespace Crazor.Blazor.Components.Adaptive
         public string? Binding { get; set; }
 
         [Parameter]
+        public BoolProperty? ClientValidation { get; set; }
+
+        [Parameter]
         public BoolProperty? ShowErrors { get; set; }
 
         public PropertyInfo? BindingProperty { get; set; }
@@ -106,16 +109,19 @@ namespace Crazor.Blazor.Components.Adaptive
                 }
             }
 
-            // if we don't have required, but binding property has [Required] then set it
-            if (BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+            if (ClientValidation == null || ClientValidation == true)
             {
-                this.IsRequired = true;
-
-                // --- Client side validation....
-                var requiredAttribute = BindingProperty?.GetCustomAttribute<RequiredAttribute>();
-                if (this.ErrorMessage == null && requiredAttribute?.ErrorMessage != null)
+                // if we don't have required, but binding property has [Required] then set it
+                if (BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
                 {
-                    this.ErrorMessage = requiredAttribute.ErrorMessage;
+                    this.IsRequired = true;
+
+                    // --- Client side validation....
+                    var requiredAttribute = BindingProperty?.GetCustomAttribute<RequiredAttribute>();
+                    if (this.ErrorMessage == null && requiredAttribute?.ErrorMessage != null)
+                    {
+                        this.ErrorMessage = requiredAttribute.ErrorMessage;
+                    }
                 }
             }
         }

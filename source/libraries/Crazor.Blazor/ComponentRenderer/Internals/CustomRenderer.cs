@@ -13,17 +13,17 @@ namespace Crazor.Blazor.ComponentRenderer.Internals;
 
 // Adapted from BlazorUnitTestingPrototype (Steve Sanderson)
 [SuppressMessage("Usage", "BL0006:Do not use RenderTree types", Justification = "Not change at this moment")]
-internal class HtmlRenderer : Renderer
+internal class CustomRenderer : Renderer
 {
     private TaskCompletionSource<object?> _nextRenderTcs = new();
     private Exception? _unhandledException;
 
-    public HtmlRenderer(IServiceProvider serviceProvider)
+    public CustomRenderer(IServiceProvider serviceProvider)
         : base(serviceProvider, (ILoggerFactory?)serviceProvider?.GetService(typeof(ILoggerFactory)) ?? new NullLoggerFactory())
     {
     }
 
-    public HtmlRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
+    public CustomRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
         : base(serviceProvider, loggerFactory)
     {
     }

@@ -1,5 +1,6 @@
 @using AdaptiveCards
 @inherits ItemComponent<AdaptiveFallbackElement>
+@implements IChildItem
 
 <ac:FallbackElement @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -7,10 +8,8 @@
 
 @code
 {
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
-
         if (this.ParentItem is AdaptiveElement element)
         {
             element.Fallback = Item;

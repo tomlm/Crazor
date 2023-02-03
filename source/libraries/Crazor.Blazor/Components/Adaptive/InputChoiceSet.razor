@@ -9,7 +9,7 @@
 <ac:Input.ChoiceSet @attributes="@GetAttributes()">
     @if (Item.Choices.Any())
     {
-        @foreach(var choice in Item.Choices)
+        @foreach (var choice in Item.Choices)
         {
             <Choice Title="@choice.Title" Value="@choice.Value" />
         }
@@ -18,7 +18,7 @@
 </ac:Input.ChoiceSet>
 @if (ShowErrors == null || ShowErrors == true)
 {
-    <ValidationErrors Id="@(Binding ?? Id)" />
+    <ValidationMessage Id="@(Binding ?? Id)" />
 }
 
 @code
@@ -31,28 +31,28 @@
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public String? Placeholder { get => Item.Placeholder ; set => Item.Placeholder  = value; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
 
     [Parameter]
     public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing ; set => Item.Spacing  = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveChoiceInputStyle), "Compact")]
-    public AdaptiveChoiceInputStyle Style { get => Item.Style ; set => Item.Style  = value; }
+    public AdaptiveChoiceInputStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String? Value { get => Item.Value ; set => Item.Value  = value; }
+    public String? Value { get => Item.Value; set => Item.Value = value; }
 
     [Parameter]
     public BoolProperty? Wrap { get => Item.Wrap; set => Item.Wrap = value == true; }
 
     [Parameter]
-    public String? Height { get => Item.Height ?.ToString(); set => Item.Height  = new AdaptiveDimension(value!); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
 
     protected override void OnParametersSet()
     {

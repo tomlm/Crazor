@@ -11,7 +11,7 @@
 </ac:Input.Text>
 @if (ShowErrors == null || ShowErrors == true)
 {
-    <ValidationErrors Id="@(Binding ?? Id)" />
+    <ValidationMessage Id="@(Binding ?? Id)" />
 }
 
 @code
@@ -54,24 +54,27 @@
     {
         base.OnParametersSet();
 
-        // --- Client side validation....
-        var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
-        if (this.Regex == null && regexAttribute?.Pattern != null)
+        if (ClientValidation == null || ClientValidation == true)
         {
-            this.Regex = regexAttribute?.Pattern;
+            // --- Client side validation....
+            var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
+            if (this.Regex == null && regexAttribute?.Pattern != null)
+            {
+                this.Regex = regexAttribute?.Pattern;
 
-        }
+            }
 
-        if (this.ErrorMessage == null && regexAttribute?.ErrorMessage != null)
-        {
-            this.ErrorMessage = regexAttribute?.ErrorMessage;
-        }
+            if (this.ErrorMessage == null && regexAttribute?.ErrorMessage != null)
+            {
+                this.ErrorMessage = regexAttribute?.ErrorMessage;
+            }
 
-        // -- MaxLength
-        var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
-        if (this.MaxLength == null && stringLengthAttribute != null)
-        {
-            this.MaxLength = stringLengthAttribute?.MaximumLength;
+            // -- MaxLength
+            var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
+            if (this.MaxLength == null && stringLengthAttribute != null)
+            {
+                this.MaxLength = stringLengthAttribute?.MaximumLength;
+            }
         }
 
         // ----  style

@@ -1,6 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveDataQuery>
+@implements IChildItem
 
 <ac:Data.Query @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -21,9 +22,9 @@
     [Parameter]
     public String? Value { get => Item.Value; set => Item.Value = value!; }
 
-    protected override void OnParametersSet()
+    public virtual void AddToParent()
     {
-        base.OnParametersSet();
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (ParentItem is AdaptiveChoiceSetInput choiceSet)
         {

@@ -16,7 +16,7 @@ namespace Crazor.Blazor.Components
     /// <summary>
     /// Shows errors when present for a given input id as TextBlock Attention
     /// </summary>
-    public class ElementComponent<ElementT> : TypedElementComponent<ElementT>
+    public class ElementComponent<ElementT> : TypedElementComponent<ElementT>, IChildItem
         where ElementT : AdaptiveElement
     {
         //[Parameter]
@@ -54,9 +54,9 @@ namespace Crazor.Blazor.Components
             }
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        public virtual void AddToParent()
         {
-            base.OnAfterRender(firstRender);
+            ArgumentNullException.ThrowIfNull(ParentItem);
 
             if (this.ParentItem is AdaptiveCard card)
             {
@@ -86,6 +86,7 @@ namespace Crazor.Blazor.Components
             {
                 throw new Exception($"{ParentItem.GetType().Name} is not a known element container type");
             }
+
         }
     }
 }

@@ -1,6 +1,7 @@
 @using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveRefresh>
+@implements IChildItem
 
 <ac:Refresh @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -11,9 +12,9 @@
     [Parameter]
     public String? UserIds { get => String.Join(",", Item.UserIds); set => Item.UserIds = value!.Split(",").ToList(); }
 
-    protected override void OnAfterRender(bool firstRender)
+    public void AddToParent()
     {
-        base.OnAfterRender(firstRender);
+        ArgumentNullException.ThrowIfNull(ParentItem);
 
         if (this.ParentItem is AdaptiveCard card)
         {

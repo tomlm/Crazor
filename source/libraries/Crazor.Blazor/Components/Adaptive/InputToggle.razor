@@ -9,7 +9,7 @@
 </ac:Input.Toggle>
 @if (ShowErrors == null || ShowErrors == true)
 {
-    <ValidationErrors Id="@(Binding ?? Id)" />
+    <ValidationMessage Id="@(Binding ?? Id)" />
 }
 
 @code

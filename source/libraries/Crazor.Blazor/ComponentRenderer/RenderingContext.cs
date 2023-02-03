@@ -28,7 +28,7 @@ public class RenderingContext
     public RenderedComponent<TComponent> RenderComponent<TComponent>(params ComponentParameter[] parameters)
         where TComponent : IComponent
     {
-        var renderer = new HtmlRenderer(_serviceProvider);
+        var renderer = new CustomRenderer(_serviceProvider);
         var renderedComponent = new RenderedComponent<TComponent>(renderer, parameters);
         return renderedComponent;
     }
@@ -54,7 +54,7 @@ public class RenderingContext
     /// <returns></returns>
     public RenderedComponent<IComponent> RenderComponent(Type componentType, params ComponentParameter[] parameters)
     {
-        var renderer = new HtmlRenderer(_serviceProvider);
+        var renderer = new CustomRenderer(_serviceProvider);
         var renderedComponent = new RenderedComponent<IComponent>(renderer, parameters, componentType);
         return renderedComponent;
     }
@@ -66,7 +66,7 @@ public class RenderingContext
     /// <returns></returns>
     public RenderedComponent<IComponent> RenderComponent(IComponent component)
     {
-        var renderer = new HtmlRenderer(_serviceProvider);
+        var renderer = new CustomRenderer(_serviceProvider);
         var componentType = component.GetType();
         var parameters = ComponentParameter.FromComponent(component);
         var renderedComponent = new RenderedComponent<IComponent>(renderer, parameters, componentType);

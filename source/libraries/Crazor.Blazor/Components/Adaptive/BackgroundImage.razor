@@ -4,6 +4,7 @@
 @using System.ComponentModel;
 @using System.Xml.Linq;
 @inherits ItemComponent<AdaptiveBackgroundImage>
+@implements IChildItem
 
 <ac:BackgroundImage @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -13,28 +14,30 @@
 {
     [Parameter]
     [DefaultValue(typeof(AdaptiveImageFillMode), "Cover")]
-    public AdaptiveImageFillMode FillMode { get => Item.FillMode ; set => Item.FillMode  = value; }
+    public AdaptiveImageFillMode FillMode { get => Item.FillMode; set => Item.FillMode = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment ; set => Item.HorizontalAlignment  = value; }
+    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
 
     [Parameter]
-    public String? Url { get => Item.Url ; set => Item.Url  = value; }
+    public String? Url { get => Item.Url; set => Item.Url = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalAlignment { get => Item.VerticalAlignment ; set => Item.VerticalAlignment  = value; }
+    public AdaptiveVerticalAlignment VerticalAlignment { get => Item.VerticalAlignment; set => Item.VerticalAlignment = value; }
 
-    protected override void OnAfterRender(bool firstRender)
+    public virtual void AddToParent()
     {
-        base.OnAfterRender(firstRender);
-
         ArgumentNullException.ThrowIfNull(ParentItem);
         if (ParentItem is AdaptiveCard card)
+        {
             card.BackgroundImage = this.Item;
+        }
         else if (ParentItem is AdaptiveContainer container)
+        {
             container.BackgroundImage = this.Item;
+        }
         else
             throw new Exception($"{ParentItem.GetType().Name} is not a valid parent for BackgroundImage");
     }

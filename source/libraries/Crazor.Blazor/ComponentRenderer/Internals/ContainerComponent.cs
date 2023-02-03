@@ -14,10 +14,10 @@ namespace Crazor.Blazor.ComponentRenderer.Internals;
 internal class ContainerComponent : IComponent
 {
     private readonly int _componentId;
-    private readonly HtmlRenderer _renderer;
+    private readonly CustomRenderer _renderer;
     private RenderHandle _renderHandle;
 
-    public ContainerComponent(HtmlRenderer renderer)
+    public ContainerComponent(CustomRenderer renderer)
     {
         _renderer = renderer;
         _componentId = renderer.AttachTestRootComponent(this);
