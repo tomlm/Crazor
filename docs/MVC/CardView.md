@@ -160,7 +160,9 @@ Input controls do 2 things automatically related to validation:
 2. They **validate server side as well** (because server side validation is richer than what Adaptive Cards provides)
 3. If there are validation errors they will **automatically display the error message** next to the input control that has incorrect ddata.
 
-> NOTE: You can disable this validation errors on an input control by setting **ShowErrors="false"**
+> NOTE: You can disable this automatic display of validation errors on an input control by setting **ShowErrors="false"**
+
+[See **Validation** for more info on validation errors](docs/Validation.md)
 
 # Navigation 
 

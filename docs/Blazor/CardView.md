@@ -164,6 +164,8 @@ Input controls do 2 things automatically related to validation:
 
 > NOTE: You can disable this validation errors on an input control by setting **ShowErrors="false"**
 
+[See **Validation** for more info on validation errors](docs/Validation.md)
+
 # Navigation 
 
 ![image](https://user-images.githubusercontent.com/17789481/190312126-9db0ffa6-27ae-4c7a-a311-52df7f4aaaa5.png)
