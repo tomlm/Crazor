@@ -5,7 +5,7 @@
 {
     @foreach (var error in ve.Value)
     {
-        <TextBlock Spacing="@AC.AdaptiveSpacing.None" Color="@AC.AdaptiveTextColor.Attention">HELP @error</TextBlock>
+        <TextBlock Spacing="@AC.AdaptiveSpacing.None" Color="@AC.AdaptiveTextColor.Attention">@error</TextBlock>
     }
 }
 

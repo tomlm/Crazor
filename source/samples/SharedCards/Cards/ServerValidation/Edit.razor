@@ -1,0 +1,22 @@
+﻿@using SharedCards.Cards.Inputs;
+@using SharedCards.Cards.ServerValidation
+@inherits CardView<CardApp,InputsModel>
+
+<Card Version="1.5">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Edit Values!</TextBlock>
+
+    <ValidationSummary />
+
+    <InputDate Binding="Model.Birthday" Max="@DateTime.Now.ToString("yyyy-MM-dd")" ClientValidation="false" />
+    <InputTime Binding="Model.ArrivalTime" Min="@DateTime.Now.ToString("yyyy-MM-dd")" ClientValidation="false" />
+    <InputNumber Binding="Model.Percent" ClientValidation="false" />
+    <InputNumber Binding="Model.Attendees" ClientValidation="false" />
+    <InputText Binding="Model.PhoneNumber" ClientValidation="false" />
+    <InputText Binding="Model.Password" ClientValidation="false" />
+    <InputToggle Binding="Model.IsCool" ClientValidation="false" />
+    <InputChoiceSet Binding="Model.FavoritePet" ClientValidation="false" />
+
+    <ActionCancel />
+    <ActionOK />
+</Card>
+
