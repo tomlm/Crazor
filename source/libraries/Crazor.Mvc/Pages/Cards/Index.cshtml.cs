@@ -58,11 +58,12 @@ namespace Crazor.Mvc.Pages.Cards
             this.CardApp = Context.CardAppFactory.Create(cardRoute, null);
 
             ArgumentNullException.ThrowIfNull(this.CardApp);
+            var channelId = Request.Headers["x-channel-id"].FirstOrDefault() ?? this.ChannelId;
 
             var loadRouteActivity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
-                ChannelId = this.ChannelId,
+                ChannelId = channelId,
                 Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount() { Id = userId },
                 Recipient = new ChannelAccount() { Id = "bot" },
