@@ -27,7 +27,7 @@ namespace Crazor.Server
             var previewedCard = ObjectPath.MapValueTo<AdaptiveCard>(attachmentContent);
 
             JObject data = new JObject();
-            var action = previewedCard.GetElements<AdaptiveAction>().FirstOrDefault();
+            var action = previewedCard.GetElements<AdaptiveAction>().Where(action => action is AdaptiveExecuteAction || action is AdaptiveSubmitAction).FirstOrDefault();
             if (action is AdaptiveExecuteAction executeAction)
             {
                 data = JObject.FromObject(executeAction.Data);
@@ -39,7 +39,7 @@ namespace Crazor.Server
 
             var cardRoute = await CardRoute.FromDataAsync(data, Context.EncryptionProvider, cancellationToken);
 
-            var activity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
+            var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
 
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
 

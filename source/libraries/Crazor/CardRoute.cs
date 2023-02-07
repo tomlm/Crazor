@@ -95,17 +95,6 @@ namespace Crazor
             // Get session data from the invoke payload
             var route = (string?)data[Constants.ROUTE_KEY];
 
-            // REMOVE this in 2023, deal with old sessiondata objects in session memory
-            if (route == null && data.ContainsKey("_sessiondata"))
-            {
-                var parts = ((string)data["_sessiondata"]).Split('|');
-                route = $"/Cards/{parts[0]}";
-                data[Constants.ROUTE_KEY] = route;
-                data[Constants.SESSION_KEY] = parts.Last();
-                data.Remove("_sessiondata");
-            }
-            // REMOVE ^^^^ in 2023
-
             ArgumentNullException.ThrowIfNull(route);
             var cardRoute = Parse(route);
             var sessionId = (string?)data[Constants.SESSION_KEY];
