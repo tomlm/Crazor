@@ -16,7 +16,7 @@ namespace Crazor
 
         public RouteResolver()
         {
-            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes().Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)))))
+            foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.GetTypes().Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)))))
             {
                 this.AddCardViewType(cardViewType);
             }

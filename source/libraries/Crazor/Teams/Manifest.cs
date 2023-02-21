@@ -62,7 +62,7 @@ namespace Crazor.Teams
                 }
             });
 
-            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes().Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)))))
+            foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.GetTypes().Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)))))
             {
                 // get route for cardtype
                 if (routeResolver.GetRouteForCardViewType(cardViewType, out var entityId))
