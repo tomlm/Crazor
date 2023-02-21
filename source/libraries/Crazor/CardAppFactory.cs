@@ -24,7 +24,7 @@ namespace Crazor
             }
             // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
             // We do this by enumerating all ICardView implementations 
-            foreach (var cardViewType in AppDomain.CurrentDomain.GetAssemblies()
+            foreach (var cardViewType in Utils.GetAssemblies()
                 .SelectMany(asm => asm.DefinedTypes.Where(t => t.GetInterface(nameof(ICardView)) != null)))
             {
                 // .cshtml files class names will be "Cards_{AppName}_Default" 

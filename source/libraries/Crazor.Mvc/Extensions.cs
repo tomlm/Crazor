@@ -12,7 +12,7 @@ namespace Crazor.Mvc
     {
         public static IServiceCollection AddCrazorMvc(this IServiceCollection services)
         {
-            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm =>
+            var cardViewTypes = Utils.GetAssemblies().SelectMany(asm =>
                 asm.DefinedTypes
                     .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(RazorPage)))
                     .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();

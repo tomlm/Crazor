@@ -18,7 +18,7 @@ namespace Crazor.Blazor
         /// <returns></returns>
         public static IServiceCollection AddCrazorBlazor(this IServiceCollection services)
         {
-            var cardViewTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+            var cardViewTypes = Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
                     .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(ComponentBase)))
                     .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
 

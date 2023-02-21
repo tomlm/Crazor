@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Crazor
@@ -71,8 +72,18 @@ namespace Crazor
             return invokeValue;
         }
 
+        public static string AssembliesStartWith = string.Empty;
 
-
-
+        public static Assembly[] GetAssemblies()
+        {
+            if (string.IsNullOrEmpty(AssembliesStartWith))
+            {
+                return AppDomain.CurrentDomain.GetAssemblies();
+            }
+            else
+            {
+                return AppDomain.CurrentDomain.GetAssemblies().Where(i => i.FullName?.StartsWith(AssembliesStartWith) ?? false).ToArray();
+            }
+        }
     }
 }

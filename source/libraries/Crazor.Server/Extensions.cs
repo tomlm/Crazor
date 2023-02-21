@@ -56,7 +56,7 @@ namespace Crazor.Server
         public static IApplicationBuilder UseCrazorServer(this IApplicationBuilder builder)
         {
             // mount any assembly with wwwroot.
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()
+            foreach (var assembly in Utils.GetAssemblies()
                     .Where(asm => asm.GetManifestResourceNames().Any(name => name.Split('.').Contains("wwwroot"))))
             {
                 var fileProvider = new EmbeddedFileProvider2(assembly);

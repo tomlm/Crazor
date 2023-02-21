@@ -39,7 +39,7 @@ namespace Crazor
 
         public static IEnumerable<TypeInfo> GetTabModuleTypes()
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false));
+            return Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes.Where(t => t.IsAssignableTo(typeof(CardTabModule)) && t.IsAbstract == false));
         }
 
         public virtual async Task<AdaptiveCard[]> OnTabFetchAsync(ITurnContext turnContext, TabRequest tabRequest, CancellationToken cancellationToken)

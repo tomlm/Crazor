@@ -136,7 +136,7 @@ namespace Crazor
 
         public static IEnumerable<TypeInfo> GetCardAppTypes()
         {
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assembly in Utils.GetAssemblies())
             {
                 foreach (var type in assembly.DefinedTypes)
                 {
