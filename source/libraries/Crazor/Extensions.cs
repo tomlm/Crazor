@@ -70,10 +70,10 @@ namespace Crazor
 
             // register CardAppFactory and card apps
             services.AddScoped<CardAppFactory>();
+            services.AddTransient<CardApp>();
             services.AddCardAppTypes();
 
             services.AddScoped<CardViewFactory>();
-            services.AddScoped<CardApp>();
             services.AddCustomCardViewTypes();
 
             services.AddTransient<CardTabModuleFactory>();
@@ -88,6 +88,16 @@ namespace Crazor
             return services;
         }
 
+        public static IServiceCollection AddCardAppTypes(this IServiceCollection services)
+        {
+            // add App types as transient dependency injection types
+            foreach (var cardAppType in CardAppFactory.GetCardAppTypes())
+            {
+                services.AddTransient(cardAppType);
+            }
+            return services;
+        }
+
         public static IServiceCollection AddCustomCardViewTypes(this IServiceCollection services)
         {
             // add card view types for razor templates
@@ -95,16 +105,6 @@ namespace Crazor
                         .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(CustomCardView)))))
             {
                 services.AddTransient(cardViewType);
-            }
-            return services;
-        }
-
-        public static IServiceCollection AddCardAppTypes(this IServiceCollection services)
-        {
-            // add App types as transient dependency injection types
-            foreach (var cardAppType in CardAppFactory.GetCardAppTypes())
-            {
-                services.AddScoped(cardAppType);
             }
             return services;
         }
