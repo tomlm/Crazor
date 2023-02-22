@@ -72,17 +72,20 @@ namespace Crazor
             return invokeValue;
         }
 
-        public static string AssembliesStartWith = string.Empty;
-
-        public static Assembly[] GetAssemblies()
+        /// <summary>
+        /// GetAssemblies
+        /// </summary>
+        /// <param name="prefix">optional prefix for assembly</param>
+        /// <returns>assemblies which match</returns>
+        public static Assembly[] GetAssemblies(string? prefix=null)
         {
-            if (string.IsNullOrEmpty(AssembliesStartWith))
+            if (string.IsNullOrEmpty(prefix))
             {
                 return AppDomain.CurrentDomain.GetAssemblies();
             }
             else
             {
-                return AppDomain.CurrentDomain.GetAssemblies().Where(i => i.FullName?.StartsWith(AssembliesStartWith) ?? false).ToArray();
+                return AppDomain.CurrentDomain.GetAssemblies().Where(i => i.FullName?.StartsWith(prefix) ?? false).ToArray();
             }
         }
     }

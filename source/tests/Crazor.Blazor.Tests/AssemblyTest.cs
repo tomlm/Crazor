@@ -18,7 +18,6 @@ namespace Crazor.Blazor.Tests
                 services.AddCrazor();
                 services.AddCrazorServer();
                 services.AddCrazorBlazor();
-                services.AddCardView<MyCodeView>();
 
                 // add your own dependencies here...
                 // services.Add<IFoo>();

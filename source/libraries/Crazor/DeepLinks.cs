@@ -12,7 +12,7 @@ namespace Crazor
     /// </summary>
     public static class DeepLinks
     {
-        private static Uri _teamsRoot = new Uri("https://teams.microsoft.com/l");
+        private static readonly Uri _teamsRoot = new Uri("https://teams.microsoft.com/l");
 
         /// <summary>
         /// Create a deep link to a url based taskmodule

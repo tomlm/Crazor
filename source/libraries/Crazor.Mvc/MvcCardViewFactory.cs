@@ -16,7 +16,7 @@ namespace Crazor.Mvc
     /// <summary>
     /// CardViewFactory which instantiates cardviews for Mvc razor templates.
     /// </summary>
-    public class MvcCardViewFactory
+    public class MvcCardViewFactory 
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IRazorViewEngine _razorEngine;

@@ -4,7 +4,6 @@
 using AdaptiveCards;
 using Crazor;
 using Crazor.Attributes;
-using Crazor.Mvc;
 
 namespace CrazorDemoBot.Cards.CodeOnlyView
 {
@@ -12,7 +11,7 @@ namespace CrazorDemoBot.Cards.CodeOnlyView
     /// You don't have to use Razor for your view.  Simply derive from CardView and override BindCard() to return the AdaptiveCard
     /// </summary>
     [CardRoute("MyCode")]
-    public class MyCodeView : CardView
+    public class MyCodeView : CustomCardView
     {
         [SessionMemory]
         public int Counter { get; set; }

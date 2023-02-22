@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Crazor.Blazor
 {
@@ -18,18 +19,18 @@ namespace Crazor.Blazor
         /// <returns></returns>
         public static IServiceCollection AddCrazorBlazor(this IServiceCollection services)
         {
-            var cardViewTypes = Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
-                    .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(ComponentBase)))
-                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
+            services.AddTransient<CardViewFactory, CardViewFactory>();
 
-            // add CardViews 
-            foreach (var cardViewType in cardViewTypes)
+            // add card view types for razor templates
+            foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                    .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(ComponentBase)))
+                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))))
             {
-                services.AddCardView(cardViewType);
+
+                services.AddTransient(cardViewType);
             }
 
             return services;
         }
-
     }
 }
