@@ -3,6 +3,7 @@
 
 using Crazor.Interfaces;
 using Microsoft.Bot.Connector;
+using System.Reflection;
 
 namespace Crazor
 {
@@ -14,7 +15,8 @@ namespace Crazor
         public CardAppFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            foreach (var cardAppType in CardApp.GetCardAppTypes())
+
+            foreach (var cardAppType in GetCardAppTypes())
             {
                 if (cardAppType != typeof(CardApp))
                 {
@@ -22,6 +24,7 @@ namespace Crazor
                     this.Add(name, cardAppType);
                 }
             }
+
             // Automatically register CardApp for Default.cshtml in folders so you don't have to define one unless you need one.
             // We do this by enumerating all ICardView implementations 
             foreach (var cardViewType in Utils.GetAssemblies()
@@ -79,6 +82,20 @@ namespace Crazor
                 return cardApp;
             }
             throw new ArgumentNullException(nameof(cardRoute));
+        }
+
+        internal static IEnumerable<TypeInfo> GetCardAppTypes()
+        {
+            foreach (var assembly in Utils.GetAssemblies())
+            {
+                foreach (var type in assembly.DefinedTypes)
+                {
+                    if (type.IsAssignableTo(typeof(CardApp)) && type.IsAbstract == false)
+                    {
+                        yield return type;
+                    }
+                }
+            }
         }
     }
 }

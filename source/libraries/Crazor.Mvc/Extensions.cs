@@ -12,18 +12,16 @@ namespace Crazor.Mvc
     {
         public static IServiceCollection AddCrazorMvc(this IServiceCollection services)
         {
-            var cardViewTypes = Utils.GetAssemblies().SelectMany(asm =>
-                asm.DefinedTypes
-                    .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(RazorPage)))
-                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))).ToList();
+            services.AddSingleton<MvcCardViewFactory>();
 
-            // add MVC CardViews 
-            foreach (var cardViewType in cardViewTypes)
+            // enumerates types that are .cshtml templates
+            foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                    .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(RazorPage)))
+                    .Where(t => (t.Name != "CardView" && t.Name != "CardView`1" && t.Name != "CardView`2" && t.Name != "CardViewBase`1" && t.Name != "EmptyCardView"))))
             {
+                // we use MvcCardViewFactory as instantiater cause .cshtml templates are instantiated using Razor goo.
                 services.AddTransient(cardViewType, (sp) => sp.GetRequiredService<MvcCardViewFactory>().Create(cardViewType));
             }
-
-            services.AddSingleton<MvcCardViewFactory>();
 
             // add card home pages support
             var mvcBuilder = services.AddRazorPages()

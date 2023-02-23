@@ -9,6 +9,7 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
@@ -133,20 +134,6 @@ namespace Crazor
         /// </summary>
         public IConnectorClient ConnectorClient { get; set; }
         public CardAppContext Context { get; }
-
-        public static IEnumerable<TypeInfo> GetCardAppTypes()
-        {
-            foreach (var assembly in Utils.GetAssemblies())
-            {
-                foreach (var type in assembly.DefinedTypes)
-                {
-                    if (type.IsAssignableTo(typeof(CardApp)) && type.IsAbstract == false)
-                    {
-                        yield return type;
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// process the activity
@@ -676,8 +663,10 @@ namespace Crazor
         {
             var cardRoute = CardRoute.Parse(cardViewState.Route);
             Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
+            ArgumentNullException.ThrowIfNull(cardViewType);
 
-            this.CurrentView = (ICardView)this.Context.ServiceProvider.GetService(cardViewType);
+            var cardViewFactory = this.Context.ServiceProvider.GetRequiredService<CardViewFactory>();
+            this.CurrentView = (ICardView)cardViewFactory.Create(cardViewType);
             ArgumentNullException.ThrowIfNull(this.CurrentView, $"View {cardViewState.Route} not found");
 
             cardRoute.SessionId = this.Route.SessionId;

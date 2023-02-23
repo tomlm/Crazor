@@ -18,7 +18,6 @@ namespace Crazor.Mvc.Tests
                 services.AddCrazor();
                 services.AddCrazorServer();
                 services.AddCrazorMvc();
-                services.AddCardView<MyCodeView>();
                 services.AddMvc()
                     // .AddRazorOptions((options) => { var x = options; })
                     // .AddRazorPagesOptions((options) => { var y = options; })

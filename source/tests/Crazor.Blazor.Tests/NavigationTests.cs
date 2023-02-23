@@ -46,7 +46,11 @@ namespace Crazor.Blazor.Tests
                 .ExecuteAction("OnIncrement")
                     .AssertTextBlock("CodeOnly")
                     .AssertTextBlock("Counter: 2");
+        }
 
+        [TestMethod]
+        public async Task TestNavigateCodeOnlyByName()
+        {
             await LoadCard("/Cards/CodeOnlyView/MyCode")
                     .AssertTextBlock("CodeOnly")
                     .AssertTextBlock("Counter: 0")

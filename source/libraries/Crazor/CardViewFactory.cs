@@ -3,11 +3,13 @@
 
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Crazor
 {
     /// <summary>
-    /// Default CardViewFactory which creates an instance using Activator and honors [inject] attributes to inject dependencies into view.
+    /// Default CardViewFactory which creates an instance using DI and then [inject] attributes to inject dependencies into view.
     /// </summary>
     public class CardViewFactory 
     {
@@ -20,7 +22,7 @@ namespace Crazor
 
         public ICardView Create(Type cardViewType)
         {
-            var card = (ICardView)Activator.CreateInstance(cardViewType);
+            var cardView = (ICardView)_serviceProvider.GetRequiredService(cardViewType);
 
             // inject dependencies
             var props = cardViewType
@@ -29,10 +31,11 @@ namespace Crazor
 
             foreach (var prop in props)
             {
-                prop.SetValue(card, _serviceProvider.GetService(prop.PropertyType), null);
+                prop.SetValue(cardView, _serviceProvider.GetService(prop.PropertyType), null);
             }
 
-            return card;
+            return cardView;
         }
+
     }
 }

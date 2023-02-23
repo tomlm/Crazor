@@ -31,7 +31,6 @@ builder.Services.AddCrazorServer((options) =>
 });
 
 
-builder.Services.AddCardView<MyCodeView>();
 // ---- </CRAZOR>
 
 var mvcBuilder = builder.Services.AddMvc();

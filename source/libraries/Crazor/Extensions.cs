@@ -5,6 +5,7 @@ using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,8 +48,7 @@ namespace Crazor
             options.Invoke(config);
 
             // Add ServiceOptions
-            services.AddTransient<ServiceOptions>(provider => config);
-
+            services.AddSingleton<ServiceOptions>(provider => config);
             services.AddHttpClient();
             services.TryAddSingleton<IStorage>((sp) =>
             {
@@ -63,20 +63,21 @@ namespace Crazor
                 return new MemoryStorage();
             });
             services.TryAddSingleton<IEncryptionProvider, NoEncryptionProvider>();
-            services.AddSingleton<CardViewFactory>();
-            services.TryAddScoped<CardAppContext>();
-            services.AddTransient<CardApp>();
-            services.AddTransient<SingleCardTabModule>();
             services.AddSingleton<IRouteResolver, RouteResolver>();
 
-            // add Apps
-            foreach (var cardAppType in CardApp.GetCardAppTypes())
-            {
-                services.AddTransient(cardAppType);
-            }
+            // CardAppContext is scoped data for a request
+            services.AddScoped<CardAppContext>();
 
-            services.AddTransient<CardAppFactory>();
+            // register CardAppFactory and card apps
+            services.AddScoped<CardAppFactory>();
+            services.AddTransient<CardApp>();
+            services.AddCardAppTypes();
 
+            services.AddScoped<CardViewFactory>();
+            services.AddCustomCardViewTypes();
+
+            services.AddTransient<CardTabModuleFactory>();
+            services.AddTransient<SingleCardTabModule>();
 
             // add TabModules
             foreach (var tabModuleType in CardTabModule.GetTabModuleTypes())
@@ -84,32 +85,27 @@ namespace Crazor
                 services.AddTransient(tabModuleType);
             }
 
-            services.AddTransient<CardTabModuleFactory>();
             return services;
         }
 
-        /// <summary>
-        /// Add a CardView
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="cardViewType"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddCardView(this IServiceCollection services, Type cardViewType)
+        public static IServiceCollection AddCardAppTypes(this IServiceCollection services)
         {
-            services.AddTransient(cardViewType, (sp) => sp.GetRequiredService<CardViewFactory>().Create(cardViewType));
+            // add App types as transient dependency injection types
+            foreach (var cardAppType in CardAppFactory.GetCardAppTypes())
+            {
+                services.AddTransient(cardAppType);
+            }
             return services;
         }
 
-        /// <summary>
-        /// Add a CardView
-        /// </summary>
-        /// <typeparam name="CardViewT"></typeparam>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddCardView<CardViewT>(this IServiceCollection services)
-            where CardViewT : ICardView
+        public static IServiceCollection AddCustomCardViewTypes(this IServiceCollection services)
         {
-            services.AddTransient(typeof(CardViewT), (sp) => sp.GetRequiredService<CardViewFactory>().Create(typeof(CardViewT)));
+            // add card view types for razor templates
+            foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
+                        .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(CustomCardView)))))
+            {
+                services.AddTransient(cardViewType);
+            }
             return services;
         }
 

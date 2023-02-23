@@ -35,7 +35,6 @@ namespace CrazorBlazorDemo
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });
             builder.Services.AddCrazorBlazor();
-            builder.Services.AddCardView<MyCodeView>();
 
             // register blob storage for state management
             var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
