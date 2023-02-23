@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.Json;
 using System.Xml;
 using Diag = System.Diagnostics;
 
@@ -66,7 +65,7 @@ namespace Crazor
         /// <summary>
         /// The activity we are processing.
         /// </summary>
-        public Activity? Activity { get; set; }
+        public Activity Activity { get; set; }
 
         /// <summary>
         /// The action we are processing.
@@ -844,6 +843,13 @@ namespace Crazor
             // add session data to outbound card
             await AddMetadataToCard(outboundCard, isPreview, cancellationToken);
 
+            var channelOptions = this.Context.ServiceOptions.GetChannelOptions(this.Activity.ChannelId);
+            if (channelOptions.SchemaVersion.Major == 1 && channelOptions.SchemaVersion.Minor < 4)
+            {
+                // transform action execute to submit if version of channel doesn't support it.
+                outboundCard = outboundCard.TransformActionExecuteToSubmit();
+            }
+
             outboundCard.Metadata = new AdaptiveMetadata() { WebUrl = GetCurrentCardUri().AbsoluteUri };
         }
 
@@ -1050,6 +1056,10 @@ namespace Crazor
 
         private void AddSystemMenu(AdaptiveCard outboundCard, bool isPreview)
         {
+            var currentUri = GetCurrentCardUri();
+
+            var channelOptions = Context.ServiceOptions.GetChannelOptions(Activity.ChannelId);
+
             var systemMenu = new AdaptiveActionSet()
             {
                 Id = "systemMenu",
@@ -1057,50 +1067,52 @@ namespace Crazor
                 Separator = true
             };
 
-            var currentUri = GetCurrentCardUri();
-
-            if (Activity!.ChannelId != currentUri.Host && !IsTaskModule && !isPreview)
+            if (channelOptions.AddSecondaryActions)
             {
-                systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
+                if (!IsTaskModule && !isPreview)
                 {
-                    Title = "Open",
-                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
-                    Url = currentUri.AbsoluteUri,
-                    Mode = AdaptiveActionMode.Secondary
-                });
-            }
+                    systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
+                    {
+                        Title = "Open",
+                        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
+                        Url = currentUri.AbsoluteUri,
+                        Mode = AdaptiveActionMode.Secondary
+                    });
+                }
 
-            if (Activity.ChannelId == currentUri.Host && outboundCard.Refresh?.Action != null)
-            {
-                outboundCard.Refresh.Action.Mode = AdaptiveActionMode.Secondary;
-                systemMenu.Actions.Add(outboundCard.Refresh.Action);
-            }
-
-            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
-            {
-                systemMenu.Actions.Add(new AdaptiveExecuteAction()
+                if (Activity.ChannelId == currentUri.Host && outboundCard.Refresh?.Action != null)
                 {
-                    Title = Constants.ABOUT_VIEW,
-                    Verb = Constants.ABOUT_VIEW,
-                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
-                    AssociatedInputs = AdaptiveAssociatedInputs.None,
-                    Mode = AdaptiveActionMode.Secondary
-                });
-            }
+                    outboundCard.Refresh.Action.Mode = AdaptiveActionMode.Secondary;
+                    systemMenu.Actions.Add(outboundCard.Refresh.Action);
+                }
 
-            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
-            {
-                systemMenu.Actions.Add(new AdaptiveExecuteAction()
+                if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
                 {
-                    Title = Constants.SETTINGS_VIEW,
-                    Verb = Constants.SETTINGS_VIEW,
-                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
-                    AssociatedInputs = AdaptiveAssociatedInputs.None,
-                    Mode = AdaptiveActionMode.Secondary
-                });
+                    systemMenu.Actions.Add(new AdaptiveExecuteAction()
+                    {
+                        Title = Constants.ABOUT_VIEW,
+                        Verb = Constants.ABOUT_VIEW,
+                        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
+                        AssociatedInputs = AdaptiveAssociatedInputs.None,
+                        Mode = AdaptiveActionMode.Secondary
+                    });
+                }
+
+                if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
+                {
+                    systemMenu.Actions.Add(new AdaptiveExecuteAction()
+                    {
+                        Title = Constants.SETTINGS_VIEW,
+                        Verb = Constants.SETTINGS_VIEW,
+                        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
+                        AssociatedInputs = AdaptiveAssociatedInputs.None,
+                        Mode = AdaptiveActionMode.Secondary
+                    });
+                }
             }
 
-            if (this.Activity.ChannelId == currentUri.Host)
+            // AddCardHeader means we simluate a card header using adaptive card markup.  Currently this is only used by "host" page for crazor.
+            if (channelOptions.AddCardHeader)
             {
                 // INSERT FAKE SYSTEM MENU 
                 if (outboundCard.Body.Any())
