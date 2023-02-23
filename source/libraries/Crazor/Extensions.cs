@@ -5,50 +5,81 @@ using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
-using System.Text.Json;
 using Diag = System.Diagnostics;
 
 namespace Crazor
 {
     public static class Extensions
     {
-        private static readonly JsonSerializerOptions DEFAULT_JSON_SERIALIZER_OPTIONS = new()
+        private static readonly System.Text.Json.JsonSerializerOptions DEFAULT_JSON_SERIALIZER_OPTIONS = new()
         {
             WriteIndented = true,
         };
 
         public static IServiceCollection AddCrazor(this IServiceCollection services, params string[] sharedAssemblies)
         {
+            return services.AddCrazor((options) => { }, sharedAssemblies);
+        }
+
+        public static IServiceCollection AddCrazor(this IServiceCollection services, Action<ServiceOptions> options, params string[] sharedAssemblies)
+        {
+            if (sharedAssemblies != null)
+            {
+                foreach (var assembly in sharedAssemblies)
+                {
+                    Assembly.Load(assembly);
+                }
+            }
+
             return AddCrazor(
                 services,
-                options =>
-                {
-                    if (sharedAssemblies != null)
-                    {
-                        foreach (var assembly in sharedAssemblies)
-                        {
-                            options.LoadCardAssembly(assembly);
-                        }
-                    }
-                });
+                options);
         }
 
         public static IServiceCollection AddCrazor(this IServiceCollection services, Action<ServiceOptions> options)
         {
-            // Get custom options from users
-            var config = new ServiceOptions();
-            options.Invoke(config);
+            services.AddSingleton<ServiceOptions>(provider =>
+            {
+                // Get custom options from users
+                var serviceOptions = new ServiceOptions();
 
-            // Add ServiceOptions
-            services.AddSingleton<ServiceOptions>(provider => config);
+                serviceOptions.ChannelOptions["Default"] = new ChannelOptions()
+                {
+                    AddCardHeader = false,
+                    AddSecondaryActions = false,
+                    SchemaVersion = new AdaptiveSchemaVersion(1, 5)
+                };
+
+                serviceOptions.ChannelOptions[Channels.Msteams] = new ChannelOptions()
+                {
+                    AddCardHeader = false,
+                    AddSecondaryActions = true,
+                    SchemaVersion = new AdaptiveSchemaVersion(1, 5)
+                };
+
+                var configuration = provider.GetService<IConfiguration>();
+                var host = configuration.GetValue<Uri>("HostUri").Host;
+                serviceOptions.ChannelOptions[host] = new ChannelOptions()
+                {
+                    AddCardHeader = true,
+                    AddSecondaryActions = true,
+                    SchemaVersion = new AdaptiveSchemaVersion(1, 5)
+                };
+
+                options.Invoke(serviceOptions);
+                return serviceOptions;
+            });
+
             services.AddHttpClient();
             services.TryAddSingleton<IStorage>((sp) =>
             {
@@ -116,6 +147,10 @@ namespace Crazor
                 if (action.Data == null)
                 {
                     action.Data = new JObject();
+                }
+                else if (action.Data is string str)
+                {
+                    action.Data = JObject.Parse(str);
                 }
                 ((JObject)action.Data)[Constants.SUBMIT_VERB] = action.Verb;
                 action.Verb = null;
