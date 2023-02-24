@@ -1,7 +1,5 @@
 ﻿@using SharedCards.Cards.TaskModule
 @inherits CardView<TaskModuleApp>
-@attribute [CommandInfo("Test Task Module", "Test general task module functionality")]
-@attribute [TaskInfo("Test Task Module", "small","small")]
 
 <Card Version="1.5">
     @if (IsPreview)
@@ -16,6 +14,4 @@
     public void OnIncrement() 
         => App.Counter++;
 
-    public void OnEdit()
-        => ShowView("Edit");
 }

@@ -27,11 +27,8 @@ namespace CrazorBlazorDemo
             builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
-                options.Manifest.Version = "1.0";
-                options.Manifest.Name.Short = "CrazorBlazorDemo";
-                options.Manifest.Name.Full = "This is a demo of using Blazor templates for crazor apps.";
+                options.Manifest.Version = "1.1";
                 options.Manifest.Developer.Name = "Tom Laird-McConnell";
-                options.Manifest.Description.Short = "CrazorBlazorDemo";
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });
             builder.Services.AddCrazorBlazor();

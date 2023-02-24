@@ -25,10 +25,10 @@ namespace Crazor.Teams
             Developer.WebsiteUrl = hostUri.AbsoluteUri;
             Developer.PrivacyUrl = new Uri(hostUri, "/Privacy").AbsoluteUri;
             Developer.TermsOfUseUrl = new Uri(hostUri, "/TermsOfUse").AbsoluteUri;
-            Name.Full = AppDomain.CurrentDomain.FriendlyName;
-            Name.Short = AppDomain.CurrentDomain.FriendlyName;
-            Description.Short = "TBD";
-            Description.Full = "TBD";
+            Name.Full = configuration.GetValue<string>("BotName");
+            Name.Short = configuration.GetValue<string>("BotName");
+            Description.Short = configuration.GetValue<string>("BotName");
+            Description.Full = $"{configuration.GetValue<string>("BotName")} - {configuration.GetValue<Uri>("HostUri").Host}";
             Icons.Color = Path.GetFileName(configuration.GetValue<string>("BotIcon")?.ToLower() ?? "boticon.png");
             Icons.Outline = Path.GetFileName(configuration.GetValue<string>("OutlineIcon")?.ToLower() ?? "outline.png");
             AccentColor = "#FFFFFF";
