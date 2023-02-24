@@ -289,7 +289,7 @@ namespace Crazor
                 outboundCard.Title = $"{this.Name} [{sw.Elapsed.ToString()}]";
             }
 
-            await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
+            outboundCard = await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
 
             // Tracing
             if (Context.ServiceOptions != null && outboundCard != null && this.Activity != null)
@@ -829,7 +829,7 @@ namespace Crazor
 
 
 
-        private async Task ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
+        private async Task<AdaptiveCard> ApplyCardModificationsAsync(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(this.Activity);
             ArgumentNullException.ThrowIfNull(this.Action);
@@ -851,6 +851,7 @@ namespace Crazor
             }
 
             outboundCard.Metadata = new AdaptiveMetadata() { WebUrl = GetCurrentCardUri().AbsoluteUri };
+            return outboundCard;
         }
 
         private async Task AddMetadataToCard(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
@@ -888,6 +889,12 @@ namespace Crazor
                     data[Constants.SESSION_KEY] = sessionIdEncrypt;
                 if (action.Id != null)
                     data[Constants.IDDATA_KEY] = action.Id;
+
+                // hide goofy feedback panel
+                if (Activity.ChannelId == Channels.Msteams)
+                {
+                    action.AdditionalProperties["msTeams"] = new JObject() { { "feedback", new JObject() { { "hide", true } } } };
+                }
             }
 
             foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
@@ -916,6 +923,12 @@ namespace Crazor
                     data[Constants.SESSION_KEY] = sessionId;
                 if (action.Id != null)
                     data[Constants.IDDATA_KEY] = action.Id;
+
+                // hide goofy feedback panel
+                if (Activity.ChannelId == Channels.Msteams)
+                {
+                    action.AdditionalProperties["msTeams"] = new JObject() { { "feedback", new JObject() { { "hide", true } } } };
+                }
             }
 
             foreach (var choiceSet in outboundCard.GetElements<AdaptiveChoiceSetInput>())

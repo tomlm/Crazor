@@ -45,7 +45,7 @@ namespace Crazor
         /// <summary>
         /// Map of ChannelId => ChannelOptions
         /// </summary>
-        public Dictionary<string, ChannelOptions> ChannelOptions { get; } = new();
+        public Dictionary<string, ChannelOptions> ChannelOptions { get; } = new Dictionary<string, ChannelOptions>(StringComparer.OrdinalIgnoreCase);
 
         public class LoggerOptions
         {
