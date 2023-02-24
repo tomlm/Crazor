@@ -94,11 +94,6 @@ namespace Crazor
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
         /// <summary>
-        /// Map of ids => elements for stylesheet mixins
-        /// </summary>
-        public Dictionary<string, AdaptiveElement>? Stylesheet { get; set; }
-
-        /// <summary>
         /// Flag to enable/disable automatically assigning a sharedId if there is not one. 
         /// Default: true
         /// </summary>
@@ -180,19 +175,6 @@ namespace Crazor
             }
 
             Diag.Trace.WriteLine($"------- OnAction({this.Action.Verb}) {this.Route.Route}-----");
-
-            // Load stylesheet
-            if (Stylesheet == null)
-            {
-                var stylesheetPath = Path.Combine(Environment.CurrentDirectory, $"Cards/{Name}/Stylesheet.cshtml");
-                if (File.Exists(stylesheetPath))
-                {
-                    var xml = await File.ReadAllTextAsync(stylesheetPath, cancellationToken);
-                    xml = $"<Card Version=\"1.6\">\n{xml}\n</Card>";
-                    var card = (AdaptiveCard)AdaptiveCard.XmlSerializer!.Deserialize(XmlReader.Create(new StringReader(xml!)))!;
-                    Stylesheet = card.Body.ToDictionary(el => $"{el.Type}.{el.Id}", StringComparer.OrdinalIgnoreCase);
-                }
-            }
 
             try
             {

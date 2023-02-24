@@ -21,11 +21,11 @@ builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
 builder.Services.AddCrazorServer((serverOptions) =>
 {
-    serverOptions.Manifest.Version = "1.0";
-    serverOptions.Manifest.Name.Short = "CrazorDemoBot";
+    serverOptions.Manifest.Version = "1.1";
+    serverOptions.Manifest.Name.Short = builder.Configuration.GetValue<string>("BotName");
     serverOptions.Manifest.Name.Full = "This is a demo of using MVC templates for crazor apps.";
     serverOptions.Manifest.Developer.Name = "Tom Laird-McConnell";
-    serverOptions.Manifest.Description.Short = "CrazorDemoBot";
+    serverOptions.Manifest.Description.Short = $"{builder.Configuration.GetValue<string>("BotName")}";
     serverOptions.Manifest.Description.Full = "This is a demo of using MVC templates for crazor apps.";
 });
 

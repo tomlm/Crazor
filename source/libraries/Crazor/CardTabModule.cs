@@ -80,7 +80,7 @@ namespace Crazor
                 tabState.RefreshMap[cardUris[i]] = (AdaptiveExecuteAction)cards[i].Refresh.Action;
             }
 
-            await Context.Storage.WriteAsync(new Dictionary<string, object>() { { GetKey(tabSessionId), tabState } }, cancellationToken);
+            await Context.Storage.WriteAsync(new Dictionary<string, object>() { { GetKey(tabSessionId), JObject.FromObject(tabState) } }, cancellationToken);
 
             return cards;
         }
@@ -97,7 +97,7 @@ namespace Crazor
             var key = GetKey(tabSessionId);
             var result = await Context.Storage.ReadAsync(new string[] { key }, cancellationToken);
 
-            CardTabModuleState tabState = (CardTabModuleState)result[key];
+            CardTabModuleState tabState = ((JObject)result[key]).ToObject<CardTabModuleState>()!;
 
             List<Task<AdaptiveCard>> taskCards = new List<Task<AdaptiveCard>>();
             foreach (string cardUri in cardUris)
