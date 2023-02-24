@@ -1,18 +1,34 @@
 ﻿@inherits CardView
 
 <Card Version="1.5">
-    
+
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Tag Helpers</TextBlock>
     <TextBlock Separator="true"></TextBlock>
-    <Accordion Title="Matt Hidinger" Id="Matt">
-        <Person Name="Matt Hidinger"
-                Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-                Size="@AdaptiveImageSize.Medium" Text="AdaptiveCard guru extraordinaire." />
+    <Accordion Id="Matt" Title="Matt Hidinger">
+        <Content>
+            <Person Name="Matt Hidinger"
+                    Url="https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                    Size="@AdaptiveImageSize.Medium" Text="AdaptiveCard guru extraordinaire." />
+        </Content>
     </Accordion>
 
-    <Accordion Title="Tom Laird-McConnell" IsExpanded="true">
-        <Person Name="Tom Laird-McConnell" Url="https://avatars.githubusercontent.com/u/17789481?s=96"
-                Size="@AdaptiveImageSize.Medium" Text="AdaptiveCard guru extraordinaire." />
+    <Accordion IsExpanded="true" >
+        <Header>
+            <TextBlock Style="AdaptiveTextBlockStyle.Heading" Color="AdaptiveTextColor.Good">Tom Laird-McConnell</TextBlock>
+        </Header>
+
+        <CollapsedIcon>
+            <TextBlock>🔽</TextBlock>
+        </CollapsedIcon>
+
+        <ExpandedIcon>
+            <TextBlock>🔼</TextBlock>
+        </ExpandedIcon>
+
+        <Content>
+            <Person Name="Tom Laird-McConnell" Url="https://avatars.githubusercontent.com/u/17789481?s=96"
+                    Size="@AdaptiveImageSize.Medium" Text="AdaptiveCard guru extraordinaire." />
+        </Content>
     </Accordion>
 
 

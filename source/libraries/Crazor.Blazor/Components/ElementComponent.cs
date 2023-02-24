@@ -19,9 +19,6 @@ namespace Crazor.Blazor.Components
     public class ElementComponent<ElementT> : TypedElementComponent<ElementT>, IChildItem
         where ElementT : AdaptiveElement
     {
-        //[Parameter]
-        //public string Class { get => Element.Class; set => Element.Class = value; }
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();

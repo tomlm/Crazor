@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using AdaptiveCards;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
 using System.Reflection;
 
 namespace Crazor.Blazor.Components
@@ -20,6 +20,7 @@ namespace Crazor.Blazor.Components
         protected virtual Dictionary<string, object> GetAttributes()
         {
             var attributes = new Dictionary<string, object>();
+
             foreach (var property in this.GetType().GetProperties().Where(p => p.PropertyType != typeof(RenderFragment) && p.GetCustomAttribute<ParameterAttribute>() != null))
             {
                 var val = property.GetValue(this);

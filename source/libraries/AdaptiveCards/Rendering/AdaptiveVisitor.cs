@@ -251,6 +251,16 @@ namespace AdaptiveCards.Rendering
         protected virtual void Visit(AdaptiveToggleVisibilityAction action)
         {
             Elements.Add(action);
+            
+            foreach(var targetElement in action.TargetElements)
+            {
+                Visit(targetElement);
+            }
+        }
+
+        protected virtual void Visit(AdaptiveTargetElement targetElement)
+        {
+
         }
 
         protected virtual void Visit(AdaptiveExecuteAction action)

@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ItemComponent<AdaptiveTargetElement>
+@implements IChildItem
 
 <ac:TargetElement @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -16,5 +17,15 @@
     [Parameter]
     [DefaultValue(null)]
     public bool? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value ?? true; }
+
+    public virtual void AddToParent()
+    {
+        ArgumentNullException.ThrowIfNull(ParentItem);
+
+        if (this.ParentItem is AdaptiveToggleVisibilityAction actionToggle)
+        {
+            actionToggle.TargetElements.Add(Item);
+        }
+    }
 
 }

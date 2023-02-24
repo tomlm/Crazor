@@ -138,6 +138,7 @@ namespace Crazor.Blazor
                 if (System.Diagnostics.Debugger.IsAttached)
                 {
                     System.Diagnostics.Debug.WriteLine(adaptiveCard.ToXml());
+                    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToJson());
                 }
                 return adaptiveCard;
 #endif
