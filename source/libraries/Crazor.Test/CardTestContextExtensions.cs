@@ -27,7 +27,12 @@ namespace Crazor.Test
             CardRoute cardRoute = await CardRoute.FromDataAsync(combined, context.Services.GetRequiredService<IEncryptionProvider>(), default(CancellationToken));
             var cardApp = context.Services.GetRequiredService<CardAppFactory>().Create(cardRoute, null);
 
-            var card = await cardApp.ProcessInvokeActivity(CardTest.CreateInvokeActivity().CreateActionInvokeActivity(action.Verb, combined), false, default(CancellationToken));
+            var activity = CardTest.CreateInvokeActivity().CreateActionInvokeActivity(action.Verb, combined);
+
+            await cardApp.LoadAppAsync(activity, default);
+
+            var card = await cardApp.ProcessInvokeActivity(activity, false, default(CancellationToken));
+
             return new CardTestContext() { Services = context.Services, Card = card };
         }
     }

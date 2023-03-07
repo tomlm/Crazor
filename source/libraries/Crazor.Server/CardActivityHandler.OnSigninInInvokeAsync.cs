@@ -2,11 +2,17 @@
 //  Licensed under the MIT License.
 
 using AdaptiveCards;
+using Crazor.Attributes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Reflection;
+using System.Security.Claims;
 
 namespace Crazor.Server
 {
@@ -29,235 +35,108 @@ namespace Crazor.Server
         // defining OnSigninInvokeAsync().
         // protected override Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
 
-//        /// <summary>
-//        /// Invoked when a <c>tokens/response</c> event is received when the base behavior of
-//        /// <see cref="OnEventActivityAsync(ITurnContext{IEventActivity}, CancellationToken)"/> is used.
-//        /// If using an <c>OAuthPrompt</c>, override this method to forward this <see cref="Activity"/> to the current dialog.
-//        /// By default, this method does nothing.
-//        /// </summary>
-//        /// <param name="turnContext">A strongly-typed context object for this turn.</param>
-//        /// <param name="cancellationToken">A cancellation token that can be used by other objects
-//        /// or threads to receive notice of cancellation.</param>
-//        /// <returns>A task that represents the work queued to execute.</returns>
-//        /// <remarks>
-//        /// When the <see cref="OnEventActivityAsync(ITurnContext{IEventActivity}, CancellationToken)"/>
-//        /// method receives an event with a <see cref="IEventActivity.Name"/> of `tokens/response`,
-//        /// it calls this method.
-//        ///
-//        /// If your bot uses the <c>OAuthPrompt</c>, forward the incoming <see cref="Activity"/> to
-//        /// the current dialog.
-//        /// </remarks>
-//        /// <seealso cref="OnEventActivityAsync(ITurnContext{IEventActivity}, CancellationToken)"/>
-//        /// <seealso cref="OnEventAsync(ITurnContext{IEventActivity}, CancellationToken)"/>
-//        protected override async Task OnTokenResponseEventAsync(ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
-//        {
-//            // Cribbed FROM SSOTokenExchangeMiddleware.cs
+        /// <summary>
+        /// Authorize the activity for the user.
+        /// </summary>
+        /// <remarks>
+        /// * This will assign Context.User and Context.UserToken if the user is authorized.
+        /// </remarks>
+        /// <exception cref="UnauthorizedAccessException">It will throw an UnauthorizedAccessException if the authenticated user does not meet [Authorized] attribute definition.</exception>
+        /// <param name="invokeActivity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>It will return Authentication if the user is not authenticated.</returns>
+        /// <exception cref="UnauthorizedAccessException"></exception>
+        private async Task<AdaptiveAuthentication> AuthorizeActivityAsync(CardApp cardApp, ITurnContext<IInvokeActivity> turnContext, bool isPreview, CancellationToken cancellationToken)
+        {
+            var userTokenClient = turnContext?.TurnState.Get<UserTokenClient>();
 
-//            // If the TokenExchange is NOT successful, the response will have already been sent by ExchangedTokenAsync
-//            if (!await ExchangeTokenAsync(turnContext, cancellationToken))
-//            {
-//                return;
-//            }
+            // Authenticate user identity by using token exchange
+            var authenticationAttribute = cardApp.CurrentView.GetType().GetCustomAttribute<AuthenticationAttribute>();
+            if (authenticationAttribute != null)
+            {
+                if (userTokenClient == null)
+                {
+                    throw new UnauthorizedAccessException($"No TurnContext");
+                }
 
-//            // Only one token exchange should proceed from here. Deduplication is performed second because in the case
-//            // of failure due to consent required, every caller needs to receive the 
-//            if (!await DeduplicatedTokenExchangeIdAsync(turnContext, cancellationToken).ConfigureAwait(false))
-//            {
-//                // If the token is not exchangeable, do not process this activity further.
-//                return;
-//            }
-//        }
+                ObjectPath.TryGetPathValue<string>(turnContext.Activity.Value, "state", out var magicCode);
 
-//        private async Task<bool> ExchangeTokenAsync(ITurnContext turnContext, CancellationToken cancellationToken)
-//        {
-//            TokenResponse tokenExchangeResponse = null;
-//            var tokenExchangeInvokeRequest = ((JObject)turnContext.Activity.Value)?.ToObject<TokenExchangeInvokeRequest>()!;
+                Context.UserToken = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, authenticationAttribute.Name, turnContext.Activity.ChannelId, magicCode, cancellationToken);
 
-//            try
-//            {
-//                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-//                if (userTokenClient != null)
-//                {
-//                    tokenExchangeResponse = await userTokenClient.ExchangeTokenAsync(
-//                        turnContext.Activity.From.Id,
-//                        tokenExchangeInvokeRequest.ConnectionName,
-//                        turnContext.Activity.ChannelId,
-//                        new TokenExchangeRequest { Token = tokenExchangeInvokeRequest.Token },
-//                        cancellationToken).ConfigureAwait(false);
-//                }
-//                else
-//                {
-//                    throw new NotSupportedException("Token Exchange is not supported by the current adapter.");
-//                }
-//            }
-//#pragma warning disable CA1031 // Do not catch general exception types (ignoring, see comment below)
-//            catch
-//#pragma warning restore CA1031 // Do not catch general exception types
-//            {
-//                // Ignore Exceptions
-//                // If token exchange failed for any reason, tokenExchangeResponse above stays null,
-//                // and hence we send back a failure invoke response to the caller.
-//            }
+                if (Context.UserToken != null)
+                {
+                    // parse token into identity and claims.
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var jwtSecurityToken = tokenHandler.ReadJwtToken(Context.UserToken.Token);
+                    var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
+                    Context.User = new ClaimsPrincipal(claimsIdentity);
+                }
+            }
 
-//            if (string.IsNullOrEmpty(tokenExchangeResponse?.Token))
-//            {
-//                // The token could not be exchanged (which could be due to a consent requirement)
-//                // Notify the sender that PreconditionFailed so they can respond accordingly.
+            // Authorize user by processing authorize attributes
+            var authorizeAttributes = cardApp.CurrentView.GetType().GetCustomAttributes<AuthorizeAttribute>().ToList();
+            if (authorizeAttributes.Any())
+            {
+                // if we are not authenticated and there are Authorize attributes then we just blow out of here.
+                if (Context.User?.Identity.IsAuthenticated == false)
+                {
+                    throw new UnauthorizedAccessException();
+                }
 
-//                var invokeResponse = new TokenExchangeInvokeResponse
-//                {
-//                    Id = tokenExchangeInvokeRequest.Id,
-//                    ConnectionName = tokenExchangeInvokeRequest.ConnectionName,
-//                    FailureDetail = "The bot is unable to exchange token. Proceed with regular login.",
-//                };
+                foreach (var authorizeAttribute in authorizeAttributes)
+                {
+                    // if we have a policy then validate it.
+                    if (!String.IsNullOrEmpty(authorizeAttribute.Policy))
+                    {
+                        var result = await AuthorizationService.AuthorizeAsync(Context.User!, authorizeAttribute.Policy);
+                        if (result.Failure != null)
+                        {
+                            throw new UnauthorizedAccessException(String.Join("\n", result.Failure.FailureReasons.Select(reason => reason.Message)));
+                        }
+                    }
 
-//                await SendInvokeResponseAsync(turnContext, invokeResponse, HttpStatusCode.PreconditionFailed, cancellationToken).ConfigureAwait(false);
+                    // if we have roles, then validate them.
+                    if (!String.IsNullOrEmpty(authorizeAttribute.Roles))
+                    {
+                        foreach (var role in authorizeAttribute.Roles.Split(',').Select(r => r.Trim()))
+                        {
+                            if (!Context.User.IsInRole(role))
+                            {
+                                throw new UnauthorizedAccessException($"User is not in required role [{role}]");
+                            }
+                        }
+                    }
+                }
+            }
 
-//                return false;
-//            }
+            // If we are not authenticated, then return authentication request.
+            if (authenticationAttribute != null && Context.User.Identity?.IsAuthenticated == false)
+            {
+                var appId = Context.Configuration.GetValue<string>("MicrosoftAppId");
 
-//            return true;
-//        }
+                var signinResource = await userTokenClient.GetSignInResourceAsync(authenticationAttribute.Name, (Activity)turnContext.Activity, null, cancellationToken);
 
+                // create authenticationOptions to ask to be logged in.
+                return new AdaptiveAuthentication()
+                {
+                    ConnectionName = authenticationAttribute.Name,
+                    Text = "Please sign in to continue",
+                    Buttons = new List<AdaptiveAuthCardButton>
+                    {
+                        new AdaptiveAuthCardButton()
+                        {
+                            Title = "Sign In",
+                            Type = "signin",
+                            Value = signinResource.SignInLink
+                        }
+                    },
+                    TokenExchangeResource = JObject.FromObject(signinResource.TokenExchangeResource).ToObject<AdaptiveTokenExchangeResource>()!,
+                };
+            }
 
-//        private async Task<bool> DeduplicatedTokenExchangeIdAsync(ITurnContext turnContext, CancellationToken cancellationToken)
-//        {
-//            var storage = turnContext.TurnState.Get<IStorage>();
+            // we are good, we are authenticated and authorized.
+            return null;
+        }
 
-//            // Create a StoreItem with Etag of the unique 'signin/tokenExchange' request
-//            var storeItem = new TokenStoreItem
-//            {
-//                ETag = (turnContext.Activity.Value as JObject).Value<string>("id")
-//            };
-
-//            var storeItems = new Dictionary<string, object> { { TokenStoreItem.GetStorageKey(turnContext), storeItem } };
-//            try
-//            {
-//                // Writing the IStoreItem with ETag of unique id will succeed only once
-//                await storage.WriteAsync(storeItems, cancellationToken).ConfigureAwait(false);
-//            }
-//            catch (Exception ex)
-
-//                // Memory storage throws a generic exception with a Message of 'Etag conflict. [other error info]'
-//                // CosmosDbPartitionedStorage throws: ex.Message.Contains("pre-condition is not met")
-//                when (ex.Message.StartsWith("Etag conflict", StringComparison.OrdinalIgnoreCase) || ex.Message.Contains("pre-condition is not met"))
-//            {
-//                // Do NOT proceed processing this message, some other thread or machine already has processed it.
-
-//                // Send 200 invoke response.
-//                await SendInvokeResponseAsync(turnContext, cancellationToken: cancellationToken).ConfigureAwait(false);
-//                return false;
-//            }
-
-//            return true;
-//        }
-
-//        private async Task SendInvokeResponseAsync(ITurnContext turnContext, object body = null, HttpStatusCode httpStatusCode = HttpStatusCode.OK, CancellationToken cancellationToken = default)
-//        {
-//            await turnContext.SendActivityAsync(new Activity { Type = ActivityTypesEx.InvokeResponse, Value = new InvokeResponse { Status = (int)httpStatusCode, Body = body, } }, cancellationToken);
-//        }
-
-//        internal class TokenStoreItem : IStoreItem
-//        {
-//            public string ETag { get; set; }
-
-//            public static string GetStorageKey(ITurnContext turnContext)
-//            {
-//                var activity = turnContext.Activity;
-//                var channelId = activity.ChannelId ?? throw new InvalidOperationException("invalid activity-missing channelId");
-//                var conversationId = activity.Conversation?.Id ?? throw new InvalidOperationException("invalid activity-missing Conversation.Id");
-
-//                var value = activity.Value as JObject;
-//                if (value == null || !value.ContainsKey("id"))
-//                {
-//                    throw new InvalidOperationException("Invalid signin/tokenExchange. Missing activity.Value.Id.");
-//                }
-
-//                return $"{channelId}/{conversationId}/{value.Value<string>("id")}";
-//            }
-//        }
-
-//        /// <summary>
-//        /// Authentication success.
-//        /// AuthToken or state is present. Verify token/state in invoke payload and return AC response
-//        /// </summary>
-//        /// <param name="authentication">authToken are absent, handle verb</param>
-//        /// <param name="state">state are absent, handle verb</param>
-//        /// <param name="turnContext">The context for the current turn.</param>
-//        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-//        /// <param name="isBasicRefresh">Refresh type</param>
-//        /// <param name="fileName">AdaptiveCardResponse.json</param>
-//        /// <returns>A task that represents the work queued to execute.</returns>
-//        private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "AdaptiveCardResponse.json")
-//        {
-//            // Verify token is present or not.
-
-//            bool isTokenPresent = authentication != null ? true : false;
-//            bool isStatePresent = state != null && state != "" ? true : false;
-
-//            string[] filepath = { ".", "Resources", fileName };
-
-//            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-//            AdaptiveCard adaptiveCard = new AdaptiveCard();
-
-//            var authResultData = isTokenPresent ? "SSO success" : isStatePresent ? "OAuth success" : "SSO/OAuth failed";
-
-//            if (isBasicRefresh)
-//            {
-//                authResultData = "Refresh done";
-//            }
-
-//            var payloadData = new
-//            {
-//                authResult = authResultData,
-//            };
-
-//            var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
-//            {
-//                StatusCode = 200,
-//                Type = AdaptiveCard.ContentType,
-//                Value = adaptiveCard
-//            };
-
-//            return CreateInvokeResponse(adaptiveCardResponse);
-//        }
-
-//        //    /// <summary>
-//        //    /// when token is absent in the invoke. We can initiate SSO in response to the invoke
-//        //    /// </summary>
-//        //    /// <param name="turnContext">The context for the current turn.</param>
-//        //    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-//        //    /// <returns>A task that represents the work queued to execute.</returns>
-//        //    private async Task<InvokeResponse> initiateSSOAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
-//        //    {
-//        //        var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
-//        //        var oAuthCard = new OAuthCard
-//        //        {
-//        //            Text = "Signin Text",
-//        //            ConnectionName = _connectionName,
-//        //            TokenExchangeResource = new TokenExchangeResource
-//        //            {
-//        //                Id = Guid.NewGuid().ToString()
-//        //            },
-//        //            Buttons = new List<CardAction>
-//        //            {
-//        //                new CardAction
-//        //                {
-//        //                    Type = ActionTypes.Signin,
-//        //                    Value = signInLink,
-//        //                    Title = "Please sign in",
-//        //                },
-//        //            }
-//        //        };
-
-//        //        var loginReqResponse = JObject.FromObject(new
-//        //        {
-//        //            statusCode = 401,
-//        //            type = "application/vnd.microsoft.activity.loginRequest",
-//        //            value = oAuthCard
-//        //        });
-
-//        //        return CreateInvokeResponse(loginReqResponse);
-//        //    }
     }
 }

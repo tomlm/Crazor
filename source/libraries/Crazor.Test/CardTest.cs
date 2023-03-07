@@ -2,14 +2,10 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using Diag = System.Diagnostics;
 
@@ -164,7 +160,11 @@ namespace Crazor.Test
         {
             var cardApp = Services.GetRequiredService<CardAppFactory>().Create(CardRoute.Parse(route), null);
 
-            var card = await cardApp.ProcessInvokeActivity(CreateInvokeActivity().CreateLoadRouteActivity(route), isPreview, default(CancellationToken));
+            var activity = CreateInvokeActivity().CreateLoadRouteActivity(route);
+            
+            await cardApp.LoadAppAsync(activity, default);
+
+            var card = await cardApp.ProcessInvokeActivity(activity, isPreview, default(CancellationToken));
             return new CardTestContext() { Card = card, Services = Services };
         }
     }

@@ -40,6 +40,8 @@ namespace Crazor.Server
 
                 var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);
 
+                await cardApp.LoadAppAsync(activity, cancellationToken);
+
                 var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
 
                 // for clients that don't support AC you must send a preview card attachment.

@@ -35,6 +35,8 @@ namespace Crazor.Server
 
             cardApp.IsTaskModule = true;
 
+            await cardApp.LoadAppAsync(activity, cancellationToken);
+
             var card = await cardApp.ProcessInvokeActivity(activity, isPreview: false, cancellationToken);
 
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);

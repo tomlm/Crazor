@@ -142,6 +142,8 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(cancellationToken);
 
             var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext);
+            
+            await cardApp.LoadAppAsync((Activity)turnContext.Activity!, cancellationToken);
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
 

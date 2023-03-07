@@ -77,6 +77,8 @@ namespace Crazor.Mvc.Pages.Cards
             this.Response.Cookies.Append("token", token);
             this.Response.Cookies.Append("userId", userId);
 
+            await CardApp.LoadAppAsync(loadRouteActivity!, default);
+
             this.AdaptiveCard = await CardApp.ProcessInvokeActivity(loadRouteActivity, isPreview: false, cancellationToken);
 
             this.RouteUrl = this.CardApp.GetCurrentCardRoute();

@@ -31,6 +31,8 @@ namespace Crazor.Server
 
             var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
 
+            await cardApp.LoadAppAsync(activity, cancellationToken);
+
             var card = await cardApp.ProcessInvokeActivity(activity, isPreview: true, cancellationToken);
 
             var preview = new Attachment(
