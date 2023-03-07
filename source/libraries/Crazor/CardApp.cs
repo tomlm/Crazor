@@ -1335,40 +1335,40 @@ namespace Crazor
             }
 
             // Authorize user by processing authorize attributes
-            //var authorizeAttributes = CurrentView.GetType().GetCustomAttributes<AuthorizeAttribute>().ToList();
-            //if (authorizeAttributes.Any())
-            //{
-            //    // if we are not authenticated and there are Authorize attributes then we just blow out of here.
-            //    if (Context.User?.Identity.IsAuthenticated == false)
-            //    {
-            //        throw new UnauthorizedAccessException();
-            //    }
+            var authorizeAttributes = CurrentView.GetType().GetCustomAttributes<AuthorizeAttribute>().ToList();
+            if (authorizeAttributes.Any())
+            {
+                // if we are not authenticated and there are Authorize attributes then we just blow out of here.
+                if (Context.User?.Identity.IsAuthenticated == false)
+                {
+                    throw new UnauthorizedAccessException();
+                }
 
-            //    foreach (var authorizeAttribute in authorizeAttributes)
-            //    {
-            //        // if we have a policy then validate it.
-            //        if (!String.IsNullOrEmpty(authorizeAttribute.Policy))
-            //        {
-            //            var result = await Context.AuthorizationService.AuthorizeAsync(Context.User!, authorizeAttribute.Policy);
-            //            if (result.Failure != null)
-            //            {
-            //                throw new UnauthorizedAccessException(String.Join("\n", result.Failure.FailureReasons.Select(reason => reason.Message)));
-            //            }
-            //        }
+                foreach (var authorizeAttribute in authorizeAttributes)
+                {
+                    // if we have a policy then validate it.
+                    if (!String.IsNullOrEmpty(authorizeAttribute.Policy))
+                    {
+                        var result = await Context.AuthorizationService.AuthorizeAsync(Context.User!, authorizeAttribute.Policy);
+                        if (result.Failure != null)
+                        {
+                            throw new UnauthorizedAccessException(String.Join("\n", result.Failure.FailureReasons.Select(reason => reason.Message)));
+                        }
+                    }
 
-            //        // if we have roles, then validate them.
-            //        if (!String.IsNullOrEmpty(authorizeAttribute.Roles))
-            //        {
-            //            foreach (var role in authorizeAttribute.Roles.Split(',').Select(r => r.Trim()))
-            //            {
-            //                if (!Context.User.IsInRole(role))
-            //                {
-            //                    throw new UnauthorizedAccessException($"User is not in required role [{role}]");
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+                    // if we have roles, then validate them.
+                    if (!String.IsNullOrEmpty(authorizeAttribute.Roles))
+                    {
+                        foreach (var role in authorizeAttribute.Roles.Split(',').Select(r => r.Trim()))
+                        {
+                            if (!Context.User.IsInRole(role))
+                            {
+                                throw new UnauthorizedAccessException($"User is not in required role [{role}]");
+                            }
+                        }
+                    }
+                }
+            }
 
             // If we are not authenticated, then return authentication request.
             if (authenticationAttribute != null && Context.User.Identity?.IsAuthenticated == false)
