@@ -30,7 +30,7 @@ namespace Crazor.Server
                     {
                         var cardRoute = CardRoute.Parse($"/Cards/{app}");
 
-                        var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+                        var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
                         var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route), isPreview: true, cancellationToken);
 

@@ -2,6 +2,7 @@
 //  Licensed under the MIT License.
 
 using Microsoft.Bot.Builder.Teams;
+using Microsoft.Identity.Web;
 using Newtonsoft.Json;
 
 namespace Crazor.Server

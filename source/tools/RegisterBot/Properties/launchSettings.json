@@ -2,8 +2,7 @@
   "profiles": {
     "RegisterBot": {
       "commandName": "Project",
-      "commandLineArgs": " --resource-group Tom0124 --name Tom0124 --endpoint https://78aa-50-47-82-141.ngrok.io",
-      "workingDirectory": "D:\\Source\\github\\crazor\\source\\samples\\CrazorDemoBot"
+      "workingDirectory": "D:\\Source\\github\\crazor\\source\\samples\\CrazorBlazorDemo"
     }
   }
 }

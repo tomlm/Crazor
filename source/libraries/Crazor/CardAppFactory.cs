@@ -2,7 +2,9 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Connector.Authentication;
 using System.Reflection;
 
 namespace Crazor
@@ -67,7 +69,7 @@ namespace Crazor
 
         public IEnumerable<string> GetNames() => _cardApps.Keys.OrderBy(n => n);
 
-        public CardApp Create(CardRoute cardRoute, IConnectorClient client = null)
+        public CardApp Create(CardRoute cardRoute, ITurnContext turnContext = null)
         {
             if (_cardApps.TryGetValue(cardRoute.App, out var cardAppType))
             {
@@ -78,7 +80,7 @@ namespace Crazor
                     cardApp.Name = cardRoute.App;
                 }
                 cardApp.Route = cardRoute;
-                cardApp.ConnectorClient = client;
+                cardApp.TurnContext = turnContext;
                 return cardApp;
             }
             throw new ArgumentNullException(nameof(cardRoute));

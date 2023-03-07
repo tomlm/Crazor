@@ -57,14 +57,24 @@ namespace Crazor
                 {
                     AddCardHeader = false,
                     AddSecondaryActions = false,
-                    SchemaVersion = new AdaptiveSchemaVersion(1, 5)
+                    SchemaVersion = new AdaptiveSchemaVersion(1, 5),
+                    Authentication = AuthenticationFlags.None
                 };
 
                 serviceOptions.ChannelOptions[Channels.Msteams] = new ChannelOptions()
                 {
                     AddCardHeader = false,
                     AddSecondaryActions = true,
-                    SchemaVersion = new AdaptiveSchemaVersion(1, 5)
+                    SchemaVersion = new AdaptiveSchemaVersion(1, 5),
+                    Authentication = AuthenticationFlags.SSO | AuthenticationFlags.OAuth
+                };
+
+                serviceOptions.ChannelOptions[Channels.Outlook] = new ChannelOptions()
+                {
+                    AddCardHeader = false,
+                    AddSecondaryActions = true,
+                    SchemaVersion = new AdaptiveSchemaVersion(1, 5),
+                    Authentication = AuthenticationFlags.SSO | AuthenticationFlags.OAuth
                 };
 
                 var configuration = provider.GetService<IConfiguration>();

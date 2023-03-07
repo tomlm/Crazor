@@ -411,7 +411,13 @@ namespace AdaptiveCards
         /// <returns>The JSON representation of this AdaptiveCard.</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, new JsonSerializerSettings()
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
+                Converters = { new StrictIntConverter() },
+                NullValueHandling = NullValueHandling.Ignore,
+            });
         }
 
         /// <summary>
@@ -419,117 +425,117 @@ namespace AdaptiveCards
         /// </summary>
         /// <returns>Resource information for the entire card.</returns>
         public RemoteResourceInformation[] GetResourceInformation()
-        {
-            // TODO: Add Media information to the list when Media type is added
-            return GetResourceInformationInCard(this).ToArray();
-        }
-
-        private List<RemoteResourceInformation> GetResourceInformationInCard(AdaptiveCard card)
-        {
-            // Initialize the result array
-            List<RemoteResourceInformation> resourceInformationList = new List<RemoteResourceInformation>();
-
-            // Get background image
-            if (!String.IsNullOrEmpty(card.BackgroundImage?.Url))
             {
-                resourceInformationList.Add(new RemoteResourceInformation(
-                    card.BackgroundImage?.Url,
-                    "image"
-                ));
+                // TODO: Add Media information to the list when Media type is added
+                return GetResourceInformationInCard(this).ToArray();
             }
 
-            // Get all resource information in body
-            foreach (AdaptiveElement bodyElement in card.Body)
+            private List<RemoteResourceInformation> GetResourceInformationInCard(AdaptiveCard card)
             {
-                resourceInformationList.AddRange(GetResourceInformationInElement(bodyElement));
-            }
+                // Initialize the result array
+                List<RemoteResourceInformation> resourceInformationList = new List<RemoteResourceInformation>();
 
-            // Get all resource information in actions
-            foreach (AdaptiveAction action in card.Actions)
-            {
-                // Get all resource information for iconUrl
-                if (!String.IsNullOrEmpty(action.IconUrl))
+                // Get background image
+                if (!String.IsNullOrEmpty(card.BackgroundImage?.Url))
                 {
                     resourceInformationList.Add(new RemoteResourceInformation(
-                        action.IconUrl,
+                        card.BackgroundImage?.Url,
                         "image"
                     ));
                 }
 
-                // Get all resource information in ShowCard actions' cards
-                if (action is AdaptiveShowCardAction showCardAction)
+                // Get all resource information in body
+                foreach (AdaptiveElement bodyElement in card.Body)
                 {
-                    resourceInformationList.AddRange(GetResourceInformationInCard(showCardAction.Card));
+                    resourceInformationList.AddRange(GetResourceInformationInElement(bodyElement));
                 }
+
+                // Get all resource information in actions
+                foreach (AdaptiveAction action in card.Actions)
+                {
+                    // Get all resource information for iconUrl
+                    if (!String.IsNullOrEmpty(action.IconUrl))
+                    {
+                        resourceInformationList.Add(new RemoteResourceInformation(
+                            action.IconUrl,
+                            "image"
+                        ));
+                    }
+
+                    // Get all resource information in ShowCard actions' cards
+                    if (action is AdaptiveShowCardAction showCardAction)
+                    {
+                        resourceInformationList.AddRange(GetResourceInformationInCard(showCardAction.Card));
+                    }
+                }
+
+                return resourceInformationList;
             }
 
-            return resourceInformationList;
-        }
+            private List<RemoteResourceInformation> GetResourceInformationInElement(AdaptiveElement element)
+            {
+                List<RemoteResourceInformation> resourceInformationList = new List<RemoteResourceInformation>();
 
-        private List<RemoteResourceInformation> GetResourceInformationInElement(AdaptiveElement element)
-        {
-            List<RemoteResourceInformation> resourceInformationList = new List<RemoteResourceInformation>();
+                // Base case
+                if (element is AdaptiveImage imageElement && !String.IsNullOrEmpty(imageElement.Url))
+                {
+                    resourceInformationList.Add(new RemoteResourceInformation(
+                        imageElement.Url,
+                        "image"
+                    ));
+                }
 
-            // Base case
-            if (element is AdaptiveImage imageElement && !String.IsNullOrEmpty(imageElement.Url))
-            {
-                resourceInformationList.Add(new RemoteResourceInformation(
-                    imageElement.Url,
-                    "image"
-                ));
-            }
+                // If element is any kind of container, iterate over its items.
+                else if (element is AdaptiveContainer container)
+                {
+                    foreach (AdaptiveElement item in container.Items)
+                    {
+                        resourceInformationList.AddRange(GetResourceInformationInElement(item));
+                    }
+                }
+                else if (element is AdaptiveImageSet imageSet)
+                {
+                    foreach (AdaptiveElement item in imageSet.Images)
+                    {
+                        resourceInformationList.AddRange(GetResourceInformationInElement(item));
+                    }
+                }
+                else if (element is AdaptiveColumnSet columnSet)
+                {
+                    foreach (AdaptiveElement item in columnSet.Columns)
+                    {
+                        resourceInformationList.AddRange(GetResourceInformationInElement(item));
+                    }
+                }
+                else if (element is AdaptiveColumn column)
+                {
+                    foreach (AdaptiveElement item in column.Items)
+                    {
+                        resourceInformationList.AddRange(GetResourceInformationInElement(item));
+                    }
+                }
 
-            // If element is any kind of container, iterate over its items.
-            else if (element is AdaptiveContainer container)
-            {
-                foreach (AdaptiveElement item in container.Items)
-                {
-                    resourceInformationList.AddRange(GetResourceInformationInElement(item));
-                }
+                return resourceInformationList;
             }
-            else if (element is AdaptiveImageSet imageSet)
-            {
-                foreach (AdaptiveElement item in imageSet.Images)
-                {
-                    resourceInformationList.AddRange(GetResourceInformationInElement(item));
-                }
-            }
-            else if (element is AdaptiveColumnSet columnSet)
-            {
-                foreach (AdaptiveElement item in columnSet.Columns)
-                {
-                    resourceInformationList.AddRange(GetResourceInformationInElement(item));
-                }
-            }
-            else if (element is AdaptiveColumn column)
-            {
-                foreach (AdaptiveElement item in column.Items)
-                {
-                    resourceInformationList.AddRange(GetResourceInformationInElement(item));
-                }
-            }
-
-            return resourceInformationList;
-        }
 
 #if !NETSTANDARD1_3
-        public string ToXml()
-        {
-            XmlWriterSettings settings = new XmlWriterSettings()
+            public string ToXml()
             {
-                Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
-                Indent = true,
-            };
-
-            using (StringWriter textWriter = new StringWriter())
-            {
-                using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
+                XmlWriterSettings settings = new XmlWriterSettings()
                 {
-                    AdaptiveCard.XmlSerializer.Serialize(xmlWriter, this, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
+                    Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
+                    Indent = true,
+                };
+
+                using (StringWriter textWriter = new StringWriter())
+                {
+                    using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
+                    {
+                        AdaptiveCard.XmlSerializer.Serialize(xmlWriter, this, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
+                    }
+                    return textWriter.ToString(); //This is the output as a string
                 }
-                return textWriter.ToString(); //This is the output as a string
             }
-        }
 #endif
+        }
     }
-}

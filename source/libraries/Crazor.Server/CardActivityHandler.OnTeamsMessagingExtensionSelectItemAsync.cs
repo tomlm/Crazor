@@ -27,7 +27,7 @@ namespace Crazor.Server
 
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
             var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
 

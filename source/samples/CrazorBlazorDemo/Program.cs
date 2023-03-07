@@ -22,12 +22,14 @@ namespace CrazorBlazorDemo
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddControllers();
+            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization();
 
             // ---- <CRAZOR>
             builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
-                options.Manifest.Version = "1.1";
+                options.Manifest.Version = "1.2";
                 options.Manifest.Developer.Name = "Tom Laird-McConnell";
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });

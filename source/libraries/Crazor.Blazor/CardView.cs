@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Xml;
 
@@ -29,6 +30,8 @@ namespace Crazor.Blazor
         /// Name of the CardView
         /// </summary>
         public string Name => this.GetType().Name;
+
+        public ClaimsPrincipal? User => App.Context.User!;
 
         /// <summary>
         /// App for this CardView

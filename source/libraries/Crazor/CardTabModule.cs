@@ -141,7 +141,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(uri);
             ArgumentNullException.ThrowIfNull(cancellationToken);
 
-            var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext);
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
 
@@ -150,7 +150,7 @@ namespace Crazor
 
         protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, CardRoute cardRoute, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateActionInvokeActivity(invokeValue.Action.Verb, JObject.FromObject(invokeValue.Action.Data)), false, cancellationToken);
             return card;
         }

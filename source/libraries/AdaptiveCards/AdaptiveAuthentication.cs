@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
@@ -9,6 +10,7 @@ namespace AdaptiveCards
     /// <summary>
     /// Authentication payload.
     /// </summary>
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class AdaptiveAuthentication
     {
         /// <summary>

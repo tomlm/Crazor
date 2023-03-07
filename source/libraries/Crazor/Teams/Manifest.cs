@@ -20,7 +20,11 @@ namespace Crazor.Teams
                 PackageName = String.Join(".", hostUri.Host.Split('.').Reverse());
             else
                 PackageName = String.Join(".", AppDomain.CurrentDomain.FriendlyName.Split('.').Reverse());
-            ValidDomains = new List<string> { hostUri.Host };
+            ValidDomains = new List<string> 
+            {
+                hostUri.Host,
+                "token.botframework.com"
+            };
             Developer.Name = "TBD";
             Developer.WebsiteUrl = hostUri.AbsoluteUri;
             Developer.PrivacyUrl = new Uri(hostUri, "/Privacy").AbsoluteUri;
@@ -38,6 +42,12 @@ namespace Crazor.Teams
                 Scopes = new List<BotScope>() { BotScope.Personal, BotScope.Groupchat, BotScope.Team },
 
             });
+
+            WebApplicationInfo = new WebApplicationInfo()
+            {
+                Id = botId,
+                Resource = $"api://botid-{botId}"
+            };
 
             StaticTabs.Add(new StaticTab()
             {
@@ -104,7 +114,7 @@ namespace Crazor.Teams
                             Id = entityId,
                             Type = commandInfoAttribute.Type,
                             Title = commandInfoAttribute.Title,
-                            Context = commandInfoAttribute.Context?.Split(',').Select(t => Enum.Parse<CommandContext>(t.Trim(), ignoreCase:true)).ToList(),
+                            Context = commandInfoAttribute.Context?.Split(',').Select(t => Enum.Parse<CommandContext>(t.Trim(), ignoreCase: true)).ToList(),
                             Description = commandInfoAttribute.Description,
                             FetchTask = true,
                             InitialRun = true,
