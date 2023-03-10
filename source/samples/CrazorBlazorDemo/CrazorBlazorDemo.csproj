@@ -1,20 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>2f079e14-92c5-4842-b95a-13323becc874</UserSecretsId>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
-    <ProjectReference Include="..\..\Libraries\Crazor.Server\Crazor.Server.csproj" />
-    <ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
-    <ProjectReference Include="..\SharedCards\SharedCards.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>2f079e14-92c5-4842-b95a-13323becc874</UserSecretsId>
+	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Cards\" />
+		<ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
+		<ProjectReference Include="..\..\Libraries\Crazor.Server\Crazor.Server.csproj" />
+		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
+		<ProjectReference Include="..\SharedCards\SharedCards.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Cards\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.14" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.5.0" />
+		<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.5.0" />
+		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.5.0" />
 	</ItemGroup>
 </Project>

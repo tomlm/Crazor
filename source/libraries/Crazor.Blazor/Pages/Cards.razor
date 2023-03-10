@@ -2,16 +2,23 @@
 @inject NavigationManager MyNavigationManager
 @implements IDisposable
 @using Crazor.Blazor.Components
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Routing;
 
-<CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
+<CascadingAuthenticationState>
+    <CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
+</CascadingAuthenticationState>
+
 
 @code {
     // this is only used to "load the cardview" from the page on initial load.
     [Parameter]
     public string? routeFragment { get; set; }
+
     CardRoute Route { get; set; }
+
     public CardViewer MyCardViewer = default!;
+
     bool routeLoaded = false;
 
     protected async override Task OnInitializedAsync()

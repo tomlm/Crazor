@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.14" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.13" />
 		<PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.19.1" />
 		<PackageReference Include="Microsoft.Bing.Search.WebSearch" Version="1.0.0" />
@@ -21,6 +22,12 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="Cards\Auth2\Default.razor">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	  </Content>
 	</ItemGroup>
 
 </Project>

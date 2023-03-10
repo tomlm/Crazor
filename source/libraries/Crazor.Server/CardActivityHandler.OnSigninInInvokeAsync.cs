@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
@@ -70,6 +71,7 @@ namespace Crazor.Server
                     var jwtSecurityToken = tokenHandler.ReadJwtToken(Context.UserToken.Token);
                     var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
                     Context.User = new ClaimsPrincipal(claimsIdentity);
+                    ((IHostEnvironmentAuthenticationStateProvider)this.AuthenticationStateProvider).SetAuthenticationState(Task.FromResult(new AuthenticationState(Context.User)));
                 }
             }
 
