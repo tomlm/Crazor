@@ -34,7 +34,10 @@ namespace Crazor.Blazor.Components
 
         public override bool Equals(object obj)
         {
-            return _value == (Boolean)obj;
+            if (obj is BoolProperty bp)
+                return _value == bp._value;
+
+            return _value == (bool)obj;
         }
 
         public override int GetHashCode()

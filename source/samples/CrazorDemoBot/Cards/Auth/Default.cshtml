@@ -1,0 +1,16 @@
+﻿@using Microsoft.Identity.Web;
+@attribute [Authentication("Graph")]
+
+@inherits CardView
+
+<Card Version="1.5">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <TextBlock>@User.GetDisplayName()</TextBlock>
+    }
+    else
+    {
+        <TextBlock>Anonymous</TextBlock>
+    }
+</Card>
+

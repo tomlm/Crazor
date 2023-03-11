@@ -3,8 +3,10 @@
 
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Crazor.Mvc
 {
@@ -13,6 +15,8 @@ namespace Crazor.Mvc
         public static IServiceCollection AddCrazorMvc(this IServiceCollection services)
         {
             services.AddSingleton<MvcCardViewFactory>();
+            services.AddHttpContextAccessor();
+            services.TryAddScoped<AuthenticationStateProvider, HttpContextAuthenticationStateProvider>();
 
             // enumerates types that are .cshtml templates
             foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
@@ -32,6 +36,5 @@ namespace Crazor.Mvc
 
             return services;
         }
-
     }
 }

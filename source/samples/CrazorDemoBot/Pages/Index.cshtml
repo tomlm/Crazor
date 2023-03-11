@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using Crazor
 @using System.Reflection
 @inject CardAppFactory cardAppFactory
@@ -23,3 +23,6 @@
         <li><a href="/Cards/@appName">@appName Card</a></li>
     }
 </ul>
+
+<div>Graph API result</div>
+<div>@ViewData["GraphApiResult"]</div>
