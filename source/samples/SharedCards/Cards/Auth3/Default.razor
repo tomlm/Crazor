@@ -1,7 +1,7 @@
 ﻿@attribute [Authentication("Graph")]
 @inherits CardView
 @using Microsoft.Graph;
-@inject GraphServiceClient graphServiceClient
+@inject GraphServiceClient GraphClient;
 
 <CascadingAuthenticationState>
     <Card Version="1.5">
@@ -16,14 +16,15 @@
     </Card>
 </CascadingAuthenticationState>
 
-@code {
+@code 
+{
     public string UserName { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
         if (User.Identity.IsAuthenticated)
         {
-            var result = await graphServiceClient.Me.Request().GetAsync();
+            var result = await GraphClient.Me.Request().GetAsync();
             UserName = result.DisplayName;
         }
 
@@ -31,8 +32,4 @@
         return;
     }
 
-    protected override Task OnParametersSetAsync()
-    {
-        return base.OnParametersSetAsync();
-    }
 }

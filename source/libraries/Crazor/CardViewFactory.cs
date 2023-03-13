@@ -26,7 +26,7 @@ namespace Crazor
 
             // inject dependencies
             var props = cardViewType
-                             .GetProperties()
+                             .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
                              .Where(p => p.CanWrite && Attribute.IsDefined(p, typeof(InjectAttribute)));
 
             foreach (var prop in props)

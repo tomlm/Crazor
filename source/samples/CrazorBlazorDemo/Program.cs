@@ -29,10 +29,9 @@ namespace CrazorBlazorDemo
             // Add services to the container.
             builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-                .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
-                .AddInMemoryTokenCaches();
-
+                    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+                        .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
+                    .AddInMemoryTokenCaches();
 
             builder.Services.AddAuthorization(options =>
             {
