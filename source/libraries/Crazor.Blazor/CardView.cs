@@ -336,9 +336,15 @@ namespace Crazor.Blazor
 
         }
 
-        void ICardView.OnInitialized()
+        protected override Task OnInitializedAsync()
         {
-            this.OnInitialized();
+            OnInitialized();
+            return Task.CompletedTask;
+        }
+
+        Task ICardView.OnInitializedAsync()
+        {
+            return this.OnInitializedAsync();
         }
 
         #endregion

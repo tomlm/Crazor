@@ -204,6 +204,20 @@ namespace Crazor.Mvc
         }
 
         /// <summary>
+        /// OnInitialized() - Initalize members
+        /// </summary>
+        /// <remarks>
+        /// This will be called only once to initialize the instance data of the cardview.
+        /// This is effectively like a constructor, with no async support.  If you
+        /// want to look up data to look at OnLoadCardAsync
+        /// </remarks>
+        protected virtual Task OnInitializedAsync()
+        {
+            OnInitialized();
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
         /// OnResumeView() - Called when a CardResult has returned back to this view
         /// </summary>
         /// <remarks>
@@ -346,9 +360,9 @@ namespace Crazor.Mvc
             }
         }
 
-        void ICardView.OnInitialized()
+        Task ICardView.OnInitializedAsync()
         {
-            this.OnInitialized();
+            return this.OnInitializedAsync();
         }
         #endregion
     }

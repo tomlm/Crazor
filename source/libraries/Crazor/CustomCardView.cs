@@ -129,8 +129,9 @@ namespace Crazor
         }
 
         /// <inheritdoc/>
-        protected virtual void OnInitialized()
+        protected virtual Task OnInitializedAsync()
         {
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc/>
@@ -151,9 +152,9 @@ namespace Crazor
         public abstract Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
 
         /// <inheritdoc/>
-        void ICardView.OnInitialized()
+        Task ICardView.OnInitializedAsync()
         {
-            this.OnInitialized();
+            return this.OnInitializedAsync();
         }
     }
 }

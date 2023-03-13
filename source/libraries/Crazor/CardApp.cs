@@ -358,13 +358,6 @@ namespace Crazor
             }
 
             CurrentView.SetModel(cardState.Model);
-
-            if (cardState.Initialized == false)
-            {
-                // call hook to give cardview opportunity to process data.
-                CurrentView.OnInitialized();
-                cardState.Initialized = true;
-            }
         }
 
         private void SaveCardState()
@@ -731,6 +724,13 @@ namespace Crazor
                     }
                 }
 
+                if (this.CallStack[0].Initialized == false)
+                {
+                    // call hook to give cardview opportunity to process data.
+                    await CurrentView.OnInitializedAsync();
+                    this.CallStack[0].Initialized = true;
+                }
+
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
                 verbMethod = this.CurrentView.GetMethod(action.Verb);
                 if (verbMethod != null)
@@ -757,6 +757,15 @@ namespace Crazor
                     }
                 }
                 action.Verb = Constants.SHOWVIEW_VERB;
+            }
+            else
+            {
+                if (this.CallStack[0].Initialized == false)
+                {
+                    // call hook to give cardview opportunity to process data.
+                    await CurrentView.OnInitializedAsync();
+                    this.CallStack[0].Initialized = true;
+                }
             }
 
             if (action.Verb != Constants.SHOWVIEW_VERB)

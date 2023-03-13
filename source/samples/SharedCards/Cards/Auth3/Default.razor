@@ -1,0 +1,38 @@
+﻿@attribute [Authentication("Graph")]
+@inherits CardView
+@using Microsoft.Graph;
+@inject GraphServiceClient graphServiceClient
+
+<CascadingAuthenticationState>
+    <Card Version="1.5">
+        <AuthorizeView>
+            <Authorized>
+                <TextBlock>Graph User is: @UserName</TextBlock>
+            </Authorized>
+            <NotAuthorized>
+                <TextBlock>Anonymous</TextBlock>
+            </NotAuthorized>
+        </AuthorizeView>
+    </Card>
+</CascadingAuthenticationState>
+
+@code {
+    public string UserName { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            var result = await graphServiceClient.Me.Request().GetAsync();
+            UserName = result.DisplayName;
+        }
+
+        await base.OnInitializedAsync();
+        return;
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+}

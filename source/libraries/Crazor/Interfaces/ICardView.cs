@@ -68,14 +68,12 @@ namespace Crazor.Interfaces
         Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
 
         /// <summary>
-        /// OnInitialized() - Initalize members
+        /// OnInitializedAsync() - Initalize members
         /// </summary>
         /// <remarks>
         /// This will be called only once to initialize the instance data of the cardview.
-        /// This is effectively like a constructor, with no async support.  If you
-        /// want to look up data to look at OnLoadCardAsync
         /// </remarks>
-        void OnInitialized();
+        Task OnInitializedAsync();
 
         /// <summary>
         /// OnActionAsync() - Called to process an incoming verb action.
