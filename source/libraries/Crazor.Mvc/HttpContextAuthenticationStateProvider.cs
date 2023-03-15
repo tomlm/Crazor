@@ -4,7 +4,6 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Graph;
 
 namespace Crazor.Mvc
 {
