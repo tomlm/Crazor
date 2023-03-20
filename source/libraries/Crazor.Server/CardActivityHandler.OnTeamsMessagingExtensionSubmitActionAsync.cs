@@ -30,7 +30,7 @@ namespace Crazor.Server
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(action.Data));
 
             CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), Context.EncryptionProvider, cancellationToken);
-            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
             cardApp.IsTaskModule = true;
 

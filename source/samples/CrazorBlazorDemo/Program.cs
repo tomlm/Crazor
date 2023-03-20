@@ -4,10 +4,11 @@
 using Crazor;
 using Crazor.Blazor;
 using Crazor.Server;
-using CrazorBlazorDemo.Data;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
-using SharedCards.Cards.CodeOnlyView;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 
 namespace CrazorBlazorDemo
 {
@@ -18,16 +19,33 @@ namespace CrazorBlazorDemo
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
-            builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddServerSideBlazor()
+                .AddMicrosoftIdentityConsentHandler();
+
             builder.Services.AddControllers();
+
+            var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ') ?? builder.Configuration["MicrosoftGraph:Scopes"]?.Split(' ');
+
+            // Add services to the container.
+            builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+                    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+                        .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
+                    .AddInMemoryTokenCaches();
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = options.DefaultPolicy;
+            });
+
+            builder.Services.AddRazorPages()
+                .AddMicrosoftIdentityUI();
 
             // ---- <CRAZOR>
             builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
-                options.Manifest.Version = "1.1";
+                options.Manifest.Version = "1.2";
                 options.Manifest.Developer.Name = "Tom Laird-McConnell";
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });
@@ -61,6 +79,10 @@ namespace CrazorBlazorDemo
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
             app.MapControllers();
             // </CRAZOR>
 

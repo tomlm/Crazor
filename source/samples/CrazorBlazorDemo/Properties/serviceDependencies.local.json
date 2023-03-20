@@ -5,6 +5,12 @@
       "type": "storage.emulator",
       "connectionId": "AzureStorage",
       "dynamicId": null
+    },
+    "identityapp1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": null,
+      "type": "identityapp.secretStore",
+      "connectionId": "AzureAD:ClientSecret"
     }
   }
 }

@@ -41,9 +41,9 @@ class Script : CShell
         string groupName = args.SkipWhile(arg => arg != "--resource-group").Skip(1).FirstOrDefault();
         string botName = args.SkipWhile(arg => arg != "--name").Skip(1).FirstOrDefault();
         string endpoint = args.SkipWhile(arg => arg != "--endpoint").Skip(1).FirstOrDefault();
-        botName = String.IsNullOrEmpty(botName) ? botName : await GetBotName();
-        endpoint = String.IsNullOrEmpty(endpoint) ? endpoint : await GetEndpoint();
-        groupName = String.IsNullOrEmpty(groupName) ? groupName : await GetGroupName(botName);
+        botName = !String.IsNullOrEmpty(botName) ? botName : await GetBotName();
+        endpoint = !String.IsNullOrEmpty(endpoint) ? endpoint : await GetEndpoint();
+        groupName = !String.IsNullOrEmpty(groupName) ? groupName : await GetGroupName(botName);
 
         Uri uri = new Uri(endpoint);
         // validate groupname exists
@@ -72,19 +72,27 @@ class Script : CShell
             Console.WriteLine($"==== Creating AD Application for {botName}");
             output = await Cmd($"az ad app create --display-name {botName}").AsJson();
             appId = (string)output.appId;
-        }
 
+        }
+        
         Console.WriteLine("==== Generating MicrosoftAppPassword");
         output = await Cmd($"az ad app credential reset --id {appId}").AsJson();
         string password = (string)output.password;
         string tenantId = (string)output.tenant;
+
+        Console.WriteLine($"===== Configuring SSO for {botName}");
+        // output = await Cmd($"az ad app update --id {appId} --identifier-uris api://{endpoint.ToLower()}/BotId-{appId}").AsJson();
+        output = await Cmd($"az ad app update --id {appId} --identifier-uris api://{uri.Host.ToLower()}/botid-{appId}").AsJson();
+
+        output = await Cmd($"az ad app permission add --api {appId} --api-permissions 00000000-0000-0000-0000-00000000000000000=Role --id 00000000-0000-0000-0000-00000000000000000").AsJson();
 
         Console.WriteLine($"==== looking up {botName}");
         var cmd = await Cmd($"az bot show -g {groupName} --name {botName}").AsResult();
         if (!cmd.Success)
         {
             Console.WriteLine($"==== Creating bot registration for {botName}");
-            output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password}").AsJson();
+            // output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password} --app-type MultiTenant").AsJson();
+            output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --name {botName} --endpoint {uri.AbsoluteUri} --app-type MultiTenant").AsJson();
             output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
         }
         else

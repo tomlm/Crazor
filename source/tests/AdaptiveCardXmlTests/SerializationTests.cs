@@ -25,7 +25,7 @@ namespace AdaptiveCardXmlTests
         };
 
 
-        public static IEnumerable<object> GetTestFiles()
+        public static IEnumerable<object[]> GetTestFiles()
         {
             var dataFolder = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "Data"));
             var files = Directory.EnumerateFiles(dataFolder, "*.json", SearchOption.AllDirectories);

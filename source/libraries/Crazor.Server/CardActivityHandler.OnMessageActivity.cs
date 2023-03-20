@@ -3,7 +3,6 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 
 namespace Crazor.Server
@@ -30,9 +29,13 @@ namespace Crazor.Server
                     {
                         var cardRoute = CardRoute.Parse($"/Cards/{app}");
 
-                        var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+                        var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
-                        var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route), isPreview: true, cancellationToken);
+                        var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
+
+                        await cardApp.LoadAppAsync(activity!, default);
+
+                        var card = await cardApp.ProcessInvokeActivity(activity, isPreview: true, cancellationToken);
 
                         var response = Activity.CreateMessageActivity();
                         response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));

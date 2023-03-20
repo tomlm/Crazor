@@ -22,7 +22,7 @@ namespace Crazor.Server
             cardRoute.SessionId = await Context.EncryptionProvider.DecryptAsync(parts[1], cancellationToken);
             searchInvoke.Dataset = parts[2];
 
-            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 

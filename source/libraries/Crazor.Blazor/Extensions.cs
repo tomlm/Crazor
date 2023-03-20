@@ -2,10 +2,10 @@
 //  Licensed under the MIT License.
 
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
 namespace Crazor.Blazor

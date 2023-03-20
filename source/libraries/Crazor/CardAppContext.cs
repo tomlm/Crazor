@@ -3,8 +3,9 @@
 
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Streaming.Transport;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace Crazor
 {
@@ -28,6 +29,7 @@ namespace Crazor
             CardTabModuleFactory = cardTabModuleFactory;
             RouteResolver = routeResolver;
             ServiceOptions = options;
+            User = new ClaimsPrincipal(new ClaimsIdentity()); ;
         }
 
         public IServiceProvider ServiceProvider { get; set; }
@@ -45,5 +47,15 @@ namespace Crazor
         public IRouteResolver RouteResolver { get; set; }
 
         public ServiceOptions ServiceOptions { get; }
+        
+        /// <summary>
+        /// User principal
+        /// </summary>
+        public ClaimsPrincipal User { get; set; }
+
+        /// <summary>
+        /// UserToken from SSO token exchange
+        /// </summary>
+        public TokenResponse? UserToken { get; set; }
     }
 }

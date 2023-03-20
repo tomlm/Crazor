@@ -3,7 +3,6 @@
 
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -51,7 +50,9 @@ namespace Crazor
             var result = await Context.Storage.ReadAsync(new string[] { key }, cancellationToken);
             CardTabModuleState tabState = result.ContainsKey(key) ? result[key] as CardTabModuleState ?? new CardTabModuleState() : new CardTabModuleState();
 
-            foreach (var cardUri in cardUris)
+            // NOTE: THIS CODE WILL NOT WORK IF THERE IS MORE THAN ONE CARD
+            // THIS SHOULD BE REWRITTEN.
+            foreach (var cardUri in cardUris.Take(1))
             {
                 // if we have a refresh action cached for this uri
                 if (tabState.RefreshMap.TryGetValue(cardUri, out var refreshAction))
@@ -141,17 +142,23 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(uri);
             ArgumentNullException.ThrowIfNull(cancellationToken);
 
-            var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext.TurnState.Get<IConnectorClient>());
+            var cardApp = Context.CardAppFactory.Create(CardRoute.FromUri(uri), turnContext);
 
-            var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery), false, cancellationToken);
+            var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);
+
+            await cardApp.LoadAppAsync(activity, cancellationToken);
+
+            var card = await cardApp.ProcessInvokeActivity(activity, false, cancellationToken);
 
             return card;
         }
 
         protected async Task<AdaptiveCard> InvokeTabCardAsync(ITurnContext turnContext, CardRoute cardRoute, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext.TurnState.Get<IConnectorClient>());
-            var card = await cardApp.ProcessInvokeActivity(turnContext.Activity.CreateActionInvokeActivity(invokeValue.Action.Verb, JObject.FromObject(invokeValue.Action.Data)), false, cancellationToken);
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
+            var activity = turnContext.Activity.CreateActionInvokeActivity(invokeValue.Action.Verb, JObject.FromObject(invokeValue.Action.Data));
+            await cardApp.LoadAppAsync(activity, cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(activity, false, cancellationToken);
             return card;
         }
     }

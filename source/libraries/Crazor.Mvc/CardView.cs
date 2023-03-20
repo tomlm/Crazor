@@ -4,7 +4,6 @@
 using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
@@ -12,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Xml;
 using Diag = System.Diagnostics;
@@ -47,6 +47,11 @@ namespace Crazor.Mvc
         /// App for this CardView
         /// </summary>
         public AppT App { get; set; }
+
+        /// <summary>
+        /// Logged in user.
+        /// </summary>
+        public ClaimsPrincipal? User => App.Context.User!;
 
         /// <summary>
         /// App reference
@@ -199,6 +204,20 @@ namespace Crazor.Mvc
         }
 
         /// <summary>
+        /// OnInitialized() - Initalize members
+        /// </summary>
+        /// <remarks>
+        /// This will be called only once to initialize the instance data of the cardview.
+        /// This is effectively like a constructor, with no async support.  If you
+        /// want to look up data to look at OnLoadCardAsync
+        /// </remarks>
+        protected virtual Task OnInitializedAsync()
+        {
+            OnInitialized();
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
         /// OnResumeView() - Called when a CardResult has returned back to this view
         /// </summary>
         /// <remarks>
@@ -341,9 +360,9 @@ namespace Crazor.Mvc
             }
         }
 
-        void ICardView.OnInitialized()
+        Task ICardView.OnInitializedAsync()
         {
-            this.OnInitialized();
+            return this.OnInitializedAsync();
         }
         #endregion
     }

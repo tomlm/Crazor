@@ -4,6 +4,10 @@
       "type": "storage",
       "connectionId": "AzureStorage",
       "dynamicId": null
+    },
+    "identityapp1": {
+      "type": "identityapp",
+      "connectionId": "AzureAD:ClientSecret"
     }
   }
 }

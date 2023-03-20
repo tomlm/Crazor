@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Crazor.Server
@@ -11,9 +13,12 @@ namespace Crazor.Server
     // Create the Bot Adapter with error handling enabled.
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage)
             : base(auth, logger)
         {
+            
+            this.Use(new SSOTokenExchangeMiddleware(storage));
+
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.

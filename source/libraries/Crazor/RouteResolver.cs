@@ -3,8 +3,6 @@
 
 using Crazor.Attributes;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Components;
-using System.IO;
 using System.Reflection;
 
 namespace Crazor

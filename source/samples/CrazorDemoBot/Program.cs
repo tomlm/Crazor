@@ -4,11 +4,35 @@
 using Crazor;
 using Crazor.Mvc;
 using Crazor.Server;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ') ?? builder.Configuration["MicrosoftGraph:Scopes"]?.Split(' ');
+
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+        .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+            .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
+            .AddInMemoryTokenCaches();
+
+builder.Services.AddAuthorization(options =>
+{
+    // By default, all incoming requests will be authorized according to the default policy.
+    options.FallbackPolicy = options.DefaultPolicy;
+});
+
+builder.Services.AddRazorPages()
+    .AddMicrosoftIdentityUI();
 
 // ---- <CRAZOR>
 // register blob storage for state management
@@ -57,6 +81,8 @@ if (!Debugger.IsAttached)
 app.UseCrazorServer();
 
 app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapRazorPages();

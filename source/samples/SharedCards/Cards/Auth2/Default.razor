@@ -1,0 +1,16 @@
+﻿@attribute [Authentication("Graph")]
+@inherits CardView
+
+<CascadingAuthenticationState>
+    <Card Version="1.5">
+        <AuthorizeView>
+            <Authorized>
+                <TextBlock>User is: @User.GetDisplayName()</TextBlock>
+                <TextBlock>User isAdmin: @User.IsInRole("Admin")</TextBlock>
+            </Authorized>
+            <NotAuthorized>
+                <TextBlock>Anonymous</TextBlock>
+            </NotAuthorized>
+        </AuthorizeView>
+    </Card>
+</CascadingAuthenticationState>

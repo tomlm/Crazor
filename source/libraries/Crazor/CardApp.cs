@@ -5,6 +5,7 @@ using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -124,10 +125,11 @@ namespace Crazor
         public List<string> TeamsConversationMembers { get; set; }
 
         /// <summary>
-        /// ConnectorClient for calling outbound.
+        /// CardAppContext.
         /// </summary>
-        public IConnectorClient ConnectorClient { get; set; }
         public CardAppContext Context { get; }
+
+        public ITurnContext TurnContext { get; set; }
 
         /// <summary>
         /// process the activity
@@ -138,8 +140,6 @@ namespace Crazor
         /// <returns></returns>
         public async Task<AdaptiveCard> ProcessInvokeActivity(IInvokeActivity invokeActivity, bool isPreview, CancellationToken cancellationToken)
         {
-            await LoadAppAsync((Activity)invokeActivity!, cancellationToken);
-
             await OnActionExecuteAsync(cancellationToken);
 
             var card = await RenderCardAsync(isPreview, cancellationToken);
@@ -148,6 +148,7 @@ namespace Crazor
 
             return card;
         }
+
 
         /// <summary>
         /// Handle action
@@ -158,6 +159,7 @@ namespace Crazor
         {
             ArgumentNullException.ThrowIfNull(this.Action);
             ArgumentNullException.ThrowIfNull(CurrentView);
+
             if (this.Action.Verb == null)
             {
                 this.Action.Verb = Constants.SHOWVIEW_VERB;
@@ -356,13 +358,6 @@ namespace Crazor
             }
 
             CurrentView.SetModel(cardState.Model);
-
-            if (cardState.Initialized == false)
-            {
-                // call hook to give cardview opportunity to process data.
-                CurrentView.OnInitialized();
-                cardState.Initialized = true;
-            }
         }
 
         private void SaveCardState()
@@ -461,6 +456,8 @@ namespace Crazor
         {
             this.TaskModuleAction = status;
         }
+
+
 
         /// <summary>
         /// Add a banner message 
@@ -661,7 +658,7 @@ namespace Crazor
         {
             var cardRoute = CardRoute.FromUri(uri);
 
-            var cardApp = Context.CardAppFactory.Create(cardRoute, this.ConnectorClient);
+            var cardApp = Context.CardAppFactory.Create(cardRoute, this.TurnContext);
 
             await cardApp.LoadAppAsync(Activity!, cancellationToken);
 
@@ -727,6 +724,13 @@ namespace Crazor
                     }
                 }
 
+                if (this.CallStack[0].Initialized == false)
+                {
+                    // call hook to give cardview opportunity to process data.
+                    await CurrentView.OnInitializedAsync();
+                    this.CallStack[0].Initialized = true;
+                }
+
                 // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
                 verbMethod = this.CurrentView.GetMethod(action.Verb);
                 if (verbMethod != null)
@@ -753,6 +757,15 @@ namespace Crazor
                     }
                 }
                 action.Verb = Constants.SHOWVIEW_VERB;
+            }
+            else
+            {
+                if (this.CallStack[0].Initialized == false)
+                {
+                    // call hook to give cardview opportunity to process data.
+                    await CurrentView.OnInitializedAsync();
+                    this.CallStack[0].Initialized = true;
+                }
             }
 
             if (action.Verb != Constants.SHOWVIEW_VERB)
@@ -975,9 +988,9 @@ namespace Crazor
                     var teamId = Activity.GetChannelData<TeamsChannelData>().Team?.Id ?? Activity.Conversation.Id;
                     try
                     {
-
                         // we need to add refresh userids
-                        var teamsMembers = await ConnectorClient.Conversations.GetConversationPagedMembersAsync(teamId, 60, cancellationToken: cancellationToken);
+                        var connectorClient = this.TurnContext.TurnState?.Get<IConnectorClient>();
+                        var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(teamId, 60, cancellationToken: cancellationToken);
                         this.TeamsConversationMembers = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
                     }
                     catch (Exception ex)

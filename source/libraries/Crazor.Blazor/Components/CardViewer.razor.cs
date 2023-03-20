@@ -4,11 +4,14 @@
 using AdaptiveCards;
 using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace Crazor.Blazor.Components
 {
@@ -41,6 +44,9 @@ namespace Crazor.Blazor.Components
 
         [Inject]
         private CardAppFactory _cardAppFactory { get; set; }
+
+        [CascadingParameter]
+        private Task<AuthenticationState> AuthenticationState { get; set; }
 
         public CardViewer()
         {
@@ -139,8 +145,9 @@ namespace Crazor.Blazor.Components
             .CreateActionInvokeActivity(action.Verb ?? Constants.SHOWVIEW_VERB, JObject.FromObject(action.Data));
 
             // process it, giving us a new card
-            this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.Route = this._cardApp.GetCurrentCardRoute();
+            await _cardApp.LoadAppAsync((Activity)activity!, default);
+            _card = await _cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
+            this.Route = _cardApp.GetCurrentCardRoute();
             await OnCardRouteChanged.InvokeAsync(this.Route);
 
             // tell tree to rerender. onrerender the card will be injected back into the html
@@ -149,7 +156,7 @@ namespace Crazor.Blazor.Components
 
         public async Task LoadRouteAsync(string route)
         {
-           // wrap it in an invoke activity
+            // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
@@ -164,7 +171,17 @@ namespace Crazor.Blazor.Components
             .CreateLoadRouteActivity(route);
 
             // process it, giving us a new card
+            await _cardApp.LoadAppAsync((Activity)activity!, default);
+
+            if (AuthenticationState != null)
+            {
+                var authState = await AuthenticationState;
+
+                _cardApp.Context.User = authState.User;
+            }
+
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
+
             this.Route = this._cardApp.GetCurrentCardRoute();
 
             // tell tree to rerender. onrerender the card will be injected back into the html
