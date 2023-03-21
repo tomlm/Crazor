@@ -2,6 +2,7 @@
 //  Licensed under the MIT License.
 
 using Crazor.Teams;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ namespace Crazor.Server.Controllers
     // achieved by specifying a more specific type for the bot constructor argument.
     [Route("/teams.zip")]
     [ApiController]
+    [AllowAnonymous]
     public class ManifestController : ControllerBase
     {
         private FileContentResult _zip;
