@@ -30,8 +30,8 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can view and interact with the card.
 
 # Pick a templating engine
-
-There are currently 2 Crazor templating implementations
+ 
+There are currently 2 Crazor templating implementations:
 
 * [Crazor.MVC](docs/MVC/README.md) - Implements templating using **.cshtml** files using **MVC** semantics.
 * [Crazor.Blazor](docs/Blazor/README.md) - Implements templating using **.razor** files using **Blazor** semantics.
