@@ -19,7 +19,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
   * **Debugger** - Visual studio debugging allows you to set breakpoints in your templates, etc.
 * **AdaptiveCard  Blazor components** - giving you intellisense for defining the card layouts
 * **CardViewer component** - CardViewer component for embedding Crazor cards into your blazor layout.
-* **Client-side** The ability for all of your Crazor logic to run on the client as a part of a WASM SPA.
+* **Authentication** and **Authorization** - Giving you ability to show per user views and make delegated calls on behalf of the user.
 
 # Installation
 
@@ -39,6 +39,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
   * [Card App Memory](../Memory.md) - Information on persistence and memory model
 
 * [Card Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Authentication](../Authentication.md) - Authenticating users and Authorizing access to create per-user secure views
 * [Writing Unit tests](../UnitTests.md) - Writing unit tests for your cards.
 * [Components (Advanced)](Components.md) - How to define reusuable components via Blazor Components
 
@@ -63,6 +64,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 |[Wordle](https://crazorblazordemo.azurewebsites.net/Cards/Wordle) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Wordle)| Wordle game, shows leveraging TaskModule and sharing to make shared ux. |
 |[Table](https://crazorblazordemo.azurewebsites.net/Cards/Table) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Table)| Shows Table support |
 |[RichText](https://crazorblazordemo.azurewebsites.net/Cards/RichText) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/RichText)| Shows RichText support |
+|[Auth](https://crazorblazordemo.azurewebsites.net/Cards/Auth) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Auth) | Authentication sample |
 
 # Setting up Azure
 

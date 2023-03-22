@@ -21,6 +21,8 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 
 * **AdaptiveCard Tag Helpers** - for intellisense and auto completion.
 
+* **Authentication** and **Authorization** - Giving you ability to show per user views and make delegated calls on behalf of the user.
+
 [Installing Crazor.MVC](Install.md) - Installing Crazor into your project
 
 * [Settings](../Settings.md) - Settings for Crazor
@@ -37,6 +39,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
   * [Card App Memory](../Memory.md) - Information on persistence and memory model
 
 * [Card Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Authentication](../Authentication.md) - Authenticating users and Authorizing access to create per-user secure views
 * [Writing Unit tests](../UnitTests.md) - Writing unit tests for your cards.
 * [TagHelpers (Advanced)](TagHelpers.md) - How to define reusuable components via custom TagHelpers
 
