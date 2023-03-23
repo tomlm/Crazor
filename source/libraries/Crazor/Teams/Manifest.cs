@@ -46,7 +46,7 @@ namespace Crazor.Teams
             WebApplicationInfo = new WebApplicationInfo()
             {
                 Id = botId,
-                Resource = $"api://botid-{botId}"
+                Resource = $"api://{hostUri.Host.ToLower()}/botid-{botId}"
             };
 
             StaticTabs.Add(new StaticTab()
