@@ -45,7 +45,7 @@ builder.Services.AddCrazor();
 builder.Services.AddCrazorMvc();
 builder.Services.AddCrazorServer((serverOptions) =>
 {
-    serverOptions.Manifest.Version = "1.3";
+    serverOptions.Manifest.Version = "1.4";
     serverOptions.Manifest.Description.Full = "This is a demo of using MVC templates for crazor apps.";
 });
 
