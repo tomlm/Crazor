@@ -2,7 +2,8 @@
   "profiles": {
     "RegisterBot": {
       "commandName": "Project",
-      "workingDirectory": "D:\\Source\\github\\crazor\\source\\samples\\CrazorBlazorDemo"
+      "commandLineArgs": "-g Crazor",
+      "workingDirectory": "d:\\scratch\\BlazorApp6\\BlazorApp6"
     }
   }
 }

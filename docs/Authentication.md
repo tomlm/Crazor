@@ -25,7 +25,8 @@ Follow instructions here to create a Azure AD SSO app
 **Notes**
 
 > 1. enter the application ID URI as ```api://botid-{BotAppId}```. Here, {BotAppId} is your Azure AD application ID.
-> 2. Use ```https://token.botframework.com/.auth/web/redirect``` as your redirect URL (see [Supported OAuth URLs - Bot Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/bot-service/ref-oauth-redirect-urls?view=azure-bot-service-4.0) for list of other redirect uris)
+> 2. Add ```https://token.botframework.com/.auth/web/redirect``` as your redirect UR (see [Supported OAuth URLs - Bot Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/bot-service/ref-oauth-redirect-urls?view=azure-bot-service-4.0) for list of other redirect uris)
+> 3. Add ```https://{YOURDOMAIN}/
 
 ## Configure your bot OAuth Connection 
 

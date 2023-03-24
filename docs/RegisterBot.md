@@ -17,6 +17,8 @@ This is the recommended way to create the bot registration.
 ### Prerequisites
 
 * Install AZ CLI [How to install the Azure CLI | Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+* Install dotnet msidentity 
+  ``` dotnet tool install -g Microsoft.dotnet-msidentity```
 * Install the **RegisterBot** CLI tool by running
   ```dotnet tool install -g RegisterBot```
 

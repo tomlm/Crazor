@@ -12,7 +12,7 @@ namespace Crazor.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public class AuthenticationAttribute : Attribute
     {
-        public AuthenticationAttribute(string connectionName = "ConnectionName")
+        public AuthenticationAttribute(string connectionName = "Default")
         {
             Name = connectionName;
         }
