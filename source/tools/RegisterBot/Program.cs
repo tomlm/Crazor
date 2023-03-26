@@ -3,6 +3,7 @@ using CShellNet;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 using System.Text;
 
 class Script : CShell
@@ -288,25 +289,14 @@ class Script : CShell
 
     private static void DisplayHelp()
     {
-        Console.WriteLine("RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]");
-        Console.WriteLine("version 2.0");
-        Console.WriteLine();
-        Console.WriteLine("Creates or updates a bot registration for [botName] pointing to [endpoint] with teams channel and SSO enabled.");
-        Console.WriteLine();
-        Console.WriteLine("Arguments:");
-        Console.WriteLine("-e, --endpoint endpoint          : (optional) If not specified the endpoint will stay the same as project settings");
-        Console.WriteLine("-n, --name botName               : (optional) If not specified the botname will be pulled from settings or interactively asked");
-        Console.WriteLine("-g, --resource-group groupName   : (optional) If not specified the groupname will be pulled from settings or interactively asked");
-        Console.WriteLine();
-        Console.WriteLine("NOTE:");
-        Console.WriteLine("* This needs to be run in a folder with a csproj.");
-        Console.WriteLine("* If you have an existing AD App in your csproj it in that will be used to create the bot registration.");
-        Console.WriteLine();
-        Console.WriteLine("If the endpoint host is:");
-        Console.WriteLine("| Host                 | Action                                                                            |");
-        Console.WriteLine("| -------------------- | --------------------------------------------------------------------------------- |");
-        Console.WriteLine("| xx.azurewebsites.net | modifies the remote web app settings to have correct settings/secrets             |");
-        Console.WriteLine("| xx.ngrok.io          | modifies the local project settings/user secrets to have correct settings/secrets |");
+        var assembly = Assembly.GetExecutingAssembly();
+        var resourceName = "Crazor.readme.md";
+
+        using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            Console.WriteLine(reader.ReadToEnd());
+        }
     }
 
     private async Task<IConfigurationRoot> GetConfiguration(string endpoint)

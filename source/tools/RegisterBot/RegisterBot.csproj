@@ -40,7 +40,7 @@
 
 	<ItemGroup>
 		<None Include="icon.png" Pack="True" PackagePath="\" />
-		<None Include="readme.md" Pack="True" PackagePath="\" />
+		<EmbeddedResource Include="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
