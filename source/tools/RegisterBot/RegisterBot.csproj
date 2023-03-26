@@ -9,8 +9,8 @@
 		<ToolCommandName>RegisterBot</ToolCommandName>
 		<PackageOutputPath>./nupkg</PackageOutputPath>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>1.4.0</VersionPrefix>
-		<AssemblyVersion>1.4.0.0</AssemblyVersion>
+		<VersionPrefix>2.0.0</VersionPrefix>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
 		<Description>Command line tool for registering a bot.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>
@@ -29,7 +29,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CShell" Version="1.2.4" />
+		<PackageReference Include="CShell" Version="1.3.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />

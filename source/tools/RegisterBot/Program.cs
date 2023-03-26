@@ -1,11 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
-using System.Text;
 using CShellNet;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Text;
 
 class Script : CShell
 {
@@ -20,23 +18,22 @@ class Script : CShell
 
         if (args.Any(a => a == "--help" || a == "-h"))
         {
-            Console.WriteLine("RegisterBot --resource-group [groupName] --name [botName] --endpoint [endpoint] (--appId [appId])");
-            Console.WriteLine("Creates or updates a bot registration for [botName] pointing to [endpoint] with teams channel enabled.");
-            Console.WriteLine();
-            Console.WriteLine("NOTE:");
-            Console.WriteLine("* This needs to be run in a folder with a csproj.");
-            Console.WriteLine("* If you have an existing AD App in your csproj it in that will be used to create the bot registration.");
-            Console.WriteLine();
-            Console.WriteLine("If the endpoint host is:");
-            Console.WriteLine("| Host              | Action                                                                          |");
-            Console.WriteLine("| ----------------- | ------------------------------------------------------------------------------- |");
-            Console.WriteLine("| azurewebsites.net | modify the remote web app settings to have correct settings/secrets             |");
-            Console.WriteLine("| ngrok.io          | modify the local project settings/user secrets to have correct settings/secrets |");
+            DisplayHelp();
             return;
         }
-        IConfigurationRoot configuration = GetConfiguration();
 
         Echo = false;
+        var cmdResult = await Cmd("az -h").Execute();
+        if (!cmdResult.Success)
+        {
+            Console.WriteLine("==== You need to install Azure CLI to use RegisterBot!!!!");
+            throw new CommandResultException(cmdResult);
+        }
+
+        string endpoint = args.SkipWhile(arg => arg != "--endpoint" && arg != "-e").Skip(1).FirstOrDefault();
+
+        IConfigurationRoot configuration = await GetConfiguration(endpoint);
+
         dynamic output = await Cmd("az account show").AsJson();
         string tenantId = output.tenantId;
         Console.WriteLine($"\n==== Subscription: {output.name} tenantId: {tenantId} =====");
@@ -46,17 +43,22 @@ class Script : CShell
             ?? await GetBotName();
 
         string groupName = args.SkipWhile(arg => arg != "--resource-group" && arg != "-g").Skip(1).FirstOrDefault()
+            ?? configuration.GetValue<string>("resource-group")
             ?? await GetGroupName(botName);
 
-        string endpoint = args.SkipWhile(arg => arg != "--endpoint" && arg != "-e").Skip(1).FirstOrDefault()
+        endpoint = endpoint
             ?? configuration.GetValue<string>("HostUri")
             ?? await GetEndpoint();
 
-        string appId = args.SkipWhile(arg => arg != "--appid").Skip(1).FirstOrDefault() ??
+        string appId = args.SkipWhile(arg => arg.ToLower() != "--appid").Skip(1).FirstOrDefault() ??
                 configuration.GetValue<String>("MicrosoftAppId") ??
                 configuration.GetValue<string>("AzureAd:ClientId");
-
-        Uri uri = new Uri(new Uri(endpoint), "/api/cardapps");
+        
+        Uri uri = new Uri(endpoint);
+        if (uri.AbsolutePath == "/")
+        {
+            uri = new Uri(uri, "/api/cardapps");
+        }
 
         // validate groupname exists
         var commandResult = await Cmd($"az group show --resource-group {groupName}").AsResult();
@@ -87,7 +89,7 @@ class Script : CShell
         dynamic oauth2PermissionScope = null;
         foreach (dynamic oauth2 in oauth2PermissionScopes)
         {
-            if (oauth2.value == "User.Read")
+            if (oauth2.value == "access_as_user")
             {
                 oauth2PermissionScope = oauth2;
                 break;
@@ -98,20 +100,20 @@ class Script : CShell
         {
             oauth2PermissionScope = JObject.FromObject(new
             {
-                adminConsentDescription = "Office can call the app's web API as the current user.",
+                adminConsentDescription = "Office can call the appplication API as the current user.",
                 adminConsentDisplayName = "Office can access user profile",
                 id = Guid.NewGuid().ToString(),
                 isEnabled = true,
                 type = "User",
-                userConsentDescription = "Office can call this app's API with the same rights as the user.",
+                userConsentDescription = "Office can call this application API with the same rights as the user.",
                 userConsentDisplayName = "Office can access the user profile and make requests on behalf of the user. ",
-                value = "User.Read"
+                value = "access_as_user"
             });
             oauth2PermissionScopes.Add(oauth2PermissionScope);
             var payload = new { api = new { oauth2PermissionScopes = oauth2PermissionScopes } };
-            var body = JsonConvert.SerializeObject(payload, Formatting.None).Replace("\"", "\\\"");
-            output = await Cmd($"az rest --method patch --uri https://graph.microsoft.com/beta/applications/{application.id} --headers Content-Type=application/json --body \"{body}\"").AsJson();
+            output = await AzRest("patch", $"https://graph.microsoft.com/beta/applications/{application.id}", payload);
         }
+    
 
         // ===== Configuring preAuthorizedApplications
         Console.WriteLine("\n===== Configuring preAuthorizedApplications");
@@ -167,18 +169,13 @@ class Script : CShell
             }
 
             var payload = new { api = new { preAuthorizedApplications = preAuthorizedApplicationsFixed } };
-            var body = JsonConvert.SerializeObject(payload, Formatting.None).Replace("\"", "\\\"");
-            output = await Cmd($"az rest --method patch --uri https://graph.microsoft.com/beta/applications/{application.id} --headers Content-Type=application/json --body \"{body}\"").AsJson();
+            output = await AzRest("patch", $"https://graph.microsoft.com/beta/applications/{application.id}", payload);
         }
 
         // ===== Configuring redirectUriSettings
         Console.WriteLine("\n===== Configuring redirectUriSettings");
 
-        var redirectUris = ((JArray)application.web.redirectUris).Where(url =>
-        {
-            var uri = new Uri(url.ToString());
-            return uri.Host != "token.botframework.com";
-        }).Select(el => el.ToString()).ToList<string>();
+        var redirectUris = new HashSet<string>(((JArray)application.web.redirectUris).Select(el => el.ToString()).Cast<string>());
 
         redirectUris.Add($"https://{uri.Host}/signin-oidc");
         foreach (var domain in new string[] { "token.botframework.com", "europe.token.botframework.com", "unitedstates.token.botframework.com", "token.botframework.azure.us" })
@@ -234,10 +231,10 @@ class Script : CShell
             }
         }
 
-        if (authSetting != null)
-        {
-            await Cmd($"az bot authsetting delete -g {groupName} --name {botName} --setting-name Default").Execute();
-        }
+        //if (authSetting != null)
+        //{
+        //    await Cmd($"az bot authsetting delete -g {groupName} --name {botName} --setting-name Default").Execute();
+        //}
 
         output = await Cmd($"az bot authsetting create -g {groupName} --name {botName} --setting-name Default --client-id {appId} --client-secret {appPassword} --service Aadv2 --provider-scope-string \"User.Read,User.ReadBasic.All\" --parameters TenantId={tenantId} TokenExchangeUrl={appIdUri}").AsJson();
 
@@ -257,17 +254,17 @@ class Script : CShell
         {
             Console.WriteLine($"\n==== Updating {uri.Host} settings");
             var webAppName = uri.Host.Split('.').First();
-            StringBuilder sb = new StringBuilder();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings BotName={botName}").AsJson();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings HostUri={new Uri(uri, "/").AbsoluteUri} ").AsJson();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings MicrosoftAppType=MultiTenant ").AsJson();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings MicrosoftAppId={appId} ").AsJson();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings TeamsAppId={appId} ").AsJson();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings AzureAd:ClientId={appId} ").AsJson();
+            List<string> settings = new List<string>();
+            settings.Add($"BotName={botName}");
+            settings.Add($"HostUri={new Uri(uri, "/").AbsoluteUri} ");
+            settings.Add($"MicrosoftAppType=MultiTenant");
+            settings.Add($"MicrosoftAppId={appId}");
+            settings.Add($"TeamsAppId={appId}");
+            settings.Add($"AzureAd:ClientId={appId}");
+            settings.Add($"MicrosoftAppPassword={appPassword}");
 
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings MicrosoftAppPassword={appPassword} ").AsJson();
-            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings AzureAD:ClientSecret={appPassword} ").AsJson();
-
+            settings.Add($"AzureAD:ClientSecret={appPassword} ");
+            output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
         }
         else if (uri.Host.EndsWith("ngrok.io") || uri.Host == "localhost")
         {
@@ -289,8 +286,57 @@ class Script : CShell
         Console.WriteLine($"{botName} - {appId} successfully configured for {uri.AbsoluteUri}!");
     }
 
-    private IConfigurationRoot GetConfiguration()
+    private static void DisplayHelp()
     {
+        Console.WriteLine("RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]");
+        Console.WriteLine("version 2.0");
+        Console.WriteLine();
+        Console.WriteLine("Creates or updates a bot registration for [botName] pointing to [endpoint] with teams channel and SSO enabled.");
+        Console.WriteLine();
+        Console.WriteLine("Arguments:");
+        Console.WriteLine("-e, --endpoint endpoint          : (optional) If not specified the endpoint will stay the same as project settings");
+        Console.WriteLine("-n, --name botName               : (optional) If not specified the botname will be pulled from settings or interactively asked");
+        Console.WriteLine("-g, --resource-group groupName   : (optional) If not specified the groupname will be pulled from settings or interactively asked");
+        Console.WriteLine();
+        Console.WriteLine("NOTE:");
+        Console.WriteLine("* This needs to be run in a folder with a csproj.");
+        Console.WriteLine("* If you have an existing AD App in your csproj it in that will be used to create the bot registration.");
+        Console.WriteLine();
+        Console.WriteLine("If the endpoint host is:");
+        Console.WriteLine("| Host                 | Action                                                                            |");
+        Console.WriteLine("| -------------------- | --------------------------------------------------------------------------------- |");
+        Console.WriteLine("| xx.azurewebsites.net | modifies the remote web app settings to have correct settings/secrets             |");
+        Console.WriteLine("| xx.ngrok.io          | modifies the local project settings/user secrets to have correct settings/secrets |");
+    }
+
+    private async Task<IConfigurationRoot> GetConfiguration(string endpoint)
+    {
+        if (endpoint != null)
+        {
+            var uri = new Uri(endpoint);
+            if (uri.Host.EndsWith("azurewebsites.net"))
+            {
+                Console.WriteLine("==== Detecting deployment settings");
+
+                dynamic output = await Cmd($"az webapp list --query [?defaultHostName=='{uri.Host}']").AsJson();
+                dynamic webApp = output[0];
+                var groupName = webApp?.resourceGroup;
+
+                output = await Cmd($"az webapp config appsettings list -g {groupName} -n {webApp.name}").AsJson();
+                Dictionary<string, string> settings = new Dictionary<string, string>();
+                settings["resource-group"] = groupName;
+                foreach (var kv in output)
+                {
+                    settings[(string)kv.name] = (string)kv.value;
+                }
+                settings["HostUri"] = new Uri(uri, "/").AbsoluteUri;
+
+                return new ConfigurationManager()
+                    .AddInMemoryCollection(settings)
+                    .Build();
+            }
+        }
+
         var csproj = dir("*.csproj").FirstOrDefault();
         string secretId = "Unknown";
         if (csproj != null)
@@ -301,13 +347,12 @@ class Script : CShell
             secretId = secret.Substring(iStart, iEnd - iStart);
         }
 
-        var cm = new ConfigurationManager()
+        return new ConfigurationManager()
             .AddJsonFile(Path.Combine(CurrentFolder.FullName, "appsettings.json"))
             .AddJsonFile(Path.Combine(CurrentFolder.FullName, "appsettings.development.json"))
             .AddUserSecrets(secretId)
-            .AddEnvironmentVariables();
-        var configuration = cm.Build();
-        return configuration;
+            .AddEnvironmentVariables()
+            .Build();
     }
 
     private async Task<string> GetBotName()
@@ -393,5 +438,15 @@ class Script : CShell
             groupName = output[--i].name;
         }
         return groupName;
+    }
+
+    public async Task<dynamic> AzRest(string verb, string uri, object payload)
+    {
+        var body = JsonConvert.SerializeObject(payload, Formatting.None);
+        File.WriteAllText("body.json", body);
+        var cmdText = $"az rest --method {verb} --uri {uri} --headers Content-Type=application/json --body @body.json";
+        var result = await Cmd(cmdText).AsJson();
+        File.Delete("body.json"); 
+        return result;
     }
 }
