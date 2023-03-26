@@ -237,7 +237,7 @@ class Script : CShell
         //    await Cmd($"az bot authsetting delete -g {groupName} --name {botName} --setting-name Default").Execute();
         //}
 
-        output = await Cmd($"az bot authsetting create -g {groupName} --name {botName} --setting-name Default --client-id {appId} --client-secret {appPassword} --service Aadv2 --provider-scope-string \"User.Read,User.ReadBasic.All\" --parameters TenantId={tenantId} TokenExchangeUrl={appIdUri}").AsJson();
+        output = await Cmd($"az bot authsetting create -g {groupName} --name {botName} --setting-name Default --client-id {appId} --client-secret {appPassword} --service Aadv2 --provider-scope-string User.Read,User.ReadBasic.All --parameters TenantId={tenantId} TokenExchangeUrl={appIdUri}").AsJson();
 
         // Saving settings
         Console.WriteLine($"\n==== Updating project/service settings");

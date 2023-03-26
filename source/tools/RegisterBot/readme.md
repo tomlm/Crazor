@@ -1,4 +1,6 @@
-﻿```RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]```
+﻿RegisterBot Version 2.0.1
+
+```RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]```
 
 Creates or updates a bot registration for [botName] pointing to [endpoint] with teams channel and SSO enabled.
 
