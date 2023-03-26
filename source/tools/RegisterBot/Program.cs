@@ -176,7 +176,9 @@ class Script : CShell
         // ===== Configuring redirectUriSettings
         Console.WriteLine("\n===== Configuring redirectUriSettings");
 
-        var redirectUris = new HashSet<string>(((JArray)application.web.redirectUris).Select(el => el.ToString()).Cast<string>());
+        var redirectUris = new HashSet<string>(((JArray)application.web.redirectUris)
+            .Select(el => (string)el.ToString())
+            .Where(domain => !domain.Contains("ngrok.io")));
 
         redirectUris.Add($"https://{uri.Host}/signin-oidc");
         foreach (var domain in new string[] { "token.botframework.com", "europe.token.botframework.com", "unitedstates.token.botframework.com", "token.botframework.azure.us" })
