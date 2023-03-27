@@ -43,6 +43,10 @@ class Script : CShell
             ?? configuration.GetValue<string>("BotName")
             ?? await GetBotName();
 
+        string appId = args.SkipWhile(arg => arg.ToLower() != "--appid").Skip(1).FirstOrDefault() ??
+                configuration.GetValue<String>("MicrosoftAppId") ??
+                configuration.GetValue<string>("AzureAd:ClientId");
+
         string groupName = args.SkipWhile(arg => arg != "--resource-group" && arg != "-g").Skip(1).FirstOrDefault()
             ?? configuration.GetValue<string>("resource-group")
             ?? await GetGroupName(botName);
@@ -50,24 +54,11 @@ class Script : CShell
         endpoint = endpoint
             ?? configuration.GetValue<string>("HostUri")
             ?? await GetEndpoint();
-
-        string appId = args.SkipWhile(arg => arg.ToLower() != "--appid").Skip(1).FirstOrDefault() ??
-                configuration.GetValue<String>("MicrosoftAppId") ??
-                configuration.GetValue<string>("AzureAd:ClientId");
         
         Uri uri = new Uri(endpoint);
         if (uri.AbsolutePath == "/")
         {
             uri = new Uri(uri, "/api/cardapps");
-        }
-
-        // validate groupname exists
-        var commandResult = await Cmd($"az group show --resource-group {groupName}").AsResult();
-        if (!commandResult.Success)
-        {
-            Console.WriteLine(commandResult.StandardError);
-            Console.WriteLine(commandResult.StandardOutput);
-            return;
         }
 
         Echo = true;
@@ -187,7 +178,7 @@ class Script : CShell
             redirectUris.Add($"https://{domain}/.auth/web/redirect");
         }
 
-        output = await Cmd($"az ad app update --id {appId} --web-redirect-uris {String.Join(" ", redirectUris)}").AsJson();
+        output = await Cmd($"az ad app update --id {appId} --web-redirect-uris {String.Join(" ", redirectUris.ToList().OrderBy(val => val))}").AsJson();
 
         // Configure Application Id Uri for App
         Console.WriteLine($"\n===== configure application ID URI for {botName}/{appId}");
@@ -408,6 +399,18 @@ class Script : CShell
 
     public async Task<string> GetGroupName(string botName)
     {
+        // try botname to get resource group
+        Console.WriteLine($"\n==== getting resource group for {botName}");
+        var result = await Cmd($"az resource list --query [?name=='{botName}']").AsResult();
+        if (result.Success)
+        {
+            dynamic results = (JArray)result.AsJson();
+            if (results.Count > 0)
+            {
+                return results[0].resourceGroup;
+            }
+        }
+
         dynamic output = await Cmd("az group list").AsJson();
         Console.WriteLine("What resource group do you want to use?");
         Console.WriteLine($"0. ** Create new group [{botName}]");

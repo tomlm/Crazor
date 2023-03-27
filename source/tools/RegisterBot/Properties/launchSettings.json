@@ -2,8 +2,8 @@
   "profiles": {
     "RegisterBot": {
       "commandName": "Project",
-      "commandLineArgs": "--endpoint https://crazorblazordemo.azurewebsites.net/api/cardapps",
-      "workingDirectory": "d:\\scratch\\BlazorApp6\\BlazorApp6"
+      "commandLineArgs": "--endpoint https://9239-50-47-89-80.ngrok.io/api/cardapps",
+      "workingDirectory": "D:\\Source\\github\\crazor\\source\\samples\\CrazorBlazorDemo"
     }
   }
 }
