@@ -34,14 +34,19 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
+            var adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
+
             await cardApp.OnActionExecuteAsync(cancellationToken);
 
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
+
                     var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
 
                     await cardApp.SaveAppAsync(cancellationToken);
+
+                    adaptiveCard.Authentication = adaptiveAuthentication;
 
                     adaptiveCard.Refresh = null;
                     var submitCard = TransformActionExecuteToSubmit(adaptiveCard);

@@ -71,8 +71,14 @@ namespace Crazor.Server
                     var jwtSecurityToken = tokenHandler.ReadJwtToken(Context.UserToken.Token);
                     var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
                     Context.User = new ClaimsPrincipal(claimsIdentity);
-                    ((IHostEnvironmentAuthenticationStateProvider)this.AuthenticationStateProvider).SetAuthenticationState(Task.FromResult(new AuthenticationState(Context.User)));
                 }
+            }
+
+            // make sure that user is set into the authenticationStateProvider is initialized
+            var isp = this.AuthenticationStateProvider as IHostEnvironmentAuthenticationStateProvider;
+            if (isp != null)
+            {
+                isp.SetAuthenticationState(Task.FromResult(new AuthenticationState(Context.User)));
             }
 
             // Authorize user by processing authorize attributes
@@ -111,8 +117,8 @@ namespace Crazor.Server
                 }
             }
 
-            // If we are not authenticated, then return authentication request.
-            if (authenticationAttribute != null && Context.User.Identity?.IsAuthenticated == false)
+            // If we are not authenticated, then return authentication metadata.
+            if (authenticationAttribute != null)
             {
                 var appId = Context.Configuration.GetValue<string>("MicrosoftAppId");
 

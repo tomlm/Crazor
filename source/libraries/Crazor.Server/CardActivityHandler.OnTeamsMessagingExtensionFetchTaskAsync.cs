@@ -37,7 +37,11 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
 
+            var adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
+
             var card = await cardApp.ProcessInvokeActivity(activity, isPreview: false, cancellationToken);
+
+            card.Authentication = adaptiveAuthentication;
 
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);
         }

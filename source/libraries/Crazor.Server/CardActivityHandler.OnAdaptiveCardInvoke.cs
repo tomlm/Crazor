@@ -25,6 +25,7 @@ namespace Crazor.Server
                 adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
 
                 AdaptiveCard card = await cardApp.ProcessInvokeActivity((Activity)turnContext.Activity!, isPreview: false, cancellationToken);
+                
                 card.Authentication = adaptiveAuthentication;
 
                 return new AdaptiveCardInvokeResponse()

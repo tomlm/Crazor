@@ -36,6 +36,8 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
+            var adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
+
             cardApp.Action = invokeValue.Action;
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
@@ -45,6 +47,8 @@ namespace Crazor.Server
                 cardApp.TaskModuleAction == TaskModuleAction.InsertCard;
 
             var card = await cardApp.RenderCardAsync(isPreview: isPreview, cancellationToken);
+
+            card.Authentication = adaptiveAuthentication;
 
             await cardApp.SaveAppAsync(cancellationToken);
 
