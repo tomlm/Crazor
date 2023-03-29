@@ -210,6 +210,15 @@ namespace Crazor
             }
             catch (Exception err)
             {
+                // hmmm...seems like we need a external function to call for this...
+                var current = err;
+                do
+                {
+                    if (current.GetType().Namespace == "Microsoft.Identity.Web")
+                        throw current;
+                    current = current.InnerException;
+                } while (current != null);
+
                 // if we fail in verb we add message banner to template.
                 AddBannerMessage(err.Message, AdaptiveContainerStyle.Attention);
             }

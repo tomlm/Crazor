@@ -13,6 +13,8 @@
                 <TextBlock>Anonymous</TextBlock>
             </NotAuthorized>
         </AuthorizeView>
+
+        <ActionExecute Verb="OnRefresh" Title="Refresh" />
     </Card>
 </CascadingAuthenticationState>
 
@@ -32,4 +34,12 @@
         return;
     }
 
+    public async Task OnRefresh()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            var result = await GraphClient.Me.Request().GetAsync();
+            UserName = result.DisplayName;
+        }
+    }
 }

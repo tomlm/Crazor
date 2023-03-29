@@ -5,9 +5,11 @@ using AdaptiveCards;
 using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Web;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -45,6 +47,10 @@ namespace Crazor.Blazor.Components
         [Inject]
         private CardAppFactory _cardAppFactory { get; set; }
 
+        [Inject]
+        private MicrosoftIdentityConsentAndConditionalAccessHandler ConsentHandler { get; set; }
+
+
         [CascadingParameter]
         private Task<AuthenticationState> AuthenticationState { get; set; }
 
@@ -77,14 +83,21 @@ namespace Crazor.Blazor.Components
 
         protected override async Task OnInitializedAsync()
         {
-            this._dotNetObjectRef = DotNetObjectReference.Create(this);
-            this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
-            this._channelId = _configuration.GetValue<Uri>("HostUri").Host;
-            this._cardApp = _cardAppFactory.Create(_cardRoute);
+            try
+            {
+                this._dotNetObjectRef = DotNetObjectReference.Create(this);
+                this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
+                this._channelId = _configuration.GetValue<Uri>("HostUri").Host;
+                this._cardApp = _cardAppFactory.Create(_cardRoute);
 
-            await LoadRouteAsync(_cardRoute.Route);
+                await LoadRouteAsync(_cardRoute.Route);
 
-            await base.OnInitializedAsync();
+                await base.OnInitializedAsync();
+            }
+            catch (MicrosoftIdentityWebChallengeUserException err)
+            {
+                ConsentHandler.HandleException(err);
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -176,9 +189,9 @@ namespace Crazor.Blazor.Components
             if (AuthenticationState != null)
             {
                 var authState = await AuthenticationState;
-
                 _cardApp.Context.User = authState.User;
             }
+
 
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
 

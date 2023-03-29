@@ -57,6 +57,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
 		<PackageReference Include="Crazor" Version="1.0.0-beta" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>
