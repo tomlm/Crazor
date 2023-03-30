@@ -33,11 +33,7 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
 
-            var adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
-
             var card = await cardApp.ProcessInvokeActivity(activity, isPreview: true, cancellationToken);
-
-            card.Authentication = adaptiveAuthentication;
 
             var preview = new Attachment(
                 contentType: "application/vnd.microsoft.card.thumbnail",

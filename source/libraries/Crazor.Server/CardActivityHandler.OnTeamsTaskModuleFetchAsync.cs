@@ -34,7 +34,7 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
-            var adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
+            var adaptiveAuthentication = await cardApp.AuthorizeActivityAsync(turnContext.Activity, cancellationToken);
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
 

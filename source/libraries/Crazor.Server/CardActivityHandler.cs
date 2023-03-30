@@ -21,17 +21,11 @@ namespace Crazor.Server
             DefaultValueHandling = DefaultValueHandling.Ignore,
         };
 
-        public CardActivityHandler(CardAppContext context, IAuthorizationService authorizationService, AuthenticationStateProvider authenticationStateProvider)
+        public CardActivityHandler(CardAppContext context)
         {
             Context = context;
-            AuthorizationService = authorizationService;
-            AuthenticationStateProvider = authenticationStateProvider;
         }
 
         public CardAppContext Context { get; }
-
-        public IAuthorizationService AuthorizationService { get; }
-
-        public AuthenticationStateProvider AuthenticationStateProvider { get; }
     }
 }

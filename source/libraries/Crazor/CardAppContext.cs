@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,8 @@ namespace Crazor
             IConfiguration configuration,
             IEncryptionProvider encryptionProvider,
             IStorage storage,
+            IAuthorizationService authorizationService, 
+            AuthenticationStateProvider authenticationStateProvider,
             ServiceOptions options)
         {
             ServiceProvider = servicesProvider;
@@ -29,6 +33,8 @@ namespace Crazor
             CardTabModuleFactory = cardTabModuleFactory;
             RouteResolver = routeResolver;
             ServiceOptions = options;
+            AuthorizationService = authorizationService;
+            AuthenticationStateProvider = authenticationStateProvider;
             User = new ClaimsPrincipal(new ClaimsIdentity()); ;
         }
 
@@ -47,7 +53,11 @@ namespace Crazor
         public IRouteResolver RouteResolver { get; set; }
 
         public ServiceOptions ServiceOptions { get; }
-        
+
+        public IAuthorizationService AuthorizationService { get; }
+
+        public AuthenticationStateProvider AuthenticationStateProvider { get; }
+
         /// <summary>
         /// User principal
         /// </summary>

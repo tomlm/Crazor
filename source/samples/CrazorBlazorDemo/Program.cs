@@ -65,7 +65,7 @@ namespace CrazorBlazorDemo
             // ---- </CRAZOR>
 
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -82,6 +82,7 @@ namespace CrazorBlazorDemo
             // ---- <CRAZOR>
             app.UseCrazorServer();
 
+            // app.UseTokenAcquirerFactory();
             app.UseStaticFiles();
             app.UseRouting();
 

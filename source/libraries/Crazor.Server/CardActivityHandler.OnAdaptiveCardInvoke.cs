@@ -22,11 +22,7 @@ namespace Crazor.Server
 
                 await cardApp.LoadAppAsync((Activity)turnContext.Activity!, cancellationToken);
 
-                adaptiveAuthentication = await this.AuthorizeActivityAsync(cardApp, turnContext, false, cancellationToken);
-
                 AdaptiveCard card = await cardApp.ProcessInvokeActivity((Activity)turnContext.Activity!, isPreview: false, cancellationToken);
-                
-                card.Authentication = adaptiveAuthentication;
 
                 return new AdaptiveCardInvokeResponse()
                 {
@@ -35,15 +31,25 @@ namespace Crazor.Server
                     Value = card
                 };
             }
+            catch (Microsoft.Identity.Web.MicrosoftIdentityWebChallengeUserException)
+            {
+                return CreateAuthCard(adaptiveAuthentication);
+            }
             catch (UnauthorizedAccessException)
             {
-                return new AdaptiveCardInvokeResponse()
+                return CreateAuthCard(adaptiveAuthentication);
+            }
+        }
+
+        private static AdaptiveCardInvokeResponse CreateAuthCard(AdaptiveAuthentication adaptiveAuthentication)
+        {
+            return new AdaptiveCardInvokeResponse()
+            {
+                StatusCode = 200,
+                Type = AdaptiveCard.ContentType,
+                Value = new AdaptiveCard("1.4")
                 {
-                    StatusCode = 200,
-                    Type = AdaptiveCard.ContentType,
-                    Value = new AdaptiveCard("1.4")
-                    {
-                        Body = new List<AdaptiveElement>()
+                    Body = new List<AdaptiveElement>()
                         {
                             new AdaptiveTextBlock()
                             {
@@ -51,7 +57,7 @@ namespace Crazor.Server
                                 Wrap = true,
                             }
                         },
-                        Actions = new List<AdaptiveAction>()
+                    Actions = new List<AdaptiveAction>()
                         {
                             new AdaptiveSubmitAction()
                             {
@@ -62,10 +68,9 @@ namespace Crazor.Server
                                 }
                             }
                         },
-                        Authentication = adaptiveAuthentication
-                    }
-                };
-            }
+                    Authentication = adaptiveAuthentication
+                }
+            };
         }
     }
 }

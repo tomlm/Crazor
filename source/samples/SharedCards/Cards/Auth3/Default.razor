@@ -24,13 +24,12 @@
 
     protected async override Task OnInitializedAsync()
     {
+        await base.OnInitializedAsync();
         if (User.Identity.IsAuthenticated)
         {
             var result = await GraphClient.Me.Request().GetAsync();
             UserName = result.DisplayName;
         }
-
-        await base.OnInitializedAsync();
         return;
     }
 
@@ -38,6 +37,14 @@
     {
         if (User.Identity.IsAuthenticated)
         {
+            //if (App.Context.UserToken?.Token != null)
+            //{
+            //    GraphClient = new GraphServiceClient(new DelegateAuthenticationProvider((request) =>
+            //    {
+            //        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", App.Context.UserToken.Token);
+            //        return Task.CompletedTask;
+            //    }));
+            //}
             var result = await GraphClient.Me.Request().GetAsync();
             UserName = result.DisplayName;
         }
