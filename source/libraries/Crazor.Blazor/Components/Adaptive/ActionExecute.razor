@@ -38,7 +38,7 @@
     public String? Verb { get => Item.Verb ; set => Item.Verb  = value; }
 
     [Parameter]
-    public String? Data { get => (string)Item.Data; set => Item.Data = value; }
+    public String? Data { get => (string)Item.Data?.ToString(); set => Item.Data = value; }
 
     protected override void OnAfterRender(bool firstRender)
     {

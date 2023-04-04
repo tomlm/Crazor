@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Crazor.Mvc;
+using Crazor.Server;
 using Crazor.Test;
 
 namespace Crazor.Tests
@@ -16,6 +17,7 @@ namespace Crazor.Tests
             {
                 services.AddCrazor();
                 services.AddCrazorMvc();
+                services.AddCrazorServer();
                 services.AddMvc()
                     // .AddRazorOptions((options) => { var x = options; })
                     // .AddRazorPagesOptions((options) => { var y = options; })

@@ -34,22 +34,14 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
-            var adaptiveAuthentication = await cardApp.AuthorizeActivityAsync(turnContext.Activity, cancellationToken);
-
-            await cardApp.OnActionExecuteAsync(cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(turnContext.Activity, false, cancellationToken);
 
             switch (cardApp.TaskModuleAction)
             {
                 case TaskModuleAction.Continue:
 
-                    var adaptiveCard = await cardApp.RenderCardAsync(isPreview: false, cancellationToken);
-
-                    await cardApp.SaveAppAsync(cancellationToken);
-
-                    adaptiveCard.Authentication = adaptiveAuthentication;
-
-                    adaptiveCard.Refresh = null;
-                    var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
+                    card.Refresh = null;
+                    var submitCard = TransformActionExecuteToSubmit(card);
 
                     // continue taskModule bound to current card view.
                     return new TaskModuleResponse()
@@ -66,6 +58,5 @@ namespace Crazor.Server
                     return new TaskModuleResponse() { };
             }
         }
-
     }
 }

@@ -6,14 +6,15 @@ using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Web;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
@@ -45,6 +46,7 @@ namespace Crazor
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Context = context;
+            context.App = this;
             this.CallStack = new List<CardViewState>();
             if (this.GetType() != typeof(CardApp))
             {
@@ -116,6 +118,11 @@ namespace Crazor
         public bool IsTabModule => this.Activity.ChannelId == Channels.Msteams && this.Activity.Conversation.Id.StartsWith("tab:");
 
         /// <summary>
+        /// Is the current context 
+        /// </summary>
+        public bool IsWebHost => this.Activity.ChannelId == Context.Configuration.GetValue<Uri>("HostUri").Host;
+
+        /// <summary>
         /// TaskModuleAction is used to control signal that the taskmodule should be closed and the action to take with the card.
         /// </summary>
         public TaskModuleAction TaskModuleAction { get; set; }
@@ -134,6 +141,9 @@ namespace Crazor
         /// </summary>
         public CardAppContext Context { get; }
 
+        /// <summary>
+        /// The current turn context.
+        /// </summary>
         public ITurnContext TurnContext { get; set; }
 
         /// <summary>
@@ -149,8 +159,16 @@ namespace Crazor
 
             await OnActionExecuteAsync(cancellationToken);
 
+            if (isPreview == false)
+            {
+                // force preview mode if the taskmodule action is set.
+                isPreview = TaskModuleAction == TaskModuleAction.Auto ||
+                    TaskModuleAction == TaskModuleAction.PostCard ||
+                    TaskModuleAction == TaskModuleAction.InsertCard;
+            }
+
             var card = await RenderCardAsync(isPreview, cancellationToken);
-            
+
             card.Authentication = authentication;
 
             await SaveAppAsync(cancellationToken);
@@ -158,6 +176,34 @@ namespace Crazor
             return card;
         }
 
+        public async Task<AdaptiveCard> CreateAuthCard(AdaptiveAuthentication adaptiveAuthentication, CancellationToken cancellationToken)
+        {
+            var card = new AdaptiveCard("1.4")
+            {
+                Body = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Unauthorized",
+                                Wrap = true,
+                            }
+                        },
+                //Actions = new List<AdaptiveAction>()
+                //        {
+                //            new AdaptiveSubmitAction()
+                //            {
+                //                Title = "Sign In",
+                //                Data = new AdaptiveCardInvokeAction()
+                //                {
+                //                    Verb = Constants.SHOWVIEW_VERB,
+                //                }
+                //            }
+                //        },
+                Authentication = adaptiveAuthentication
+            };
+            await this.ApplyCardModificationsAsync(card, true, cancellationToken);
+            return card;
+        }
 
         /// <summary>
         /// Handle action
@@ -286,7 +332,7 @@ namespace Crazor
             sw.Stop();
 
             var host = this.Context.Configuration.GetValue<Uri>("HostUri").Host.ToLower();
-            if (host == "localhost" || host.EndsWith("ngrok.io"))
+            if (host == "localhost" || host.EndsWith("ngrok.io") || host.EndsWith(".devtunnels.ms"))
             {
                 outboundCard.Title = $"{this.Name} [{sw.Elapsed.ToString()}]";
             }
@@ -541,7 +587,7 @@ namespace Crazor
             this.Activity = (Activity)activity;
             var invoke = JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
             ArgumentNullException.ThrowIfNull(invoke);
-            this.Action = invoke.Action;
+            this.Action = this.Action ?? invoke.Action;
 
             // map Route attributes for app
             foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
@@ -661,16 +707,33 @@ namespace Crazor
             Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
             ArgumentNullException.ThrowIfNull(cardViewType);
 
-            var cardViewFactory = this.Context.ServiceProvider.GetRequiredService<CardViewFactory>();
-            this.CurrentView = (ICardView)cardViewFactory.Create(cardViewType);
+            this.CurrentView = CreateCardView(cardViewType);
             ArgumentNullException.ThrowIfNull(this.CurrentView, $"View {cardViewState.Route} not found");
 
             cardRoute.SessionId = this.Route.SessionId;
             this.Route = cardRoute;
-            this.CurrentView.App = this;
             // restore card SessionMemory properties for CardView
             LoadCardState(cardViewState);
         }
+
+        private ICardView CreateCardView(Type cardViewType)
+        {
+            var cardView = (ICardView)Context.ServiceProvider.GetRequiredService(cardViewType);
+            cardView.App = this;
+
+            // inject dependencies
+            var props = cardViewType
+                             .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                             .Where(p => p.CanWrite && Attribute.IsDefined(p, typeof(InjectAttribute)));
+
+            foreach (var prop in props)
+            {
+                prop.SetValue(cardView, Context.ServiceProvider.GetService(prop.PropertyType), null);
+            }
+
+            return cardView;
+        }
+
 
         public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
         {
@@ -1294,28 +1357,31 @@ namespace Crazor
         /// <exception cref="UnauthorizedAccessException"></exception>
         public virtual async Task<AdaptiveAuthentication> AuthorizeActivityAsync(IInvokeActivity activity, CancellationToken cancellationToken)
         {
-            var userTokenClient = this.TurnContext?.TurnState.Get<UserTokenClient>();
-
             // Authenticate user identity by using token exchange
             var authenticationAttribute = this.CurrentView.GetType().GetCustomAttribute<AuthenticationAttribute>();
             if (authenticationAttribute != null)
             {
-                if (userTokenClient == null)
+                if (Context.UserTokenClient == null)
                 {
-                    throw new UnauthorizedAccessException($"No TurnContext");
+                    throw new UnauthorizedAccessException($"No UserTokenClient");
                 }
 
                 ObjectPath.TryGetPathValue<string>(activity.Value, "state", out var magicCode);
 
-                Context.UserToken = await userTokenClient.GetUserTokenAsync(activity.From.Id, authenticationAttribute.Name, activity.ChannelId, magicCode, cancellationToken);
+                var tokenResponse = await Context.UserTokenClient.GetUserTokenAsync(activity.From.Id, authenticationAttribute.Name, activity.ChannelId, magicCode, cancellationToken);
 
-                if (Context.UserToken != null)
+                if (tokenResponse != null)
                 {
-                    // parse token into identity and claims.
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var jwtSecurityToken = tokenHandler.ReadJwtToken(Context.UserToken.Token);
-                    var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
-                    Context.User = new ClaimsPrincipal(claimsIdentity);
+                    Context.TokenResponses[authenticationAttribute.Name] = tokenResponse;
+
+                    if (Context.User.Identity?.IsAuthenticated == false)
+                    {
+                        // parse token into identity and claims.
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var jwtSecurityToken = tokenHandler.ReadJwtToken(tokenResponse.Token);
+                        var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
+                        Context.User = new ClaimsPrincipal(claimsIdentity);
+                    }
                 }
             }
 
@@ -1365,9 +1431,7 @@ namespace Crazor
             // If we are not authenticated, then return authentication metadata.
             if (authenticationAttribute != null)
             {
-                var appId = Context.Configuration.GetValue<string>("MicrosoftAppId");
-
-                var signinResource = await userTokenClient.GetSignInResourceAsync(authenticationAttribute.Name, (Activity)activity, null, cancellationToken);
+                var signinResource = await Context.UserTokenClient.GetSignInResourceAsync(authenticationAttribute.Name, (Activity)activity, null, cancellationToken);
 
                 // create authenticationOptions to ask to be logged in.
                 return new AdaptiveAuthentication()

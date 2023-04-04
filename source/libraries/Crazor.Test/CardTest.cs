@@ -4,6 +4,7 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json.Linq;
@@ -24,7 +25,8 @@ namespace Crazor.Test
             builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>()
             {
                 { "HostUri", "http://localhost" },
-                { "BotId", "00000000-0000-0000-0000-000000000000" }
+                { "BotId", "00000000-0000-0000-0000-000000000000" },
+                { "MicrosoftAppId", "00000000-0000-0000-0000-000000000000" }
             });
             builder.Services.AddSingleton<IRazorViewEngine, RazorViewEngine>();
             builder.Services.AddSingleton<IStorage, MemoryStorage>();

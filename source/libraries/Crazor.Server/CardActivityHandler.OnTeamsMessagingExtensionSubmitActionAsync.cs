@@ -33,24 +33,11 @@ namespace Crazor.Server
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
             cardApp.IsTaskModule = true;
+            cardApp.Action = invokeValue.Action;
 
             await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
 
-            cardApp.Action = invokeValue.Action;
-
-            var adaptiveAuthentication = await cardApp.AuthorizeActivityAsync(turnContext.Activity, cancellationToken);
-
-            await cardApp.OnActionExecuteAsync(cancellationToken);
-
-            bool isPreview = cardApp.TaskModuleAction == TaskModuleAction.Auto ||
-                cardApp.TaskModuleAction == TaskModuleAction.PostCard ||
-                cardApp.TaskModuleAction == TaskModuleAction.InsertCard;
-
-            var card = await cardApp.RenderCardAsync(isPreview: isPreview, cancellationToken);
-
-            card.Authentication = adaptiveAuthentication;
-
-            await cardApp.SaveAppAsync(cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(turnContext.Activity, false, cancellationToken);
 
             return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);
         }

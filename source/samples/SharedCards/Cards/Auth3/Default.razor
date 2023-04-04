@@ -5,16 +5,24 @@
 
 <CascadingAuthenticationState>
     <Card Version="1.5">
-        <AuthorizeView>
-            <Authorized>
-                <TextBlock>Graph User is: @UserName</TextBlock>
-            </Authorized>
-            <NotAuthorized>
-                <TextBlock>Anonymous</TextBlock>
-            </NotAuthorized>
-        </AuthorizeView>
+        @if (IsPreview)
+        {
+            <TextBlock>(Preview) Graph User is: ...</TextBlock>
+        }
+        else
+        {
 
-        <ActionExecute Verb="OnRefresh" Title="Refresh" />
+            <AuthorizeView>
+                <Authorized>
+                    <TextBlock>Graph User is: @UserName</TextBlock>
+                </Authorized>
+                <NotAuthorized>
+                    <TextBlock>Anonymous</TextBlock>
+                </NotAuthorized>
+            </AuthorizeView>
+
+            <ActionExecute Verb="OnRefresh" Title="Refresh" />
+        }
     </Card>
 </CascadingAuthenticationState>
 
@@ -25,7 +33,7 @@
     protected async override Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        if (User.Identity.IsAuthenticated)
+        if (!IsPreview && User.Identity.IsAuthenticated)
         {
             var result = await GraphClient.Me.Request().GetAsync();
             UserName = result.DisplayName;
