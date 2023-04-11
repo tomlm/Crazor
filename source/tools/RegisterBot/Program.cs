@@ -169,7 +169,7 @@ class Script : CShell
 
         var redirectUris = new HashSet<string>(((JArray)application.web.redirectUris)
             .Select(el => (string)el.ToString())
-            .Where(domain => !domain.Contains("ngrok.io")));
+            .Where(domain => !domain.Contains(".ngrok.io") && !domain.EndsWith(".devtunnels.ms")));
 
         redirectUris.Add($"https://{uri.Host}/signin-oidc");
         foreach (var domain in new string[] { "token.botframework.com", "europe.token.botframework.com", "unitedstates.token.botframework.com", "token.botframework.azure.us" })
@@ -260,7 +260,7 @@ class Script : CShell
             settings.Add($"AzureAD:ClientSecret={appPassword} ");
             output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
         }
-        else if (uri.Host.EndsWith("ngrok.io") || uri.Host == "localhost")
+        else if (uri.Host.EndsWith("ngrok.io") || uri.Host == "localhost" || uri.Host.EndsWith(".devtunnels.ms"))
         {
             Console.WriteLine($"\n==== Updating appsettings.Development.json");
             dynamic settings = JObject.Parse(File.ReadAllText(@"appsettings.Development.json"));

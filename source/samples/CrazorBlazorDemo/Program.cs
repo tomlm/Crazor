@@ -9,9 +9,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CrazorBlazorDemo
 {
@@ -65,7 +62,7 @@ namespace CrazorBlazorDemo
             // ---- </CRAZOR>
 
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -82,6 +79,7 @@ namespace CrazorBlazorDemo
             // ---- <CRAZOR>
             app.UseCrazorServer();
 
+            // app.UseTokenAcquirerFactory();
             app.UseStaticFiles();
             app.UseRouting();
 

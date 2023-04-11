@@ -5,16 +5,24 @@
 
 <CascadingAuthenticationState>
     <Card Version="1.5">
-        <AuthorizeView>
-            <Authorized>
-                <TextBlock>Graph User is: @UserName</TextBlock>
-            </Authorized>
-            <NotAuthorized>
-                <TextBlock>Anonymous</TextBlock>
-            </NotAuthorized>
-        </AuthorizeView>
+        @if (IsPreview)
+        {
+            <TextBlock>(Preview) Graph User is: ...</TextBlock>
+        }
+        else
+        {
 
-        <ActionExecute Verb="OnRefresh" Title="Refresh" />
+            <AuthorizeView>
+                <Authorized>
+                    <TextBlock>Graph User is: @UserName</TextBlock>
+                </Authorized>
+                <NotAuthorized>
+                    <TextBlock>Anonymous</TextBlock>
+                </NotAuthorized>
+            </AuthorizeView>
+
+            <ActionExecute Verb="OnRefresh" Title="Refresh" />
+        }
     </Card>
 </CascadingAuthenticationState>
 
@@ -24,13 +32,12 @@
 
     protected async override Task OnInitializedAsync()
     {
-        if (User.Identity.IsAuthenticated)
+        await base.OnInitializedAsync();
+        if (!IsPreview && User.Identity.IsAuthenticated)
         {
             var result = await GraphClient.Me.Request().GetAsync();
             UserName = result.DisplayName;
         }
-
-        await base.OnInitializedAsync();
         return;
     }
 
@@ -38,6 +45,14 @@
     {
         if (User.Identity.IsAuthenticated)
         {
+            //if (App.Context.UserToken?.Token != null)
+            //{
+            //    GraphClient = new GraphServiceClient(new DelegateAuthenticationProvider((request) =>
+            //    {
+            //        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", App.Context.UserToken.Token);
+            //        return Task.CompletedTask;
+            //    }));
+            //}
             var result = await GraphClient.Me.Request().GetAsync();
             UserName = result.DisplayName;
         }

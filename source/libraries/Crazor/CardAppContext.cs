@@ -2,7 +2,10 @@
 // Licensed under the MIT License.
 
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
@@ -19,6 +22,9 @@ namespace Crazor
             IConfiguration configuration,
             IEncryptionProvider encryptionProvider,
             IStorage storage,
+            IAuthorizationService authorizationService, 
+            AuthenticationStateProvider authenticationStateProvider,
+            UserTokenClient userTokenClient,
             ServiceOptions options)
         {
             ServiceProvider = servicesProvider;
@@ -29,7 +35,10 @@ namespace Crazor
             CardTabModuleFactory = cardTabModuleFactory;
             RouteResolver = routeResolver;
             ServiceOptions = options;
+            AuthorizationService = authorizationService;
+            AuthenticationStateProvider = authenticationStateProvider;
             User = new ClaimsPrincipal(new ClaimsIdentity()); ;
+            UserTokenClient = userTokenClient;
         }
 
         public IServiceProvider ServiceProvider { get; set; }
@@ -47,7 +56,13 @@ namespace Crazor
         public IRouteResolver RouteResolver { get; set; }
 
         public ServiceOptions ServiceOptions { get; }
-        
+
+        public IAuthorizationService AuthorizationService { get; }
+
+        public AuthenticationStateProvider AuthenticationStateProvider { get; }
+
+        public CardApp App { get; set; }
+
         /// <summary>
         /// User principal
         /// </summary>
@@ -56,6 +71,8 @@ namespace Crazor
         /// <summary>
         /// UserToken from SSO token exchange
         /// </summary>
-        public TokenResponse? UserToken { get; set; }
+        public UserTokenClient UserTokenClient { get; set; }
+
+        public Dictionary<string, TokenResponse> TokenResponses { get; set; } = new Dictionary<string, TokenResponse>();
     }
 }

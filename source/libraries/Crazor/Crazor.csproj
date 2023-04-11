@@ -40,10 +40,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Bot.Builder" Version="4.19.3" />
 		<PackageReference Include="Microsoft.Bot.Schema" Version="4.19.3" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.4" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>

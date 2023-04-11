@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
+using AdaptiveCards;
+using Azure.Core;
 using Crazor.Interfaces;
 using Crazor.Teams;
 using Microsoft.AspNetCore.Builder;
@@ -9,11 +11,16 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Identity.Abstractions;
+using Microsoft.Identity.Web;
 using Newtonsoft.Json;
 using System.Reflection;
+using System.Security.Claims;
+using System.Threading;
 
 namespace Crazor.Server
 {
@@ -29,7 +36,25 @@ namespace Crazor.Server
         {
             services.AddHttpClient();
             services.AddHttpContextAccessor();
+            services.AddScoped<IAuthorizationHeaderProvider, CrazorAuthorizationHeaderProvider>();
+            services.AddScoped<TokenCredential, CrazorAuthorizationHeaderProvider>();
             services.TryAddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+            services.AddScoped<UserTokenClient>((sp) =>
+            {
+                var config = sp.GetRequiredService<IConfiguration>();
+                var botAppId = config.GetValue<string>("MicrosoftAppId");
+                var claimsIdentity = new ClaimsIdentity(new List<Claim>
+                {
+                    // Adding claimse for both Emulator and Channel.
+                    new Claim(AuthenticationConstants.AudienceClaim, botAppId),
+                    new Claim(AuthenticationConstants.AppIdClaim, botAppId),
+                    // new Claim(AuthenticationConstants.ServiceUrlClaim, serviceUrl)
+                });
+
+                var botAuth = sp.GetRequiredService<BotFrameworkAuthentication>();
+                var userTokenClient = botAuth.CreateUserTokenClientAsync(claimsIdentity, CancellationToken.None).GetAwaiter().GetResult();
+                return userTokenClient;
+            });
             services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
             services.TryAddScoped<IBot, CardActivityHandler>();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -68,6 +93,22 @@ namespace Crazor.Server
             }
 
             return builder;
+        }
+
+        public static async Task<AdaptiveCard> ProcessInvokeActivitySilent(this CardApp cardApp, AdaptiveAuthentication? authentication, IInvokeActivity invokeActivity, bool isPreview, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await cardApp.ProcessInvokeActivity(invokeActivity, isPreview, cancellationToken);
+            }
+            catch (MicrosoftIdentityWebChallengeUserException)
+            {
+                return await cardApp.CreateAuthCard(authentication, cancellationToken);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return await cardApp.CreateAuthCard(authentication, cancellationToken);
+            }
         }
     }
 }

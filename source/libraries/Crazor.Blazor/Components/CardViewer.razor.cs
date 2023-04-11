@@ -142,14 +142,19 @@ namespace Crazor.Blazor.Components
         {
             // turn js action into C# action.
             var action = JsonConvert.DeserializeObject<AdaptiveCardInvokeAction>(jsAction.ToString()!);
-
+            var authState = (AuthenticationState != null) ? await AuthenticationState : null;
             // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
                 ChannelId = this._channelId,
                 Id = Guid.NewGuid().ToString("n"),
-                From = new ChannelAccount() { Id = String.Empty },
+                From = new ChannelAccount()
+                {
+                    AadObjectId = authState?.User?.GetObjectId() ?? String.Empty,
+                    Id = authState?.User?.GetObjectId() ?? String.Empty,
+                    Name = authState?.User?.GetDisplayName() ?? "Anonymous"
+                },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = _cardRoute.SessionId },
                 Timestamp = DateTimeOffset.UtcNow,
@@ -169,13 +174,19 @@ namespace Crazor.Blazor.Components
 
         public async Task LoadRouteAsync(string route)
         {
+            var authState = (AuthenticationState != null) ? await AuthenticationState : null;
             // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)
             {
                 ServiceUrl = "https://about",
                 ChannelId = this._channelId,
                 Id = Guid.NewGuid().ToString("n"),
-                From = new ChannelAccount() { Id = String.Empty },
+                From = new ChannelAccount()
+                {
+                    AadObjectId = authState?.User?.GetObjectId() ?? String.Empty,
+                    Id = authState?.User?.GetObjectId() ?? String.Empty,
+                    Name = authState?.User?.GetDisplayName() ?? "Anonymous"
+                },
                 Recipient = new ChannelAccount() { Id = "bot" },
                 Conversation = new ConversationAccount() { Id = _cardRoute.SessionId },
                 Timestamp = DateTimeOffset.UtcNow,
@@ -186,12 +197,10 @@ namespace Crazor.Blazor.Components
             // process it, giving us a new card
             await _cardApp.LoadAppAsync((Activity)activity!, default);
 
-            if (AuthenticationState != null)
+            if (authState != null)
             {
-                var authState = await AuthenticationState;
                 _cardApp.Context.User = authState.User;
             }
-
 
             this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
 

@@ -19,8 +19,6 @@ namespace Crazor.Blazor
         /// <returns></returns>
         public static IServiceCollection AddCrazorBlazor(this IServiceCollection services)
         {
-            services.AddTransient<CardViewFactory, CardViewFactory>();
-
             // add card view types for razor templates
             foreach (var cardViewType in Utils.GetAssemblies().SelectMany(asm => asm.DefinedTypes
                     .Where(t => t.IsAbstract == false && t.IsAssignableTo(typeof(ICardView)) && t.IsAssignableTo(typeof(ComponentBase)))

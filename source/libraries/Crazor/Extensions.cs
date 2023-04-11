@@ -114,7 +114,6 @@ namespace Crazor
             services.AddTransient<CardApp>();
             services.AddCardAppTypes();
 
-            services.AddScoped<CardViewFactory>();
             services.AddCustomCardViewTypes();
 
             services.AddTransient<CardTabModuleFactory>();
