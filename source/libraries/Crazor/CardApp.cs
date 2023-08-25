@@ -587,7 +587,7 @@ namespace Crazor
             this.Activity = (Activity)activity;
             var invoke = JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
             ArgumentNullException.ThrowIfNull(invoke);
-            this.Action = this.Action ?? invoke.Action;
+            this.Action = invoke.Action ?? this.Action;
 
             // map Route attributes for app
             foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
