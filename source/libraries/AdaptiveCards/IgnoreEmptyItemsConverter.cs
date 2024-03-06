@@ -7,7 +7,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// JSON converter that will drop empty element items.

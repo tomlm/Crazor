@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     ///     Controls how elements are horizontally positioned within their container.

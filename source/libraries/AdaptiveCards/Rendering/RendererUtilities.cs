@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections;
 
-namespace AdaptiveCards.Rendering
+namespace Crazor.AdaptiveCards.Rendering
 {
     /// <summary>
     ///     Utility methods for dealing with body and binding

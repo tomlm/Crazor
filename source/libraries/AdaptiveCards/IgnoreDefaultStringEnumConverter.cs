@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     internal class IgnoreDefaultStringEnumConverter<TEnum> : StringEnumConverter, ILogWarnings
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     internal class AdaptiveSelectActionConverter : JsonConverter<AdaptiveSelectAction>
     {

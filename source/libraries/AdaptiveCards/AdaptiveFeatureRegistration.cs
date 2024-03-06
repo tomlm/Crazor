@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 using System.Collections.Generic;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Tracks features supported by a host. When an Adaptive Cards element declares "requires", this is the collection

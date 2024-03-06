@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the Input.Date element.

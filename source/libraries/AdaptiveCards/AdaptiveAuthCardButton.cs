@@ -3,7 +3,7 @@
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Button for auth card

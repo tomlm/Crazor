@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     ///     Submit action gathers up input fields, merges with optional data field and generates event to client

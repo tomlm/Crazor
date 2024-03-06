@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the target of an Action.ToggleVisibility element.

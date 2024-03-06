@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 using System.Xml.Serialization;
 using System.ComponentModel;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the AdaptiveCards schema version.

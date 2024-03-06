@@ -3,7 +3,7 @@
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     public partial class AdaptiveFallbackElement
     {

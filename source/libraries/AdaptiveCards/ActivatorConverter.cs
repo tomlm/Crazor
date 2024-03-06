@@ -3,7 +3,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     internal class ActivatorConverter<T>: CustomCreationConverter<T>
     {

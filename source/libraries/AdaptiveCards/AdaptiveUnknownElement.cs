@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 #endif 
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents an unknown element encountered while parsing.

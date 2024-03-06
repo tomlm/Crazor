@@ -1,4 +1,4 @@
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     class Globals
     {

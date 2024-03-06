@@ -3,7 +3,7 @@
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     ///     Controls the color style of TextBlock Elements

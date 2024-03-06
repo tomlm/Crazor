@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents any input element.

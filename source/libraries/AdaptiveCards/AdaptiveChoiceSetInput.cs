@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
-using AdaptiveCards.Rendering;
+using Crazor.AdaptiveCards.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the Input.ChoiceSet element.

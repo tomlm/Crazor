@@ -3,7 +3,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     public class StrictIntConverter : JsonConverter
     {

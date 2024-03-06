@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Metadata structure for adaptive card.

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using AdaptiveCards;
-using AdaptiveCards.Rendering;
+using Crazor.AdaptiveCards;
+using Crazor.AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;

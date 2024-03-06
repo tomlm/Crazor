@@ -6,7 +6,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the Media element.

@@ -3,7 +3,7 @@
 
 using Crazor.Attributes;
 using Crazor.Interfaces;
-using global::AdaptiveCards;
+using global::Crazor.AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

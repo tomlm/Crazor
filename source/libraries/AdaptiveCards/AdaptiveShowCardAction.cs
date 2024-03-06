@@ -3,7 +3,7 @@
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the Action.ShowCard element.

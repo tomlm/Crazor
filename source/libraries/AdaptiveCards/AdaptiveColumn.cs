@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
 
     /// <summary>

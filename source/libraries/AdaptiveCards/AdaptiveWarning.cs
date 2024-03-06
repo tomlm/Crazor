@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     // TODO: decide if standard error codes are useful or if this should just be string
 

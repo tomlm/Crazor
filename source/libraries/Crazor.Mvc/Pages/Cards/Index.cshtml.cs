@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using AdaptiveCards;
+using Crazor.AdaptiveCards;
 using Crazor.Server.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;

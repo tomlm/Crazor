@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents the Input.Number element.

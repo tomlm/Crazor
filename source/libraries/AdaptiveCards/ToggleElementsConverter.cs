@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     public class ToggleElementsConverter : JsonConverter
     {

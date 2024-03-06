@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     public class SerializableDictionary<TValue> : Dictionary<string, TValue>
 #if !NETSTANDARD1_3

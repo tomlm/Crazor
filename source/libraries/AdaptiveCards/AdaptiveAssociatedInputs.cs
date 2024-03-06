@@ -4,7 +4,7 @@ using System;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     ///     Controls which inputs are associated with a given submit action

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 using System.Collections.Generic;
 
-namespace AdaptiveCards.Rendering
+namespace Crazor.AdaptiveCards.Rendering
 {
     /// <summary>
     ///     Utility class which allows you to visit every node

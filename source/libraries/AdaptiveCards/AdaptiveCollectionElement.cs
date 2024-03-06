@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Base class for all elements that contain other elements.

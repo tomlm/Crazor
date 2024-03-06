@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents how a card can be refreshed by making a request to the target Bot

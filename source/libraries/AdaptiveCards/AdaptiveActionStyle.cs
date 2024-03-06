@@ -4,7 +4,7 @@ using System;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     ///     Controls the style of an Action, which influences how the action is displayed, spoken, etc.

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 using System;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// Represents an exception that occurs during serialization.

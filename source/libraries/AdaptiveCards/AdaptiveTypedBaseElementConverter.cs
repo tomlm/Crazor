@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 using Newtonsoft.Json;
 
-namespace AdaptiveCards
+namespace Crazor.AdaptiveCards
 {
     /// <summary>
     /// JsonConverters that deserialize to AdaptiveCards elements and use ParseContext must inherit this class.
