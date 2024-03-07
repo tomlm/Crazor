@@ -85,8 +85,8 @@ app.MapControllers();
 2. Create a **Cards/_Imports.razor** file containing default namespaces:
 
    ```C#
-   @using AdaptiveCards
    @using Crazor
+   @using Crazor.AdaptiveCards
    @using Crazor.Attributes
    @using Crazor.Blazor
    @using Crazor.Blazor.Components.Adaptive;
