@@ -1,16 +1,8 @@
 {
   "dependencies": {
-    "storage1": {
-      "secretStore": null,
-      "type": "storage.emulator",
-      "connectionId": "AzureStorage",
+    "secrets1": {
+      "type": "secrets.user",
       "dynamicId": null
-    },
-    "identityapp1": {
-      "secretStore": "LocalSecretsFile",
-      "resourceId": null,
-      "type": "identityapp.secretStore",
-      "connectionId": "AzureAD:ClientSecret"
     }
   }
 }
