@@ -35,8 +35,6 @@ namespace Crazor
             type = null;
             if (_routes.TryGetValue(route.App, out var routeTemplates))
             {
-                var parts = route.Path.Split('/');
-
                 foreach (var routeTemplate in routeTemplates)
                 {
                     if (routeTemplate.Matched(route.Path, out var data))
