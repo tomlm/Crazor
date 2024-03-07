@@ -2,20 +2,20 @@
 ![image](https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png)
 
 
-# Crazor
-**Crazor** is a library which marries **Razor Templating** with **Adaptive Cards** to create a super productive 
-coding environment focused 100% on building the micro card based applications.
+# Crazor.Blazor
+**Crazor.Blazor** is a library which marries **Razor Templating** with **Adaptive Cards** to create a super productive 
+coding environment focused 100% on building the micro card based applications on the **Crazor** platform.
 
 All of the bot logic is implemented for you, all you do is make templates bound to your data and write
 the code behind.  Really. 
 
-If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
+If you know Blazor then Crazor will feel crazy familiar and powerful to you.
 
 # Features
 
 ![image](https://user-images.githubusercontent.com/17789481/199912880-bc35becb-9469-4470-9253-612cdf1a9d53.png)
 
-**Crazor** provides:
+**Crazor.Blazor** provides:
 
 * **Razor based card templates** - Define your Adaptive Card views using Razor templating markup with logic, leveraging all of the years of tooling built into Visual Studio to make it super productive to author your experience:
   * **Strong-Typing** - you can refactor and get build errors when working with your models
