@@ -85,8 +85,8 @@ app.MapControllers();
 2. Create a **Cards/_Imports.razor** file containing default namespaces:
 
    ```C#
-   @using AdaptiveCards
    @using Crazor
+   @using Crazor.AdaptiveCards
    @using Crazor.Attributes
    @using Crazor.Blazor
    @using Crazor.Blazor.Components.Adaptive;
@@ -110,7 +110,44 @@ This adds razor pages defined **Crazor.Blazor** package, specifically the page t
 
 ## Settings
 
-Look at [Settings](../Settings.md) page for information settings for your project 
+(REQUIRED) Look at [Settings](../Settings.md) page for information settings for your project 
+
+## Modify Pages/_Host.cshtml or Pages/_Layout.cshtml
+You need to add adaptive card javascript to the header of either _Host.csthml or _Layout.cshtml
+
+```html
+<head>
+...
+    <!-- CRAZOR -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
+    <script src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
+    <script type="text/javascript" src="~/js/hostconfig.js"></script>
+    <style>
+        .cardDiv {
+            width: 640px;
+            margin: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);/
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 4px;
+        }
+
+        .column {
+            flex: 25%;
+            max- width: 33.3%;
+            padding: 0 4px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
+    <!--CRAZOR -->
+...
+</head>
+```
 
 # (Optional) Modify index.razor to enumerate your card apps
 
