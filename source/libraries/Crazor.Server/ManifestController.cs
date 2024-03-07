@@ -26,6 +26,10 @@ namespace Crazor.Server.Controllers
         {
             var botIcon = configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png";
             var botIconPath = Path.Combine(environment.WebRootPath, botIcon.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
+            if (!Path.Exists(botIconPath))
+            {
+                botIconPath = Path.Combine(environment.WebRootPath, "images", "boticon.png");
+            }
 
             var outline = configuration.GetValue<string>("OutlineIcon") ?? "/images/outline.png";
             var outlinePath = Path.Combine(environment.WebRootPath, outline.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
