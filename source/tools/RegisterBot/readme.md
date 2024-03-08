@@ -1,8 +1,17 @@
-﻿RegisterBot Version 2.0.7
+﻿RegisterBot Version 2.0.8
 
 ```RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]```
 
 Creates or updates a bot registration for [botName] pointing to [endpoint] with teams channel and SSO enabled.
+This tool will:
+* Create or update the Microsoft Application for login
+** the OAuth redirect URIs
+** the App secrets
+* Create or update the bot registration
+** Register teams channel
+** Enable SSO
+** Set the messaging endpoint
+** Update the bot secrets
 
 | Argument                         | Description                                                                                   |
 | -------------------------------- | --------------------------------------------------------------------------------------------- |
@@ -16,10 +25,12 @@ If the endpoint host name is:
 | Host                 | Action                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------ |
 | xx.azurewebsites.net | it modifies the remote web app settings to have correct settings/secrets             |
-| xx.ngrok.io          | it modifies the local project settings/user secrets to have correct settings/secrets |
+| xx.ngrok.xx          | it modifies the local project settings/user secrets to have correct settings/secrets |
+| xx.devtunnels.ms     | it modifies the local project settings/user secrets to have correct settings/secrets |
+| localhost            | it modifies the local project settings/user secrets to have correct settings/secrets |
 
 > NOTE:
 > * This tool requires Azure CLI to be installed, logged and the correct subscription to be set.
-> * This needs to be run in a folder with a csproj.
+> * This needs to be run in a folder with the csproj which is hosting the bot.
 > * If you have an existing AD App in your csproj it in that will be used to create the bot registration.
 

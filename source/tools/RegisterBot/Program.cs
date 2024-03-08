@@ -54,7 +54,7 @@ class Script : CShell
         endpoint = endpoint
             ?? configuration.GetValue<string>("HostUri")
             ?? await GetEndpoint();
-        
+
         Uri uri = new Uri(endpoint);
         if (uri.AbsolutePath == "/")
         {
@@ -74,6 +74,13 @@ class Script : CShell
         // ==== Setting redirect Uris for {appId};
         Console.WriteLine($"\n==== getting application for {botName}/{appId}");
         dynamic application = await Cmd($"az ad app show --id {appId}").AsJson();
+
+        dynamic azureAD = new JObject();
+        azureAD.Instance = "https://login.microsoftonline.com";
+        azureAD.Domain = application.publisherDomain;
+        azureAD.TenantId = tenantId;
+        azureAD.CallbackPath = "/signin-oidc";
+        azureAD.ClientId = appId;
 
         // ===== Configuring oauth2PermissionScopes
         Console.WriteLine($"\n===== configuring OAuth2PermissionScopes for {appId}");
@@ -105,7 +112,7 @@ class Script : CShell
             var payload = new { api = new { oauth2PermissionScopes = oauth2PermissionScopes } };
             output = await AzRest("patch", $"https://graph.microsoft.com/beta/applications/{application.id}", payload);
         }
-    
+
 
         // ===== Configuring preAuthorizedApplications
         Console.WriteLine("\n===== Configuring preAuthorizedApplications");
@@ -254,26 +261,34 @@ class Script : CShell
             settings.Add($"MicrosoftAppType=MultiTenant");
             settings.Add($"MicrosoftAppId={appId}");
             settings.Add($"TeamsAppId={appId}");
-            settings.Add($"AzureAd:ClientId={appId}");
+            settings.Add($"AzureAD:Instance={azureAD.Instance}");
+            settings.Add($"AzureAD:Domain={azureAD.Domain}");
+            settings.Add($"AzureAD:TenantId={azureAD.TenantId}");
+            settings.Add($"AzureAD:CallbackPath={azureAD.CallbackPath}");
+            settings.Add($"AzureAD:ClientId={azureAD.ClientId}");
+            settings.Add($"AzureAD:ClientSecret={appPassword} ");
             settings.Add($"MicrosoftAppPassword={appPassword}");
 
-            settings.Add($"AzureAD:ClientSecret={appPassword} ");
             output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
         }
         else if (uri.Host.Contains(".ngrok") || uri.Host == "localhost" || uri.Host.Contains(".devtunnels"))
         {
             Console.WriteLine($"\n==== Updating appsettings.Development.json");
-            dynamic settings = JObject.Parse(File.ReadAllText(@"appsettings.Development.json"));
+            dynamic settings = null;
+            if (File.Exists("appsettings.Development.json"))
+            {
+                settings = JObject.Parse(File.ReadAllText("appsettings.Development.json"));
+            }
+            else
+            {
+                settings = new JObject();
+            }
             settings.BotName = botName;
             settings.HostUri = new Uri(uri, "/").AbsoluteUri;
             settings.MicrosoftAppType = "MultiTenant";
             settings.MicrosoftAppId = appId;
             settings.TeamsAppId = appId;
-            if (!((JObject)settings).ContainsKey("AzureAd"))
-            {
-                settings.AzureAd = new JObject();
-            }
-            settings.AzureAd.ClientId = appId;
+            settings.AzureAd = azureAD;
 
             File.WriteAllText("appsettings.Development.json", ((JObject)settings).ToString());
             await Cmd($"dotnet user-secrets set MicrosoftAppPassword {appPassword}").AsString();
@@ -445,7 +460,7 @@ class Script : CShell
         File.WriteAllText("body.json", body);
         var cmdText = $"az rest --method {verb} --uri {uri} --headers Content-Type=application/json --body @body.json";
         var result = await Cmd(cmdText).AsJson();
-        File.Delete("body.json"); 
+        File.Delete("body.json");
         return result;
     }
 }
