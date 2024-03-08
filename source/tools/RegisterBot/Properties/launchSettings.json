@@ -2,8 +2,8 @@
   "profiles": {
     "RegisterBot": {
       "commandName": "Project",
-      "commandLineArgs": "--endpoint https://9239-50-47-89-80.ngrok.io/api/cardapps",
-      "workingDirectory": "D:\\Source\\github\\crazor\\source\\samples\\CrazorBlazorDemo"
+      "commandLineArgs": "--endpoint https://ff2a-50-35-50-35.ngrok-free.app/api/cardapps",
+      "workingDirectory": "s:\\github\\Microflows\\source\\Microflows"
     }
   }
 }

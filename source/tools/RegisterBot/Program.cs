@@ -260,7 +260,7 @@ class Script : CShell
             settings.Add($"AzureAD:ClientSecret={appPassword} ");
             output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
         }
-        else if (uri.Host.EndsWith("ngrok.io") || uri.Host == "localhost" || uri.Host.EndsWith(".devtunnels.ms"))
+        else if (uri.Host.Contains("ngrok") || uri.Host == "localhost" || uri.Host.Contains("devtunnels"))
         {
             Console.WriteLine($"\n==== Updating appsettings.Development.json");
             dynamic settings = JObject.Parse(File.ReadAllText(@"appsettings.Development.json"));
