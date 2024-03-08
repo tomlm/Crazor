@@ -9,8 +9,8 @@
 		<ToolCommandName>RegisterBot</ToolCommandName>
 		<PackageOutputPath>./nupkg</PackageOutputPath>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>2.0.5</VersionPrefix>
-		<AssemblyVersion>2.0.5.0</AssemblyVersion>
+		<VersionPrefix>2.0.6</VersionPrefix>
+		<AssemblyVersion>2.0.6.0</AssemblyVersion>
 		<Description>Command line tool for registering a bot.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>

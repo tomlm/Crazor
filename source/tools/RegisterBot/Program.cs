@@ -169,7 +169,7 @@ class Script : CShell
 
         var redirectUris = new HashSet<string>(((JArray)application.web.redirectUris)
             .Select(el => (string)el.ToString())
-            .Where(domain => !domain.Contains(".ngrok.io") && !domain.EndsWith(".devtunnels.ms")));
+            .Where(domain => !domain.Contains(".ngrok") && !domain.Contains(".devtunnels")));
 
         redirectUris.Add($"https://{uri.Host}/signin-oidc");
         foreach (var domain in new string[] { "token.botframework.com", "europe.token.botframework.com", "unitedstates.token.botframework.com", "token.botframework.azure.us" })
@@ -260,7 +260,7 @@ class Script : CShell
             settings.Add($"AzureAD:ClientSecret={appPassword} ");
             output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
         }
-        else if (uri.Host.Contains("ngrok") || uri.Host == "localhost" || uri.Host.Contains("devtunnels"))
+        else if (uri.Host.Contains(".ngrok") || uri.Host == "localhost" || uri.Host.Contains(".devtunnels"))
         {
             Console.WriteLine($"\n==== Updating appsettings.Development.json");
             dynamic settings = JObject.Parse(File.ReadAllText(@"appsettings.Development.json"));
@@ -269,7 +269,11 @@ class Script : CShell
             settings.MicrosoftAppType = "MultiTenant";
             settings.MicrosoftAppId = appId;
             settings.TeamsAppId = appId;
-            settings["AzureAd"] = new JObject() { { "ClientId", appId } };
+            if (!((JObject)settings).ContainsKey("AzureAd"))
+            {
+                settings.AzureAd = new JObject();
+            }
+            settings.AzureAd.ClientId = appId;
 
             File.WriteAllText("appsettings.Development.json", ((JObject)settings).ToString());
             await Cmd($"dotnet user-secrets set MicrosoftAppPassword {appPassword}").AsString();
