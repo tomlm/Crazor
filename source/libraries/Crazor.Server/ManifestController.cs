@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 
 namespace Crazor.Server.Controllers
 {
@@ -20,19 +22,14 @@ namespace Crazor.Server.Controllers
     [AllowAnonymous]
     public class ManifestController : ControllerBase
     {
+        private readonly IWebHostEnvironment _environment;
         private FileContentResult _zip;
 
         public ManifestController(IConfiguration configuration, IWebHostEnvironment environment, CrazorServerOptions crazorServerOptions)
         {
+            this._environment = environment;
             var botIcon = configuration.GetValue<string>("BotIcon") ?? "/images/boticon.png";
-            var botIconPath = Path.Combine(environment.WebRootPath, botIcon.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
-            if (!Path.Exists(botIconPath))
-            {
-                botIconPath = Path.Combine(environment.WebRootPath, "images", "boticon.png");
-            }
-
-            var outline = configuration.GetValue<string>("OutlineIcon") ?? "/images/outline.png";
-            var outlinePath = Path.Combine(environment.WebRootPath, outline.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
+            var outlineIcon = configuration.GetValue<string>("OutlineIcon") ?? "/images/outline.png";
 
             using (var memoryStream = new MemoryStream())
             {
@@ -46,10 +43,10 @@ namespace Crazor.Server.Controllers
                             streamWriter.Write(JsonConvert.SerializeObject(crazorServerOptions.Manifest, Formatting.Indented));
                         }
                     }
-                    
 
-                    entry = archive.CreateEntry(Path.GetFileName(botIconPath).ToLower());
-                    using (var inputStream = System.IO.File.OpenRead(botIconPath))
+
+                    entry = archive.CreateEntry(Path.GetFileName(botIcon).ToLower());
+                    using (var inputStream = GetIconStream(botIcon))
                     {
                         using (var outputStream = entry.Open())
                         {
@@ -57,8 +54,8 @@ namespace Crazor.Server.Controllers
                         }
                     }
 
-                    entry = archive.CreateEntry(Path.GetFileName(outlinePath).ToLower());
-                    using (var inputStream = System.IO.File.OpenRead(outlinePath))
+                    entry = archive.CreateEntry(Path.GetFileName(outlineIcon).ToLower());
+                    using (var inputStream = GetIconStream(outlineIcon))
                     {
                         using (var outputStream = entry.Open())
                         {
@@ -71,6 +68,27 @@ namespace Crazor.Server.Controllers
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 _zip = new FileContentResult(memoryStream.GetBuffer(), "application/zip");
             }
+
+        }
+
+        private Stream? GetIconStream(string icon)
+        {
+            var iconPath = Path.Combine(_environment.WebRootPath, icon.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar));
+            if (System.IO.File.Exists(iconPath))
+                return System.IO.File.OpenRead(iconPath);
+
+            // look for crazor defaults.
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(asm=> !asm.FullName.StartsWith("Crazor.")))
+            {
+                var resourceName = $"{assembly.GetName().Name}.wwwroot{icon.Replace(Path.DirectorySeparatorChar, '.').Replace(Path.AltDirectorySeparatorChar, '.')}";
+                if (assembly.GetManifestResourceNames().Contains(resourceName))
+                {
+                    var stream = assembly.GetManifestResourceStream(resourceName);
+                    if (stream != null)
+                        return stream;
+                }
+            }
+            return null;
         }
 
         [HttpGet]

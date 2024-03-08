@@ -37,6 +37,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\images\outline.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="icon.png" Pack="True" PackagePath="\" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
