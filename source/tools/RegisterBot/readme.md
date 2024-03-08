@@ -1,17 +1,17 @@
-﻿RegisterBot Version 2.0.8
+﻿RegisterBot Version 2.0.9
 
 ```RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]```
 
 Creates or updates a bot registration for [botName] pointing to [endpoint] with teams channel and SSO enabled.
 This tool will:
 * Create or update the Microsoft Application for login
-** the OAuth redirect URIs
-** the App secrets
+	* the OAuth redirect URIs
+	* the App secrets
 * Create or update the bot registration
-** Register teams channel
-** Enable SSO
-** Set the messaging endpoint
-** Update the bot secrets
+    * Register teams channel
+	* Enable SSO
+	* Set the messaging endpoint
+	* Update the bot secrets
 
 | Argument                         | Description                                                                                   |
 | -------------------------------- | --------------------------------------------------------------------------------------------- |

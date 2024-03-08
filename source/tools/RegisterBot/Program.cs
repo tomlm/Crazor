@@ -274,15 +274,7 @@ class Script : CShell
         else if (uri.Host.Contains(".ngrok") || uri.Host == "localhost" || uri.Host.Contains(".devtunnels"))
         {
             Console.WriteLine($"\n==== Updating appsettings.Development.json");
-            dynamic settings = null;
-            if (File.Exists("appsettings.Development.json"))
-            {
-                settings = JObject.Parse(File.ReadAllText("appsettings.Development.json"));
-            }
-            else
-            {
-                settings = new JObject();
-            }
+            dynamic settings = JObject.Parse(File.ReadAllText("appsettings.Development.json"));
             settings.BotName = botName;
             settings.HostUri = new Uri(uri, "/").AbsoluteUri;
             settings.MicrosoftAppType = "MultiTenant";
@@ -349,9 +341,14 @@ class Script : CShell
             secretId = secret.Substring(iStart, iEnd - iStart);
         }
 
+        if (!File.Exists("appsettings.Development.json"))
+        {
+            File.WriteAllText("appsettings.Development.json", "{}");
+        }
+
         return new ConfigurationManager()
             .AddJsonFile(Path.Combine(CurrentFolder.FullName, "appsettings.json"))
-            .AddJsonFile(Path.Combine(CurrentFolder.FullName, "appsettings.development.json"))
+            .AddJsonFile(Path.Combine(CurrentFolder.FullName, "appsettings.Development.json"))
             .AddUserSecrets(secretId)
             .AddEnvironmentVariables()
             .Build();
