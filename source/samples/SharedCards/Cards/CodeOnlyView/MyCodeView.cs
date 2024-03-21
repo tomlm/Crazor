@@ -10,8 +10,12 @@ using Microsoft.Extensions.Configuration;
 namespace SharedCards.Cards.CodeOnlyView
 {
     /// <summary>
-    /// You don't have to use Razor for your view.  Simply derive from CardView and override BindCard() to return the AdaptiveCard
+    /// You don't have to use Razor for your view.  Simply derive from CardView and override RenderCardAsync() to return the AdaptiveCard
     /// </summary>
+    /// <remarks>
+    /// NOTE: The default implementation of OnAction is to use reflection to map incoming values to the the properties on the view. 
+    /// Then RenderCardAsync() is called to bind the view model to the AdaptiveCard.
+    /// </remarks>
     [CardRoute("MyCard")]
     public class MyCodeView : CustomCardView
     {
@@ -33,7 +37,11 @@ namespace SharedCards.Cards.CodeOnlyView
                 },
                 Actions = new List<AdaptiveAction>()
                 {
-                    new AdaptiveExecuteAction(){ Verb = nameof(OnIncrement), Title = "Increment"}
+                    new AdaptiveExecuteAction()
+                    {
+                        Verb = nameof(OnIncrement),
+                        Title = "Increment"
+                    }
                 }
             };
         }
