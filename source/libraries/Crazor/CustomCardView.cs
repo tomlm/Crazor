@@ -156,5 +156,66 @@ namespace Crazor
         {
             return this.OnInitializedAsync();
         }
+
+        #region Utility
+        /// <summary>
+        /// Add a banner message to be displayed to the viewer.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="style"></param>
+        public void AddBannerMessage(string text, AdaptiveContainerStyle style = AdaptiveContainerStyle.Default)
+        {
+            this.App!.AddBannerMessage(text, style);
+        }
+
+        /// <summary>
+        /// Navigate to card by name
+        /// </summary>
+        /// <param name="cardRoute">route of card </param>
+        /// <param name="model">model to pass</param>
+        public void ShowView(string cardRoute, object? model = null)
+        {
+            this.App!.ShowView(cardRoute, model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one 
+        /// </summary>
+        /// <param name="cardRoute">route of card</param>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView(string cardRoute, object? model = null)
+        {
+            this.App!.ReplaceView(cardRoute, model);
+        }
+
+        /// <summary>
+        /// Close the current card, optionalling returning the result
+        /// </summary>
+        /// <param name="result">the result to return to the current caller</param>
+        public void CloseView(object? result = null)
+        {
+            this.App?.CloseView(result);
+        }
+
+        /// <summary>
+        /// Cancel the current card, returning a message
+        /// </summary>
+        /// <param name="message">optional message to return.</param>
+        public void CancelView(string? message = null)
+        {
+            this.App?.CancelView(message);
+        }
+
+        /// <summary>
+        /// Change the taskmodule status
+        /// </summary>
+        /// <param name="status">action to take on closing</param>
+        public void CloseTaskModule(TaskModuleAction status)
+        {
+            this.App.CloseTaskModule(status);
+        }
+
+
+        #endregion
     }
 }
