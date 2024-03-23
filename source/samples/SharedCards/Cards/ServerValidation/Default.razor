@@ -26,7 +26,7 @@
         ShowView("Edit", Data);
     }
 
-    public override async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+    public override async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         if (cardResult.Success)

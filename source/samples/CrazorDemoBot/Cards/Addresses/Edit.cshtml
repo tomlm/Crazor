@@ -5,7 +5,7 @@
 @attribute [CardRoute("{Model.Id}/Edit")]
 @functions {
 
-    public void OnLoadRoute()
+    public void OnLoad()
     {
         ArgumentNullException.ThrowIfNull(Model.Id);
         this.Model = this.App?.Addresses.SingleOrDefault(a => a.Id == Model.Id)! ?? throw new CardRouteNotFoundException($"Address {Model.Id} not found");

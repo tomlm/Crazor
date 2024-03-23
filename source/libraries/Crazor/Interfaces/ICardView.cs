@@ -73,7 +73,7 @@ namespace Crazor.Interfaces
         /// <remarks>
         /// This will be called only once to initialize the instance data of the cardview.
         /// </remarks>
-        Task OnInitializedAsync();
+        Task OnInitializedAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// OnActionAsync() - Called to process an incoming verb action.
@@ -97,7 +97,7 @@ namespace Crazor.Interfaces
         /// <param name="cardResult">the card result</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>task</returns>
-        Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken);
+        Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken);
 
         /// <summary>
         /// Called to search for choices.
@@ -106,6 +106,6 @@ namespace Crazor.Interfaces
         /// <param name="services"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken);
+        Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken);
     }
 }

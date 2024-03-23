@@ -215,7 +215,7 @@ namespace Crazor
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
-                    Verb = Constants.LOADROUTE_VERB,
+                    Verb = Constants.LOAD_VERB,
                     Data = new JObject() { { Constants.ROUTE_KEY, route } }
                 }
             };

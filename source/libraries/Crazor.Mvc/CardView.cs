@@ -91,26 +91,7 @@ namespace Crazor.Mvc
 
         #region ---- Core Methods -----
 
-        /// <summary>
-        /// OnInvokeActionAsync() - Called to process an incoming verb action.
-        /// </summary>
-        /// <remarks>
-        /// The default implementation uses reflection to find the name of the method and invoke it.
-        /// </remarks>
-        /// <param name="action">the action to process</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
-        {
-            await this.App.OnActionReflectionAsync(action, cancellationToken);
-        }
-
-        /// <summary>
-        /// Bind View to an adaptive card
-        /// </summary>
-        /// <remarks>Override this to do custom binding to the adaptive card.</remarks>
-        /// <param name="cancellationToken">cancellationToken</param>
-        /// <returns>bound card</returns>
+        /// <inheritdoc/>
         public virtual async Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
             this.IsPreview = isPreview;
@@ -191,59 +172,46 @@ namespace Crazor.Mvc
         #endregion -----
 
         #region  ----- Action Lifecycle Methods ----
-        /// <summary>
-        /// OnInitialized() - Initalize members
-        /// </summary>
-        /// <remarks>
-        /// This will be called only once to initialize the instance data of the cardview.
-        /// This is effectively like a constructor, with no async support.  If you
-        /// want to look up data to look at OnLoadCardAsync
-        /// </remarks>
-        protected virtual void OnInitialized()
+
+        /// <inheritdoc/>
+        public virtual void OnInitialized()
         {
         }
 
-        /// <summary>
-        /// OnInitialized() - Initalize members
-        /// </summary>
-        /// <remarks>
-        /// This will be called only once to initialize the instance data of the cardview.
-        /// This is effectively like a constructor, with no async support.  If you
-        /// want to look up data to look at OnLoadCardAsync
-        /// </remarks>
-        protected virtual Task OnInitializedAsync()
+        /// <inheritdoc/>
+        public virtual async Task OnInitializedAsync(CancellationToken cancellationToken)
         {
             OnInitialized();
-            return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// OnResumeView() - Called when a CardResult has returned back to this view
-        /// </summary>
-        /// <remarks>
-        /// Override this to handle the result that is returned to the card from a child view.
-        /// When a view is resumed because a child view has completed this method will
-        /// be called giving you an opportunity to do something with the result of the child view.
-        /// </remarks>
-        /// <param name="cardResult">the card result</param>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns>task</returns>
-        public virtual async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
-        {
             await Task.CompletedTask;
         }
 
-
-        /// <summary>
-        /// Override this to provide dynamic choices for Input.ChoiceSet
-        /// </summary>
-        /// <param name="search">request</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>array of choices</returns>
-        public virtual async Task<AdaptiveChoice[]> OnSearchChoices(SearchInvoke search, CancellationToken cancellationToken)
+        /// <inheritdoc/>
+        public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
+            await this.App.OnActionReflectionAsync(action, cancellationToken);
+        }
+
+        public virtual void OnResumeView(CardResult cardResult)
+        {
+        }
+
+        /// <inheritdoc/>
+        public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+        {
+            OnResumeView(cardResult);
             await Task.CompletedTask;
+        }
+
+        public virtual AdaptiveChoice[] OnSearchChoices(SearchInvoke search)
+        {
             return Array.Empty<AdaptiveChoice>();
+        }
+
+        /// <inheritdoc/>
+        public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+            return OnSearchChoices(search);
         }
         #endregion
 
@@ -304,6 +272,8 @@ namespace Crazor.Mvc
         {
             this.App.CloseTaskModule(status);
         }
+        #endregion
+
 
         public IEnumerable<PropertyInfo> GetPersistentProperties()
         {
@@ -359,12 +329,6 @@ namespace Crazor.Mvc
                 this.ViewContext.ViewData.Model = model;
             }
         }
-
-        Task ICardView.OnInitializedAsync()
-        {
-            return this.OnInitializedAsync();
-        }
-        #endregion
     }
 
     public class CardView : CardViewBase<CardApp>

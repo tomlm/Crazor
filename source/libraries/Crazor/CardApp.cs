@@ -246,7 +246,7 @@ namespace Crazor
                         {
                             // because we are resuming we don't need to execute again unless
                             // the resumption causes it to happen.
-                            await this.CurrentView.OnResumeView(LastResult, cancellationToken);
+                            await this.CurrentView.OnResumeViewAsync(LastResult, cancellationToken);
                         }
 
                         if (this.Route == currentRoute)
@@ -358,7 +358,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(CurrentView);
             Diag.Trace.WriteLine($"------- OnSearch({searchInvoke.Dataset}, {searchInvoke.QueryText})-----");
 
-            var choices = await CurrentView.OnSearchChoices(searchInvoke, cancellationToken);
+            var choices = await CurrentView.OnSearchChoicesAsync(searchInvoke, cancellationToken);
 
             return new AdaptiveCardInvokeResponse()
             {
@@ -401,7 +401,7 @@ namespace Crazor
             {
                 var cardViewState = new CardViewState(newRoute.Route, model);
                 CallStack.Insert(0, cardViewState);
-                Action!.Verb = Constants.LOADROUTE_VERB;
+                Action!.Verb = Constants.LOAD_VERB;
                 Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
                 SetCurrentView(cardViewState);
             }
@@ -455,7 +455,7 @@ namespace Crazor
             {
                 var cardState = new CardViewState(route, model);
                 this.CallStack[0] = cardState;
-                Action!.Verb = Constants.LOADROUTE_VERB;
+                Action!.Verb = Constants.LOAD_VERB;
                 Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
                 SetCurrentView(cardState);
             }
@@ -483,7 +483,7 @@ namespace Crazor
                     throw new Exception("No default route!");
             }
 
-            Action!.Verb = Constants.LOADROUTE_VERB;
+            Action!.Verb = Constants.LOAD_VERB;
             Action!.Data = new JObject() { { Constants.ROUTE_KEY, this.CallStack[0].Route } };
             SetCurrentView(this.CallStack[0]);
         }
@@ -638,7 +638,7 @@ namespace Crazor
                 }
             }
 
-            if (Action?.Verb == Constants.LOADROUTE_VERB)
+            if (Action?.Verb == Constants.LOAD_VERB)
             {
                 var newRoute = ((JObject)Action.Data)[Constants.ROUTE_KEY].ToString();
 
@@ -764,7 +764,7 @@ namespace Crazor
             BindProperties(data);
 
             MethodInfo? verbMethod = null;
-            if (action.Verb == Constants.LOADROUTE_VERB)
+            if (action.Verb == Constants.LOAD_VERB)
             {
                 // merge in route and query data since we are in a LOAD ROUTE situation.
                 if (this.Route.RouteData != null)
@@ -808,7 +808,7 @@ namespace Crazor
                 if (this.CallStack[0].Initialized == false)
                 {
                     // call hook to give cardview opportunity to process data.
-                    await CurrentView.OnInitializedAsync();
+                    await CurrentView.OnInitializedAsync(cancellationToken);
                     this.CallStack[0].Initialized = true;
                 }
 
@@ -844,7 +844,7 @@ namespace Crazor
                 if (this.CallStack[0].Initialized == false)
                 {
                     // call hook to give cardview opportunity to process data.
-                    await CurrentView.OnInitializedAsync();
+                    await CurrentView.OnInitializedAsync(cancellationToken);
                     this.CallStack[0].Initialized = true;
                 }
             }
@@ -1031,7 +1031,7 @@ namespace Crazor
                     refresh = new AdaptiveExecuteAction()
                     {
                         Title = "Refresh",
-                        Verb = Constants.LOADROUTE_VERB,
+                        Verb = Constants.LOAD_VERB,
                         IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = new JObject()

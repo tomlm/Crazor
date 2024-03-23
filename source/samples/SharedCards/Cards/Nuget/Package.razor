@@ -6,7 +6,7 @@
 @attribute [CardRoute("packages/{Model.Id}")]
 @code
 {
-    public async Task OnLoadRoute(CancellationToken cancellationToken)
+    public async Task OnLoad(CancellationToken cancellationToken)
         => this.Model = await App.GetNugetPackage(Model.Id, cancellationToken);
 }
 

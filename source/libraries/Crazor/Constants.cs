@@ -15,7 +15,7 @@ namespace Crazor
         // well known verbs
         public const string CANCEL_VERB = "OnCancel";
         public const string OK_VERB = "OnOK";
-        public const string LOADROUTE_VERB = "OnLoadRoute";
+        public const string LOAD_VERB = "OnLoad";
         public const string SHOWVIEW_VERB = "OnShowView";
         public const string ONEDIT_VERB = "OnEdit";
 

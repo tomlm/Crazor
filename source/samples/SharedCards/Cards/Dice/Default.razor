@@ -14,7 +14,7 @@
             ShowView("Dice");
     }
 
-    public override Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+    public override Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
         if (App.DiceName == null)
             ShowView("Settings");

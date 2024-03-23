@@ -58,8 +58,7 @@
     [StringLength(maximumLength: 5, ErrorMessage = "Word must be 5 chars")]
     public string Guess { get; set; }
 
-
-    protected override void OnInitialized()
+    public override void OnInitialized()
     {
         // First person to play the game sets Todays word for the world.
         if (App.TodaysWord == null)

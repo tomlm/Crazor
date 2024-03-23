@@ -1,11 +1,8 @@
-﻿//#define XML_SERIALIZATION
-// Copyright (c) Microsoft Corporation. All rights reserved.
-//  Licensed under the MIT License.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 using Crazor.AdaptiveCards;
 using Crazor.Attributes;
-using Crazor.Blazor.ComponentRenderer;
-using Crazor.Blazor.Components;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Schema;
@@ -13,26 +10,28 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-using System.Xml;
+using System.Text.Json.Serialization;
 
-namespace Crazor.Blazor
+namespace Crazor
 {
-    public abstract class CardViewBase<AppT> : ComponentBase, ICardView
+    /// <summary>
+    /// CustomCardView class, implement OnRenderCard() to do custom rendering
+    /// </summary>
+    public abstract class CustomCardViewBase<AppT> : ICardView
         where AppT : CardApp
     {
-        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CardViewBase`1", "CardView", "CardView`1", "CardView`2", "ComponentBase" };
+        private static HashSet<string> ignorePropertiesOnTypes = new HashSet<string>() { "CustomCardViewBase`1", "CustomCardView", "CustomCardView`1", "CustomCardView`2" };
 
+        public CustomCardViewBase()
+        {
+        }
 
-        [Inject]
-        public IServiceProvider? ServiceProvider { get; set; }
-
-        /// <summary>
-        /// Name of the CardView
-        /// </summary>
+        /// <inheritdoc/>
         public string Name => this.GetType().Name;
 
         public ClaimsPrincipal? User => App.Context.User!;
 
+        /// <inheritdoc/>
         /// <summary>
         /// App for this CardView
         /// </summary>
@@ -43,16 +42,12 @@ namespace Crazor.Blazor
         /// </summary>
         CardApp ICardView.App { get => App; set => App = (AppT)value; }
 
-        /// <summary>
-        /// True if the model and properites on the view have passed validation
-        /// </summary>
-        public bool IsModelValid { get; set; } = true;
 
-        /// <summary>
-        /// Validation Errors for current input to the cardview.
-        /// </summary>
-        /// <remarks>The key is the id of the input control, the hashset is the error messages.</remarks>
-        public Dictionary<string, HashSet<string>> ValidationErrors { get; set; } = new Dictionary<string, HashSet<string>>();
+        /// <inheritdoc/>
+        public Dictionary<string, HashSet<string>> ValidationErrors => new Dictionary<string, HashSet<string>>();
+
+        /// <inheritdoc/>
+        public bool IsModelValid { get; set; }
 
         /// <summary>
         /// True if the card is inside a taskmodule
@@ -64,92 +59,19 @@ namespace Crazor.Blazor
         /// </summary>
         public bool IsPreview { get; set; }
 
-        #region ---- Core Methods -----
-
-        public override Task SetParametersAsync(ParameterView parameters)
+        /// <inheritdoc/>
+        public virtual object? GetModel()
         {
-            // we do our own parameter setting because base class will reject any properties 
-            // without [Parameter] on them, but we want to pass all of our state through to the view
-            // that's being rendered
-            foreach (var parm in parameters)
-            {
-                this.SetTargetProperty(this.GetType().GetProperty(parm.Name), parm.Value);
-            }
-            this.StateHasChanged();
-            return Task.CompletedTask;
+            return null;
         }
 
         /// <inheritdoc/>
-        public virtual async Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+        public virtual void SetModel(object model)
         {
-            IsPreview = isPreview;
 
-            string xml = string.Empty;
-            try
-            {
-                // Create a RenderFragment from the component
-                var ctx = new RenderingContext(ServiceProvider);
-                var renderer = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
-#if XML_SERIALIZATION
-                xml = rendered.Markup;
-
-                if (!String.IsNullOrWhiteSpace(xml))
-                {
-                    if (!xml.StartsWith("<?xml"))
-                    {
-                        xml = $"<?xml version=\"1.0\" encoding=\"utf-16\"?>\n{xml}";
-                    }
-                    // File.WriteAllText(@"c:\scratch\foo.xml", xml);
-                    System.Diagnostics.Debug.WriteLine(xml);
-
-                    var reader = XmlReader.Create(new StringReader(xml));
-                    var card = (AdaptiveCard?)AdaptiveCard.XmlSerializer.Deserialize(reader);
-                    if (System.Diagnostics.Debugger.IsAttached)
-                    {
-                        System.Diagnostics.Debug.WriteLine(card.ToXml());
-                    }
-                    return card;
-                }
-                else
-                {
-                    // no card defined in markup
-                    return new AdaptiveCard("1.5");
-                }
-#else
-                // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
-                // which has the adaptive card already instantiated in memory and ready to go.
-                var adaptiveCard = renderer.GetComponent<Components.Adaptive.Card>().Item;
-                if (System.Diagnostics.Debugger.IsAttached)
-                {
-                    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToXml());
-                    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToJson());
-                }
-                return adaptiveCard;
-#endif
-            }
-            catch (Exception err)
-            {
-                var xerr = err as XmlException ?? err.InnerException as XmlException;
-                if (xerr != null)
-                {
-                    var line = String.Join("\n", xml.Trim() + "\n\n".Split("\n").Skip(xerr.LineNumber - 2).Take(2));
-                    throw new XmlException($"{xerr.Message}\n{line}", xerr.InnerException, xerr.LineNumber, xerr.LinePosition);
-                }
-                else
-                {
-                    throw;
-                }
-            }
         }
 
-        /// <summary>
-        /// GetRoute() - returns custom subpath for the view
-        /// </summary>
-        /// <remarks>
-        /// Override this to define custom subroute
-        /// The default is to use reflection and [Route] to calculate the route
-        /// </remarks>
-        /// <returns>relative path to the card for deep linking</returns>
+        /// <inheritdoc/>
         public virtual string GetRoute()
         {
             var routeAttr = this.GetType().GetCustomAttribute<CardRouteAttribute>();
@@ -172,7 +94,11 @@ namespace Crazor.Blazor
                 return (this.Name != Constants.DEFAULT_VIEW) ? this.Name : String.Empty;
             }
         }
-        #endregion -----
+
+
+        /// <inheritdoc/>
+        public abstract Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
+
 
         #region  ----- Action Lifecycle Methods ----
 
@@ -277,7 +203,8 @@ namespace Crazor.Blazor
         }
         #endregion
 
-        public IEnumerable<PropertyInfo> GetPersistentProperties()
+        /// <inheritdoc/>
+        public virtual IEnumerable<PropertyInfo> GetPersistentProperties()
         {
             return this.GetType().GetProperties().Where(propertyInfo =>
             {
@@ -290,6 +217,9 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
                     return false;
 
+                if (propertyInfo.GetCustomAttribute<JsonIgnoreAttribute>() != null)
+                    return false;
+
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                     return false;
 
@@ -301,7 +231,8 @@ namespace Crazor.Blazor
             }).ToList();
         }
 
-        public IEnumerable<PropertyInfo> GetBindableProperties()
+        /// <inheritdoc/>
+        public virtual IEnumerable<PropertyInfo> GetBindableProperties()
         {
             return this.GetType().GetProperties().Where(propertyInfo =>
             {
@@ -314,45 +245,31 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
                     return false;
 
+                if (propertyInfo.GetCustomAttribute<JsonIgnoreAttribute>() != null)
+                    return false;
+
                 if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
                     return false;
 
                 return true;
             }).ToList();
         }
-
-        public virtual object? GetModel()
-        {
-            return null;
-        }
-
-        public virtual void SetModel(object? model)
-        {
-
-        }
-
-        protected override Task OnInitializedAsync()
-        {
-            OnInitialized();
-            return Task.CompletedTask;
-        }
-
     }
 
-    public class CardView : CardViewBase<CardApp>
+    public abstract class CustomCardView : CustomCardViewBase<CardApp>
     {
     }
 
-    public class CardView<AppT> : CardViewBase<AppT>
+    public abstract class CustomCardView<AppT> : CustomCardViewBase<AppT>
         where AppT : CardApp
     {
     }
 
-    public class CardView<AppT, ModelT> : CardViewBase<AppT>
+    public abstract class CustomCardView<AppT, ModelT> : CustomCardViewBase<AppT>
         where AppT : CardApp
         where ModelT : class
     {
-        public CardView()
+        public CustomCardView()
         {
             if (typeof(ModelT).IsAssignableTo(typeof(CardApp)))
             {

@@ -9,7 +9,7 @@ namespace Crazor.Mvc.Tests
 
     public class Cards_Route_Default : CardView
     {
-        public void OnLoadRoute()
+        public void OnLoad()
         {
         }
     }
@@ -21,7 +21,7 @@ namespace Crazor.Mvc.Tests
     [CardRoute("{value}")]
     public class Cards_Route_Path1 : CardView
     {
-        public void OnLoadRoute(string value)
+        public void OnLoad(string value)
         {
             Assert.AreEqual("test", value);
         }
@@ -31,7 +31,7 @@ namespace Crazor.Mvc.Tests
     [CardRoute("resource/{resourceId}")]
     public class Cards_Route_Path2 : CardView
     {
-        public void OnLoadRoute(string resourceId)
+        public void OnLoad(string resourceId)
         {
             Assert.AreEqual("12345", resourceId);
         }
@@ -40,7 +40,7 @@ namespace Crazor.Mvc.Tests
     [CardRoute("resource/{value}/sub/{subvalue}")]
     public class Cards_Route_Path3 : CardView
     {
-        public void OnLoadRoute(string value, string subvalue)
+        public void OnLoad(string value, string subvalue)
         {
             Assert.AreEqual("1234", value);
             Assert.AreEqual("5678", subvalue);

@@ -8,7 +8,7 @@
 {
     public string Title { get; set; }
 
-    public void OnLoadRoute(string resource, string name)
+    public void OnLoad(string resource, string name)
     {
         Title = $"{resource}-{name}";
     }
