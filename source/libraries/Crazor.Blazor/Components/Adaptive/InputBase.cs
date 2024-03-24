@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Crazor.Blazor.Components.Adaptive
 {
-    public class Input<AdaptiveInputT> : ElementComponent<AdaptiveInputT>
+    public class InputBase<AdaptiveInputT> : ElementComponent<AdaptiveInputT>
         where AdaptiveInputT : AdaptiveInput
     {
         [CascadingParameter(Name = "CardView")]

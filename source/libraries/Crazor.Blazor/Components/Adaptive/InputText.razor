@@ -4,7 +4,7 @@
 @using System.ComponentModel;
 @using System.ComponentModel.DataAnnotations;
 @using System.Reflection;
-@inherits Input<AdaptiveTextInput>
+@inherits InputBase<AdaptiveTextInput>
 
 <ac:Input.Text @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>

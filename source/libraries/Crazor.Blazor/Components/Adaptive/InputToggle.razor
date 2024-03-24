@@ -2,7 +2,7 @@
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
-@inherits Input<AdaptiveToggleInput>
+@inherits InputBase<AdaptiveToggleInput>
 
 <ac:Input.Toggle @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>

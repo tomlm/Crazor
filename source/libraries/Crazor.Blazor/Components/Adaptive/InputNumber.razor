@@ -4,7 +4,7 @@
 @using System.ComponentModel;
 @using System.ComponentModel.DataAnnotations;
 @using System.Reflection;
-@inherits Input<AdaptiveNumberInput>
+@inherits InputBase<AdaptiveNumberInput>
 
 <ac:Input.Number @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>

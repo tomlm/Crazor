@@ -4,7 +4,7 @@
 @using System.ComponentModel;
 @using System.Reflection;
 @using System.Text;
-@inherits Input<AdaptiveChoiceSetInput>
+@inherits InputBase<AdaptiveChoiceSetInput>
 
 <ac:Input.ChoiceSet @attributes="@GetAttributes()">
     @if (Item.Choices.Any())

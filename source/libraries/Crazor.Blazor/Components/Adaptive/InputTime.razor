@@ -4,7 +4,7 @@
 @using System.ComponentModel;
 @using System.ComponentModel.DataAnnotations;
 @using System.Reflection;
-@inherits Input<AdaptiveTimeInput>
+@inherits InputBase<AdaptiveTimeInput>
 
 <ac:Input.Time @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
