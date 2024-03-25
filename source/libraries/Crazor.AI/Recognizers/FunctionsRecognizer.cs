@@ -107,11 +107,11 @@ namespace Crazor.AI.Recognizers
                     var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                     cts.CancelAfter(timeout.HasValue ? timeout.Value.Milliseconds : 5 * 1000);
 
-                    if (model.Contains("chat"))
-                    {
+                    //if (model.Contains("chat"))
+                    //{
                         var options = new ChatCompletionsOptions()
                         {
-                            DeploymentName = "Production",
+                            DeploymentName = "gpt-3.5-turbo", // Use DeploymentName for "model" with non-Azure clients
                             Temperature = temp,
                             MaxTokens = maxTokens,
                             NucleusSamplingFactor = (float)0.0,
@@ -140,20 +140,20 @@ namespace Crazor.AI.Recognizers
                             if (chatText.StartsWith("user"))
                             {
                                 int iEnd = chatText.IndexOf(IM_END);
-                                message = new ChatRequestUserMessage(chatText.Substring("user".Length, iEnd));
+                                message = new ChatRequestUserMessage(chatText.Substring("user".Length, iEnd - "user".Length));
                             }
                             else if (chatText.StartsWith("assistant"))
                             {
                                 int iEnd = chatText.IndexOf(IM_END);
                                 if (iEnd > 0)
-                                    message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length, iEnd));
+                                    message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length, iEnd - "assistant".Length));
                                 else
                                     message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length));
                             }
                             else if (chatText.StartsWith("system"))
                             {
                                 int iEnd = chatText.IndexOf(IM_END);
-                                message = new ChatRequestSystemMessage(chatText.Substring("system".Length, iEnd));
+                                message = new ChatRequestSystemMessage(chatText.Substring("system".Length, iEnd - "system".Length));
                             }
 
                             options.Messages.Add(message);
@@ -161,34 +161,34 @@ namespace Crazor.AI.Recognizers
 
                         var response = await openAIClient.GetChatCompletionsAsync(/*model, */options, cts.Token);
                         return response.Value.Choices.FirstOrDefault()?.Message.Content;
-                    }
-                    else
-                    {
-                        var options = new CompletionsOptions()
-                        {
-                            DeploymentName = "Production",
-                            Temperature = temp,
-                            MaxTokens = maxTokens,
-                            FrequencyPenalty = frequencyPenalty,
-                            PresencePenalty = presencePenalty,
-                            User = Guid.NewGuid().ToString("n")
-                        };
-                        if (stopWords != null)
-                        {
-                            foreach (var stopWord in stopWords)
-                            {
-                                options.StopSequences.Add(stopWord);
-                            }
-                        }
-                        else
-                        {
-                            options.StopSequences.Add(STOP);
-                        }
-                        Debug.WriteLine($"---> STOPWORDS: [{string.Join(",", options.StopSequences)}]");
-                        options.Prompts.Add(prompt);
-                        var responseWithoutStream = await openAIClient.GetCompletionsAsync(options, cts.Token);
-                        return responseWithoutStream.Value.Choices.FirstOrDefault()?.Text;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    var options = new CompletionsOptions()
+                    //    {
+                    //        DeploymentName = model,
+                    //        Temperature = temp,
+                    //        MaxTokens = maxTokens,
+                    //        FrequencyPenalty = frequencyPenalty,
+                    //        PresencePenalty = presencePenalty,
+                    //        User = Guid.NewGuid().ToString("n")
+                    //    };
+                    //    if (stopWords != null)
+                    //    {
+                    //        foreach (var stopWord in stopWords)
+                    //        {
+                    //            options.StopSequences.Add(stopWord);
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        options.StopSequences.Add(STOP);
+                    //    }
+                    //    Debug.WriteLine($"---> STOPWORDS: [{string.Join(",", options.StopSequences)}]");
+                    //    options.Prompts.Add(prompt);
+                    //    var responseWithoutStream = await openAIClient.GetCompletionsAsync(options, cts.Token);
+                    //    return responseWithoutStream.Value.Choices.FirstOrDefault()?.Text;
+                    //}
                 }
                 catch (Exception err)
                 {

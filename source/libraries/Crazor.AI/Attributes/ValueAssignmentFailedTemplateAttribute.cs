@@ -14,8 +14,13 @@ namespace Crazor.AI.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class ValueAssignmentFailedTemplateAttribute : ActionTemplateAttribute
     {
-        public ValueAssignmentFailedTemplateAttribute(string? template = null)
-            : base(template ?? "Failed to set {property} to {value}: {errors}")
+        public ValueAssignmentFailedTemplateAttribute()
+            : base("Failed to set ${property} to ${value}: ${errors}")
+        {
+        }
+
+        public ValueAssignmentFailedTemplateAttribute(string template)
+            : base(template)
         {
         }
     }

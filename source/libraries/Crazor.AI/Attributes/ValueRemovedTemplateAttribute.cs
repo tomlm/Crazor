@@ -14,7 +14,12 @@ namespace Crazor.AI.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class ValueRemovedTemplateAttribute : ActionTemplateAttribute
     {
-        public ValueRemovedTemplateAttribute(string? template = "Removed {value} from {property}.")
+        public ValueRemovedTemplateAttribute()
+            : base("Removed ${value} from ${property}.")
+        {
+        }
+
+        public ValueRemovedTemplateAttribute(string template)
             : base(template)
         {
         }

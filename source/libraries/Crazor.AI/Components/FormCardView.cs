@@ -76,7 +76,7 @@ namespace Crazor.AI
             if (!String.IsNullOrEmpty(copilotText))
             {
                 // recognize...
-                var result = await Recognizer.RecognizeAsync("gpt-3.5-turbo", copilotText, cancellationToken);
+                var result = await Recognizer.RecognizeAsync(this.Model, copilotText, cancellationToken);
                 var (intent, score) = result.GetTopScoringIntent();
 
                 if (intent == FunctionsRecognizer.FUNCTIONS_INTENT)
@@ -244,12 +244,12 @@ namespace Crazor.AI
                 collection.Add(value);
 
                 // add ADDED(value) response
-                AddBannerMessage(BindPropertyTemplate<ValueAddedTemplateAttribute>(property));
+                AddBannerMessage(BindPropertyTemplate<ValueAddedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
                 return;
             }
 
             // get old value if any
-            var oldValue = ObjectPath.GetPathValue<object?>(this.Model, property);
+            ObjectPath.TryGetPathValue<object?>(this.Model, property, out var oldValue);
 
             // if it changed
             if (string.Compare(value?.ToString(), oldValue?.ToString(), ignoreCase: true) != 0)
@@ -261,13 +261,12 @@ namespace Crazor.AI
                 if (oldValue != null)
                 {
                     // add CHANGED(value) response
-                    AddBannerMessage(BindPropertyTemplate<ValueChangedTemplateAttribute>(property, new KeyValuePair<string, object?>("oldValue", oldValue)));
-                    AddBannerMessage(BindPropertyTemplate<ValueAddedTemplateAttribute>(property));
+                    AddBannerMessage(BindPropertyTemplate<ValueChangedTemplateAttribute>(property, new KeyValuePair<string, object?>("oldValue", oldValue)), AdaptiveContainerStyle.Good);
                 }
                 else
                 {
                     // add ASSIGNED(value) response
-                    AddBannerMessage(BindPropertyTemplate<ValueAssignedTemplateAttribute>(property));
+                    AddBannerMessage(BindPropertyTemplate<ValueAssignedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
                 }
             }
             return;
@@ -306,7 +305,7 @@ namespace Crazor.AI
                 else
                 {
                     ObjectPath.RemovePathValue(this.Model, property);
-                    AddBannerMessage(BindPropertyTemplate<ValueClearedTemplateAttribute>(property));
+                    AddBannerMessage(BindPropertyTemplate<ValueClearedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
                 }
             }
         }
@@ -336,7 +335,7 @@ namespace Crazor.AI
                 collection.Remove(value);
 
                 // add ADDED(value) response
-                AddBannerMessage(BindPropertyTemplate<ValueRemovedTemplateAttribute>(property));
+                AddBannerMessage(BindPropertyTemplate<ValueRemovedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
                 return;
             }
         }
@@ -570,25 +569,32 @@ namespace Crazor.AI
         /// <param name="alternatives">collection of alternatives to bind to</param>
         /// <param name="args"></param>
         /// <returns></returns>
-        protected string BindPropertyTemplate<TextResponseTemplateAttributeT>(string propertyName, params KeyValuePair<string, object?>[] args)
+        protected string BindPropertyTemplate<TextResponseTemplateAttributeT>(string property, params KeyValuePair<string, object?>[] args)
             where TextResponseTemplateAttributeT : ActionTemplateAttribute
         {
-            var propertyInfo = this.Model.GetType().GetProperty(propertyName);
+            var propertyInfo = this.Model.GetType().GetProperty(property);
             var attributes = propertyInfo.GetCustomAttributes(typeof(TextResponseTemplateAttributeT), true)?.ToList();
+            IResponseTemplate responseTemplate;
             if (attributes != null && attributes.Any())
             {
-                var responseTemplate = (IResponseTemplate)attributes[_rnd.Next(attributes.Count - 1)];
-
-                Dictionary<string, object?> data = new Dictionary<string, object?>(args)
-                {
-                    { "propertyName", propertyName },
-                    { "value", propertyInfo.GetValue(this) },
-                    { "form", this },
-                    { "model", this.GetModel() }
-                };
-                return responseTemplate.BindTemplate(data);
+                responseTemplate = (IResponseTemplate)attributes[_rnd.Next(attributes.Count - 1)];
             }
-            throw new ArgumentNullException($"Couldn't find attribute of {typeof(TextResponseTemplateAttributeT).Name} on property {propertyName}");
+            else
+            {
+                responseTemplate = Activator.CreateInstance<TextResponseTemplateAttributeT>();
+            }
+
+            var value = propertyInfo.GetValue(this.Model);
+            Dictionary<string, object?> data = new Dictionary<string, object?>(args)
+            {
+                { "$property", property },
+                { "$value", propertyInfo.GetValue(this.Model) },
+                { "property", this.GetPropertyLabel(property) },
+                { "value", this.GetPropertyValueFormated(property, value) },
+                { "form", this },
+                { "model", this.GetModel() }
+            };
+            return responseTemplate.BindTemplate(data);
         }
 
         /// <summary>
@@ -898,14 +904,14 @@ namespace Crazor.AI
             }
             if (result == null)
             {
-                return (null, $"{value} is not valid for {GetDisplayForProperty(property)}");
+                return (null, $"{value} is not valid for {GetPropertyLabel(property)}");
             }
 
             IList<ValidationError> errors = new List<ValidationError>();
             var isValid = JToken.FromObject(result).IsValid(pschema, out errors);
             if (!isValid)
             {
-                return (null, $"{value} is not valid for {GetDisplayForProperty(property)} because: {string.Join(',', errors.Select(e => e.Message))}");
+                return (null, $"{value} is not valid for {GetPropertyLabel(property)} because: {string.Join(',', errors.Select(e => e.Message))}");
             }
 
             if (pschema.Type == JSchemaType.String && pschema.Format == "phone")
@@ -913,7 +919,7 @@ namespace Crazor.AI
                 var model = Microsoft.Recognizers.Text.Sequence.SequenceRecognizer.RecognizePhoneNumber(result?.ToString(), "en");
                 if (model.Count != 1)
                 {
-                    return (null, $"{value} is not valid for {GetDisplayForProperty(property)}");
+                    return (null, $"{value} is not valid for {GetPropertyLabel(property)}");
                 }
                 else
                 {
@@ -1032,7 +1038,7 @@ namespace Crazor.AI
             return result;
         }
 
-        protected string GetDisplayForProperty(string property)
+        protected string GetPropertyLabel(string property)
         {
             var prop = Schema.Properties[property];
             if (prop.ExtensionData.TryGetValue("label", out var label))
@@ -1064,32 +1070,35 @@ namespace Crazor.AI
             return prop ?? property;
         }
 
-        protected string GetDisplayForPropertyValue(JSchema property, object? value)
+        protected string GetPropertyValueFormated(string propertyName, object? value)
         {
-            if (property.Type == JSchemaType.Array && property.Items != null)
+            if (this.Schema.Properties.TryGetValue(propertyName, out var property))
             {
-                var item = property.Items.FirstOrDefault();
-                if (item != null && item.Type == JSchemaType.String && item.Enum != null)
+                if (property.Type == JSchemaType.Array && property.Items != null)
                 {
-                    if (!(value is JArray))
-                        value = new JArray() { value };
-
-                    return string.Join(", ", JArray.FromObject(value).Select(v =>
+                    var item = property.Items.FirstOrDefault();
+                    if (item != null && item.Type == JSchemaType.String && item.Enum != null)
                     {
-                        if (item.ExtensionData.TryGetValue("EnumLabels", out var enumLabels))
+                        if (!(value is JArray))
+                            value = new JArray() { value };
+
+                        return string.Join(", ", JArray.FromObject(value).Select(v =>
                         {
-                            var labels = enumLabels as JArray;
-                            if (labels != null)
+                            if (item.ExtensionData.TryGetValue("EnumLabels", out var enumLabels))
                             {
-                                var index = item.Enum.IndexOf(v?.ToString());
-                                if (index >= 0 && index < labels.Count)
+                                var labels = enumLabels as JArray;
+                                if (labels != null)
                                 {
-                                    return labels[index].ToString();
+                                    var index = item.Enum.IndexOf(v?.ToString());
+                                    if (index >= 0 && index < labels.Count)
+                                    {
+                                        return labels[index].ToString();
+                                    }
                                 }
                             }
-                        }
-                        return v.ToString().Humanize();
-                    }));
+                            return v.ToString().Humanize();
+                        }));
+                    }
                 }
             }
             return value?.ToString();

@@ -14,7 +14,11 @@ namespace Crazor.AI.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class ValueClearedTemplateAttribute : ActionTemplateAttribute
     {
-        public ValueClearedTemplateAttribute(string? template = "The {property} value was cleared.")
+        public ValueClearedTemplateAttribute()
+            : base("The ${property} value was cleared.")
+        {
+        }
+        public ValueClearedTemplateAttribute(string template)
             : base(template)
         {
         }

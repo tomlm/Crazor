@@ -12,7 +12,11 @@ namespace Crazor.AI.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class ValueAddedTemplateAttribute : ActionTemplateAttribute
     {
-        public ValueAddedTemplateAttribute(string? template = "Added {value} to {property}")
+        public ValueAddedTemplateAttribute()
+            : base("Added ${value} to ${property}")
+        { }
+
+        public ValueAddedTemplateAttribute(string? template)
             : base(template)
         {
         }

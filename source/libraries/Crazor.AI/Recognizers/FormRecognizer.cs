@@ -7,6 +7,7 @@ using Newtonsoft.Json.Schema;
 using Azure.AI.OpenAI;
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
+using Newtonsoft.Json.Schema.Generation;
 
 namespace Crazor.AI.Recognizers
 {
@@ -14,10 +15,15 @@ namespace Crazor.AI.Recognizers
     {
 
         private string _model;
+        private Dictionary<Type, string> _schemas = new Dictionary<Type, string>();
+        private JSchemaGenerator _schemaGenerator;
 
         public FormRecognizer(OpenAIClient openAIClient) :
             base(openAIClient)
         {
+            _schemaGenerator = new JSchemaGenerator();
+            _schemaGenerator.GenerationProviders.Add(new StringEnumGenerationProvider());
+
             Functions.Add(new FunctionDefinition($"{FormFunctions.ASSIGN}('property', 'value')", "assign to a property or property array a single value.", "My name is joe => ASSIGN('name', 'joe')", "My like frogs and dogs => ASSIGN('likes', ['frogs','dogs'])"));
             Functions.Add(new FunctionDefinition($"{FormFunctions.CLEAR}('property')", "clear the value for a property (setting it to null).", "Forget my name => CLEAR('name')"));
             Functions.Add(new FunctionDefinition($"{FormFunctions.REMOVE}('property', 'value')", "remove a value from a property or collection.", "Remove apple from cart => REMOVE('cart', 'apple')"));
@@ -35,10 +41,21 @@ namespace Crazor.AI.Recognizers
 
         public async virtual Task<RecognizerResult> RecognizeAsync(object model, string text, CancellationToken cancellationToken = default)
         {
-            var instructions = $"The json schema describing the properties for the form:\n{YamlConvert.SerializeObject(model)}";
+            string schema;
+            lock (_schemas)
+            {
+                if (!_schemas.TryGetValue(model.GetType(), out schema))
+                {
+                    var s = _schemaGenerator.Generate(model.GetType());
+                    schema = YamlConvert.SerializeObject(s);
+                    _schemas[model.GetType()] = schema;
+                }
+            }
+
+            var instructions = $"The json schema describing the properties for the form:\n{schema}";
 
             // call OpenAI recognizer
-            var result = await base.RecognizeAsync("chatGPT_GPT35-turbo-0301", text, instructions, cancellationToken);
+            var result = await base.RecognizeAsync("gpt-3.5-turbo", text, instructions, cancellationToken);
 
             if (result.Intents.ContainsKey(FormRecognizer.FUNCTIONS_INTENT))
             {

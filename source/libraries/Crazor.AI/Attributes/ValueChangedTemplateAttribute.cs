@@ -14,7 +14,12 @@ namespace Crazor.AI.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class ValueChangedTemplateAttribute : ActionTemplateAttribute
     {
-        public ValueChangedTemplateAttribute(string? template = "Changed {property} from {oldValue} to {value}.")
+        public ValueChangedTemplateAttribute()
+            : base("Changed ${property} from ${oldValue} to ${value}.")
+        {
+        }
+
+        public ValueChangedTemplateAttribute(string template)
             : base(template)
         {
         }

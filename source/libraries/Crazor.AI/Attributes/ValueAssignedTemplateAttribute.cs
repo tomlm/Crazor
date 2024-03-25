@@ -13,7 +13,12 @@ namespace Crazor.AI.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class ValueAssignedTemplateAttribute : ActionTemplateAttribute
     {
-        public ValueAssignedTemplateAttribute(string? template = "Set {property} to {value}")
+        public ValueAssignedTemplateAttribute()
+            : base("Set ${property} to ${value}")
+        {
+        }
+
+        public ValueAssignedTemplateAttribute(string template)
             : base(template)
         {
         }
