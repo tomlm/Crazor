@@ -1,0 +1,21 @@
+﻿@using Crazor.AdaptiveCards
+@using Crazor.Blazor.Components.Adaptive
+
+<InputText Id="copilotText" Label="Copilot" Placeholder="@Placeholder" Separator="@Separator" Spacing="AdaptiveSpacing.Small">
+    <ActionExecute Verb="OnCopilot" IconUrl="@IconUrl" Title="@Title" />
+</InputText>
+
+@code
+{
+    [Parameter]
+    public string Placeholder { get; set; } = "Ask me to help fill out the form.";
+
+    [Parameter]
+    public string Title { get; set; } = "Copilot can help";
+
+    [Parameter]
+    public string IconUrl { get; set; } = "https://r.bing.com/rp/R8ErSC7kK_3o4eRM-pP2JlReVkE.png";
+
+    [Parameter]
+    public bool Separator { get; set; } = true;
+}

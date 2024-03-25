@@ -1,0 +1,147 @@
+﻿@using System.Reflection
+@using Crazor.AdaptiveCards
+@using Crazor.Interfaces
+@using Crazor.Blazor.Components
+@using Crazor.Blazor.Components.Adaptive
+@using System.ComponentModel
+@using Humanizer
+
+<ColumnSet>
+    @{
+        var viewId = Guid.NewGuid().ToString("n");
+        var editId = Guid.NewGuid().ToString("n");
+        var toggleId = Guid.NewGuid().ToString("n");
+    }
+    <Column Width="stretch">
+        <Container Id="@viewId" IsVisible="@(HasValue == true || ViewOnly)">
+            @if (View == null)
+            {
+                <TextBlock Text="@($"{BindingLabel}: {BindingValue}")" />
+            }
+            else
+            {
+                @View
+            }
+        </Container>
+        <Container Id="@editId" IsVisible="@(HasValue == false && !ViewOnly)">
+            @if (Edit == null)
+            {
+                switch (BindingProperty.PropertyType)
+                {
+                    case Type _ when BindingProperty.PropertyType == typeof(bool?):
+                    case Type _ when BindingProperty.PropertyType == typeof(bool):
+                        <InputToggle Binding="@Binding" ClientValidation="false" />
+                        break;
+                    case Type _ when BindingProperty.PropertyType == typeof(string):
+                        <InputText Binding="@Binding" ClientValidation="false" />
+                        break;
+                    case Type _ when BindingProperty.PropertyType == typeof(Int16?):
+                    case Type _ when BindingProperty.PropertyType == typeof(Int16):
+                    case Type _ when BindingProperty.PropertyType == typeof(Int32?):
+                    case Type _ when BindingProperty.PropertyType == typeof(Int32):
+                    case Type _ when BindingProperty.PropertyType == typeof(Int64?):
+                    case Type _ when BindingProperty.PropertyType == typeof(Int64):
+                    case Type _ when BindingProperty.PropertyType == typeof(UInt16?):
+                    case Type _ when BindingProperty.PropertyType == typeof(UInt16):
+                    case Type _ when BindingProperty.PropertyType == typeof(UInt32?):
+                    case Type _ when BindingProperty.PropertyType == typeof(UInt32):
+                    case Type _ when BindingProperty.PropertyType == typeof(UInt64?):
+                    case Type _ when BindingProperty.PropertyType == typeof(UInt64):
+                    case Type _ when BindingProperty.PropertyType == typeof(Single?):
+                    case Type _ when BindingProperty.PropertyType == typeof(Single):
+                    case Type _ when BindingProperty.PropertyType == typeof(Double?):
+                    case Type _ when BindingProperty.PropertyType == typeof(Double):
+                    case Type _ when BindingProperty.PropertyType == typeof(decimal?):
+                    case Type _ when BindingProperty.PropertyType == typeof(decimal):
+                    case Type _ when BindingProperty.PropertyType == typeof(byte?):
+                    case Type _ when BindingProperty.PropertyType == typeof(byte):
+                        <InputNumber Binding="@Binding" ClientValidation="false" />
+                        break;
+                    case Type _ when BindingProperty.PropertyType == typeof(DateOnly?):
+                    case Type _ when BindingProperty.PropertyType == typeof(DateOnly):
+                        <InputDate Binding="@Binding" ClientValidation="false" />
+                        break;
+                    case Type _ when BindingProperty.PropertyType == typeof(DateTime?):
+                    case Type _ when BindingProperty.PropertyType == typeof(DateTime):
+                        <InputDate Binding="@Binding" ClientValidation="false" />
+                        break;
+                    case Type _ when BindingProperty.PropertyType == typeof(TimeOnly):
+                        <InputTime Binding="@Binding" ClientValidation="false" />
+                        break;
+                    default:
+                        <InputChoiceSet Binding="@Binding" ClientValidation="false" />
+                        break;
+                }
+            }
+            else
+            {
+                @Edit
+            }
+        </Container>
+    </Column>
+    <Column Id="@toggleId" Width="auto" IsVisible="@(BindingValue != null && ViewOnly == false)">
+        <SelectAction>
+            <ActionToggleVisibility Title="Edit">
+                <TargetElement ElementId="@toggleId" />
+                <TargetElement ElementId="@viewId" />
+                <TargetElement ElementId="@editId" />
+            </ActionToggleVisibility>
+        </SelectAction>
+        <TextBlock Text="🖉" Separator="true" Spacing="AdaptiveSpacing.Small" />
+    </Column>
+</ColumnSet>
+
+@code {
+    [CascadingParameter(Name = "CardView")]
+    protected ICardView CardView { get; set; }
+
+    [Parameter]
+    public RenderFragment? View { get; set; }
+
+    [Parameter]
+    public RenderFragment? Edit { get; set; }
+
+    [Parameter]
+    public string? Binding { get; set; }
+
+    [Parameter]
+    public bool ViewOnly { get; set; } = false;
+
+    public bool HasValue => BindingValue != null;
+
+    protected object? BindingValue { get; set; }
+
+    protected PropertyInfo BindingProperty { get; set; } = null;
+
+    protected String BindingLabel { get; set; } = String.Empty;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (!String.IsNullOrEmpty(this.Binding))
+        {
+            object? val = CardView;
+            var parts = this.Binding.Split('.');
+            foreach (var part in parts)
+            {
+                BindingProperty = val?.GetType().GetProperty(part)!;
+                if (BindingProperty != null)
+                {
+                    val = BindingProperty?.GetValue(val)!;
+                    BindingValue = val;
+                }
+                else
+                {
+                    throw new Exception($"Invalid Binding='{this.Binding}': property '{part}' does not exist");
+                }
+            }
+
+            BindingLabel = BindingProperty.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName;
+            if (BindingLabel == null)
+            {
+                BindingLabel = BindingProperty.Name.Humanize();
+            }
+        }
+    }
+}

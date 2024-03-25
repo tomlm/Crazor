@@ -116,7 +116,7 @@ namespace Crazor.Blazor.Components.Adaptive
             if (ClientValidation == null || ClientValidation == true)
             {
                 // if we don't have required, but binding property has [Required] then set it
-                if (BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+                if (this.IsRequired == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
                 {
                     this.IsRequired = true;
 
