@@ -5,11 +5,36 @@ using System.ComponentModel.DataAnnotations;
 using Humanizer;
 using System.ComponentModel;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
+using System.Text;
 
 namespace Crazor.AI
 {
     public static class Extensions
     {
+        public static List<string> Tokenize(this string text)
+        {
+            List<string> tokens = new List<string>();
+            StringBuilder sb = new StringBuilder();
+            foreach (char ch in text)
+            {
+                if (Char.IsAsciiLetterOrDigit(ch))
+                    sb.Append(ch);
+                else
+                {
+                    if (sb.Length > 0)
+                    {
+                        tokens.Add(sb.ToString().ToLower());
+                        sb.Clear();
+                    }
+                }
+            }
+            if (sb.Length > 0)
+            {
+                tokens.Add(sb.ToString().ToLower());
+            }
+
+            return tokens;
+        }
 
         public static async Task<T> GetYamlOrJsonAsync<T>(this HttpClient httpClient, string url, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -52,12 +77,12 @@ namespace Crazor.AI
 
         public static PropertyInfo GetPropertyInfo(this Type type, string property)
         {
-            return type.GetProperties().Single(p => p.Name == property);
+            return type.GetProperties().Single(p => p.Name.ToLower() == property.ToLower());
         }
 
         public static bool TryGetPropertyInfo(this Type type, string property, out PropertyInfo? propertyInfo)
         {
-            propertyInfo = type.GetProperties().SingleOrDefault(p => p.Name == property);
+            propertyInfo = type.GetProperties().SingleOrDefault(p => p.Name.ToLower() == property.ToLower());
             return propertyInfo != null;
         }
 

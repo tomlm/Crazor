@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Recognizers.Text.Choice;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
+using Humanizer;
 
 namespace Crazor.AI
 {
@@ -550,7 +551,10 @@ namespace Crazor.AI
         protected string BindPropertyTemplate<TextResponseTemplateAttributeT>(string property, params KeyValuePair<string, object?>[] args)
             where TextResponseTemplateAttributeT : ActionTemplateAttribute
         {
-            var propertyInfo = this.Model.GetType().GetProperty(property);
+            if (!this.Model.GetType().TryGetPropertyInfo(property, out var propertyInfo))
+            {
+                throw new MissingMemberException(property);
+            }
             var attributes = propertyInfo.GetCustomAttributes(typeof(TextResponseTemplateAttributeT), true)?.ToList();
             IResponseTemplate responseTemplate;
             if (attributes != null && attributes.Any())
@@ -651,20 +655,6 @@ namespace Crazor.AI
         }
 
         /// <summary>
-        /// Normalize a string value for case and ending.
-        /// </summary>
-        protected string Normalize(string input)
-        {
-            var value = input.Trim().ToLowerInvariant();
-            if (value.EndsWith('s'))
-            {
-                value = value.Substring(0, value.Length - 1);
-            }
-            return value;
-        }
-
-
-        /// <summary>
         /// Convert string value to the desired schema type and validate it.
         /// </summary>
         /// <param name="value">Recognizer string value.</param>
@@ -696,7 +686,12 @@ namespace Crazor.AI
             var propertyType = propertyInfo.PropertyType;
             if (propertyInfo.PropertyType.IsList())
             {
-                propertyType = propertyInfo.PropertyType.GetElementType();
+                propertyType = propertyInfo.PropertyType.GetElementType()!;
+            }
+
+            if (propertyType.GenericTypeArguments.Any())
+            {
+                propertyType = propertyType.GenericTypeArguments.First();
             }
 
             // Figure out base time for references
@@ -712,41 +707,105 @@ namespace Crazor.AI
             //    }
             //}
             object? realValue = null;
-            switch (propertyType)
+            switch (Type.GetTypeCode(propertyType))
             {
-                case Type _ when propertyType == typeof(string):
+                case TypeCode.String:
                     realValue = value.Trim();
                     if (!Validator.TryValidateProperty(realValue, context, validationResults))
                         return (null, GetErrorMessage(value, propertyInfo, validationResults));
                     return (realValue, null);
-                case Type _ when propertyType == typeof(bool):
-                case Type _ when propertyType == typeof(bool?):
+                case TypeCode.Boolean:
                     realValue = RecognizeBool(propertyInfo, value, "en-us");
                     if (!Validator.TryValidateProperty(realValue, context, validationResults))
                         return (null, GetErrorMessage(value, propertyInfo, validationResults));
                     return (realValue, null);
-                case Type _ when propertyType == typeof(Int16):
-                case Type _ when propertyType == typeof(Int16?):
-                case Type _ when propertyType == typeof(Int32):
-                case Type _ when propertyType == typeof(Int32?):
-                case Type _ when propertyType == typeof(Int64):
-                case Type _ when propertyType == typeof(Int64?):
-                case Type _ when propertyType == typeof(UInt16):
-                case Type _ when propertyType == typeof(UInt16?):
-                case Type _ when propertyType == typeof(UInt32):
-                case Type _ when propertyType == typeof(UInt32?):
-                case Type _ when propertyType == typeof(UInt64):
-                case Type _ when propertyType == typeof(UInt64?):
-                case Type _ when propertyType == typeof(Single):
-                case Type _ when propertyType == typeof(Single?):
-                case Type _ when propertyType == typeof(Double):
-                case Type _ when propertyType == typeof(Double?):
-                    realValue = RecognizeNumber(propertyInfo, value, "en-us");
-                    if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                        return (null, GetErrorMessage(value, propertyInfo, validationResults));
-                    return (realValue, null);
 
-                case Type _ when propertyType == typeof(DateTimeOffset):
+                case TypeCode.Byte:
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                    {
+                        if (propertyType.IsEnum)
+                        {
+                            var enumChoices = Enum.GetNames(propertyType)
+                                .Select(name =>
+                                {
+                                    Enum val = (Enum)Enum.Parse(propertyType, name);
+                                    var normalizedName = val.Humanize(LetterCasing.LowerCase);
+                                    return new EnumChoice()
+                                    {
+                                        Name = normalizedName,
+                                        Words = normalizedName.Tokenize(),
+                                        Value = val
+                                    };
+                                }).ToList();
+
+                            var normalizedValue = value.Humanize(LetterCasing.LowerCase).Singularize();
+                            var incomingWords = normalizedValue.Tokenize().Select(t => t.ToLower()).ToList();
+                            var wordCount = -1;
+                            EnumChoice topChoice = null;
+
+                            // partial matching
+                            foreach (var choice in enumChoices)
+                            {
+                                if (choice.Name == normalizedValue ||
+                                    choice.Name.Singularize() == normalizedValue.Singularize())
+
+                                {
+                                    topChoice = choice;
+                                    break;
+                                }
+                                else
+                                {
+                                    // Count word matches for partial matches
+                                    var count = 0;
+                                    foreach (var word in choice.Words)
+                                    {
+                                        foreach (var incomingWord in incomingWords)
+                                        {
+                                            if (incomingWord == word ||
+                                                incomingWord.Singularize() == word.Singularize())
+                                                ++count;
+                                        }
+                                    }
+
+                                    if (count > 0 && count > wordCount)
+                                    {
+                                        wordCount = count;
+                                        topChoice = choice;
+                                    }
+                                }
+                            }
+                            if (topChoice != null)
+                            {
+                                realValue = topChoice.Value;
+                            }
+
+                            if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                                return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (realValue, null);
+                        }
+                        else
+                        {
+                            realValue = RecognizeNumber(propertyInfo, value, "en-us");
+                            if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                                return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (realValue, null);
+                        }
+                    }
+                case TypeCode.Single:
+                case TypeCode.Double:
+                    {
+                        realValue = RecognizeNumber(propertyInfo, value, "en-us");
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                        return (realValue, null);
+                    }
+
+                case TypeCode.DateTime:
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
                         realValue = timex.Merge((DateTimeOffset)propertyInfo.GetValue(this.Model));
@@ -763,129 +822,36 @@ namespace Crazor.AI
                         }
                     }
                     return (realValue, null);
-                case Type _ when propertyType == typeof(DateTimeOffset?):
-                    {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateTimeOffset?)propertyInfo.GetValue(this.Model));
-                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
-                    }
-                    return (realValue, null);
-                case Type _ when propertyType == typeof(DateTime):
+
+
+
+                case TypeCode.Object when propertyType.Name == nameof(DateTimeOffset):
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
                         realValue = timex.Merge((DateTime)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                             return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                        return (realValue, null);
                     }
-                    return (realValue, null);
-                case Type _ when propertyType == typeof(DateTime?):
-                    {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateTime?)propertyInfo.GetValue(this.Model));
-                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
-                    }
-                    return (realValue, null);
-                case Type _ when propertyType == typeof(TimeOnly):
+
+                case TypeCode.Object when propertyType.Name == nameof(TimeOnly):
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
                         realValue = timex.Merge((TimeOnly)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                             return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                        return (realValue, null);
                     }
-                    return (realValue, null);
-                case Type _ when propertyType == typeof(TimeOnly?):
-                    {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((TimeOnly?)propertyInfo.GetValue(this.Model));
-                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
-                    }
-                    return (realValue, null);
-                case Type _ when propertyType == typeof(DateOnly):
+
+                case TypeCode.Object when propertyType.Name == nameof(DateOnly):
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
                         realValue = timex.Merge((DateOnly)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                             return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                        return (realValue, null);
                     }
-                    return (realValue, null);
-                case Type _ when propertyType == typeof(DateOnly?):
-                    {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateOnly?)propertyInfo.GetValue(this.Model));
-                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
-                    }
-                    return (realValue, null);
-
-                ////case "duration":
-                ////    {
-                ////        var (type, timex, _dvalue) = RecognizeDateTime(pschema, value, locale, refDate);
-                ////        TimexProperty timexProperty = new TimexProperty(timex);
-                ////    }
-                ////    break;
                 default:
-                    //{
-                    //    var enumChoices = pschema!.Enum;
-                    //    if (enumChoices.Any())
-                    //    {
-                    //        var nvalue = Normalize(value);
-                    //        var wordCount = -1;
-                    //        List<string>? wordMatches = null;
-                    //        foreach (var jchoice in enumChoices)
-                    //        {
-                    //            var choice = jchoice.ToString();
-                    //            if (choice.ToLowerInvariant() == nvalue)
-                    //            {
-                    //                result = choice;
-                    //                break;
-                    //            }
-                    //            else
-                    //            {
-                    //                // Break on case changes and normalize
-                    //                var words = from word in Regex.Split(choice, @"(?<!^)(?=\p{Lu})") select Normalize(word);
-                    //                var phrase = string.Join(' ', words);
-                    //                if (phrase == nvalue)
-                    //                {
-                    //                    result = choice;
-                    //                    break;
-                    //                }
-                    //                else
-                    //                {
-                    //                    // Count word matches for partial matches
-                    //                    var count = 0;
-                    //                    foreach (var word in words)
-                    //                    {
-                    //                        if (nvalue.Contains(word))
-                    //                        {
-                    //                            ++count;
-                    //                        }
-                    //                    }
-                    //                    if (count == wordCount)
-                    //                    {
-                    //                        wordMatches!.Add(choice);
-                    //                    }
-                    //                    else if (count > 0 && count > wordCount)
-                    //                    {
-                    //                        wordCount = count;
-                    //                        wordMatches = new List<string> { choice };
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-                    //        if (wordMatches != null && wordMatches.Count == 1)
-                    //        {
-                    //            // Partial match of one choice
-                    //            result = wordMatches.First();
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        result = value;
-                    //    }
-                    //}
                     break;
             }
             return (null, "uhoho");
@@ -1039,5 +1005,14 @@ namespace Crazor.AI
             return propertyRef;
         }
         #endregion
+
+
+    }
+
+    internal class EnumChoice
+    {
+        public string Name { get; set; }
+        public List<string> Words { get; set; }
+        public Enum Value { get; set; }
     }
 }
