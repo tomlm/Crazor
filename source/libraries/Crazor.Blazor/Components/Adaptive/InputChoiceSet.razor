@@ -4,6 +4,7 @@
 @using System.ComponentModel;
 @using System.Reflection;
 @using System.Text;
+@using System.ComponentModel.DataAnnotations
 @inherits InputBase<AdaptiveChoiceSetInput>
 
 <ac:Input.ChoiceSet @attributes="@GetAttributes()">
@@ -65,6 +66,13 @@
             {
                 bindingType = bindingType.GenericTypeArguments[0];
             }
+
+            var displayAttribute = bindingType.GetCustomAttribute<DisplayAttribute>();
+            if (displayAttribute != null && String.IsNullOrEmpty(this.Placeholder))
+            {
+                this.Placeholder = displayAttribute.GetPrompt();
+            }
+
             if (bindingType.IsEnum)
             {
                 // automatically compute choice from enumeration.
@@ -75,7 +83,7 @@
                     // we can then attempt to retrieve the
                     // description attribute from the member info
                     var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
-                    var displayAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
+                    var displayNameAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
                     // if we find the attribute we can access its values
                     if (descriptionAttribute != null)
                     {
@@ -83,7 +91,7 @@
                     }
                     else if (displayAttribute != null)
                     {
-                        Item.Choices.Add(new AdaptiveChoice() { Title = displayAttribute.DisplayName, Value = value?.ToString() });
+                        Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute.DisplayName, Value = value?.ToString() });
                     }
                     else
                     {

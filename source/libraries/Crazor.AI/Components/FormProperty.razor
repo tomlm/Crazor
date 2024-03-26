@@ -65,6 +65,7 @@
                     case Type _ when BindingProperty.PropertyType == typeof(DateTime):
                         <InputDate Binding="@Binding" ClientValidation="false" />
                         break;
+                    case Type _ when BindingProperty.PropertyType == typeof(TimeOnly?):
                     case Type _ when BindingProperty.PropertyType == typeof(TimeOnly):
                         <InputTime Binding="@Binding" ClientValidation="false" />
                         break;

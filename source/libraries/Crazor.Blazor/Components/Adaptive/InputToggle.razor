@@ -47,9 +47,11 @@
     {
         base.OnParametersSet();
 
-        if (this.Title == null)
+        // Title is better than label if we just have one.
+        if (this.Title == null && this.Label != null)
         {
-            this.Title = this.Label ?? this.Id ?? String.Empty;
+            this.Title = this.Label;
+            this.Label = null;
         }
     }
 }

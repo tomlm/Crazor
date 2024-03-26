@@ -58,48 +58,39 @@
     {
         base.OnParametersSet();
 
-        if (ClientValidation == null || ClientValidation == true)
+        if (BindingProperty != null)
         {
-            // if we don't have required, but binding property has [Required] then set it
-            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (this.Min == null && rangeAttribute?.Minimum != null)
-            {
-                this.Min = DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format);
-            }
+            // var bindingType = BindingProperty.PropertyType;
+            // if (bindingType.Name == "Nullable`1")
+            // {
+            //     bindingType = bindingType.GenericTypeArguments[0];
+            // }
 
-            if (this.Max == null && rangeAttribute?.Maximum != null)
-            {
-                this.Max = DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format);
-            }
+            // var displayAttribute = bindingType.GetCustomAttribute<DisplayAttribute>();
+            // if (displayAttribute != null && String.IsNullOrEmpty(this.Placeholder))
+            // {
+            //     this.Placeholder = displayAttribute.GetPrompt();
+            // }
 
-            if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+            if (ClientValidation == null || ClientValidation == true)
             {
-                this.ErrorMessage = rangeAttribute?.ErrorMessage;
+                // if we don't have required, but binding property has [Required] then set it
+                var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+                if (this.Min == null && rangeAttribute?.Minimum != null)
+                {
+                    this.Min = DateTime.Parse((string)rangeAttribute.Minimum).ToString(Format);
+                }
+
+                if (this.Max == null && rangeAttribute?.Maximum != null)
+                {
+                    this.Max = DateTime.Parse((string)rangeAttribute.Maximum).ToString(Format);
+                }
+
+                if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+                {
+                    this.ErrorMessage = rangeAttribute?.ErrorMessage;
+                }
             }
         }
     }
-
-    protected override Dictionary<string, object> GetAttributes()
-    {
-        var attributes = new Dictionary<string, object>();
-        foreach (var property in this.GetType().GetProperties().Where(p => p.PropertyType != typeof(RenderFragment) && p.GetCustomAttribute<ParameterAttribute>() != null))
-        {
-            var val = property.GetValue(this);
-            var targetProperty = Item!.GetType().GetProperty(property.Name) ?? property;
-            var defValue = (targetProperty.PropertyType.IsValueType) ? Activator.CreateInstance(targetProperty.PropertyType) : null;
-            if (val != null && !Object.Equals(val, defValue))
-            {
-                if (val is bool b)
-                    // HTML serialization used by Blazor will turn raw bool into just attribute name with no value
-                    // we are targeting XML which always must have a value, and bool is represented as string "true"|"false"
-                    attributes.Add(property.Name, b.ToString().ToLower());
-                else if (val is DateTime dt)
-                    attributes.Add(property.Name, dt.ToString(Format));
-                else
-                    attributes.Add(property.Name, val);
-            }
-        }
-        return attributes;
-    }
-
 }

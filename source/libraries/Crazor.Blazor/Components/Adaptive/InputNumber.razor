@@ -47,22 +47,37 @@
     {
         base.OnParametersSet();
 
-        if (ClientValidation == null || ClientValidation == true)
+        if (BindingProperty != null)
         {
-            var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
-            if (this.Min == null && rangeAttribute?.Minimum != null)
+            var bindingType = BindingProperty.PropertyType;
+            if (bindingType.Name == "Nullable`1")
             {
-                this.Min = Convert.ToDouble(rangeAttribute.Minimum);
+                bindingType = bindingType.GenericTypeArguments[0];
             }
 
-            if (this.Max == null && rangeAttribute?.Maximum != null)
+            var displayAttribute = bindingType.GetCustomAttribute<DisplayAttribute>();
+            if (displayAttribute != null && String.IsNullOrEmpty(this.Placeholder))
             {
-                this.Max = Convert.ToDouble(rangeAttribute.Maximum);
+                this.Placeholder = displayAttribute.GetPrompt();
             }
 
-            if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+            if (ClientValidation == null || ClientValidation == true)
             {
-                this.ErrorMessage = rangeAttribute?.ErrorMessage;
+                var rangeAttribute = BindingProperty?.GetCustomAttribute<RangeAttribute>();
+                if (this.Min == null && rangeAttribute?.Minimum != null)
+                {
+                    this.Min = Convert.ToDouble(rangeAttribute.Minimum);
+                }
+
+                if (this.Max == null && rangeAttribute?.Maximum != null)
+                {
+                    this.Max = Convert.ToDouble(rangeAttribute.Maximum);
+                }
+
+                if (this.ErrorMessage == null && rangeAttribute?.ErrorMessage != null)
+                {
+                    this.ErrorMessage = rangeAttribute?.ErrorMessage;
+                }
             }
         }
     }

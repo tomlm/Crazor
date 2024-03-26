@@ -237,60 +237,92 @@ namespace Crazor
             {
                 if (value != null)
                 {
-                    var targetType = targetProperty.PropertyType;
-                    if (targetType.Name == "Nullable`1")
+                    if (value.GetType() != targetProperty.PropertyType)
                     {
-                        targetType = targetType.GenericTypeArguments[0];
-                    }
-
-                    switch (targetType.Name)
-                    {
-                        case "Byte":
-                            value = Convert.ToByte(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Int16":
-                            value = Convert.ToInt16(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Int32":
-                            value = Convert.ToInt32(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Int64":
-                            value = Convert.ToInt64(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "UInt16":
-                            value = Convert.ToUInt16(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "UInt32":
-                            value = Convert.ToUInt32(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "UInt64":
-                            value = Convert.ToUInt64(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Single":
-                            value = Convert.ToSingle(Convert.ToDouble(value.ToString()));
-                            break;
-                        case "Double":
-                            value = Convert.ToDouble(value.ToString());
-                            break;
-                        case "Boolean":
-                            value = Convert.ToBoolean(value.ToString());
-                            break;
-                        case "DateTime":
-                            value = Convert.ToDateTime(value.ToString());
-                            break;
-                        case "String":
-                            value = value.ToString();
-                            break;
-                        default:
-                            if (targetType.IsEnum)
+                        var targetType = targetProperty.PropertyType;
+                        if (targetType.Name == "Nullable`1" && targetType.GenericTypeArguments.Any())
+                        {
+                            targetType = targetType.GenericTypeArguments[0];
+                        }
+                        if (value.GetType() != targetProperty.PropertyType)
+                        {
+                            switch (targetType.Name)
                             {
-                                value = Enum.Parse(targetType, value.ToString()!);
+                                case "Byte":
+                                    value = Convert.ToByte(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "Int16":
+                                    value = Convert.ToInt16(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "Int32":
+                                    value = Convert.ToInt32(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "Int64":
+                                    value = Convert.ToInt64(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "UInt16":
+                                    value = Convert.ToUInt16(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "UInt32":
+                                    value = Convert.ToUInt32(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "UInt64":
+                                    value = Convert.ToUInt64(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "Single":
+                                    value = Convert.ToSingle(Convert.ToDouble(value.ToString()));
+                                    break;
+                                case "Double":
+                                    value = Convert.ToDouble(value.ToString());
+                                    break;
+                                case "Boolean":
+                                    value = Convert.ToBoolean(value.ToString());
+                                    break;
+                                case "DateTime":
+                                    value = Convert.ToDateTime(value.ToString());
+                                    break;
+                                case "DateTimeOffset":
+                                    value = new DateTimeOffset(Convert.ToDateTime(value.ToString()));
+                                    break;
+                                case "DateOnly":
+                                    if (value is DateTime dt)
+                                        value = DateOnly.FromDateTime(dt);
+                                    else if (value is DateTimeOffset dto)
+                                        value = DateOnly.FromDateTime(dto.DateTime);
+                                    else
+                                        value = DateOnly.FromDateTime(Convert.ToDateTime(value?.ToString()));
+                                    break;
+                                case "TimeSpan":
+                                    if (value is DateTime dt2)
+                                        value = dt2.TimeOfDay;
+                                    else if (value is DateTimeOffset dto)
+                                        value = dto.TimeOfDay;
+                                    else
+                                        value = TimeSpan.Parse(value?.ToString());
+                                    break;
+                                case "TimeOnly":
+                                    if (value is DateTime dt3)
+                                        value = TimeOnly.FromDateTime(dt3);
+                                    else if (value is DateTimeOffset dto)
+                                        value = TimeOnly.FromDateTime(dto.DateTime);
+                                    else
+                                        value = TimeOnly.FromDateTime(Convert.ToDateTime(value?.ToString()));
+                                    break;
+                                case "String":
+                                    value = value.ToString();
+                                    break;
+                                default:
+                                    if (targetType.IsEnum)
+                                    {
+                                        value = Enum.Parse(targetType, value.ToString()!);
+                                    }
+                                    else if (value is JToken jt)
+                                    {
+                                        value = jt.ToObject(targetType)!;
+                                    }
+                                    break;
                             }
-                            else if (value is JToken jt)
-                            {
-                                value = jt.ToObject(targetType)!;
-                            }
-                            break;
+                        }
                     }
                     targetProperty.SetValue(targetObject, value);
                 }

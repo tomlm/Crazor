@@ -1,13 +1,9 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json.Linq;
-using Microsoft.Recognizers.Text.Choice;
-using Microsoft.Extensions.Configuration;
+﻿using Newtonsoft.Json.Linq;
 using YamlConverter;
-using Newtonsoft.Json.Schema;
 using Azure.AI.OpenAI;
-using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
-using Newtonsoft.Json.Schema.Generation;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using System.Text;
 
 namespace Crazor.AI.Recognizers
 {
@@ -15,15 +11,10 @@ namespace Crazor.AI.Recognizers
     {
 
         private string _model;
-        private Dictionary<Type, string> _schemas = new Dictionary<Type, string>();
-        private JSchemaGenerator _schemaGenerator;
 
         public FormRecognizer(OpenAIClient openAIClient) :
             base(openAIClient)
         {
-            _schemaGenerator = new JSchemaGenerator();
-            _schemaGenerator.GenerationProviders.Add(new StringEnumGenerationProvider());
-
             Functions.Add(new FunctionDefinition($"{FormFunctions.ASSIGN}('property', 'value')", "assign to a property or property array a single value.", "My name is joe => ASSIGN('name', 'joe')", "My like frogs and dogs => ASSIGN('likes', ['frogs','dogs'])"));
             Functions.Add(new FunctionDefinition($"{FormFunctions.CLEAR}('property')", "clear the value for a property (setting it to null).", "Forget my name => CLEAR('name')"));
             Functions.Add(new FunctionDefinition($"{FormFunctions.REMOVE}('property', 'value')", "remove a value from a property or collection.", "Remove apple from cart => REMOVE('cart', 'apple')"));
@@ -41,18 +32,13 @@ namespace Crazor.AI.Recognizers
 
         public async virtual Task<RecognizerResult> RecognizeAsync(object model, string text, CancellationToken cancellationToken = default)
         {
-            string schema;
-            lock (_schemas)
+            StringBuilder sb = new StringBuilder();
+            foreach(var property in model.GetType().GetProperties())
             {
-                if (!_schemas.TryGetValue(model.GetType(), out schema))
-                {
-                    var s = _schemaGenerator.Generate(model.GetType());
-                    schema = YamlConvert.SerializeObject(s);
-                    _schemas[model.GetType()] = schema;
-                }
+                sb.AppendLine($"  * {property.PropertyType.Name} {property.Name} - {property.GetPropertyLabel()}");
             }
 
-            var instructions = $"The json schema describing the properties for the form:\n{schema}";
+            var instructions = $"The properties for the form are:\n{sb.ToString()}";
 
             // call OpenAI recognizer
             var result = await base.RecognizeAsync("gpt-3.5-turbo", text, instructions, cancellationToken);

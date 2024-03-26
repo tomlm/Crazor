@@ -26,6 +26,7 @@ namespace Crazor.AdaptiveCards
         /// <summary>
         /// Title text for this element.
         /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         [JsonRequired]
 #if !NETSTANDARD1_3
         [XmlAttribute]

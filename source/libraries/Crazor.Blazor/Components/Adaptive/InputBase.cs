@@ -65,9 +65,10 @@ namespace Crazor.Blazor.Components.Adaptive
                         throw new Exception($"Invalid Binding='{this.Binding}': property '{part}' does not exist");
                     }
                 }
+                var dAttr = this.BindingProperty?.GetCustomAttribute<DisplayAttribute>();
                 var dnAttr = this.BindingProperty?.GetCustomAttribute<DisplayNameAttribute>();
                 var descAttr = this.BindingProperty?.GetCustomAttribute<DescriptionAttribute>();
-                this.BindingDisplayName = dnAttr?.DisplayName ?? descAttr?.Description ?? MakeTitle(parts.Last());
+                this.BindingDisplayName = dAttr?.GetName() ?? dnAttr?.DisplayName ?? descAttr?.Description ?? MakeTitle(parts.Last());
             }
             else
             {

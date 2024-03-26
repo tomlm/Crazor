@@ -54,87 +54,103 @@
     {
         base.OnParametersSet();
 
-        if (ClientValidation == null || ClientValidation == true)
+        if (BindingProperty != null)
         {
-            // --- Client side validation....
-            var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
-            if (this.Regex == null && regexAttribute?.Pattern != null)
+            var bindingType = BindingProperty.PropertyType;
+            if (bindingType.Name == "Nullable`1")
             {
-                this.Regex = regexAttribute?.Pattern;
-
+                bindingType = bindingType.GenericTypeArguments[0];
             }
 
-            if (this.ErrorMessage == null && regexAttribute?.ErrorMessage != null)
+            var displayAttribute = bindingType.GetCustomAttribute<DisplayAttribute>();
+            if (displayAttribute != null && String.IsNullOrEmpty(this.Placeholder))
             {
-                this.ErrorMessage = regexAttribute?.ErrorMessage;
+                this.Placeholder = displayAttribute.GetPrompt();
             }
 
-            // -- MaxLength
-            var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
-            if (this.MaxLength == null && stringLengthAttribute != null)
+
+            if (ClientValidation == null || ClientValidation == true)
             {
-                this.MaxLength = stringLengthAttribute?.MaximumLength;
+                // --- Client side validation....
+                var regexAttribute = BindingProperty?.GetCustomAttribute<RegularExpressionAttribute>();
+                if (this.Regex == null && regexAttribute?.Pattern != null)
+                {
+                    this.Regex = regexAttribute?.Pattern;
+
+                }
+
+                if (this.ErrorMessage == null && regexAttribute?.ErrorMessage != null)
+                {
+                    this.ErrorMessage = regexAttribute?.ErrorMessage;
+                }
+
+                // -- MaxLength
+                var stringLengthAttribute = BindingProperty?.GetCustomAttribute<StringLengthAttribute>();
+                if (this.MaxLength == null && stringLengthAttribute != null)
+                {
+                    this.MaxLength = stringLengthAttribute?.MaximumLength;
+                }
             }
-        }
 
-        // ----  style
-        var maxLengthAttribute = BindingProperty?.GetCustomAttribute<MaxLengthAttribute>();
-        if (this.MaxLength == null && maxLengthAttribute != null)
-        {
-            this.MaxLength = maxLengthAttribute?.Length;
-        }
-
-        var phoneAttribute = BindingProperty?.GetCustomAttribute<PhoneAttribute>();
-        if (phoneAttribute != null)
-        {
-            this.Style = AdaptiveTextInputStyle.Tel;
-        }
-
-        var emailAttribute = BindingProperty?.GetCustomAttribute<EmailAddressAttribute>();
-        if (emailAttribute != null)
-        {
-            this.Style = AdaptiveTextInputStyle.Email;
-        }
-
-        var passwordAttribute = BindingProperty?.GetCustomAttribute<PasswordPropertyTextAttribute>();
-        if (passwordAttribute != null)
-        {
-            this.Style = AdaptiveTextInputStyle.Password;
-        }
-
-        var urlAttribute = BindingProperty?.GetCustomAttribute<UrlAttribute>();
-        if (urlAttribute != null)
-        {
-            this.Style = AdaptiveTextInputStyle.Url;
-        }
-
-        var dtAttribute = BindingProperty?.GetCustomAttribute<DataTypeAttribute>();
-        if (dtAttribute != null)
-        {
-            switch (dtAttribute.DataType)
+            // ----  style
+            var maxLengthAttribute = BindingProperty?.GetCustomAttribute<MaxLengthAttribute>();
+            if (this.MaxLength == null && maxLengthAttribute != null)
             {
-                case DataType.Text:
-                    this.Style = AdaptiveTextInputStyle.Text;
-                    break;
-                case DataType.EmailAddress:
-                    this.Style = AdaptiveTextInputStyle.Email;
-                    break;
-                case DataType.PhoneNumber:
-                    this.Style = AdaptiveTextInputStyle.Tel;
-                    break;
-                case DataType.Password:
-                    this.Style = AdaptiveTextInputStyle.Password;
-                    break;
-                case DataType.Url:
-                    this.Style = AdaptiveTextInputStyle.Url;
-                    break;
-                case DataType.Date:
-                case DataType.DateTime:
-                case DataType.Time:
-                case DataType.CreditCard:
-                case DataType.Currency:
-                case DataType.PostalCode:
-                    break;
+                this.MaxLength = maxLengthAttribute?.Length;
+            }
+
+            var phoneAttribute = BindingProperty?.GetCustomAttribute<PhoneAttribute>();
+            if (phoneAttribute != null)
+            {
+                this.Style = AdaptiveTextInputStyle.Tel;
+            }
+
+            var emailAttribute = BindingProperty?.GetCustomAttribute<EmailAddressAttribute>();
+            if (emailAttribute != null)
+            {
+                this.Style = AdaptiveTextInputStyle.Email;
+            }
+
+            var passwordAttribute = BindingProperty?.GetCustomAttribute<PasswordPropertyTextAttribute>();
+            if (passwordAttribute != null)
+            {
+                this.Style = AdaptiveTextInputStyle.Password;
+            }
+
+            var urlAttribute = BindingProperty?.GetCustomAttribute<UrlAttribute>();
+            if (urlAttribute != null)
+            {
+                this.Style = AdaptiveTextInputStyle.Url;
+            }
+
+            var dtAttribute = BindingProperty?.GetCustomAttribute<DataTypeAttribute>();
+            if (dtAttribute != null)
+            {
+                switch (dtAttribute.DataType)
+                {
+                    case DataType.Text:
+                        this.Style = AdaptiveTextInputStyle.Text;
+                        break;
+                    case DataType.EmailAddress:
+                        this.Style = AdaptiveTextInputStyle.Email;
+                        break;
+                    case DataType.PhoneNumber:
+                        this.Style = AdaptiveTextInputStyle.Tel;
+                        break;
+                    case DataType.Password:
+                        this.Style = AdaptiveTextInputStyle.Password;
+                        break;
+                    case DataType.Url:
+                        this.Style = AdaptiveTextInputStyle.Url;
+                        break;
+                    case DataType.Date:
+                    case DataType.DateTime:
+                    case DataType.Time:
+                    case DataType.CreditCard:
+                    case DataType.Currency:
+                    case DataType.PostalCode:
+                        break;
+                }
             }
         }
     }

@@ -1,28 +1,19 @@
-﻿using Azure.AI.OpenAI;
-using Crazor.AdaptiveCards;
+﻿using Crazor.AdaptiveCards;
 using Crazor.AI.Recognizers;
-using Crazor.Teams;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Recognizers.Text.Choice;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 using Microsoft.Recognizers.Text.DateTime;
 using Microsoft.Recognizers.Text.Number;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
-using System.Text.RegularExpressions;
-using System.Text;
-using YamlConverter;
 using Crazor.AI.Attributes;
 using System.Collections;
 using Crazor.Attributes;
-using System.ComponentModel.DataAnnotations;
 using Crazor.Blazor;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Bot.Schema;
-using Humanizer;
-using System;
+using Microsoft.Recognizers.Text.Choice;
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crazor.AI
 {
@@ -34,10 +25,10 @@ namespace Crazor.AI
 
         public FormCardView()
         {
-            var gen = new JSchemaGenerator();
-            gen.GenerationProviders.Add(new StringEnumGenerationProvider());
+            //var gen = new JSchemaGenerator();
+            //gen.GenerationProviders.Add(new StringEnumGenerationProvider());
 
-            this.Schema = gen.Generate(typeof(ModelT));
+            //this.Schema = gen.Generate(typeof(ModelT));
         }
 
         [Inject]
@@ -47,9 +38,6 @@ namespace Crazor.AI
         public FormRecognizer Recognizer { get; set; }
 
         public string Name { get; set; }
-
-        [TempMemory]
-        protected JSchema Schema { get; set; } = new JSchema();
 
         [TempMemory]
         public bool HasApproval { get; set; } = false;
@@ -191,16 +179,16 @@ namespace Crazor.AI
         {
             await Task.CompletedTask;
 
-            // if the property is not in the schema.
-            if (!Schema.Properties.TryGetValue(property, out var propSchema))
-            {
-                // add UNKNOWNPROPERTY(property) response.
-                // AddBannerMessage(BindFormTemplate<UnknownPropertyTemplateAttribute>(property));
-                return;
-            }
+            //// if the property is not in the schema.
+            //if (!Schema.Properties.TryGetValue(property, out var propSchema))
+            //{
+            //    // add UNKNOWNPROPERTY(property) response.
+            //    // AddBannerMessage(BindFormTemplate<UnknownPropertyTemplateAttribute>(property));
+            //    return;
+            //}
 
             // see if value matches property schema
-            var (newValue, errorResponse) = await ValidatePropertyValue(property, value?.ToString());
+            var (newValue, errorResponse) = await ResolvePropertyValue(property, value?.ToString());
             if (errorResponse != null)
             {
                 AddBannerMessage(errorResponse, AdaptiveContainerStyle.Warning);
@@ -228,17 +216,15 @@ namespace Crazor.AI
         /// <returns></returns>
         protected virtual async Task AssignValueAsync(string? property, object? value, CancellationToken cancellationToken = default)
         {
-            if (!Schema.Properties.TryGetValue(property, out var propSchema))
+            if (!typeof(ModelT).TryGetPropertyInfo(property, out var propertyInfo))
             {
                 // add UNKNOWNPROPERTY(property) response.
                 // AddBannerMessage(BindTemplate(Templates.UnknownProperty, property));
                 return;
             }
 
-            var propertyInfo = typeof(ModelT).GetProperty(property);
-
             // If it's an array then we process the value as "add" operation
-            if (propSchema.Type == JSchemaType.Array)
+            if (propertyInfo.PropertyType.IsList())
             {
                 var collection = (IList)propertyInfo.GetValue(this.Model);
                 collection.Add(value);
@@ -255,7 +241,7 @@ namespace Crazor.AI
             if (string.Compare(value?.ToString(), oldValue?.ToString(), ignoreCase: true) != 0)
             {
                 // set the new value
-                ObjectPath.SetPathValue(this.Model, property, value);
+                this.Model.SetTargetProperty(propertyInfo, value);
 
                 // if old value was not null
                 if (oldValue != null)
@@ -295,18 +281,10 @@ namespace Crazor.AI
         {
             await Task.CompletedTask;
 
-            if (property != null)
+            if (typeof(ModelT).HasProperty(property))
             {
-                // add REMOVED(property) response
-                if (!Schema.Properties.ContainsKey(property))
-                {
-                    // AddBannerMessage(BindTemplate(Templates.UnknownProperty, property, null));
-                }
-                else
-                {
-                    ObjectPath.RemovePathValue(this.Model, property);
-                    AddBannerMessage(BindPropertyTemplate<ValueClearedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
-                }
+                ObjectPath.RemovePathValue(this.Model, property);
+                AddBannerMessage(BindPropertyTemplate<ValueClearedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
             }
         }
 
@@ -321,7 +299,7 @@ namespace Crazor.AI
         {
             await Task.CompletedTask;
 
-            if (!Schema.Properties.TryGetValue(property, out var propSchema))
+            if (!typeof(ModelT).TryGetPropertyInfo(property, out var propertyInfo))
             {
                 // add UNKNOWNPROPERTY(property) response.
                 // AddBannerMessage(BindTemplate(Templates.UnknownProperty, property));
@@ -329,9 +307,9 @@ namespace Crazor.AI
             }
 
             // If it's an array then we process the value as "add" operation
-            if (propSchema.Type == JSchemaType.Array)
+            if (propertyInfo.PropertyType.IsList())
             {
-                var collection = (IList)ObjectPath.GetPathValue<IList<object?>>(this.Model, property);
+                var collection = (IList)propertyInfo.GetValue(this.Model);
                 collection.Remove(value);
 
                 // add ADDED(value) response
@@ -588,9 +566,9 @@ namespace Crazor.AI
             Dictionary<string, object?> data = new Dictionary<string, object?>(args)
             {
                 { "$property", property },
-                { "$value", propertyInfo.GetValue(this.Model) },
-                { "property", this.GetPropertyLabel(property) },
-                { "value", this.GetPropertyValueFormated(property, value) },
+                { "$value", value },
+                { "property", propertyInfo.GetPropertyLabel() },
+                { "value", propertyInfo.GetFormatedValueText(value) },
                 { "form", this },
                 { "model", this.GetModel() }
             };
@@ -647,13 +625,13 @@ namespace Crazor.AI
         }
 
         /// <summary>
-        /// ValidateValue
+        /// Given a property and a value resolve the value to a valid value for the property or return errors
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public virtual async Task<(object? value, string? errors)> ValidatePropertyValue(string? property, string? value)
+        public virtual async Task<(object? value, string? errors)> ResolvePropertyValue(string? property, string? value)
         {
             await Task.CompletedTask;
 
@@ -664,7 +642,7 @@ namespace Crazor.AI
             }
 
             // Convert to a valid instance of the schema type
-            var (newValue, errors) = ToSchemaType(property, value);
+            var (newValue, errors) = NormalizeValue(property, value);
             if (errors != null)
             {
                 return (null, errors);
@@ -696,39 +674,29 @@ namespace Crazor.AI
         /// If there are validation errors then we would convert but the result did not match json schema validation.
         /// If the value is null and there is no type, then the property did not exist.
         /// </remarks>
-        protected (object?, string?) ToSchemaType(string? property, string? value)
+        protected (object?, string?) NormalizeValue(string? property, string? value)
         {
             // Convert value to the appropriate JSON type
             // This is fixed because we ask GPT to translate.
             // var locale = dc.State.GetStringValue($"conversation.locale", "en-us");
             var locale = "en-us";
 
-            object? result = null;
-            JSchemaType? eltType = null;
-            var noType = $"Unknown {property}";
-            if (property == null)
+            if (!typeof(ModelT).TryGetPropertyInfo(property, out var propertyInfo))
             {
-                return (result, noType);
+                return (null, $"I didn't understand {property}");
             }
 
-            if (value == null || !Schema.Properties.TryGetValue(property, out var pschema))
+            var validationResults = new List<ValidationResult>();
+            var context = new ValidationContext(this.Model)
             {
-                return (result, noType);
-            }
+                MemberName = propertyInfo.Name,
+                DisplayName = propertyInfo.GetPropertyLabel(),
+            };
 
-            var isArray = false;
-            if (pschema.Type == null && pschema.OneOf.Any())
-                pschema = pschema.OneOf.FirstOrDefault();
-            eltType = pschema.Type;
-            if (eltType == JSchemaType.Array)
+            var propertyType = propertyInfo.PropertyType;
+            if (propertyInfo.PropertyType.IsList())
             {
-                pschema = pschema.Items?.FirstOrDefault();
-                isArray = true;
-                eltType = pschema?.Type;
-            }
-            if (pschema == null)
-            {
-                return (null, noType);
+                propertyType = propertyInfo.PropertyType.GetElementType();
             }
 
             // Figure out base time for references
@@ -743,255 +711,240 @@ namespace Crazor.AI
             //        refDate = dateValue;
             //    }
             //}
-
-            switch (eltType)
+            object? realValue = null;
+            switch (propertyType)
             {
-                case JSchemaType.String:
-                    switch (pschema?.Format)
+                case Type _ when propertyType == typeof(string):
+                    realValue = value.Trim();
+                    if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                        return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(bool):
+                case Type _ when propertyType == typeof(bool?):
+                    realValue = RecognizeBool(propertyInfo, value, "en-us");
+                    if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                        return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(Int16):
+                case Type _ when propertyType == typeof(Int16?):
+                case Type _ when propertyType == typeof(Int32):
+                case Type _ when propertyType == typeof(Int32?):
+                case Type _ when propertyType == typeof(Int64):
+                case Type _ when propertyType == typeof(Int64?):
+                case Type _ when propertyType == typeof(UInt16):
+                case Type _ when propertyType == typeof(UInt16?):
+                case Type _ when propertyType == typeof(UInt32):
+                case Type _ when propertyType == typeof(UInt32?):
+                case Type _ when propertyType == typeof(UInt64):
+                case Type _ when propertyType == typeof(UInt64?):
+                case Type _ when propertyType == typeof(Single):
+                case Type _ when propertyType == typeof(Single?):
+                case Type _ when propertyType == typeof(Double):
+                case Type _ when propertyType == typeof(Double?):
+                    realValue = RecognizeNumber(propertyInfo, value, "en-us");
+                    if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                        return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    return (realValue, null);
+
+                case Type _ when propertyType == typeof(DateTimeOffset):
                     {
-                        case "date":
-                            {
-                                var (type, _timex, dvalue) = RecognizeDateTime(pschema, value, locale, refDate);
-                                if (type == "date")
-                                {
-                                    result = dvalue;
-                                }
-                            }
-                            break;
-                        case "time":
-                            {
-                                var (type, _timex, dvalue) = RecognizeDateTime(pschema, value, locale, refDate);
-                                if (type == "time")
-                                {
-                                    result = dvalue;
-                                }
-                            }
-                            break;
-                        case "datetime":
-                        case "date-time":
-                            {
-                                var (type, timex, _dvalue) = RecognizeDateTime(pschema, value, locale, refDate);
-                                if (type == "datetime" && timex != null)
-                                {
-                                    var colons = timex.Count(c => c == ':');
-                                    if (colons == 0)
-                                    {
-                                        timex += ":00:00";
-                                    }
-                                    else if (colons == 1)
-                                    {
-                                        timex += ":00";
-                                    }
-                                    result = timex;
-                                }
-                                else if (type == "date")
-                                {
-                                    result = Convert.ToDateTime(_dvalue);
-                                }
-                                else if (type == "time")
-                                {
-                                    result = Convert.ToDateTime(_dvalue);
-                                }
-                            }
-                            break;
-                        case "duration":
-                            {
-                                var (type, timex, _dvalue) = RecognizeDateTime(pschema, value, locale, refDate);
-                                TimexProperty timexProperty = new TimexProperty(timex);
-                            }
-                            break;
-                        default:
-                            {
-                                var enumChoices = pschema!.Enum;
-                                if (enumChoices.Any())
-                                {
-                                    var nvalue = Normalize(value);
-                                    var wordCount = -1;
-                                    List<string>? wordMatches = null;
-                                    foreach (var jchoice in enumChoices)
-                                    {
-                                        var choice = jchoice.ToString();
-                                        if (choice.ToLowerInvariant() == nvalue)
-                                        {
-                                            result = choice;
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            // Break on case changes and normalize
-                                            var words = from word in Regex.Split(choice, @"(?<!^)(?=\p{Lu})") select Normalize(word);
-                                            var phrase = string.Join(' ', words);
-                                            if (phrase == nvalue)
-                                            {
-                                                result = choice;
-                                                break;
-                                            }
-                                            else
-                                            {
-                                                // Count word matches for partial matches
-                                                var count = 0;
-                                                foreach (var word in words)
-                                                {
-                                                    if (nvalue.Contains(word))
-                                                    {
-                                                        ++count;
-                                                    }
-                                                }
-                                                if (count == wordCount)
-                                                {
-                                                    wordMatches!.Add(choice);
-                                                }
-                                                else if (count > 0 && count > wordCount)
-                                                {
-                                                    wordCount = count;
-                                                    wordMatches = new List<string> { choice };
-                                                }
-                                            }
-                                        }
-                                    }
-                                    if (wordMatches != null && wordMatches.Count == 1)
-                                    {
-                                        // Partial match of one choice
-                                        result = wordMatches.First();
-                                    }
-                                }
-                                else
-                                {
-                                    result = value;
-                                }
-                            }
-                            break;
-                    }
-                    break;
-                case JSchemaType.Boolean:
-                    {
-                        if (bool.TryParse(value, out var bvalue))
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((DateTimeOffset)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
                         {
-                            result = bvalue;
-                        }
-                        break;
-                    }
-                case JSchemaType.Integer:
-                    {
-                        if (int.TryParse(value, out var ivalue))
-                        {
-                            result = ivalue;
-                        }
-                        else
-                        {
-                            var number = RecognizeNumber(value, locale);
-                            if (number is int)
+                            foreach (var date in dates)
                             {
-                                result = number;
+                                foreach (var time in times)
+                                {
+                                    realValue = new DateTimeOffset(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second, TimeSpan.MinValue);
+                                }
                             }
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
                         }
                     }
-                    break;
-                case JSchemaType.Number:
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(DateTimeOffset?):
                     {
-                        if (double.TryParse(value, out var dvalue))
-                        {
-                            result = dvalue;
-                        }
-                        else
-                        {
-                            result = RecognizeNumber(value, "en-us");
-                        }
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((DateTimeOffset?)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
                     }
-                    break;
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(DateTime):
+                    {
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((DateTime)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    }
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(DateTime?):
+                    {
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((DateTime?)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    }
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(TimeOnly):
+                    {
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((TimeOnly)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    }
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(TimeOnly?):
+                    {
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((TimeOnly?)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    }
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(DateOnly):
+                    {
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((DateOnly)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    }
+                    return (realValue, null);
+                case Type _ when propertyType == typeof(DateOnly?):
+                    {
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        realValue = timex.Merge((DateOnly?)propertyInfo.GetValue(this.Model));
+                        if (!Validator.TryValidateProperty(realValue, context, validationResults))
+                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                    }
+                    return (realValue, null);
+
+                ////case "duration":
+                ////    {
+                ////        var (type, timex, _dvalue) = RecognizeDateTime(pschema, value, locale, refDate);
+                ////        TimexProperty timexProperty = new TimexProperty(timex);
+                ////    }
+                ////    break;
                 default:
+                    //{
+                    //    var enumChoices = pschema!.Enum;
+                    //    if (enumChoices.Any())
+                    //    {
+                    //        var nvalue = Normalize(value);
+                    //        var wordCount = -1;
+                    //        List<string>? wordMatches = null;
+                    //        foreach (var jchoice in enumChoices)
+                    //        {
+                    //            var choice = jchoice.ToString();
+                    //            if (choice.ToLowerInvariant() == nvalue)
+                    //            {
+                    //                result = choice;
+                    //                break;
+                    //            }
+                    //            else
+                    //            {
+                    //                // Break on case changes and normalize
+                    //                var words = from word in Regex.Split(choice, @"(?<!^)(?=\p{Lu})") select Normalize(word);
+                    //                var phrase = string.Join(' ', words);
+                    //                if (phrase == nvalue)
+                    //                {
+                    //                    result = choice;
+                    //                    break;
+                    //                }
+                    //                else
+                    //                {
+                    //                    // Count word matches for partial matches
+                    //                    var count = 0;
+                    //                    foreach (var word in words)
+                    //                    {
+                    //                        if (nvalue.Contains(word))
+                    //                        {
+                    //                            ++count;
+                    //                        }
+                    //                    }
+                    //                    if (count == wordCount)
+                    //                    {
+                    //                        wordMatches!.Add(choice);
+                    //                    }
+                    //                    else if (count > 0 && count > wordCount)
+                    //                    {
+                    //                        wordCount = count;
+                    //                        wordMatches = new List<string> { choice };
+                    //                    }
+                    //                }
+                    //            }
+                    //        }
+                    //        if (wordMatches != null && wordMatches.Count == 1)
+                    //        {
+                    //            // Partial match of one choice
+                    //            result = wordMatches.First();
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        result = value;
+                    //    }
+                    //}
                     break;
             }
-            if (result == null)
-            {
-                return (null, $"{value} is not valid for {GetPropertyLabel(property)}");
-            }
-
-            IList<ValidationError> errors = new List<ValidationError>();
-            var isValid = JToken.FromObject(result).IsValid(pschema, out errors);
-            if (!isValid)
-            {
-                return (null, $"{value} is not valid for {GetPropertyLabel(property)} because: {string.Join(',', errors.Select(e => e.Message))}");
-            }
-
-            if (pschema.Type == JSchemaType.String && pschema.Format == "phone")
-            {
-                var model = Microsoft.Recognizers.Text.Sequence.SequenceRecognizer.RecognizePhoneNumber(result?.ToString(), "en");
-                if (model.Count != 1)
-                {
-                    return (null, $"{value} is not valid for {GetPropertyLabel(property)}");
-                }
-                else
-                {
-                    result = model[0].Resolution["value"].ToString();
-                }
-            }
-
-
-            return (result, null);
+            return (null, "uhoho");
         }
 
-        static protected (string? type, string? timex, string? value) RecognizeDateTime(JSchema schema, string value, string locale, DateTime refDate)
+        private static string GetErrorMessage(string value, PropertyInfo propertyInfo, List<ValidationResult> validationResults)
         {
-            DateTime min = DateTime.MinValue;
-            DateTime max = DateTime.MaxValue;
-            if (schema.ExtensionData.TryGetValue("$minimum", out var minVal))
-            {
-                min = minVal.ToString() == "$NOW" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) : DateTime.Parse(minVal.ToString());
-            }
+            return $"{value} is not valid for {propertyInfo.GetPropertyLabel()} because: {string.Join(',', validationResults.Select(e => e.ErrorMessage))}";
+        }
 
-            if (schema.ExtensionData.TryGetValue("$maximum", out var maxVal))
-            {
-                max = maxVal.ToString() == "$NOW" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 55, 55) : DateTime.Parse(maxVal.ToString());
-            }
-
-            var results = DateTimeRecognizer.RecognizeDateTime(value, locale, refTime: refDate).FirstOrDefault();
+        static protected (TimexProperty, IList<DateOnly>, IList<TimeOnly>) RecognizeTimex(PropertyInfo propertyInfo, string value, string locale, DateTime refDate)
+        {
+            var results = DateTimeRecognizer.RecognizeDateTime(value, locale, refTime: refDate);
             if (results == null)
             {
-                results = NumberRecognizer.RecognizeOrdinal(value, locale).FirstOrDefault();
+                results = NumberRecognizer.RecognizeOrdinal(value, locale);
                 if (results != null)
                 {
-                    results = DateTimeRecognizer.RecognizeDateTime($"on the {value}", "en-us", refTime: refDate).FirstOrDefault();
+                    results = DateTimeRecognizer.RecognizeDateTime($"on the {value}", "en-us", refTime: refDate);
                 }
             }
 
+            TimexProperty? timexProperty = null;
+            List<DateOnly> dates = new List<DateOnly>();
+            List<TimeOnly> times = new List<TimeOnly>();
             if (results != null)
             {
-                if ((results.End - results.Start) < value.Length / 2)
+                foreach (var values in results[0].Resolution["values"] as List<Dictionary<string, string>>)
                 {
-                    return (null, null, null);
-                }
-
-                foreach (var resolution in results?.Resolution["values"] as List<Dictionary<string, string>>)
-                {
-                    switch (resolution["type"])
+                    if (timexProperty == null && values.ContainsKey("timex"))
                     {
-                        case "date":
-                        case "date-time":
-                        case "datetime":
-                            var date = DateTime.Parse(resolution["value"]);
-                            if (date >= min && date <= max)
-                            {
-                                return (resolution?["type"], resolution?["timex"], resolution?["value"]);
-                            }
-                            break;
-                        case "time":
-                            var time = TimeSpan.Parse(resolution["value"]);
-                            if (time >= min.TimeOfDay && time <= max.TimeOfDay)
-                            {
-                                return (resolution?["type"], resolution?["timex"], resolution?["value"]);
-                            }
-                            break;
-                        case "duration":
-                            // TODO : Check duration constraints
-                            return (resolution?["type"], resolution?["timex"], resolution?["value"]);
+                        timexProperty = new TimexProperty(values["timex"]);
+                    }
+
+                    if (values.ContainsKey("type"))
+                    {
+                        var valueType = values["type"];
+                        var val = values["value"];
+                        if (valueType == "datetime")
+                        {
+                            var dt = DateTime.Parse(val);
+                            dates.Add(DateOnly.FromDateTime(dt));
+                            times.Add(TimeOnly.FromDateTime(dt));
+                        }
+                        else if (valueType == "date")
+                        {
+                            dates.Add(DateOnly.Parse(val));
+                        }
+                        else if (valueType == "time")
+                        {
+                            times.Add(TimeOnly.Parse(val));
+                        }
                     }
                 }
             }
-            return (null, null, null);
+            return (timexProperty, dates, times.Distinct().ToList());
         }
 
-        static protected object? RecognizeNumber(string value, string locale)
+        static protected object? RecognizeNumber(PropertyInfo propertyInfo, string value, string locale)
         {
             object? result = null;
             value = value.Trim();
@@ -1035,74 +988,56 @@ namespace Crazor.AI
                     }
                 }
             }
+
+            if (result != null)
+            {
+                var targetType = propertyInfo.PropertyType;
+                if (targetType.GenericTypeArguments.Any())
+                    targetType = targetType.GenericTypeArguments.First();
+                return Convert.ChangeType(result, targetType);
+            }
             return result;
         }
 
-        protected string GetPropertyLabel(string property)
+        static protected bool? RecognizeBool(PropertyInfo propertyInfo, string value, string locale)
         {
-            var prop = Schema.Properties[property];
-            if (prop.ExtensionData.TryGetValue("label", out var label))
+            object? result = null;
+            value = value.Trim();
+
+            var models = ChoiceRecognizer.RecognizeBoolean(value, locale);
+            if (models.Count > 1)
             {
-                return label.ToString().Humanize();
+                return null;
             }
-            return property;
+            var model = models.FirstOrDefault();
+            if (model != null)
+            {
+                return (bool?)model.Resolution["value"];
+            }
+            return null;
         }
 
-        protected string GetPropertyForLabel(string property)
+        protected string GetPropertyForLabel(string propertyRef)
         {
-            if (string.IsNullOrEmpty(property))
+            if (string.IsNullOrEmpty(propertyRef))
             {
                 return null;
             }
 
-            if (Schema.Properties.TryGetValue(property, out var _))
+            if (this.Model.GetType().HasProperty(propertyRef))
             {
-                return property;
+                return propertyRef;
             }
-            var prop = Schema.Properties.Where(p =>
-            {
-                if (p.Value.ExtensionData.TryGetValue("label", out var label))
-                {
-                    return string.Compare(label.ToString(), property, ignoreCase: true) == 0;
-                }
-                return false;
-            }).Select(prop => prop.Key).FirstOrDefault();
-            return prop ?? property;
-        }
 
-        protected string GetPropertyValueFormated(string propertyName, object? value)
-        {
-            if (this.Schema.Properties.TryGetValue(propertyName, out var property))
+            foreach (var propertyInfo in this.Model.GetType().GetProperties())
             {
-                if (property.Type == JSchemaType.Array && property.Items != null)
+                if (String.Equals(propertyInfo.GetPropertyLabel(), propertyRef, StringComparison.OrdinalIgnoreCase))
                 {
-                    var item = property.Items.FirstOrDefault();
-                    if (item != null && item.Type == JSchemaType.String && item.Enum != null)
-                    {
-                        if (!(value is JArray))
-                            value = new JArray() { value };
-
-                        return string.Join(", ", JArray.FromObject(value).Select(v =>
-                        {
-                            if (item.ExtensionData.TryGetValue("EnumLabels", out var enumLabels))
-                            {
-                                var labels = enumLabels as JArray;
-                                if (labels != null)
-                                {
-                                    var index = item.Enum.IndexOf(v?.ToString());
-                                    if (index >= 0 && index < labels.Count)
-                                    {
-                                        return labels[index].ToString();
-                                    }
-                                }
-                            }
-                            return v.ToString().Humanize();
-                        }));
-                    }
+                    return propertyInfo.Name;
                 }
             }
-            return value?.ToString();
+            return propertyRef;
         }
-        #endregion    
+        #endregion
     }
 }

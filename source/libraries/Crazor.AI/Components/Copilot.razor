@@ -1,7 +1,8 @@
 ﻿@using Crazor.AdaptiveCards
 @using Crazor.Blazor.Components.Adaptive
 
-<InputText Id="copilotText" Label="Copilot" Placeholder="@Placeholder" Separator="@Separator" Spacing="AdaptiveSpacing.Small">
+<TextBlock Style="AdaptiveTextBlockStyle.Heading" Text="Copilot"/>
+<InputText Id="copilotText" Label="" Placeholder="@Placeholder" Separator="@Separator" Spacing="AdaptiveSpacing.Small">
     <ActionExecute Verb="OnCopilot" IconUrl="@IconUrl" Title="@Title" />
 </InputText>
 
