@@ -16,7 +16,10 @@
         <Container Id="@viewId" IsVisible="@(HasValue == true || ViewOnly)">
             @if (View == null)
             {
-                <TextBlock Text="@($"{BindingLabel}: {BindingValue}")" />
+                <RichTextBlock>
+                    <TextRun Weight="AdaptiveTextWeight.Bolder">@BindingLabel</TextRun>
+                    <TextRun>: @BindingValue</TextRun>
+                </RichTextBlock>
             }
             else
             {

@@ -1105,6 +1105,7 @@ namespace Crazor
                     {
                         Id = $"messageBanner{iMessage}",
                         Style = message.Style,
+                        Bleed= true,
                         Spacing = AdaptiveSpacing.None,
                         Columns = new List<AdaptiveColumn>()
                         {
