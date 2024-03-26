@@ -15,6 +15,8 @@ using Microsoft.Recognizers.Text.Choice;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using Humanizer;
+using Microsoft.Bot.Schema;
+using Crazor.AI.Components;
 
 namespace Crazor.AI
 {
@@ -57,6 +59,16 @@ namespace Crazor.AI
             return apiResult;
         }
 
+        public async override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+        {
+            await base.OnActionAsync(action, cancellationToken);
+         
+            if (action.Verb == InputCopilot.COPOILOT_VERB)
+            {
+                // we don't want validation errors if we are doing a copilot action.
+                this.ValidationErrors.Clear();
+            }
+        }
 
         #region functions
 
@@ -808,7 +820,7 @@ namespace Crazor.AI
                 case TypeCode.DateTime:
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateTimeOffset)propertyInfo.GetValue(this.Model));
+                        realValue = timex.Merge((DateTimeOffset?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                         {
                             foreach (var date in dates)
@@ -828,7 +840,7 @@ namespace Crazor.AI
                 case TypeCode.Object when propertyType.Name == nameof(DateTimeOffset):
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateTime)propertyInfo.GetValue(this.Model));
+                        realValue = timex.Merge((DateTime?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                             return (null, GetErrorMessage(value, propertyInfo, validationResults));
                         return (realValue, null);
@@ -837,7 +849,7 @@ namespace Crazor.AI
                 case TypeCode.Object when propertyType.Name == nameof(TimeOnly):
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((TimeOnly)propertyInfo.GetValue(this.Model));
+                        realValue = timex.Merge((TimeOnly?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                             return (null, GetErrorMessage(value, propertyInfo, validationResults));
                         return (realValue, null);
@@ -846,7 +858,7 @@ namespace Crazor.AI
                 case TypeCode.Object when propertyType.Name == nameof(DateOnly):
                     {
                         var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateOnly)propertyInfo.GetValue(this.Model));
+                        realValue = timex.Merge((DateOnly?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                             return (null, GetErrorMessage(value, propertyInfo, validationResults));
                         return (realValue, null);

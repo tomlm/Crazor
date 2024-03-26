@@ -1,13 +1,17 @@
 ﻿@using Crazor.AdaptiveCards
 @using Crazor.Blazor.Components.Adaptive
 
-<TextBlock Style="AdaptiveTextBlockStyle.Heading" Text="Copilot"/>
-<InputText Id="copilotText" Label="" Placeholder="@Placeholder" Separator="@Separator" Spacing="AdaptiveSpacing.Small">
-    <ActionExecute Verb="OnCopilot" IconUrl="@IconUrl" Title="@Title" />
-</InputText>
-
+<Container Bleed="true" Style="AdaptiveContainerStyle.Emphasis">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading" Text="Copilot" />
+    <InputText Id="COPILOTTEXT" Label="" Placeholder="@Placeholder" Separator="@Separator" Spacing="AdaptiveSpacing.Small">
+        <ActionExecute Verb="@COPOILOT_VERB" IconUrl="@IconUrl" Title="@Title" />
+    </InputText>
+</Container>
 @code
 {
+    public const string COPILOT_TEXT = "copilotText";
+    public const string COPOILOT_VERB = "OnCopilot";
+
     [Parameter]
     public string Placeholder { get; set; } = "Ask me to help fill out the form.";
 
