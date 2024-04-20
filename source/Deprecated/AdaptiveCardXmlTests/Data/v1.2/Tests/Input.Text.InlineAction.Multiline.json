@@ -1,0 +1,30 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Multiline Text Inputs with inline actions"
+    },
+    {
+      "type": "Input.Text",
+      "id": "input3",
+      "isMultiline": true,
+      "inlineAction": {
+        "type": "Action.Submit",
+        "title": "Reply",
+        "iconUrl": "https://adaptivecards.io/content/send.png"
+      }
+    },
+    {
+      "type": "Input.Text",
+      "id": "input4",
+      "isMultiline": true,
+      "inlineAction": {
+        "type": "Action.OpenUrl",
+        "url": "https://adaptivecards.io/",
+        "title": "Reply"
+      }
+    }
+  ]
+}

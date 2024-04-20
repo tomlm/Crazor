@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.3" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.Text Id="id1" IsRequired="true" Label="Required Input.Text" ErrorMessage="This is a required input" />
-  <Input.Text Id="id2" Label="Input.Text with regex: ([A-Z])\w+" ErrorMessage="This input must begin with a capital letter and contain only alphanumeric characters." Regex="([A-Z])\w+" />
-  <Input.Text Id="id3" Label="Input.Text with maxLength of 6" ErrorMessage="This input must contain 6 characters or less." MaxLength="6" />
-  <Action.Submit Title="Submit" />
-</Card>

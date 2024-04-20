@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="1" />
+  <TextBlock Wrap="true">This card has an action with an icon. Icon placement and size depend on host.</TextBlock>
+  <Action.OpenUrl Title="With Icon" IconUrl="https://adaptivecards.io/content/cats/1.png" Url="https://adaptivecards.io/" />
+</Card>

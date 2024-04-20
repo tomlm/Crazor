@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Size="Medium" Wrap="true">Test scenarios around numbered lists with max values.</TextBlock>
+  <TextBlock>Numbered List:</TextBlock>
+  <TextBlock>1. One
+2. Two</TextBlock>
+  <TextBlock>
+Numbered List starting at 3:</TextBlock>
+  <TextBlock>3. One
+2. Two.</TextBlock>
+  <TextBlock Wrap="true">
+Numbered List starting at a number bigger than max unsigned int (4294967295).</TextBlock>
+  <TextBlock>4294967296. One
+2. Two</TextBlock>
+  <TextBlock Wrap="true">
+Numbered List where second element would be bigger than max unsigned int (4294967295).</TextBlock>
+  <TextBlock>4294967295. One
+2. Two</TextBlock>
+  <TextBlock Wrap="true">
+Numbered List where second element equals max unsigned int (4294967295).</TextBlock>
+  <TextBlock>4294967294. One
+2. Two</TextBlock>
+</Card>

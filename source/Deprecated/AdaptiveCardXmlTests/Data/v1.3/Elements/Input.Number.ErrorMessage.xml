@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Input.Number Id="input1" IsRequired="true" Label="Required Input.Number" ErrorMessage="This number is required" Value="NaN" Min="NaN" Max="NaN" />
+  <Input.Number Id="input2" Label="Input.Number with valid min of 5" ErrorMessage="This number must be greater than 5" Value="NaN" Min="5" Max="NaN" />
+  <Input.Number Id="input3" Label="Input.Number with valid max of 10" ErrorMessage="This number must be smaller than 10" Value="NaN" Min="NaN" Max="10" />
+  <Input.Number Id="input4" IsRequired="true" Label="Required Input.Number with valid range between 0 and 100" ErrorMessage="This number is required and must be between 0 and 100" Value="NaN" Min="0" Max="100" />
+  <Action.Submit Title="Submit" />
+</Card>

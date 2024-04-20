@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="4" />
+  <TextBlock Wrap="true" Style="Heading">Please confirm your order:</TextBlock>
+  <FactSet>
+    <Fact Title="Name" Value="John Smith" />
+    <Fact Title="Phone number" Value="(555) 555-5555" />
+  </FactSet>
+  <Container>
+    <AdaptiveElement p3:type="FactSet" Spacing="Small" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">
+      <Fact Title="1x" Value="Steak" />
+      <Fact Title="2x" Value="Side Rice" />
+      <Fact Title="1x" Value="Soft Drink" />
+    </AdaptiveElement>
+  </Container>
+  <Action.Execute Title="Place Order" Verb="" />
+  <Action.Execute Title="Edit Order" Mode="Secondary" Verb="">"edit"</Action.Execute>
+  <Action.Execute Title="Save Order" Mode="Secondary" Verb="">"save"</Action.Execute>
+</Card>

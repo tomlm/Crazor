@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock IsSubtle="true">This tests that unknown elements are OK</TextBlock>
-  <UnknownElement Type="AmazingFeature">
-    <AdditionalProperties>
-      <Property Name="isAwesome">true</Property>
-    </AdditionalProperties>
-  </UnknownElement>
-</Card>

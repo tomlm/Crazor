@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <BackgroundImage BackgroundImage="https://foo.com/sets/background.png" />
+  <Image Url="https://foo.com/Assets/Adaptive10.png" AltText="Adaptive cards 1.0 logo" />
+  <Action.ShowCard Title="Open Card" IconUrl="https://foo.com/Assets/Adaptive10.png">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+      <Input.Text Id="comment" Placeholder="Enter your comment" IsMultiline="true" />
+      <Action.Submit Title="OK" IconUrl="https://foo.com/Assets/Adaptive10.png" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

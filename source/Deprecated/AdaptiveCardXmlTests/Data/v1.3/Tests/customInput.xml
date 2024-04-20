@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <AdaptiveUnknownElement Id="id1">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">label</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">Please enter a csharp keyword</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string xmlns="">isRequired</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">true</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string xmlns="">errorMessage</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">This has to be a csharp keyword!</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Type>CSharpKeywordInput</Type>
+  </AdaptiveUnknownElement>
+  <Input.Text Id="id2" IsRequired="true" Label="Please enter some text" ErrorMessage="This input is required." />
+  <Action.Submit Title="Submit" />
+</Card>

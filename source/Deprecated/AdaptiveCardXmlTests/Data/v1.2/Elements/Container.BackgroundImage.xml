@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">What a beautiful background</AdaptiveElement>
+  </Container>
+  <TextBlock>They can even repeat a bunch of different ways...</TextBlock>
+  <Container />
+  <Container />
+  <Container />
+</Card>

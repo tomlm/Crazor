@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card MinHeight="150px" xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="1" />
+  <TextBlock>I'm a regular TextBlock...</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">But I'm centered...</AdaptiveElement>
+  </Container>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">And I'm like a footer!</AdaptiveElement>
+  </Container>
+</Card>

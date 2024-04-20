@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock Wrap="true">This card has four OpenUrl actions. The styles from left to right are "Default", "Positive", "Destructive" and "Other".</TextBlock>
+  <Action.OpenUrl Title="Default" Url="https://adaptivecards.io/" />
+  <Action.OpenUrl Title="Pawsitive" Style="positive" Url="https://adaptivecards.io/" />
+  <Action.OpenUrl Title="Destructive" Style="destructive" Url="https://adaptivecards.io/" />
+  <Action.OpenUrl Title="Other" Url="https://adaptivecards.io/" />
+</Card>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.1" FallbackText="This card requires Adaptive Cards version 1.1." xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Wrap="true">This should not appear if renderer version &lt; card version.</TextBlock>
-</Card>

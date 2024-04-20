@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Size="Large" Weight="Bolder">Please rate your experience</TextBlock>
+  <Input.ChoiceSet Id="Rating" Spacing="Medium" Value="5">
+    <Choices>
+      <Choice Title="Excellent" Value="5" />
+      <Choice Title="Good" Value="4" />
+      <Choice Title="Average" Value="3" />
+      <Choice Title="Poor" Value="2" />
+      <Choice Title="Very poor" Value="1" />
+    </Choices>
+  </Input.ChoiceSet>
+  <TextBlock Spacing="Large">Leave a comment</TextBlock>
+  <Input.Text Id="FeedbackText" Spacing="Medium" IsMultiline="true" MaxLength="500" />
+  <TextBlock Spacing="Small">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">space</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">preserve</anyType>
+        </value>
+      </item>
+    </AdditionalProperties> </TextBlock>
+  <Action.Submit Title="Send">{
+  "CardType": "FeedbackCard",
+  "DialogId": "Feedback",
+  "Command": "SendFeedback",
+  "ActionAvailability": "GlobalInterrupt"
+}</Action.Submit>
+</Card>

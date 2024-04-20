@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock>Date Input</TextBlock>
-  <Input.Date Id="date" Placeholder="Enter a date" Value="2017-10-12" />
-  <Action.Submit Title="OK" />
-</Card>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Container>
+    <AdaptiveElement p3:type="Input.Text" Id="input1" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">
+      <Height HeightType="Stretch" />
+    </AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Bottom text</AdaptiveElement>
+  </Container>
+  <Container>
+    <AdaptiveElement p3:type="Input.Text" Id="input2" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Bottom text</AdaptiveElement>
+  </Container>
+  <Container>
+    <AdaptiveElement p3:type="Input.Text" Id="input3" IsRequired="true" Label="Required Input.Text label" ErrorMessage="Required input" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Bottom text</AdaptiveElement>
+  </Container>
+  <Action.Submit Title="Submit" />
+</Card>

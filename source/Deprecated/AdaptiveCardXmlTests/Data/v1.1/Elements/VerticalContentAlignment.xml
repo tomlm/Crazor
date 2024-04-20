@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="1" />
+  <TextBlock>Hi,</TextBlock>
+  <TextBlock IsSubtle="true">MasterHip</TextBlock>
+  <VerticalContentAlignment>Bottom</VerticalContentAlignment>
+</Card>

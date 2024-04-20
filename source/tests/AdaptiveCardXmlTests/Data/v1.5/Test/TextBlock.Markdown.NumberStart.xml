@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.4" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock>1. First item in the list;</TextBlock>
-  <TextBlock>2. Second item in the list;</TextBlock>
-  <TextBlock>3. Third item in the list;</TextBlock>
-  <TextBlock Wrap="true">10. The tenth thing
-10. The list is still going!
-10. Should be 12!</TextBlock>
-</Card>

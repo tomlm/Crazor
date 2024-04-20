@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.5" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.Text Id="name" Label="Please enter your name below:" />
-  <Action.Submit Title="Submit" Tooltip="Click here to add your name to the waiting list." />
-</Card>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="5" />
+  <TextBlock Wrap="true">Disabled OpenUrl Button</TextBlock>
+  <Action.OpenUrl Title="Enabled" Url="https://adaptivecards.io/" />
+  <Action.OpenUrl Title="Disabled" Url="https://adaptivecards.io/" />
+</Card>

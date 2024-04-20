@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock Wrap="true">Fallback test:</TextBlock>
+  <AdaptiveUnknownElement>
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">egg</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">her?</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Drop</Type>
+    </Fallback>
+    <Type>Steve Holt!</Type>
+  </AdaptiveUnknownElement>
+  <AdaptiveUnknownElement>
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">someProperty</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">foo</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Fallback>
+      <Type>Content</Type>
+      <Content p4:type="TextBlock" Wrap="true" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">No graph support. Guess we'll just use this textblock instead.</Content>
+    </Fallback>
+    <Type>Graph</Type>
+  </AdaptiveUnknownElement>
+</Card>

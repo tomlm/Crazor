@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>color: default</TextBlock>
+  <TextBlock Color="Accent">color: accent</TextBlock>
+  <TextBlock Color="Good">color: good</TextBlock>
+  <TextBlock Color="Warning">color: warning</TextBlock>
+  <TextBlock Color="Attention">color: attention</TextBlock>
+  <TextBlock Color="Light">color: light</TextBlock>
+  <TextBlock Color="Dark">color: dark</TextBlock>
+</Card>

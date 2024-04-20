@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.ChoiceSet Id="myColor4" Value="1" Style="expanded" IsMultiSelect="true">
-    <Choice Title="Red" Value="1" />
-    <Choice Title="Green" Value="2" />
-    <Choice Title="Blue" Value="3" />
-  </Input.ChoiceSet>
-  <Action.Submit Title="OK" />
-</Card>

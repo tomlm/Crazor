@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Wrap="true">Action.OpenUrl of this card has custom property that will render button green</TextBlock>
+  <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io/">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">color</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">green</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+  </Action.OpenUrl>
+</Card>

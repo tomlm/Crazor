@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Style="Heading">Specify the type of text being requested:</TextBlock>
+  <Input.Text Id="myComment" Label="style: text" />
+  <Input.Text Id="myEmail" Label="style: email" Style="Email" />
+  <Input.Text Id="myTel" Label="style: tel" Style="Tel" />
+  <Input.Text Id="myUrl" Label="style: url" Style="Url" />
+  <Input.Text Id="myPassword" Label="style: password" />
+  <Action.Submit Title="OK" />
+</Card>

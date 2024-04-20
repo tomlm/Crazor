@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.Toggle Id="toggleLabelId" Label="Default Input.Toggle label" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="false" />
-  <Input.Toggle Id="requiredToggleLabelId" IsRequired="true" Label="Required Input.Toggle label" ErrorMessage="Required input" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="false" />
-  <Action.Submit Title="OK" />
-</Card>

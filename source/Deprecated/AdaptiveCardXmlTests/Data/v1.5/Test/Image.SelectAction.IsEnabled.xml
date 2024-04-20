@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="4" />
+  <Image Size="Large" Url="https://adaptivecards.io/content/cats/1.png">
+    <SelectAction p3:type="Action.OpenUrl" Tooltip="This cat button is disabled :(" Url="https://adaptivecards.io/" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Image>
+</Card>

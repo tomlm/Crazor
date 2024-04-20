@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock>**test1** **test2**</TextBlock>
+</Card>

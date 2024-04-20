@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>isSubtle:false</TextBlock>
+  <TextBlock IsSubtle="true">isSubtle:true</TextBlock>
+</Card>

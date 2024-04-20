@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Input.Date Id="dateLabelId" Label="Default Input.Date label" />
+  <Input.Date Id="requiredDateLabelId" IsRequired="true" Label="Required Input.Date label" ErrorMessage="Required input" />
+  <Action.Submit Title="OK" />
+</Card>

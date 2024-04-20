@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock Wrap="true">This card has four ShowCard actions. The styles from left to right are "Default", "Positive", "Destructive" and "Other".</TextBlock>
+  <Action.ShowCard Title="Default">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Pawsitive" Style="positive">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Destructive" Style="destructive">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Other">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

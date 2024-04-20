@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <Container>
+    <AdaptiveElement p3:type="Input.ChoiceSet" Id="0" Style="Expanded" Wrap="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">
+      <Choices>
+        <Choice Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. End." Value="0" />
+        <Choice Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. End." Value="1" />
+      </Choices>
+    </AdaptiveElement>
+  </Container>
+</Card>

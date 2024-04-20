@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <AdaptiveUnknownElement>
+    <Fallback>
+      <Type>Drop</Type>
+    </Fallback>
+    <Type>SomeCustomElement</Type>
+  </AdaptiveUnknownElement>
+  <AdaptiveUnknownAction Title="This is a bug!">
+    <Fallback>
+      <Type>Drop</Type>
+    </Fallback>
+    <Type>SomeCustomAction</Type>
+  </AdaptiveUnknownAction>
+</Card>

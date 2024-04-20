@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Speak>&lt;s&gt;Your  meeting about "Adaptive Card design session"&lt;break strength='weak'/&gt; is starting at 12:30pm&lt;/s&gt;&lt;s&gt;Do you want to snooze &lt;break strength='weak'/&gt; or do you want to send a late notification to the attendees?&lt;/s&gt;</Speak>
+  <TextBlock Size="Large" Weight="Bolder" Wrap="true" Style="Heading">Adaptive Card design session</TextBlock>
+  <TextBlock IsSubtle="true" Wrap="true">Conf Room 112/3377 (10)</TextBlock>
+  <TextBlock Spacing="None" IsSubtle="true" Wrap="true">12:30 PM - 1:30 PM</TextBlock>
+  <TextBlock Wrap="true">Snooze for</TextBlock>
+  <Input.ChoiceSet Id="snooze" Value="5">
+    <Choices>
+      <Choice Title="5 minutes" Value="5" />
+      <Choice Title="15 minutes" Value="15" />
+      <Choice Title="30 minutes" Value="30" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Action.Submit Title="Snooze">{
+  "x": "snooze"
+}</Action.Submit>
+  <Action.Submit Title="I'll be late">{
+  "x": "late"
+}</Action.Submit>
+</Card>

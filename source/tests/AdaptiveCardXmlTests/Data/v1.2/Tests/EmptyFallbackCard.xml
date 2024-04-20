@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
-  <UnknownElement Type="SomeCustomElement">
-    <Fallback Type="drop" />
-  </UnknownElement>
-  <Action.Unknown Title="This is a bug!" Type="SomeCustomAction">
-    <Fallback Type="drop" />
-  </Action.Unknown>
-</Card>

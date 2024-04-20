@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.Number Id="numberLabelId" Label="Default Input.Number label" Value="NaN" Min="NaN" Max="NaN" />
-  <Input.Number Id="requiredNumberLabelId" IsRequired="true" Label="Require Input.Number label" ErrorMessage="Required input" Value="NaN" Min="NaN" Max="NaN" />
-  <Action.Submit Title="Submit" />
-</Card>

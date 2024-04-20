@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Size="medium" Weight="bolder">spacing: none</TextBlock>
-  <Image Spacing="none" Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-  <TextBlock Size="medium" Weight="bolder">spacing: large, separator: true</TextBlock>
-  <Image Spacing="large" Separator="true" Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-</Card>

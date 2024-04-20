@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <Image Url="https://picsum.photos/300?image=882" AltText="Seated guest drinking a cup of coffee" />
+  <Image Url="https://picsum.photos/300?image=882" AltText="Seated guest drinking a cup of coffee" PixelWidth="300">
+    <Height HeightType="Pixel" Unit="300" />
+  </Image>
+</Card>

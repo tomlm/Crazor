@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>This empty columnset should not prevent the card from rendering</TextBlock>
+  <ColumnSet />
+</Card>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card FallbackText="This card requires Media to be viewed. Ask your platform to update to Adaptive Cards v1.1 for this and more!" xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="1" />
+  <Media Poster="https://adaptivecards.io/content/poster-video.png">
+    <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+  </Media>
+</Card>

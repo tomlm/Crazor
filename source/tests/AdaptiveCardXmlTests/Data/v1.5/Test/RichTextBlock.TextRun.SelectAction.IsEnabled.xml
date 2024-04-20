@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.4" xmlns="application/vnd.microsoft.card.adaptive">
-  <RichTextBlock>
-    <TextRun>This link is disabled: </TextRun>
-    <TextRun>Link<Action.OpenUrl Url="https://adaptivecards.io/" /></TextRun>
-  </RichTextBlock>
-</Card>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Size="ExtraLarge">Container Spacing</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">spacing: none</AdaptiveElement>
+  </Container>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">spacing: extraLarge, separator: true</AdaptiveElement>
+  </Container>
+</Card>

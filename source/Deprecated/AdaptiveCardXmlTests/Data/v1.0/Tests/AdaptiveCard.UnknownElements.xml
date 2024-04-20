@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock IsSubtle="true">This tests that unknown elements are OK</TextBlock>
+  <AdaptiveUnknownElement>
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">isAwesome</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">true</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Type>AmazingFeature</Type>
+  </AdaptiveUnknownElement>
+</Card>

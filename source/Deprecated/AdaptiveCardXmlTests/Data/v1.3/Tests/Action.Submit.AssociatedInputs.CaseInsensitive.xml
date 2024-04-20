@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="3" />
+  <TextBlock Weight="Bolder" Wrap="true">Validate that associatedInputs 'auto' and 'none' are handled case-insensitively</TextBlock>
+  <Input.Text Id="ID" IsRequired="true" Label="Text Box:" Placeholder="Placeholder text" />
+  <Action.Submit Title="NONE" AssociatedInputs="None" />
+  <Action.Submit Title="AUTO" />
+</Card>

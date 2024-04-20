@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
-  <Container Style="emphasis">
-    <Input.ChoiceSet Id="0" Style="expanded" Wrap="true">
-      <Choice Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. End." Value="0" />
-      <Choice Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. End." Value="1" />
-    </Input.ChoiceSet>
-  </Container>
-</Card>

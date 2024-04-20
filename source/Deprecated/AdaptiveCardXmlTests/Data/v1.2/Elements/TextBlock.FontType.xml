@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock>Font type not set.</TextBlock>
+  <TextBlock>Font type set to *default*.</TextBlock>
+  <TextBlock FontType="Monospace">Font type set to *monospace*.</TextBlock>
+</Card>

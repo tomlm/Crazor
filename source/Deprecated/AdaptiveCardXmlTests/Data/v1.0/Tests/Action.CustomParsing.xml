@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Wrap="true">This card has a custom action. If renderer can render the custom type, it will render a button. try clicking the button.</TextBlock>
+  <AdaptiveUnknownAction Title="New Button Type ">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">Red</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:long" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">150</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string xmlns="">Green</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:long" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">100</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string xmlns="">Blue</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:long" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">100</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string xmlns="">CornerRadius</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:long" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">10</anyType>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string xmlns="">alertMessage</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">Add Custom Message Here</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <Type>NewStyle</Type>
+  </AdaptiveUnknownAction>
+</Card>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.5" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Size="extraLarge" Wrap="true">Our new product is awesome!</TextBlock>
-  <Action.ShowCard Title="Terms and Conditions" Tooltip="Click here to view the details of our terms and conditions.">
-    <Card Version="1.5">
-      <TextBlock Size="small" Wrap="true">Here's some fine print for you to read. Don't break any laws! We will also not break any laws!</TextBlock>
-    </Card>
-  </Action.ShowCard>
-</Card>

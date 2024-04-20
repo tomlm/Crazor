@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**weight = lighter**</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Size="Small" Weight="Lighter" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = small)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Weight="Lighter" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = default)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" Weight="Lighter" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = medium)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Large" Weight="Lighter" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = large)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="ExtraLarge" Weight="Lighter" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = extraLarge)</AdaptiveElement>
+  </Container>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**weight = default**</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Size="Small" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = small)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = default)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = medium)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Large" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = large)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="ExtraLarge" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = extraLarge)</AdaptiveElement>
+  </Container>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**weight = bolder**</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Size="Small" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = small)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = default)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = medium)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Large" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = large)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="ExtraLarge" Weight="Bolder" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (size = extraLarge)</AdaptiveElement>
+  </Container>
+  <TextBlock Spacing="Large" Separator="true" Size="ExtraLarge">**Text colors**</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (color = default)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" IsSubtle="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (color = default, isSubtle = true)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" Color="Accent" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (color = accent)</AdaptiveElement>
+    <AdaptiveElement p3:type="TextBlock" Size="Medium" Color="Accent" IsSubtle="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">The quick brown fox jumps over the lazy dog. (color = accent, isSubtle = true)</AdaptiveElement>
+  </Container>
+</Card>

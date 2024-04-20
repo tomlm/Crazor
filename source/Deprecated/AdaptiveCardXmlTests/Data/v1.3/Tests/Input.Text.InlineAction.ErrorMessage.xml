@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Input.Text Id="input1" IsRequired="true" Label="Required Input.Text with inline action" ErrorMessage="This is a required input">
+    <Action.Submit Title="Inline Action" IconUrl="http://adaptivecards.io/content/cats/1.png" />
+  </Input.Text>
+  <Input.Text Id="input2" Label="Input.Text with regex: ^\w{5,10}$ and inline action" ErrorMessage="Input must contain between 5 and 10 characters long." Regex="^\w{5,50}$">
+    <Action.Submit Title="Inline Action" IconUrl="http://adaptivecards.io/content/cats/1.png" />
+  </Input.Text>
+  <Input.Text Id="input3" Label="Input.Text with maxLength of 6 and inline action" ErrorMessage="Input must contain 6 characters or less." MaxLength="6">
+    <Action.Submit Title="Inline Action" IconUrl="http://adaptivecards.io/content/cats/1.png" />
+  </Input.Text>
+  <Action.Submit Title="Submit" />
+</Card>

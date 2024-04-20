@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <Input.Text Id="iconInlineActionId" Label="Text input with an inline action">
+    <Action.Submit IconUrl="https://adaptivecards.io/content/send.png" Tooltip="Send" />
+  </Input.Text>
+  <Input.Text Id="textInlineActionId" Label="Text input with an inline action with no icon">
+    <Action.OpenUrl Title="Reply" Tooltip="Reply to this message" Url="https://adaptivecards.io/" />
+  </Input.Text>
+</Card>

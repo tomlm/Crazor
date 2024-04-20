@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card FallbackText="This card requires Media to be viewed. Ask your platform to update to Adaptive Cards v1.1 for this and more!" xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="1" />
+  <Media Poster="https://adaptivecards.io/content/poster-video.png" AltText="Adaptive Cards overview video">
+    <MediaSource MimeType="video/mp4" Url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4" />
+    <CaptionSource MimeType="vtt" Url="https://raw.githubusercontent.com/microsoft/AdaptiveCards/5ac07e8adb8d7dcd7480973321e57d279d1f7d2c/assets/ProductVideoSubtitles.vtt" Label="English (vtt)" />
+    <CaptionSource MimeType="srt" Url="https://raw.githubusercontent.com/microsoft/AdaptiveCards/da2eb4ad4de60d14b37decc062d3952da9dbb790/assets/ProductVideoSubtitles.srt" Label="English (srt)" />
+  </Media>
+  <Action.OpenUrl Title="Learn more" Url="https://adaptivecards.io/" />
+</Card>

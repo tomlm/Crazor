@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="5" />
+  <TextBlock Weight="Bolder" Wrap="true">Button with no title or tooltip</TextBlock>
+  <ActionSet>
+    <Action.Submit IconUrl="https://adaptivecards.io/content/cats/1.png" />
+  </ActionSet>
+  <TextBlock Weight="Bolder" Wrap="true">Button with a title</TextBlock>
+  <ActionSet>
+    <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" />
+  </ActionSet>
+  <TextBlock Weight="Bolder" Wrap="true">Button with a tooltip</TextBlock>
+  <ActionSet>
+    <Action.Submit IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
+  </ActionSet>
+  <TextBlock Weight="Bolder" Wrap="true">Button with a title and a tooltip</TextBlock>
+  <ActionSet>
+    <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
+  </ActionSet>
+  <Input.Text Id="tooltiptest1" Label="Inline Action with a title (title should show on button, no tooltip)">
+    <Action.Submit Title="Title" />
+  </Input.Text>
+  <Input.Text Id="tooltiptest2" Label="Inline Action with a title and a tooltip (title should show on button, tooltip in tooltip)">
+    <Action.Submit Title="Title" Tooltip="Tooltip" />
+  </Input.Text>
+  <Input.Text Id="tooltiptest3" Label="Inline Action with an icon and a tooltip (icon should show on button, tooltip in tooltip)">
+    <Action.Submit IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
+  </Input.Text>
+  <Input.Text Id="tooltiptest4" Label="Inline Action with an icon and a title (icon should show on button, title in tooltip)">
+    <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" />
+  </Input.Text>
+  <Input.Text Id="tooltiptest5" Label="Inline Action with an icon and a title and a tooltip (icon should show on button, tooltip in tooltip)">
+    <Action.Submit Title="Title" IconUrl="https://adaptivecards.io/content/cats/1.png" Tooltip="Tooltip" />
+  </Input.Text>
+  <TextBlock Weight="Bolder" Wrap="true">A container with a text block and an image. No title or tooltip. (no tooltip)</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Wrap="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Text block content.</AdaptiveElement>
+    <AdaptiveElement p3:type="Image" Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Container>
+  <TextBlock Weight="Bolder" Wrap="true">A container with a text block and an image. Action has title. (title should be used as tooltip)</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Wrap="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Text block content.</AdaptiveElement>
+    <AdaptiveElement p3:type="Image" Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Container>
+  <TextBlock Weight="Bolder" Wrap="true">A container with a text block and an image. Action has tooltip. (tooltip should be used as tooltip)</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Wrap="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Text block content.</AdaptiveElement>
+    <AdaptiveElement p3:type="Image" Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Container>
+  <TextBlock Weight="Bolder" Wrap="true">A container with a text block and an image. Action has title and tooltip. (tooltip should be used as tooltip)</TextBlock>
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Wrap="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">Text block content.</AdaptiveElement>
+    <AdaptiveElement p3:type="Image" Size="Medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text." xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Container>
+  <RichTextBlock>
+    <Inlines Color="Good">
+      <Type>TextRun</Type>RichTextBlock with SelectAction, Action has title and tooltip (tooltip should be used as tooltip).<SelectAction p4:type="Action.Submit" Title="Title" Tooltip="Tooltip" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" /></Inlines>
+    <Inlines Weight="Bolder">
+      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
+    <Inlines Color="Warning">
+      <Type>TextRun</Type>RichTextBlock with SelectAction, Action has title and no tooltip (title should be used as tooltip).<SelectAction p4:type="Action.Submit" Title="title" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{
+  "x": "hello world!"
+}</SelectAction></Inlines>
+    <Inlines Weight="Bolder">
+      <Type>TextRun</Type> -Should not trigger any actions- </Inlines>
+  </RichTextBlock>
+  <TextBlock Weight="Bolder" Wrap="true">Image has SelectAction. No title or tooltip (no tooltip)</TextBlock>
+  <Image Size="Large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">tooltip</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">tooltip</anyType>
+        </value>
+      </item>
+    </AdditionalProperties>
+    <SelectAction p3:type="Action.Submit" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Image>
+  <TextBlock Weight="Bolder" Wrap="true">Image has SelectAction. Action has title and tooltip. (tooltip should be used as tooltip)</TextBlock>
+  <Image Size="Large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
+    <SelectAction p3:type="Action.Submit" Title="title" Tooltip="tooltip" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Image>
+  <TextBlock Weight="Bolder" Wrap="true">Image has SelectAction. Action has title. (title should be used as tooltip)</TextBlock>
+  <Image Size="Large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Image Alt Text.">
+    <SelectAction p3:type="Action.Submit" Title="title" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Image>
+  <TextBlock Weight="Bolder" Wrap="true">Adaptive Card has SelectAction Action has tooltip. (tooltip should appear)</TextBlock>
+  <SelectAction p2:type="Action.Submit" Title="title" Tooltip="Card Level Tooltip" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance">{
+  "Card Level Action?": "Yes"
+}</SelectAction>
+</Card>

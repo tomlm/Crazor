@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Size="Medium" Weight="Bolder" Wrap="true">Your registration is almost complete</TextBlock>
+  <TextBlock Wrap="true">What type of food do you prefer?</TextBlock>
+  <ImageSet ImageSize="Medium">
+    <Image Url="https://adaptivecards.io/content/steak.jpeg" AltText="Steak cut with fries" />
+    <Image Url="https://adaptivecards.io/content/chicken.jpeg" AltText="Fried chicken with lettuce" />
+    <Image Url="https://adaptivecards.io/content/tofu.jpeg" AltText="Tofu topped with red sauce" />
+  </ImageSet>
+  <Action.ShowCard Title="Steak">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+      <TextBlock Size="Medium" Wrap="true">How would you like your steak prepared?</TextBlock>
+      <Input.ChoiceSet Id="SteakTemp" Style="Expanded">
+        <Choices>
+          <Choice Title="Rare" Value="rare" />
+          <Choice Title="Medium-Rare" Value="medium-rare" />
+          <Choice Title="Well-done" Value="well-done" />
+        </Choices>
+      </Input.ChoiceSet>
+      <Input.Text Id="SteakOther" Placeholder="Any other preparation requests?" IsMultiline="true" />
+      <Action.Submit Title="OK">{
+  "FoodChoice": "Steak"
+}</Action.Submit>
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Chicken">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+      <TextBlock Size="Medium" Wrap="true">Do you have any allergies?</TextBlock>
+      <Input.ChoiceSet Id="ChickenAllergy" Style="Expanded" IsMultiSelect="true">
+        <Choices>
+          <Choice Title="I'm allergic to peanuts" Value="peanut" />
+        </Choices>
+      </Input.ChoiceSet>
+      <Input.Text Id="ChickenOther" Placeholder="Any other preparation requests?" IsMultiline="true" />
+      <Action.Submit Title="OK">{
+  "FoodChoice": "Chicken"
+}</Action.Submit>
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.ShowCard Title="Tofu">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+      <TextBlock Size="Medium" Wrap="true">Would you like it prepared vegan?</TextBlock>
+      <Input.Toggle Id="Vegetarian" Title="Please prepare it vegan" ValueOn="vegan" ValueOff="notVegan" />
+      <Input.Text Id="VegOther" Placeholder="Any other preparation requests?" IsMultiline="true" />
+      <Action.Submit Title="OK">{
+  "FoodChoice": "Vegetarian"
+}</Action.Submit>
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

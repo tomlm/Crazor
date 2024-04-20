@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock>What time do you want to meet?</TextBlock>
-  <Input.Time Id="time" Value="15:30" Min="09:00" Max="17:00" />
-  <Action.Submit Title="OK" />
-</Card>

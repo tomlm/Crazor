@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="3" />
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>This is the text<SelectAction p4:type="Action.Submit" Title="Click me" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" /></Inlines>
+  </RichTextBlock>
+</Card>

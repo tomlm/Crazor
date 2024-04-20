@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock Wrap="true">InlineActions of type ShowCard won't render if show card actionMode is inline.</TextBlock>
+  <Input.Text Id="input2">
+    <Action.ShowCard Title="Reply">
+      <AdaptiveCard>
+        <Version Major="1" Minor="0" />
+        <TextBlock>This ShowCard will only show in popup mode!</TextBlock>
+      </AdaptiveCard>
+    </Action.ShowCard>
+  </Input.Text>
+</Card>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>size:default</TextBlock>
+  <TextBlock Size="Small">size:small</TextBlock>
+  <TextBlock>size:default</TextBlock>
+  <TextBlock Size="Medium">size:medium</TextBlock>
+  <TextBlock Size="Large">size:large</TextBlock>
+  <TextBlock Size="ExtraLarge">size:extraLarge</TextBlock>
+</Card>

@@ -1,0 +1,101 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "id": "textToToggle",
+      "text": "Here are some images:",
+      "isVisible": false
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "id": "imageToToggle",
+              "size": "medium",
+              "style": "person",
+              "url": "https://picsum.photos/100/100?image=112",
+              "altText": "Wheat field",
+              "isVisible": false
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "id": "imageToToggle2",
+              "size": "medium",
+              "url": "https://picsum.photos/100/100?image=123",
+              "altText": "Gravel road",
+              "isVisible": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "color": "good",
+          "text": "Interacting with the text in the good color will open a web page. ",
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://adaptivecards.io/",
+            "tooltip": "Default"
+          }
+        },
+        {
+          "type": "TextRun",
+          "weight": "bolder",
+          "text": " -Should not trigger any actions- "
+        },
+        {
+          "type": "TextRun",
+          "color": "warning",
+          "text": " Interacting with the text in the warning color will submit. ",
+          "selectAction": {
+            "type": "Action.Submit",
+            "data": {
+              "x": "hello world!"
+            },
+            "tooltip": "Action.Submit"
+          }
+        },
+        {
+          "type": "TextRun",
+          "weight": "bolder",
+          "text": " -Should not trigger any actions- "
+        },
+        {
+          "type": "TextRun",
+          "color": "accent",
+          "text": "Interacting with the text in the accent color will toggle visibility ",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "targetElements": [
+              {
+                "elementId": "textToToggle"
+              },
+              {
+                "elementId": "imageToToggle"
+              },
+              {
+                "elementId": "imageToToggle2"
+              }
+            ],
+            "tooltip": "Toggle!"
+          }
+        }
+      ]
+    }
+  ]
+}

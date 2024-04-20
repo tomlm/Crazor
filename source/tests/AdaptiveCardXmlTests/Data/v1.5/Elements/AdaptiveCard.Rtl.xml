@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.5" Rtl="true" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Wrap="true">هذه كتلة نص</TextBlock>
-  <TextBlock Wrap="true">זהו בלוק טקסט</TextBlock>
-  <TextBlock Wrap="true">This is a text block</TextBlock>
-</Card>

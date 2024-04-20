@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Input.ChoiceSet Id="requiredCompactId" IsRequired="true" Label="Required Input.ChoiceSet label (compact)" ErrorMessage="This is a required input" Placeholder="Please make selection">
+    <Choices>
+      <Choice Title="Option 1" Value="1" />
+      <Choice Title="Option 2" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="requiredExpandedId" IsRequired="true" Label="Required Input.ChoiceSet label (expanded)" ErrorMessage="This is a required input" Style="Expanded">
+    <Choices>
+      <Choice Title="Option 1" Value="1" />
+      <Choice Title="Option 2" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="requiredMultiselectId" IsRequired="true" Label="Required Input.ChoiceSet label (expanded, multiselect)" ErrorMessage="This is a required input" Style="Expanded" IsMultiSelect="true">
+    <Choices>
+      <Choice Title="Option 1" Value="1" />
+      <Choice Title="Option 2" Value="2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Action.Submit Title="OK" />
+</Card>

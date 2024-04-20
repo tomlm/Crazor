@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2" MinHeight="300px" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Height="stretch" Wrap="true">This is a stretched textblock</TextBlock>
-  <Input.Text Id="input1" Height="stretch" />
-  <TextBlock Wrap="true">This is a non-stretched textblock</TextBlock>
-  <Input.Text Id="input2" Height="stretch" />
-</Card>

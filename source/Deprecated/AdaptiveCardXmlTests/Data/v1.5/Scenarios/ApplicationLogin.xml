@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="4" />
+  <TextBlock Size="Medium" Weight="Bolder" HorizontalAlignment="Center" Wrap="true" Style="Heading">Application Login</TextBlock>
+  <TextBlock Wrap="true">Username</TextBlock>
+  <Input.Text Id="UserVal" IsRequired="true" />
+  <TextBlock Wrap="true">Password</TextBlock>
+  <Input.Text Id="PassVal" />
+  <Action.Submit Title="Login">{
+  "id": "LoginVal"
+}</Action.Submit>
+</Card>

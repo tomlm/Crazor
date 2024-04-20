@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.Number Id="number" Placeholder="Enter a number" Value="3" Min="1" Max="10" />
-  <Action.Submit Title="OK" />
-</Card>

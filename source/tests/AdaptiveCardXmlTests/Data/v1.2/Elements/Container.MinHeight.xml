@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.2" xmlns="application/vnd.microsoft.card.adaptive">
-  <Container Style="emphasis" MinHeight="100px">
-    <TextBlock Wrap="true">This textblock is inside a container with a min height of 100px</TextBlock>
-  </Container>
-</Card>

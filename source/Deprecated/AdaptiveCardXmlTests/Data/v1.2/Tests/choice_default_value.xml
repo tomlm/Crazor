@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>What color do you want? *(isMultiSelect:false, style:compact)*</TextBlock>
+  <Input.ChoiceSet Id="myColor">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+      <Choice Title="Blue" Value="3" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Action.Submit Title="Submit" />
+</Card>

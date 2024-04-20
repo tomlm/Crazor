@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Image Size="Small" Url="https://adaptivecards.io/content/cats/2.png" BackgroundColor="#FF0000FF" AltText="Cat" />
+  <Image Style="Person" Url="https://adaptivecards.io/content/cats/1.png" BackgroundColor="#FFFF0000" AltText="Cat" />
+</Card>

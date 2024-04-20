@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">This is some text</AdaptiveElement>
+    <AdaptiveElement p3:type="Image" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+  </Container>
+</Card>

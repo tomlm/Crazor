@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="1" />
+  <Image Url="symbol:Adaptive10" AltText="Adaptive cards 1.0 logo" />
+  <Image Size="Small" Url="symbol:Adaptive10" AltText="Adaptive cards 1.0 logo" />
+</Card>

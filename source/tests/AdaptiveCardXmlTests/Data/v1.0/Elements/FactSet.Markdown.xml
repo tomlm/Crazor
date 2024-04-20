@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Container>
-    <FactSet>
-      <Fact Title="Test Markdown Link :" Value="This is a [Link](https://adaptivecards.io)" />
-    </FactSet>
-  </Container>
-</Card>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>This card's action will show another card</TextBlock>
+  <Action.ShowCard Title="Action.ShowCard">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+      <TextBlock>What do you think?</TextBlock>
+      <Action.Submit Title="Neat!">{
+  "neat": "true"
+}</Action.Submit>
+    </AdaptiveCard>
+  </Action.ShowCard>
+</Card>

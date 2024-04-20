@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Input.Time Id="timeLabelId" Label="Default Input.Time label" />
-  <Input.Time Id="requiredTimeLabelId" IsRequired="true" Label="Required Input.Time label" ErrorMessage="Required input" />
-  <Action.Submit Title="OK" />
-</Card>

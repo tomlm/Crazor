@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Weight="bolder">horizontalAlignment:left</TextBlock>
-  <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" />
-  <TextBlock Weight="bolder" HorizontalAlignment="center">horizontalAlignment:center</TextBlock>
-  <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" HorizontalAlignment="center" AltText="Cat" />
-  <TextBlock Weight="bolder" HorizontalAlignment="right">horizontalAlignment:right</TextBlock>
-  <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" HorizontalAlignment="right" AltText="Cat" />
-</Card>

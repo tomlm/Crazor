@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="3" />
+  <Input.Text Id="input1" Label="This is an optional input" Placeholder="Placeholder text" />
+  <Input.Text Id="input2" IsRequired="true" Label="This is a required Text input. This label is intentionally long to show that it correctly wraps." ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Placeholder="Placeholder text" Regex="abc" />
+  <Input.Date Id="input3" IsRequired="true" Label="This is a required Date input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Min="6/1/2020" Max="6/30/2020" />
+  <Input.Time Id="input4" IsRequired="true" Label="This is a required Time input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Min="08:00" Max="15:00" />
+  <Input.Number Id="input5" IsRequired="true" Label="This is a required Number input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Placeholder="Placeholder text" Value="NaN" Min="4" Max="6" />
+  <Input.ChoiceSet Id="input6" IsRequired="true" Label="This is a required ChoiceSet input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Placeholder="Placeholder text">
+    <Choices>
+      <Choice Title="Choice 1" Value="Choice 1" />
+      <Choice Title="Choice 2" Value="Choice 2" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.Toggle Id="input7" IsRequired="true" Label="This is a required Toggle input" ErrorMessage="The input value is invalid. This error message is intentionally long to show that it wraps." Title="New Input.Toggle" ValueOn="True" ValueOff="False" />
+  <Action.Submit Title="Action.Submit" />
+</Card>

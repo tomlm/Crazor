@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Weight="Lighter">weight: lighter</TextBlock>
+  <TextBlock>weight: default</TextBlock>
+  <TextBlock Weight="Bolder">weight: bolder</TextBlock>
+</Card>

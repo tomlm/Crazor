@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Action.ShowCard Title="Set due date">
+    <AdaptiveCard>
+      <Version Major="1" Minor="0" />
+      <Input.Date Id="dueDate" />
+      <Input.Text Id="comment" Placeholder="Add a comment" IsMultiline="true" />
+      <Action.OpenUrl Title="OK" Url="https://adaptivecards.io/" />
+    </AdaptiveCard>
+  </Action.ShowCard>
+  <Action.OpenUrl Title="View" Url="https://adaptivecards.io/" />
+</Card>

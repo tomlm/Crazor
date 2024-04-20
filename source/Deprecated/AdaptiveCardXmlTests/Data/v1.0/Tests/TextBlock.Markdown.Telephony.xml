@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Wrap="true">Below markdown link should trigger telephony service</TextBlock>
+  <TextBlock>[(555) 555-5555](tel:5555555555)</TextBlock>
+</Card>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="3" />
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>This is the first inline. </Inlines>
+    <Inlines>
+      <Type>TextRun</Type>This inline has default underline value. </Inlines>
+    <Inlines Underline="true">
+      <Type>TextRun</Type>This inline must have underline. </Inlines>
+    <Inlines>
+      <Type>TextRun</Type>This inline must not have underline. </Inlines>
+  </RichTextBlock>
+</Card>

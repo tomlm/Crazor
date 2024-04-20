@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <Container Style="good" Bleed="true">
-    <TextBlock Wrap="true">This Container bleeds into its parent padding for a nice visual appearance!</TextBlock>
-  </Container>
-  <Container Style="warning">
-    <TextBlock Wrap="true">This Container is just a plain ol' container, it looks nice too though!</TextBlock>
-  </Container>
-</Card>

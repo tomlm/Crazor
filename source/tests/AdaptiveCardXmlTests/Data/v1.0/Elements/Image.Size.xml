@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<Card Version="1.0" xmlns="application/vnd.microsoft.card.adaptive">
-  <TextBlock Size="large" Weight="bolder">size:small</TextBlock>
-  <Image Size="small" Url="https://adaptivecards.io/content/cats/1.png" AltText="Small cat" />
-  <TextBlock Size="large" Weight="bolder">size:medium</TextBlock>
-  <Image Size="medium" Url="https://adaptivecards.io/content/cats/1.png" AltText="Medium cat" />
-  <TextBlock Size="large" Weight="bolder">size:large</TextBlock>
-  <Image Size="large" Url="https://adaptivecards.io/content/cats/1.png" AltText="Large cat" />
-</Card>

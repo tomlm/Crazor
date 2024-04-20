@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <Container>
+    <AdaptiveElement p3:type="TextBlock" Wrap="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance">This textblock is inside a container with a min height of 100px</AdaptiveElement>
+  </Container>
+</Card>

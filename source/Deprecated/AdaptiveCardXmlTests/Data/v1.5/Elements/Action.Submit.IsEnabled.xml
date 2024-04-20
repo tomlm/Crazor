@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="5" />
+  <TextBlock Wrap="true">Disabled Submit Button</TextBlock>
+  <Action.Submit Title="Enabled" />
+  <Action.Submit Title="Disabled" />
+</Card>

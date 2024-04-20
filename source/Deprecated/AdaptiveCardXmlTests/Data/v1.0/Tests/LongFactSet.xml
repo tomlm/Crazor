@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Size="Large" Weight="Bolder">Nutrition facts</TextBlock>
+  <TextBlock>Per 3 cookies (36 g)</TextBlock>
+  <TextBlock Weight="Bolder">Calories 180</TextBlock>
+  <FactSet>
+    <Fact Title="Fat" Value="10 g" />
+    <Fact Title="Saturated" Value="4 g" />
+    <Fact Title="+ Trans" Value="0 g" />
+    <Fact Title="Cholesterol" Value="5 mg" />
+    <Fact Title="Sodium" Value="100 mg" />
+    <Fact Title="Carbohydrate" Value="24 g" />
+    <Fact Title="Fibre" Value="0 g" />
+    <Fact Title="Sugars" Value="12 g" />
+    <Fact Title="Protein" Value="2 g" />
+    <Fact Title="Vitamin A" Value="0 %" />
+    <Fact Title="Vitamin C" Value="0 %" />
+    <Fact Title="Calcium" Value="0 %" />
+    <Fact Title="Iron" Value="6 %" />
+  </FactSet>
+</Card>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="5" />
+  <TextBlock Wrap="true">Disabled Execute Button</TextBlock>
+  <Action.Execute Title="Enabled" Verb="" />
+  <Action.Execute Title="Disabled" Verb="" />
+</Card>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="5" />
+  <TextBlock Wrap="true" Style="Heading">Style: Heading</TextBlock>
+  <TextBlock Wrap="true">Style: Default</TextBlock>
+  <TextBlock Wrap="true">Style: (unset)</TextBlock>
+  <TextBlock Wrap="true" Style="Heading">Style: Heading, everything default</TextBlock>
+  <TextBlock Size="ExtraLarge" Weight="Lighter" IsSubtle="true" Wrap="true" FontType="Monospace" Style="Heading">Style: Heading, isSubtle: true, weight: lighter, size: extraLarge, fontType: monospace</TextBlock>
+  <TextBlock Size="ExtraLarge" Weight="Lighter" IsSubtle="true" Wrap="true" FontType="Monospace">Style: Default, isSubtle: true, weight: lighter, size: extraLarge, fontType: monospace</TextBlock>
+</Card>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="2" />
+  <TextBlock Separator="true">\n:
+next line
+
+two lines down</TextBlock>
+  <TextBlock Separator="true">\n:
+next line
+
+two lines down</TextBlock>
+  <TextBlock Separator="true">\n\n:
+
+next line
+
+
+
+two lines down</TextBlock>
+  <TextBlock Separator="true">\n\n\n:
+
+
+should be two lines down
+
+
+two lines down</TextBlock>
+  <TextBlock Separator="true">\no newlines, \just backslashes\</TextBlock>
+  <TextBlock Separator="true">Some legal escape chars after newline:
+"\/</TextBlock>
+  <TextBlock Separator="true">This should be the letter 'A': A</TextBlock>
+  <TextBlock Separator="true">HTML entities ahoy: "Foo &amp;amp; Bar" &amp;lt;admin@example.com&amp;gt;</TextBlock>
+  <TextBlock Separator="true">&amp;amp**;** &amp;am&amp;nbsp;p;</TextBlock>
+  <TextBlock Separator="true">↓ Empty TextBlock below ↓</TextBlock>
+  <TextBlock Separator="true">
+    <AdditionalProperties>
+      <item>
+        <key>
+          <string xmlns="">space</string>
+        </key>
+        <value>
+          <anyType xmlns:q1="http://www.w3.org/2001/XMLSchema" p7:type="q1:string" xmlns:p7="http://www.w3.org/2001/XMLSchema-instance" xmlns="">preserve</anyType>
+        </value>
+      </item>
+    </AdditionalProperties></TextBlock>
+  <TextBlock Separator="true">↑ Empty TextBlock above ↑</TextBlock>
+  <TextBlock Separator="true" Wrap="true">0123456789012345678901234567890123456789--&gt;
+&lt;--0123456789012345678901234567890123456789</TextBlock>
+  <TextBlock Separator="true" Wrap="true">0123456789012345678901234567890123456789--&gt;
+&lt;--0123456789012345678901234567890123456789</TextBlock>
+  <TextBlock Separator="true" Wrap="true">0123456789012345678901234567890123456789--&gt;
+
+&lt;--0123456789012345678901234567890123456789</TextBlock>
+</Card>

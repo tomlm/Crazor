@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card Lang="en" xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Speak>This card requires Adaptive Cards version 99.0, which probably doesn't exist</Speak>
+  <TextBlock>This card requires Adaptive Cards version 99.0, which probably doesn't exist</TextBlock>
+</Card>

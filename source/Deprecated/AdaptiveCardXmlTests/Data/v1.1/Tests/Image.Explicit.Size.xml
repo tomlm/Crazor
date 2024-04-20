@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock Size="Small" Weight="Bolder">width:50px height:50px</TextBlock>
+  <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" PixelWidth="50">
+    <Height HeightType="Pixel" Unit="50" />
+  </Image>
+  <TextBlock Size="Small" Weight="Bolder">width:25px height:50px</TextBlock>
+  <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" PixelWidth="25">
+    <Height HeightType="Pixel" Unit="50" />
+  </Image>
+  <TextBlock Size="Small" Weight="Bolder">width:80px height:not set</TextBlock>
+  <Image Url="https://adaptivecards.io/content/cats/1.png" AltText="Cat" PixelWidth="80" />
+  <TextBlock Size="Small" Weight="Bolder">width:80px height:not set, style:person</TextBlock>
+  <Image Style="Person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" PixelWidth="80" />
+  <TextBlock Size="Small" Weight="Bolder">width:40px height:80px, style:person</TextBlock>
+  <Image Style="Person" Url="https://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg" AltText="Person" PixelWidth="40">
+    <Height HeightType="Pixel" Unit="80" />
+  </Image>
+</Card>

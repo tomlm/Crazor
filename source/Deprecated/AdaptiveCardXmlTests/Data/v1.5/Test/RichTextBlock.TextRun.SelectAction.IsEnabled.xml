@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="4" />
+  <RichTextBlock>
+    <Inlines>
+      <Type>TextRun</Type>This link is disabled: </Inlines>
+    <Inlines>
+      <Type>TextRun</Type>Link<SelectAction p4:type="Action.OpenUrl" Url="https://adaptivecards.io/" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance" /></Inlines>
+  </RichTextBlock>
+</Card>

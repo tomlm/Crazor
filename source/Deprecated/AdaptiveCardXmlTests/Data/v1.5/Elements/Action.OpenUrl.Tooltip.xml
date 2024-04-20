@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="5" />
+  <TextBlock Wrap="true">Check out our website!</TextBlock>
+  <Action.OpenUrl Title="Click Here!" Tooltip="Adaptive Cards website" Url="https://adaptivecards.io/" />
+</Card>

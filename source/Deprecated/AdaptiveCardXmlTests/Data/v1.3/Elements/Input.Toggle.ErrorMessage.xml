@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Input.Toggle Id="input2" IsRequired="true" Label="Required Input.Toggle" ErrorMessage="You must accept the terms and conditions" Title="I accept the terms and agreements" ValueOn="true" ValueOff="false" Value="false" />
+  <Action.Submit Title="OK" />
+</Card>

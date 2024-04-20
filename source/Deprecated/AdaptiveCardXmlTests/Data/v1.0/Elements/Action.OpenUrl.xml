@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <TextBlock>This card's action will open a URL</TextBlock>
+  <Action.OpenUrl Title="Action.OpenUrl" Url="https://adaptivecards.io/" />
+</Card>

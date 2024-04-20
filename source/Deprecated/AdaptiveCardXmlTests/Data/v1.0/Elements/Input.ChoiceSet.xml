@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Card xmlns="application/vnd.microsoft.card.adaptive">
+  <Version Major="1" Minor="0" />
+  <Input.ChoiceSet Id="myColor" Label="What color do you want? (isMultiSelect:false, style:compact)" Value="1">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+      <Choice Title="Blue" Value="3" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="myColor2" Label="What color do you want? (isMultiSelect:false, style:expanded)" Value="1" Style="Expanded">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+      <Choice Title="Blue" Value="3" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="myColor3" Label="What colors do you want? (isMultiSelect:true, style:compact)" Value="1,3" IsMultiSelect="true">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+      <Choice Title="Blue" Value="3" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Input.ChoiceSet Id="myColor4" Label="What colors do you want? (isMultiSelect:true, style:expanded)" Value="1" Style="Expanded" IsMultiSelect="true">
+    <Choices>
+      <Choice Title="Red" Value="1" />
+      <Choice Title="Green" Value="2" />
+      <Choice Title="Blue" Value="3" />
+    </Choices>
+  </Input.ChoiceSet>
+  <Action.Submit Title="OK" />
+</Card>
