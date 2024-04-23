@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj" />
 		<ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
 		<ProjectReference Include="..\..\Libraries\Crazor.Server\Crazor.Server.csproj" />
 		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />

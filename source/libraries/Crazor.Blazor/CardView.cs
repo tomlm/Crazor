@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using Crazor.AdaptiveCards;
+using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
@@ -121,7 +121,6 @@ namespace Crazor.Blazor
                 var adaptiveCard = renderer.GetComponent<Components.Adaptive.Card>().Item;
                 if (System.Diagnostics.Debugger.IsAttached)
                 {
-                    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToXml());
                     System.Diagnostics.Debug.WriteLine(adaptiveCard.ToJson());
                 }
                 return adaptiveCard;

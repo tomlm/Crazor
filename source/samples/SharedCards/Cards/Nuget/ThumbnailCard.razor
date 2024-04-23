@@ -1,9 +1,9 @@
 ﻿
 <ColumnSet>
-    <Column Width="Auto" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
+    <Column Width="AdaptiveWidth.Auto"HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
         <Image Url="@ImageUrl" Size="@(Size ?? AdaptiveImageSize.Medium)" />
     </Column>
-    <Column Width="stretch">
+    <Column Width="AdaptiveWidth.Stretch">
         @if (!String.IsNullOrEmpty(Title))
         {
             <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@Title</TextBlock>

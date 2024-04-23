@@ -15,7 +15,7 @@
                 <TargetElement ElementId="@contentId" />
             </ActionToggleVisibility>
         </SelectAction>
-        <Column Width="stretch">
+        <Column Width="AdaptiveWidth.Stretch">
             @if (Header != null)
             {
                 @Header
@@ -25,7 +25,7 @@
                 <TextBlock Style="AdaptiveTextBlockStyle.Heading">@Title</TextBlock>
             }
         </Column>
-        <Column Width="Auto">
+        <Column Width="AdaptiveWidth.Auto">
             @if (CollapsedIcon == null)
             {
                 <Image Id="@showButtonId" IsVisible="@(IsExpanded)" Url="@CollapsedIconUrl" Size="AdaptiveImageSize.Auto" />

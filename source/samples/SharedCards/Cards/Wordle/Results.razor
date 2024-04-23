@@ -16,14 +16,14 @@
     }
 
     <Table GridStyle="AdaptiveContainerStyle.Default" ShowGridLines="true" FirstRowAsHeaders="false">
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
-        <TableColumn Width="auto" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
+        <TableColumn Width="1" />
         @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
         {
-            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalContentAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalContentAlignment.Center">
                 @foreach (var letter in App.Game.Guesses[iGuess].Letters)
                 {
                     <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
@@ -33,7 +33,7 @@
 
         @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
         {
-            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalAlignment.Center">
+            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalContentAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalContentAlignment.Center">
                 <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
                 <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
                 <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>

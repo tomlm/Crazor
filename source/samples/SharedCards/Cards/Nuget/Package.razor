@@ -12,10 +12,10 @@
 
 <Card Version="1.5">
     <ColumnSet>
-        <Column Width="Auto" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
+        <Column Width="AdaptiveWidth.Auto"HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
             <Image Url="@GetIconUrl()" Size="AdaptiveImageSize.Medium" />
         </Column>
-        <Column Width="stretch">
+        <Column Width="AdaptiveWidth.Stretch">
             @if (!String.IsNullOrEmpty(Model?.Title))
             {
                 <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@Model!.Title</TextBlock>

@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ElementComponent<AdaptiveColumn>
@@ -34,16 +34,15 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle Style { get => Item.Style; set => Item.Style = value; }
+    public AdaptiveContainerStyle? Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
     public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment; set => Item.VerticalContentAlignment = value; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
+    public AdaptiveHeight? Height { get => Item.Height; set => Item.Height = value; }
 
     [Parameter]
-    public String? Width { get => Item.Width?.ToString(); set => Item.Width = new AdaptiveColumnWidth(value); }
-
+    public AdaptiveWidth? Width { get => Item.Width; set => Item.Width = value; }
 }

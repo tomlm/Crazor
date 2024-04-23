@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -21,7 +21,7 @@
     public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
 
     [Parameter]
-    public String? Url { get => Item.Url; set => Item.Url = value; }
+    public String? Url { get => Item.Url?.ToString(); set => Item.Url = (value != null) ? new Uri(value) : null; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]

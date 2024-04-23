@@ -10,11 +10,11 @@
         {
             <Container Separator="true">
                 <ColumnSet Spacing="AdaptiveSpacing.None">
-                    <Column Width="stretch">
+                    <Column Width="AdaptiveWidth.Stretch">
                         <TextBlock>@address.Street</TextBlock>
                         <TextBlock>@address.City, @address.State @address.PostalCode @address.Country</TextBlock>
                     </Column>
-                    <Column Width="auto">
+                    <Column Width="AdaptiveWidth.Auto">
                         <Image Url="@App.GetContentUrl("~/images/EditIcon.png")" Size="AdaptiveImageSize.Small">
                             <SelectAction>
                                 <ActionExecute Tooltip="Edit Address" Verb="@nameof(OnEdit)">
@@ -23,7 +23,7 @@
                             </SelectAction>
                         </Image>
                     </Column>
-                    <Column Width="auto">
+                    <Column Width="AdaptiveWidth.Auto">
                         <Image Url="@App.GetContentUrl("~/images/DeleteIcon.png")" Size="AdaptiveImageSize.Small">
                             <SelectAction>
                                 <ActionExecute Tooltip="Delete Address" Verb="@nameof(OnDelete)">

@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -48,7 +48,7 @@
     public String? Value { get => Item.Value; set => Item.Value = value; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }
 
     protected override void OnParametersSet()
     {

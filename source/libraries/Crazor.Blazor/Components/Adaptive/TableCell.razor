@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ElementComponent<AdaptiveTableCell>
@@ -15,7 +15,7 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment ; set => Item.HorizontalAlignment  = value; }
+    public AdaptiveHorizontalContentAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment; set => Item.HorizontalCellContentAlignment = value; }
 
     [Parameter]
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
@@ -35,12 +35,12 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle Style { get => Item.Style ; set => Item.Style  = value; }
+    public AdaptiveContainerStyle? Style { get => Item.Style ; set => Item.Style  = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
-    public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment ; set => Item.VerticalContentAlignment  = value; }
+    public AdaptiveVerticalContentAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment; set => Item.VerticalCellContentAlignment = value; }
 
     [Parameter]
-    public String? Height { get => Item.Height ?.ToString(); set => Item.Height  = new AdaptiveDimension(value!); }
+    public String? Height { get => Item.Height ?.ToString(); set => Item.Height  = AdaptiveHeight.Parse(value!); }
 }

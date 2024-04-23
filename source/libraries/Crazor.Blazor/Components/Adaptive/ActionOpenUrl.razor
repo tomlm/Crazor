@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ActionComponent<AdaptiveOpenUrlAction>
@@ -21,8 +21,8 @@
     public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
 
     [Parameter]
-    [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-    public AdaptiveActionStyle Style { get => Item.Style ; set => Item.Style  = value; }
+    [DefaultValue(typeof(string), "Default")]
+    public string Style { get => Item.Style ; set => Item.Style  = value; }
 
     [Parameter]
     public String? Title { get => Item.Title ; set => Item.Title  = value; }
@@ -31,5 +31,5 @@
     public String? Tooltip { get => Item.Tooltip ; set => Item.Tooltip  = value; }
 
     [Parameter]
-    public String? Url { get => Item.Url ; set => Item.Url  = value; }
+    public String? Url { get => Item.Url?.ToString() ; set => Item.Url  = (value != null) ? new Uri(value) : null; }
 }

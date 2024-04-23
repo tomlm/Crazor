@@ -1,7 +1,7 @@
-@using Crazor.AdaptiveCards
-@using Microsoft.AspNetCore.Components;
-@inherits ItemComponent<AdaptiveSelectAction>
-@implements IChildItem
+ @using AdaptiveCards
+ @using Microsoft.AspNetCore.Components;
+ @inherits ItemComponent<AdaptiveSelectAction>
+ @implements IChildItem
 
 <ac:SelectAction @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -15,19 +15,19 @@
 
         if (this.ParentItem is AdaptiveCard card)
         {
-            card.SelectAction = Item;
+            card.SelectAction = Item.Action;
         }
         else if (this.ParentItem is AdaptiveCollectionElement collection)
         {
-            collection.SelectAction = Item;
+            collection.SelectAction = Item.Action;
         }
         else if (this.ParentItem is AdaptiveImage image)
         {
-            image.SelectAction = Item;
+            image.SelectAction = Item.Action;
         }
         else if (this.ParentItem is AdaptiveTextRun textrun)
         {
             textrun.SelectAction = Item.Action;
         }
     }
-}
+ }

@@ -10,7 +10,7 @@
     </InputText>
 
     <ColumnSet>
-        <Column Width="auto">
+        <Column Width="AdaptiveWidth.Auto">
             @if (HasPrev())
             {
                 <ActionSet>
@@ -18,8 +18,8 @@
                 </ActionSet>
             }
         </Column>
-        <Column Width="stretch" />
-        <Column Width="auto">
+        <Column Width="AdaptiveWidth.Stretch" />
+        <Column Width="AdaptiveWidth.Auto">
             @if (HasNext())
             {
                 <ActionSet>
@@ -35,12 +35,12 @@
         {
             <Container Separator="true">
                 <ColumnSet>
-                    <Column Width="stretch">
+                    <Column Width="AdaptiveWidth.Stretch">
                         <TextBlock Weight="AdaptiveTextWeight.Bolder">[@result.Name](@result.DisplayUrl)</TextBlock>
                         <TextBlock Spacing="AdaptiveSpacing.None">[@result.DisplayUrl](@result.DisplayUrl)</TextBlock>
                         <TextBlock Spacing="AdaptiveSpacing.Small">@result.Snippet</TextBlock>
                     </Column>
-                    <Column Width="auto">
+                    <Column Width="AdaptiveWidth.Auto">
                         @if (!String.IsNullOrEmpty(result.ThumbnailUrl))
                         {
                             <Image Url="@result.ThumbnailUrl" Size="AdaptiveImageSize.Large" />

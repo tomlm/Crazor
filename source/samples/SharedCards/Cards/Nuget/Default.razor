@@ -11,14 +11,14 @@
     </InputText>
 
     <ColumnSet>
-        <Column Width="auto">
+        <Column Width="AdaptiveWidth.Auto">
             @if (Packages.Any() && Skip > 0)
             {
                 <ActionSet><ActionExecute Title="<" Verb="@nameof(OnPrevious)" /></ActionSet>
             }
         </Column>
-        <Column Width="stretch" />
-        <Column Width="auto">
+        <Column Width="AdaptiveWidth.Stretch" />
+        <Column Width="AdaptiveWidth.Auto">
             @if (Packages.Any())
             {
                 <ActionSet><ActionExecute Title=">" Verb="@nameof(OnNext)" /></ActionSet>

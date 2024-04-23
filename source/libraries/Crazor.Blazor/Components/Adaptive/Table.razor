@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ElementComponent<AdaptiveTable>
@@ -14,11 +14,15 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveContainerStyle), "Default")]
-    public AdaptiveContainerStyle GridStyle { get => Item.GridStyle ; set => Item.GridStyle  = value; }
+    public AdaptiveContainerStyle? GridStyle { get => Item.GridStyle; set => Item.GridStyle = value; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveHorizontalAlignment), "Left")]
-    public AdaptiveHorizontalAlignment HorizontalCellContentAlignment { get => Item.HorizontalCellContentAlignment ; set => Item.HorizontalCellContentAlignment  = value; }
+    public AdaptiveHorizontalContentAlignment HorizontalCellContentAlignment
+    {
+        get => Item.HorizontalCellContentAlignment;
+        set => Item.HorizontalCellContentAlignment = value;
+    }
 
     [Parameter]
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
@@ -31,12 +35,12 @@
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveSpacing), "Default")]
-    public AdaptiveSpacing Spacing { get => Item.Spacing ; set => Item.Spacing  = value; }
+    public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
-    [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]
-    public AdaptiveVerticalAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment ; set => Item.VerticalCellContentAlignment  = value; }
+    [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]
+    public AdaptiveVerticalContentAlignment VerticalCellContentAlignment { get => Item.VerticalCellContentAlignment; set => Item.VerticalCellContentAlignment = value; }
 
     [Parameter]
-    public String? Height { get => Item.Height ?.ToString(); set => Item.Height  = new AdaptiveDimension(value!); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }
 }

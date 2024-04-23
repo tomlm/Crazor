@@ -2,7 +2,7 @@
 //  Licensed under the MIT License.
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-using Crazor.AdaptiveCards;
+using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components;
@@ -63,10 +63,6 @@ namespace Crazor.Blazor.Components
             {
                 showCard.Card = ac;
             }
-            else if (this.ParentItem is AdaptiveContainer container)
-            {
-                container.Items.Add(this.Item);
-            }
             else if (Item is AdaptiveTableCell cell && this.ParentItem is AdaptiveTableRow row)
             {
                 row.Cells.Add(cell);
@@ -78,6 +74,18 @@ namespace Crazor.Blazor.Components
             else if (Item is AdaptiveImage image && this.ParentItem is AdaptiveImageSet imageSet)
             {
                 imageSet.Images.Add(image);
+            }
+            else if (this.ParentItem is AdaptiveContainer container)
+            {
+                container.Items.Add(this.Item);
+            }
+            else if (this.ParentItem is AdaptiveColumn column)
+            {
+                column.Items.Add(this.Item);
+            }
+            else if (this.ParentItem is AdaptiveTableCell cellParent)
+            {
+                cellParent.Items.Add(this.Item);
             }
             else
             {

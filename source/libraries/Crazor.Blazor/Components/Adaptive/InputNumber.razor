@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -41,7 +41,7 @@
     public Double? Value { get => Double.IsNaN(Item.Value) ? null : Item.Value; set => Item.Value = value ?? double.NaN; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }
 
     protected override void OnParametersSet()
     {

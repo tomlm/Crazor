@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ElementComponent<AdaptiveMedia>
@@ -27,5 +27,5 @@
     public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }
 }

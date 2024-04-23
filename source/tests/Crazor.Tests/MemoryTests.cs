@@ -12,7 +12,7 @@ namespace Crazor.Tests
         [TestInitialize]
         public async Task TestInitialize()
         {
-            var cardApp = (MemoryApp)Factory.Create(CardRoute.Parse("/Cards/Memory"));
+            var cardApp = (MemoryApp)Factory.Create(CardRoute.Parse("/Cards/Memory/test"));
             await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
             cardApp.App = "App1";
             cardApp.Session = "Session1";
@@ -26,7 +26,7 @@ namespace Crazor.Tests
         [TestMethod]
         public async Task TestMemory()
         {
-            var cardRoute = CardRoute.Parse("/Cards/Memory");
+            var cardRoute = CardRoute.Parse("/Cards/Memory/test");
             // validate load
             {
                 var cardApp = (MemoryApp)Factory.Create(cardRoute);

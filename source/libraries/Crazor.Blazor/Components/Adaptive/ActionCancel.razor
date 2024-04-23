@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Crazor.Blazor.ComponentRenderer;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -25,8 +25,8 @@
     public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
 
     [Parameter]
-    [DefaultValue(typeof(AdaptiveActionStyle), "Default")]
-    public AdaptiveActionStyle Style { get => Item.Style; set => Item.Style = value; }
+    [DefaultValue(typeof(string), "Default")]
+    public string Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
     public String? Title { get => Item.Title; set => Item.Title = value; }

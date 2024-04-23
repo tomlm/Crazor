@@ -1,4 +1,4 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ElementComponent<AdaptiveImage>
@@ -39,11 +39,11 @@
     public AdaptiveImageStyle Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
-    public String? Url { get => Item.Url; set => Item.Url = value; }
+    public String? Url { get => Item.Url?.ToString(); set => Item.Url = (value != null) ? new Uri(value) : null; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = new AdaptiveDimension(value!); }
+    public AdaptiveHeight? Height { get => Item.Height; set => Item.Height = value; }
 
     [Parameter]
-    public String? Width { get => Item.Width?.ToString(); set => Item.Width = new AdaptiveDimension(value!); }
+    public String? Width { get => (Item.PixelWidth != 0) ? Item.PixelWidth.ToString() : null; set => Item.PixelWidth = uint.Parse(value!.Replace("px", string.Empty)); }
 }

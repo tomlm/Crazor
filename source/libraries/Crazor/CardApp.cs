@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using Crazor.AdaptiveCards;
+using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
@@ -331,12 +331,13 @@ namespace Crazor
             }
             sw.Stop();
 
+#if instrument
             var host = this.Context.Configuration.GetValue<Uri>("HostUri").Host.ToLower();
             if (host == "localhost" || host.EndsWith("ngrok.io") || host.EndsWith(".devtunnels.ms"))
             {
                 outboundCard.Title = $"{this.Name} [{sw.Elapsed.ToString()}]";
             }
-
+#endif
             outboundCard = await ApplyCardModificationsAsync(outboundCard, isPreview, cancellationToken);
 
             // Tracing
@@ -1165,7 +1166,7 @@ namespace Crazor
                     {
                         Title = "Open",
                         IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
-                        Url = currentUri.AbsoluteUri,
+                        Url = currentUri,
                         Mode = AdaptiveActionMode.Secondary
                     });
                 }

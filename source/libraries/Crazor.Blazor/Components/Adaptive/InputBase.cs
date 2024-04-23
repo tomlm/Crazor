@@ -3,7 +3,7 @@
 
 using Crazor.Attributes;
 using Crazor.Interfaces;
-using global::Crazor.AdaptiveCards;
+using global::AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +19,7 @@ namespace Crazor.Blazor.Components.Adaptive
         protected ICardView CardView { get; set; }
 
         [Parameter]
-        public BoolProperty? IsRequired { get => Item.IsRequired; set => Item.IsRequired = value == true; }
+        public BoolProperty? IsRequired { get => Item.IsRequired; set => Item.IsRequired = (value == true); }
 
         [Parameter]
         [Binding(BindingType.DisplayName)]
@@ -117,7 +117,7 @@ namespace Crazor.Blazor.Components.Adaptive
             if (ClientValidation == null || ClientValidation == true)
             {
                 // if we don't have required, but binding property has [Required] then set it
-                if (this.IsRequired == null && BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
+                if (BindingProperty?.GetCustomAttribute<RequiredAttribute>() != null)
                 {
                     this.IsRequired = true;
 

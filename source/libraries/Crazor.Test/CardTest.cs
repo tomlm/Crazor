@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Crazor.AdaptiveCards;
+using AdaptiveCards;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json.Linq;
 using Diag = System.Diagnostics;
 
@@ -34,6 +36,7 @@ namespace Crazor.Test
             var listener = new Diag.DiagnosticListener("Microsoft.AspNetCore");
             builder.Services.AddSingleton<Diag.DiagnosticListener>(listener);
             builder.Services.AddSingleton<Diag.DiagnosticSource>(listener);
+
             if (callback != null)
             {
                 callback(builder.Services);

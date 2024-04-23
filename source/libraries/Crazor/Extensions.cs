@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using Crazor.AdaptiveCards;
-using Crazor.AdaptiveCards.Rendering;
+using AdaptiveCards;
+using AdaptiveCards.Rendering;
 using Crazor.Encryption;
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
@@ -15,7 +15,10 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Xml.Serialization;
+using System.Xml;
 using Diag = System.Diagnostics;
+using System.Text;
 
 namespace Crazor
 {
@@ -45,6 +48,34 @@ namespace Crazor
                 services,
                 options);
         }
+
+        //private static XmlSerializer xmlSerializer = new XmlSerializer(typeof(AdaptiveCard), defaultNamespace: AdaptiveCard.ContentType);
+
+        //public static string ToXml(this AdaptiveCard card)
+        //{
+        //    try
+        //    {
+        //        XmlWriterSettings settings = new XmlWriterSettings()
+        //        {
+        //            Encoding = new UnicodeEncoding(false, false), // no BOM in a .NET string
+        //            Indent = true,
+        //        };
+
+        //        using (StringWriter textWriter = new StringWriter())
+        //        {
+        //            using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
+        //            {
+        //                xmlSerializer.Serialize(xmlWriter, card, new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty }));
+        //            }
+        //            return textWriter.ToString(); //This is the output as a string
+        //        }
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        Diag.Debug.WriteLine(err.ToString());
+        //    }
+        //    return string.Empty;
+        //}
 
         public static IServiceCollection AddCrazor(this IServiceCollection services, Action<ServiceOptions> options)
         {
@@ -223,11 +254,18 @@ namespace Crazor
             return activity.AsInvokeActivity();
         }
 
-        public static IEnumerable<T> GetElements<T>(this AdaptiveTypedElement element)
-            where T : AdaptiveTypedElement
+        public static IEnumerable<T> GetElements<T>(this AdaptiveElement element)
+            where T : AdaptiveElement
         {
             var visitor = new AdaptiveVisitor();
             visitor.Visit(element);
+            return visitor.Elements.OfType<T>();
+        }
+
+        public static IEnumerable<T> GetElements<T>(this AdaptiveCard card)
+        {
+            var visitor = new AdaptiveVisitor();
+            visitor.Visit(card);
             return visitor.Elements.OfType<T>();
         }
 
@@ -352,6 +390,4 @@ namespace Crazor
             return System.Text.Json.JsonSerializer.Serialize(activity, DEFAULT_JSON_SERIALIZER_OPTIONS);
         }
     }
-
-
 }

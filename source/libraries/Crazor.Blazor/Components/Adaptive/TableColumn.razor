@@ -1,6 +1,6 @@
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Microsoft.AspNetCore.Components;
-@inherits ItemComponent<AdaptiveTableColumn>
+@inherits ItemComponent<AdaptiveTableColumnDefinition>
 @implements IChildItem
 
 <ac:TableColumn @attributes="@GetAttributes()">
@@ -9,9 +9,17 @@
 
 @code
 {
-
+    /// <summary>
+    /// The width of the column in pixels
+    /// </summary>
     [Parameter]
-    public String? Width { get => Item.Width?.ToString(); set => Item.Width = new AdaptiveColumnWidth(value); }
+    public double PixelWidth { get => Item.PixelWidth; set => Item.PixelWidth = value; }
+
+    /// <summary>
+    /// The relative weight of the column 
+    /// </summary>
+    [Parameter]
+    public double Width { get => Item.Width; set => Item.Width = value; }
 
     public virtual void AddToParent()
     {

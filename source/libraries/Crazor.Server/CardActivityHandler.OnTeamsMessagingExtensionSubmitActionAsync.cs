@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License.
 
-using Crazor.AdaptiveCards;
+using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor.Server
@@ -104,7 +105,6 @@ namespace Crazor.Server
             card = TransformActionExecuteToSubmit(card);
 
             AdaptiveSubmitAction refreshAction = (AdaptiveSubmitAction?)card.Refresh.Action;
-
             var actions = card.GetElements<AdaptiveSubmitAction>().ToList();
             foreach (var action in actions)
             {
