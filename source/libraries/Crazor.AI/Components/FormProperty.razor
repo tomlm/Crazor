@@ -1,5 +1,5 @@
 ﻿@using System.Reflection
-@using Crazor.AdaptiveCards
+@using AdaptiveCards
 @using Crazor.Interfaces
 @using Crazor.Blazor.Components
 @using Crazor.Blazor.Components.Adaptive
@@ -12,7 +12,7 @@
         var editId = Guid.NewGuid().ToString("n");
         var toggleId = Guid.NewGuid().ToString("n");
     }
-    <Column Width="stretch">
+    <Column Width="AdaptiveWidth.Stretch">
         <Container Id="@viewId" IsVisible="@(HasValue == true || ViewOnly)">
             @if (View == null)
             {
@@ -83,7 +83,7 @@
             }
         </Container>
     </Column>
-    <Column Id="@toggleId" Width="auto" IsVisible="@(BindingValue != null && ViewOnly == false)">
+    <Column Id="@toggleId" Width="AdaptiveWidth.Stretch" IsVisible="@(BindingValue != null && ViewOnly == false)">
         <SelectAction>
             <ActionToggleVisibility Title="Edit">
                 <TargetElement ElementId="@toggleId" />

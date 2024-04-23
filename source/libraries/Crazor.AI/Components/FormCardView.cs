@@ -1,4 +1,4 @@
-﻿using Crazor.AdaptiveCards;
+﻿using AdaptiveCards;
 using Crazor.AI.Recognizers;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Configuration;
