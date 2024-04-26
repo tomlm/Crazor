@@ -59,6 +59,9 @@ namespace Crazor.Server
                 ((JObject)action.Data)[Constants.SUBMIT_VERB] = action.Verb;
                 action.Verb = null;
             }
+            // no refresh if only submit
+            card.Refresh = null;
+
             var json = JsonConvert.SerializeObject(card, _jsonSettings);
             json = json.Replace($"\"type\": \"{AdaptiveExecuteAction.TypeName}\"", $"\"type\": \"{AdaptiveSubmitAction.TypeName}\"");
             return JsonConvert.DeserializeObject<AdaptiveCard>(json, _jsonSettings)!;

@@ -53,5 +53,18 @@ namespace Crazor.Blazor.Tests
                     .AssertTextBlock("Hi!");
         }
 
+        [TestMethod]
+        public async Task TestSelectActionContainer()
+        {
+            await LoadCard("/Cards/SelectActionTests")
+                    .AssertElement<AdaptiveExecuteAction>("CardAction")
+                    .AssertElement<AdaptiveExecuteAction>("ContainerAction")
+                    .AssertElement<AdaptiveExecuteAction>("ColumnSetAction")
+                    .AssertElement<AdaptiveExecuteAction>("ColumnAction")
+                    .AssertElement<AdaptiveExecuteAction>("TextRunAction")
+                    .AssertElement<AdaptiveExecuteAction>("TableCellAction")
+                    .AssertElement<AdaptiveExecuteAction>("ImageAction");
+        }
+
     }
 }

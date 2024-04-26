@@ -104,15 +104,15 @@ namespace Crazor.Server
         {
             card = TransformActionExecuteToSubmit(card);
 
-            AdaptiveSubmitAction refreshAction = (AdaptiveSubmitAction?)card.Refresh.Action;
+            AdaptiveAction refreshAction = card.Refresh?.Action;
             var actions = card.GetElements<AdaptiveSubmitAction>().ToList();
             foreach (var action in actions)
             {
                 ObjectPath.SetPathValue(action, $"data.{Constants.EDITSESSION_KEY}", cardApp.Route.SessionId!, true);
             }
-            card.Refresh = null;
 
             // make sure there is an action (we have to remove Refresh because teams barfs on refresh.
+            card.Refresh = null;
             if (!card.GetElements<AdaptiveSubmitAction>().Any())
             {
                 if (refreshAction == null)

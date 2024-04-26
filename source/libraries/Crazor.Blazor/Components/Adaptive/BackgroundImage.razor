@@ -21,7 +21,7 @@
     public AdaptiveHorizontalAlignment HorizontalAlignment { get => Item.HorizontalAlignment; set => Item.HorizontalAlignment = value; }
 
     [Parameter]
-    public String? Url { get => Item.Url?.ToString(); set => Item.Url = (value != null) ? new Uri(value) : null; }
+    public String? Url { get => Item.Url?.ToString(); set => Item.Url = Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out var val) ? val : null; }
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalAlignment), "Top")]

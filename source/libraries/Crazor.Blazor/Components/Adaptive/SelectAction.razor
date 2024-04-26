@@ -9,25 +9,13 @@
 
 @code
 {
+    private AdaptiveTypedElement parentItem;
+
     public virtual void AddToParent()
     {
         ArgumentNullException.ThrowIfNull(ParentItem);
 
-        if (this.ParentItem is AdaptiveCard card)
-        {
-            card.SelectAction = Item.Action;
-        }
-        else if (this.ParentItem is AdaptiveCollectionElement collection)
-        {
-            collection.SelectAction = Item.Action;
-        }
-        else if (this.ParentItem is AdaptiveImage image)
-        {
-            image.SelectAction = Item.Action;
-        }
-        else if (this.ParentItem is AdaptiveTextRun textrun)
-        {
-            textrun.SelectAction = Item.Action;
-        }
+        // capture the parent so when the action is set it can correctly set the parent.
+        Item.ParentItem = this.ParentItem;
     }
  }

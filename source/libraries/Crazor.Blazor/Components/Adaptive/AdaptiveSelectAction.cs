@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+using Crazor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
@@ -10,35 +11,20 @@ namespace AdaptiveCards
     /// <summary>
     /// Represents how a card can be refreshed by making a request to the target Bot
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-#if !NETSTANDARD1_3
-    [XmlType(TypeName = "SelectAction")]
-#endif
-    [JsonConverter(typeof(AdaptiveSelectActionConverter))]
     public class AdaptiveSelectAction
     {
-        /// <summary>
-        ///    The action to be executed to refresh the card.
-        ///    Clients can run this refresh action automatically or can provide an affordance for users to trigger it manually.
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-#if !NETSTANDARD1_3
-        [XmlElement(typeof(AdaptiveShowCardAction))]
-        [XmlElement(typeof(AdaptiveSubmitAction))]
-        [XmlElement(typeof(AdaptiveOpenUrlAction))]
-        [XmlElement(typeof(AdaptiveToggleVisibilityAction))]
-        [XmlElement(typeof(AdaptiveExecuteAction))]
-        [XmlElement(typeof(AdaptiveUnknownAction))]
-#endif
-        public AdaptiveAction Action { get; set; }
+        private AdaptiveAction _action;
 
-        /// <summary>
-        /// Assignment operator
-        /// </summary>
-        /// <param name="action"></param>
-        public static implicit operator AdaptiveSelectAction(AdaptiveAction action)
+        public object ParentItem { get; set; }
+
+        public AdaptiveAction Action
         {
-            return new AdaptiveSelectAction() { Action = action };
+            get => _action;
+            set
+            {
+                _action = value;
+                ObjectPath.SetPathValue(this.ParentItem, "SelectAction", value, json: false);
+            }
         }
 
     }
