@@ -31,9 +31,13 @@ namespace Crazor.Blazor.Components
             {
                 textInput.InlineAction = this.Item;
             }
-            else
+            else 
             {
-                throw new Exception("Unknown parent");
+                var property = ParentItem.GetType().GetProperty("SelectAction");
+                if (property != null)
+                    property.SetValue(ParentItem, this.Item);
+                else
+                    throw new Exception("Unknown action element as parent!");
             }
         }
     }

@@ -23,7 +23,10 @@ namespace AdaptiveCards
             set
             {
                 _action = value;
-                ObjectPath.SetPathValue(this.ParentItem, "SelectAction", value, json: false);
+                if (this.ParentItem is AdaptiveCard card)
+                    card.SelectAction = value;
+                else
+                    throw new Exception("Unknown SelectAction");
             }
         }
 

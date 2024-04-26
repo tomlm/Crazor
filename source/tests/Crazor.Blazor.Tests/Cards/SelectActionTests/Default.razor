@@ -6,38 +6,26 @@
         <ActionExecute Id="CardAction" Verb="@nameof(OnSelect)" />
     </SelectAction>
     <Container>
-        <SelectAction>
-            <ActionExecute Id="ContainerAction" Verb="@nameof(OnSelect)" />
-        </SelectAction>
+        <ActionExecute Id="ContainerAction" Verb="@nameof(OnSelect)" />
     </Container>
     <ColumnSet>
-        <SelectAction>
-            <ActionExecute Id="ColumnSetAction" Verb="@nameof(OnSelect)" />
-        </SelectAction>
+        <ActionExecute Id="ColumnSetAction" Verb="@nameof(OnSelect)" />
         <Column>
             <RichTextBlock>
                 <TextRun Text="Text">
-                    <SelectAction>
-                        <ActionExecute Id="TextRunAction" Verb="@nameof(OnSelect)" />
-                    </SelectAction>
+                    <ActionExecute Id="TextRunAction" Verb="@nameof(OnSelect)" />
                 </TextRun>
             </RichTextBlock>
-            <SelectAction>
-                <ActionExecute Id ="ColumnAction" Verb="@nameof(OnSelect)" />
-            </SelectAction>
+            <ActionExecute Id="ColumnAction" Verb="@nameof(OnSelect)" />
         </Column>
     </ColumnSet>
     <Image Url="https://bing.com">
-        <SelectAction>
-            <ActionExecute Id="ImageAction" Verb="@nameof(OnSelect)" />
-        </SelectAction>
+        <ActionExecute Id="ImageAction" Verb="@nameof(OnSelect)" />
     </Image>
     <Table>
         <TableRow>
             <TableCell>
-                <SelectAction>
-                    <ActionExecute Id="TableCellAction" Verb="@nameof(OnSelect)" />
-                </SelectAction>
+                <ActionExecute Id="TableCellAction" Verb="@nameof(OnSelect)" />
             </TableCell>
         </TableRow>
     </Table>
