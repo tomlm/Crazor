@@ -35,10 +35,10 @@
     public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment; set => Item.VerticalContentAlignment = value; }
 
     [Parameter]
-    public String? Height { get; set; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = value; }
 
     [Parameter]
-    public String? Version { get; set; }
+    public String? Version { get => Item.Version?.ToString(); set => Item.Version = value; }
 
     public virtual void AddToParent()
     {

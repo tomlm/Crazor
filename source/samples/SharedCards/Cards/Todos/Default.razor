@@ -1,0 +1,124 @@
+﻿@using Crazor.Blazor;
+@inherits CardView
+@* This is the TodosMVC written using crazor *@
+<Card Version="1.4">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Todos</TextBlock>
+    <InputText Id="text" Label="" Placeholder="What needs to be done?">
+        <ActionExecute Verb="@nameof(OnNewItem)" Title="+"></ActionExecute>
+    </InputText>
+
+    @if (Todos.Any())
+    {
+        @foreach (var todo in Todos.Where(t => ShowTodo(t)))
+        {
+            @if (EditTodo == todo.Title)
+            {
+                <InputText Id="newTitle" Value="@todo.Title" Label="">
+                    <ActionExecute Verb="OnSaveTitle" Title="Save">{ "title": "@todo.Title" }</ActionExecute>
+                </InputText>
+            }
+            else
+            {
+                <ColumnSet>
+                    <Column Width="AdaptiveColumnWidth.Auto" VerticalContentAlignment="AdaptiveVerticalContentAlignment.Center">
+                        <ActionExecute Verb="@nameof(OnToggle)">{ "title": "@todo.Title" }</ActionExecute>
+                        <TextBlock Size="AdaptiveTextSize.ExtraLarge">@(todo.IsDone ? "☑" : "☐")</TextBlock>
+                    </Column>
+                    <Column Width="AdaptiveColumnWidth.Stretch" VerticalContentAlignment="AdaptiveVerticalContentAlignment.Center">
+                        <ActionExecute Verb="@nameof(OnEditTodo)">{ "title": "@todo.Title" }</ActionExecute>
+                        <TextBlock>@(todo.IsDone ? $"~~{todo.Title}~~" : todo.Title)</TextBlock>
+                    </Column>
+                    <Column Width="AdaptiveColumnWidth.Auto" VerticalContentAlignment="AdaptiveVerticalContentAlignment.Center">
+                        <ActionExecute Verb="@nameof(OnDelete)">{ "title": "@todo.Title" }</ActionExecute>
+                        <TextBlock Size="AdaptiveTextSize.ExtraLarge">🗑</TextBlock>
+                    </Column>
+                </ColumnSet>
+            }
+        }
+
+        <ColumnSet>
+            <Column Width="AdaptiveColumnWidth.Auto" VerticalContentAlignment="AdaptiveVerticalContentAlignment.Center">
+                <TextBlock>@Todos.Count(t => !t.IsDone) items left!</TextBlock>
+            </Column>
+            <Column Width="AdaptiveColumnWidth.Stretch" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
+                <ActionSet>
+                    <ActionExecute Title="All" Verb="@nameof(OnFilter)" IsEnabled="@(TodoFilter != Filter.All)">{ 'filter':'@Filter.All' }</ActionExecute>
+                    <ActionExecute Title="Active" Verb="@nameof(OnFilter)" IsEnabled="@(TodoFilter != Filter.Active)">{ 'filter':'@Filter.Active' }</ActionExecute>
+                    <ActionExecute Title="Completed" Verb="@nameof(OnFilter)" IsEnabled="@(TodoFilter != Filter.Completed)">{ 'filter':'@Filter.Completed' }</ActionExecute>
+                </ActionSet>
+            </Column>
+            <Column Width="AdaptiveColumnWidth.Auto" HorizontalAlignment="AdaptiveHorizontalAlignment.Center">
+                <ActionSet>
+                    <ActionExecute Title="Clear Completed" Verb="@nameof(OnClearDone)" />
+                </ActionSet>
+            </Column>
+        </ColumnSet>
+    }
+</Card>
+
+@code
+{
+    public enum Filter { All, Active, Completed };
+
+    public List<TodoItem> Todos { get; set; } = new List<TodoItem>();
+
+    public Filter TodoFilter { get; set; } = Filter.All;
+
+    [TempMemory]
+    public string EditTodo { get; set; }
+
+    public void OnNewItem(string text)
+    {
+        if (!String.IsNullOrWhiteSpace(text))
+        {
+            text = text.Trim();
+            if (!Todos.Any(todo => todo.Title.ToLower() == text.ToLower()))
+                Todos.Add(new TodoItem() { Title = text.Trim() });
+            else
+                AddBannerMessage("Duplicate todo", AdaptiveContainerStyle.Warning);
+        }
+    }
+
+    public void OnDelete(string title)
+    {
+        Todos.RemoveAll(p => p.Title == title);
+    }
+
+    public void OnFilter(Filter filter)
+    {
+        this.TodoFilter = filter;
+    }
+
+    public void OnClearDone()
+    {
+        Todos.RemoveAll(todo => todo.IsDone);
+    }
+
+    public void OnToggle(string title)
+    {
+        var todo = Todos.Find(p => p.Title == title);
+        if (todo != null)
+            todo.IsDone = !todo.IsDone;
+    }
+
+    public void OnEditTodo(string title)
+    {
+        EditTodo = title;
+    }
+
+    public void OnSaveTitle(string title, string newTitle)
+    {
+        var todo = Todos.Find(p => p.Title == title);
+        if (todo != null)
+            todo.Title = newTitle;
+    }
+
+    public bool ShowTodo(TodoItem todo)
+    {
+        if (TodoFilter == Filter.Active)
+            return todo.IsDone == false;
+        if (TodoFilter == Filter.Completed)
+            return todo.IsDone;
+        return true;
+    }
+}

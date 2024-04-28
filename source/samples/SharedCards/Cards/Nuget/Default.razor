@@ -5,7 +5,7 @@
 @attribute [CommandInfo(title: "Nuget", description: "Search for nuget packages", Type = CommandType.Query)]
 @attribute [QueryParameter(name: "search", description:  "Enter in package name you want", title: "Package")]
 
-<Card Version="1.5">
+<Card Version="1.4">
     <InputText Id="@nameof(Search)" Value="@Search" >
         <ActionExecute Verb="@nameof(OnSearch)" Title="Search"/>
     </InputText>
