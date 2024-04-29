@@ -167,7 +167,7 @@
         int altScore = score;
         foreach (var ace in hand.Where(card => card.Value == "ACE"))
         {
-            altScore -= 11;
+            altScore -= 10;
             if (altScore <= 21)
                 return altScore;
         }
