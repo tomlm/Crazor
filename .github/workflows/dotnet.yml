@@ -1,6 +1,7 @@
 name: BuildAndRunTests
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ "main" ]
     paths:
