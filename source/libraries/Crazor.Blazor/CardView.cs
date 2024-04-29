@@ -183,8 +183,7 @@ namespace Crazor.Blazor
         /// <inheritdoc/>
         public virtual async Task OnInitializedAsync(CancellationToken cancellationToken)
         {
-            OnInitialized();
-            await Task.CompletedTask;
+            await OnInitializedAsync();
         }
 
         /// <inheritdoc/>

@@ -1,0 +1,19 @@
+﻿@using SharedCards.DeckOfCards
+@inherits CardView<CardApp,BlackjackSettings>
+
+<Card Version="1.4">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Blackjack!</TextBlock>
+
+    <InputNumber Binding="Model.Bet" />
+
+    <ActionCancel/>
+    <ActionOK/>
+</Card>
+
+@code
+{
+    public void OnBet()
+    {
+        CloseView(this.Model);
+    }
+}

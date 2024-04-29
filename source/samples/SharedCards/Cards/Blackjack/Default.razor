@@ -1,0 +1,176 @@
+﻿@using SharedCards.DeckOfCards
+@inherits CardView
+
+<Card Version="1.4" Title="Blackjack!">
+
+    @* dealer hand *@
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Dealer Hand</TextBlock>
+    <ImageSet ImageSize="AdaptiveImageSize.Large" Spacing="AdaptiveSpacing.Medium">
+        @if (!PlayerDone)
+        {
+            <Image Url="https://deckofcardsapi.com/static/img/back.png" />
+            <Image Url="@DealerHand.Skip(1).First().Image" />
+        }
+        else
+        {
+            foreach (var card in DealerHand)
+            {
+                <Image Url="@card.Image" />
+            }
+        }
+    </ImageSet>
+    @if (PlayerDone)
+    {
+        <TextBlock>Dealer Total: @DealerScore</TextBlock>
+    }
+
+    @* player hand *@
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Player Hand</TextBlock>
+    <TextBlock>Current Bet: $@Settings.Bet</TextBlock>
+    <ImageSet ImageSize="AdaptiveImageSize.Large">
+        @foreach (var card in PlayerHand)
+        {
+            <Image Url="@card.Image" />
+        }
+    </ImageSet>
+    <TextBlock>Your Total: @PlayerScore</TextBlock>
+
+    @if (!PlayerDone)
+    {
+        <ActionExecute Verb="@nameof(OnHitMe)" Title="Hit me" />
+        <ActionExecute Verb="@nameof(OnStandPat)" Title="Stand" />
+    }
+    else
+    {
+        <ActionExecute Verb="@nameof(OnChangeBet)" Title="Change Bet" />
+        <ActionExecute Verb="@nameof(OnDeal)" Title="Deal" />
+    }
+</Card>
+
+@code
+{
+    private DeckAPI deckApi = new DeckAPI(new HttpClient());
+
+    private bool DealerBust => DealerScore > 21;
+    private int DealerScore => GetHandScore(DealerHand);
+
+    private bool PlayerBust => PlayerScore > 21;
+    private int PlayerScore => GetHandScore(PlayerHand);
+
+    public string DeckId { get; set; }
+
+    public bool PlayerDone { get; set; }
+
+    public BlackjackSettings Settings { get; set; } = new BlackjackSettings();
+
+    public List<DeckOfCards.Card> DealerHand { get; set; }
+
+    public List<DeckOfCards.Card> PlayerHand { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        if (DeckId == null)
+        {
+            var result = await deckApi.GetShuffledDeckAsync(1, null);
+            DeckId = result.Deck_id;
+
+            await OnDeal();
+        }
+    }
+
+    public async override Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
+    {
+        this.Settings = (BlackjackSettings)cardResult.Result;
+    }
+
+    public async Task OnDeal()
+    {
+        var result = await deckApi.ReshuffleDeckAsync(DeckId, null);
+
+        PlayerDone = false;
+
+        var drawn = await deckApi.DrawCardsExistingDeckAsync(DeckId, 2);
+        DealerHand = drawn.Cards.ToList();
+
+        drawn = await deckApi.DrawCardsExistingDeckAsync(DeckId, 2);
+        PlayerHand = drawn.Cards.ToList();
+    }
+
+    public async Task OnHitMe()
+    {
+        var drawn = await deckApi.DrawCardsExistingDeckAsync(DeckId, 1);
+        PlayerHand.Add(drawn.Cards.Single());
+
+        if (PlayerBust)
+        {
+            PlayerDone = true;
+            AddBannerMessage("You bust!", AdaptiveContainerStyle.Attention);
+        }
+    }
+
+    public async Task OnStandPat()
+    {
+        PlayerDone = true;
+
+        await PlayDealer();
+    }
+
+    public void OnChangeBet()
+    {
+        ShowView("Settings", Settings);
+    }
+
+    private async Task PlayDealer()
+    {
+        while (DealerScore < 17)
+        {
+            var drawn = await deckApi.DrawCardsExistingDeckAsync(DeckId, 1);
+            DealerHand.Add(drawn.Cards.Single());
+            if (DealerBust)
+            {
+                AddBannerMessage("Dealer Bust!", AdaptiveContainerStyle.Attention);
+                return;
+            }
+        }
+
+        if (PlayerScore >= DealerScore)
+        {
+            AddBannerMessage("You Won!", AdaptiveContainerStyle.Good);
+        }
+        else
+        {
+            AddBannerMessage("You lost!", AdaptiveContainerStyle.Attention);
+        }
+    }
+
+    private int GetCardValue(DeckOfCards.Card card, bool aceHigh)
+    {
+        switch (card.Value)
+        {
+            case "ACE":
+                return (aceHigh) ? 11 : 1;
+            case "KING":
+            case "QUEEN":
+            case "JACK":
+                return 10;
+            default:
+                return int.Parse(card.Value);
+        }
+    }
+
+    private int GetHandScore(IEnumerable<DeckOfCards.Card> hand)
+    {
+        int score = hand.Sum(card => GetCardValue(card, true));
+        if (score <= 21)
+            return score;
+
+        int altScore = score;
+        foreach (var ace in hand.Where(card => card.Value == "ACE"))
+        {
+            altScore -= 11;
+            if (altScore <= 21)
+                return altScore;
+        }
+        return altScore;
+    }
+}

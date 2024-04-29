@@ -6,6 +6,12 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <OpenApiReference Include="OpenAPIs\openapi-deckofcardsapi.yml" CodeGenerator="NSwagCSharp" Namespace="SharedCards.DeckOfCards" ClassName="DeckAPI">
+	    <SourceUri>https://gist.githubusercontent.com/chrismahoney/9b7dbfb7aef62baec5019466afaa07d3/raw/ff744c48bf472f871fa11759a770117413fd13b5/openapi-deckofcardsapi.yml</SourceUri>
+	  </OpenApiReference>
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
@@ -17,8 +23,17 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.2" />
 		<PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.22.2" />
 		<PackageReference Include="Microsoft.Bing.Search.WebSearch" Version="1.0.0" />
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.Identity.Web" Version="2.17.1" />
 		<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.17.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>

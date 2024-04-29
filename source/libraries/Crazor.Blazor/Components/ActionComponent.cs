@@ -37,7 +37,7 @@ namespace Crazor.Blazor.Components
                 if (property != null)
                     property.SetValue(ParentItem, this.Item);
                 else
-                    throw new Exception("Unknown action element as parent!");
+                    throw new Exception($"Unknown element {ParentItem?.GetType().Name} as parent for {this.Item.GetType().Name}!");
             }
         }
     }
