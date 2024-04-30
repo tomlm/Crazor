@@ -15,6 +15,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Checkout AdaptiveCards repo
+      uses: actions/checkout@v4
+      with:
+        repository: microsoft/adaptivecards
+        path: adaptivecards
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
