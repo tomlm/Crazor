@@ -39,6 +39,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: dotnet pack Crazor
+        continue-on-error: true
         run: dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols -v d --version-suffix "beta-${{ steps.t1.outputs.time  }}" 
 
       - name: dotnet push
