@@ -40,9 +40,9 @@ jobs:
 
       - name: dotnet pack Crazor
         continue-on-error: true
-        run: dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols -v d --version-suffix "beta-${{ steps.t1.outputs.time  }}" 
+        run: dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta-${{ steps.t1.outputs.time  }}" --property WarningLevel=0
 
       - name: dotnet push
         run: |
-          ls -al packages/*.*nupkg
+          ls packages/*
           # dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} "packages/crazor*.nupkg"
