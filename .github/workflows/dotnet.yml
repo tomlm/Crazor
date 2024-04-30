@@ -13,18 +13,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        path: crazor
     - name: Checkout adaptivecards
       uses: actions/checkout@v4
       with:
         repository: microsoft/adaptivecards
-        path: ../adaptivecards
+        path: adaptivecards
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore source/Crazor.sln
+      run: dotnet restore crazor/source/Crazor.sln
     - name: Build
-      run: dotnet build --no-restore source/Crazor.sln
+      run: dotnet build --no-restore crazor/source/Crazor.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal source/Crazor.sln
+      run: dotnet test --no-build --verbosity normal crazor/source/Crazor.sln
