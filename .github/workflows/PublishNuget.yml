@@ -1,8 +1,5 @@
 name: Publish Nuget
 
-#on:
-#  workflow_dispatch:
-#    branches: [ "main" ]
 on:
   workflow_dispatch:
 #  push:
@@ -48,10 +45,9 @@ jobs:
 #        run: dotnet build --no-restore crazor/source/Crazor.sln
 
       - name: dotnet pack Crazor
-        # run: dotnet pack --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" crazor/source/Crazor.sln
-        run: dotnet pack --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" crazor/source/Crazor:Libraries.sln -o packages
+        run: dotnet pack --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" crazor/source/CrazorLibraries.sln -o packages
 
       - name: dotnet push
         run: |
           ls -al packages/*.*nupkg
-          # dotnet nuget push --api-key ${{secrets.NUGET_KEY}} "crazor/source/libraries/Crazor/bin/Debug/Crazor.*.nupkg"
+          # dotnet nuget push --api-key ${{secrets.NUGET_KEY}} "packages/crazor*.nupkg"
