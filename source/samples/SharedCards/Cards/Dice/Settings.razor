@@ -23,7 +23,7 @@
     [Range(1, 50, ErrorMessage = "Dice must be between 1 and 50.")]
     public int? NumberDice { get; set; }
 
-    public override void OnInitialized()
+    protected override void OnInitialized()
     {
         DiceName = App.DiceName;
         NumberDice = App.NumberDice;

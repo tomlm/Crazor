@@ -19,18 +19,18 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.2" />
-		<PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.22.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.4" />
+		<PackageReference Include="Microsoft.Bot.Builder.Azure.Blobs" Version="4.22.3" />
 		<PackageReference Include="Microsoft.Bing.Search.WebSearch" Version="1.0.0" />
-		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="8.0.4">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Identity.Web" Version="2.17.1" />
-		<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.17.1" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.18.1" />
+		<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.18.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.7">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

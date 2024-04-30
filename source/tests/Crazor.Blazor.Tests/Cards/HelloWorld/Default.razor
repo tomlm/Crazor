@@ -7,12 +7,7 @@
 
 @code
 {
-    public override void OnInitialized()
-    {
-        this.Title = "Hello";
-    }
-
-    public string Title { get; set; }
+    public string Title { get; set; } = "Hello";
 
     public void OnClick() => Title = "Clicked";
 }

@@ -83,6 +83,8 @@ namespace Crazor.Blazor
         /// <inheritdoc/>
         public virtual async Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
+
             IsPreview = isPreview;
 
             string xml = string.Empty;
@@ -157,11 +159,6 @@ namespace Crazor.Blazor
         #endregion -----
 
         #region  ----- Action Lifecycle Methods ----
-
-        /// <inheritdoc/>
-        public virtual void OnInitialized()
-        {
-        }
 
         /// <inheritdoc/>
         public virtual async Task OnInitializedAsync(CancellationToken cancellationToken)
