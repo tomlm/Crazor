@@ -4,6 +4,7 @@ name: Publish Nuget
 #  workflow_dispatch:
 #    branches: [ "main" ]
 on:
+  workflow_dispatch:
   push:
     branches:
     - main
@@ -11,8 +12,7 @@ on:
     - source/libraries/**
 
 env:
-  AZURE_ARTIFACTS_FEED_URL:   https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json
-  DOTNET_VERSION: '7.x' 
+  DOTNET_VERSION: 8.0.x
 
 jobs:
   build:
@@ -24,33 +24,33 @@ jobs:
         with:
           format: "YYYYMMDDHHmm"      
       
-      # Checkout the repo
-      - uses: actions/checkout@v3
+      - name: Checkout crazor
+        uses: actions/checkout@v4
+        with:
+          path: crazor
+          
+      - name: Checkout adaptivecards
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/adaptivecards
+          path: adaptivecards
 
-      # Setup .NET Core SDK
+    # Setup .NET Core SDK
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-          source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.AZURE_ARTIFACTS_PAT }} 
 
-        # Run dotnet build and package
-      # dotnet pack -c Debug --no-restore --version-suffix beta-$(date +'%Y%m%d%H%M') source/libraries/Crazor/Crazor.csproj
-      - name: dotnet restore
-        run: dotnet restore source/Crazor.sln
+      - name: Restore dependencies
+        run: dotnet restore crazor/source/Crazor.sln
 
-      - name: dotnet build
-        run: dotnet build -c Debug --no-restore source/Crazor.sln
+      - name: Build
+        run: dotnet build --no-restore crazor/source/Crazor.sln
 
       - name: dotnet pack Crazor
-        run: dotnet pack -c Debug --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" source/Crazor.sln
+        run: dotnet pack --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" crazor/source/Crazor.sln
 
       - name: dotnet push
         run: |
-          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor/bin/Debug/Crazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
-          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Mvc/bin/Debug/Crazor.Mvc.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
-          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Blazor/bin/Debug/Crazor.Blazor.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
-          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Server/bin/Debug/Crazor.Server.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
-          dotnet nuget push --api-key AzureArtifacts "source/libraries/Crazor.Test/bin/Debug/Crazor.Test.1.0.0-beta-${{ steps.t1.outputs.time }}.nupkg"
+          ls -al crazor/source/libraries/crazor/bin/debug/*.*nupkg
+          # dotnet nuget push --api-key ${{secrets.NUGET_KEY}} "crazor/source/libraries/Crazor/bin/Debug/Crazor.*.nupkg"
