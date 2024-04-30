@@ -1,9 +1,9 @@
 name: Deply CrazorDemo website
 on:
   workflow_dispatch:
-  push:
-    branches:
-    - main
+#  push:
+#    branches:
+#    - main
 env:
   AZURE_WEBAPP_NAME: CrazorDemo
   AZURE_WEBAPP_PACKAGE_PATH: crazor/source/Samples/CrazorBlazorDemo/published
