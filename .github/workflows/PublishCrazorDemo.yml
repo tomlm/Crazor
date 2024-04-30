@@ -1,62 +1,76 @@
-name: Deply CrazorDemo website
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy CrazorDemo web app
+
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
-#  push:
-#    branches:
-#    - main
-env:
-  AZURE_WEBAPP_NAME: CrazorDemo
-  AZURE_WEBAPP_PACKAGE_PATH: crazor/source/Samples/CrazorBlazorDemo/published
-  CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 8.0.x
-  WORKING_DIRECTORY: crazor/source/Samples/CrazorBlazorDemo
+
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
-    - name: Checkout crazor
-      uses: actions/checkout@v4
-      with:
-        path: crazor
-    - name: Checkout adaptivecards
-      uses: actions/checkout@v4
-      with:
-        repository: microsoft/adaptivecards
-        path: adaptivecards
-    - name: Checkout AdaptiveCards repo
-      uses: actions/checkout@v4
-      with:
-        repository: microsoft/adaptivecards
-        path: adaptivecards
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
-    - name: Restore
-      run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
-    - name: Build
-      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
-    - name: Test
-      run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
-    - name: Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - uses: actions/checkout@v4
+      - name: Checkout crazor
+        uses: actions/checkout@v4
+        with:
+          path: crazor
+          
+      - name: Checkout adaptivecards
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/adaptivecards
+          path: adaptivecards
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 8.0.x
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build crazor/source/Samples/CrazorBlazorDemo --configuration Release 
+
+      - name: dotnet publish
+        run: dotnet publish crazor/source/Samples/CrazorBlazorDemo --configuration Release -o crazor/source/Samples/CrazorBlazorDemo/published
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: crazor/source/Samples/CrazorBlazorDemo/published
+
   deploy:
     runs-on: windows-latest
     needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
     steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v3
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    - name: Deploy to Azure WebApp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.CrazorDemo_1893 }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+      
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0C3E2E79A97F4ED093F8B2EC68C67370 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6FE005B58D824FBFB733D263113B394E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3EBE19E2AF1145D8ACFA03657356A294 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'CrazorDemo'
+          slot-name: 'Production'
+          package: .
+          
