@@ -13,6 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Checkout adaptivecards
+      uses: actions/checkout@v4
+      with:
+        repository: microsoft/adaptivecards
+        path: adaptivecards
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
