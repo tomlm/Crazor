@@ -9,9 +9,9 @@ using System.Xml.Serialization;
 namespace AdaptiveCards
 {
     /// <summary>
-    /// Represents how a card can be refreshed by making a request to the target Bot
+    /// Represents an explict AdaptiveInlineAction
     /// </summary>
-    public class AdaptiveSelectAction
+    public class AdaptiveInlineAction
     {
         private AdaptiveAction _action;
 
@@ -23,11 +23,11 @@ namespace AdaptiveCards
             set
             {
                 _action = value;
-                var property = ParentItem.GetType().GetProperty("SelectAction");
+                var property = ParentItem.GetType().GetProperty("InlineAction");
                 if (property != null)
                     property.SetValue(ParentItem, value);
                 else
-                    throw new Exception($"Unknown element {ParentItem?.GetType().Name} as parent for {value.GetType().Name}!");
+                    throw new Exception($"Unknown element {ParentItem?.GetType().Name} doesn't have InlineAction!");
             }
         }
 

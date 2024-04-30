@@ -1,0 +1,17 @@
+﻿@using Crazor
+@inherits CardView
+
+<Card Version="1.5">
+    <InputText>
+        <InlineAction>
+            <ActionExecute Id="InputTextAction" Verb="@nameof(OnSelect)" />
+        </InlineAction>
+    </InputText>
+</Card>
+
+@code {
+    public void OnSelect()
+    {
+
+    }
+}

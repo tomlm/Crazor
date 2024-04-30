@@ -74,25 +74,7 @@ namespace Crazor
         /// <inheritdoc/>
         public virtual string GetRoute()
         {
-            var routeAttr = this.GetType().GetCustomAttribute<CardRouteAttribute>();
-            if (routeAttr != null)
-            {
-                StringBuilder sb = new StringBuilder();
-                var parts = routeAttr.Template.Split('/');
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    var part = parts[i];
-                    if (part.StartsWith('{') && part.EndsWith('}'))
-                    {
-                        parts[i] = ObjectPath.GetPathValue<string>(this, part.Trim('{', '}', '?'), null);
-                    }
-                }
-                return String.Join('/', parts);
-            }
-            else
-            {
-                return (this.Name != Constants.DEFAULT_VIEW) ? this.Name : String.Empty;
-            }
+            return CardViewExtensions.GetRoute(this);
         }
 
 

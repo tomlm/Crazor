@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Crazor.Attributes;
 using Crazor.Interfaces;
 using Crazor.Validation;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Text;
 
 namespace Crazor
 {
@@ -142,6 +144,60 @@ namespace Crazor
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// GetRouteHelper() - returns custom subpath for the ICardView
+        /// </summary>
+        /// <remarks>
+        /// The default is to use reflection and [Route] to calculate the route
+        /// </remarks>
+        /// <returns>relative path to the card for deep linking</returns>
+        public static string GetRoute(ICardView cardView)
+        {
+            StringBuilder sb = new StringBuilder();
+            var routeAttr = cardView.GetType().GetCustomAttribute<CardRouteAttribute>();
+            if (routeAttr != null)
+            {
+                var parts = routeAttr.Template.Split('/');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    var part = parts[i];
+                    if (part.StartsWith('{') && part.EndsWith('}'))
+                    {
+                        parts[i] = ObjectPath.GetPathValue<string>(cardView, part.Trim('{', '}', '?'), null);
+                    }
+                }
+                sb.Append(String.Join('/', parts));
+            }
+            else
+            {
+                sb.Append((cardView.Name != Constants.DEFAULT_VIEW) ? cardView.Name : String.Empty);
+            }
+
+            var fromCardQueryProperties = cardView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromCardQueryAttribute>() != null);
+            Dictionary<string, string> queryParameters = new Dictionary<string, string>();
+            if (fromCardQueryProperties.Any())
+            {
+                foreach (var targetProperty in fromCardQueryProperties)
+                {
+                    var queryParameterName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ?? targetProperty.Name;
+                    if (queryParameterName != null)
+                    {
+                        var value = targetProperty.GetValue(cardView);
+                        if (value != null)
+                        {
+                            queryParameters.Add(queryParameterName, value.ToString());
+                        }
+                    }
+                }
+            }
+            if (queryParameters.Any())
+            {
+                sb.Append($"?{String.Join('&', queryParameters.Select(kv => $"{kv.Key}={Uri.EscapeDataString(kv.Value)}"))}");
+            }
+
+            return sb.ToString().TrimEnd('?');
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿@using Crazor
+@inherits CardView
+
+<Card Version="1.5">
+    <SelectAction>
+        <ActionExecute Id="CardAction" Verb="@nameof(OnSelect)" />
+    </SelectAction>
+    <Container>
+        <SelectAction>
+            <ActionExecute Id="ContainerAction" Verb="@nameof(OnSelect)" />
+        </SelectAction>
+    </Container>
+    <ColumnSet>
+        <SelectAction>
+            <ActionExecute Id="ColumnSetAction" Verb="@nameof(OnSelect)" />
+        </SelectAction>
+        <Column>
+            <RichTextBlock>
+                <TextRun Text="Text">
+                    <SelectAction>
+                        <ActionExecute Id="TextRunAction" Verb="@nameof(OnSelect)" />
+                    </SelectAction>
+                </TextRun>
+            </RichTextBlock>
+            <SelectAction>
+                <ActionExecute Id="ColumnAction" Verb="@nameof(OnSelect)" />
+            </SelectAction>
+        </Column>
+    </ColumnSet>
+    <Image Url="https://bing.com">
+        <SelectAction>
+            <ActionExecute Id="ImageAction" Verb="@nameof(OnSelect)" />
+        </SelectAction>
+    </Image>
+    <Table>
+        <TableRow>
+            <TableCell>
+                <SelectAction>
+                    <ActionExecute Id="TableCellAction" Verb="@nameof(OnSelect)" />
+                </SelectAction>
+            </TableCell>
+        </TableRow>
+    </Table>
+</Card>
+
+@code {
+    public void OnSelect()
+    {
+
+    }
+}

@@ -1,0 +1,21 @@
+ @using AdaptiveCards
+ @using Microsoft.AspNetCore.Components;
+ @inherits ItemComponent<AdaptiveInlineAction>
+ @implements IChildItem
+
+<ac:SelectAction @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:SelectAction>
+
+@code
+{
+    private AdaptiveTypedElement parentItem;
+
+    public virtual void AddToParent()
+    {
+        ArgumentNullException.ThrowIfNull(ParentItem);
+
+        // capture the parent so when the action is set it can correctly set the parent.
+        Item.ParentItem = this.ParentItem;
+    }
+ }

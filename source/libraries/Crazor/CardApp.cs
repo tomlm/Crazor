@@ -549,14 +549,19 @@ namespace Crazor
             UriBuilder uri = new UriBuilder();
 
             var viewRoute = this.CurrentView!.GetRoute();
-            var parts = viewRoute.Split('?');
-            var subPath = parts[0];
-            var query = parts.Skip(1).SingleOrDefault() ?? String.Empty;
-            if (!viewRoute.StartsWith('/'))
+            var i = viewRoute.IndexOf('?');
+            string subPath = String.Empty;
+            if (i >= 0)
             {
-                if (viewRoute.Length > 0)
+                uri.Query = viewRoute.Substring(i+ 1);
+                subPath = viewRoute.Substring(0, i);
+            }
+
+            if (!subPath.StartsWith('/'))
+            {
+                if (subPath.Length > 0)
                     uri.Path = $"/Cards/{this.Name}/{subPath}";
-                else if (viewRoute.Length == 0)
+                else if (subPath.Length == 0)
                     uri.Path = $"/Cards/{this.Name}";
                 else
                     uri.Path = $"/Cards/{this.Name}/{this.CurrentView.Name}";
@@ -566,7 +571,6 @@ namespace Crazor
                 uri.Path = subPath;
             }
 
-            uri.Query = query;
             return uri.Uri.PathAndQuery;
         }
 
@@ -1106,7 +1110,7 @@ namespace Crazor
                     {
                         Id = $"messageBanner{iMessage}",
                         Style = message.Style,
-                        Bleed= true,
+                        Bleed = true,
                         Spacing = AdaptiveSpacing.None,
                         Columns = new List<AdaptiveColumn>()
                         {

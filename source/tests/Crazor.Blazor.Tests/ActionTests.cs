@@ -54,9 +54,9 @@ namespace Crazor.Blazor.Tests
         }
 
         [TestMethod]
-        public async Task TestSelectActionContainer()
+        public async Task TestSelectActionImplicit()
         {
-            await LoadCard("/Cards/SelectActionTests")
+            await LoadCard("/Cards/SelectAction")
                     .AssertElement<AdaptiveExecuteAction>("CardAction")
                     .AssertElement<AdaptiveExecuteAction>("ContainerAction")
                     .AssertElement<AdaptiveExecuteAction>("ColumnSetAction")
@@ -66,5 +66,31 @@ namespace Crazor.Blazor.Tests
                     .AssertElement<AdaptiveExecuteAction>("ImageAction");
         }
 
+        [TestMethod]
+        public async Task TestSelectActionExplict()
+        {
+            await LoadCard("/Cards/SelectAction/Explicit")
+                    .AssertElement<AdaptiveExecuteAction>("CardAction")
+                    .AssertElement<AdaptiveExecuteAction>("ContainerAction")
+                    .AssertElement<AdaptiveExecuteAction>("ColumnSetAction")
+                    .AssertElement<AdaptiveExecuteAction>("ColumnAction")
+                    .AssertElement<AdaptiveExecuteAction>("TextRunAction")
+                    .AssertElement<AdaptiveExecuteAction>("TableCellAction")
+                    .AssertElement<AdaptiveExecuteAction>("ImageAction");
+        }
+
+        [TestMethod]
+        public async Task TestInlineActionImplicit()
+        {
+            await LoadCard("/Cards/InlineAction")
+                    .AssertElement<AdaptiveExecuteAction>("InputTextAction");
+        }
+
+        [TestMethod]
+        public async Task TestInlineActionExcplit()
+        {
+            await LoadCard("/Cards/InlineAction/Explicit")
+                    .AssertElement<AdaptiveExecuteAction>("InputTextAction");
+        }
     }
 }
