@@ -38,16 +38,10 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore dependencies
-        run: dotnet restore crazor/source/CrazorLibraries.sln
-
-#      - name: Build
-#        run: dotnet build --no-restore crazor/source/Crazor.sln
-
       - name: dotnet pack Crazor
-        run: dotnet pack --no-restore --version-suffix "beta-${{ steps.t1.outputs.time  }}" crazor/source/CrazorLibraries.sln -o packages
+        run: dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols -v d --version-suffix "beta-${{ steps.t1.outputs.time  }}" 
 
       - name: dotnet push
         run: |
           ls -al packages/*.*nupkg
-          # dotnet nuget push --api-key ${{secrets.NUGET_KEY}} "packages/crazor*.nupkg"
+          # dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} "packages/crazor*.nupkg"
