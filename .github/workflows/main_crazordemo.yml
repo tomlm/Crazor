@@ -33,10 +33,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build crazor/source/Samples/CrazorBlazorDemo/CrazorBlazorDemo --configuration Release 
+        run: dotnet build crazor/source/Samples/CrazorBlazorDemo --configuration Release 
 
       - name: dotnet publish
-        run: dotnet publish crazor/source/Samples/CrazorBlazorDemo/CrazorBlazorDemo --configuration Release -o crazor/source/Samples/CrazorBlazorDemo/published
+        run: dotnet publish crazor/source/Samples/CrazorBlazorDemo --configuration Release -o crazor/source/Samples/CrazorBlazorDemo/published
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
