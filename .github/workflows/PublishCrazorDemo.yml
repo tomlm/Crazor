@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Web App CrazorDemo
+name: Deply CrazorDemo website
 on:
   workflow_dispatch:
   push:
