@@ -44,11 +44,15 @@ jobs:
 
       - name: dotnet pack Crazor
         continue-on-error: true
-        run: dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta" --property WarningLevel=0
+        run: |
+          dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta" --property WarningLevel=0
 
       - name: dotnet push
+        continue-on-error: true
         run: |
-          for %%s in (packages/crazor*.nupkg) do dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} %s
+          for file in /packages/*.nupkg; do
+            dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} $file
+          done
 
       - name: Commit bumped versions
         run: |
