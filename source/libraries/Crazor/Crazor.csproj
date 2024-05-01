@@ -53,8 +53,8 @@
 	  <EditorConfigFiles Remove="D:\Source\github\crazor\source\.editorconfig" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards.Net6\AdaptiveCards.csproj" />
+  </ItemGroup>
 
 </Project>
