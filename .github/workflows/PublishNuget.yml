@@ -55,11 +55,9 @@ jobs:
           api-key: '${{ secrets.NUGET_KEY }}' 
           working-directory: 'packages'
         
-      - name: Commit bumped versions
-        run: |
-          cd crazor
-          git config user.name "Tom Laird-McConnell"
-          git config user.email "thermous@iciclecreek.com"
-          git add .
-          git commit -m "Bump project build version" 
-          git push 
+      - name: Commit version changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Bumped versions'
+          add: '.'
+          cwd: './crazor'
