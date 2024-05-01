@@ -48,11 +48,12 @@ jobs:
 
       - name: dotnet push
         run: |
-          dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} "packages/crazor*.nupkg"
+          for %%s in (packages/crazor*.nupkg) do dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} %s
 
-      - run: |
+      - name: Commit bumped versions
+        run: |
           git config user.name "Tom Laird-McConnell"
-          git config user.email "your-email@users.noreply.github.com"
+          git config user.email "thermous@iciclecreek.com"
           git add crazor
-          git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
+          git commit -m "Bump project version" crazor
           git push 
