@@ -1,6 +1,6 @@
 ﻿//#define XML_SERIALIZATION
-// Copyright (c) Microsoft Corporation. All rights reserved.
-//  Licensed under the MIT License.
+
+
 
 using AdaptiveCards;
 using Crazor.Attributes;

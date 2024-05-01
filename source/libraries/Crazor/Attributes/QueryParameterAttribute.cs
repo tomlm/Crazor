@@ -1,6 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-//  Licensed under the MIT License.
-
+﻿
 using Crazor.Teams;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
