@@ -47,19 +47,19 @@ jobs:
         run: |
           dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta" --property WarningLevel=0
 
-      - name: dotnet push
+      - name: Publish NuGet and symbols
         continue-on-error: true
-        run: |
-          for file in ./packages/*.nupkg
-          do
-            dotnet nuget push @$file --skip-duplicate --api-key ${{secrets.NUGET_KEY}} 
-          done
-        shell: bash          
+        id: nuget-push
+        uses: edumserrano/nuget-push@v1
+        with:
+          api-key: '${{ secrets.NUGET_KEY }}' 
+          working-directory: 'packages'
         
       - name: Commit bumped versions
         run: |
+          cd crazor
           git config user.name "Tom Laird-McConnell"
           git config user.email "thermous@iciclecreek.com"
-          git add crazor
-          git commit -m "Bump project version" crazor
+          git add .
+          git commit -m "Bump project build version" 
           git push 
