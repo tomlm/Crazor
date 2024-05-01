@@ -12,19 +12,7 @@ To start you create a MSTest test project
 
 ## Add Crazor package
 
->  NOTE: Currently Crazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a **nuget.config** in the root of your project with the following:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <clear />
-    <add key="Crazor" value="https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json" />
-  </packageSources>
-</configuration>
-```
-
-Then you can add the **crazor.test** package
+Add the **Crazor.Test** package
 
 ```shell
 nuget add package crazor.test
