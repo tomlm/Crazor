@@ -56,7 +56,7 @@ jobs:
           working-directory: 'packages'
         
       - name: Commit version changes
-        uses: EndBug/add-and-commit@v9
+        uses: github-actions-x/commit@v2.9
         with:
-          message: 'Bumped package versions'
-          cwd: './crazor'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Updated package version for published packages'
