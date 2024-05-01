@@ -35,11 +35,7 @@ jobs:
         id: bump
         uses: vers-one/dotnet-project-version-updater@v1.5
         with:
-          file: |
-            "crazor/source/libraries/Crazor/Crazor.csproj", 
-            "crazor/source/libraries/Crazor.Blazor/Crazor.Blazor.csproj", 
-            "crazor/source/libraries/Crazor.Server/Crazor.Server.csproj", 
-            "crazor/source/libraries/Crazor.Test/Crazor.Test.csproj"
+          files: "**/libraries/**/Crazor*.csproj"
           version: bump-build
 
       - name: dotnet pack Crazor
