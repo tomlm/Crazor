@@ -18,13 +18,13 @@ jobs:
       - name: Checkout crazor
         uses: actions/checkout@v4
         with:
-          path: crazor
+          path: Crazor
           
       - name: Checkout adaptivecards
         uses: actions/checkout@v4
         with:
           repository: microsoft/adaptivecards
-          path: adaptivecards
+          path: AdaptiveCards
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
@@ -39,12 +39,10 @@ jobs:
           version: bump-build
 
       - name: dotnet pack Crazor
-        continue-on-error: true
         run: |
-          dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --property WarningLevel=0
+          dotnet pack ./Crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --property WarningLevel=0
 
       - name: Publish NuGet and symbols
-        continue-on-error: true
         id: nuget-push
         uses: edumserrano/nuget-push@v1
         with:
