@@ -23,7 +23,7 @@ jobs:
       - name: Checkout adaptivecards
         uses: actions/checkout@v4
         with:
-          repository: microsoft/adaptivecards
+          repository: tomlm/adaptivecards
           path: AdaptiveCards
 
       - name: Setup .NET Core
