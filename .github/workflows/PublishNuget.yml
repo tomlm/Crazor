@@ -15,12 +15,6 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Get version timestamp
-        id: t1
-        uses: Kaven-Universe/github-action-current-date-time@v1.1.0
-        with:
-          format: "YYYYMMDDHHmm"      
-      
       - name: Checkout crazor
         uses: actions/checkout@v4
         with:
@@ -32,17 +26,40 @@ jobs:
           repository: microsoft/adaptivecards
           path: adaptivecards
 
-    # Setup .NET Core SDK
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Bump build version
+        id: bump
+        uses: vers-one/dotnet-project-version-updater@v1.5
+        with:
+          file: |
+            "crazor/source/Libraries/Crazor/Crazor.csproj", 
+            "crazor/source/Libraries/Crazor.Blazor/Crazor.Blazor.csproj", 
+            "crazor/source/Libraries/Crazor.Server/Crazor.Server.csproj", 
+            "crazor/source/Libraries/Crazor.Test/Crazor.Test.csproj"
+          version: bump-build
+
       - name: dotnet pack Crazor
         continue-on-error: true
-        run: dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta-${{ steps.t1.outputs.time  }}" --property WarningLevel=0
-
-      - name: dotnet push
         run: |
-          ls packages/*
-          # dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} "packages/crazor*.nupkg"
+          dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta" --property WarningLevel=0
+
+      - name: Publish NuGet and symbols
+        continue-on-error: true
+        id: nuget-push
+        uses: edumserrano/nuget-push@v1
+        with:
+          api-key: '${{ secrets.NUGET_KEY }}' 
+          working-directory: 'packages'
+        
+      - name: Commit bumped versions
+        run: |
+          cd crazor
+          git config user.name "Tom Laird-McConnell"
+          git config user.email "thermous@iciclecreek.com"
+          git add .
+          git commit -m "Bump project build version" 
+          git push 
