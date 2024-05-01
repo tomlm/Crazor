@@ -50,10 +50,12 @@ jobs:
       - name: dotnet push
         continue-on-error: true
         run: |
-          for file in /packages/*.nupkg; do
-            dotnet nuget push --skip-duplicate --api-key ${{secrets.NUGET_KEY}} $file
+          for file in ./packages/*.nupkg
+          do
+            dotnet nuget push @$file --skip-duplicate --api-key ${{secrets.NUGET_KEY}} 
           done
-
+        shell: bash          
+        
       - name: Commit bumped versions
         run: |
           git config user.name "Tom Laird-McConnell"
