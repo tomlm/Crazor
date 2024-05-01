@@ -126,7 +126,7 @@ namespace Crazor
         public bool TryGetValue(string name, out string value)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             List<string> values;
 

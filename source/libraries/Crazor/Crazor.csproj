@@ -16,7 +16,8 @@
 	<PropertyGroup>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<VersionPrefix>1.0.0</VersionPrefix>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <VersionSuffix>beta</VersionSuffix>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Description>Experimental library for creating Adaptive Cards.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>
