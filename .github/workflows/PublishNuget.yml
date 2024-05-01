@@ -45,7 +45,7 @@ jobs:
       - name: dotnet pack Crazor
         continue-on-error: true
         run: |
-          dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --version-suffix "beta" --property WarningLevel=0
+          dotnet pack crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --property WarningLevel=0
 
       - name: Publish NuGet and symbols
         continue-on-error: true
@@ -58,6 +58,5 @@ jobs:
       - name: Commit version changes
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'Bumped versions'
-          add: '.'
+          message: 'Bumped package versions'
           cwd: './crazor'
