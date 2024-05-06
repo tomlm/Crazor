@@ -36,13 +36,13 @@ jobs:
           version: bump-build
   
       - name: Restore dependencies
-        run: dotnet restore crazor/source/Crazor.sln
+        run: dotnet restore crazor/source/CrazorLibraries.sln
 
       - name: Build
-        run: dotnet build crazor/source/Crazor.sln -c Debug --no-restore 
+        run: dotnet build crazor/source/CrazorLibraries.sln -c Debug --no-restore 
   
       - name: dotnet pack Crazor
-        run: dotnet pack  --no-build ./Crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --property WarningLevel=0
+        run: dotnet pack  --no-build ./crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --property WarningLevel=0
 
       - name: Publish NuGet and symbols
         id: nuget-push
