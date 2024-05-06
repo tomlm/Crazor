@@ -21,13 +21,13 @@ jobs:
       - name: Checkout crazor
         uses: actions/checkout@v4
         with:
-          path: crazor
+          path: Crazor
           
       - name: Checkout adaptivecards
         uses: actions/checkout@v4
         with:
           repository: microsoft/adaptivecards
-          path: adaptivecards
+          path: AdaptiveCards
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -36,16 +36,16 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build crazor/source/Samples/CrazorBlazorDemo --configuration Release 
+        run: dotnet build Crazor/source/Samples/CrazorBlazorDemo --configuration Release 
 
       - name: dotnet publish
-        run: dotnet publish crazor/source/Samples/CrazorBlazorDemo --configuration Release -o crazor/source/Samples/CrazorBlazorDemo/published
+        run: dotnet publish Crazor/source/Samples/CrazorBlazorDemo --configuration Release -o Crazor/source/Samples/CrazorBlazorDemo/published
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: crazor/source/Samples/CrazorBlazorDemo/published
+          path: Crazor/source/Samples/CrazorBlazorDemo/published
 
   deploy:
     runs-on: ubuntu-latest
