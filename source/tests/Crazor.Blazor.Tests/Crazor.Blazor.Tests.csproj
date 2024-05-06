@@ -21,7 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
-		<ProjectReference Include="..\..\Libraries\Crazor.Test\Crazor.Test.csproj" />
-		<ProjectReference Include="..\..\Libraries\Crazor\Crazor.csproj" />
+		<ProjectReference Include="..\..\libraries\Crazor.Test\Crazor.Test.csproj" />
+		<ProjectReference Include="..\..\libraries\Crazor\Crazor.csproj" />
 	</ItemGroup>
 </Project>
