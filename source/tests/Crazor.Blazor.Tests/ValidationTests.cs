@@ -128,7 +128,7 @@ namespace Crazor.Blazor.Tests
                     .AssertTextBlock(nameof(InputsModel.Percent), "1.5")
                     .AssertTextBlock(nameof(InputsModel.Attendees), "5")
                     .AssertTextBlock(nameof(InputsModel.Birthday), DateTime.Parse("1967-05-25").ToShortDateString())
-                    .AssertTextBlock(nameof(InputsModel.ArrivalTime), "12:35 PM")
+                    .AssertTextBlock(nameof(InputsModel.ArrivalTime), TimeOnly.Parse("12:35").ToString())
                     .AssertTextBlock(nameof(InputsModel.FavoritePet), "Dogs")
                     .AssertTextBlock(nameof(InputsModel.IsCool), "True");
         }
