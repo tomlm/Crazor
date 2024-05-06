@@ -34,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.Server", "libraries\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedCards", "samples\SharedCards\SharedCards.csproj", "{64DC9ADE-7583-4F12-90D7-BA6EAF22FA2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCards", "..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards.Net6\AdaptiveCards.csproj", "{DEC07395-16B2-4304-96BD-BF1F93D229EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaptiveCards", "..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj", "{DEC07395-16B2-4304-96BD-BF1F93D229EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
