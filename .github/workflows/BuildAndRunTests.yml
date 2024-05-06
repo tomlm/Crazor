@@ -34,10 +34,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore Crazor/source/Crazor.sln
+      run: dotnet restore Crazor/source/Crazor.sln 
 
     - name: Build
-      run: dotnet build --no-restore Crazor/source/Crazor.sln
+      run: dotnet build --no-restore Crazor/source/Crazor.sln --property WarningLevel=0
       
     - name: Test
       run: dotnet test --no-build --verbosity normal Crazor/source/Crazor.sln
