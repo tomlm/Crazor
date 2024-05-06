@@ -54,7 +54,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards.Net6\AdaptiveCards.csproj" />
+    <ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj" />
   </ItemGroup>
 
 </Project>

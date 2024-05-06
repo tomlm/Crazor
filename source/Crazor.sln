@@ -12,9 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{05D90974-40A3-4066-BBEA-6551B76A2A28}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		..\.github\workflows\crazordemobot.yml = ..\.github\workflows\crazordemobot.yml
-		..\.github\workflows\dotnet.yml = ..\.github\workflows\dotnet.yml
-		..\.github\workflows\OpCardBot.yml = ..\.github\workflows\OpCardBot.yml
 		..\.github\workflows\PublishNuget.yml = ..\.github\workflows\PublishNuget.yml
 		..\README.md = ..\README.md
 	EndProjectSection
