@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{058D5B6C-56D5-4FB8-8141-08C829581193}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{058D5B6C-56D5-4FB8-8141-08C829581193}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.Test", "libraries\Crazor.Test\Crazor.Test.csproj", "{20AF7F79-6B1F-4138-B3EF-BF77AC33EE72}"
 EndProject
