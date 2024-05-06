@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libraries\Crazor.Server\Crazor.Server.csproj" />
+    <ProjectReference Include="..\..\..\libraries\Crazor.Server\Crazor.Server.csproj" />
     <ProjectReference Include="..\..\SharedCards\SharedCards.csproj" />
   </ItemGroup>
 
