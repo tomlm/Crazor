@@ -2,32 +2,42 @@ name: BuildAndRunTests
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+    - crazor/source/**
   pull_request:
     branches: [ "main" ]
     paths:
     - source/**
+    
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout crazor
       uses: actions/checkout@v4
       with:
         path: crazor
+
     - name: Checkout adaptivecards
       uses: actions/checkout@v4
       with:
         repository: microsoft/adaptivecards
         path: adaptivecards
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
+
     - name: Restore dependencies
       run: dotnet restore crazor/source/Crazor.sln
+
     - name: Build
       run: dotnet build --no-restore crazor/source/Crazor.sln
+      
     - name: Test
       run: dotnet test --no-build --verbosity normal crazor/source/Crazor.sln
