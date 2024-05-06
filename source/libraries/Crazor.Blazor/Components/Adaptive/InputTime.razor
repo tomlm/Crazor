@@ -60,17 +60,17 @@
 
         if (BindingProperty != null)
         {
-            // var bindingType = BindingProperty.PropertyType;
-            // if (bindingType.Name == "Nullable`1")
-            // {
-            //     bindingType = bindingType.GenericTypeArguments[0];
-            // }
+            var bindingType = BindingProperty.PropertyType;
+            if (bindingType.Name == "Nullable`1")
+            {
+                bindingType = bindingType.GenericTypeArguments[0];
+            }
 
-            // var displayAttribute = bindingType.GetCustomAttribute<DisplayAttribute>();
-            // if (displayAttribute != null && String.IsNullOrEmpty(this.Placeholder))
-            // {
-            //     this.Placeholder = displayAttribute.GetPrompt();
-            // }
+            var displayAttribute = bindingType.GetCustomAttribute<DisplayAttribute>();
+            if (displayAttribute != null && String.IsNullOrEmpty(this.Placeholder))
+            {
+                this.Placeholder = displayAttribute.GetPrompt();
+            }
 
             if (ClientValidation == null || ClientValidation == true)
             {

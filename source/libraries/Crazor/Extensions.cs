@@ -328,7 +328,7 @@ namespace Crazor
                                     else if (value is DateTimeOffset dto)
                                         value = DateOnly.FromDateTime(dto.DateTime);
                                     else
-                                        value = DateOnly.FromDateTime(Convert.ToDateTime(value?.ToString()));
+                                        value = DateOnly.Parse(value?.ToString());
                                     break;
                                 case "TimeSpan":
                                     if (value is DateTime dt2)
@@ -344,7 +344,7 @@ namespace Crazor
                                     else if (value is DateTimeOffset dto)
                                         value = TimeOnly.FromDateTime(dto.DateTime);
                                     else
-                                        value = TimeOnly.FromDateTime(Convert.ToDateTime(value?.ToString()));
+                                        value = TimeOnly.Parse(value?.ToString());
                                     break;
                                 case "String":
                                     value = value.ToString();

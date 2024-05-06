@@ -22,13 +22,13 @@ namespace Crazor.Blazor.Tests.Validation
         [Required]
         [DataType(DataType.Date)]
         [System.ComponentModel.Description("Your birthday")]
-        [Range(typeof(DateTime), minimum: "01-01-1900", maximum: "01-01-2100", ErrorMessage = "Birthday has to be between 1900 and 2022")]
-        public DateTime? Birthday { get; set; }
+        [Range(typeof(DateOnly), minimum: "01-01-1900", maximum: "01-01-2100", ErrorMessage = "Birthday has to be between 1900 and 2022")]
+        public DateOnly? Birthday { get; set; }
 
         [Required]
         [DataType(DataType.Time)]
-        [Range(typeof(DateTime), minimum: "08:00", maximum: "20:00", ErrorMessage = "Arrival time must be between 8AM and 8PM")]
-        public DateTime? ArrivalTime { get; set; }
+        [Range(typeof(TimeOnly), minimum: "08:00", maximum: "20:00", ErrorMessage = "Arrival time must be between 8AM and 8PM")]
+        public TimeOnly? ArrivalTime { get; set; }
 
         [Required]
         [System.ComponentModel.Description("Percentage")]
