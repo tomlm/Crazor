@@ -54,9 +54,16 @@ jobs:
           working-directory: 'packages'
           fail-if-exists: false
         
-      - name: Commit version changes
-        uses: github-actions-x/commit@v2.9
-        working-directory: 'packages'
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Updated package version for published packages'
+#      - name: Commit version changes
+#        uses: github-actions-x/commit@v2.9
+#        working-directory: 'packages'
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          commit-message: 'Updated package version for published packages'
+      - name: Commit new version changes
+        working-directory: ./Crazor
+        run: |
+          git config --global user.name "Github Action"
+          git config --global user.email "tomlm@users.noreply.github.com"
+          git commit -a -m "Bumped version for published nuget artifacts"
+          git push
