@@ -1,4 +1,5 @@
-﻿@using Microsoft.Extensions.Hosting
+﻿@using Microsoft.Bot.Connector
+@using Microsoft.Extensions.Hosting
 @using Newtonsoft.Json
 @using SharedCards.Cards.NugetSearch
 @using Microsoft.Bot.Schema.Teams
@@ -7,8 +8,22 @@
 <Card Version="1.4">
     <ColumnSet Spacing="AdaptiveSpacing.None" Style="AdaptiveContainerStyle.Emphasis" Bleed="true">
         <Column Width="AdaptiveWidth.Stretch">
-            <InputChoiceSet Binding="Index" Label="" Style="AdaptiveChoiceInputStyle.Filtered" Placeholder="Choose card">
-                <DataQuery Dataset="Files" />
+            <InputChoiceSet Id="@nameof(Index)" Value="@Choice?.Title" Label="" Style="AdaptiveChoiceInputStyle.Filtered" Placeholder="Choose card">
+                @if (this.App.Activity.ChannelId == Channels.Msteams)
+                {
+                    if (Choice != null)
+                    {
+                        <Choice Title="@Choice.Title" Value="@Choice.Value" />
+                    }
+                    <DataQuery Dataset="Files" />
+                }
+                else
+                {
+                    foreach (var choice in GetFileChoices(null, 0, int.MaxValue))
+                    {
+                        <Choice Title="@choice.Title" Value="@choice.Value"/>
+                    }
+                }
             </InputChoiceSet>
         </Column>
         <Column Width="AdaptiveWidth.Auto">
@@ -22,20 +37,21 @@
 
 @code
 {
-    public string? Index { get; set; }
+    public AdaptiveChoice Choice { get; set; }
 
     [TempMemory]
     public AdaptiveCard? TestCard { get; set; } = null;
 
-    public void OnShowCard()
+    public void OnShowCard(string index)
     {
         // get file card
-        if (Index != null)
+        if (!String.IsNullOrEmpty(index))
         {
-            var index = int.Parse(Index);
-            var choice = GetFileChoices(null, index, 1)[0];
+            var i = int.Parse(index);
+            Choice = GetFileChoices(null, i, 1)[0];
+            
             string root = Path.GetDirectoryName(this.GetType().Assembly.Location);
-            var path = Path.Combine(root, "Cards", "Tests", choice.Title);
+            var path = Path.Combine(root, "Cards", "Tests", Choice.Title);
             var json = System.IO.File.ReadAllText(path);
             TestCard = JsonConvert.DeserializeObject<AdaptiveCard>(json);
         }
