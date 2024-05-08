@@ -7,6 +7,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Cards\Tests\tests\**" />
+	  <Content Remove="Cards\Tests\tests\**" />
+	  <EmbeddedResource Remove="Cards\Tests\tests\**" />
+	  <None Remove="Cards\Tests\tests\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <OpenApiReference Include="OpenAPIs\openapi-deckofcardsapi.yml" CodeGenerator="NSwagCSharp" Namespace="SharedCards.DeckOfCards" ClassName="DeckAPI">
 	    <SourceUri>https://gist.githubusercontent.com/chrismahoney/9b7dbfb7aef62baec5019466afaa07d3/raw/ff744c48bf472f871fa11759a770117413fd13b5/openapi-deckofcardsapi.yml</SourceUri>
 	  </OpenApiReference>

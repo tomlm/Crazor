@@ -39,7 +39,7 @@ namespace Crazor.Attributes
         /// <summary>
         /// Initial value for the parameter
         /// </summary>
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
     }
 }

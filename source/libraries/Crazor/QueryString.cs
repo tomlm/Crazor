@@ -58,7 +58,7 @@ namespace Crazor
         internal QueryStringParameter(string name, string value = null)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             Name = name;
             Value = value;
@@ -84,7 +84,9 @@ namespace Crazor
     /// <summary>
     /// A portable string serializer/deserializer for .NET.
     /// </summary>
+#pragma warning disable CA1067 // Override Object.Equals(object) when implementing IEquatable<T>
     internal class QueryString : IEnumerable<QueryStringParameter>, IEquatable<QueryString>
+#pragma warning restore CA1067 // Override Object.Equals(object) when implementing IEquatable<T>
     {
         private Dictionary<string, List<string>> _dictionary = new Dictionary<string, List<string>>();
 
@@ -106,7 +108,7 @@ namespace Crazor
             get
             {
                 if (name == null)
-                    throw new ArgumentNullException("name");
+                    throw new ArgumentNullException(nameof(name));
 
                 string value;
 
@@ -149,7 +151,7 @@ namespace Crazor
         public bool TryGetValues(string name, out string[] values)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             List<string> storedValues;
 
@@ -179,7 +181,7 @@ namespace Crazor
         public void Add(string name, string value = null)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             List<string> values;
 
@@ -200,7 +202,7 @@ namespace Crazor
         public void Set(string name, string value = null)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             _dictionary[name] = new List<string>()
             {
@@ -216,7 +218,7 @@ namespace Crazor
         public bool Contains(string name)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             return _dictionary.ContainsKey(name);
         }
@@ -230,7 +232,7 @@ namespace Crazor
         public bool Contains(string name, string value)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             List<string> values;
 

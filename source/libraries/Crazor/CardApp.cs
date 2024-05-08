@@ -344,6 +344,14 @@ namespace Crazor
                 Context.ServiceOptions.Logger.Response?.Invoke(this.Activity, outboundCard);
             }
 
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Diagnostics.Debug.WriteLine("===outbound card===");
+                System.Diagnostics.Debug.WriteLine(outboundCard.ToJson());
+            }
+#endif
+
             return outboundCard;
         }
 
@@ -970,10 +978,11 @@ namespace Crazor
                     data[Constants.IDDATA_KEY] = action.Id;
 
                 // hide goofy feedback panel
-                if (Activity.ChannelId == Channels.Msteams)
-                {
-                    action.AdditionalProperties["msTeams"] = new JObject() { { "feedback", new JObject() { { "hide", true } } } };
-                }
+                // THIS IS DISABLED UNTIL BUG IS FIXED
+                //if (Activity.ChannelId == Channels.Msteams)
+                //{
+                //    action.AdditionalProperties["msTeams"] = new JObject() { { "feedback", new JObject() { { "hide", true } } } };
+                //}
             }
 
             foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
@@ -1004,10 +1013,11 @@ namespace Crazor
                     data[Constants.IDDATA_KEY] = action.Id;
 
                 // hide goofy feedback panel
-                if (Activity.ChannelId == Channels.Msteams)
-                {
-                    action.AdditionalProperties["msTeams"] = new JObject() { { "feedback", new JObject() { { "hide", true } } } };
-                }
+                // THIS IS DISABLED UNTIL BUG IS FIXED
+                //if (Activity.ChannelId == Channels.Msteams)
+                //{
+                //    action.AdditionalProperties["msTeams"] = new JObject() { { "feedback", new JObject() { { "hide", true } } } };
+                //}
             }
 
             foreach (var choiceSet in outboundCard.GetElements<AdaptiveChoiceSetInput>())

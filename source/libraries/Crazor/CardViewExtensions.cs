@@ -115,10 +115,22 @@ namespace Crazor
             {
                 validationResults = new List<ValidationResult>();
                 var value = property.GetValue(cardView);
-                if (!validator.TryValidateObjectRecursive(value, validationResults))
+                if (value == null)
                 {
-                    cardView.IsModelValid = false;
-                    cardView.AddValidationResults($"{property.Name}.", validationResults);
+                    // if this is required and null then we have an issue.
+                    if (property.GetCustomAttribute<RequiredAttribute>() != null)
+                    {
+                        cardView.IsModelValid = false;
+                        cardView.AddValidationResults($"{property.Name}.", validationResults);
+                    }
+                }
+                else
+                {
+                    if (!validator.TryValidateObjectRecursive(value, validationResults))
+                    {
+                        cardView.IsModelValid = false;
+                        cardView.AddValidationResults($"{property.Name}.", validationResults);
+                    }
                 }
             }
         }

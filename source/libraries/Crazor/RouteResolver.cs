@@ -75,7 +75,7 @@ namespace Crazor
 
             CardRoute cardRoute;
             List<RouteTemplate> list;
-            if (cardViewType.Name.Contains("_"))
+            if (cardViewType.Name.Contains('_'))
             {
                 cardRoute = CardRoute.Parse(cardViewType.Name.Replace("_", "/"));
 

@@ -32,7 +32,7 @@ namespace Crazor.Blazor.Components
         public static bool operator ==(BoolProperty? lhs, BoolProperty? rhs) => lhs?._value == rhs?._value;
         public static bool operator !=(BoolProperty? lhs, BoolProperty? rhs) => lhs?._value != rhs?._value;
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is BoolProperty bp)
                 return _value == bp._value;

@@ -38,6 +38,7 @@ public static class BlazorExtensions
     /// <returns>raw string content</returns>
     public static string GetStringContent(this RenderFragment renderFragment)
     {
+#pragma warning disable BL0006 // Do not use RenderTree types
         var builder = new RenderTreeBuilder();
         var stringBuilder = new StringBuilder();
         renderFragment(builder);
@@ -55,6 +56,7 @@ public static class BlazorExtensions
                     break;
             }
         }
+#pragma warning restore BL0006 // Do not use RenderTree types
         return stringBuilder.ToString();
     }
 }

@@ -1,0 +1,94 @@
+﻿@using Microsoft.Extensions.Hosting
+@using Newtonsoft.Json
+@using SharedCards.Cards.NugetSearch
+@using Microsoft.Bot.Schema.Teams
+@inherits CardView<CardApp>
+
+<Card Version="1.4">
+    <ColumnSet Spacing="AdaptiveSpacing.None" Style="AdaptiveContainerStyle.Emphasis" Bleed="true">
+        <Column Width="AdaptiveWidth.Stretch">
+            <InputChoiceSet Binding="Index" Label="" Style="AdaptiveChoiceInputStyle.Filtered" Placeholder="Choose card">
+                <DataQuery Dataset="Files" />
+            </InputChoiceSet>
+        </Column>
+        <Column Width="AdaptiveWidth.Auto">
+            <ActionSet>
+                <ActionExecute Verb="@nameof(OnShowCard)" AssociatedInputs="@AdaptiveAssociatedInputs.Auto" Title="Show Card" />
+            </ActionSet>
+        </Column>
+    </ColumnSet>
+</Card>
+
+
+@code
+{
+    public string? Index { get; set; }
+
+    [TempMemory]
+    public AdaptiveCard? TestCard { get; set; } = null;
+
+    public void OnShowCard()
+    {
+        // get file card
+        if (Index != null)
+        {
+            var index = int.Parse(Index);
+            var choice = GetFileChoices(null, index, 1)[0];
+            string root = Path.GetDirectoryName(this.GetType().Assembly.Location);
+            var path = Path.Combine(root, "Cards", "Tests", choice.Title);
+            var json = System.IO.File.ReadAllText(path);
+            TestCard = JsonConvert.DeserializeObject<AdaptiveCard>(json);
+        }
+    }
+
+    public async override Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+    {
+        var card = await base.RenderCardAsync(isPreview, cancellationToken);
+
+        if (TestCard != null)
+        {
+            // merge
+            foreach (var element in TestCard.Body)
+                card.Body.Add(element);
+
+            foreach (var action in TestCard.Actions)
+                card.Actions.Add(action);
+        }
+
+        return card;
+    }
+
+    public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+    {
+        await Task.CompletedTask;
+
+        if (search.Dataset == "Files")
+        {
+            return GetFileChoices(search.QueryText, search.QueryOptions.Skip, search.QueryOptions.Top);
+        }
+        return Array.Empty<AdaptiveChoice>();
+    }
+
+    private AdaptiveChoice[] GetFileChoices(string query, int skip, int top)
+    {
+        //get the full location of the assembly with DaoTests in it
+        string root = Path.GetDirectoryName(this.GetType().Assembly.Location);
+        int i = 0;
+        var folder = Path.Combine(root, App.Route.Route.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+        return Directory.EnumerateFiles(folder, "*.json", SearchOption.AllDirectories)
+            .Select(p =>
+                {
+                    var title = Path.GetRelativePath(root, p).Substring("Cards\\Tests\\".Length);
+                    return new AdaptiveChoice()
+                        {
+                            Title = title,
+                            Value = i++.ToString()
+                        };
+                })
+            .Where(choice => choice.Title.Contains(query?.Trim() ?? String.Empty, StringComparison.OrdinalIgnoreCase))
+            .Skip(skip)
+            .Take(top)
+            .ToArray();
+
+    }
+}
