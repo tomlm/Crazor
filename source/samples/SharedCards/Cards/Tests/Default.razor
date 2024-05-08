@@ -16,7 +16,7 @@
                 {
                     foreach (var choice in GetFileChoices(null, 0, int.MaxValue))
                     {
-                        <Choice Title="@choice.Title" Value="@choice.Value"/>
+                        <Choice Title="@choice.Title" Value="@choice.Value" />
                     }
                 }
             </InputChoiceSet>
@@ -44,7 +44,7 @@
         {
             var i = int.Parse(index);
             Choice = GetFileChoices(null, i, 1)[0];
-            
+
             string root = Path.GetDirectoryName(this.GetType().Assembly.Location);
             var path = Path.Combine(root, "Cards", "Tests", Choice.Title);
             var json = System.IO.File.ReadAllText(path);
@@ -58,6 +58,30 @@
 
         if (TestCard != null)
         {
+            if (TestCard.BackgroundImage != null)
+                card.BackgroundImage = TestCard.BackgroundImage;
+
+            if (TestCard.Fallback != null)
+                card.Fallback = TestCard.Fallback;
+
+            if (TestCard.FallbackText != null)
+                card.FallbackText = TestCard.FallbackText;
+
+            if (TestCard.Height != null)
+                card.Height = TestCard.Height;
+
+            if (TestCard.MinHeight != null)
+                card.MinHeight = TestCard.MinHeight;
+
+            if (TestCard.Rtl != null)
+                card.Rtl = TestCard.Rtl;
+
+            if (TestCard.VerticalContentAlignment != null)
+                card.VerticalContentAlignment = TestCard.VerticalContentAlignment;
+
+            if (TestCard.SelectAction != null)
+                card.SelectAction = TestCard.SelectAction;
+
             // merge
             foreach (var element in TestCard.Body)
                 card.Body.Add(element);
