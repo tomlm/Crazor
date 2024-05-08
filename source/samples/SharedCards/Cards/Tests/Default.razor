@@ -1,15 +1,10 @@
-﻿@using Microsoft.Bot.Connector
-@using Microsoft.Extensions.Hosting
-@using Newtonsoft.Json
-@using SharedCards.Cards.NugetSearch
-@using Microsoft.Bot.Schema.Teams
-@inherits CardView<CardApp>
+﻿@inherits CardView
 
 <Card Version="1.4">
     <ColumnSet Spacing="AdaptiveSpacing.None" Style="AdaptiveContainerStyle.Emphasis" Bleed="true">
         <Column Width="AdaptiveWidth.Stretch">
             <InputChoiceSet Id="@nameof(Index)" Value="@Choice?.Title" Label="" Style="AdaptiveChoiceInputStyle.Filtered" Placeholder="Choose card">
-                @if (this.App.Activity.ChannelId == Channels.Msteams)
+                @if (this.App.Activity.ChannelId == Channels.Msteams || this.App.Activity.ChannelId == Channels.Outlook)
                 {
                     if (Choice != null)
                     {
