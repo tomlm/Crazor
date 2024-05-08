@@ -26,8 +26,9 @@ jobs:
       - name: Checkout adaptivecards
         uses: actions/checkout@v4
         with:
-          repository: microsoft/adaptivecards
+          repository: tomlm/adaptivecards
           path: AdaptiveCards
+          ref: tomlm/warnings3
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -42,13 +43,13 @@ jobs:
         run: dotnet build --no-restore Crazor/source/Crazor.sln --property WarningLevel=0 -c Release
     
       - name: dotnet publish
-        run: dotnet publish Crazor/source/Samples/CrazorBlazorDemo --configuration Release -o Crazor/source/Samples/CrazorBlazorDemo/published --no-restore --no-build
+        run: dotnet publish Crazor/source/samples/CrazorBlazorDemo --configuration Release -o Crazor/source/samples/CrazorBlazorDemo/published 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: Crazor/source/Samples/CrazorBlazorDemo/published
+          path: Crazor/source/samples/CrazorBlazorDemo/published
 
   deploy:
     runs-on: ubuntu-latest
