@@ -8,8 +8,8 @@ on:
     branches:
       - main
     paths:
-    - crazor/source/libraries/**
-    - crazor/source/samples/**
+    - source/libraries/**
+    - source/samples/**
   workflow_dispatch:
 
 jobs:
