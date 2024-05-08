@@ -117,7 +117,11 @@ namespace Crazor
                     SchemaVersion = new AdaptiveSchemaVersion(1, 5)
                 };
 
-                options.Invoke(serviceOptions);
+                if (options != null)
+                {
+                    // give user opportunity to tweak default settings.
+                    options.Invoke(serviceOptions);
+                }
                 return serviceOptions;
             });
 

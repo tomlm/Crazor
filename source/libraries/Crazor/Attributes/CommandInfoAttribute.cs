@@ -5,6 +5,9 @@ using Newtonsoft.Json.Converters;
 
 namespace Crazor.Attributes
 {
+    /// <summary>
+    /// CommandInfo Attribute defines that the view should be surfaced as a command
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class CommandInfoAttribute : Attribute
     {

@@ -17,10 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Cards\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
 		<PackageReference Include="Azure.Storage.Files.Shares" Version="12.17.1" />
 		<PackageReference Include="Azure.Storage.Queues" Version="12.17.1" />

@@ -23,18 +23,15 @@ namespace CrazorBlazorDemo
                 .AddMicrosoftIdentityConsentHandler();
 
             builder.Services.AddControllers();
-
-            var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ') ?? builder.Configuration["MicrosoftGraph:Scopes"]?.Split(' ');
+            builder.Services.AddControllersWithViews();
 
             // Add services to the container.
+            var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ') ?? builder.Configuration["MicrosoftGraph:Scopes"]?.Split(' ');
             builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
                     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
                         .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
                     .AddInMemoryTokenCaches();
-
-            builder.Services.AddControllersWithViews();
-
             builder.Services.AddAuthorization(options =>
             {
                 options.FallbackPolicy = options.DefaultPolicy;
@@ -47,7 +44,7 @@ namespace CrazorBlazorDemo
             builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
-                options.Manifest.Version = "1.4";
+                options.Manifest.Version = "1.5";
                 options.Manifest.Developer.Name = "Tom Laird-McConnell";
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });
@@ -62,7 +59,7 @@ namespace CrazorBlazorDemo
             // ---- </CRAZOR>
 
             var app = builder.Build();
-            
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -78,17 +75,14 @@ namespace CrazorBlazorDemo
 
             // ---- <CRAZOR>
             app.UseCrazorServer();
-
-            // app.UseTokenAcquirerFactory();
-            app.UseStaticFiles();
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-            app.MapControllers();
+            app.UseCrazorBlazor();
             // </CRAZOR>
 
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.MapControllers();
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 

@@ -1,0 +1,39 @@
+﻿@inherits CardView
+@attribute [CommandInfo("Post card", "Post a adaptive card JSON directly")]
+@attribute [TaskInfo("Post Card", "large", "large")]
+
+<Card Version="1.4">
+    <InputChoiceSet Binding="TaskAction" Label="Action" />
+    <InputText Binding="@nameof(Json)" IsMultiline="true" IsRequired="true" />
+    <ActionOK />
+    <ActionCancel />
+</Card>
+
+@code {
+    public TaskModuleAction TaskAction { get; set; } = TaskModuleAction.Auto;
+
+    public string Json { get; set; }
+
+    public async override Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+    {
+        if (!String.IsNullOrEmpty(Json))
+        {
+            var cardResult = AdaptiveCard.FromJson(Json);
+            if (cardResult.Warnings.Any())
+            {
+                foreach (var warning in cardResult.Warnings)
+                {
+                    AddBannerMessage(warning.Message, AdaptiveContainerStyle.Attention);
+                }
+                return await base.RenderCardAsync(isPreview, cancellationToken);
+            }
+            return cardResult.Card;
+        }
+
+        return await base.RenderCardAsync(isPreview, cancellationToken);
+    }
+
+    public void OnOK() => CloseTaskModule(TaskAction);
+
+    public void OnCancel() => CloseTaskModule(Crazor.TaskModuleAction.None);
+}

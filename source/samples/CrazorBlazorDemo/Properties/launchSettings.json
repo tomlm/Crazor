@@ -3,7 +3,7 @@
     "CrazorBlazorDemo": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://24cc-50-35-67-190.ngrok-free.app",
+      "launchUrl": "https://1a16-50-35-67-190.ngrok-free.app",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

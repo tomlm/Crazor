@@ -1,22 +1,15 @@
-﻿
-
-
-using Crazor.Teams;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
-using System.IO;
 using System.IO.Compression;
-using System.Reflection;
 
 namespace Crazor.Server.Controllers
 {
-    // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
-    // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
-    // achieved by specifying a more specific type for the bot constructor argument.
+    /// <summary>
+    /// Controller which uses attributes on classes to generate a Teams manifest for registering this bot with teams/office.
+    /// </summary>
     [Route("/teams.zip")]
     [ApiController]
     [AllowAnonymous]
@@ -92,6 +85,7 @@ namespace Crazor.Server.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public FileContentResult GetAsync()
         {
             return _zip;
