@@ -35,11 +35,14 @@ jobs:
           dotnet-version: 8.0.x
           include-prerelease: true
 
-      - name: Build with dotnet
-        run: dotnet build Crazor/source/Samples/CrazorBlazorDemo --configuration Release 
-
+      - name: Restore dependencies
+        run: dotnet restore Crazor/source/Crazor.sln 
+    
+      - name: Build
+        run: dotnet build --no-restore Crazor/source/Crazor.sln --property WarningLevel=0 -c Release
+    
       - name: dotnet publish
-        run: dotnet publish Crazor/source/Samples/CrazorBlazorDemo --configuration Release -o Crazor/source/Samples/CrazorBlazorDemo/published
+        run: dotnet publish Crazor/source/Samples/CrazorBlazorDemo --configuration Release -o Crazor/source/Samples/CrazorBlazorDemo/published --no-restore --no-build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
