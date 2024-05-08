@@ -15,7 +15,7 @@
 @code {
 
     // [BindProperty]
-    public TaskModuleAction TaskAction { get; set; }
+    public Crazor.TaskModuleAction TaskAction { get; set; }
 
     public void OnIncrement() => App.Counter++;
 
@@ -27,6 +27,6 @@
 
     public void OnCancel()
     {
-        CloseTaskModule(TaskModuleAction.None);
+        CloseTaskModule(Crazor.TaskModuleAction.None);
     }
 }
