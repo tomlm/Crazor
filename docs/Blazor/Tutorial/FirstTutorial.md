@@ -45,14 +45,15 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
 	 builder.Services.AddCrazor(nameof(MyBlazorAdaptiveProject));
 	 builder.Services.AddCrazorServer();
 	 builder.Services.AddCrazorBlazor();
-	 ```
+	```
 
 	 And this code before `app.Run()`.
      ```csharp
      app.UseCrazorServer();
+     app.UseCrazorBlazor();
      app.MapControllers();
      ```
-
+     
   5. Open the file **_imports.razor** and add these two usings.
      ```csharp
      @using Crazor.Blazor
@@ -74,17 +75,17 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      </style>
      <link rel="stylesheet" type="text/css" 
            href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
-	  ```
+	```
 
      Add this **hostconfig.js** file into the folder **wwwroot/js**, with this content.
      ```js
 	  const adaptiveHostConfig = new AdaptiveCards.HostConfig({ XXX });
-	  ```
-	 
+	```
+	
 	 Where the `{ XXX }` is a JSON object. A sample is downloadable on the [GitHub site](https://github.com/Microsoft/AdaptiveCards/blob/master/samples/HostConfig/sample.json).
 
 	 > ⚠️ During development phases, copy the **wwwroot/images** files (about.png, refresh.png, ...)
-	 
+	
   7. Open the **appsettings.json** file and add these configurations.
      ```json
      "BotName": "MyBlazorAdaptiveProject",
@@ -93,7 +94,7 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      "MicrosoftAppId": "",
      "MicrosoftAppPassword": "",
      "TeamsAppId": ""
-	 ```
+	```
 
   8. Add a new page **Cards.razor**, in the folder Pages, with this content:
 
@@ -125,11 +126,12 @@ using a Blazor Server project with Crazor.Blazor library to generate Adaptive Ca
      
          public void OnIncrement() => this.Counter++;
      }
-	 ```
+	```
 
   10. Run your project and display this card: `https://localhost:7105/Cards/HelloWorld`.
+
      ![Card sample](./CardSample.png)
-	 
+
 
 ## 2. Display this card in Microsoft Teams
 
@@ -140,12 +142,12 @@ In this section, we will use the tool **ngrok** to give a public internet access
   2. Go to the **setup page** to copy the command with your personal authentication **token** and run this command in a new Command Prompt.
      ```
      ngrok config add-authtoken <YOUR_PERSONAL_TOKEN>
-	 ```
+	```
 
   3. Open a Command Prompt and run this **ngrok command**.
      ```
 	 ngrok http --host-header="localhost:7105" https://localhost:7105
-	 ```
+	```
 
   4. You can now display the AdaptiveCard using the public ngrok.io URL 
      ![Ngrok](Ngrok.png)
@@ -160,7 +162,7 @@ Next, create a Microsoft Teams manifest to define all parameters of your applica
   
   3. Set the **Endpoint Address** using the previous ngrok.io URL followed by **"/api/cardapps"** and click on **Save**.
      ![Developer Portal - Bots](DevPortal-Bot.png)
- 
+
   4. Click on **Client Secrets** panel and create a new secret for your Bot. 
      Copy this value into the **AppSettings.json / MicrosoftAppPassword** parameter.
 
@@ -180,7 +182,7 @@ Next, create a Microsoft Teams manifest to define all parameters of your applica
 	   - **Developer website** URL like `https://mysite.com`.
 	   - **Privacy policy** URL like `https://mysite.com/privacy`.
 	   - **Terms of use** URL like `https://mysite.com/termofuse`.
-	  
+	
   9. Click the **Save** button.
   
   10. Go to the **Configure / App features** panel and, in the **module Bot**, select the bot created previously.
@@ -197,6 +199,6 @@ Next, create a Microsoft Teams manifest to define all parameters of your applica
       This command `post` is only available with Crazor to display a specific card.
       ```
 	  post HelloWorld
-	  ```
+	```
 
       ![Teams - Demo](Teams-Demo.gif)
