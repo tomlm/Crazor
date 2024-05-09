@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
-using System.Text;
 
 class Script : CShell
 {
@@ -81,6 +80,7 @@ class Script : CShell
         azureAD.TenantId = tenantId;
         azureAD.CallbackPath = "/signin-oidc";
         azureAD.ClientId = appId;
+        azureAD.AllowWebApiToBeAuthorizedByACL = true;
 
         // ===== Configuring oauth2PermissionScopes
         Console.WriteLine($"\n===== configuring OAuth2PermissionScopes for {appId}");
@@ -267,6 +267,7 @@ class Script : CShell
             settings.Add($"AzureAD:CallbackPath={azureAD.CallbackPath}");
             settings.Add($"AzureAD:ClientId={azureAD.ClientId}");
             settings.Add($"AzureAD:ClientSecret={appPassword} ");
+            settings.Add($"AzureAD:AllowWebApiToBeAuthorizedByACL=true");
             settings.Add($"MicrosoftAppPassword={appPassword}");
 
             output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
@@ -281,10 +282,17 @@ class Script : CShell
             settings.MicrosoftAppId = appId;
             settings.TeamsAppId = appId;
             settings.AzureAd = azureAD;
-
+            
             File.WriteAllText("appsettings.Development.json", ((JObject)settings).ToString());
             await Cmd($"dotnet user-secrets set MicrosoftAppPassword {appPassword}").AsString();
             await Cmd($"dotnet user-secrets set AzureAD:ClientSecret {appPassword}").AsString();
+
+            // update profile
+            Console.WriteLine(@"Updating Properties\launchSettings.json");
+            var profile = JObject.Parse(File.ReadAllText(@"Properties\launchSettings.json"));
+            var csproj = dir("*.csproj").FirstOrDefault();
+            profile["profiles"][Path.GetFileNameWithoutExtension(csproj)]["launchUrl"] = endpoint;
+            File.WriteAllText(@"Properties\launchSettings.json", JsonConvert.SerializeObject(profile, Formatting.Indented));
         }
 
         Console.WriteLine();
