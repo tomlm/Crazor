@@ -12,7 +12,6 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Web;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
@@ -420,6 +419,8 @@ namespace Crazor
 
         private void LoadCardState(CardViewState cardState)
         {
+            CurrentView.ApplyRouteAttributes(this.Route);
+
             foreach (var property in CurrentView.GetPersistentProperties())
             {
                 if (cardState.SessionMemory.TryGetValue(property.Name, out var val))
@@ -556,10 +557,10 @@ namespace Crazor
 
             var viewRoute = this.CurrentView!.GetRoute();
             var i = viewRoute.IndexOf('?');
-            string subPath = String.Empty;
+            string subPath = viewRoute;
             if (i >= 0)
             {
-                uri.Query = viewRoute.Substring(i+ 1);
+                uri.Query = viewRoute.Substring(i + 1);
                 subPath = viewRoute.Substring(0, i);
             }
 
@@ -598,36 +599,11 @@ namespace Crazor
             this.Activity = (Activity)activity;
             var invoke = JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
             ArgumentNullException.ThrowIfNull(invoke);
+            if (invoke.Action == null)
+                invoke.Action = new AdaptiveCardInvokeAction() { Verb = Constants.SHOWVIEW_VERB, Data = new JObject() };
             this.Action = invoke.Action ?? this.Action;
 
-            // map Route attributes for app
-            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
-            {
-                var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>()?.Name ?? targetProperty.Name;
-                if (fromRouteName != null)
-                {
-                    var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-                    if (dataProperty != null)
-                    {
-                        this.SetTargetProperty(targetProperty, dataProperty.Value);
-                    }
-                }
-            }
-
-            // map query parameters for app.
-            foreach (var targetProperty in this.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardQueryAttribute>() != null))
-            {
-                var fromQueryName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ??
-                    targetProperty.Name;
-                if (fromQueryName != null)
-                {
-                    var dataProperty = Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
-                    if (dataProperty != null)
-                    {
-                        this.SetTargetProperty(targetProperty, dataProperty.Value);
-                    }
-                }
-            }
+            this.ApplyRouteAttributes(Route);
 
             // map App. routedata to app
             foreach (var routeProperty in Route.RouteData.Properties().Where(p => p.Name.StartsWith("App.")))
