@@ -75,6 +75,7 @@
 
     public void OnCancel()
     {
+        ReplaceView($"{CardId}/View");
         CloseTaskModule(Crazor.TaskModuleAction.None);
     }
 }
