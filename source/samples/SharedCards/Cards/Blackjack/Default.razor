@@ -2,48 +2,58 @@
 @inherits CardView
 
 <Card Version="1.4" Title="Blackjack!">
-
-    @* dealer hand *@
-    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Dealer Hand</TextBlock>
-    <ImageSet ImageSize="AdaptiveImageSize.Large" Spacing="AdaptiveSpacing.Medium">
-        @if (!PlayerDone)
-        {
-            <Image Url="https://deckofcardsapi.com/static/img/back.png" />
-            <Image Url="@DealerHand.Skip(1).First().Image" />
-        }
-        else
-        {
-            foreach (var card in DealerHand)
-            {
-                <Image Url="@card.Image" />
-            }
-        }
-    </ImageSet>
-    @if (PlayerDone)
+    @if (DealerHand == null)
     {
-        <TextBlock>Dealer Total: @DealerScore</TextBlock>
-    }
-
-    @* player hand *@
-    <TextBlock Style="AdaptiveTextBlockStyle.Heading">Player Hand</TextBlock>
-    <TextBlock>Current Bet: $@Settings.Bet</TextBlock>
-    <ImageSet ImageSize="AdaptiveImageSize.Large">
-        @foreach (var card in PlayerHand)
-        {
-            <Image Url="@card.Image" />
-        }
-    </ImageSet>
-    <TextBlock>Your Total: @PlayerScore</TextBlock>
-
-    @if (!PlayerDone)
-    {
-        <ActionExecute Verb="@nameof(OnHitMe)" Title="Hit me" />
-        <ActionExecute Verb="@nameof(OnStandPat)" Title="Stand" />
+        <TextBlock Style="AdaptiveTextBlockStyle.Heading">Play Blackjack!</TextBlock>
+        <ImageSet ImageSize="AdaptiveImageSize.Large" Spacing="AdaptiveSpacing.Medium">
+                <Image Url="https://deckofcardsapi.com/static/img/back.png" />
+        </ImageSet>
+        <ActionExecute Verb="@nameof(OnDeal)" Title="Deal" />
     }
     else
     {
-        <ActionExecute Verb="@nameof(OnChangeBet)" Title="Change Bet" />
-        <ActionExecute Verb="@nameof(OnDeal)" Title="Deal" />
+        @* dealer hand *@
+        <TextBlock Style="AdaptiveTextBlockStyle.Heading">Dealer Hand</TextBlock>
+        <ImageSet ImageSize="AdaptiveImageSize.Large" Spacing="AdaptiveSpacing.Medium">
+            @if (!PlayerDone)
+            {
+                <Image Url="https://deckofcardsapi.com/static/img/back.png" />
+                <Image Url="@DealerHand.Skip(1).First().Image" />
+            }
+            else
+            {
+                foreach (var card in DealerHand)
+                {
+                    <Image Url="@card.Image" />
+                }
+            }
+        </ImageSet>
+        @if (PlayerDone)
+        {
+            <TextBlock>Dealer Total: @DealerScore</TextBlock>
+        }
+
+        @* player hand *@
+        <TextBlock Style="AdaptiveTextBlockStyle.Heading">Player Hand</TextBlock>
+        <TextBlock>Current Bet: $@Settings.Bet</TextBlock>
+        <ImageSet ImageSize="AdaptiveImageSize.Large">
+            @foreach (var card in PlayerHand)
+            {
+                <Image Url="@card.Image" />
+            }
+        </ImageSet>
+        <TextBlock>Your Total: @PlayerScore</TextBlock>
+
+        @if (!PlayerDone)
+        {
+            <ActionExecute Verb="@nameof(OnHitMe)" Title="Hit me" />
+            <ActionExecute Verb="@nameof(OnStandPat)" Title="Stand" />
+        }
+        else
+        {
+            <ActionExecute Verb="@nameof(OnChangeBet)" Title="Change Bet" />
+            <ActionExecute Verb="@nameof(OnDeal)" Title="Deal" />
+        }
     }
 </Card>
 
@@ -73,8 +83,6 @@
         {
             var result = await deckApi.GetShuffledDeckAsync(1, null);
             DeckId = result.Deck_id;
-
-            await OnDeal();
         }
     }
 
