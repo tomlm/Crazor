@@ -31,8 +31,8 @@ namespace Crazor.Server
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
             cardApp.IsTaskModule = true;
-
-            await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
+            var showActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
+            await cardApp.LoadAppAsync(showActivity, cancellationToken);
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity, false, cancellationToken);
 

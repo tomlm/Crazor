@@ -1,11 +1,13 @@
 ﻿
 using AdaptiveCards;
+using AdaptiveCards.Rendering;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
@@ -13,6 +15,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
@@ -108,6 +111,11 @@ namespace Crazor
         /// IsTaskModule is true when the card is running in a taskModule mode.
         /// </summary>
         public bool IsTaskModule { get; set; } = false;
+
+        /// <summary>
+        /// CommandContext is "compose", "commandBox", "message" 
+        /// </summary>
+        public string CommandContext { get; set; } = "message";
 
         /// <summary>
         /// IsTabModule is true when the card is running in a teams Tab.
@@ -597,11 +605,9 @@ namespace Crazor
             }
 
             this.Activity = (Activity)activity;
-            var invoke = JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
+            var invoke = activity.Value as AdaptiveCardInvokeValue ?? JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
             ArgumentNullException.ThrowIfNull(invoke);
-            if (invoke.Action == null)
-                invoke.Action = new AdaptiveCardInvokeAction() { Verb = Constants.SHOWVIEW_VERB, Data = new JObject() };
-            this.Action = invoke.Action ?? this.Action;
+            this.Action = invoke.Action;
 
             this.ApplyRouteAttributes(Route);
 
@@ -927,31 +933,12 @@ namespace Crazor
             }
             var route = GetCurrentCardRoute();
 
-            foreach (var action in outboundCard.GetElements<AdaptiveExecuteAction>())
-            {
-                if (action.Data == null)
-                {
-                    action.Data = new JObject();
-                }
-                else if (action.Data is string text)
-                {
-                    text = text.Trim();
-                    if (String.IsNullOrEmpty(text))
-                    {
-                        action.Data = new JObject();
-                    }
-                    else
-                    {
-                        action.Data = JObject.Parse(text);
-                    }
-                }
+            var visitor = new AdaptiveVisitor();
+            visitor.Visit(outboundCard);
 
-                var data = (JObject)action.Data;
-                data[Constants.ROUTE_KEY] = route;
-                if (sessionId != null)
-                    data[Constants.SESSION_KEY] = sessionIdEncrypt;
-                if (action.Id != null)
-                    data[Constants.IDDATA_KEY] = action.Id;
+            foreach (var action in visitor.Elements.OfType<AdaptiveExecuteAction>())
+            {
+                action.Data = AddMetadataToDataPayload(action.Data, route, sessionIdEncrypt, action.Id);
 
                 // hide goofy feedback panel
                 // THIS IS DISABLED UNTIL BUG IS FIXED
@@ -961,32 +948,9 @@ namespace Crazor
                 //}
             }
 
-            foreach (var action in outboundCard.GetElements<AdaptiveSubmitAction>())
+            foreach (var action in visitor.Elements.OfType<AdaptiveSubmitAction>())
             {
-                // YAML authoring errors - "data:" without children properties is an empty string
-                if (action.Data == null)
-                {
-                    action.Data = new JObject();
-                }
-                else if (action.Data is string text)
-                {
-                    text = text.Trim();
-                    if (String.IsNullOrEmpty(text))
-                    {
-                        action.Data = new JObject();
-                    }
-                    else
-                    {
-                        action.Data = JObject.Parse(text);
-                    }
-                }
-
-                var data = JObject.FromObject(action.Data);
-                data[Constants.ROUTE_KEY] = route;
-                if (sessionId != null)
-                    data[Constants.SESSION_KEY] = sessionId;
-                if (action.Id != null)
-                    data[Constants.IDDATA_KEY] = action.Id;
+                action.Data = AddMetadataToDataPayload(action.Data, route, sessionIdEncrypt, action.Id);
 
                 // hide goofy feedback panel
                 // THIS IS DISABLED UNTIL BUG IS FIXED
@@ -996,16 +960,43 @@ namespace Crazor
                 //}
             }
 
-            foreach (var choiceSet in outboundCard.GetElements<AdaptiveChoiceSetInput>())
+            foreach (var choiceSet in visitor.Elements.OfType<AdaptiveChoiceSetInput>())
             {
                 if (choiceSet.DataQuery != null)
                 {
-                    if (Activity!.ChannelId == Channels.Msteams && choiceSet.DataQuery.Dataset.StartsWith("graph.microsoft.com/users"))
+                    // teams supports direct query of graph api 
+                    if ((Activity!.ChannelId == Channels.Msteams || Activity!.ChannelId == Channels.Outlook) &&
+                        choiceSet.DataQuery.Dataset.StartsWith("graph.microsoft.com/users"))
                         continue;
                     else
                         choiceSet.DataQuery.Dataset = $"{Route.Route}{AdaptiveDataQuery.Separator}{sessionId}{AdaptiveDataQuery.Separator}{choiceSet.DataQuery.Dataset}";
                 }
             }
+        }
+
+        private static JObject AddMetadataToDataPayload(object inObj, string route, string? sessionIdEncrypt, string? id)
+        {
+            ArgumentNullException.ThrowIfNull(route);
+
+            JObject data = new JObject();
+
+            if (inObj is JObject job)
+                data = job;
+            else
+            {
+                var text = inObj?.ToString().Trim();
+                if (!String.IsNullOrEmpty(text))
+                {
+                    data = JObject.Parse(text);
+                }
+            }
+
+            data[Constants.ROUTE_KEY] = route;
+            if (sessionIdEncrypt != null)
+                data[Constants.SESSION_KEY] = sessionIdEncrypt;
+            if (id != null)
+                data[Constants.IDDATA_KEY] = id;
+            return data;
         }
 
         private async Task AddRefresh(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)

@@ -1,0 +1,80 @@
+﻿@using Microsoft.Bot.Builder
+@using Newtonsoft.Json.Linq
+@inherits CardView
+@attribute [CardRoute("{CardId}/Edit")]
+
+<Card Version="1.4">
+    <InputText Binding="@nameof(Json)" IsMultiline="true" IsRequired="true" />
+    <ActionCancel />
+    <ActionOK />
+</Card>
+
+@code {
+    [Inject]
+    public IStorage Storage { get; set; }
+
+    [FromCardRoute]
+    public string CardId { get; set; }
+
+    public string? Json { get; set; }
+
+    public bool CardExists { get; set; } = false;
+
+    public async override Task OnInitializedAsync(CancellationToken cancellationToken)
+    {
+        if (!String.IsNullOrEmpty(CardId))
+        {
+            var result = await Storage.ReadAsync<JObject>(new string[] { CardId }, cancellationToken);
+            if (result.ContainsKey(CardId))
+            {
+                Json = ((JObject)result[CardId]).ToString();
+                CardExists = true;
+            }
+
+        }
+        await base.OnInitializedAsync(cancellationToken);
+    }
+
+    public void OnLoad()
+    {
+        
+    }
+
+    public async Task OnOK(CancellationToken cancellationToken)
+    {
+        try
+        {
+            var cardResult = AdaptiveCard.FromJson(Json);
+            if (cardResult.Warnings.Any())
+            {
+                foreach (var warning in cardResult.Warnings)
+                {
+                    AddBannerMessage(warning.Message, AdaptiveContainerStyle.Attention);
+                }
+                return;
+            }
+            var data = new Dictionary<string, object>();
+            data[CardId] = JObject.Parse(Json);
+            await Storage.WriteAsync(data, cancellationToken);
+
+            ReplaceView($"{CardId}/View");
+            if (CommandContext == "message")
+                // just close
+                CloseTaskModule(TaskModuleAction.None);
+            else 
+                // compose, commandBox
+                // then we need to insert/post, etc.
+                CloseTaskModule(TaskModuleAction.Auto);
+        }
+        catch (Exception err)
+        {
+            AddBannerMessage(err.Message, AdaptiveContainerStyle.Attention);
+            return;
+        }
+    }
+
+    public void OnCancel()
+    {
+        CloseTaskModule(Crazor.TaskModuleAction.None);
+    }
+}

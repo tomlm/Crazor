@@ -61,6 +61,11 @@ namespace Crazor.Blazor
         public bool IsTaskModule => App.IsTaskModule;
 
         /// <summary>
+        /// The CommandContext when view is hosted in taskmodule ["message", "commandBox", "compose"]
+        /// </summary>
+        public string CommandContext => App.CommandContext;
+
+        /// <summary>
         /// True if the card is being rendered to be shared with people without session data
         /// </summary>
         public bool IsPreview { get; set; }
@@ -122,10 +127,10 @@ namespace Crazor.Blazor
                 // use razor in memory object instead of serialization.  The instance is a CardViewWrapper
                 // which has the adaptive card already instantiated in memory and ready to go.
                 var adaptiveCard = renderer.GetComponent<Components.Adaptive.Card>().Item;
-                if (System.Diagnostics.Debugger.IsAttached)
-                {
-                    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToJson());
-                }
+                //if (System.Diagnostics.Debugger.IsAttached)
+                //{
+                //    System.Diagnostics.Debug.WriteLine(adaptiveCard.ToJson());
+                //}
                 return adaptiveCard;
 #endif
             }

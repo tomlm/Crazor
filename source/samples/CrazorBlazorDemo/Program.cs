@@ -44,12 +44,11 @@ namespace CrazorBlazorDemo
             builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
-                options.Manifest.Version = "1.5.0";
+                options.Manifest.Version = "1.5.1";
                 options.Manifest.Developer.Name = "Tom Laird-McConnell";
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });
             builder.Services.AddCrazorBlazor();
-
             // register blob storage for state management
             var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
             if (!String.IsNullOrEmpty(storageKey))

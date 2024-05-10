@@ -18,29 +18,31 @@ namespace Crazor.Server
         /// Handle Fetch Task request
         /// </summary>
         /// <param name="turnContext"></param>
-        /// <param name="action"></param>
+        /// <param name="messageExtensionAction"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(
             ITurnContext<IInvokeActivity> turnContext,
-            MessagingExtensionAction action,
+            MessagingExtensionAction messageExtensionAction,
             CancellationToken cancellationToken)
         {
             System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionSubmitActionAsync() ");
 
-            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(action.Data));
+            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(messageExtensionAction.Data));
 
             CardRoute cardRoute = await CardRoute.FromDataAsync(JObject.FromObject(invokeValue.Action.Data), Context.EncryptionProvider, cancellationToken);
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
+            cardApp.CommandContext = messageExtensionAction.CommandContext;
             cardApp.IsTaskModule = true;
-            cardApp.Action = invokeValue.Action;
 
-            await cardApp.LoadAppAsync((Activity)turnContext.Activity, cancellationToken);
+            var submitActionActivity = turnContext.Activity.CreateActionInvokeActivity(invokeValue);
+
+            await cardApp.LoadAppAsync(submitActionActivity, cancellationToken);
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity, false, cancellationToken);
 
-            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);
+            return CreateMessagingExtensionActionResponse(messageExtensionAction.CommandContext, cardApp, card);
         }
 
         private MessagingExtensionActionResponse CreateMessagingExtensionActionResponse(string commandContext, CardApp cardApp, AdaptiveCard adaptiveCard)

@@ -1,0 +1,86 @@
+﻿@using Microsoft.Bot.Builder
+@using Newtonsoft.Json.Linq
+@inherits CardView
+@attribute [CardRoute("{CardId}/View")]
+
+<Card Version="1.4" MinHeight="600px">
+</Card>
+
+@code {
+    [Inject]
+    public IStorage Storage { get; set; }
+
+    [FromCardRoute]
+    public string CardId { get; set; }
+
+    public async override Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+    {
+        if (!String.IsNullOrEmpty(CardId))
+        {
+            var result = await Storage.ReadAsync(new string[] { CardId }, cancellationToken);
+            if (result.ContainsKey(CardId))
+            {
+                var job = result[CardId] as JObject;
+                TransformSubmits(job);
+                var card = AdaptiveCard.FromJson(job.ToString()).Card;
+
+                // Add ShowTaskModuleAction
+                if (App.Activity.ChannelId == Channels.Msteams)
+                    card.Actions.Add(new AdaptiveShowTaskModuleAction($"/Cards/PostCard/{CardId}/Edit")
+                    {
+                        Title = "Edit Json", 
+                        Mode = AdaptiveActionMode.Secondary 
+                    });
+                else
+                    card.Actions.Add(new AdaptiveExecuteAction()
+                        {
+                            Verb = nameof(OnEdit),
+                            Title = "Edit Json",
+                            Mode = AdaptiveActionMode.Secondary
+                        });
+
+                return card;
+            }
+        }
+
+        return await base.RenderCardAsync(IsTaskModule, cancellationToken);
+    }
+
+    public void OnEdit()
+    {
+        ReplaceView($"{CardId}/Edit");   
+    }
+
+    public override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+    {
+        if (action.Verb != Crazor.Constants.LOAD_VERB && 
+            action.Verb != Crazor.Constants.SHOWVIEW_VERB &&
+            action.Verb != nameof(OnEdit))
+            AddBannerMessage(JsonConvert.SerializeObject(action), AdaptiveContainerStyle.Emphasis);
+        return base.OnActionAsync(action, cancellationToken);
+    }
+
+    public static void TransformSubmits(JToken token)
+    {
+        if (token is JObject job)
+        {
+            dynamic obj = job;
+            if (obj.type == "Action.Submit")
+            {
+                obj.type = "Action.Execute";
+                obj.verb = "OnSubmit";
+            }
+            foreach (var property in token.Children<JProperty>())
+            {
+                TransformSubmits(property.Value);
+            }
+        }
+        else if (token is JArray jarr)
+        {
+            foreach (var item in jarr.Children())
+            {
+                TransformSubmits(item);
+            }
+        }
+    }
+}

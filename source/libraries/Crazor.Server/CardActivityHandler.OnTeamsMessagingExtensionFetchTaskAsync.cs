@@ -20,26 +20,27 @@ namespace Crazor.Server
         /// Handle Fetch Task request
         /// </summary>
         /// <param name="turnContext"></param>
-        /// <param name="action"></param>
+        /// <param name="messageExtensionAction"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected async override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        protected async override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction messageExtensionAction, CancellationToken cancellationToken)
         {
             System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionFetchTaskAsync() processing");
 
-            var activity = turnContext.Activity.CreateLoadRouteActivity(action.CommandId);
-            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), action.CommandId);
+            var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(messageExtensionAction.CommandId);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), messageExtensionAction.CommandId);
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
+            cardApp.CommandContext = messageExtensionAction.CommandContext;
             cardApp.IsTaskModule = true;
 
-            await cardApp.LoadAppAsync(activity, cancellationToken);
+            await cardApp.LoadAppAsync(loadRouteActivity, cancellationToken);
 
-            var card = await cardApp.ProcessInvokeActivity(activity, isPreview: false, cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(loadRouteActivity, isPreview: false, cancellationToken);
 
-            return CreateMessagingExtensionActionResponse(action.CommandContext, cardApp, card);
+            return CreateMessagingExtensionActionResponse(messageExtensionAction.CommandContext, cardApp, card);
         }
 
         protected static AdaptiveCard TransformCardNoRefresh(AdaptiveCard card)

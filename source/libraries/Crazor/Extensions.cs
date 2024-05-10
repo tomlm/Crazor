@@ -218,17 +218,21 @@ namespace Crazor
 
         public static IInvokeActivity CreateActionInvokeActivity(this IActivity sourceActivity, string? verb = null, JObject? data = null)
         {
-            var activity = sourceActivity.Clone();
-            activity.Type = ActivityTypes.Invoke;
-            activity.Name = "adaptiveCard/action";
-            var invokeValue = new AdaptiveCardInvokeValue()
+            return sourceActivity.CreateActionInvokeActivity(new AdaptiveCardInvokeValue()
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
                     Verb = verb ?? Constants.SHOWVIEW_VERB,
                     Data = data ?? new JObject()
                 }
-            };
+            });
+        }
+
+        public static IInvokeActivity CreateActionInvokeActivity(this IActivity sourceActivity, AdaptiveCardInvokeValue invokeValue)
+        {
+            var activity = sourceActivity.Clone();
+            activity.Type = ActivityTypes.Invoke;
+            activity.Name = "adaptiveCard/action";
             activity!.Value = invokeValue;
             return activity.AsInvokeActivity();
         }

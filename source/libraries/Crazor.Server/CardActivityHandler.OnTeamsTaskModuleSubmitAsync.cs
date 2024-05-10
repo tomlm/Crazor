@@ -24,18 +24,17 @@ namespace Crazor.Server
             System.Diagnostics.Debug.WriteLine($"Starting OnTeamsTaskModuleSubmitAsync() processing");
 
             JObject data = JObject.FromObject(taskModuleRequest.Data);
-            data[Constants.ROUTE_KEY] = (string)data["commandId"];
+            if (!data.ContainsKey(Constants.ROUTE_KEY) && data.ContainsKey("commandId"))
+                data[Constants.ROUTE_KEY] = (string)data["commandId"];
             CardRoute cardRoute = await CardRoute.FromDataAsync(data, Context.EncryptionProvider, cancellationToken);
 
-            var showViewActivity = turnContext.Activity.CreateActionInvokeActivity(Constants.SHOWVIEW_VERB);
-
-            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(JObject.FromObject(taskModuleRequest.Data));
+            AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(data);
 
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
             cardApp.IsTaskModule = true;
-            cardApp.Action = invokeValue.Action;
 
-            await cardApp.LoadAppAsync(showViewActivity, cancellationToken);
+            var submitActionActivity = turnContext.Activity.CreateActionInvokeActivity(invokeValue);
+            await cardApp.LoadAppAsync(submitActionActivity, cancellationToken);
 
             await cardApp.OnActionExecuteAsync(cancellationToken);
 

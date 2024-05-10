@@ -37,16 +37,13 @@
     [Parameter]
     public String? Verb { get => Item.Verb ; set => Item.Verb  = value; }
 
-    [Parameter]
-    public String? Data { get => (string)Item.Data?.ToString(); set => Item.Data = value; }
-
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (String.IsNullOrEmpty(Data) && ChildContent != null)
+        if (ChildContent != null)
         {
-            Data = ChildContent.GetStringContent();
+            this.Item.DataJson = ChildContent.GetStringContent();
         }
     }
 }

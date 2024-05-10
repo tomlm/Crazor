@@ -6,7 +6,8 @@
     },
     "storage1": {
       "type": "storage",
-      "connectionId": "AzureStorage"
+      "connectionId": "AzureStorage",
+      "dynamicId": null
     }
   }
 }

@@ -35,16 +35,13 @@
     [Parameter]
     public String? Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
 
-    [Parameter]
-    public String? Data { get => (string)Item.Data; set => Item.Data = value; }
-
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (String.IsNullOrEmpty(Data) && ChildContent != null)
+        if (ChildContent != null)
         {
-            Data = ChildContent.GetStringContent();
+            this.Item.DataJson = ChildContent.GetStringContent();
         }
     }
 }

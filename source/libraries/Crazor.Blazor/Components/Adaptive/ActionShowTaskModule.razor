@@ -1,37 +1,37 @@
+@using Crazor.Blazor.ComponentRenderer;
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+@inherits ActionSubmit
 
-//#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+<ac:Action.ShowTaskModule @attributes="@GetAttributes()">
+    <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
+</ac:Action.ShowTaskModule>
 
-//@using Microsoft.AspNetCore.Components;
-//@using Newtonsoft.Json.Linq;
+@code
+{
+    private static JObject fetch = new JObject() { { "type", "task/fetch" } };
 
-//namespace Crazor.Blazor.Components.AdaptiveCards
-//{
+    /// <summary>
+    /// The Card Route to show in a taskmodule, if not in teams this will be equivelent of navigating to a view.
+    /// </summary>
+    [Parameter]
+    public string? Route { get; set; }
 
-//    /// <summary>
-//    /// Component for showing a card in a task module
-//    /// </summary>
-//    public class ActionShowTaskModule : ActionSubmit
-//    {
-//        public ActionShowTaskModule()
-//        {
-//        }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
 
-//        [Parameter]
-//        public string Route { get; set; }
+        if (Route != null)
+        {
+            if (this.Item.Data == null)
+                this.Item.Data = new JObject();
 
-//        public async override Task ProcessAsync(ComponentContext context, ComponentOutput output)
-//        {
-//            await base.ProcessAsync(context, output);
-
-//            output.TagName = "Action.Submit";
-//            output.TagMode = TagMode.StartTagAndEndTag;
-//            var content = output.Content.GetContent();
-//            dynamic data = String.IsNullOrWhiteSpace(content) ? new JObject() : JObject.Parse(content);
-//            data.commandId = this.Route;
-//            data.msteams = new JObject();
-//            data.msteams.type = "task/fetch";
-//            output.Content.SetHtmlContent((string)data.ToString());
-//            output.Attributes.RemoveAll(nameof(Route));
-//        }
-//    }
-//}
+            var data = this.Item.Data as JObject;
+            if (data != null)
+            {
+                data["msteams"] = fetch;
+                data["commandId"] = Route;
+            }
+        }
+    }
+}

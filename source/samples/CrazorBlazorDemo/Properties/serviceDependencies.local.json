@@ -3,6 +3,12 @@
     "secrets1": {
       "type": "secrets.user",
       "dynamicId": null
+    },
+    "storage1": {
+      "secretStore": "LocalSecretsFile",
+      "type": "storage.emulator",
+      "connectionId": "AzureStorage",
+      "dynamicId": null
     }
   }
 }
