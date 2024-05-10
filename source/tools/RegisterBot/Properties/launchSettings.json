@@ -2,7 +2,7 @@
   "profiles": {
     "RegisterBot": {
       "commandName": "Project",
-      "commandLineArgs": "--endpoint https://944c-50-35-67-190.ngrok-free.app",
+      "commandLineArgs": " -e https://944c-50-35-67-190.ngrok-free.app",
       "workingDirectory": "s:\\github\\Crazor\\source\\samples\\CrazorBlazorDemo"
     }
   }

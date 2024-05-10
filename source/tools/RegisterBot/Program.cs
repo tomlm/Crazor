@@ -1,9 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using CShellNet;
+using Medallion.Shell;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 class Script : CShell
 {
@@ -35,8 +37,9 @@ class Script : CShell
         IConfigurationRoot configuration = await GetConfiguration(endpoint);
 
         dynamic output = await Cmd("az account show").AsJson();
+        string subscriptionId = output.id;
         string tenantId = output.tenantId;
-        Console.WriteLine($"\n==== Subscription: {output.name} tenantId: {tenantId} =====");
+        Console.WriteLine($"\n==== Subscription: {output.name} subscription: {subscriptionId} tenantId: {tenantId} =====");
 
         string botName = args.SkipWhile(arg => arg != "--name" && arg != "-n").Skip(1).FirstOrDefault()
             ?? configuration.GetValue<string>("BotName")
@@ -204,7 +207,6 @@ class Script : CShell
             Console.WriteLine($"\n==== Creating bot registration for {botName}");
             // output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password} --app-type MultiTenant").AsJson();
             output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --name {botName} --endpoint {uri.AbsoluteUri} --app-type MultiTenant").AsJson();
-            output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
         }
         else
         {
@@ -216,6 +218,18 @@ class Script : CShell
                 cmd = await Cmd($"az bot update --resource-group {groupName} --name {botName} --endpoint {uri.AbsoluteUri}").Execute();
             }
         }
+
+        Console.WriteLine($"\n==== Enabling MSTeams channel for {botName}/{appId}");
+        output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
+        
+        Console.WriteLine($"\n==== Enabling M365Extensions channel for {botName}/{appId}");
+        var batch = Path.GetTempFileName() + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".cmd" : ".sh");
+        var properties = JsonConvert.SerializeObject(new JObject() { { "channelName", "M365Extensions" }, { "properties", new JObject() { { "isEnabled", true } } } }, Formatting.None).Replace("\"", "\\\"");
+        var m365Command= $"@az resource create --id /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.BotService/botServices/{botName}/channels/M365Extensions --resource-type Microsoft.BotService/botServices/channel --properties \"{properties}\" --location global";
+        Console.WriteLine(m365Command);
+        File.WriteAllText(batch, m365Command);
+        cmd = await Cmd(batch).Execute();
+        File.Delete(batch);
 
         // refreshing client secret
         Console.WriteLine($"\n==== Refreshing {botName}/{appId} client secret");
@@ -258,20 +272,22 @@ class Script : CShell
         {
             Console.WriteLine($"\n==== Updating {uri.Host} settings");
             var webAppName = uri.Host.Split('.').First();
-            List<string> settings = new List<string>();
-            settings.Add($"BotName={botName}");
-            settings.Add($"HostUri={new Uri(uri, "/").AbsoluteUri} ");
-            settings.Add($"MicrosoftAppType=MultiTenant");
-            settings.Add($"MicrosoftAppId={appId}");
-            settings.Add($"TeamsAppId={appId}");
-            settings.Add($"AzureAD:Instance={azureAD.Instance}");
-            settings.Add($"AzureAD:Domain={azureAD.Domain}");
-            settings.Add($"AzureAD:TenantId={azureAD.TenantId}");
-            settings.Add($"AzureAD:CallbackPath={azureAD.CallbackPath}");
-            settings.Add($"AzureAD:ClientId={azureAD.ClientId}");
-            settings.Add($"AzureAD:ClientSecret={appPassword} ");
-            settings.Add($"AzureAD:AllowWebApiToBeAuthorizedByACL=true");
-            settings.Add($"MicrosoftAppPassword={appPassword}");
+            List<string> settings =
+            [
+                $"BotName={botName}",
+                $"HostUri={new Uri(uri, "/").AbsoluteUri} ",
+                $"MicrosoftAppType=MultiTenant",
+                $"MicrosoftAppId={appId}",
+                $"TeamsAppId={appId}",
+                $"AzureAD:Instance={azureAD.Instance}",
+                $"AzureAD:Domain={azureAD.Domain}",
+                $"AzureAD:TenantId={azureAD.TenantId}",
+                $"AzureAD:CallbackPath={azureAD.CallbackPath}",
+                $"AzureAD:ClientId={azureAD.ClientId}",
+                $"AzureAD:ClientSecret={appPassword} ",
+                $"AzureAD:AllowWebApiToBeAuthorizedByACL=true",
+                $"MicrosoftAppPassword={appPassword}",
+            ];
 
             output = await Cmd($"az webapp config appsettings set --resource-group {groupName} --name {webAppName} --settings {String.Join(' ', settings)}").AsJson();
         }
@@ -310,7 +326,8 @@ class Script : CShell
         using (Stream stream = assembly.GetManifestResourceStream(resourceName))
         using (StreamReader reader = new StreamReader(stream))
         {
-            Console.WriteLine(reader.ReadToEnd());
+            var readme = reader.ReadToEnd();
+            Console.WriteLine(readme.Replace("[[VERSION]]", assembly.GetName().Version.ToString()));
         }
     }
 

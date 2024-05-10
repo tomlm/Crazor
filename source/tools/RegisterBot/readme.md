@@ -1,4 +1,4 @@
-﻿RegisterBot Version 2.0.9
+﻿RegisterBot Version [[VERSION]]
 
 ```RegisterBot [--endpoint endpoint] [--name botName] [--resource-group groupName] [--help]```
 
