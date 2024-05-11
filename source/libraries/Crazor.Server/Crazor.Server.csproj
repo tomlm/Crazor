@@ -19,9 +19,9 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.2</VersionPrefix>
+		<VersionPrefix>1.0.3</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
 		<Description>Experimental library for hosting Crazor Adaptive Cards on a AspNetCore server.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>
