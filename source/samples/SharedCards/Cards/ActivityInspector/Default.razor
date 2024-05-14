@@ -1,0 +1,34 @@
+﻿@using System.Text
+@using YamlConverter
+@inherits CardView<CardApp>
+
+<!-- reflect activity back to caller -->
+<Card Version="1.4">
+    <TextBlock Style="AdaptiveTextBlockStyle.Heading" Weight="AdaptiveTextWeight.Bolder">Activity</TextBlock>
+    <RichTextBlock Separator="true">
+        @foreach (var line in @YamlConvert.SerializeObject(App.Activity).Split('\n'))
+        {
+            <TextRun FontType="AdaptiveFontType.Monospace">@($"{PadChars(line)}\n")</TextRun>
+        }
+    </RichTextBlock>
+</Card>
+
+@{
+    string PadChars(string text)
+    {
+        StringBuilder sb = new();
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (text[i] == ' ')
+                sb.Append((char)160);
+            else if (text[i] == '\t')
+                sb.Append((char)160, 4);
+            else
+            {
+                sb.Append(text.Substring(i));
+                break;
+            }
+        }
+        return sb.ToString();
+    }
+}

@@ -1,7 +1,9 @@
 ﻿
 
 
+using Crazor.Teams;
 using Microsoft.Bot.Schema;
+using System.Text;
 
 namespace SharedCards.Cards.Wordle
 {
@@ -25,12 +27,18 @@ namespace SharedCards.Cards.Wordle
 
         public List<Guess> Guesses { get; set; } = new List<Guess>();
 
-        public bool MakeGuess(string guess)
-        {
-            if (guess.Length == 5 && !Guesses.Any(g => g.Value == guess))
-                Guesses.Add(new Guess(guess, Word));
+        public string GetResultsRoute() => $"{Date.ToString("yyyyMMdd")}/{WordleApp.Sanitize(Player.Id)}";
 
-            return guess.ToUpper() == Word;
+        public void AddUserGuess(string guess)
+        {
+            if (Guesses.Count < 6)
+            {
+                if (guess.Length == 5 && !Guesses.Any(g => g.Value == guess))
+                    Guesses.Add(new Guess(guess, Word));
+
+                if (guess.ToUpper() == Word)
+                    Won = true;
+            }
         }
     }
 }

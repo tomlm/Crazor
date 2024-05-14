@@ -35,7 +35,7 @@
 
         @* player hand *@
         <TextBlock Style="AdaptiveTextBlockStyle.Heading">Player Hand</TextBlock>
-        <TextBlock>Current Bet: $@Settings.Bet</TextBlock>
+        <TextBlock>Current Bet: $@Options.Bet</TextBlock>
         <ImageSet ImageSize="AdaptiveImageSize.Large">
             @foreach (var card in PlayerHand)
             {
@@ -71,7 +71,7 @@
 
     public bool PlayerDone { get; set; }
 
-    public BlackjackSettings Settings { get; set; } = new BlackjackSettings();
+    public GameOptions Options { get; set; } = new GameOptions();
 
     public List<DeckOfCards.Card> DealerHand { get; set; }
 
@@ -88,7 +88,7 @@
 
     public async override Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
-        this.Settings = (BlackjackSettings)cardResult.Result;
+        this.Options = (GameOptions)cardResult.Result;
     }
 
     public async Task OnDeal()
@@ -125,7 +125,7 @@
 
     public void OnChangeBet()
     {
-        ShowView("Settings", Settings);
+        ShowView("Settings", Options);
     }
 
     private async Task PlayDealer()

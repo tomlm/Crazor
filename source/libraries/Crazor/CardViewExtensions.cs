@@ -98,7 +98,11 @@ namespace Crazor
                 ?? cardView.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
         }
 
-        public static void Validate(this ICardView cardView)
+        /// <summary>
+        /// Utility method which validates a cardview using reflection and Data annotations
+        /// </summary>
+        /// <param name="cardView"></param>
+        public static void ValidateModelWithAnnotations(this ICardView cardView)
         {
             // validate root object model
             var validator = new DataAnnotationsValidator();
@@ -106,7 +110,8 @@ namespace Crazor
             // do shallow validation for root level properties
             var validationResults = new List<ValidationResult>();
             cardView.IsModelValid = validator.TryValidateObject(cardView, validationResults);
-            cardView.AddValidationResults(String.Empty, validationResults);
+            foreach (var validationResult in validationResults)
+                cardView.AddValidationResult(String.Empty, validationResult);
 
             // for complex types do a recursive deep validation. We can't
             // do this at the root because CardView is too complicated for a deep compare.
@@ -121,7 +126,8 @@ namespace Crazor
                     if (property.GetCustomAttribute<RequiredAttribute>() != null)
                     {
                         cardView.IsModelValid = false;
-                        cardView.AddValidationResults($"{property.Name}.", validationResults);
+                        foreach(var validationResult in validationResults)
+                            cardView.AddValidationResult($"{property.Name}.", validationResult);
                     }
                 }
                 else
@@ -129,29 +135,33 @@ namespace Crazor
                     if (!validator.TryValidateObjectRecursive(value, validationResults))
                     {
                         cardView.IsModelValid = false;
-                        cardView.AddValidationResults($"{property.Name}.", validationResults);
+                        foreach (var validationResult in validationResults)
+                            cardView.AddValidationResult($"{property.Name}.", validationResult);
                     }
                 }
             }
         }
 
-        public static void AddValidationResults(this ICardView cardView, string prefix, List<ValidationResult> validationResults)
+        /// <summary>
+        /// Utility method for CardView implementations to add a validation
+        /// </summary>
+        /// <param name="cardView"></param>
+        /// <param name="prefix">like property name</param>
+        /// <param name="result">validation result to add</param>
+        public static void AddValidationResult(this ICardView cardView, string prefix, ValidationResult result)
         {
-            foreach (var result in validationResults)
+            foreach (var member in result.MemberNames)
             {
-                foreach (var member in result.MemberNames)
+                var path = $"{prefix}{member}";
+                if (!cardView.ValidationErrors.TryGetValue(path, out var list))
                 {
-                    var path = $"{prefix}{member}";
-                    if (!cardView.ValidationErrors.TryGetValue(path, out var list))
-                    {
-                        list = new HashSet<string>();
-                        cardView.ValidationErrors[path] = list;
-                    }
+                    list = new HashSet<string>();
+                    cardView.ValidationErrors[path] = list;
+                }
 
-                    if (result.ErrorMessage != null)
-                    {
-                        list.Add(result.ErrorMessage);
-                    }
+                if (result.ErrorMessage != null)
+                {
+                    list.Add(result.ErrorMessage);
                 }
             }
         }

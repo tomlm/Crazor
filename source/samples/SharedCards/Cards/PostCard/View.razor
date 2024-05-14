@@ -24,7 +24,7 @@
                 TransformSubmits(job);
                 var card = AdaptiveCard.FromJson(job.ToString()).Card;
 
-                // Add ShowTaskModuleAction
+                // Add ShowTaskModuleAction in teams
                 if (App.Activity.ChannelId == Channels.Msteams)
                     card.Actions.Add(new AdaptiveShowTaskModuleAction($"/Cards/PostCard/{CardId}/Edit")
                     {
@@ -54,8 +54,9 @@
     public override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
     {
         if (action.Verb != Crazor.Constants.LOAD_VERB && 
-            action.Verb != Crazor.Constants.SHOWVIEW_VERB &&
+            action.Verb != Crazor.Constants.REFRESH_VERB &&
             action.Verb != nameof(OnEdit))
+            // show verb to user with a banner message.
             AddBannerMessage(JsonConvert.SerializeObject(action), AdaptiveContainerStyle.Emphasis);
         return base.OnActionAsync(action, cancellationToken);
     }

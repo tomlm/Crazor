@@ -123,7 +123,7 @@ namespace Crazor.Server
                     {
                         Data = new JObject()
                         {
-                            { Constants.SUBMIT_VERB, Constants.ONEDIT_VERB },
+                            { Constants.SUBMIT_VERB, Constants.EDIT_VERB },
                             { Constants.ROUTE_KEY, cardApp.Route.Route },
                             { Constants.EDITSESSION_KEY, cardApp.Route.SessionId }
                         }

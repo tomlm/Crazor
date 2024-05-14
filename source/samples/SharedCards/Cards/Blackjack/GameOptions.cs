@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SharedCards.Cards.Blackjack
 {
-    public class BlackjackSettings
+    public class GameOptions
     {
         public int Bet { get; set; } = 20;
     }

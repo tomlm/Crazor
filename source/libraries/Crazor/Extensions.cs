@@ -83,24 +83,24 @@ namespace Crazor
 
                 serviceOptions.ChannelOptions["Default"] = new ChannelOptions()
                 {
-                    AddCardHeader = false,
-                    AddSecondaryActions = false,
+                    SupportsCardHeader = false,
+                    SupportsTaskModule = false,
                     SchemaVersion = new AdaptiveSchemaVersion(1, 5),
                     Authentication = AuthenticationFlags.None
                 };
 
                 serviceOptions.ChannelOptions[Channels.Msteams] = new ChannelOptions()
                 {
-                    AddCardHeader = false,
-                    AddSecondaryActions = true,
+                    SupportsCardHeader = true,
+                    SupportsTaskModule = true,
                     SchemaVersion = new AdaptiveSchemaVersion(1, 5),
                     Authentication = AuthenticationFlags.SSO | AuthenticationFlags.OAuth
                 };
 
-                serviceOptions.ChannelOptions[Channels.Outlook] = new ChannelOptions()
+                serviceOptions.ChannelOptions["m365extensions"] = new ChannelOptions()
                 {
-                    AddCardHeader = false,
-                    AddSecondaryActions = true,
+                    SupportsCardHeader = true,
+                    SupportsTaskModule = true,
                     SchemaVersion = new AdaptiveSchemaVersion(1, 5),
                     Authentication = AuthenticationFlags.SSO | AuthenticationFlags.OAuth
                 };
@@ -109,8 +109,8 @@ namespace Crazor
                 var host = configuration.GetValue<Uri>("HostUri").Host;
                 serviceOptions.ChannelOptions[host] = new ChannelOptions()
                 {
-                    AddCardHeader = true,
-                    AddSecondaryActions = true,
+                    SupportsCardHeader = false,
+                    SupportsTaskModule = false,
                     SchemaVersion = new AdaptiveSchemaVersion(1, 5)
                 };
 
@@ -147,15 +147,6 @@ namespace Crazor
             services.AddCardAppTypes();
 
             services.AddCustomCardViewTypes();
-
-            services.AddTransient<CardTabModuleFactory>();
-            services.AddTransient<SingleCardTabModule>();
-
-            // add TabModules
-            foreach (var tabModuleType in CardTabModule.GetTabModuleTypes())
-            {
-                services.AddTransient(tabModuleType);
-            }
 
             return services;
         }
@@ -222,7 +213,7 @@ namespace Crazor
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
-                    Verb = verb ?? Constants.SHOWVIEW_VERB,
+                    Verb = verb ?? Constants.REFRESH_VERB,
                     Data = data ?? new JObject()
                 }
             });

@@ -2,12 +2,10 @@
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Attributes;
-using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
@@ -15,12 +13,12 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Xml;
+using YamlConverter;
 using Diag = System.Diagnostics;
 
 namespace Crazor
@@ -222,7 +220,7 @@ namespace Crazor
 
             if (this.Action.Verb == null)
             {
-                this.Action.Verb = Constants.SHOWVIEW_VERB;
+                this.Action.Verb = Constants.REFRESH_VERB;
             }
 
             if (this.Route.SessionId == null)
@@ -246,6 +244,14 @@ namespace Crazor
                     while (ShowViewAttempts++ < 5)
                     {
                         var currentRoute = this.Route;
+
+                        if (this.CallStack[0].Initialized == false)
+                        {
+                            // call hook to give cardview opportunity to process data.
+                            await CurrentView.OnInitializedAsync(cancellationToken);
+                            this.CallStack[0].Initialized = true;
+                        }
+
                         await this.CurrentView.OnActionAsync(this.Action, cancellationToken);
                         if (LastResult != null)
                         {
@@ -314,7 +320,28 @@ namespace Crazor
             AdaptiveCard? outboundCard;
             try
             {
-                outboundCard = await CurrentView.RenderCardAsync(isPreview, cancellationToken);
+                if (this.Action.Verb == Constants.DEBUGGER_VERB)
+                {
+                    outboundCard = new AdaptiveCard("1.5")
+                    {
+                        Body =
+                        {
+                            new AdaptiveTextBlock() { Text = "Activity", Style=AdaptiveTextBlockStyle.Heading, Weight=AdaptiveTextWeight.Bolder },
+                            new AdaptiveRichTextBlock()
+                            {
+                                Separator = true,
+                                Inlines = YamlConvert.SerializeObject(this.Activity).Split('\n')
+                                            .Select(line => new AdaptiveTextRun($"{line}\n".Replace(' ', ' ')) { FontType=AdaptiveFontType.Monospace })
+                                            .Cast<AdaptiveInline>()
+                                            .ToList()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    outboundCard = await CurrentView.RenderCardAsync(isPreview, cancellationToken);
+                }
                 ArgumentNullException.ThrowIfNull(outboundCard);
             }
             catch (XmlException xerr)
@@ -754,104 +781,28 @@ namespace Crazor
         {
             // Process BindProperty tags
             var data = (JObject)JObject.FromObject(action.Data).DeepClone();
+            MergeRouteData(data);
             BindProperties(data);
+            action = new AdaptiveCardInvokeAction()
+            {
+                Verb = action.Verb,
+                Id = action.Id,
+                Type = action.Type,
+                Data = data
+            };
 
             MethodInfo? verbMethod = null;
-            if (action.Verb == Constants.LOAD_VERB)
-            {
-                // merge in route and query data since we are in a LOAD ROUTE situation.
-                if (this.Route.RouteData != null)
-                    data.Merge(this.Route.RouteData);
-
-                if (this.Route.QueryData != null)
-                    data.Merge(this.Route.QueryData);
-
-                // process [FromCardRoute] attributes. This allows [FromCardRoute] to be placed on a property which doesn't match the RouteData.property name
-                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
-                {
-                    var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>().Name ?? targetProperty.Name;
-                    var dataProperty = this.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
-                    if (dataProperty != null)
-                    {
-                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
-                    }
-                }
-
-                // Process any Route properties as setters onto current view.
-                foreach (var routeProperty in this.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
-                {
-                    ObjectPath.SetPathValue(this.CurrentView, routeProperty.Name, routeProperty.Value.ToString(), false);
-                }
-
-                // process query  attributes as setters onto current view
-                foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromCardQueryAttribute>() != null))
-                {
-                    var fromQueryName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ??
-                        targetProperty.Name;
-                    if (fromQueryName != null)
-                    {
-                        var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
-                        if (dataProperty != null)
-                        {
-                            this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
-                        }
-                    }
-                }
-
-                if (this.CallStack[0].Initialized == false)
-                {
-                    // call hook to give cardview opportunity to process data.
-                    await CurrentView.OnInitializedAsync(cancellationToken);
-                    this.CallStack[0].Initialized = true;
-                }
-
-                // LoadRoute verb should invoke this method FIRST before validation, as this method should load the model.
-                verbMethod = this.CurrentView.GetMethod(action.Verb);
-                if (verbMethod != null)
-                {
-                    try
-                    {
-                        await this.CurrentView.InvokeMethodAsync(verbMethod, this.CurrentView.GetMethodArgs(verbMethod, data, cancellationToken));
-                    }
-                    catch (CardRouteNotFoundException notFound)
-                    {
-                        this.AddBannerMessage(notFound.Message, AdaptiveContainerStyle.Attention);
-                        this.CancelView();
-                    }
-                    catch (Exception err)
-                    {
-                        if (err.InnerException is CardRouteNotFoundException notFound)
-                        {
-                            this.CancelView(notFound.Message);
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                }
-                action.Verb = Constants.SHOWVIEW_VERB;
-            }
-            else
-            {
-                if (this.CallStack[0].Initialized == false)
-                {
-                    // call hook to give cardview opportunity to process data.
-                    await CurrentView.OnInitializedAsync(cancellationToken);
-                    this.CallStack[0].Initialized = true;
-                }
-            }
-
-            if (action.Verb != Constants.SHOWVIEW_VERB)
+            if (action.Verb != Constants.REFRESH_VERB &&
+                action.Verb != Constants.LOAD_VERB)
             {
                 // otherwise, validate Model first so verb can check Model.IsValid property to decide what to do.
-                this.CurrentView.Validate();
+                await this.CurrentView.OnValidateModelAsync(cancellationToken);
             }
 
             switch (action.Verb)
             {
                 case Constants.CANCEL_VERB:
-                    // if there is an OnCancel, call it
+                    // cancel verb cancels the window
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         // default implementation 
@@ -860,6 +811,7 @@ namespace Crazor
                     break;
 
                 case Constants.OK_VERB:
+                    // ok verb closes the window if the model is valid.
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         if (this.CurrentView.IsModelValid)
@@ -869,9 +821,52 @@ namespace Crazor
                     }
                     break;
 
+
                 default:
                     await this.CurrentView.InvokeVerbAsync(action, cancellationToken);
                     break;
+            }
+        }
+
+        private void MergeRouteData(JObject data)
+        {
+            // merge in route and query data since we are in a LOAD ROUTE situation.
+            if (this.Route.RouteData != null)
+                data.Merge(this.Route.RouteData);
+
+            if (this.Route.QueryData != null)
+                data.Merge(this.Route.QueryData);
+
+            // process [FromCardRoute] attributes. This allows [FromCardRoute] to be placed on a property which doesn't match the RouteData.property name
+            foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
+            {
+                var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>().Name ?? targetProperty.Name;
+                var dataProperty = this.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                if (dataProperty != null)
+                {
+                    this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                }
+            }
+
+            // Process any Route properties as setters onto current view.
+            foreach (var routeProperty in this.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
+            {
+                ObjectPath.SetPathValue(this.CurrentView, routeProperty.Name, routeProperty.Value.ToString(), false);
+            }
+
+            // process query  attributes as setters onto current view
+            foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromCardQueryAttribute>() != null))
+            {
+                var fromQueryName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ??
+                    targetProperty.Name;
+                if (fromQueryName != null)
+                {
+                    var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
+                    if (dataProperty != null)
+                    {
+                        this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
+                    }
+                }
             }
 
         }
@@ -926,7 +921,7 @@ namespace Crazor
         private async Task AddMetadataToCard(AdaptiveCard outboundCard, bool isPreview, CancellationToken cancellationToken)
         {
             var sessionId = (isPreview) ? null : this.Route.SessionId;
-            string sessionIdEncrypt = null;
+            string? sessionIdEncrypt = null;
             if (!String.IsNullOrEmpty(sessionId))
             {
                 sessionIdEncrypt = await Context.EncryptionProvider.EncryptAsync(sessionId, cancellationToken);
@@ -1026,7 +1021,7 @@ namespace Crazor
                     refresh = new AdaptiveExecuteAction()
                     {
                         Title = "Refresh",
-                        Verb = Constants.SHOWVIEW_VERB,
+                        Verb = Constants.REFRESH_VERB,
                         IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = new JObject()
@@ -1137,52 +1132,60 @@ namespace Crazor
                 Separator = true
             };
 
-            if (channelOptions.AddSecondaryActions)
+            if (!IsTaskModule && !isPreview)
             {
-                if (!IsTaskModule && !isPreview)
+                systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
                 {
-                    systemMenu.Actions.Add(new AdaptiveOpenUrlAction()
-                    {
-                        Title = "Open",
-                        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
-                        Url = currentUri,
-                        Mode = AdaptiveActionMode.Secondary
-                    });
-                }
+                    Title = "Open",
+                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("OpenLinkIcon") ?? "/images/OpenLink.png").AbsoluteUri,
+                    Url = currentUri,
+                    Mode = AdaptiveActionMode.Secondary
+                });
+            }
 
-                if (Activity.ChannelId == currentUri.Host && outboundCard.Refresh?.Action != null)
-                {
-                    outboundCard.Refresh.Action.Mode = AdaptiveActionMode.Secondary;
-                    systemMenu.Actions.Add(outboundCard.Refresh.Action);
-                }
+            if (Activity.ChannelId == currentUri.Host && outboundCard.Refresh?.Action != null)
+            {
+                outboundCard.Refresh.Action.Mode = AdaptiveActionMode.Secondary;
+                systemMenu.Actions.Add(outboundCard.Refresh.Action);
+            }
 
-                if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
+            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
+            {
+                systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
-                    systemMenu.Actions.Add(new AdaptiveExecuteAction()
-                    {
-                        Title = Constants.ABOUT_VIEW,
-                        Verb = Constants.ABOUT_VIEW,
-                        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
-                        AssociatedInputs = AdaptiveAssociatedInputs.None,
-                        Mode = AdaptiveActionMode.Secondary
-                    });
-                }
+                    Title = Constants.ABOUT_VIEW,
+                    Verb = Constants.ABOUT_VIEW,
+                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
+                    AssociatedInputs = AdaptiveAssociatedInputs.None,
+                    Mode = AdaptiveActionMode.Secondary
+                });
+            }
 
-                if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
+            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
+            {
+                systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
-                    systemMenu.Actions.Add(new AdaptiveExecuteAction()
-                    {
-                        Title = Constants.SETTINGS_VIEW,
-                        Verb = Constants.SETTINGS_VIEW,
-                        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
-                        AssociatedInputs = AdaptiveAssociatedInputs.None,
-                        Mode = AdaptiveActionMode.Secondary
-                    });
-                }
+                    Title = Constants.SETTINGS_VIEW,
+                    Verb = Constants.SETTINGS_VIEW,
+                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
+                    AssociatedInputs = AdaptiveAssociatedInputs.None,
+                    Mode = AdaptiveActionMode.Secondary
+                });
+            }
+
+            if (Diag.Debugger.IsAttached)
+            {
+                systemMenu.Actions.Add(new AdaptiveExecuteAction()
+                {
+                    Title = "Debugger",
+                    Verb = Constants.DEBUGGER_VERB,
+                    AssociatedInputs = AdaptiveAssociatedInputs.Auto,
+                    Mode = AdaptiveActionMode.Secondary
+                });
             }
 
             // AddCardHeader means we simluate a card header using adaptive card markup.  Currently this is only used by "host" page for crazor.
-            if (channelOptions.AddCardHeader)
+            if (!channelOptions.SupportsCardHeader)
             {
                 // INSERT FAKE SYSTEM MENU 
                 if (outboundCard.Body.Any())
@@ -1196,6 +1199,7 @@ namespace Crazor
                     outboundCard.Actions = outboundCard.Actions.Where(a => a.Mode == AdaptiveActionMode.Primary).ToList();
                 }
 
+#pragma warning disable CS0618 // Type or member is obsolete
                 var ellipsis = new AdaptiveColumnSet()
                 {
                     Separator = false,
@@ -1251,6 +1255,7 @@ namespace Crazor
                         }
                     }
                 };
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 outboundCard.Body.Insert(0, ellipsis);
 

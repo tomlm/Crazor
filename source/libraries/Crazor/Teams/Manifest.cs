@@ -128,24 +128,6 @@ namespace Crazor.Teams
                         });
                     }
 
-                    // add static tabs
-                    var tabInfoAttribute = cardViewType.GetCustomAttribute<TabInfoAttribute>();
-                    if (tabInfoAttribute != null)
-                    {
-                        if (entityId.Contains("{"))
-                        {
-                            throw new ArgumentOutOfRangeException($"You cannot define a static tab on a CardView with a dynamic route {entityId}.  The route must be static.");
-                        }
-
-                        StaticTabs.Add(new StaticTab()
-                        {
-                            ContentBotId = botId,
-                            EntityId = entityId,
-                            Name = tabInfoAttribute.Name,
-                            Scopes = tabInfoAttribute.Scopes?.Split(',').Select(t => Enum.Parse<StaticTabScope>(t.Trim(), ignoreCase: true)).ToList(),
-                            Context = tabInfoAttribute.Context?.Split(',').Where(t => !String.IsNullOrWhiteSpace(t)).Select(t => Enum.Parse<TabContext>(t.Trim(), ignoreCase: true)).ToList(),
-                        });
-                    }
                 }
             }
         }

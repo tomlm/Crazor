@@ -43,7 +43,6 @@
     [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
     public AdaptiveTextWeight Weight { get => Item.Weight ; set => Item.Weight  = value; }
 
-    [Parameter]
     public String? Text { get => Item.Text; set => Item.Text = value; }
 
     public virtual void AddToParent()
@@ -64,9 +63,9 @@
     {
         base.OnAfterRender(firstRender);
 
-        if (String.IsNullOrEmpty(Text) && ChildContent != null)
+        if (String.IsNullOrWhiteSpace(Text) && ChildContent != null)
         {
-            Text = ChildContent.GetStringContent();
+            Item.Text = ChildContent.GetStringContent();
         }
     }
 }

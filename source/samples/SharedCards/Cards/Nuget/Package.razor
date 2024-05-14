@@ -6,7 +6,7 @@
 @attribute [CardRoute("packages/{Model.Id}")]
 @code
 {
-    public async Task OnLoad(CancellationToken cancellationToken)
+    public override async Task OnInitializedAsync(CancellationToken cancellationToken)
         => this.Model = await App.GetNugetPackage(Model.Id, cancellationToken);
 }
 
@@ -18,13 +18,19 @@
         <Column Width="AdaptiveWidth.Stretch">
             @if (!String.IsNullOrEmpty(Model?.Title))
             {
-                <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@Model!.Title</TextBlock>
+                <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">
+                    @Model!.Title
+                </TextBlock>
             }
             @if (!String.IsNullOrEmpty(Model?.Version))
             {
-                <TextBlock Size="AdaptiveTextSize.Medium" IsSubtle="true">@Model!.Version</TextBlock>
+                <TextBlock Size="AdaptiveTextSize.Medium" IsSubtle="true">
+                    @Model!.Version
+                </TextBlock>
             }
-            <TextBlock Wrap="true" MaxLines="3">@Model!.Description</TextBlock>
+            <TextBlock Wrap="true" MaxLines="3">
+                @Model!.Description
+            </TextBlock>
         </Column>
     </ColumnSet>
 

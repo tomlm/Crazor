@@ -64,7 +64,7 @@ namespace Crazor.Interfaces
         /// </summary>
         /// <param name="isPreview">IsPreview is signal that anonymous preview card should be returned.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns>Task AdaptiveCard</returns>
         Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
 
         /// <summary>
@@ -73,7 +73,18 @@ namespace Crazor.Interfaces
         /// <remarks>
         /// This will be called only once to initialize the instance data of the cardview.
         /// </remarks>
+        /// <returns>Task</returns>
         Task OnInitializedAsync(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// OnValidateModelAsync() - Called to validate model, 
+        /// </summary>
+        /// <remarks>
+        /// sets IsModelValid and fill ValidationErrors collection
+        /// </remarks>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Task</returns>
+        Task OnValidateModelAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// OnActionAsync() - Called to process an incoming verb action.
@@ -83,7 +94,7 @@ namespace Crazor.Interfaces
         /// </remarks>
         /// <param name="action">the action to process</param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken);
 
         /// <summary>

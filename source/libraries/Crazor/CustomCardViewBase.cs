@@ -97,6 +97,15 @@ namespace Crazor
         }
 
         /// <inheritdoc/>
+        /// <remarks>default implemntation uses data annotations</remarks>
+        public virtual Task OnValidateModelAsync(CancellationToken cancellationToken)
+        {
+            this.ValidateModelWithAnnotations();
+            return Task.CompletedTask;
+        }
+
+        /// <inheritdoc/>
+        /// <remarks>default implemntation uses reflection to find methods to execute</remarks>
         public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             await this.App.OnActionReflectionAsync(action, cancellationToken);
@@ -107,18 +116,22 @@ namespace Crazor
         }
 
         /// <inheritdoc/>
+        /// <remarks>default implementation calls OnResumeView()</remarks>
         public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
         {
             OnResumeView(cardResult);
             await Task.CompletedTask;
         }
 
+        /// <inheritdoc/>
+        /// <remarks>Default implemntation returns empty collection</remarks>
         public virtual AdaptiveChoice[] OnSearchChoices(SearchInvoke search)
         {
             return Array.Empty<AdaptiveChoice>();
         }
 
         /// <inheritdoc/>
+        /// <remarks>Default implementation calls OnSearchChoices()</remarks>
         public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;

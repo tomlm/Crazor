@@ -23,7 +23,7 @@ namespace Crazor.Blazor.Tests
                     .AssertTextBlock(nameof(InputsModel.Birthday), String.Empty)
                     .AssertTextBlock(nameof(InputsModel.FavoritePet), String.Empty)
                     .AssertTextBlock(nameof(InputsModel.IsCool), String.Empty)
-                .ExecuteAction(Constants.ONEDIT_VERB)
+                .ExecuteAction(Constants.EDIT_VERB)
                     .AssertHas<AdaptiveTextInput>("Model.PhoneNumber")
                     .AssertHas<AdaptiveTextInput>("Model.Password")
                     .AssertHas<AdaptiveNumberInput>("Model.Percent")

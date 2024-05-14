@@ -28,14 +28,14 @@ namespace Crazor
     public class ChannelOptions
     {
         /// <summary>
-        /// Insert adaptive card markup to simulate card header and secondary menu
+        /// Does this channel support card header 
         /// </summary>
-        public bool AddCardHeader { get; set; } = false;
+        public bool SupportsCardHeader { get; set; } = false;
 
         /// <summary>
-        /// Automatically add secondary actions like OpenUrl, Refresh, About, Settings etc.
+        /// Does this support a task module
         /// </summary>
-        public bool AddSecondaryActions { get; set; } = true;
+        public bool SupportsTaskModule { get; set; } = false;
 
         /// <summary>
         /// Version to assume client supports for poly fills

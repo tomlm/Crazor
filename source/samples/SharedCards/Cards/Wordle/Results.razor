@@ -1,69 +1,93 @@
-﻿@using SharedCards.Cards.Wordle
+﻿@using Microsoft.Bot.Builder
+@using Newtonsoft.Json.Linq
+@using SharedCards.Cards.Wordle
 @using Microsoft.Bot.Connector
 @using Microsoft.Bot.Schema
 @using Newtonsoft.Json
 @inherits CardView<WordleApp>
+@attribute [CardRoute("{Date}/{PlayerId}")]
 
 <Card Version="1.5">
     <TextBlock Size="AdaptiveTextSize.Large" Style="AdaptiveTextBlockStyle.Heading">Wordle Results!</TextBlock>
-    @if (App.Game.Won)
+    @if (Game == null)
     {
-        <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">I got it in @App.Game.Guesses.Count tries! 😄</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">Game not found</TextBlock>
     }
     else
     {
-        <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">I failed. 😥</TextBlock>
-    }
-
-    <Table GridStyle="AdaptiveContainerStyle.Default" ShowGridLines="true" FirstRowAsHeaders="false">
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        <TableColumn Width="1" />
-        @for (int iGuess = 0; iGuess < App.Game.Guesses.Count; iGuess++)
+        @if (Game.Won)
         {
-            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalContentAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalContentAlignment.Center">
-                @foreach (var letter in App.Game.Guesses[iGuess].Letters)
+            <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">I got it in @Game.Guesses.Count tries! 😄</TextBlock>
+        }
+        else
+        {
+            <TextBlock Size="AdaptiveTextSize.Medium" Style="AdaptiveTextBlockStyle.Heading">I failed. 😥</TextBlock>
+        }
+
+        <Table GridStyle="AdaptiveContainerStyle.Default" ShowGridLines="true" FirstRowAsHeaders="false">
+            <TableColumn Width="1" />
+            <TableColumn Width="1" />
+            <TableColumn Width="1" />
+            <TableColumn Width="1" />
+            <TableColumn Width="1" />
+            @foreach (var guess in Game.Guesses)
+            {
+                <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalContentAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalContentAlignment.Center">
+                    @foreach (var letter in guess.Letters)
+                    {
+                        <TableCell Style="@letter.State" MinHeight="45px"><TextBlock /></TableCell>
+                    }
+                </TableRow>
+            }
+
+            @for (int guessLeft = Game.Guesses.Count; guessLeft < 6; guessLeft++)
+            {
+                <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalContentAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalContentAlignment.Center">
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"><TextBlock /></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"><TextBlock /></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"><TextBlock /></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"><TextBlock /></TableCell>
+                    <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"><TextBlock /></TableCell>
+                </TableRow>
+            }
+        </Table>
+
+        @if (!IsPreview)
+        {
+            if (IsTaskModule)
+            {
+                <ActionExecute Title="Share" Verb="OnShare" />
+                <ActionExecute Title="Close" Verb="OnClose" />
+            }
+            else if (App.Activity.From.Id != Game.Player?.Id)
+            {
+                // it's not the person who played the game, give them a link to play
+                if (App.Activity.ChannelId == Channels.Msteams || App.Activity.ChannelId == "M365Extensions")
                 {
-                    <TableCell Style="@letter.State" MinHeight="45px"></TableCell>
+                    <ActionShowTaskModule Title="Play" Route="/Cards/Wordle" />
                 }
-            </TableRow>
-        }
-
-        @for (int guessLeft = App.Game.Guesses.Count; guessLeft < 6; guessLeft++)
-        {
-            <TableRow HorizontalCellContentAlignment="AdaptiveHorizontalContentAlignment.Center" VerticalCellContentAlignment="AdaptiveVerticalContentAlignment.Center">
-                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
-                <TableCell Style="AdaptiveContainerStyle.Emphasis" MinHeight="45px"></TableCell>
-            </TableRow>
-        }
-    </Table>
-
-    @if (!IsPreview)
-    {
-        if (IsTaskModule)
-        {
-            <ActionExecute Title="Share" Verb="OnShare" />
-            <ActionExecute Title="Close" Verb="OnClose" />
-        }
-        else if (App.Activity.From.Id != App.Game.Player?.Id) 
-        {
-            // it's not the person who played the game, give them a link to play
-            <ActionOpenCard Title="Play" ChannelId="@App.Activity.ChannelId" Url="@App.GetCardUriForRoute("/Cards/Wordle")" />
+                else
+                {
+                    <ActionOpenUrl Title="Play" Url="@App.GetCardUriForRoute("/Cards/Wordle").ToString()" />
+                }
+            }
         }
     }
 </Card>
 
 @code
 {
-    protected override void OnInitialized()
+    [FromCardRoute]
+    public string Date { get; set; }
+
+    [FromCardRoute]
+    public string PlayerId { get; set; }
+
+    public WordleGame Game { get; set; }
+
+    public async override Task OnInitializedAsync(CancellationToken cancellationToken)
     {
-        if (App.Game == null)
-            CloseView();
+        Game = await App.LoadGame(Date, PlayerId, cancellationToken);
     }
 
     public void OnShare()

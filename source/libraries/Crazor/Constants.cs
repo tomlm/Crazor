@@ -16,8 +16,9 @@ namespace Crazor
         public const string CANCEL_VERB = "OnCancel";
         public const string OK_VERB = "OnOK";
         public const string LOAD_VERB = "OnLoad";
-        public const string SHOWVIEW_VERB = "OnShowView";
-        public const string ONEDIT_VERB = "OnEdit";
+        public const string REFRESH_VERB = "OnRefresh";
+        public const string EDIT_VERB = "OnEdit";
+        public const string DEBUGGER_VERB = "OnDebugger";
 
         // well known screens
         public const string DEFAULT_VIEW = "Default";

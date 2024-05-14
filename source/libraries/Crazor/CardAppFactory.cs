@@ -67,18 +67,18 @@ namespace Crazor
 
         public IEnumerable<string> GetNames() => _cardApps.Keys.OrderBy(n => n);
 
-        public CardApp Create(CardRoute cardRoute, ITurnContext turnContext = null)
+        public CardApp Create(CardRoute cardRoute, ITurnContext? turnContext = null)
         {
             if (_cardApps.TryGetValue(cardRoute.App, out var cardAppType))
             {
-                var cardApp = (CardApp)_serviceProvider.GetService(cardAppType);
+                var cardApp = (CardApp)_serviceProvider.GetService(cardAppType)!;
                 if (cardAppType == typeof(CardApp))
                 {
                     // this is folder with no app defined
                     cardApp.Name = cardRoute.App;
                 }
                 cardApp.Route = cardRoute;
-                cardApp.TurnContext = turnContext;
+                cardApp.TurnContext = turnContext!;
                 return cardApp;
             }
             throw new ArgumentNullException(nameof(cardRoute));

@@ -387,49 +387,6 @@ namespace Crazor.Blazor.Tests
         }
 
 
-        [TestMethod]
-        public async Task TestTabModule()
-        {
-            var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
-            var hostUri = configuration.GetValue<string>("HostUri");
-            var adapter = new CardTestAdapter(bot);
-
-            // Fetch Tab
-            var response = await adapter.Invoke(CreateTabFetchTaskActivity(new TaskModuleRequest()
-            {
-                TabEntityContext = new TabEntityContext() { TabEntityId = "/Cards/TabModule" }
-            }));
-            var tabResponse = ObjectPath.MapValueTo<TabResponse>(response.Body);
-            Assert.IsNotNull(tabResponse);
-            Assert.IsNotNull(tabResponse.Tab);
-            Assert.AreEqual("continue", tabResponse.Tab.Type);
-            Assert.IsNotNull(tabResponse.Tab.Value);
-            var card = ObjectPath.MapValueTo<AdaptiveCard>(tabResponse.Tab.Value.Cards.Single().Card);
-
-            card.AssertTextBlock("Counter: 0")
-                .AssertHasNoRefresh()
-                .AssertHasSession()
-                .AssertHasOnlySubmitActions();
-
-            // OnIncrement
-            response = await adapter.Invoke(CreateTabSubmitActivity(new TaskModuleRequest()
-            {
-                TabEntityContext = new TabEntityContext() { TabEntityId = "/Cards/TabModule" },
-                Data = card.GetElements<AdaptiveSubmitAction>().Single(a => a.Id == "OnIncrement").Data,
-            }));
-            tabResponse = ObjectPath.MapValueTo<TabResponse>(response.Body);
-            Assert.IsNotNull(tabResponse);
-            Assert.IsNotNull(tabResponse.Tab);
-            Assert.AreEqual("continue", tabResponse.Tab.Type);
-            Assert.IsNotNull(tabResponse.Tab.Value);
-            card = ObjectPath.MapValueTo<AdaptiveCard>(tabResponse.Tab.Value.Cards.Single().Card);
-
-            card.AssertTextBlock("Counter: 1")
-                .AssertHasNoRefresh()
-                .AssertHasSession()
-                .AssertHasOnlySubmitActions();
-        }
 
         [TestMethod]
         public async Task TestChoiceSetDataQuery()

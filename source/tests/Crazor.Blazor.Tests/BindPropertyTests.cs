@@ -19,7 +19,7 @@ namespace Crazor.Blazor.Tests
                     .AssertElement<AdaptiveTextInput>("Abc", ti => Assert.AreEqual("123", ti.Value))
                 .ExecuteAction("OnSubmit")
                     .AssertElement<AdaptiveTextInput>("Abc", ti => Assert.AreEqual("123", ti.Value))
-                .ExecuteAction("OnShowView")
+                .ExecuteAction(Constants.REFRESH_VERB)
                     .AssertElement<AdaptiveTextInput>("Abc", ti => Assert.AreEqual("123", ti.Value));
         }
     }

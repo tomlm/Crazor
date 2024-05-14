@@ -64,7 +64,7 @@ namespace Crazor.Server
                                 Title = "Sign In",
                                 Data = new AdaptiveCardInvokeAction()
                                 {
-                                    Verb = Constants.SHOWVIEW_VERB,
+                                    Verb = Constants.REFRESH_VERB,
                                 }
                             }
                         },

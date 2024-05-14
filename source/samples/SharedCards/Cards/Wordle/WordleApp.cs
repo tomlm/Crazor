@@ -3,6 +3,11 @@
 
 using Crazor;
 using Crazor.Attributes;
+using Crazor.Teams;
+using Microsoft.Identity.Client.Extensions.Msal;
+using Newtonsoft.Json.Linq;
+using System.Text;
+using System.Threading;
 
 namespace SharedCards.Cards.Wordle
 {
@@ -19,15 +24,6 @@ namespace SharedCards.Cards.Wordle
         [TimeMemory("yyyyMMdd")]
         public string TodaysWord { get; set; }
 
-        [PathMemoryAttribute("PlayerGameKey")]
-        public WordleGame Game { get; set; }
-
-        /// <summary>
-        /// the game ID is 
-        /// </summary>
-        [FromCardRoute]
-        public string GameId => $"{DateTime.Now.ToString("yyyyMMdd")}-{Game.Player}";
-
         public Dictionary<char, string> Glyphs = new Dictionary<char, string>()
         {
             { 'A', "🄰" }, {'B', "🄱" }, {'C', "🄲"}, {'D', "🄳" }, {'E', "🄴" }, {'F', "🄵" },
@@ -36,6 +32,36 @@ namespace SharedCards.Cards.Wordle
             { 'S', "🅂" }, {'T', "🅃" }, {'U', "🅄" }, {'V', "🅅" }, {'W', "🅆" }, {'X', "🅇" },
             { 'Y', "🅈" }, {'Z', "🅉" },
         };
+
+        private string GetGameKey(string date, string playerId)
+            => $"wordle/{date.ToLower().Trim()}/{Sanitize(playerId)}";
+
+        public static string Sanitize(string text)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var ch in text.Trim().Where(ch => Char.IsLetterOrDigit(ch)))
+                sb.Append(Char.ToLower(ch));
+            return sb.ToString();
+        }
+
+        public async Task<WordleGame> LoadGame(string date, string playerId, CancellationToken cancellationToken)
+        {
+            var gameKey = GetGameKey(date, playerId);
+            var result = await Context.Storage.ReadAsync(new string[] { gameKey }, cancellationToken);
+            if (result.TryGetValue(gameKey, out var val))
+            {
+                return JObject.FromObject(val).ToObject<WordleGame>();
+            }
+            return null;
+        }
+
+        public async Task SaveGame(WordleGame wordleGame, CancellationToken cancellationToken)
+        {
+            var gameKey = GetGameKey(wordleGame.Date.ToString("yyyyMMdd"), wordleGame.Player.Id);
+            var keys = new Dictionary<string, object>();
+            keys[gameKey] = JObject.FromObject(wordleGame);
+            await Context.Storage.WriteAsync(keys, cancellationToken);
+        }
 
         public static HashSet<string> Words = new HashSet<string>()
         {

@@ -8,12 +8,10 @@ using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Security.Claims;
-using System.Text;
 using System.Xml;
 
 namespace Crazor.Blazor
@@ -172,9 +170,18 @@ namespace Crazor.Blazor
         }
 
         /// <inheritdoc/>
+        /// <remarks>Default Implmentation uses reflection</remarks>
         public async virtual Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             await this.App.OnActionReflectionAsync(action, cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        /// <remarks>Default implemntation uses data annotation attributes</remarks>
+        public virtual Task OnValidateModelAsync(CancellationToken cancellationToken)
+        {
+            this.ValidateModelWithAnnotations();
+            return Task.CompletedTask;
         }
 
         public virtual void OnResumeView(CardResult cardResult)
@@ -182,18 +189,22 @@ namespace Crazor.Blazor
         }
 
         /// <inheritdoc/>
+        /// <remarks>Default implemntation calls OnResumeView(cardResult)</remarks>
         public virtual async Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
         {
             OnResumeView(cardResult);
             await Task.CompletedTask;
         }
 
+        /// <inheritdoc/>
+        /// <remarks>Default implmentation returns empty collection</remarks>
         public virtual AdaptiveChoice[] OnSearchChoices(SearchInvoke search)
         {
             return Array.Empty<AdaptiveChoice>();
         }
 
         /// <inheritdoc/>
+        /// <remarks>Default implementation returns OnSearchChoices(search)</remarks>
         public virtual async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;

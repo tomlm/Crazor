@@ -160,7 +160,7 @@ namespace Crazor.Blazor.Components
                 Timestamp = DateTimeOffset.UtcNow,
                 LocalTimestamp = DateTimeOffset.Now,
             }
-            .CreateActionInvokeActivity(action.Verb ?? Constants.SHOWVIEW_VERB, JObject.FromObject(action.Data));
+            .CreateActionInvokeActivity(action.Verb, JObject.FromObject(action.Data));
 
             // process it, giving us a new card
             await _cardApp.LoadAppAsync((Activity)activity!, default);

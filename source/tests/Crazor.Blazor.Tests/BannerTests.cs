@@ -24,7 +24,7 @@ namespace Crazor.Blazor.Tests
                         Assert.IsTrue(columnSets.First().Style == AdaptiveContainerStyle.Attention);
                         Assert.IsTrue(columnSets.Skip(1).First().Style == AdaptiveContainerStyle.Accent);
                     })
-                .ExecuteAction("OnShowView")
+                .ExecuteAction(Constants.REFRESH_VERB)
                     .AssertHasNo<AdaptiveTextBlock>();
         }
     }

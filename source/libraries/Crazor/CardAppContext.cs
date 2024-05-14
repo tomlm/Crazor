@@ -15,7 +15,6 @@ namespace Crazor
         public CardAppContext(
             IServiceProvider servicesProvider,
             CardAppFactory cardAppFactory,
-            CardTabModuleFactory cardTabModuleFactory,
             IRouteResolver routeResolver,
             IConfiguration configuration,
             IEncryptionProvider encryptionProvider,
@@ -30,7 +29,6 @@ namespace Crazor
             EncryptionProvider = encryptionProvider;
             Storage = storage;
             CardAppFactory = cardAppFactory;
-            CardTabModuleFactory = cardTabModuleFactory;
             RouteResolver = routeResolver;
             ServiceOptions = options;
             AuthorizationService = authorizationService;
@@ -48,8 +46,6 @@ namespace Crazor
         public IStorage Storage { get; set; }
 
         public CardAppFactory CardAppFactory { get; }
-
-        public CardTabModuleFactory CardTabModuleFactory { get; }
 
         public IRouteResolver RouteResolver { get; set; }
 
