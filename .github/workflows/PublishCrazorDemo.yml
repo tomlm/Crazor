@@ -28,7 +28,7 @@ jobs:
         with:
           repository: tomlm/adaptivecards
           path: AdaptiveCards
-          ref: tomlm/warnings3
+          ref: main
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
