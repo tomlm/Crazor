@@ -50,10 +50,6 @@
 		<PackageReference Include="YamlConvert" Version="2.1.1" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <EditorConfigFiles Remove="D:\Source\github\crazor\source\.editorconfig" />
-	</ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj" />
   </ItemGroup>

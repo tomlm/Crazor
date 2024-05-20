@@ -117,7 +117,7 @@ namespace Crazor
         public string CommandContext { get; set; } = "message";
 
         /// <summary>
-        /// Is the current context 
+        /// Is the current context running in the web page
         /// </summary>
         public bool IsWebHost => this.Activity.ChannelId == Context.Configuration.GetValue<Uri>("HostUri").Host;
 
