@@ -4,7 +4,7 @@
     <ColumnSet Spacing="AdaptiveSpacing.None" Style="AdaptiveContainerStyle.Emphasis" Bleed="true">
         <Column Width="AdaptiveWidth.Stretch">
             <InputChoiceSet Id="@nameof(Index)" Value="@Choice?.Title" Label="" Style="AdaptiveChoiceInputStyle.Filtered" Placeholder="Choose card">
-                @if (this.App.Activity.ChannelId == Channels.Msteams || this.App.Activity.ChannelId == Channels.Outlook)
+                @if (this.App.Activity.ChannelId == Channels.Msteams || this.App.Activity.ChannelId == "m365extensions")
                 {
                     if (Choice != null)
                     {

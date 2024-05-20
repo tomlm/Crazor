@@ -1,0 +1,42 @@
+﻿@inherits CardView
+@attribute [CommandInfo("Reply With Card", "Send a reply to the message with a different card")]
+<Card Version="1.4">
+    <InputText Binding="Url" Placeholder="Enter in card url.">
+        <ActionExecute Title="Send it to me" Verb="@nameof(OnSend)" />
+    </InputText>
+</Card>
+
+@code {
+
+    public string Url { get; set; }
+
+    public async Task OnSend(CancellationToken cancellationToken)
+    {
+        var route = Url;
+        if (Uri.TryCreate(Url, UriKind.Absolute, out var uri))
+            route = uri.PathAndQuery;
+
+        var card = await App.GetPreviewCardForRoute(route, cancellationToken);
+        
+        ResourceResponse resource;
+        if ((App.Activity.ChannelId == Channels.Email) ||
+            (App.Activity.ChannelId == "m365extensions"))
+        {
+            resource = await App.SendActionableMessage(
+                to: new ChannelAccount("tom@symplist.io", "Tom"),
+                subject: $"Re: {ObjectPath.GetPathValue<string>(App.Activity, "ChannelData.Subject", "")}",
+                message: "Here you go",
+                card: card,
+                cancellationToken: cancellationToken);
+        }
+        else
+        {
+            resource = await App.ReplyWithCardAttachment($"Here is a card {Url}", card, cancellationToken);
+        }
+
+        if (resource != null)
+        {
+            AddBannerMessage(resource.Id, AdaptiveContainerStyle.Good);
+        }
+    }
+}
