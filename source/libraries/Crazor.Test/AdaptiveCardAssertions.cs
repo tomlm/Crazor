@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
@@ -68,7 +65,7 @@ namespace Crazor.Test.MSTest
         /// <param name="card"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static AdaptiveCard AssertElement<T>(this AdaptiveCard card, string id, Action<T> callback = null)
+        public static AdaptiveCard AssertElement<T>(this AdaptiveCard card, string id, Action<T> callback)
             where T : AdaptiveTypedElement
         {
             var element = (T?)card.GetElements<AdaptiveTypedElement>().SingleOrDefault(el => el.Id == id);
