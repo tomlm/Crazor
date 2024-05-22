@@ -14,18 +14,20 @@ namespace Crazor.Blazor.Tests
         public async Task TestAddBannerMessage()
         {
             await LoadCard("/Cards/Banner")
-                    .AssertHasNo<AdaptiveTextBlock>()
+                    .AssertHasNo<AdaptiveColumnSet>("messageBanner0")
+                    .AssertHasNo<AdaptiveColumnSet>("messageBanner1")
                 .ExecuteAction("OnMessage", new { Message = "Test" })
-                    .AssertTextBlock("Test")
-                    .AssertElements<AdaptiveColumnSet>((columnSets) => Assert.IsTrue(columnSets.First().Style == AdaptiveContainerStyle.Accent))
+                    .AssertHas<AdaptiveColumnSet>("messageBanner0")
+                    .AssertHasNo<AdaptiveColumnSet>("messageBanner1")
+                    .AssertElement<AdaptiveColumnSet>("messageBanner0", (columnSet) => Assert.IsTrue(columnSet.Style == AdaptiveContainerStyle.Accent))
                 .ExecuteAction("OnMessage2", new { Message = "Test" })
-                    .AssertElements<AdaptiveColumnSet>((columnSets) =>
-                    {
-                        Assert.IsTrue(columnSets.First().Style == AdaptiveContainerStyle.Attention);
-                        Assert.IsTrue(columnSets.Skip(1).First().Style == AdaptiveContainerStyle.Accent);
-                    })
+                    .AssertHas<AdaptiveColumnSet>("messageBanner0")
+                    .AssertHas<AdaptiveColumnSet>("messageBanner1")
+                    .AssertElement<AdaptiveColumnSet>("messageBanner0", (columnSet) => Assert.IsTrue(columnSet.Style == AdaptiveContainerStyle.Accent))
+                    .AssertElement<AdaptiveColumnSet>("messageBanner1", (columnSet) => Assert.IsTrue(columnSet.Style == AdaptiveContainerStyle.Attention))
                 .ExecuteAction(Constants.REFRESH_VERB)
-                    .AssertHasNo<AdaptiveTextBlock>();
+                    .AssertHasNo<AdaptiveColumnSet>("messageBanner0")
+                    .AssertHasNo<AdaptiveColumnSet>("messageBanner1");
         }
     }
 }

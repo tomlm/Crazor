@@ -16,19 +16,19 @@ namespace Crazor.Blazor.Tests
             await LoadCard("/Cards/ActionTests")
                     .AssertHasRefresh()
                     .AssertTextBlock("counter", "0")
-                    .AssertElement<AdaptiveExecuteAction>("OnSubmit")
+                    .AssertHas<AdaptiveExecuteAction>("OnSubmit")
                 .ExecuteAction("OnSubmit")
                     .AssertHasRefresh()
                     .AssertTextBlock("counter", "1")
-                    .AssertElement<AdaptiveExecuteAction>("OnSubmit")
+                    .AssertHas<AdaptiveExecuteAction>("OnSubmit")
                 .ExecuteAction("OnSubmitAmount")
                     .AssertHasRefresh()
                     .AssertTextBlock("counter", "6")
-                    .AssertElement<AdaptiveExecuteAction>("OnSubmit")
+                    .AssertHas<AdaptiveExecuteAction>("OnSubmit")
                 .ExecuteAction("OnSubmitAmount", new { amount = 10 })
                     .AssertHasRefresh()
                     .AssertTextBlock("counter", "16")
-                    .AssertElement<AdaptiveExecuteAction>("OnSubmit");
+                    .AssertHas<AdaptiveExecuteAction>("OnSubmit");
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace Crazor.Blazor.Tests
         {
             await LoadCard("/Cards/ActionTests", isPreview: true)
                     .AssertHasRefresh()
-                    .AssertElement<AdaptiveTextBlock>("Preview")
+                    .AssertHas<AdaptiveTextBlock>("Preview")
                     .AssertTextBlock("PREVIEW");
 
             await LoadCard("/Cards/ActionTests", isPreview: false)
@@ -48,7 +48,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestShowCard()
         {
             await LoadCard("/Cards/ShowCard", isPreview: true)
-                    .AssertElement<AdaptiveShowCardAction>("showCard")
+                    .AssertHas<AdaptiveShowCardAction>("showCard")
                     .AssertTextBlock("Hello")
                     .AssertTextBlock("Hi!");
         }
@@ -57,40 +57,40 @@ namespace Crazor.Blazor.Tests
         public async Task TestSelectActionImplicit()
         {
             await LoadCard("/Cards/SelectAction")
-                    .AssertElement<AdaptiveExecuteAction>("CardAction")
-                    .AssertElement<AdaptiveExecuteAction>("ContainerAction")
-                    .AssertElement<AdaptiveExecuteAction>("ColumnSetAction")
-                    .AssertElement<AdaptiveExecuteAction>("ColumnAction")
-                    .AssertElement<AdaptiveExecuteAction>("TextRunAction")
-                    .AssertElement<AdaptiveExecuteAction>("TableCellAction")
-                    .AssertElement<AdaptiveExecuteAction>("ImageAction");
+                    .AssertHas<AdaptiveExecuteAction>("CardAction")
+                    .AssertHas<AdaptiveExecuteAction>("ContainerAction")
+                    .AssertHas<AdaptiveExecuteAction>("ColumnSetAction")
+                    .AssertHas<AdaptiveExecuteAction>("ColumnAction")
+                    .AssertHas<AdaptiveExecuteAction>("TextRunAction")
+                    .AssertHas<AdaptiveExecuteAction>("TableCellAction")
+                    .AssertHas<AdaptiveExecuteAction>("ImageAction");
         }
 
         [TestMethod]
         public async Task TestSelectActionExplict()
         {
             await LoadCard("/Cards/SelectAction/Explicit")
-                    .AssertElement<AdaptiveExecuteAction>("CardAction")
-                    .AssertElement<AdaptiveExecuteAction>("ContainerAction")
-                    .AssertElement<AdaptiveExecuteAction>("ColumnSetAction")
-                    .AssertElement<AdaptiveExecuteAction>("ColumnAction")
-                    .AssertElement<AdaptiveExecuteAction>("TextRunAction")
-                    .AssertElement<AdaptiveExecuteAction>("TableCellAction")
-                    .AssertElement<AdaptiveExecuteAction>("ImageAction");
+                    .AssertHas<AdaptiveExecuteAction>("CardAction")
+                    .AssertHas<AdaptiveExecuteAction>("ContainerAction")
+                    .AssertHas<AdaptiveExecuteAction>("ColumnSetAction")
+                    .AssertHas<AdaptiveExecuteAction>("ColumnAction")
+                    .AssertHas<AdaptiveExecuteAction>("TextRunAction")
+                    .AssertHas<AdaptiveExecuteAction>("TableCellAction")
+                    .AssertHas<AdaptiveExecuteAction>("ImageAction");
         }
 
         [TestMethod]
         public async Task TestInlineActionImplicit()
         {
             await LoadCard("/Cards/InlineAction")
-                    .AssertElement<AdaptiveExecuteAction>("InputTextAction");
+                    .AssertHas<AdaptiveExecuteAction>("InputTextAction");
         }
 
         [TestMethod]
         public async Task TestInlineActionExcplit()
         {
             await LoadCard("/Cards/InlineAction/Explicit")
-                    .AssertElement<AdaptiveExecuteAction>("InputTextAction");
+                    .AssertHas<AdaptiveExecuteAction>("InputTextAction");
         }
     }
 }

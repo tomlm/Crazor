@@ -28,6 +28,7 @@ namespace Crazor.Test
             {
                 { "HostUri", "http://localhost" },
                 { "BotId", "00000000-0000-0000-0000-000000000000" },
+                { "BotName", "TestBot" },
                 { "MicrosoftAppId", "00000000-0000-0000-0000-000000000000" }
             });
             builder.Services.AddSingleton<IRazorViewEngine, RazorViewEngine>();
@@ -138,20 +139,6 @@ namespace Crazor.Test
         public static IInvokeActivity CreateTaskModuleSubmitActivity(TaskModuleRequest request)
         {
             var activity = CreateInvokeActivity("task/submit");
-            activity.Value = JObject.FromObject(request);
-            return activity.AsInvokeActivity();
-        }
-
-        public static IInvokeActivity CreateTabFetchTaskActivity(TaskModuleRequest request)
-        {
-            var activity = CreateInvokeActivity("tab/fetch");
-            activity.Value = JObject.FromObject(request);
-            return activity.AsInvokeActivity();
-        }
-
-        public static IInvokeActivity CreateTabSubmitActivity(TaskModuleRequest request)
-        {
-            var activity = CreateInvokeActivity("tab/submit");
             activity.Value = JObject.FromObject(request);
             return activity.AsInvokeActivity();
         }

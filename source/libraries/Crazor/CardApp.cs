@@ -359,6 +359,7 @@ namespace Crazor
             }
             sw.Stop();
 
+            outboundCard.Title = outboundCard.Title ?? this.Name;
 #if instrument
             var host = this.Context.Configuration.GetValue<Uri>("HostUri").Host.ToLower();
             if (host == "localhost" || host.EndsWith("ngrok.io") || host.EndsWith(".devtunnels.ms"))
