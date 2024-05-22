@@ -17,23 +17,8 @@
             route = uri.PathAndQuery;
 
         var card = await App.GetPreviewCardForRoute(route, cancellationToken);
-        
-        ResourceResponse resource;
-        if ((App.Activity.ChannelId == Channels.Email) ||
-            (App.Activity.ChannelId == "m365extensions"))
-        {
-            resource = await App.SendActionableMessage(
-                to: new ChannelAccount("tom@symplist.io", "Tom"),
-                subject: $"Re: {ObjectPath.GetPathValue<string>(App.Activity, "ChannelData.Subject", "")}",
-                message: "Here you go",
-                card: card,
-                cancellationToken: cancellationToken);
-        }
-        else
-        {
-            resource = await App.ReplyWithCardAttachment($"Here is a card {Url}", card, cancellationToken);
-        }
 
+        var resource= await App.TurnContext.ReplyWithCardAsync($"Here is a card {Url}", card, cancellationToken);
         if (resource != null)
         {
             AddBannerMessage(resource.Id, AdaptiveContainerStyle.Good);

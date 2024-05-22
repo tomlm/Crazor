@@ -1,7 +1,4 @@
-﻿
-
-
-using AdaptiveCards;
+﻿using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 
@@ -37,10 +34,7 @@ namespace Crazor.Server
 
                         var card = await cardApp.ProcessInvokeActivity(activity, isPreview: true, cancellationToken);
 
-                        var response = Activity.CreateMessageActivity();
-                        response.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
-
-                        await turnContext.SendActivityAsync(response, cancellationToken);
+                        var result = await turnContext.ReplyWithCardAsync("", card, cancellationToken);
                     }
                 }
             }

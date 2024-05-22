@@ -217,24 +217,6 @@ namespace Crazor
             return new Uri(_teamsRoot, $"/app/{appId}").AbsoluteUri;
         }
 
-        /// <summary>Deep linking for teams tabs</summary>
-        /// <param name="appId">Your manifest ID, for example fe4a8eba-2a31-4737-8e33-e5fae6fee194.</param>
-        /// <param name="entityId">The item ID that you provided when configuring the tab.For example, tasklist123.</param>
-        /// <param name="webUrl">An optional field with a fallback URL to use if the client doesn't support rendering of the tab - https://tasklist.example.com/123 or https://tasklist.example.com/list123/task456.</param>
-        /// <param name="label">A label for the item in your tab, to use when displaying the deep link, Task List 123 or Task 456.</param>
-        public static string CreateTeamsTabLink(string appId, string entityId, string? webUrl = null, string? label = null)
-        {
-            QueryBuilder qb = new QueryBuilder();
-            if (webUrl != null)
-            {
-                if (label != null)
-                {
-                    webUrl = $"{webUrl.TrimEnd('/')}/{label}";
-                }
-                qb.Add(nameof(webUrl), webUrl);
-            }
-            return new Uri(_teamsRoot, $"/entity/{appId}/{entityId}{qb.ToQueryString()}").AbsoluteUri;
-        }
 
         /// <summary>Generate a deep link to a teams call</summary>
         /// <param name="users">The comma-separated list of user IDs representing the participants of the call. Currently, the User ID field supports the Azure AD UserPrincipalName, typically an email address, or in a PSTN call, it supports a pstn mri 4:</param>

@@ -97,7 +97,7 @@ namespace Crazor
                     Authentication = AuthenticationFlags.SSO | AuthenticationFlags.OAuth
                 };
 
-                serviceOptions.ChannelOptions["m365extensions"] = new ChannelOptions()
+                serviceOptions.ChannelOptions[ChannelsEx.M365Extensions] = new ChannelOptions()
                 {
                     SupportsCardHeader = true,
                     SupportsTaskModule = true,
@@ -231,6 +231,20 @@ namespace Crazor
         public static Activity CreateReply(this IActivity activity, string? text = null, string? locale = null)
         {
             return ((Activity)activity).CreateReply(text, locale);
+        }
+
+        /// <summary>
+        /// Reply to the user with a message and card
+        /// </summary>
+        /// <param name="message">message</param>
+        /// <param name="route">route for the card</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns></returns>
+        public static async Task<ResourceResponse> ReplyWithCardAsync(this ITurnContext turnContext, string message, AdaptiveCard card, CancellationToken cancellationToken)
+        {
+            var replyActivity = turnContext.Activity.CreateReply(message);
+            replyActivity.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
+            return await turnContext.SendActivityAsync(replyActivity, cancellationToken);
         }
 
         public static IInvokeActivity CreateLoadRouteActivity(this IActivity sourceActivity, string route)

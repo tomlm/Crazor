@@ -750,21 +750,7 @@ namespace Crazor
             return cardView;
         }
 
-        /// <summary>
-        /// Reply to the user with a message and card
-        /// </summary>
-        /// <param name="message">message</param>
-        /// <param name="route">route for the card</param>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns></returns>
-        public async Task<ResourceResponse> ReplyWithCardAttachment(string message, AdaptiveCard card, CancellationToken cancellationToken)
-        {
-            var replyActivity = TurnContext.Activity.CreateReply(message);
-            replyActivity.Attachments.Add(new Attachment(AdaptiveCard.ContentType, content: card));
-            return await TurnContext.SendActivityAsync(replyActivity, cancellationToken);
-        }
 
-        /// <summary>
         /// GetPreviewCardForRoute()
         /// </summary>
         /// <param name="route">route to get preview card for</param>
@@ -779,110 +765,7 @@ namespace Crazor
             var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
             return card;
         }
-
-        private class EmailChannelData
-        {
-            public uint Importance { get; set; } = 1;
-
-            public string Subject { get; set; }
-
-            public Body TextBody { get; set; } = new Body() { BodyType = 1 };
-
-            public Body Body { get; set; } = new Body() { BodyType = 0 };
-
-            public IList<Recipient> ToRecipients { get; set; }
-
-            public IList<Recipient> CcRecipients { get; set; }
-        
-            public string ItemClass { get; set; } = "IPM.Note";
-        }
-
-        private class Recipient
-        {
-            public string Name { get; set; }
-            public string Address { get; set; }
-        }
-
-        private class Body
-        {
-            public uint BodyType { get; set; } = 1;
-
-            public string Text { get; set; }
-        }
-
-              
-        /// <summary>
-        /// Send an actionable message email.
-        /// </summary>
-        /// <param name="to">reipient </param>
-        /// <param name="subject">subject</param>
-        /// <param name="message">message text</param>
-        /// <param name="card">adaptive card to send</param>
-        /// <param name="cancellationToken">cancelation token</param>
-        /// <returns>resource for the newly created message</returns>
-        public async Task<ResourceResponse> SendActionableMessage(ChannelAccount to, string subject, string message, AdaptiveCard card, CancellationToken cancellationToken)
-        {
-            var emailActivity = new Activity()
-            {
-                Type = ActivityTypes.Message,
-                ChannelId = Channels.Email,
-                ServiceUrl = "https://email.botframework.com/",
-                Attachments = new List<Attachment>(),
-                Text = message,
-                TextFormat = TextFormatTypes.Plain,
-                From = new ChannelAccount(id: Context.Configuration.GetValue<string>("BotEmail"), name: Context.Configuration.GetValue<string>("BotName")),
-                Conversation = new ConversationAccount(id: "AAQkADY5YWVkY2M3LWE5NzMtNGQ2Ni04MWNlLTVlZDA5MTdhZjZkOAAQAD2CzNS9UWFNkVLaTHIHwSc~"),
-                Recipient = to,
-                ChannelData = new EmailChannelData()
-                {
-                    Subject = subject,
-                    ToRecipients = new List<Recipient>() { new Recipient() { Address = to.Id, Name = to.Name } },
-                    TextBody = new Body()
-                    {
-                        BodyType = 0,
-                        Text = message,
-                    },
-                    Body = new Body()
-                    {
-                        BodyType = 1,
-                        Text = $"""
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <script type="application/adaptivecard+json">
-{JsonConvert.SerializeObject(card)}
-  </script>
-</head>
-<body>
-{message}
-</body>
-</html>
-"""
-                    }
-                }
-            };
-            var connectorClient = this.TurnContext.TurnState?.Get<IConnectorClient>();
-            var conversationResource = await connectorClient.Conversations.CreateDirectConversationAsync(emailActivity.From, emailActivity.Recipient, emailActivity, cancellationToken: cancellationToken);
-            emailActivity.Conversation = new ConversationAccount(id: conversationResource.Id);
-            var responses = await TurnContext.Adapter.SendActivitiesAsync(TurnContext, new Activity[] { emailActivity }, cancellationToken);
-            return responses[0];
-        }
-
-        public async Task<string> CreateCardTaskDeepLink(Uri uri, string title, string height, string width, CancellationToken cancellationToken)
-        {
-            var cardRoute = CardRoute.FromUri(uri);
-
-            var cardApp = Context.CardAppFactory.Create(cardRoute, this.TurnContext);
-
-            await cardApp.LoadAppAsync(Activity!, cancellationToken);
-
-            var card = await cardApp.CurrentView.RenderCardAsync(isPreview: true, cancellationToken);
-
-            var botId = Context.Configuration.GetValue<string>("MicrosoftAppId");
-            var appId = Context.Configuration.GetValue<string>("TeamsAppId") ?? botId;
-
-            return DeepLinks.CreateTaskModuleCardLink(appId, card!, title, height, width, botId);
-        }
+          
 
         /// <summary>
         /// This is a utility function for CardViews to use reflection to handle action verbs

@@ -14,11 +14,12 @@ namespace Crazor.Server
     // Create the Bot Adapter with error handling enabled.
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage, IConfiguration configuration)
             : base(auth, logger)
         {
             
             this.Use(new SSOTokenExchangeMiddleware(storage));
+            this.Use(new ActionableMessageMiddleware(configuration));
 
             OnTurnError = async (turnContext, exception) =>
             {
