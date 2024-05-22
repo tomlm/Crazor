@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 
 namespace Crazor

@@ -1,6 +1,3 @@
-
-
-
 using Crazor.Attributes;
 using Crazor.Interfaces;
 using global::AdaptiveCards;

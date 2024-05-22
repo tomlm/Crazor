@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Bot.Builder;

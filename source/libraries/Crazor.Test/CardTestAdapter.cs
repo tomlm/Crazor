@@ -1,6 +1,3 @@
-﻿
-
-
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Adapters;
 using Microsoft.Bot.Connector;

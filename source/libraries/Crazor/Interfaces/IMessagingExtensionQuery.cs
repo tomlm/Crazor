@@ -1,6 +1,3 @@
-﻿
-
-
 using Microsoft.Bot.Schema.Teams;
 
 namespace Crazor.Interfaces

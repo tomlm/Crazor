@@ -1,6 +1,3 @@
-﻿
-
-
 namespace Crazor.Interfaces
 {
     public interface IEncryptionProvider

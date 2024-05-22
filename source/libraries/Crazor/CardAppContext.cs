@@ -1,4 +1,3 @@
-﻿
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;

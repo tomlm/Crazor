@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;

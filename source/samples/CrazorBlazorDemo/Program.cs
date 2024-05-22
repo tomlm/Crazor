@@ -1,6 +1,3 @@
-
-
-
 using Crazor;
 using Crazor.Blazor;
 using Crazor.Server;

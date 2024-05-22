@@ -1,6 +1,3 @@
-
-
-
 using Crazor.Test;
 using Crazor.Tests.Cards.Memory;
 

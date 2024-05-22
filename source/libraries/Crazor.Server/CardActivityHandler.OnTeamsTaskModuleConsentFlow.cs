@@ -1,7 +1,3 @@
-﻿
-
-
-
 //namespace Crazor.Server
 //{
 //    // this is the payload to be embedded in a card

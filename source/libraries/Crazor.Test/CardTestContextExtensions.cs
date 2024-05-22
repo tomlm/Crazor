@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Crazor.Interfaces;
 using Newtonsoft.Json.Linq;

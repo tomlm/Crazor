@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor.Blazor.Tests.Cards.CodeOnlyView;
 using Crazor.Server;
 using Crazor.Test;

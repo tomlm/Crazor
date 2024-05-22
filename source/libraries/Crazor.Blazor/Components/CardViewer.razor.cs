@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components;

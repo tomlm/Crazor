@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Azure.Core;
 using Crazor.Interfaces;

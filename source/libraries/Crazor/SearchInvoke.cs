@@ -1,6 +1,3 @@
-﻿
-
-
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;

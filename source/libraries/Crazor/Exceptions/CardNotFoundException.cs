@@ -1,6 +1,3 @@
-﻿
-
-
 namespace Crazor.Exceptions
 {
     /// <summary>

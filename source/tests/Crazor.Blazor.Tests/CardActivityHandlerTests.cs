@@ -1,6 +1,3 @@
-
-
-
 using AdaptiveCards;
 using Crazor.Test;
 using Crazor.Test.MSTest;

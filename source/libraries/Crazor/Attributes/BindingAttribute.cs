@@ -1,4 +1,3 @@
-﻿
 namespace Crazor.Attributes
 {
     public enum BindingType

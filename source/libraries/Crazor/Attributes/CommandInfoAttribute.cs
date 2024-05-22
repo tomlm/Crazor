@@ -1,4 +1,3 @@
-﻿
 using Crazor.Teams;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

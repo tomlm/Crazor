@@ -1,4 +1,3 @@
-﻿
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;

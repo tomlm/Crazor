@@ -1,6 +1,3 @@
-﻿
-
-
 namespace Crazor.Blazor.Tests.Cards.RouteBinding2
 {
     public class RouteBinding2App: CardApp

@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor;
 using Crazor.Attributes;
 using Crazor.Teams;

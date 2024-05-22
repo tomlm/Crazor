@@ -1,4 +1,3 @@
-﻿
 namespace Crazor
 {
     public class CardResult

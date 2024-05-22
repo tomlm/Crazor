@@ -1,6 +1,3 @@
-﻿
-
-
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 

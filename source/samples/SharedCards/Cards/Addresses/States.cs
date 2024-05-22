@@ -1,6 +1,3 @@
-﻿
-
-
 using System.ComponentModel;
 
 namespace SharedCards.Cards.Addresses

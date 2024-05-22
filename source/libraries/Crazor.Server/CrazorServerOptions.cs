@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor.Teams;
 
 namespace Crazor

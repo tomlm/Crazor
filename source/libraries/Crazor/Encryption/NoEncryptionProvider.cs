@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor.Interfaces;
 
 namespace Crazor.Encryption

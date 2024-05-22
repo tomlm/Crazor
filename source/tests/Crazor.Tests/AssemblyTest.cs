@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor.Server;
 using Crazor.Test;
 using Microsoft.AspNetCore.Authorization;

@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Microsoft.AspNetCore.Components;
 using System.Reflection;

@@ -1,6 +1,3 @@
-﻿
-
-
 namespace Crazor.Validation
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]

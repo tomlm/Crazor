@@ -1,6 +1,3 @@
-﻿
-
-
 namespace Crazor
 {
     public enum TaskModuleAction

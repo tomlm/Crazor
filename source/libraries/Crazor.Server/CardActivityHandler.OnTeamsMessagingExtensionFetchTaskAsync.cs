@@ -1,6 +1,3 @@
-﻿
-
-
 using AdaptiveCards;
 using Crazor.Attributes;
 using Microsoft.Bot.Builder;

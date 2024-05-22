@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json;

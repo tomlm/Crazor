@@ -1,6 +1,3 @@
-﻿
-
-
 using Azure.Core;
 using Crazor.Attributes;
 using Microsoft.Bot.Schema;

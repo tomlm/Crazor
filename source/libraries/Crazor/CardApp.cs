@@ -1,4 +1,3 @@
-﻿
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Attributes;

@@ -1,4 +1,3 @@
-﻿
 using Crazor.Interfaces;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;

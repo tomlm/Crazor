@@ -1,6 +1,3 @@
-﻿
-
-
 using Crazor.Attributes;
 
 namespace Crazor.Blazor.Tests.Cards.TaskModule

@@ -1,6 +1,3 @@
-
-
-
 namespace Crazor.Blazor.Tests
 {
 

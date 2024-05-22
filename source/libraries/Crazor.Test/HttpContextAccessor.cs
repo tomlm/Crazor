@@ -1,6 +1,3 @@
-﻿
-
-
 using Microsoft.AspNetCore.Http;
 
 namespace Crazor.Test
