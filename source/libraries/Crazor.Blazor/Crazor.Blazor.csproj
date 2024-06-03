@@ -14,9 +14,9 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.5</VersionPrefix>
+		<VersionPrefix>1.0.6</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
-		<AssemblyVersion>1.0.5.0</AssemblyVersion>
+		<AssemblyVersion>1.0.6.0</AssemblyVersion>
 		<Description>Experimental library for creating Adaptive Cards using ASP.NET Blazor component .Razor templates.</Description>
 		<Company>Microsoft</Company>
 		<Authors>Microsoft</Authors>
