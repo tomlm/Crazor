@@ -16,6 +16,10 @@ namespace Crazor
         public const string REFRESH_VERB = "OnRefresh";
         public const string EDIT_VERB = "OnEdit";
         public const string DEBUGGER_VERB = "OnDebugger";
+        public const string LOGIN_VERB = "OnLogin";
+        public const string LOGOUT_VERB = "OnLogout";
+        public const string ABOUT_VERB = "OnAbout";
+        public const string SETTINGS_VERB = "OnSettings";
 
         // well known screens
         public const string DEFAULT_VIEW = "Default";

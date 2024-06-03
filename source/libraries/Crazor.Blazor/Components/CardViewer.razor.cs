@@ -149,7 +149,7 @@ namespace Crazor.Blazor.Components
                 From = new ChannelAccount()
                 {
                     AadObjectId = authState?.User?.GetObjectId() ?? String.Empty,
-                    Id = authState?.User?.GetObjectId() ?? String.Empty,
+                    Id = authState?.User?.GetObjectId() ?? "Unknown",
                     Name = authState?.User?.GetDisplayName() ?? "Anonymous"
                 },
                 Recipient = new ChannelAccount() { Id = "bot" },

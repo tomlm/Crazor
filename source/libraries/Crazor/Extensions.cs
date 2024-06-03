@@ -43,6 +43,21 @@ namespace Crazor
                 options);
         }
 
+        public static string GetCardRoute<CardViewT>(this ICardView cardView)
+            where CardViewT : ICardView
+        {
+            var route = typeof(CardViewT).Name;
+            var cardRouteAtt = typeof(CardViewT).GetCustomAttribute<CardRouteAttribute>();
+            if (cardRouteAtt != null)
+            {
+                // only untemplated routes can be bound this way.
+                if (!cardRouteAtt.Template.Contains("{"))
+                    route = cardRouteAtt.Template;
+            }
+            return route;
+        }
+
+
         //private static XmlSerializer xmlSerializer = new XmlSerializer(typeof(AdaptiveCard), defaultNamespace: AdaptiveCard.ContentType);
 
         //public static string ToXml(this AdaptiveCard card)

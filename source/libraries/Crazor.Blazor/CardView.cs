@@ -1,8 +1,4 @@
-﻿//#define XML_SERIALIZATION
-
-
-
-using AdaptiveCards;
+﻿using AdaptiveCards;
 using Crazor.Attributes;
 using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
@@ -241,6 +237,28 @@ namespace Crazor.Blazor
         public void ReplaceView(string cardRoute, object? model = null)
         {
             this.App!.ReplaceView(cardRoute, model);
+        }
+
+        /// <summary>
+        /// Navigate to card by name
+        /// </summary>
+        /// <typeparam name="CardViewT">CardView class to show</typeparam>
+        /// <param name="model">model to pass</param>
+        public void ShowView<CardViewT>(object? model = null)
+            where CardViewT : ICardView
+        {
+            this.App!.ShowView(this.GetCardRoute<CardViewT>(), model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one 
+        /// </summary>
+        /// <typeparam name="CardViewT">CardView class to navigate to</typeparam>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView<CardViewT>(object? model = null)
+            where CardViewT: ICardView
+        {
+            this.App!.ReplaceView(this.GetCardRoute<CardViewT>(), model);
         }
 
         /// <summary>

@@ -1,0 +1,12 @@
+﻿@inherits CardView
+
+<Card Version="1.4">
+    <TextBlock>Card2</TextBlock>
+    <ActionExecute Verb="@nameof(OnBack)"/>
+    <ActionExecute Verb="@nameof(OnReplace)" />
+</Card>
+
+@code {
+    public void OnBack() => CloseView();
+    public void OnReplace() => ReplaceView<Card3>();
+}

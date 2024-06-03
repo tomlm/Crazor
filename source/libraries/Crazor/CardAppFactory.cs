@@ -77,7 +77,7 @@ namespace Crazor
                     cardApp.Name = cardRoute.App;
                 }
                 cardApp.Route = cardRoute;
-                cardApp.TurnContext = turnContext!;
+                cardApp.Context.TurnContext = turnContext!;
                 return cardApp;
             }
             throw new ArgumentNullException(nameof(cardRoute));

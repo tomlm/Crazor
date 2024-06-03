@@ -32,7 +32,10 @@ namespace Crazor.Server
             if (uri.Host == hostName)
             {
                 CardRoute cardRoute = CardRoute.FromUri(uri);
-
+                if (cardRoute == null)
+                {
+                    return new MessagingExtensionResponse();
+                }
                 var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
                 var activity = turnContext.Activity.CreateLoadRouteActivity(uri.PathAndQuery);

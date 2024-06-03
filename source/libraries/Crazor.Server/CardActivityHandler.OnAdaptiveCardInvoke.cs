@@ -1,4 +1,6 @@
 using AdaptiveCards;
+using Azure.Identity;
+using Crazor.Exceptions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
@@ -10,32 +12,29 @@ namespace Crazor.Server
     {
         protected async override Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
         {
-            AdaptiveAuthentication adaptiveAuthentication = null;
-            try
+            CardRoute cardRoute = await CardRoute.FromDataAsync((JObject)invokeValue.Action.Data, Context.EncryptionProvider, cancellationToken);
+
+            var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
+
+            await cardApp.LoadAppAsync((Activity)turnContext.Activity!, cancellationToken);
+
+            AdaptiveCard card = await cardApp.ProcessInvokeActivity((Activity)turnContext.Activity!, isPreview: false, cancellationToken);
+
+            return new AdaptiveCardInvokeResponse()
             {
-                CardRoute cardRoute = await CardRoute.FromDataAsync((JObject)invokeValue.Action.Data, Context.EncryptionProvider, cancellationToken);
-
-                var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
-
-                await cardApp.LoadAppAsync((Activity)turnContext.Activity!, cancellationToken);
-
-                AdaptiveCard card = await cardApp.ProcessInvokeActivity((Activity)turnContext.Activity!, isPreview: false, cancellationToken);
-
-                return new AdaptiveCardInvokeResponse()
-                {
-                    StatusCode = 200,
-                    Type = AdaptiveCard.ContentType,
-                    Value = card
-                };
-            }
-            catch (Microsoft.Identity.Web.MicrosoftIdentityWebChallengeUserException)
-            {
-                return CreateAuthCard(adaptiveAuthentication);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                return CreateAuthCard(adaptiveAuthentication);
-            }
+                StatusCode = 200,
+                Type = AdaptiveCard.ContentType,
+                Value = card
+            };
+            //}
+            //catch (Microsoft.Identity.Web.MicrosoftIdentityWebChallengeUserException)
+            //{
+            //    return CreateAuthCard(adaptiveAuthentication);
+            //}
+            //catch (UnauthorizedAccessException)
+            //{
+            //    return CreateAuthCard(adaptiveAuthentication);
+            //}
         }
 
         private static AdaptiveCardInvokeResponse CreateAuthCard(AdaptiveAuthentication adaptiveAuthentication)

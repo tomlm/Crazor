@@ -1,19 +1,21 @@
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using Crazor.Attributes;
+using Crazor.Exceptions;
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
@@ -44,13 +46,13 @@ namespace Crazor
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Context = context;
-            context.App = this;
             this.CallStack = new List<CardViewState>();
             if (this.GetType() != typeof(CardApp))
             {
                 this.Name = this.GetType().Name;
                 this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
             }
+            context.App = this;
         }
 
         /// <summary>
@@ -140,11 +142,6 @@ namespace Crazor
         public CardAppContext Context { get; }
 
         /// <summary>
-        /// The current turn context.
-        /// </summary>
-        public ITurnContext TurnContext { get; set; }
-
-        /// <summary>
         /// process the activity
         /// </summary>
         /// <param name="invokeActivity"></param>
@@ -153,7 +150,9 @@ namespace Crazor
         /// <returns></returns>
         public async Task<AdaptiveCard> ProcessInvokeActivity(IInvokeActivity invokeActivity, bool isPreview, CancellationToken cancellationToken)
         {
-            var authentication = await AuthorizeActivityAsync(invokeActivity, cancellationToken);
+            await AuthenticateUserAsync(cancellationToken);
+
+            await AuthorizeActivityAsync(invokeActivity, isPreview, cancellationToken);
 
             await OnActionExecuteAsync(cancellationToken);
 
@@ -167,39 +166,17 @@ namespace Crazor
 
             var card = await RenderCardAsync(isPreview, cancellationToken);
 
-            card.Authentication = authentication;
+            card.Authentication = await GetAdaptiveAuthentication(cancellationToken);
 
             await SaveAppAsync(cancellationToken);
 
-            return card;
-        }
-
-        public async Task<AdaptiveCard> CreateAuthCard(AdaptiveAuthentication adaptiveAuthentication, CancellationToken cancellationToken)
-        {
-            var card = new AdaptiveCard("1.4")
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
             {
-                Body = new List<AdaptiveElement>()
-                        {
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Unauthorized",
-                                Wrap = true,
-                            }
-                        },
-                //Actions = new List<AdaptiveAction>()
-                //        {
-                //            new AdaptiveSubmitAction()
-                //            {
-                //                Title = "Sign In",
-                //                Data = new AdaptiveCardInvokeAction()
-                //                {
-                //                    Verb = Constants.SHOWVIEW_VERB,
-                //                }
-                //            }
-                //        },
-                Authentication = adaptiveAuthentication
-            };
-            await this.ApplyCardModificationsAsync(card, true, cancellationToken);
+                System.Diagnostics.Debug.WriteLine("===outbound card===");
+                System.Diagnostics.Debug.WriteLine(card.ToJson());
+            }
+#endif
             return card;
         }
 
@@ -269,6 +246,11 @@ namespace Crazor
                     SaveCardState();
                 }
             }
+            catch (AdaptiveAuthenticationRequiredException authRequired)
+            {
+                SaveCardState();
+                throw;
+            }
             catch (Exception err)
             {
                 // hmmm...seems like we need a external function to call for this...
@@ -330,6 +312,10 @@ namespace Crazor
                                             .Cast<AdaptiveInline>()
                                             .ToList()
                             }
+                        },
+                        Actions = new List<AdaptiveAction>()
+                        {
+                            new AdaptiveExecuteAction() { Verb = Constants.REFRESH_VERB, Data = this.Action.Data, Title="Refresh" }
                         }
                     };
                 }
@@ -373,14 +359,6 @@ namespace Crazor
             {
                 Context.ServiceOptions.Logger.Response?.Invoke(this.Activity, outboundCard);
             }
-
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                System.Diagnostics.Debug.WriteLine("===outbound card===");
-                System.Diagnostics.Debug.WriteLine(outboundCard.ToJson());
-            }
-#endif
 
             return outboundCard;
         }
@@ -606,7 +584,7 @@ namespace Crazor
             }
             else
             {
-                uri.Path = subPath;
+                uri.Path = subPath.TrimEnd('/');
             }
 
             return uri.Uri.PathAndQuery;
@@ -750,23 +728,6 @@ namespace Crazor
             return cardView;
         }
 
-
-        /// GetPreviewCardForRoute()
-        /// </summary>
-        /// <param name="route">route to get preview card for</param>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns>adaptive card suitable for sharing</returns>
-        public async Task<AdaptiveCard> GetPreviewCardForRoute(string route, CancellationToken cancellationToken)
-        {
-            CardRoute cardRoute = CardRoute.Parse(route);
-            var cardApp = Context.CardAppFactory.Create(cardRoute, TurnContext);
-            var activity = TurnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
-            await cardApp.LoadAppAsync(activity, cancellationToken);
-            var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
-            return card;
-        }
-          
-
         /// <summary>
         /// This is a utility function for CardViews to use reflection to handle action verbs
         /// </summary>
@@ -799,6 +760,7 @@ namespace Crazor
             {
                 case Constants.CANCEL_VERB:
                     // cancel verb cancels the window
+                    // we call invoke verb so it can be overriden
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         // default implementation 
@@ -808,6 +770,7 @@ namespace Crazor
 
                 case Constants.OK_VERB:
                     // ok verb closes the window if the model is valid.
+                    // we call invoke verb so it can be overriden
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         if (this.CurrentView.IsModelValid)
@@ -817,7 +780,36 @@ namespace Crazor
                     }
                     break;
 
+                case Constants.LOGIN_VERB:
+                    // we call invoke verb so it can be overriden
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        await LoginUserAsync(cancellationToken);
+                    }
+                    break;
 
+                case Constants.LOGOUT_VERB:
+                    // we call invoke verb so it can be overriden
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        await this.LogoutUserAsync(cancellationToken);
+                    }
+                    break;
+
+                case Constants.ABOUT_VERB:
+                    // we call invoke verb so it can be overriden
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        this.ShowView(Constants.ABOUT_VIEW);
+                    }
+                    break;
+                case Constants.SETTINGS_VERB:
+                    // we call invoke verb so it can be overriden
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        this.ShowView(Constants.SETTINGS_VIEW);
+                    }
+                    break;
                 default:
                     await this.CurrentView.InvokeVerbAsync(action, cancellationToken);
                     break;
@@ -1041,7 +1033,7 @@ namespace Crazor
                     try
                     {
                         // we need to add refresh userids
-                        var connectorClient = this.TurnContext.TurnState?.Get<IConnectorClient>();
+                        var connectorClient = Context.TurnContext.TurnState?.Get<IConnectorClient>();
                         var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(teamId, 60, cancellationToken: cancellationToken);
                         this.TeamsConversationMembers = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
                     }
@@ -1150,7 +1142,7 @@ namespace Crazor
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
                     Title = Constants.ABOUT_VIEW,
-                    Verb = Constants.ABOUT_VIEW,
+                    Verb = Constants.ABOUT_VERB,
                     IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
                     AssociatedInputs = AdaptiveAssociatedInputs.None,
                     Mode = AdaptiveActionMode.Secondary
@@ -1162,7 +1154,7 @@ namespace Crazor
                 systemMenu.Actions.Add(new AdaptiveExecuteAction()
                 {
                     Title = Constants.SETTINGS_VIEW,
-                    Verb = Constants.SETTINGS_VIEW,
+                    Verb = Constants.SETTINGS_VERB,
                     IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
                     AssociatedInputs = AdaptiveAssociatedInputs.None,
                     Mode = AdaptiveActionMode.Secondary
@@ -1329,6 +1321,88 @@ namespace Crazor
         }
 
         /// <summary>
+        /// Request signin authentication for default connectionName
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task LoginUserAsync(CancellationToken cancellationToken)
+        {
+            if (Context.User.Identity?.IsAuthenticated == false)
+            {
+                var authentication = await GetAdaptiveAuthentication(cancellationToken);
+                throw new AdaptiveAuthenticationRequiredException(authentication, HttpStatusCode.Unauthorized);
+            }
+        }
+
+        /// <summary>
+        /// Request logout for the user.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task LogoutUserAsync(CancellationToken cancellationToken)
+        {
+            await LogoutUserAsync(OAuthConnectionAttribute.Default, cancellationToken);
+        }
+
+        /// <summary>
+        /// Request logout for the user.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task LogoutUserAsync(string connectionName, CancellationToken cancellationToken)
+        {
+            var userTokenClient = Context.TurnContext.TurnState.Get<UserTokenClient>();
+            if (userTokenClient != null)
+            {
+                await userTokenClient.SignOutUserAsync(Activity.From.Id, connectionName, Activity.ChannelId, cancellationToken);
+            }
+            else if (Context.TurnContext.Adapter is IExtendedUserTokenProvider adapter)
+            {
+                await adapter.SignOutUserAsync(Context.TurnContext, connectionName, Activity.From.Id, cancellationToken);
+            }
+            else
+            {
+                throw new NotSupportedException("Logout is not supported by the current adapter.");
+            }
+            Context.User = new ClaimsPrincipal(new ClaimsIdentity());
+            // make sure that user is set into the authenticationStateProvider is initialized
+            var isp = this.Context.AuthenticationStateProvider as IHostEnvironmentAuthenticationStateProvider;
+            if (isp != null)
+            {
+                isp.SetAuthenticationState(Task.FromResult(new AuthenticationState(Context.User)));
+            }
+        }
+
+        public virtual async Task AuthenticateUserAsync(CancellationToken cancellation)
+        {
+            var authenticationAttribute = CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
+            if (authenticationAttribute != null && !String.IsNullOrEmpty(Activity.From.Id))
+            {
+                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                if (userTokenClient != null)
+                {
+                    var tokenResponse = await userTokenClient.GetUserTokenAsync(Activity.From.Id, authenticationAttribute.Connection, Activity.ChannelId, null, default);
+                    var status = await userTokenClient.GetTokenStatusAsync(Activity.From.Id, Activity.ChannelId, String.Empty, cancellation);
+                    if (tokenResponse != null)
+                    {
+                        // parse token into identity and claims.
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var jwtSecurityToken = tokenHandler.ReadJwtToken(tokenResponse.Token);
+                        var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
+                        var user = new ClaimsPrincipal(claimsIdentity);
+                        var isp = this.Context.AuthenticationStateProvider as IHostEnvironmentAuthenticationStateProvider;
+                        if (isp != null)
+                        {
+                            isp.SetAuthenticationState(Task.FromResult(new AuthenticationState(Context.User)));
+                        }
+                    }
+                }
+            }
+            var state = await Context.AuthenticationStateProvider.GetAuthenticationStateAsync();
+            Context.User = state.User;
+        }
+
+        /// <summary>
         /// Authorize the activity for the user.
         /// </summary>
         /// <remarks>
@@ -1338,51 +1412,21 @@ namespace Crazor
         /// <param name="cancellationToken"></param>
         /// <returns>It will return Authentication if the user is not authenticated.</returns>
         /// <exception cref="UnauthorizedAccessException"></exception>
-        public virtual async Task<AdaptiveAuthentication> AuthorizeActivityAsync(IInvokeActivity activity, CancellationToken cancellationToken)
+        public virtual async Task AuthorizeActivityAsync(IInvokeActivity activity, bool isPreview, CancellationToken cancellationToken)
         {
-            // Authenticate user identity by using token exchange
-            var authenticationAttribute = this.CurrentView.GetType().GetCustomAttribute<AuthenticationAttribute>();
-            if (authenticationAttribute != null)
-            {
-                if (Context.UserTokenClient == null)
-                {
-                    throw new UnauthorizedAccessException($"No UserTokenClient");
-                }
-
-                ObjectPath.TryGetPathValue<string>(activity.Value, "state", out var magicCode);
-
-                var tokenResponse = await Context.UserTokenClient.GetUserTokenAsync(activity.From.Id, authenticationAttribute.Name, activity.ChannelId, magicCode, cancellationToken);
-
-                if (tokenResponse != null)
-                {
-                    Context.TokenResponses[authenticationAttribute.Name] = tokenResponse;
-
-                    if (Context.User.Identity?.IsAuthenticated == false)
-                    {
-                        // parse token into identity and claims.
-                        var tokenHandler = new JwtSecurityTokenHandler();
-                        var jwtSecurityToken = tokenHandler.ReadJwtToken(tokenResponse.Token);
-                        var claimsIdentity = new ClaimsIdentity(jwtSecurityToken.Claims, "JWT");
-                        Context.User = new ClaimsPrincipal(claimsIdentity);
-                    }
-                }
-            }
-
-            // make sure that user is set into the authenticationStateProvider is initialized
-            var isp = this.Context.AuthenticationStateProvider as IHostEnvironmentAuthenticationStateProvider;
-            if (isp != null)
-            {
-                isp.SetAuthenticationState(Task.FromResult(new AuthenticationState(Context.User)));
-            }
+            // If there are authentication attribute on the view, then we need to authenticate the user.
+            var oauthAttribute = this.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
 
             // Authorize user by processing authorize attributes
             var authorizeAttributes = this.CurrentView.GetType().GetCustomAttributes<AuthorizeAttribute>().ToList();
-            if (authorizeAttributes.Any())
+            if (isPreview == false && authorizeAttributes.Any())
             {
                 // if we are not authenticated and there are Authorize attributes then we just blow out of here.
                 if (Context.User?.Identity.IsAuthenticated == false)
                 {
-                    throw new UnauthorizedAccessException();
+                    // authentication is required.
+                    var authentication = await GetAdaptiveAuthentication(cancellationToken);
+                    throw new AdaptiveAuthenticationRequiredException(authentication, HttpStatusCode.Unauthorized);
                 }
 
                 foreach (var authorizeAttribute in authorizeAttributes)
@@ -1410,18 +1454,25 @@ namespace Crazor
                     }
                 }
             }
+        }
 
-            // If we are not authenticated, then return authentication metadata.
-            if (authenticationAttribute != null)
+
+        private async Task<AdaptiveAuthentication> GetAdaptiveAuthentication(CancellationToken cancellationToken)
+        {
+            var oauthAttribute = this.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
+            if (oauthAttribute != null && !String.IsNullOrEmpty(Activity.From.Id))
             {
-                var signinResource = await Context.UserTokenClient.GetSignInResourceAsync(authenticationAttribute.Name, (Activity)activity, null, cancellationToken);
-
-                // create authenticationOptions to ask to be logged in.
-                return new AdaptiveAuthentication()
+                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                if (userTokenClient != null)
                 {
-                    ConnectionName = authenticationAttribute.Name,
-                    Text = "Please sign in to continue",
-                    Buttons = new List<AdaptiveAuthCardButton>
+                    var signinResource = await userTokenClient.GetSignInResourceAsync(oauthAttribute.Connection, (Activity)Activity, null, cancellationToken);
+
+                    // create authenticationOptions to ask to be logged in.
+                    var authentication = new AdaptiveAuthentication()
+                    {
+                        ConnectionName = oauthAttribute.Connection,
+                        Text = "Please sign in to continue",
+                        Buttons = new List<AdaptiveAuthCardButton>
                     {
                         new AdaptiveAuthCardButton()
                         {
@@ -1430,13 +1481,12 @@ namespace Crazor
                             Value = signinResource.SignInLink
                         }
                     },
-                    TokenExchangeResource = JObject.FromObject(signinResource.TokenExchangeResource).ToObject<AdaptiveTokenExchangeResource>()!,
-                };
+                        TokenExchangeResource = JObject.FromObject(signinResource.TokenExchangeResource).ToObject<AdaptiveTokenExchangeResource>()!,
+                    };
+                    return authentication;
+                }
             }
-
-            // we are good, we are authenticated and authorized.
             return null;
         }
-
     }
 }

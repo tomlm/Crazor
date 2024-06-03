@@ -8,6 +8,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -35,6 +36,7 @@ namespace Crazor.Server
     public class SSOTokenExchangeMiddleware : IMiddleware
     {
         private readonly IStorage _storage;
+        private readonly IConfiguration _configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamsSSOTokenExchangeMiddleware"/> class.
@@ -42,7 +44,7 @@ namespace Crazor.Server
         /// <param name="storage">The <see cref="IStorage"/> to use for deduplication.</param>
         /// <param name="connectionName">The connection name to use for the single
         /// sign on token exchange.</param>
-        public SSOTokenExchangeMiddleware(IStorage storage)
+        public SSOTokenExchangeMiddleware(IStorage storage, IConfiguration configuration)
         {
             if (storage == null)
             {
@@ -50,6 +52,7 @@ namespace Crazor.Server
             }
 
             _storage = storage;
+            _configuration = configuration;
         }
 
         /// <inheritdoc/>
@@ -73,7 +76,7 @@ namespace Crazor.Server
                 if (tokenExchangeRequest != null)
                 {
                     // If the TokenExchange is NOT successful, the response will have already been sent by ExchangedTokenAsync
-                    if (!await this.ExchangedTokenAsync(turnContext, tokenExchangeRequest, cancellationToken).ConfigureAwait(false))
+                    if (!await this.ExchangeTokenAsync(turnContext, tokenExchangeRequest, cancellationToken).ConfigureAwait(false))
                     {
                         return;
                     }
@@ -135,30 +138,38 @@ namespace Crazor.Server
                 }, cancellationToken).ConfigureAwait(false);
         }
 
-        private async Task<bool> ExchangedTokenAsync(ITurnContext turnContext, TokenExchangeInvokeRequest tokenExchangeRequest, CancellationToken cancellationToken)
+        private async Task<bool> ExchangeTokenAsync(ITurnContext turnContext, TokenExchangeInvokeRequest tokenExchangeInvokeRequest, CancellationToken cancellationToken)
         {
+            var botId = _configuration.GetValue<string>("MicrosoftAppId");
+            var hostUri = _configuration.GetValue<string>("HostUri");
             TokenResponse tokenExchangeResponse = null;
             string message = "The bot is unable to exchange token. Proceed with regular login.";
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
             try
             {
-                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+                var tokenExchangeRequest = new TokenExchangeRequest
+                {
+                    Token = tokenExchangeInvokeRequest.Token,
+                    // Uri = $"api://{new Uri(hostUri).Host}/BotId-{botId}"
+                };
+
                 if (userTokenClient != null)
                 {
                     tokenExchangeResponse = await userTokenClient.ExchangeTokenAsync(
                         turnContext.Activity.From.Id,
-                        tokenExchangeRequest.ConnectionName,
+                        tokenExchangeInvokeRequest.ConnectionName,
                         turnContext.Activity.ChannelId,
-                        new TokenExchangeRequest { Token = tokenExchangeRequest.Token },
-                        cancellationToken).ConfigureAwait(false);
+                        tokenExchangeRequest,
+                        cancellationToken);
                 }
                 else if (turnContext.Adapter is IExtendedUserTokenProvider adapter)
                 {
                     tokenExchangeResponse = await adapter.ExchangeTokenAsync(
                         turnContext,
-                        tokenExchangeRequest.ConnectionName,
+                        tokenExchangeInvokeRequest.ConnectionName,
                         turnContext.Activity.From.Id,
-                        new TokenExchangeRequest { Token = tokenExchangeRequest.Token },
-                        cancellationToken).ConfigureAwait(false);
+                        tokenExchangeRequest,
+                        cancellationToken);
                 }
                 else
                 {
@@ -180,23 +191,12 @@ namespace Crazor.Server
                 // The token could not be exchanged (which could be due to a consent requirement)
                 // Notify the sender that PreconditionFailed so they can respond accordingly.
 
-                //var response = new JObject()
+                // https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/authentication-flow-in-universal-action-for-adaptive-cards
+                //var response = JObject.FromObject(new
                 //{
-                //    new JProperty("status", (int)HttpStatusCode.PreconditionFailed),
-                //    new JProperty("body", JObject.FromObject(new TokenExchangeInvokeResponse
-                //    {
-                //        Id = tokenExchangeRequest.Id,
-                //        ConnectionName = tokenExchangeRequest.ConnectionName,
-                //        FailureDetail = "The bot is unable to exchange token. Proceed with regular login.",
-                //    }))
-                //};
-
-                //var response = new TokenExchangeInvokeResponse
-                //{
-                //    Id = tokenExchangeRequest.Id,
-                //    ConnectionName = tokenExchangeRequest.ConnectionName,
-                //    FailureDetail = "The bot is unable to exchange token. Proceed with regular login.",
-                //};
+                //    statusCode = (int)HttpStatusCode.Unauthorized,
+                //    type = "application/vnd.microsoft.error.invalidAuthCode"
+                //});
 
                 var response = JObject.FromObject(new
                 {
@@ -205,7 +205,7 @@ namespace Crazor.Server
                     value = new
                     {
                         code = "412",
-                        message = "authentication token expired"
+                        message = message
                     }
                 });
 

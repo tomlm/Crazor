@@ -1,10 +1,13 @@
+using AdaptiveCards;
 using Crazor.Interfaces;
+using Crazor.Teams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
 using System.Security.Claims;
 
 namespace Crazor
@@ -18,9 +21,8 @@ namespace Crazor
             IConfiguration configuration,
             IEncryptionProvider encryptionProvider,
             IStorage storage,
-            IAuthorizationService authorizationService, 
+            IAuthorizationService authorizationService,
             AuthenticationStateProvider authenticationStateProvider,
-            UserTokenClient userTokenClient,
             ServiceOptions options)
         {
             ServiceProvider = servicesProvider;
@@ -32,8 +34,7 @@ namespace Crazor
             ServiceOptions = options;
             AuthorizationService = authorizationService;
             AuthenticationStateProvider = authenticationStateProvider;
-            User = new ClaimsPrincipal(new ClaimsIdentity()); ;
-            UserTokenClient = userTokenClient;
+            User = new ClaimsPrincipal(new ClaimsIdentity());
         }
 
         public IServiceProvider ServiceProvider { get; set; }
@@ -51,7 +52,7 @@ namespace Crazor
         public ServiceOptions ServiceOptions { get; }
 
         public IAuthorizationService AuthorizationService { get; }
-
+        
         public AuthenticationStateProvider AuthenticationStateProvider { get; }
 
         public CardApp App { get; set; }
@@ -61,11 +62,21 @@ namespace Crazor
         /// </summary>
         public ClaimsPrincipal User { get; set; }
 
-        /// <summary>
-        /// UserToken from SSO token exchange
-        /// </summary>
-        public UserTokenClient UserTokenClient { get; set; }
+        public ITurnContext TurnContext { get; set; }
 
-        public Dictionary<string, TokenResponse> TokenResponses { get; set; } = new Dictionary<string, TokenResponse>();
+        /// GetPreviewCardForRoute()
+        /// </summary>
+        /// <param name="route">route to get preview card for</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns>adaptive card suitable for sharing</returns>
+        public async Task<AdaptiveCard> GetPreviewCardForRoute(string route, ITurnContext context, CancellationToken cancellationToken)
+        {
+            CardRoute cardRoute = CardRoute.Parse(route);
+            var cardApp = CardAppFactory.Create(cardRoute, context);
+            var activity = context.Activity.CreateLoadRouteActivity(cardRoute.Route);
+            await cardApp.LoadAppAsync(activity, cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(activity!, isPreview: true, cancellationToken);
+            return card;
+        }
     }
 }

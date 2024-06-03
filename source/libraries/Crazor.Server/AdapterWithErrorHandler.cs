@@ -15,7 +15,7 @@ namespace Crazor.Server
             : base(auth, logger)
         {
             
-            this.Use(new SSOTokenExchangeMiddleware(storage));
+            this.Use(new SSOTokenExchangeMiddleware(storage, configuration));
             this.Use(new ActionableMessageMiddleware(configuration));
 
             OnTurnError = async (turnContext, exception) =>

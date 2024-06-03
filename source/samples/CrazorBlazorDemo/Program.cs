@@ -1,9 +1,14 @@
 using Crazor;
 using Crazor.Blazor;
 using Crazor.Server;
+using Crazor.Server.Controllers;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
+using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 
@@ -14,6 +19,7 @@ namespace CrazorBlazorDemo
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            //builder.Services.AddHttpLogging(o => { });
 
             // Add services to the container.
             builder.Services.AddServerSideBlazor()
@@ -29,11 +35,8 @@ namespace CrazorBlazorDemo
                     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
                         .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
                     .AddInMemoryTokenCaches();
-            builder.Services.AddAuthorization(options =>
-            {
-                options.FallbackPolicy = options.DefaultPolicy;
-            });
 
+            builder.Services.AddAuthorization();
             builder.Services.AddRazorPages()
                 .AddMicrosoftIdentityUI();
 
@@ -41,20 +44,17 @@ namespace CrazorBlazorDemo
             builder.Services.AddCrazor("SharedCards");
             builder.Services.AddCrazorServer((options) =>
             {
-                options.Manifest.Version = "1.5.3";
+                options.Manifest.Version = "1.5.7";
                 options.Manifest.Developer.Name = "Tom Laird-McConnell";
                 options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
             });
             builder.Services.AddCrazorBlazor();
             // register blob storage for state management
-            var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
-            if (!String.IsNullOrEmpty(storageKey))
-            {
-                builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, nameof(CrazorBlazorDemo).ToLower()));
-            }
+            builder.Services.AddSingleton<IStorage>(sp => new BlobsStorage(builder.Configuration.GetValue<string>("AzureStorage"), nameof(CrazorBlazorDemo).ToLower()));
             // ---- </CRAZOR>
 
             var app = builder.Build();
+            // app.UseHttpLogging();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -76,9 +76,10 @@ namespace CrazorBlazorDemo
 
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.MapRazorPages();
             app.MapControllers();
+            // app.UseAuthentication();
+            app.UseAuthorization();
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 

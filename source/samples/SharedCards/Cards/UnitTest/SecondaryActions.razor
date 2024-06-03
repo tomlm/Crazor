@@ -1,0 +1,31 @@
+﻿@using System.Text
+@inherits CardView<UnitTestApp>
+
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Secondary Actions</TextBlock>
+
+    <TextBlock Separator="true" Wrap="true">Secondary actions should be visible and actionable</TextBlock>
+    <TextBlock Wrap="true">* There should be a Secondary action **About** available which shows about view.</TextBlock>
+
+    <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
+    <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
+    <ActionExecute Title="Next" Verb="@nameof(OnNext)" />
+
+</Card>
+
+@code {
+    public void OnStartOver()
+    => ReplaceView<Default>();
+
+    public void OnNext()
+        => ReplaceView<OpenUrls>();
+
+    public void OnSubmitBug()
+    {
+        ShowView<FileBug>(new BugReport()
+            {
+                Title = "Secondary actions bug: ",
+                Description = "There is in issue with secondary actions\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+            });
+    }
+}

@@ -16,9 +16,9 @@
         if (Uri.TryCreate(Url, UriKind.Absolute, out var uri))
             route = uri.PathAndQuery;
 
-        var card = await App.GetPreviewCardForRoute(route, cancellationToken);
+        var card = await App.Context.GetPreviewCardForRoute(route, App.Context.TurnContext, cancellationToken);
 
-        var resource= await App.TurnContext.ReplyWithCardAsync($"Here is a card {Url}", card, cancellationToken);
+        var resource= await App.Context.TurnContext.ReplyWithCardAsync($"Here is a card {Url}", card, cancellationToken);
         if (resource != null)
         {
             AddBannerMessage(resource.Id, AdaptiveContainerStyle.Good);

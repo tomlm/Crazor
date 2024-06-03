@@ -6,12 +6,19 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+
 	<ItemGroup>
-	  <Compile Remove="Cards\Tests\tests\**" />
-	  <Content Remove="Cards\Tests\tests\**" />
-	  <EmbeddedResource Remove="Cards\Tests\tests\**" />
-	  <None Remove="Cards\Tests\tests\**" />
+	  <EmbeddedResource Include="Cards\Dice\dice1.png" />
+	  <EmbeddedResource Include="Cards\Dice\dice2.png" />
+	  <EmbeddedResource Include="Cards\Dice\dice3.png" />
+	  <EmbeddedResource Include="Cards\Dice\dice4.png" />
+	  <EmbeddedResource Include="Cards\Dice\dice5.png" />
+	  <EmbeddedResource Include="Cards\Dice\dice6.png" />
+	  <EmbeddedResource Include="wwwroot\images\card.png" />
+	  <EmbeddedResource Include="wwwroot\images\DeleteIcon.png" />
+	  <EmbeddedResource Include="wwwroot\images\EditIcon.png" />
 	</ItemGroup>
+
 
 	<ItemGroup>
 	  <OpenApiReference Include="OpenAPIs\openapi-deckofcardsapi.yml" CodeGenerator="NSwagCSharp" Namespace="SharedCards.DeckOfCards" ClassName="DeckAPI">
@@ -46,12 +53,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Update="Cards\Auth2\Default.razor">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	  </Content>
 	</ItemGroup>
 
 </Project>

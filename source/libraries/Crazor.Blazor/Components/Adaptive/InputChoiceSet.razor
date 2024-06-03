@@ -1,5 +1,6 @@
 @using AdaptiveCards
 @using Crazor.Attributes;
+@using Humanizer
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @using System.Reflection;
@@ -75,27 +76,30 @@
 
             if (bindingType.IsEnum)
             {
-                // automatically compute choice from enumeration.
-                foreach (var value in bindingType.GetEnumValues())
+                if (ChildContent == null)
                 {
-                    MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
+                    // automatically compute choice from enumeration.
+                    foreach (var value in bindingType.GetEnumValues())
+                    {
+                        MemberInfo memberInfo = bindingType.GetMember(value.ToString()!).First();
 
-                    // we can then attempt to retrieve the
-                    // description attribute from the member info
-                    var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
-                    var displayNameAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
-                    // if we find the attribute we can access its values
-                    if (descriptionAttribute != null)
-                    {
-                        Item.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString() });
-                    }
-                    else if (displayAttribute != null)
-                    {
-                        Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute.DisplayName, Value = value?.ToString() });
-                    }
-                    else
-                    {
-                        Item.Choices.Add(new AdaptiveChoice() { Title = value.ToString(), Value = value.ToString() });
+                        // we can then attempt to retrieve the
+                        // description attribute from the member info
+                        var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
+                        var displayNameAttribute = memberInfo.GetCustomAttribute<DisplayNameAttribute>();
+                        // if we find the attribute we can access its values
+                        if (descriptionAttribute != null)
+                        {
+                            Item.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString() });
+                        }
+                        else if (displayAttribute != null)
+                        {
+                            Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute.DisplayName, Value = value?.ToString() });
+                        }
+                        else
+                        {
+                            Item.Choices.Add(new AdaptiveChoice() { Title = value.ToString().Humanize(), Value = value.ToString() });
+                        }
                     }
                 }
             }

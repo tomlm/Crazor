@@ -1,0 +1,32 @@
+﻿@using System.Text
+@inherits CardView<UnitTestApp>
+
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Link Unfurl</TextBlock>
+
+    <TextBlock Separator="true" Wrap="true">If you copy and paste this url **@App.GetCardUriForRoute("/Cards/HelloWorld")**</TextBlock>
+    <TextBlock Wrap="true">You should get a card that unfurls to displays "Hello World"</TextBlock>
+
+    <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
+    <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
+    <ActionExecute Title="Next" Verb="@nameof(OnNext)" />
+</Card>
+
+
+@code {
+
+    public void OnStartOver()
+        => ReplaceView<Default>();
+
+    public void OnNext()
+        => ReplaceView<Done>();
+
+    public void OnSubmitBug()
+    {
+        ShowView<FileBug>(new BugReport()
+            {
+                Title = "Link Unfurling bug: ",
+                Description = "There is in issue with unfurling the url for a card\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+            });
+    }
+}

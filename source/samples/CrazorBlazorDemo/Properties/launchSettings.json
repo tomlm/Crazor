@@ -3,7 +3,7 @@
     "CrazorBlazorDemo": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://a0dc-50-35-67-190.ngrok-free.app",
+      "launchUrl": "https://hip-logical-boar.ngrok-free.app",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

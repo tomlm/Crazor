@@ -191,7 +191,8 @@ namespace Crazor
             }
             else
             {
-                sb.Append((cardView.Name != Constants.DEFAULT_VIEW) ? cardView.Name : String.Empty);
+                var name = (cardView.Name != Constants.DEFAULT_VIEW) ? cardView.Name : String.Empty;
+                sb.Append($"/Cards/{cardView.App.Name}/{name}");
             }
 
             var fromCardQueryProperties = cardView.GetType().GetProperties().Where(p => p.GetCustomAttribute<FromCardQueryAttribute>() != null);

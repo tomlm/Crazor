@@ -24,15 +24,7 @@ namespace Crazor.Server
 
                     if (Context.CardAppFactory.GetNames().Any(name => name.ToLower() == app.ToLower()))
                     {
-                        var cardRoute = CardRoute.Parse($"/Cards/{app}");
-
-                        var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
-
-                        var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
-
-                        await cardApp.LoadAppAsync(activity!, default);
-
-                        var card = await cardApp.ProcessInvokeActivity(activity, isPreview: true, cancellationToken);
+                        var card = await Context.GetPreviewCardForRoute($"/Cards/{app}", turnContext, cancellationToken);
 
                         var result = await turnContext.ReplyWithCardAsync("", card, cancellationToken);
                     }

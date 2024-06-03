@@ -1,0 +1,11 @@
+﻿@inherits CardView
+@* This card uses the default oauth connection*@
+@attribute [OAuthConnection]
+
+@* This card is required to be authorized *@
+@attribute [Authorize]
+
+<Card Version="1.4">
+    <TextBlock>@User.GetDisplayName()</TextBlock>
+</Card>
+

@@ -1,4 +1,4 @@
-﻿@attribute [Authentication]
+﻿@attribute [OAuthConnection]
 @attribute [CommandInfo("Auth2", "Add a Auth2 card")]
 @inherits CardView
 
@@ -10,7 +10,8 @@
                 <TextBlock>User isAdmin: @User.IsInRole("Admin")</TextBlock>
             </Authorized>
             <NotAuthorized>
-                <TextBlock>Anonymous</TextBlock>
+                <TextBlock>User is: Unknown</TextBlock>
+                <ActionLogin/>
             </NotAuthorized>
         </AuthorizeView>
     </Card>

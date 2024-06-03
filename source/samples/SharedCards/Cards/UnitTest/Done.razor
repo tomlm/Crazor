@@ -1,0 +1,15 @@
+﻿@using System.Text
+@inherits CardView<UnitTestApp>
+
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Unit Tests Done!</TextBlock>
+
+    <ActionExecute Verb="OnStartOver" Title="Start over" />
+</Card>
+
+@code {
+
+    public void OnStartOver()
+        => ReplaceView<Default>();
+
+}

@@ -1,0 +1,57 @@
+﻿@using System.Text
+@attribute [OAuthConnection]
+@inherits CardView<UnitTestApp>
+
+<CascadingAuthenticationState>
+    <Card Version="1.4">
+        <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Auth Test</TextBlock>
+        <TextBlock Separator="true" Wrap="true">If authenticated, the user name should be displayed.</TextBlock>
+        <TextBlock Wrap="true">If Unauthenticated, the user name should be **unknown**.</TextBlock>
+        <Container Style="AdaptiveContainerStyle.Emphasis">
+            <AuthorizeView>
+                <NotAuthorized>
+                    <TextBlock>User is: Unknown</TextBlock>
+                    <TextBlock Wrap="true">There should be an card offer to signin displayed by the host application.</TextBlock>
+                    <TextBlock Wrap="true">You can also force a signin by clicking below</TextBlock>
+                    <ActionSet>
+                        <ActionLogin />
+                        <ActionLogout />
+                    </ActionSet>
+                </NotAuthorized>
+                <Authorized>
+                    <TextBlock>User is: @User.GetDisplayName()</TextBlock>
+                    <Container Style="AdaptiveContainerStyle.Emphasis">
+                        <TextBlock>value.authentication*</TextBlock>
+                        <TextBlock Wrap="true" FontType="AdaptiveFontType.Monospace">@YamlConverter.YamlConvert.SerializeObject(ObjectPath.GetPathValue<object>(App.Activity, "value.authentication", new object()))</TextBlock>
+                    </Container>
+                    <ActionSet>
+                        <ActionLogin />
+                        <ActionLogout />
+                    </ActionSet>
+                </Authorized>
+            </AuthorizeView>
+        </Container>
+        
+
+        <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
+        <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
+        <ActionExecute Title="Next" Verb="@nameof(OnNext)" />
+    </Card>
+
+</CascadingAuthenticationState>
+
+@code {
+    public void OnStartOver() => ReplaceView(nameof(Default));
+
+    public void OnNext()
+        => ReplaceView<Done>();
+
+    public void OnSubmitBug()
+    {
+        ShowView<FileBug>(new BugReport()
+            {
+                Title = "Auth bug: ",
+                Description = "There is in issue with auth for a card\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+            });
+    }
+}

@@ -167,6 +167,29 @@ namespace Crazor
             this.App!.ReplaceView(cardRoute, model);
         }
 
+
+        /// <summary>
+        /// Navigate to card by type name
+        /// </summary>
+        /// <typeparam name="CardViewT">CardView class to show</typeparam>
+        /// <param name="model">model to pass</param>
+        public void ShowView<CardViewT>(object? model = null)
+            where CardViewT : ICardView
+        {
+            this.App!.ShowView(this.GetCardRoute<CardViewT>(), model);
+        }
+
+        /// <summary>
+        /// Replace this view with another one by type name
+        /// </summary>
+        /// <typeparam name="CardViewT">CardView class to navigate to</typeparam>
+        /// <param name="model">model to pass</param>
+        public void ReplaceView<CardViewT>(object? model = null)
+            where CardViewT : ICardView
+        {
+            this.App!.ReplaceView(this.GetCardRoute<CardViewT>(), model);
+        }
+
         /// <summary>
         /// Close the current card, optionalling returning the result
         /// </summary>

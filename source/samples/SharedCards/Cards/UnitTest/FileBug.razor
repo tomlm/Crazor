@@ -1,0 +1,61 @@
+﻿@using System.Text
+@inherits CardView<UnitTestApp, BugReport>
+
+<Card Version="1.4">
+    <FactSet>
+        <Fact Title="ChannelId" Value="@Model.Activity.ChannelId" />
+        <Fact Title="Application" Value="@Model.AppHost.ToString()" />
+    </FactSet>
+
+    <InputChoiceSet Binding="Model.Platform" Label="What platform?" />
+    <InputChoiceSet Binding="Model.ConversationType" Label="What kind of conversation?" />
+    <InputChoiceSet Separator="true" Binding="Model.InsertionType" Label="How was the card delivered?" />
+
+    <InputText IsMultiline="false" Binding="Model.Title" Label="Title" />
+    <InputText IsMultiline="true" Binding="Model.Description" Label="Description" />
+
+    <ActionCancel />
+    <ActionOK Title="Submit" />
+</Card>
+
+@code {
+
+    public void OnLoad()
+    {
+        this.Model.Activity = App.Activity;
+        this.Model.AppHost = App.AppHost;
+        this.Model.InsertionType = App.InsertionType;
+        if (App.Activity.ChannelId == Channels.Msteams && Enum.TryParse<ConversationType>(App.Activity.Conversation.ConversationType, true, out var ct))
+        {
+            this.Model.ConversationType = ct;
+        }
+        else if (App.Activity.ChannelId == Channels.Outlook || App.Activity.ChannelId == Channels.Email)
+        {
+            this.Model.ConversationType = ConversationType.Email;
+        }
+    }
+
+    public async Task OnOK(CancellationToken cancellationToken)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine($"# {Model.Title}");
+        sb.AppendLine(Model.Description);
+        sb.AppendLine();
+
+        sb.AppendLine("# Information");
+        sb.AppendLine(Model.ConversationType.ToString());
+        sb.AppendLine(Model.InsertionType.ToString());
+        sb.AppendLine(Model.Platform.ToString());
+        sb.AppendLine(Model.AppHost.ToString());
+
+        sb.AppendLine();
+        sb.AppendLine("# Activity");
+        sb.AppendLine("```yaml");
+        sb.AppendLine(YamlConverter.YamlConvert.SerializeObject(this.Model.Activity));
+        sb.AppendLine("```");
+
+        var replyActivity = App.Context.TurnContext.Activity.CreateReply(sb.ToString());
+        await App.Context.TurnContext.SendActivityAsync(replyActivity, cancellationToken);
+        CloseView();
+    }
+}

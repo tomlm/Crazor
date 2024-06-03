@@ -1,4 +1,4 @@
-﻿@attribute [Authentication]
+﻿@attribute [OAuthConnection]
 @inherits CardView
 @using Microsoft.Graph;
 @inject GraphServiceClient GraphClient;
@@ -7,11 +7,10 @@
     <Card Version="1.4">
         @if (IsPreview)
         {
-            <TextBlock>(Preview) Graph User is: ...</TextBlock>
+            <TextBlock>(Preview) ...</TextBlock>
         }
         else
         {
-
             <AuthorizeView>
                 <Authorized>
                     <TextBlock>Graph User is: @UserName</TextBlock>

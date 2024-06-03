@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 
@@ -12,12 +10,11 @@ namespace Crazor.Server.Controllers
     // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
     // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
     // achieved by specifying a more specific type for the bot constructor argument.
+    [AllowAnonymous]
     [Route("api/cardapps")]
     [ApiController]
     public class CardAppController : ControllerBase
     {
-        private static HttpClient _httpClient = new HttpClient();
-
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
 
@@ -41,21 +38,6 @@ namespace Crazor.Server.Controllers
             {
                 System.Diagnostics.Trace.TraceError(err.Message);
                 Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            }
-        }
-
-        public static async Task<string> GetTokenAsync(IConfiguration configuration)
-        {
-            string appId = configuration.GetValue<string>("MicrosoftAppId");
-            if (appId != null)
-            {
-                var credentialsFactory = new ConfigurationServiceClientCredentialFactory(configuration);
-                var credentials = (AppCredentials)await credentialsFactory.CreateCredentialsAsync(appId, appId, AuthenticationConstants.ToChannelFromBotLoginUrlTemplate, false, CancellationToken.None);
-                return await credentials.GetTokenAsync();
-            }
-            else
-            {
-                return String.Empty;
             }
         }
     }

@@ -1,11 +1,11 @@
 using Azure.Core;
 using Crazor.Attributes;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Identity.Abstractions;
 using Microsoft.Identity.Web;
 using System.Reflection;
 using System.Security.Claims;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Crazor.Server
 {
@@ -29,20 +29,23 @@ namespace Crazor.Server
 
         public async Task<string> CreateAuthorizationHeaderForUserAsync(IEnumerable<string> scopes, AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, ClaimsPrincipal? claimsPrincipal = null, CancellationToken cancellationToken = default)
         {
-            var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<AuthenticationAttribute>();
+            var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (authenticationAttribute != null)
             {
-                var tokenResponse = await Context.UserTokenClient.GetUserTokenAsync(Context.App.Activity.From.Id, authenticationAttribute.Name, Context.App.Activity.ChannelId, null, cancellationToken);
+                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                if (userTokenClient != null)
+                {
+                    var tokenResponse = await userTokenClient.GetUserTokenAsync(Context.App.Activity.From.Id, authenticationAttribute.Connection, Context.App.Activity.ChannelId, null, cancellationToken);
 
-                if (tokenResponse != null)
-                {
-                    Context.TokenResponses[authenticationAttribute.Name] = tokenResponse;
-                    return tokenResponse.Token;
-                }
-                else
-                {
-                    var result = await TokenAcquisition.GetAccessTokenForUserAsync(scopes);
-                    return result;
+                    if (tokenResponse != null)
+                    {
+                        return tokenResponse.Token;
+                    }
+                    else
+                    {
+                        var result = await TokenAcquisition.GetAccessTokenForUserAsync(scopes);
+                        return result;
+                    }
                 }
             }
 
@@ -56,22 +59,24 @@ namespace Crazor.Server
 
         public async override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
         {
-            var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<AuthenticationAttribute>();
+            var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (authenticationAttribute != null)
             {
-                var tokenResponse = await Context.UserTokenClient.GetUserTokenAsync(Context.App.Activity.From.Id, authenticationAttribute.Name, Context.App.Activity.ChannelId, null, cancellationToken);
+                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                if (userTokenClient != null)
+                {
+                    var tokenResponse = await userTokenClient.GetUserTokenAsync(Context.App.Activity.From.Id, authenticationAttribute.Connection, Context.App.Activity.ChannelId, null, cancellationToken);
 
-                if (tokenResponse != null)
-                {
-                    Context.TokenResponses[authenticationAttribute.Name] = tokenResponse;
-                    return new AccessToken(tokenResponse.Token, DateTimeOffset.Parse(tokenResponse.Expiration));
-                }
-                else
-                {
-                    var result = await TokenAcquisition.GetAccessTokenForUserAsync(requestContext.Scopes);
-                    tokenResponse = new TokenResponse(Context.App.Activity.ChannelId, token: result);
-                    Context.TokenResponses[authenticationAttribute.Name] = tokenResponse;
-                    return new AccessToken(tokenResponse.Token, DateTimeOffset.Parse(tokenResponse.Expiration));
+                    if (tokenResponse != null)
+                    {
+                        return new AccessToken(tokenResponse.Token, DateTimeOffset.Parse(tokenResponse.Expiration));
+                    }
+                    else
+                    {
+                        var result = await TokenAcquisition.GetAccessTokenForUserAsync(requestContext.Scopes);
+                        tokenResponse = new TokenResponse(Context.App.Activity.ChannelId, token: result);
+                        return new AccessToken(tokenResponse.Token, DateTimeOffset.Parse(tokenResponse.Expiration));
+                    }
                 }
             }
 
