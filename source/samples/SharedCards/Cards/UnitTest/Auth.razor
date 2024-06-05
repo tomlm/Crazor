@@ -5,6 +5,7 @@
 <CascadingAuthenticationState>
     <Card Version="1.4">
         <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Auth Test</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
         <TextBlock Separator="true" Wrap="true">If authenticated, the user name should be displayed.</TextBlock>
         <TextBlock Wrap="true">If Unauthenticated, the user name should be **unknown**.</TextBlock>
         <Container Style="AdaptiveContainerStyle.Emphasis">
@@ -52,6 +53,7 @@
             {
                 Title = "Auth bug: ",
                 Description = "There is in issue with auth for a card\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+                LastActivity = App.LastActivity
             });
     }
 }

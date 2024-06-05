@@ -3,9 +3,13 @@
 
 <Card Version="1.4">
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Secondary Actions</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
 
     <TextBlock Separator="true" Wrap="true">Secondary actions should be visible and actionable</TextBlock>
-    <TextBlock Wrap="true">* There should be a Secondary action **About** available which shows about view.</TextBlock>
+    <TextBlock Wrap="true">* There should be a Secondary action **About** available.</TextBlock>
+    <TextBlock Wrap="true">* If you click on it it should show a different view.</TextBlock>
+    <TextBlock>* There should be an icon for the action **About** which looks like this: </TextBlock>
+    <Image Url="@App.GetContentUrl($"~/images/about.png")" Size="AdaptiveImageSize.Small"/>
 
     <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
     <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
@@ -26,6 +30,7 @@
             {
                 Title = "Secondary actions bug: ",
                 Description = "There is in issue with secondary actions\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+                LastActivity = App.LastActivity
             });
     }
 }

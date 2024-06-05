@@ -6,6 +6,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove="Cards\UnitTest\CopyUrl.png" />
+	  <None Remove="Cards\UnitTest\LinkUnfurl.png" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Cards\Dice\dice1.png" />
@@ -14,9 +19,11 @@
 	  <EmbeddedResource Include="Cards\Dice\dice4.png" />
 	  <EmbeddedResource Include="Cards\Dice\dice5.png" />
 	  <EmbeddedResource Include="Cards\Dice\dice6.png" />
+	  <EmbeddedResource Include="Cards\UnitTest\CopyUrl.png" />
+	  <EmbeddedResource Include="Cards\UnitTest\LinkUnfurl.png" />
 	  <EmbeddedResource Include="wwwroot\images\card.png" />
 	  <EmbeddedResource Include="wwwroot\images\DeleteIcon.png" />
-	  <EmbeddedResource Include="wwwroot\images\EditIcon.png" />
+	  <EmbeddedResource Include="Cards\UnitTest\Refresh.png" />
 	</ItemGroup>
 
 

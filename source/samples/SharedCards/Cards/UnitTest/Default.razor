@@ -1,50 +1,35 @@
-﻿@attribute [OAuthConnection]
-@attribute [CommandInfo("Integration Test", "a card for running an integration test")]
+﻿@attribute [CommandInfo("Integration Test", "a card for running an integration test")]
 @inherits CardView<UnitTestApp>
 
 <CascadingAuthenticationState>
     <Card Version="1.4">
         <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Unit Tests</TextBlock>
+        <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">Activation: @App.Client.Activation</TextBlock>
         <TextBlock>This card runs integration tests:</TextBlock>
         <TextBlock>* Refresh Button</TextBlock>
         <TextBlock>* Secondary Actions</TextBlock>
         <TextBlock>* Open Url</TextBlock>
         <TextBlock>* Copy Url</TextBlock>
         <TextBlock>* Link Unfurling</TextBlock>
-        <TextBlock>* Auth</TextBlock>
-        @if (IsTaskModule && App.TaskModuleAction != TaskModuleAction.InsertCard)
+        @* <TextBlock>* Auth</TextBlock> *@
+
+        @if (IsTaskModule)
         {
-            <ActionExecute Verb="@nameof(OnInsert)" Title="Insert" />
-            <ActionExecute Verb="@nameof(OnPost)" Title="Post" />
-            <ActionExecute Verb="@nameof(OnInsertAndPost)" Title="Insert and Post" />
+            if (!IsPreview)
+            {
+                @if (TaskAction == null)
+                {
+                    <ActionExecute Verb="@nameof(OnInsert)" Title="Insert" />
+                    <ActionExecute Verb="@nameof(OnPost)" Title="Post" />
+                }
+                else 
+                {
+                    <ActionOK />
+                }
+            }
         }
         else
         {
-@*              <Container Style="AdaptiveContainerStyle.Emphasis">
-                 <AuthorizeView>
-                     <NotAuthorized>
-                         <TextBlock>User is: Unknown</TextBlock>
-                         <TextBlock Wrap="true">There should be an card offer to signin displayed by the host application.</TextBlock>
-                         <TextBlock Wrap="true">You can also force a signin by clicking below</TextBlock>
-                         <ActionSet>
-                             <ActionLogin />
-                             <ActionLogout />
-                         </ActionSet>
-                     </NotAuthorized>
-                     <Authorized>
-                         <TextBlock>User is: @User.GetDisplayName()</TextBlock>
-                         <Container Style="AdaptiveContainerStyle.Emphasis">
-                             <TextBlock>value.authentication*</TextBlock>
-                             <TextBlock Wrap="true" FontType="AdaptiveFontType.Monospace">@YamlConverter.YamlConvert.SerializeObject(ObjectPath.GetPathValue<object>(App.Activity, "value.authentication", new object()))</TextBlock>
-                         </Container>
-                         <ActionSet>
-                             <ActionLogin />
-                             <ActionLogout />
-                         </ActionSet>
-                     </Authorized>
-                 </AuthorizeView>
-             </Container>
- *@
             <ActionExecute Verb="@nameof(OnStart)" Title="Start" />
         }
     </Card>
@@ -52,41 +37,26 @@
 
 @code
 {
-    public void OnLoad()
-    {
-        this.App.AppHost = (App.Activity.ChannelId == Channels.Msteams) ? AppHost.Teams :
-                                                                    (App.Activity.ChannelId == Channels.Outlook) ? AppHost.Outlook :
-                                                                    AppHost.Unknown;
-        this.App.InsertionType = InsertionType.Unknown;
-        if (App.Activity.Name == "composeExtension/queryLink")
-        {
-            App.InsertionType = InsertionType.LinkUnfurling;
-        }
-        else
-        {
-            System.Diagnostics.Debug.WriteLine(App.Activity.Name);
-        }
-    }
+    public TaskModuleAction? TaskAction { get; set; }
 
     public void OnStart()
         => ReplaceView<Refresh>();
 
     public async Task OnInsert(CancellationToken cancellationToken)
     {
-        CloseTaskModule(TaskModuleAction.InsertCard);
+        App.Client.Activation = $"TaskModuleAction.{TaskModuleAction.InsertCard}";
+        TaskAction = TaskModuleAction.InsertCard;
     }
 
     public async Task OnPost(CancellationToken cancellationToken)
     {
-        CloseTaskModule(TaskModuleAction.PostCard);
+        App.Client.Activation = $"TaskModuleAction.{TaskModuleAction.PostCard}";
+        TaskAction = TaskModuleAction.PostCard;
     }
 
-    public async Task OnInsertAndPost(CancellationToken cancellationToken)
+
+    public async Task OnOK(CancellationToken cancellationToken)
     {
-        var card = await App.Context.GetPreviewCardForRoute($"/Cards/UnitTest", App.Context.TurnContext, cancellationToken);
-        var result = await App.Context.TurnContext.ReplyWithCardAsync("", card, cancellationToken);
-
-        CloseTaskModule(TaskModuleAction.InsertCard);
+        CloseTaskModule(TaskAction.Value);
     }
-
 }

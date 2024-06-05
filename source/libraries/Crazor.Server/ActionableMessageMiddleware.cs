@@ -16,7 +16,7 @@ namespace Crazor.Server
 
         public ActionableMessageMiddleware(IConfiguration configuration)
         {
-            _originator = configuration.GetValue<string>("Channels:email:OriginatorId")!;
+            _originator = configuration.GetValue<string>("Channels:outlook:OriginatorId")!;
         }
 
         public Task OnTurnAsync(ITurnContext turnContext, NextDelegate next, CancellationToken cancellationToken = default)
@@ -81,7 +81,10 @@ namespace Crazor.Server
     public class EmailChannelData
     {
         [JsonProperty("importance")]
-        public string? Importance { get; set; } 
+        public string? Importance { get; set; }
+
+        [JsonProperty("subject")]
+        public string? Subject { get; set; }
 
         [JsonProperty("htmlBody")]
         public string? HtmlBody { get; set; }

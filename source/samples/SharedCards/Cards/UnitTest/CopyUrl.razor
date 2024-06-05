@@ -3,10 +3,11 @@
 
 <Card Version="1.4">
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Copy Url</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
 
     <TextBlock Separator="true" Wrap="true">This card has Metadata.WebUrl which you should be able to get via a **Copy Url** UI affordance.</TextBlock>
     <TextBlock Wrap="true">When you click on it it should be one of:</TextBlock>
-    <TextBlock Wrap="true">* **@App.GetCardUriForRoute(this.GetRoute())**</TextBlock>
+    <TextBlock Wrap="true">* (Ideal) **@App.GetCardUriForRoute(this.GetRoute())**</TextBlock>
     <TextBlock Wrap="true">* (OPTIONAL) **@App.GetCardUriForRoute("/Cards/UnitTest")**</TextBlock>
 
     <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
@@ -28,6 +29,7 @@
             {
                 Title = "Copy Url bug: ",
                 Description = "There is in issue with copying the url for a card\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+                LastActivity = App.LastActivity 
             });
     }
 }

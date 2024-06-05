@@ -23,6 +23,8 @@ namespace Crazor.Server
             var attachmentContent = activityPreview.Attachments[0].Content;
             var previewedCard = ObjectPath.MapValueTo<AdaptiveCard>(attachmentContent);
 
+            // The data that comes back is missing our data, so we look for a candidate to use
+            // to get our route infomration.
             JObject data = new JObject();
             var action = previewedCard.GetElements<AdaptiveAction>().Where(action => action is AdaptiveExecuteAction || action is AdaptiveSubmitAction).FirstOrDefault();
             if (action is AdaptiveExecuteAction executeAction)
@@ -38,13 +40,17 @@ namespace Crazor.Server
 
             var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
 
+            var invoke = activity.Value as AdaptiveCardInvokeValue ?? JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
+            invoke.Action.Data = data;
+            activity.Value = invoke;
+
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
 
-            await cardApp.OnActionExecuteAsync(cancellationToken);
-
-            var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
+            var card = await cardApp.ProcessInvokeActivity(activity, isPreview:true, cancellationToken:cancellationToken); 
+            // OnActionExecuteAsync(cancellationToken);
+            //var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 
             var reply = turnContext.Activity.CreateReply();
             Attachment attachment = new Attachment()
@@ -69,7 +75,7 @@ namespace Crazor.Server
                 }
             };
 
-            await turnContext.SendActivityAsync(reply, cancellationToken);
+            await turnContext.Adapter.SendActivitiesAsync(turnContext, new[] { reply }, cancellationToken);
             return null!;
         }
     }

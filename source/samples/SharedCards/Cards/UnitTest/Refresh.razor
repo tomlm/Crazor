@@ -3,13 +3,15 @@
 
 <Card Version="1.4">
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Refresh</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
 
     <TextBlock Separator="true" Wrap="true">* There should be a **Refresh** action available. When you click on it, the time should change.</TextBlock>
-
     <Container Style="AdaptiveContainerStyle.Emphasis">
         <TextBlock FontType="AdaptiveFontType.Monospace" Separator="true">The time is: @DateTime.Now.ToString("T")</TextBlock>
     </Container>
-
+    <TextBlock Separator="true" Wrap="true">There should be an icon for the action **Refresh** which looks like this: </TextBlock>
+    <Image Url="@App.GetContentUrl($"~/Cards/UnitTest/Refresh.png")" />
+    
     <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
     <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
     <ActionExecute Title="Next" Verb="@nameof(OnNext)" />
@@ -30,6 +32,7 @@
             {
                 Title = "Refresh bug: ",
                 Description = "There is in issue with refresh\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+                LastActivity = App.LastActivity
             });
     }
 }

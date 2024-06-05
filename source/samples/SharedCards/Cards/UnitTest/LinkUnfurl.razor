@@ -3,9 +3,11 @@
 
 <Card Version="1.4">
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Link Unfurl</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
 
-    <TextBlock Separator="true" Wrap="true">If you copy and paste this url **@App.GetCardUriForRoute("/Cards/HelloWorld")**</TextBlock>
-    <TextBlock Wrap="true">You should get a card that unfurls to displays "Hello World"</TextBlock>
+    <TextBlock Separator="true" Wrap="true">If you copy and paste this url **@App.GetCardUriForRoute("/Cards/UnitTest")**</TextBlock>
+    <TextBlock Wrap="true">You should get a card that unfurls to the start of this unit test like this:</TextBlock>
+    <Image Url="@App.GetContentUrl($"~/Cards/UnitTest/LinkUnfurl.png")" />
 
     <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
     <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
@@ -27,6 +29,7 @@
             {
                 Title = "Link Unfurling bug: ",
                 Description = "There is in issue with unfurling the url for a card\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+                LastActivity = App.LastActivity
             });
     }
 }

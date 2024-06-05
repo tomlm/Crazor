@@ -1,15 +1,18 @@
 ﻿@using System.Text
+@using Crazor.Server
+@using Microsoft.Extensions.Configuration
+@using Newtonsoft.Json.Linq
 @inherits CardView<UnitTestApp, BugReport>
 
 <Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">File bug</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
     <FactSet>
-        <Fact Title="ChannelId" Value="@Model.Activity.ChannelId" />
-        <Fact Title="Application" Value="@Model.AppHost.ToString()" />
+        <Fact Title="ChannelId" Value="@App.Activity.ChannelId" />
     </FactSet>
 
-    <InputChoiceSet Binding="Model.Platform" Label="What platform?" />
-    <InputChoiceSet Binding="Model.ConversationType" Label="What kind of conversation?" />
-    <InputChoiceSet Separator="true" Binding="Model.InsertionType" Label="How was the card delivered?" />
+    <InputChoiceSet Binding="App.Client.Platform" Label="What platform?" />
+    <InputChoiceSet Binding="App.Client.ConversationType" Label="What kind of conversation?" />
 
     <InputText IsMultiline="false" Binding="Model.Title" Label="Title" />
     <InputText IsMultiline="true" Binding="Model.Description" Label="Description" />
@@ -20,42 +23,51 @@
 
 @code {
 
-    public void OnLoad()
-    {
-        this.Model.Activity = App.Activity;
-        this.Model.AppHost = App.AppHost;
-        this.Model.InsertionType = App.InsertionType;
-        if (App.Activity.ChannelId == Channels.Msteams && Enum.TryParse<ConversationType>(App.Activity.Conversation.ConversationType, true, out var ct))
-        {
-            this.Model.ConversationType = ct;
-        }
-        else if (App.Activity.ChannelId == Channels.Outlook || App.Activity.ChannelId == Channels.Email)
-        {
-            this.Model.ConversationType = ConversationType.Email;
-        }
-    }
+    [Inject]
+    public IConfiguration Configuration { get; set; }
 
     public async Task OnOK(CancellationToken cancellationToken)
     {
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine($"# {Model.Title}");
         sb.AppendLine(Model.Description);
         sb.AppendLine();
-
-        sb.AppendLine("# Information");
-        sb.AppendLine(Model.ConversationType.ToString());
-        sb.AppendLine(Model.InsertionType.ToString());
-        sb.AppendLine(Model.Platform.ToString());
-        sb.AppendLine(Model.AppHost.ToString());
-
+        sb.AppendLine("# Client Context ");
+        sb.AppendLine($"```yaml\n{YamlConverter.YamlConvert.SerializeObject(App.Client)}\n```");
         sb.AppendLine();
         sb.AppendLine("# Activity");
-        sb.AppendLine("```yaml");
-        sb.AppendLine(YamlConverter.YamlConvert.SerializeObject(this.Model.Activity));
-        sb.AppendLine("```");
+        sb.AppendLine($"```yaml\n{YamlConverter.YamlConvert.SerializeObject(Model.LastActivity ?? new Activity())}\n```");
+        sb.AppendLine();
 
-        var replyActivity = App.Context.TurnContext.Activity.CreateReply(sb.ToString());
-        await App.Context.TurnContext.SendActivityAsync(replyActivity, cancellationToken);
-        CloseView();
+        var botEmail = Configuration.GetValue<string>("Channels:email:bot");
+        var botName = Configuration.GetValue<string>("BotName");
+        var botId = Configuration.GetValue<string>("MicrosoftAppId");
+        var from = new ChannelAccount(botEmail, botName);
+        var recipient = new ChannelAccount("thermous@iciclecreek.com", "Tom");
+
+        var emailActivity = Activity.CreateMessageActivity();
+        emailActivity.ChannelId = Channels.Email;
+        emailActivity.From = from;
+        emailActivity.Recipient = recipient;
+        emailActivity.Text = sb.ToString();
+        emailActivity.ChannelData = new EmailChannelData()
+            {
+                Subject = this.Model.Title,
+            };
+        emailActivity.Attachments.Add(new Attachment()
+            {
+                ContentType = "text",
+                Content = JsonConvert.SerializeObject(emailActivity)
+            });
+
+        await App.Context.TurnContext.Adapter.CreateConversationAsync(
+            botAppId: botId,
+            channelId: Channels.Email,
+            serviceUrl: $"https://{Channels.Email}.botframework.com",
+            audience: null, // is this right?
+            conversationParameters: new ConversationParameters(bot: from, members: new[] { recipient }, activity: (Activity)emailActivity),
+            callback: (tc, ct) => Task.CompletedTask,
+            cancellationToken: cancellationToken);
+
+        this.CloseView();
     }
 }

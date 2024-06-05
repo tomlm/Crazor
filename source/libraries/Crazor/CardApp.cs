@@ -102,12 +102,6 @@ namespace Crazor
         public List<BannerMessage> BannerMessages { get; private set; } = new List<BannerMessage>();
 
         /// <summary>
-        /// Flag to enable/disable automatically assigning a sharedId if there is not one. 
-        /// Default: true
-        /// </summary>
-        public bool AutoSharedId { get; set; } = true;
-
-        /// <summary>
         /// IsTaskModule is true when the card is running in a taskModule mode.
         /// </summary>
         public bool IsTaskModule { get; set; } = false;
@@ -148,7 +142,7 @@ namespace Crazor
         /// <param name="isPreview"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<AdaptiveCard> ProcessInvokeActivity(IInvokeActivity invokeActivity, bool isPreview, CancellationToken cancellationToken)
+        public virtual async Task<AdaptiveCard> ProcessInvokeActivity(IInvokeActivity invokeActivity, bool isPreview, CancellationToken cancellationToken)
         {
             await AuthenticateUserAsync(cancellationToken);
 

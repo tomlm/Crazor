@@ -1,29 +1,11 @@
 ﻿using Microsoft.Bot.Schema;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace SharedCards.Cards.UnitTest
 {
-    public enum InsertionType
-    {
-        Unknown,
-        Message,
-        LinkUnfurling,
-        TaskModuleInsert,
-        ActionableMessage
-    }
 
-    public enum AppHost
-    {
-        Teams,
-        Outlook, 
-        Unknown
-    }
-
+    [JsonConverter(typeof(StringEnumConverter), true)]
     public enum ConversationType
     {
         Unknown,
@@ -32,6 +14,7 @@ namespace SharedCards.Cards.UnitTest
         Email
     }
 
+    [JsonConverter(typeof(StringEnumConverter), true)]
     public enum Platform
     {
         Web,
@@ -44,18 +27,19 @@ namespace SharedCards.Cards.UnitTest
     public class BugReport
     {
 
-        public Activity Activity { get; set; }
+        public string Title { get; set; } = String.Empty;
 
-        public string Title { get; set; }
-        
-        public string Description { get; set; }
+        public string Description { get; set; } = String.Empty;
 
-        public ConversationType ConversationType { get; set; }
+        public Activity LastActivity { get; set; } 
+    }
 
-        public InsertionType InsertionType { get; set; } = InsertionType.Unknown;
+    public class ClientDetails
+    {
+        public string Activation { get; set; } 
 
-        public AppHost AppHost { get; set; }
+        public ConversationType ConversationType { get; set; } = ConversationType.Unknown;
 
-        public Platform Platform { get; set; }
+        public Platform Platform { get; set; } = Platform.Web;
     }
 }

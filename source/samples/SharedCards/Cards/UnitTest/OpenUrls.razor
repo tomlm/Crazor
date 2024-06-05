@@ -3,10 +3,12 @@
 
 <Card Version="1.4">
     <TextBlock Size="AdaptiveTextSize.ExtraLarge" Weight="AdaptiveTextWeight.Bolder">Open Url</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder">@App.Client.Activation</TextBlock>
 
-    <TextBlock Separator="true" Wrap="true">There should be a secondary action called **Open** which should open **@App.GetCardUriForRoute(this.GetRoute())**</TextBlock>
-    <TextBlock Separator="true" Wrap="true">There should be an icon the a secondary action called **Open** which looks like this: </TextBlock>
-    <Image Url="@App.GetContentUrl($"~/images/OpenLink.png")" />
+    <TextBlock Separator="true" Wrap="true">* There should be a secondary action called **Open** which should open **@App.GetCardUriForRoute(this.GetRoute())**</TextBlock>
+    <TextBlock>* There should be an icon for the action **Open** which looks like this: </TextBlock>
+    <Image Url="@App.GetContentUrl($"~/images/OpenLink.png")" Size="AdaptiveImageSize.Small" />
+    <TextBlock Wrap="true">* If you click on it it should open **@App.GetCardUriForRoute(this.GetRoute())**</TextBlock>
 
     <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
     <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
@@ -26,6 +28,7 @@
             {
                 Title = "Action.OpenUrl bug: ",
                 Description = "There is in issue with open url actions\n# Issue \n\n# Expected\n\n# Repro Steps\n\n",
+                LastActivity = App.LastActivity
             });
     }
 }
