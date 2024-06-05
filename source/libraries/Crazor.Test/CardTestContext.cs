@@ -1,4 +1,5 @@
 using AdaptiveCards;
+using Microsoft.Bot.Builder.Adapters;
 
 namespace Crazor.Test
 {
@@ -8,5 +9,8 @@ namespace Crazor.Test
 
         public AdaptiveCard Card { get; set; }
 
+        public TestAdapter Adapter { get; set; }
+
+        public CardApp App { get; set; }
     }
 }

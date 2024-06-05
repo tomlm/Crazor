@@ -9,8 +9,7 @@ namespace Crazor.Blazor.Tests
         [TestInitialize]
         public async Task TestInitialize()
         {
-            var cardApp = (MemoryApp)Factory.Create(CardRoute.Parse("/Cards/Memory"));
-            await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+            var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
             cardApp.App = "App1";
             cardApp.Session = "Session1";
             cardApp.User = "User1";
@@ -26,8 +25,7 @@ namespace Crazor.Blazor.Tests
             var cardRoute = CardRoute.Parse("/Cards/Memory");
             // validate load
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
 
                 Assert.AreEqual("App1", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -38,7 +36,7 @@ namespace Crazor.Blazor.Tests
 
             // validate App Save
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
                 await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
 
                 Assert.AreEqual("App1", cardApp.App);
@@ -55,8 +53,7 @@ namespace Crazor.Blazor.Tests
 
             // validate session
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -72,8 +69,7 @@ namespace Crazor.Blazor.Tests
 
             // validate user
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);
@@ -89,8 +85,7 @@ namespace Crazor.Blazor.Tests
 
             // validate Conversation
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
                 Assert.IsNull(cardApp.Temp);
 
                 cardApp.Temp = "Test1";
@@ -106,8 +101,7 @@ namespace Crazor.Blazor.Tests
 
             // validate Path
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);
@@ -123,8 +117,7 @@ namespace Crazor.Blazor.Tests
 
             // validate Path
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                var cardApp = (MemoryApp)(await LoadCard(CardRoute.Parse("/Cards/Memory"))).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);

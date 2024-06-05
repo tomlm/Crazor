@@ -66,8 +66,9 @@ namespace Crazor
 
         public IEnumerable<string> GetNames() => _cardApps.Keys.OrderBy(n => n);
 
-        public CardApp Create(CardRoute cardRoute, ITurnContext? turnContext = null)
+        public CardApp Create(CardRoute cardRoute, ITurnContext turnContext)
         {
+            ArgumentNullException.ThrowIfNull(turnContext);
             if (_cardApps.TryGetValue(cardRoute.App, out var cardAppType))
             {
                 var cardApp = (CardApp)_serviceProvider.GetService(cardAppType)!;

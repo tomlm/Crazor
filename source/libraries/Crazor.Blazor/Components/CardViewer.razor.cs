@@ -1,5 +1,6 @@
 using AdaptiveCards;
 using Crazor.Blazor.Components.Adaptive;
+using Crazor.Server;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -25,11 +26,19 @@ namespace Crazor.Blazor.Components
 
         private string _channelId;
 
+        private string _botName;
+
+        private string _botId;
+
+        private string _conversationId = Guid.NewGuid().ToString("n");
+
         private DotNetObjectReference<CardViewer> _dotNetObjectRef;
 
-        private CardApp _cardApp;
+        //private CardApp _cardApp;
 
-        private CardRoute _cardRoute;
+        //private CardRoute _cardRoute;
+
+        private string _cardRoute;
 
         private AdaptiveCard _card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 5));
 
@@ -42,7 +51,10 @@ namespace Crazor.Blazor.Components
         private IConfiguration _configuration { get; set; }
 
         [Inject]
-        private CardAppFactory _cardAppFactory { get; set; }
+        private IBot _bot { get; set; }
+
+        [Inject]
+        private CrazorCloudAdapter _adapter { get; set; }
 
         [Inject]
         private MicrosoftIdentityConsentAndConditionalAccessHandler ConsentHandler { get; set; }
@@ -60,13 +72,12 @@ namespace Crazor.Blazor.Components
         [Parameter]
         public string Route
         {
-            get => _cardRoute.Route;
+            get => _cardRoute;
             set
             {
-                if (String.Compare(_cardRoute?.Route, value, true) != 0)
+                if (String.Compare(_cardRoute, value, true) != 0)
                 {
-                    _cardRoute = CardRoute.Parse(value);
-                    StateHasChanged();
+                    _cardRoute = CardRoute.Parse(value).Route;
                 }
             }
         }
@@ -85,9 +96,10 @@ namespace Crazor.Blazor.Components
                 this._dotNetObjectRef = DotNetObjectReference.Create(this);
                 this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
                 this._channelId = _configuration.GetValue<Uri>("HostUri").Host;
-                this._cardApp = _cardAppFactory.Create(_cardRoute);
+                this._botName = _configuration.GetValue<string>("BotName");
+                this._botId = _configuration.GetValue<string>("MicrosoftAppId");
 
-                await LoadRouteAsync(_cardRoute.Route);
+                await LoadRouteAsync(Route);
 
                 await base.OnInitializedAsync();
             }
@@ -143,8 +155,8 @@ namespace Crazor.Blazor.Components
             // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)
             {
-                ServiceUrl = "https://about",
-                ChannelId = this._channelId,
+                ServiceUrl = _botUrl,
+                ChannelId = _channelId,
                 Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount()
                 {
@@ -152,21 +164,16 @@ namespace Crazor.Blazor.Components
                     Id = authState?.User?.GetObjectId() ?? "Unknown",
                     Name = authState?.User?.GetDisplayName() ?? "Anonymous"
                 },
-                Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = _cardRoute.SessionId },
+                Recipient = new ChannelAccount() { Id = _botId, Name = _botName },
+                Conversation = new ConversationAccount() { Id = _conversationId },
                 Timestamp = DateTimeOffset.UtcNow,
                 LocalTimestamp = DateTimeOffset.Now,
             }
             .CreateActionInvokeActivity(action.Verb, JObject.FromObject(action.Data));
 
             // process it, giving us a new card
-            await _cardApp.LoadAppAsync((Activity)activity!, default);
-            _card = await _cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-            this.Route = _cardApp.GetCurrentCardRoute();
-            await OnCardRouteChanged.InvokeAsync(this.Route);
-
-            // tell tree to rerender. onrerender the card will be injected back into the html
-            StateHasChanged();
+            var invokeResponse = await _adapter.ProcessAuthenticatedActivityAsync((Activity)activity!, (tc, ct) => _bot.OnTurnAsync(tc, ct), default);
+            await ProcessInvokeResponse(invokeResponse);
         }
 
         public async Task LoadRouteAsync(string route)
@@ -175,41 +182,53 @@ namespace Crazor.Blazor.Components
             // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)
             {
-                ServiceUrl = "https://about",
-                ChannelId = this._channelId,
+                ServiceUrl = _botUrl,
+                ChannelId = _channelId,
                 Id = Guid.NewGuid().ToString("n"),
                 From = new ChannelAccount()
                 {
                     AadObjectId = authState?.User?.GetObjectId() ?? String.Empty,
-                    Id = authState?.User?.GetObjectId() ?? String.Empty,
+                    Id = authState?.User?.GetObjectId() ?? "Unknown",
                     Name = authState?.User?.GetDisplayName() ?? "Anonymous"
                 },
-                Recipient = new ChannelAccount() { Id = "bot" },
-                Conversation = new ConversationAccount() { Id = _cardRoute.SessionId },
+                Recipient = new ChannelAccount() { Id = _botId, Name = _botName },
+                Conversation = new ConversationAccount() { Id = _conversationId },
                 Timestamp = DateTimeOffset.UtcNow,
                 LocalTimestamp = DateTimeOffset.Now,
             }
             .CreateLoadRouteActivity(route);
 
-            // process it, giving us a new card
-            await _cardApp.LoadAppAsync((Activity)activity!, default);
+            //if (authState != null)
+            //{
+            //    _cardApp.Context.User = authState.User;
+            //}
 
-            if (authState != null)
+            var invokeResponse = await _adapter.ProcessAuthenticatedActivityAsync((Activity)activity!, (tc, ct) => _bot.OnTurnAsync(tc, ct), default);
+            await ProcessInvokeResponse(invokeResponse);
+        }
+
+        private async Task ProcessInvokeResponse(InvokeResponse invokeResponse)
+        {
+            var acResponse = invokeResponse.Body as AdaptiveCardInvokeResponse;
+            if (acResponse != null)
             {
-                _cardApp.Context.User = authState.User;
+                if (acResponse.Value is AdaptiveCard card)
+                {
+                    _card = card;
+                }
+                else
+                    throw new Exception(JsonConvert.SerializeObject(acResponse.Value));
             }
+            else
+                throw new Exception(JsonConvert.SerializeObject(invokeResponse.Body));
 
-            this._card = await this._cardApp.ProcessInvokeActivity(activity, isPreview: false, default);
-
-            this.Route = this._cardApp.GetCurrentCardRoute();
+            // notify host that route is now different
+            this.Route = new Uri(_card.Metadata.WebUrl).PathAndQuery;
+            await OnCardRouteChanged.InvokeAsync(this.Route);
 
             // tell tree to rerender. onrerender the card will be injected back into the html
             StateHasChanged();
-
-            // notify host that route is now different
-            await OnCardRouteChanged.InvokeAsync(this.Route);
         }
-
 
         public void Dispose() => _dotNetObjectRef?.Dispose();
 

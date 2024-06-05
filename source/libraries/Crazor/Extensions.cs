@@ -225,6 +225,7 @@ namespace Crazor
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
+                    Type = AdaptiveExecuteAction.TypeName,
                     Verb = verb ?? Constants.REFRESH_VERB,
                     Data = data ?? new JObject()
                 }
@@ -236,7 +237,7 @@ namespace Crazor
             var activity = sourceActivity.Clone();
             activity.Type = ActivityTypes.Invoke;
             activity.Name = "adaptiveCard/action";
-            activity!.Value = invokeValue;
+            activity!.Value = JObject.FromObject(invokeValue);
             return activity.AsInvokeActivity();
         }
 
@@ -268,11 +269,12 @@ namespace Crazor
             {
                 Action = new AdaptiveCardInvokeAction()
                 {
+                    Type = AdaptiveExecuteAction.TypeName,
                     Verb = Constants.LOAD_VERB,
                     Data = new JObject() { { Constants.ROUTE_KEY, route } }
                 }
             };
-            activity!.Value = invokeValue;
+            activity!.Value = JObject.FromObject(invokeValue, new JsonSerializer() { NullValueHandling = NullValueHandling.Ignore });
             return activity.AsInvokeActivity();
         }
 

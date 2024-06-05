@@ -1372,7 +1372,7 @@ namespace Crazor
             var authenticationAttribute = CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (authenticationAttribute != null && !String.IsNullOrEmpty(Activity.From.Id))
             {
-                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                var userTokenClient = Context.TurnContext.TurnState?.Get<UserTokenClient>();
                 if (userTokenClient != null)
                 {
                     var tokenResponse = await userTokenClient.GetUserTokenAsync(Activity.From.Id, authenticationAttribute.Connection, Activity.ChannelId, null, default);
@@ -1456,7 +1456,7 @@ namespace Crazor
             var oauthAttribute = this.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (oauthAttribute != null && !String.IsNullOrEmpty(Activity.From.Id))
             {
-                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                var userTokenClient = Context.TurnContext.TurnState?.Get<UserTokenClient>();
                 if (userTokenClient != null)
                 {
                     var signinResource = await userTokenClient.GetSignInResourceAsync(oauthAttribute.Connection, (Activity)Activity, null, cancellationToken);

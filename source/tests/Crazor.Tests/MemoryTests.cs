@@ -1,5 +1,6 @@
 using Crazor.Test;
 using Crazor.Tests.Cards.Memory;
+using Microsoft.Bot.Builder;
 
 namespace Crazor.Tests
 {
@@ -9,8 +10,8 @@ namespace Crazor.Tests
         [TestInitialize]
         public async Task TestInitialize()
         {
-            var cardApp = (MemoryApp)Factory.Create(CardRoute.Parse("/Cards/Memory/test"));
-            await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+            var cardRoute = CardRoute.Parse("/Cards/Memory/test");
+            var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
             cardApp.App = "App1";
             cardApp.Session = "Session1";
             cardApp.User = "User1";
@@ -26,8 +27,7 @@ namespace Crazor.Tests
             var cardRoute = CardRoute.Parse("/Cards/Memory/test");
             // validate load
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
 
                 Assert.AreEqual("App1", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -38,8 +38,7 @@ namespace Crazor.Tests
 
             // validate App Save
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
 
                 Assert.AreEqual("App1", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -55,8 +54,7 @@ namespace Crazor.Tests
 
             // validate session
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session1", cardApp.Session);
@@ -72,8 +70,7 @@ namespace Crazor.Tests
 
             // validate user
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default);
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);
@@ -89,8 +86,7 @@ namespace Crazor.Tests
 
             // validate Conversation
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
                 Assert.IsNull(cardApp.Temp);
 
                 cardApp.Temp = "Test1";
@@ -106,8 +102,7 @@ namespace Crazor.Tests
 
             // validate Path
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);
@@ -123,8 +118,7 @@ namespace Crazor.Tests
 
             // validate Path
             {
-                var cardApp = (MemoryApp)Factory.Create(cardRoute);
-                await cardApp.LoadAppAsync(CreateInvokeActivity().CreateLoadRouteActivity(cardApp.Route.Route), default(CancellationToken));
+                var cardApp = (MemoryApp)(await LoadCard(cardRoute)).App;
 
                 Assert.AreEqual("App2", cardApp.App);
                 Assert.AreEqual("Session2", cardApp.Session);

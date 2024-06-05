@@ -1,5 +1,8 @@
 using AdaptiveCards;
 using Crazor.Interfaces;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Bot.Builder.Adapters;
+using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor.Test
@@ -22,15 +25,19 @@ namespace Crazor.Test
                 combined.Merge(JObject.FromObject(data));
 
             CardRoute cardRoute = await CardRoute.FromDataAsync(combined, context.Services.GetRequiredService<IEncryptionProvider>(), default(CancellationToken));
-            var cardApp = context.Services.GetRequiredService<CardAppFactory>().Create(cardRoute, null);
-
             var activity = CardTest.CreateInvokeActivity().CreateActionInvokeActivity(action.Verb, combined);
-
-            await cardApp.LoadAppAsync(activity, default);
-
-            var card = await cardApp.ProcessInvokeActivity(activity, false, default(CancellationToken));
-
-            return new CardTestContext() { Services = context.Services, Card = card };
+            var cardContext = new CardTestContext()
+            {
+                Services = context.Services,
+                Adapter = context.Adapter
+            };
+            await cardContext.Adapter.ProcessActivityAsync((Activity)activity, async (tc, ct) =>
+            {
+                cardContext.App= CardTest.Factory.Create(cardRoute, tc);
+                await cardContext.App.LoadAppAsync(activity, ct);
+                cardContext.Card = await cardContext.App.ProcessInvokeActivity(tc.Activity, isPreview:false, cancellationToken: ct);
+            }, default);
+            return cardContext;
         }
     }
 }

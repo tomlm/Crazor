@@ -1,8 +1,10 @@
 using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Adapters;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Newtonsoft.Json.Linq;
 using Diag = System.Diagnostics;
 
@@ -142,16 +144,32 @@ namespace Crazor.Test
         /// </summary>
         /// <param name="route"></param>
         /// <returns></returns>
-        public async Task<CardTestContext> LoadCard(string route, string channelId = "test", bool isPreview = false)
+        public async Task<CardTestContext> LoadCard(string route, bool isPreview = false)
         {
-            var cardApp = Services.GetRequiredService<CardAppFactory>().Create(CardRoute.Parse(route), null);
+            var cardRoute = CardRoute.Parse(route);
+            return await LoadCard(cardRoute, isPreview: isPreview);
+        }
 
-            var activity = CreateInvokeActivity().CreateLoadRouteActivity(route);
-            
-            await cardApp.LoadAppAsync(activity, default);
-
-            var card = await cardApp.ProcessInvokeActivity(activity, isPreview, default(CancellationToken));
-            return new CardTestContext() { Card = card, Services = Services };
+        /// <summary>
+        /// Load card by route
+        /// </summary>
+        /// <param name="route"></param>
+        /// <returns></returns>
+        public async Task<CardTestContext> LoadCard(CardRoute cardRoute, bool isPreview = false)
+        {
+            var activity = (Activity)CreateInvokeActivity().CreateLoadRouteActivity(cardRoute.Route);
+            var cardContext = new CardTestContext()
+            {
+                Services = Services,
+                Adapter = new TestAdapter()
+            };
+            await cardContext.Adapter.ProcessActivityAsync(activity, async (tc, ct) =>
+                {
+                    cardContext.App = Factory.Create(cardRoute, tc);
+                    await cardContext.App.LoadAppAsync(activity, ct);
+                    cardContext.Card = await cardContext.App.ProcessInvokeActivity(tc.Activity, isPreview, ct);
+                }, default);
+            return cardContext;
         }
     }
 }

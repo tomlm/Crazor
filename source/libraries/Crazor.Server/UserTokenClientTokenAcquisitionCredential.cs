@@ -32,7 +32,7 @@ namespace Crazor.Server
             var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (authenticationAttribute != null)
             {
-                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                var userTokenClient = Context.TurnContext.TurnState?.Get<UserTokenClient>();
                 if (userTokenClient != null)
                 {
                     var tokenResponse = await userTokenClient.GetUserTokenAsync(Context.App.Activity.From.Id, authenticationAttribute.Connection, Context.App.Activity.ChannelId, null, cancellationToken);
@@ -62,7 +62,7 @@ namespace Crazor.Server
             var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (authenticationAttribute != null)
             {
-                var userTokenClient = Context.TurnContext?.TurnState?.Get<UserTokenClient>();
+                var userTokenClient = Context.TurnContext.TurnState?.Get<UserTokenClient>();
                 if (userTokenClient != null)
                 {
                     var tokenResponse = await userTokenClient.GetUserTokenAsync(Context.App.Activity.From.Id, authenticationAttribute.Connection, Context.App.Activity.ChannelId, null, cancellationToken);

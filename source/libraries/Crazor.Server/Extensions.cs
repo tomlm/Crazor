@@ -60,7 +60,8 @@ namespace Crazor.Server
             //    var userTokenClient = botAuth.CreateUserTokenClientAsync(claimsIdentity, CancellationToken.None).GetAwaiter().GetResult();
             //    return userTokenClient;
             //});
-            services.TryAddScoped<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            services.TryAddScoped<IBotFrameworkHttpAdapter, CrazorCloudAdapter>();
+            services.TryAddScoped<CrazorCloudAdapter>();
             services.TryAddScoped<IBot, CardActivityHandler>();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.TryAddSingleton<Manifest>();
