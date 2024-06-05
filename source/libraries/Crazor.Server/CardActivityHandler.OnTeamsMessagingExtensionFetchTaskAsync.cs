@@ -25,7 +25,7 @@ namespace Crazor.Server
             System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionFetchTaskAsync() processing");
 
             var loadRouteActivity = turnContext.Activity.CreateLoadRouteActivity(messageExtensionAction.CommandId);
-            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), messageExtensionAction.CommandId);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, messageExtensionAction.CommandId);
             CardRoute cardRoute = CardRoute.FromUri(uri);
 
             var cardApp = Context.CardAppFactory.Create(cardRoute, turnContext);
@@ -70,14 +70,16 @@ namespace Crazor.Server
             var viewTaskInfo = cardApp.CurrentView.GetType().GetCustomAttribute<TaskInfoAttribute>();
             var appTaskInfo = cardApp.GetType().GetCustomAttribute<TaskInfoAttribute>();
 
+#pragma warning disable CS0618 // Type or member is obsolete
             var taskInfo = new TaskModuleTaskInfo()
             {
                 Title = viewTaskInfo?.Title ?? appTaskInfo?.Title ?? adaptiveCard?.Title ?? cardApp.Name,
                 Width = viewTaskInfo?.Width ?? appTaskInfo?.Width ?? "medium",
                 Height = viewTaskInfo?.Height ?? appTaskInfo?.Height ?? "medium",
             };
+#pragma warning restore CS0618 // Type or member is obsolete
 
-            taskInfo.FallbackUrl = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri;
+            taskInfo.FallbackUrl = new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, cardApp.GetCurrentCardRoute()).AbsoluteUri;
             // taskInfo.Url = Context.Configuration.GetValue<string>("BotUri") ?? new Uri(Context.Configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri; 
             taskInfo.CompletionBotId = Context.Configuration.GetValue<string>("MicrosoftAppId");
             taskInfo.Card = new Attachment()

@@ -51,7 +51,7 @@ namespace Crazor
             if (cardRouteAtt != null)
             {
                 // only untemplated routes can be bound this way.
-                if (!cardRouteAtt.Template.Contains("{"))
+                if (!cardRouteAtt.Template.Contains('{'))
                     route = cardRouteAtt.Template;
             }
             return route;
@@ -117,8 +117,8 @@ namespace Crazor
                     Authentication = AuthenticationFlags.SSO | AuthenticationFlags.OAuth
                 };
 
-                var configuration = provider.GetService<IConfiguration>();
-                var host = configuration.GetValue<Uri>("HostUri").Host;
+                var configuration = provider.GetRequiredService<IConfiguration>();
+                var host = configuration.GetValue<Uri>("HostUri")!.Host;
                 serviceOptions.ChannelOptions[host] = new ChannelOptions()
                 {
                     SupportsCardHeader = false,
@@ -395,7 +395,7 @@ namespace Crazor
                                     else if (value is DateTimeOffset dto)
                                         value = DateOnly.FromDateTime(dto.DateTime);
                                     else
-                                        value = DateOnly.Parse(value?.ToString());
+                                        value = DateOnly.Parse(value?.ToString()!);
                                     break;
                                 case "TimeSpan":
                                     if (value is DateTime dt2)
@@ -403,7 +403,7 @@ namespace Crazor
                                     else if (value is DateTimeOffset dto)
                                         value = dto.TimeOfDay;
                                     else
-                                        value = TimeSpan.Parse(value?.ToString());
+                                        value = TimeSpan.Parse(value?.ToString()!);
                                     break;
                                 case "TimeOnly":
                                     if (value is DateTime dt3)
@@ -411,10 +411,10 @@ namespace Crazor
                                     else if (value is DateTimeOffset dto)
                                         value = TimeOnly.FromDateTime(dto.DateTime);
                                     else
-                                        value = TimeOnly.Parse(value?.ToString());
+                                        value = TimeOnly.Parse(value?.ToString()!);
                                     break;
                                 case "String":
-                                    value = value.ToString();
+                                    value = value?.ToString()!;
                                     break;
                                 default:
                                     if (targetType.IsEnum)

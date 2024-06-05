@@ -24,7 +24,7 @@ namespace Crazor
 
         public bool GetRouteForCardViewType(Type cardViewType, out string route)
         {
-            return _card2Routes.TryGetValue(cardViewType, out route);
+            return _card2Routes.TryGetValue(cardViewType, out route!);
         }
 
         public bool ResolveRoute(CardRoute route, out Type? type)
@@ -34,7 +34,7 @@ namespace Crazor
             {
                 foreach (var routeTemplate in routeTemplates)
                 {
-                    if (routeTemplate.Matched(route.Path, out var data))
+                    if (routeTemplate.Matched(route.Path!, out var data))
                     {
                         foreach (var property in data.Properties())
                         {
@@ -71,7 +71,7 @@ namespace Crazor
             System.Diagnostics.Debug.WriteLine(cardViewType.FullName);
 
             CardRoute cardRoute;
-            List<RouteTemplate> list;
+            List<RouteTemplate>? list;
             if (cardViewType.Name.Contains('_'))
             {
                 cardRoute = CardRoute.Parse(cardViewType.Name.Replace("_", "/"));
@@ -122,11 +122,11 @@ namespace Crazor
 
             else
             {
-                string route = null;
-                var iCards = cardViewType.FullName.IndexOf(".Cards.");
+                string? route = null;
+                var iCards = cardViewType.FullName!.IndexOf(".Cards.");
                 if (iCards > 0)
                 {
-                    route = $"{cardViewType.FullName.Substring(cardViewType.FullName.IndexOf(".Cards.")).Replace('.', '/')}";
+                    route = $"{cardViewType.FullName!.Substring(cardViewType.FullName.IndexOf(".Cards.")).Replace('.', '/')}";
                 }
                 var routeAttribute = cardViewType.GetCustomAttribute<CardRouteAttribute>();
                 if (routeAttribute != null)
@@ -137,7 +137,7 @@ namespace Crazor
                     }
                     else
                     {
-                        cardRoute = CardRoute.Parse(route);
+                        cardRoute = CardRoute.Parse(route!);
                         route = $"/Cards/{cardRoute.App}/{routeAttribute.Template}";
                     }
                 }

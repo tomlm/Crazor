@@ -40,8 +40,6 @@ namespace Crazor.AI
         [Inject]
         public FormRecognizer Recognizer { get; set; }
 
-        public string Name { get; set; }
-
         [TempMemory]
         public bool HasApproval { get; set; } = false;
 
@@ -52,6 +50,7 @@ namespace Crazor.AI
         /// <returns></returns>
         public async virtual Task<APIResult> OnFormReady(CancellationToken cancellationToken = default)
         {
+            await Task.CompletedTask;
             // NOTE: this default implementation simply gathers up all properties from memory and returns it with empty result.
             // var message = await GetSuccessResponseMessage(this, cancellationToken);
             string message = "Form is ready";
@@ -62,7 +61,7 @@ namespace Crazor.AI
         public async override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
         {
             await base.OnActionAsync(action, cancellationToken);
-         
+
             if (action.Verb == InputCopilot.COPOILOT_VERB)
             {
                 // we don't want validation errors if we are doing a copilot action.
@@ -107,7 +106,7 @@ namespace Crazor.AI
         /// <returns></returns>
         protected virtual async Task OnFunctionsIntent(RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
-            var functions = JToken.FromObject(recognizerResult.Entities[FunctionsRecognizer.FUNCTIONS_INTENT]).ToObject<List<Function>>();
+            var functions = JToken.FromObject(recognizerResult.Entities[FunctionsRecognizer.FUNCTIONS_INTENT]!).ToObject<List<Function>>()!;
 
             // it's possible to get a CHANGE(property) and ASSIGN(property, value) in same recognition.  If we have an assignment we can drop the CHANGE()
             foreach (var changeFunction in functions.Where(function => function.Name == FormFunctions.CHANGE).ToList())
@@ -136,22 +135,22 @@ namespace Crazor.AI
             switch (function.Name)
             {
                 case FormFunctions.ASSIGN:
-                    await OnAssignPropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), function.Args.Skip(1).FirstOrDefault(), cancellationToken);
+                    await OnAssignPropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!), function.Args.Skip(1).FirstOrDefault(), cancellationToken);
                     break;
                 case FormFunctions.VALUE:
                     await OnValueAsync(function.Args.FirstOrDefault()?.ToString(), cancellationToken);
                     break;
                 case FormFunctions.CLEAR:
-                    await OnClearPropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), cancellationToken);
+                    await OnClearPropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!), cancellationToken);
                     break;
                 case FormFunctions.REMOVE:
-                    await OnRemoveValueAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), function.Args.Skip(1).FirstOrDefault(), cancellationToken);
+                    await OnRemoveValueAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!), function.Args.Skip(1).FirstOrDefault(), cancellationToken);
                     break;
                 case FormFunctions.CHANGE:
-                    await OnChangePropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), cancellationToken);
+                    await OnChangePropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!), cancellationToken);
                     break;
                 case FormFunctions.QUESTION:
-                    await OnQuestionAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), cancellationToken);
+                    await OnQuestionAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!), cancellationToken);
                     break;
                 case FormFunctions.CANCEL:
                     await OnCancelFormAsync(cancellationToken);
@@ -163,13 +162,13 @@ namespace Crazor.AI
                     await OnApprovalAsync(function.Args.FirstOrDefault()?.ToString(), cancellationToken);
                     break;
                 case FormFunctions.OPTIONS:
-                    await OnOptionsAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), cancellationToken);
+                    await OnOptionsAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!), cancellationToken);
                     break;
                 case FormFunctions.SHOW:
                     await OnShowFormAsync(cancellationToken);
                     break;
                 case FormFunctions.SHOWPROPERTY:
-                    await OnShowPropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()), cancellationToken);
+                    await OnShowPropertyAsync(GetPropertyForLabel(function.Args.FirstOrDefault()?.ToString()!)!, cancellationToken);
                     break;
                 case FormFunctions.FORMREADY:
                     await OnFormReadyFunctionAsync(cancellationToken);
@@ -229,7 +228,8 @@ namespace Crazor.AI
         /// <returns></returns>
         protected virtual async Task AssignValueAsync(string? property, object? value, CancellationToken cancellationToken = default)
         {
-            if (!typeof(ModelT).TryGetPropertyInfo(property, out var propertyInfo))
+            await Task.CompletedTask;
+            if (!typeof(ModelT).TryGetPropertyInfo(property!, out var propertyInfo))
             {
                 // add UNKNOWNPROPERTY(property) response.
                 // AddBannerMessage(BindTemplate(Templates.UnknownProperty, property));
@@ -237,35 +237,35 @@ namespace Crazor.AI
             }
 
             // If it's an array then we process the value as "add" operation
-            if (propertyInfo.PropertyType.IsList())
+            if (propertyInfo!.PropertyType.IsList())
             {
-                var collection = (IList)propertyInfo.GetValue(this.Model);
+                var collection = (IList)propertyInfo.GetValue(this.Model)!;
                 collection.Add(value);
 
                 // add ADDED(value) response
-                AddBannerMessage(BindPropertyTemplate<ValueAddedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
+                AddBannerMessage(BindPropertyTemplate<ValueAddedTemplateAttribute>(property!), AdaptiveContainerStyle.Good);
                 return;
             }
 
             // get old value if any
-            ObjectPath.TryGetPathValue<object?>(this.Model, property, out var oldValue);
+            ObjectPath.TryGetPathValue<object?>(this.Model, property!, out var oldValue);
 
             // if it changed
             if (string.Compare(value?.ToString(), oldValue?.ToString(), ignoreCase: true) != 0)
             {
                 // set the new value
-                this.Model.SetTargetProperty(propertyInfo, value);
+                this.Model.SetTargetProperty(propertyInfo, value!);
 
                 // if old value was not null
                 if (oldValue != null)
                 {
                     // add CHANGED(value) response
-                    AddBannerMessage(BindPropertyTemplate<ValueChangedTemplateAttribute>(property, new KeyValuePair<string, object?>("oldValue", oldValue)), AdaptiveContainerStyle.Good);
+                    AddBannerMessage(BindPropertyTemplate<ValueChangedTemplateAttribute>(property!, new KeyValuePair<string, object?>("oldValue", oldValue)), AdaptiveContainerStyle.Good);
                 }
                 else
                 {
                     // add ASSIGNED(value) response
-                    AddBannerMessage(BindPropertyTemplate<ValueAssignedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
+                    AddBannerMessage(BindPropertyTemplate<ValueAssignedTemplateAttribute>(property!), AdaptiveContainerStyle.Good);
                 }
             }
             return;
@@ -294,10 +294,10 @@ namespace Crazor.AI
         {
             await Task.CompletedTask;
 
-            if (typeof(ModelT).HasProperty(property))
+            if (typeof(ModelT).HasProperty(property!))
             {
-                ObjectPath.RemovePathValue(this.Model, property);
-                AddBannerMessage(BindPropertyTemplate<ValueClearedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
+                ObjectPath.RemovePathValue(this.Model, property!);
+                AddBannerMessage(BindPropertyTemplate<ValueClearedTemplateAttribute>(property!), AdaptiveContainerStyle.Good);
             }
         }
 
@@ -312,21 +312,23 @@ namespace Crazor.AI
         {
             await Task.CompletedTask;
 
-            if (!typeof(ModelT).TryGetPropertyInfo(property, out var propertyInfo))
+            if (!typeof(ModelT).TryGetPropertyInfo(property!, out var propertyInfo))
             {
                 // add UNKNOWNPROPERTY(property) response.
                 // AddBannerMessage(BindTemplate(Templates.UnknownProperty, property));
                 return;
             }
 
+            ArgumentNullException.ThrowIfNull(propertyInfo);
+
             // If it's an array then we process the value as "add" operation
             if (propertyInfo.PropertyType.IsList())
             {
-                var collection = (IList)propertyInfo.GetValue(this.Model);
+                var collection = (IList)propertyInfo.GetValue(this.Model)!;
                 collection.Remove(value);
 
                 // add ADDED(value) response
-                AddBannerMessage(BindPropertyTemplate<ValueRemovedTemplateAttribute>(property), AdaptiveContainerStyle.Good);
+                AddBannerMessage(BindPropertyTemplate<ValueRemovedTemplateAttribute>(property!), AdaptiveContainerStyle.Good);
                 return;
             }
         }
@@ -506,7 +508,8 @@ namespace Crazor.AI
         /// <returns></returns>
         public async virtual Task OnEvaluateStateAsync(CancellationToken cancellationToken)
         {
-            bool hasAllRequired = true;
+            await Task.CompletedTask;
+            //bool hasAllRequired = true;
 
             //// figure out if we have have an external dependency we need to change view for.
             //foreach (var property in Model.GetType().GetProperties())
@@ -567,6 +570,8 @@ namespace Crazor.AI
             {
                 throw new MissingMemberException(property);
             }
+            ArgumentNullException.ThrowIfNull(propertyInfo);
+
             var attributes = propertyInfo.GetCustomAttributes(typeof(TextResponseTemplateAttributeT), true)?.ToList();
             IResponseTemplate responseTemplate;
             if (attributes != null && attributes.Any())
@@ -579,14 +584,14 @@ namespace Crazor.AI
             }
 
             var value = propertyInfo.GetValue(this.Model);
-            Dictionary<string, object?> data = new Dictionary<string, object?>(args)
+            Dictionary<string, object> data = new Dictionary<string, object>(args!)
             {
                 { "$property", property },
-                { "$value", value },
+                { "$value", value! },
                 { "property", propertyInfo.GetPropertyLabel() },
-                { "value", propertyInfo.GetFormatedValueText(value) },
+                { "value", propertyInfo.GetFormatedValueText(value)! },
                 { "form", this },
-                { "model", this.GetModel() }
+                { "model", this.GetModel()! }
             };
             return responseTemplate.BindTemplate(data);
         }
@@ -611,10 +616,10 @@ namespace Crazor.AI
                 responseTemplate = Activator.CreateInstance<TextResponseTemplateAttributeT>();
             }
 
-            Dictionary<string, object?> data = new Dictionary<string, object?>(args)
+            var data = new Dictionary<string, object>(args!)
             {
                 { "form", this },
-                { "model", this.GetModel() }
+                { "model", this.GetModel()! }
             };
             return responseTemplate.BindTemplate(data);
         }
@@ -630,7 +635,7 @@ namespace Crazor.AI
                 var property = function.Args.FirstOrDefault();
                 foreach (var arg in jfunction)
                 {
-                    functions.Add(new Function { Name = function.Name, Args = new List<object> { property, arg } });
+                    functions.Add(new Function { Name = function.Name, Args = new List<object> { property!, arg } });
                 }
             }
             else
@@ -683,11 +688,12 @@ namespace Crazor.AI
             // var locale = dc.State.GetStringValue($"conversation.locale", "en-us");
             var locale = "en-us";
 
-            if (!typeof(ModelT).TryGetPropertyInfo(property, out var propertyInfo))
+            if (!typeof(ModelT).TryGetPropertyInfo(property!, out var propertyInfo))
             {
                 return (null, $"I didn't understand {property}");
             }
 
+            ArgumentNullException.ThrowIfNull(propertyInfo);
             var validationResults = new List<ValidationResult>();
             var context = new ValidationContext(this.Model)
             {
@@ -722,14 +728,14 @@ namespace Crazor.AI
             switch (Type.GetTypeCode(propertyType))
             {
                 case TypeCode.String:
-                    realValue = value.Trim();
+                    realValue = value!.Trim();
                     if (!Validator.TryValidateProperty(realValue, context, validationResults))
                         return (null, GetErrorMessage(value, propertyInfo, validationResults));
                     return (realValue, null);
                 case TypeCode.Boolean:
-                    realValue = RecognizeBool(propertyInfo, value, "en-us");
+                    realValue = RecognizeBool(propertyInfo, value!, "en-us");
                     if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                        return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                        return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                     return (realValue, null);
 
                 case TypeCode.Byte:
@@ -758,7 +764,7 @@ namespace Crazor.AI
                             var normalizedValue = value.Humanize(LetterCasing.LowerCase).Singularize();
                             var incomingWords = normalizedValue.Tokenize().Select(t => t.ToLower()).ToList();
                             var wordCount = -1;
-                            EnumChoice topChoice = null;
+                            EnumChoice? topChoice = null;
 
                             // partial matching
                             foreach (var choice in enumChoices)
@@ -797,30 +803,30 @@ namespace Crazor.AI
                             }
 
                             if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                                return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                                return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                             return (realValue, null);
                         }
                         else
                         {
-                            realValue = RecognizeNumber(propertyInfo, value, "en-us");
+                            realValue = RecognizeNumber(propertyInfo, value!, "en-us");
                             if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                                return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                                return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                             return (realValue, null);
                         }
                     }
                 case TypeCode.Single:
                 case TypeCode.Double:
                     {
-                        realValue = RecognizeNumber(propertyInfo, value, "en-us");
+                        realValue = RecognizeNumber(propertyInfo, value!, "en-us");
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                         return (realValue, null);
                     }
 
                 case TypeCode.DateTime:
                     {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
-                        realValue = timex.Merge((DateTimeOffset?)propertyInfo.GetValue(this.Model));
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value!, locale, refDate);
+                        realValue = timex!.Merge((DateTimeOffset?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
                         {
                             foreach (var date in dates)
@@ -830,7 +836,7 @@ namespace Crazor.AI
                                     realValue = new DateTimeOffset(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second, TimeSpan.MinValue);
                                 }
                             }
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                         }
                     }
                     return (realValue, null);
@@ -839,28 +845,28 @@ namespace Crazor.AI
 
                 case TypeCode.Object when propertyType.Name == nameof(DateTimeOffset):
                     {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value!, locale, refDate);
                         realValue = timex.Merge((DateTime?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                         return (realValue, null);
                     }
 
                 case TypeCode.Object when propertyType.Name == nameof(TimeOnly):
                     {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value!, locale, refDate);
                         realValue = timex.Merge((TimeOnly?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                         return (realValue, null);
                     }
 
                 case TypeCode.Object when propertyType.Name == nameof(DateOnly):
                     {
-                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value, locale, refDate);
+                        var (timex, dates, times) = RecognizeTimex(propertyInfo, value!, locale, refDate);
                         realValue = timex.Merge((DateOnly?)propertyInfo.GetValue(this.Model));
                         if (!Validator.TryValidateProperty(realValue, context, validationResults))
-                            return (null, GetErrorMessage(value, propertyInfo, validationResults));
+                            return (null, GetErrorMessage(value!, propertyInfo, validationResults));
                         return (realValue, null);
                     }
                 default:
@@ -891,7 +897,7 @@ namespace Crazor.AI
             List<TimeOnly> times = new List<TimeOnly>();
             if (results != null)
             {
-                foreach (var values in results[0].Resolution["values"] as List<Dictionary<string, string>>)
+                foreach (var values in (results[0].Resolution["values"] as List<Dictionary<string, string>>)!)
                 {
                     if (timexProperty == null && values.ContainsKey("timex"))
                     {
@@ -918,8 +924,9 @@ namespace Crazor.AI
                         }
                     }
                 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
-            return (timexProperty, dates, times.Distinct().ToList());
+            return (timexProperty!, dates!, times.Distinct().ToList());
         }
 
         static protected object? RecognizeNumber(PropertyInfo propertyInfo, string value, string locale)
@@ -979,7 +986,6 @@ namespace Crazor.AI
 
         static protected bool? RecognizeBool(PropertyInfo propertyInfo, string value, string locale)
         {
-            object? result = null;
             value = value.Trim();
 
             var models = ChoiceRecognizer.RecognizeBoolean(value, locale);
@@ -995,7 +1001,7 @@ namespace Crazor.AI
             return null;
         }
 
-        protected string GetPropertyForLabel(string propertyRef)
+        protected string? GetPropertyForLabel(string propertyRef)
         {
             if (string.IsNullOrEmpty(propertyRef))
             {

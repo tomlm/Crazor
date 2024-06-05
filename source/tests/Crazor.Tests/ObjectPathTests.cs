@@ -326,7 +326,7 @@ namespace Crazor.Tests
                 Location = new Location() { Lat = 1.2312312F, Long = 3.234234F }
             };
 
-            var result = ObjectPath.Assign<Options>(null, defaultOptions);
+            var result = ObjectPath.Assign<Options>(null!, defaultOptions);
             Assert.AreEqual(result.LastName, defaultOptions.LastName);
             Assert.AreEqual(result.FirstName, defaultOptions.FirstName);
             Assert.AreEqual(result.Age, defaultOptions.Age);
@@ -346,7 +346,7 @@ namespace Crazor.Tests
                 Location = new Location() { Lat = 1.2312312F, Long = 3.234234F }
             };
 
-            var result = ObjectPath.Assign<Options>(defaultOptions, null);
+            var result = ObjectPath.Assign<Options>(defaultOptions, null!);
             Assert.AreEqual(result.LastName, defaultOptions.LastName);
             Assert.AreEqual(result.FirstName, defaultOptions.FirstName);
             Assert.AreEqual(result.Age, defaultOptions.Age);
@@ -428,7 +428,7 @@ namespace Crazor.Tests
             // now try with JObject
             {
                 var json = JsonConvert.SerializeObject(test, settings);
-                dynamic jtest = JsonConvert.DeserializeObject(json);
+                dynamic jtest = JsonConvert.DeserializeObject(json)!;
                 Assert.AreEqual(json, JsonConvert.SerializeObject(ObjectPath.GetPathValue<object>(jtest, string.Empty), settings));
                 Assert.AreEqual((string)jtest.test, ObjectPath.GetPathValue<string>(jtest, "test"));
                 Assert.AreEqual((int)jtest.bar.options.Age, ObjectPath.GetPathValue<int>(jtest, "bar.options.age"));
@@ -486,7 +486,7 @@ namespace Crazor.Tests
             ObjectPath.SetPathValue(test, "foo", new { Bar = 15, Blat = "yo" });
             ObjectPath.SetPathValue(test, "x.a[1]", "yabba");
             ObjectPath.SetPathValue(test, "x.a[0]", "dabba");
-            ObjectPath.SetPathValue(test, "null", null);
+            ObjectPath.SetPathValue(test, "null", null!);
             ObjectPath.SetPathValue(test, "enum", TypeCode.Empty);
             ObjectPath.SetPathValue(test, "date.string.iso", dateISO);
             ObjectPath.SetPathValue(test, "date.string.jtoken.iso", new JValue(dateISO));
@@ -547,7 +547,7 @@ namespace Crazor.Tests
             {
             }
 
-            Assert.IsNull(ObjectPath.GetPathValue<string>(test, "x.y.z", null));
+            Assert.IsNull(ObjectPath.GetPathValue<string>(test, "x.y.z", null!));
             Assert.AreEqual(99, ObjectPath.GetPathValue<int>(test, "x.y.z", 99));
             Assert.IsFalse(ObjectPath.TryGetPathValue<string>(test, "x.y.z", out var value));
             ObjectPath.RemovePathValue(test, "x.a[1]");
@@ -576,10 +576,10 @@ namespace Crazor.Tests
 
         private void AssertGetSetValueType<T>(object test, T val)
         {
-            ObjectPath.SetPathValue(test, val.GetType().Name, val);
+            ObjectPath.SetPathValue(test, val!.GetType().Name, val);
             var result = ObjectPath.GetPathValue<T>(test, typeof(T).Name);
             Assert.AreEqual(val, result);
-            Assert.AreEqual(val.GetType(), result.GetType());
+            Assert.AreEqual(val.GetType(), result!.GetType());
         }
     }
 

@@ -1,10 +1,10 @@
 ﻿
 @inherits CardView
-@attribute [CardRoute("{Name?}")]
+@attribute [CardRoute("{PersonName ?}")]
 <Card Version="1.4">
-    @if (!String.IsNullOrEmpty(Name))
+    @if (!String.IsNullOrEmpty(PersonName))
     {
-        <TextBlock>Hello @Name!</TextBlock>
+        <TextBlock>Hello @PersonName !</TextBlock>
     }
     @if (!String.IsNullOrEmpty(Color))
     {
@@ -17,7 +17,7 @@
 @code
 {
     [Required]
-    public string Name { get; set; }
+    public string PersonName { get; set; }
 
     [FromCardQuery]
     public string Color { get; set; }

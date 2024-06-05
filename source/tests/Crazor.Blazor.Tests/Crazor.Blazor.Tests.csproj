@@ -3,9 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-
-		<IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -24,4 +23,14 @@
 		<ProjectReference Include="..\..\libraries\Crazor.Test\Crazor.Test.csproj" />
 		<ProjectReference Include="..\..\libraries\Crazor\Crazor.csproj" />
 	</ItemGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;BL0007;CS8616;CS8618;CA1822</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;BL0007;CS8616;CS8618;CA1822</NoWarn>
+  </PropertyGroup>
+
 </Project>

@@ -29,7 +29,7 @@
         await base.OnInitializedAsync();
     }
 
-    public void OnPageLocationChanged(object sender, LocationChangedEventArgs locationChanged)
+    public void OnPageLocationChanged(object? sender, LocationChangedEventArgs locationChanged)
     {
         System.Diagnostics.Debug.WriteLine($"LOCATION: {locationChanged.Location}");
         var route = new Uri(locationChanged.Location).PathAndQuery;

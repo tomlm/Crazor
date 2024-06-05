@@ -6,6 +6,6 @@
 @attribute [Authorize]
 
 <Card Version="1.4">
-    <TextBlock>@User.GetDisplayName()</TextBlock>
+    <TextBlock>@User?.GetDisplayName()</TextBlock>
 </Card>
 

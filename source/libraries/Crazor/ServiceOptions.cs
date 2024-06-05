@@ -15,7 +15,7 @@ namespace Crazor
         /// Load assemblies with cards, using long or short form of the assembly name.
         /// </summary>
         /// <param name="assemblyString"></param>
-        public void LoadCardAssembly(string assemblyString)
+        public static void LoadCardAssembly(string assemblyString)
         {
             Assembly.Load(assemblyString);
         }

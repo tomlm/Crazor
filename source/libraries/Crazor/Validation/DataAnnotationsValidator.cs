@@ -13,7 +13,7 @@ namespace Crazor.Validation
     {
         public bool TryValidateObject(object obj, ICollection<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)
         {
-            return Validator.TryValidateObject(obj, new ValidationContext(obj, null, validationContextItems), results, true);
+            return Validator.TryValidateObject(obj, new ValidationContext(obj, null, validationContextItems!), results, true);
         }
 
         public bool TryValidateObjectRecursive<T>(T obj, List<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)

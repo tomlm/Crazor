@@ -94,10 +94,10 @@ namespace Crazor.Blazor.Components
             try
             {
                 this._dotNetObjectRef = DotNetObjectReference.Create(this);
-                this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri"), "/api/cardapps").AbsoluteUri;
-                this._channelId = _configuration.GetValue<Uri>("HostUri").Host;
-                this._botName = _configuration.GetValue<string>("BotName");
-                this._botId = _configuration.GetValue<string>("MicrosoftAppId");
+                this._botUrl = _configuration.GetValue<string>("BotUri") ?? new Uri(_configuration.GetValue<Uri>("HostUri") ?? throw new ArgumentNullException("HostUri"), "/api/cardapps").AbsoluteUri;
+                this._channelId = _configuration.GetValue<Uri>("HostUri")!.Host;
+                this._botName = _configuration.GetValue<string>("BotName")!;
+                this._botId = _configuration.GetValue<string>("MicrosoftAppId")!;
 
                 await LoadRouteAsync(Route);
 
@@ -115,7 +115,7 @@ namespace Crazor.Blazor.Components
             {
                 _jsModule = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", JAVASCRIPT_FILE);
             }
-            string json = null;
+            string? json = null;
             try
             {
                 json = JsonConvert.SerializeObject(this._card);
@@ -150,7 +150,7 @@ namespace Crazor.Blazor.Components
         public async Task onExecuteAction(object jsAction)
         {
             // turn js action into C# action.
-            var action = JsonConvert.DeserializeObject<AdaptiveCardInvokeAction>(jsAction.ToString()!);
+            var action = JsonConvert.DeserializeObject<AdaptiveCardInvokeAction>(jsAction.ToString()!)!;
             var authState = (AuthenticationState != null) ? await AuthenticationState : null;
             // wrap it in an invoke activity
             var activity = new Activity(ActivityTypes.Invoke)

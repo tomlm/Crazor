@@ -10,12 +10,12 @@ namespace Crazor
         /// <summary>
         /// Route path like /cards/Foo/path?q1=...
         /// </summary>
-        public string Route { get; set; }
+        public string Route { get; set; } = String.Empty;
 
         /// <summary>
         /// App extracted from route
         /// </summary>
-        public string App { get; set; }
+        public string App { get; set; } = String.Empty;
 
         /// <summary>
         /// The view from the route
@@ -60,7 +60,7 @@ namespace Crazor
             result.Query = parts.Skip(1).FirstOrDefault();
             var pathParts = local.Trim('/').Split('/');
             if (pathParts.Length < 2)
-                return null;
+                throw new ArgumentException($"Unknown route {pathAndQuery}");
 
             if (pathParts[0].ToLower() != "cards")
                 throw new ArgumentException($"Unknown route {pathAndQuery}");

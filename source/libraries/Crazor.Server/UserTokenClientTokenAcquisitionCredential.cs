@@ -27,7 +27,7 @@ namespace Crazor.Server
             return result;
         }
 
-        public async Task<string> CreateAuthorizationHeaderForUserAsync(IEnumerable<string> scopes, AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, ClaimsPrincipal? claimsPrincipal = null, CancellationToken cancellationToken = default)
+        public async Task<string> CreateAuthorizationHeaderForUserAsync(IEnumerable<string> scopes, AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, ClaimsPrincipal? claimsPrincipal = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var authenticationAttribute = Context.App.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (authenticationAttribute != null)
@@ -49,7 +49,7 @@ namespace Crazor.Server
                 }
             }
 
-            return null;
+            return null!;
         }
 
         public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)

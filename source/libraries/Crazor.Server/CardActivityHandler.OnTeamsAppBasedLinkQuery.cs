@@ -26,7 +26,7 @@ namespace Crazor.Server
         {
             var uri = new Uri(query.Url);
             System.Diagnostics.Debug.WriteLine($"Starting composeExtension/queryLink processing {uri}");
-            var hostName = Context.Configuration.GetValue<Uri>("HostUri").Host ?? uri.Host;
+            var hostName = Context.Configuration.GetValue<Uri>("HostUri")?.Host ?? uri.Host;
 
             // get play page url => envir, cardId, instanceId,
             if (uri.Host == hostName)

@@ -16,11 +16,11 @@ namespace Crazor.Test
 
         public static CardAppFactory Factory => Services.GetRequiredService<CardAppFactory>();
 
-        public static void InitCardServices(Action<IServiceCollection> callback = null)
+        public static void InitCardServices(Action<IServiceCollection>? callback = null)
         {
             Environment.CurrentDirectory = Path.Combine(Environment.CurrentDirectory, "..", "..", "..");
             var builder = WebApplication.CreateBuilder();
-            builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>()
+            builder.Configuration.AddInMemoryCollection(initialData: new Dictionary<string, string?>()
             {
                 { "HostUri", "http://localhost" },
                 { "BotId", "00000000-0000-0000-0000-000000000000" },

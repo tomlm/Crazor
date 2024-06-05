@@ -34,7 +34,7 @@ namespace Crazor.Server
         /// <param name="services"></param>
         /// <param name="configureOptions">manifest factory</param>
         /// <returns></returns>
-        public static IServiceCollection AddCrazorServer(this IServiceCollection services, Action<CrazorServerOptions> configureOptions = null)
+        public static IServiceCollection AddCrazorServer(this IServiceCollection services, Action<CrazorServerOptions>? configureOptions = null)
         {
             services.AddHttpClient();
             services.AddHttpContextAccessor();

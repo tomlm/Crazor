@@ -28,7 +28,9 @@
     public String? Speak { get => Item.Speak; set => Item.Speak = value; }
 
     [Parameter]
+#pragma warning disable CS0618 // AdaptiveCard.Title is obselete
     public String? Title { get => Item.Title; set => Item.Title = value; }
+#pragma warning restore CS0618 // AdaptiveCard.Title is obselete
 
     [Parameter]
     [DefaultValue(typeof(AdaptiveVerticalContentAlignment), "Top")]

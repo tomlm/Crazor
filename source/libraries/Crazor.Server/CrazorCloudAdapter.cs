@@ -23,7 +23,7 @@ namespace Crazor.Server
             this.Use(new SSOTokenExchangeMiddleware(storage, configuration));
             this.Use(new ActionableMessageMiddleware(configuration));
 
-            _botAppId = configuration.GetValue<String>("MicrosoftAppId");
+            _botAppId = configuration.GetValue<String>("MicrosoftAppId")!;
 
             _claimsIdentity = new ClaimsIdentity(new List<Claim>
             {

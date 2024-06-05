@@ -41,7 +41,7 @@ namespace SharedCards.Cards.Wordle
             return sb.ToString();
         }
 
-        public async Task<WordleGame> LoadGame(string date, string playerId, CancellationToken cancellationToken)
+        public async Task<WordleGame?> LoadGame(string date, string playerId, CancellationToken cancellationToken)
         {
             var gameKey = GetGameKey(date, playerId);
             var result = await Context.Storage.ReadAsync(new string[] { gameKey }, cancellationToken);

@@ -19,7 +19,7 @@ namespace Crazor.Server
           ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
         {
             var card = ((JObject)action.BotActivityPreview.First().Attachments.First().Content).ToObject<AdaptiveCard>();
-            var actionSubmit = card.GetElements<AdaptiveSubmitAction>().First();
+            var actionSubmit = card!.GetElements<AdaptiveSubmitAction>().First();
             action.Data = actionSubmit.Data;
             ((JObject)action.Data)[Constants.SUBMIT_VERB] = Constants.EDIT_VERB;
             ((JObject)action.Data)[Constants.SESSION_KEY] = ((JObject)action.Data)[Constants.EDITSESSION_KEY];

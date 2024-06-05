@@ -23,7 +23,7 @@ namespace Crazor.Server
         {
             System.Diagnostics.Debug.WriteLine($"Starting OnTeamsMessagingExtensionQueryAsync() processing");
 
-            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), query.CommandId);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, query.CommandId);
 
             CardRoute cardRoute = CardRoute.FromUri(uri);
 

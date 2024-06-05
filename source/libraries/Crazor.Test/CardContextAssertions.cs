@@ -66,7 +66,7 @@ namespace Crazor.Test.MSTest
         /// <param name="contextTask"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<CardTestContext> AssertElement<T>(this Task<CardTestContext> contextTask, string id, Action<T> callback = null)
+        public static async Task<CardTestContext> AssertElement<T>(this Task<CardTestContext> contextTask, string id, Action<T>? callback = null)
             where T : AdaptiveTypedElement
         {
             var context = await contextTask;

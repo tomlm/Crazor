@@ -88,7 +88,8 @@
 
     public async override Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
     {
-        this.Options = (GameOptions)cardResult.Result;
+        this.Options = (GameOptions)cardResult.Result!;
+        await Task.CompletedTask;
     }
 
     public async Task OnDeal()

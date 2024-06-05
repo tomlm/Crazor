@@ -55,13 +55,13 @@ namespace Crazor
         /// </summary>
         /// <param name="name">The name of the parameter. Cannot be null.</param>
         /// <param name="value">The optional value of the parameter.</param>
-        internal QueryStringParameter(string name, string value = null)
+        internal QueryStringParameter(string name, string? value = null)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
             Name = name;
-            Value = value;
+            Value = value!;
         }
     }
 
@@ -130,7 +130,7 @@ namespace Crazor
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            List<string> values;
+            List<string>? values;
 
             if (_dictionary.TryGetValue(name, out values))
             {
@@ -138,7 +138,7 @@ namespace Crazor
                 return true;
             }
 
-            value = null;
+            value = null!;
             return false;
         }
 
@@ -148,14 +148,14 @@ namespace Crazor
         /// <param name="name">The parameter name to find.</param>
         /// <param name="values">The parameter's values will be written here once found.</param>
         /// <returns></returns>
-        public bool TryGetValues(string name, out string[] values)
+        public bool TryGetValues(string name, out string[]? values)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            List<string> storedValues;
+            List<string>? storedValues;
 
-            if (_dictionary.TryGetValue(name, out storedValues))
+            if (_dictionary.TryGetValue(name, out storedValues!))
             {
                 values = storedValues.ToArray();
                 return true;
@@ -178,12 +178,12 @@ namespace Crazor
         /// </summary>
         /// <param name="name">The name of the parameter.</param>
         /// <param name="value">The optional value of the parameter.</param>
-        public void Add(string name, string value = null)
+        public void Add(string name, string? value = null)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            List<string> values;
+            List<string>? values;
 
             if (!_dictionary.TryGetValue(name, out values))
             {
@@ -191,7 +191,7 @@ namespace Crazor
                 _dictionary[name] = values;
             }
 
-            values.Add(value);
+            values.Add(value!);
         }
 
         /// <summary>
@@ -199,14 +199,14 @@ namespace Crazor
         /// </summary>
         /// <param name="name">The name of the parameter.</param>
         /// <param name="value">The optional value of the parameter.</param>
-        public void Set(string name, string value = null)
+        public void Set(string name, string? value = null)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
             _dictionary[name] = new List<string>()
             {
-                value
+                value!
             };
         }
 
@@ -234,7 +234,7 @@ namespace Crazor
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            List<string> values;
+            List<string>? values;
 
             return _dictionary.TryGetValue(name, out values) && values.Contains(value);
         }
@@ -246,7 +246,7 @@ namespace Crazor
         /// <returns>True if the parameters were removed, else false.</returns>
         public bool Remove(string name)
         {
-            List<string> values;
+            List<string>? values;
 
             if (_dictionary.TryGetValue(name, out values))
             {
@@ -279,7 +279,7 @@ namespace Crazor
         /// <returns>True if parameter was removed, else false.</returns>
         public bool Remove(string name, string value)
         {
-            List<string> values;
+            List<string>? values;
 
             if (_dictionary.TryGetValue(name, out values))
             {
@@ -304,7 +304,7 @@ namespace Crazor
         /// <returns>The count of parameters removed.</returns>
         public int RemoveAll(string name, string value)
         {
-            List<string> values;
+            List<string>? values;
 
             if (_dictionary.TryGetValue(name, out values))
             {
@@ -351,7 +351,7 @@ namespace Crazor
             foreach (string pair in pairs)
             {
                 string name;
-                string value;
+                string? value;
 
                 int indexOfEquals = pair.IndexOf('=');
 
@@ -446,15 +446,15 @@ namespace Crazor
         /// </summary>
         /// <param name="other">The query string to compare to.</param>
         /// <returns>Returns true if the query string has the exact same parameters as the current query string (order is irrelevant).</returns>
-        public bool Equals(QueryString other)
+        public bool Equals(QueryString? other)
         {
             return this.Equals(other, default(StringComparison), default(StringComparison));
         }
 
-        public bool Equals(QueryString other, StringComparison nameComparisonType, StringComparison valueComparisonType)
+        public bool Equals(QueryString? other, StringComparison nameComparisonType, StringComparison valueComparisonType)
         {
             // If they have a different count of keys
-            if (_dictionary.Count != other._dictionary.Count)
+            if (_dictionary.Count != other?._dictionary.Count)
                 return false;
 
             // Go through each key from current object
@@ -463,7 +463,7 @@ namespace Crazor
                 // Get values for this key
                 List<string> thisValues = param.Value;
 
-                List<string> otherValues;
+                List<string>? otherValues;
 
                 // If the other didn't have param name
                 if (!other._dictionary.TryGetValue(param.Key, out otherValues))
@@ -489,7 +489,7 @@ namespace Crazor
             return true;
         }
 
-        private bool ValueEquals(string value1, string value2, StringComparison comparisonType)
+        private static bool ValueEquals(string value1, string value2, StringComparison comparisonType)
         {
             // If both are null, true
             if (value1 == null && value2 == null)

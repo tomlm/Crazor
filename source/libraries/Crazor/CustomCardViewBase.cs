@@ -235,7 +235,7 @@ namespace Crazor
                 if (propertyInfo.GetCustomAttribute<JsonIgnoreAttribute>() != null)
                     return false;
 
-                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType?.Name!))
                     return false;
 
                 if (propertyInfo.Name == "Model")
@@ -263,7 +263,7 @@ namespace Crazor
                 if (propertyInfo.GetCustomAttribute<JsonIgnoreAttribute>() != null)
                     return false;
 
-                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType?.Name!))
                     return false;
 
                 return true;
@@ -308,7 +308,7 @@ namespace Crazor
             }
             else
             {
-                Model = model as ModelT ?? JObject.FromObject(model).ToObject<ModelT>();
+                Model = model as ModelT ?? JObject.FromObject(model).ToObject<ModelT>()!;
             }
         }
     }

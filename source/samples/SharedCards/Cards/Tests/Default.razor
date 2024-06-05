@@ -46,18 +46,18 @@
             var i = int.Parse(index);
             Choice = GetFileChoices(null, i, 1)[0];
 
-            string root = Path.GetDirectoryName(this.GetType().Assembly.Location);
+            string root = Path.GetDirectoryName(this.GetType().Assembly.Location)!;
             var path = Path.Combine(root, "Cards", "Tests", Choice.Title);
             var json = System.IO.File.ReadAllText(path);
             TestCard = JsonConvert.DeserializeObject<AdaptiveCard>(json);
         }
     }
 
-    public async override Task<AdaptiveCard> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
+    public async override Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken)
     {
         var card = await base.RenderCardAsync(isPreview, cancellationToken);
 
-        if (TestCard != null)
+        if (TestCard != null && card != null)
         {
             if (TestCard.BackgroundImage != null)
                 card.BackgroundImage = TestCard.BackgroundImage;
@@ -77,7 +77,7 @@
             if (TestCard.Rtl != null)
                 card.Rtl = TestCard.Rtl;
 
-            if (TestCard.VerticalContentAlignment != null)
+            if (TestCard.VerticalContentAlignment != default(AdaptiveVerticalContentAlignment))
                 card.VerticalContentAlignment = TestCard.VerticalContentAlignment;
 
             if (TestCard.SelectAction != null)
@@ -105,10 +105,10 @@
         return Array.Empty<AdaptiveChoice>();
     }
 
-    private AdaptiveChoice[] GetFileChoices(string query, int skip, int top)
+    private AdaptiveChoice[] GetFileChoices(string? query, int skip, int top)
     {
         //get the full location of the assembly with DaoTests in it
-        string root = Path.GetDirectoryName(this.GetType().Assembly.Location);
+        string root = Path.GetDirectoryName(this.GetType().Assembly.Location)!;
         int i = 0;
         var folder = Path.Combine(root, App.Route.Route.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
         return Directory.EnumerateFiles(folder, "*.json", SearchOption.AllDirectories)

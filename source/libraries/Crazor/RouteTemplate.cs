@@ -28,7 +28,7 @@ namespace Crazor
             {
                 var part = (i < parts.Length) ? parts[i] : null;
                 var templatePart = templateParts[i].Trim();
-                if (part == null & templatePart != null)
+                if (part == null && templatePart != null)
                 {
                     if (templatePart.StartsWith('{') && templatePart.EndsWith('}'))
                     {
@@ -38,9 +38,9 @@ namespace Crazor
                     return false;
                 }
 
-                if (part?.ToLower() != templatePart.ToLower())
+                if (part?.ToLower() != templatePart!.ToLower())
                 {
-                    string propertyName = null;
+                    string? propertyName = null;
                     if (templatePart.StartsWith('{') && templatePart.EndsWith('}'))
                     {
                         propertyName = templatePart.Trim('{', '}');

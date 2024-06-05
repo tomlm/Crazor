@@ -38,7 +38,7 @@ namespace Crazor.Test
             throw new NotImplementedException();
         }
 
-        public async virtual Task<InvokeResponse> Invoke(IInvokeActivity activity, CancellationToken cancellationToken = default)
+        public async virtual Task<InvokeResponse?> Invoke(IInvokeActivity activity, CancellationToken cancellationToken = default)
         {
             lock (_lock)
             {

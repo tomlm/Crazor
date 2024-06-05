@@ -39,10 +39,10 @@ namespace Crazor.Server
 
             var card = await cardApp.ProcessInvokeActivity(turnContext.Activity, false, cancellationToken);
 
-            return CreateMessagingExtensionActionResponse(messageExtensionAction.CommandContext, cardApp, card);
+            return CreateMessagingExtensionActionResponse(messageExtensionAction.CommandContext, cardApp, card)!;
         }
 
-        private MessagingExtensionActionResponse CreateMessagingExtensionActionResponse(string commandContext, CardApp cardApp, AdaptiveCard adaptiveCard)
+        private MessagingExtensionActionResponse? CreateMessagingExtensionActionResponse(string commandContext, CardApp cardApp, AdaptiveCard adaptiveCard)
         {
             switch (cardApp.TaskModuleAction)
             {
@@ -89,7 +89,7 @@ namespace Crazor.Server
                 ComposeExtension = new MessagingExtensionResult(attachmentLayout: "list", type: "result")
                 {
                     // url to card
-                    Text = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), cardApp.GetCurrentCardRoute()).AbsoluteUri,
+                    Text = new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, cardApp.GetCurrentCardRoute()).AbsoluteUri,
                     Attachments = new List<MessagingExtensionAttachment>()
                     {
                         // card
@@ -103,7 +103,7 @@ namespace Crazor.Server
         {
             card = TransformActionExecuteToSubmit(card);
 
-            AdaptiveAction refreshAction = card.Refresh?.Action;
+            AdaptiveAction? refreshAction = card.Refresh?.Action;
             var actions = card.GetElements<AdaptiveSubmitAction>().ToList();
             foreach (var action in actions)
             {

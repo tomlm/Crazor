@@ -29,7 +29,7 @@
         <Container Id="@editId" IsVisible="@(HasValue == false && !ViewOnly)">
             @if (Edit == null)
             {
-                switch (BindingProperty.PropertyType)
+                switch (BindingProperty!.PropertyType)
                 {
                     case Type _ when BindingProperty.PropertyType == typeof(bool?):
                     case Type _ when BindingProperty.PropertyType == typeof(bool):
@@ -115,7 +115,7 @@
 
     protected object? BindingValue { get; set; }
 
-    protected PropertyInfo BindingProperty { get; set; } = null;
+    protected PropertyInfo? BindingProperty { get; set; } = null;
 
     protected String BindingLabel { get; set; } = String.Empty;
 
@@ -141,10 +141,10 @@
                 }
             }
 
-            BindingLabel = BindingProperty.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName;
+            BindingLabel = BindingProperty!.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName!;
             if (BindingLabel == null)
             {
-                BindingLabel = BindingProperty.Name.Humanize();
+                BindingLabel = BindingProperty!.Name.Humanize();
             }
         }
     }

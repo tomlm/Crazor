@@ -83,7 +83,7 @@
     [FromCardRoute]
     public string PlayerId { get; set; }
 
-    public WordleGame Game { get; set; }
+    public WordleGame? Game { get; set; }
 
     public async override Task OnInitializedAsync(CancellationToken cancellationToken)
     {

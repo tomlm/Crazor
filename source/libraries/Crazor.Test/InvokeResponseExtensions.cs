@@ -15,7 +15,7 @@ namespace Crazor.Test.MSTest
         /// <param name="id"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static AdaptiveCard GetCardFromResponse<T>(this InvokeResponse invokeResponse, Action<T>? callback = null)
+        public static AdaptiveCard? GetCardFromResponse<T>(this InvokeResponse invokeResponse, Action<T>? callback = null)
         {
             if (invokeResponse.Body is AdaptiveCardInvokeResponse ac)
             {
@@ -62,6 +62,8 @@ namespace Crazor.Test.MSTest
 
         public static AdaptiveCard GetCardFromResponse(this MessagingExtensionActionResponse response)
         {
+            ArgumentNullException.ThrowIfNull(response);
+
             if (response.Task is TaskModuleContinueResponse continueResponse)
             {
                 return continueResponse.GetCardFromResponse();
@@ -75,7 +77,7 @@ namespace Crazor.Test.MSTest
                     .Single()!; ;
             }
 
-            return response.ComposeExtension.Attachments
+            return response.ComposeExtension!.Attachments
                     .Where(a => a.ContentType == AdaptiveCard.ContentType)
                     .Select(a => ObjectPath.MapValueTo<AdaptiveCard>(a.Content))
                     .Single()!;

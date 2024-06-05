@@ -96,7 +96,7 @@ namespace Crazor.AI.Recognizers
         }
 
 
-        private async Task<string> GetCompletionsAsync(string model, string prompt, float temp, OpenAIClient openAIClient, string[] stopWords = null, int maxTokens = 1500, float topP = 0.0f, float presencePenalty = 0.0f, float frequencyPenalty = 0.0f, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
+        private async Task<string> GetCompletionsAsync(string model, string prompt, float temp, OpenAIClient openAIClient, string[]? stopWords = null, int maxTokens = 1500, float topP = 0.0f, float presencePenalty = 0.0f, float frequencyPenalty = 0.0f, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -136,7 +136,7 @@ namespace Crazor.AI.Recognizers
                         var chatTexts = prompt.Split(IM_START, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
                         foreach (var chatText in chatTexts)
                         {
-                            ChatRequestMessage message = null;
+                            ChatRequestMessage? message = null;
                             if (chatText.StartsWith("user"))
                             {
                                 int iEnd = chatText.IndexOf(IM_END);
@@ -160,7 +160,7 @@ namespace Crazor.AI.Recognizers
                         }
 
                         var response = await openAIClient.GetChatCompletionsAsync(/*model, */options, cts.Token);
-                        return response.Value.Choices.FirstOrDefault()?.Message.Content;
+                        return response.Value.Choices.FirstOrDefault()?.Message.Content!;
                     //}
                     //else
                     //{
@@ -190,7 +190,7 @@ namespace Crazor.AI.Recognizers
                     //    return responseWithoutStream.Value.Choices.FirstOrDefault()?.Text;
                     //}
                 }
-                catch (Exception err)
+                catch (Exception)
                 {
 
                 }
@@ -239,7 +239,7 @@ namespace Crazor.AI.Recognizers
                                 if (inArray)
                                     arrayArgs.Add(arg.Trim());
                                 else
-                                    function.Args.Add(arg.Trim());
+                                    function!.Args.Add(arg.Trim());
                             }
                             arg = "";
                             continue;
@@ -261,9 +261,9 @@ namespace Crazor.AI.Recognizers
                             if (inArray)
                                 arrayArgs.Add(arg.Trim());
                             else
-                                function.Args.Add(arg.Trim());
+                                function!.Args.Add(arg.Trim());
                         }
-                        functions.Add(function);
+                        functions.Add(function!);
                         function = null;
                         arg = "";
                         continue;
@@ -276,7 +276,7 @@ namespace Crazor.AI.Recognizers
                             if (inArray)
                                 arrayArgs.Add(arg.Trim());
                             else
-                                function.Args.Add(arg.Trim());
+                                function!.Args.Add(arg.Trim());
                         }
                         arg = "";
                     }
@@ -292,7 +292,7 @@ namespace Crazor.AI.Recognizers
                         {
                             arrayArgs.Add(arg.Trim());
                         }
-                        function.Args.Add(arrayArgs);
+                        function!.Args.Add(arrayArgs);
                         inArray = false;
                         arg = "";
                         continue;

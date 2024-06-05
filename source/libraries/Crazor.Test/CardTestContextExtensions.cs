@@ -13,7 +13,7 @@ namespace Crazor.Test
         /// <param name="idOrVerb">id of the action</param>
         /// <param name="data">optional data to merge in to simulate input controls</param>
         /// <returns></returns>
-        public static async Task<CardTestContext> ExecuteAction(this Task<CardTestContext> contextTask, string idOrVerb, object data = null)
+        public static async Task<CardTestContext> ExecuteAction(this Task<CardTestContext> contextTask, string idOrVerb, object? data = null)
         {
             var context = await contextTask;
 

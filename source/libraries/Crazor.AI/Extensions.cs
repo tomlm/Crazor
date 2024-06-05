@@ -41,27 +41,27 @@ namespace Crazor.AI
             using (var response = await httpClient.GetAsync(url))
             {
                 var content = await response.Content.ReadAsStringAsync();
-                if (response.Content.Headers.ContentType.MediaType == "text/yaml")
+                if (response.Content.Headers.ContentType!.MediaType == "text/yaml")
                     return YamlConvert.DeserializeObject<T>(content);
                 else if (response.Content.Headers.ContentType.MediaType == "application/json")
-                    return JsonConvert.DeserializeObject<T>(content);
+                    return JsonConvert.DeserializeObject<T>(content)!;
                 else
                 {
                     if (content.StartsWith("{") && content.EndsWith("}"))
                         return YamlConvert.DeserializeObject<T>(content);
                     else
-                        return JsonConvert.DeserializeObject<T>(content);
+                        return JsonConvert.DeserializeObject<T>(content)!;
                 }
             }
         }
 
-        public static string LoadResource(this Assembly assembly, string resource)
+        public static string? LoadResource(this Assembly assembly, string resource)
         {
             if (assembly.GetManifestResourceNames().Any(name => name == resource))
             {
                 using (var stream = assembly.GetManifestResourceStream(resource))
                 {
-                    using (var tr = new StreamReader(stream))
+                    using (var tr = new StreamReader(stream!))
                     {
                         return tr.ReadToEnd();
                     }
@@ -92,7 +92,7 @@ namespace Crazor.AI
             return displayAttribute?.GetName() ?? displayAttribute?.GetShortName() ?? propertyInfo.Name.Humanize();
         }
 
-        public static string GetFormatedValueText(this PropertyInfo propertyInfo, object? value)
+        public static string? GetFormatedValueText(this PropertyInfo propertyInfo, object? value)
         {
             if (value == null)
                 return string.Empty;

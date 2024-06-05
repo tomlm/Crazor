@@ -94,7 +94,7 @@
                         }
                         else if (displayAttribute != null)
                         {
-                            Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute.DisplayName, Value = value?.ToString() });
+                            Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute?.DisplayName, Value = value?.ToString() });
                         }
                         else
                         {

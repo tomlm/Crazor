@@ -21,8 +21,8 @@
             if (result.ContainsKey(CardId))
             {
                 var job = result[CardId] as JObject;
-                TransformSubmits(job);
-                var card = AdaptiveCard.FromJson(job.ToString()).Card;
+                TransformSubmits(job!);
+                var card = AdaptiveCard.FromJson(job!.ToString()).Card;
 
                 // Add ShowTaskModuleAction in teams
                 if (App.Activity.ChannelId == Channels.Msteams)

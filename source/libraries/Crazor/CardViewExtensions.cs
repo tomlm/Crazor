@@ -184,7 +184,7 @@ namespace Crazor
                     var part = parts[i];
                     if (part.StartsWith('{') && part.EndsWith('}'))
                     {
-                        parts[i] = ObjectPath.GetPathValue<string>(cardView, part.Trim('{', '}', '?'), null);
+                        parts[i] = ObjectPath.GetPathValue<string?>(cardView, part.Trim('{', '}', '?'), null)!;
                     }
                 }
                 sb.Append(String.Join('/', parts));
@@ -207,7 +207,7 @@ namespace Crazor
                         var value = targetProperty.GetValue(cardView);
                         if (value != null)
                         {
-                            queryParameters.Add(queryParameterName, value.ToString());
+                            queryParameters.Add(queryParameterName, value.ToString()!);
                         }
                     }
                 }

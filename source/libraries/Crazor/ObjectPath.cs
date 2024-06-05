@@ -77,7 +77,7 @@ namespace Crazor
         /// <returns>true if successful.</returns>
         public static bool TryGetPathValue<T>(object obj, string path, out T value)
         {
-            value = default;
+            value = default!;
 
             if (obj == null)
             {
@@ -159,7 +159,7 @@ namespace Crazor
                             // Expand array to index
                             for (var idx = ((ICollection)current).Count; idx <= index; ++idx)
                             {
-                                ((JArray)current)[idx] = null;
+                                ((JArray)current)[idx] = null!;
                             }
 
                             next = current[index];
@@ -187,7 +187,7 @@ namespace Crazor
                     }
                 }
 
-                current = next;
+                current = next!;
             }
 
             var lastSegment = segments.Last();
@@ -342,7 +342,7 @@ namespace Crazor
         /// <returns>The object as Json.</returns>
         public static T Clone<T>(T obj)
         {
-            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj, _cloneSettings), _cloneSettings);
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj, _cloneSettings), _cloneSettings)!;
         }
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace Crazor
             if (startObject != null && overlayObject != null)
             {
                 // make a deep clone JObject of the startObject
-                var jsMerged = startObject is JObject ? (JObject)(startObject as JObject).DeepClone() : JObject.FromObject(startObject);
+                var jsMerged = startObject is JObject ? (JObject)(startObject as JObject)!.DeepClone() : JObject.FromObject(startObject);
 
                 // get a JObject of the overlay object
                 var jsOverlay = overlayObject is JObject ? overlayObject as JObject : JObject.FromObject(overlayObject);
@@ -394,7 +394,7 @@ namespace Crazor
                     MergeNullValueHandling = MergeNullValueHandling.Ignore,
                 });
 
-                return jsMerged.ToObject(type);
+                return jsMerged.ToObject(type)!;
             }
 
             var singleObject = startObject ?? overlayObject;
@@ -402,13 +402,13 @@ namespace Crazor
             {
                 if (singleObject is JObject)
                 {
-                    return (singleObject as JObject).ToObject(type);
+                    return (singleObject as JObject)?.ToObject(type)!;
                 }
 
                 return singleObject;
             }
 
-            return (Type)Activator.CreateInstance(type);
+            return (Type)Activator.CreateInstance(type)!;
         }
 
         /// <summary>
@@ -421,7 +421,7 @@ namespace Crazor
         {
             if (val is JValue)
             {
-                return ((JValue)val).ToObject<T>();
+                return ((JValue)val).ToObject<T>()!;
             }
 
             if (typeof(T) == typeof(object))
@@ -431,12 +431,12 @@ namespace Crazor
 
             if (val is JArray)
             {
-                return ((JArray)val).ToObject<T>();
+                return ((JArray)val).ToObject<T>()!;
             }
 
             if (val is JObject)
             {
-                return ((JObject)val).ToObject<T>();
+                return ((JObject)val).ToObject<T>()!;
             }
 
             if (typeof(T) == typeof(JObject))
@@ -459,7 +459,7 @@ namespace Crazor
                 return (T)val;
             }
 
-            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(val, _expressionCaseSettings), new JsonSerializerSettings { MaxDepth = null });
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(val, _expressionCaseSettings), new JsonSerializerSettings { MaxDepth = null })!;
         }
 
         /// <summary>
@@ -620,7 +620,7 @@ namespace Crazor
         /// <param name="obj">object.</param>
         /// <param name="property">property or array segment to get relative to the object.</param>
         /// <returns>the value or null if not found.</returns>
-        private static object GetObjectProperty(object obj, string property)
+        private static object? GetObjectProperty(object obj, string property)
         {
             if (obj == null)
             {
@@ -647,7 +647,7 @@ namespace Crazor
             if (obj is JValue jval)
             {
                 // in order to make things like "this.value.Length" work, when "this.value" is a string.
-                return GetObjectProperty(jval.Value, property);
+                return GetObjectProperty(jval.Value!, property);
             }
 
             var prop = obj.GetType().GetProperties().Where(p => string.Equals(p.Name, property, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
@@ -674,9 +674,9 @@ namespace Crazor
             if (segment is int index)
             {
                 var jar = obj as JArray;
-                for (var i = jar.Count; i <= index; i++)
+                for (var i = jar!.Count; i <= index; i++)
                 {
-                    jar.Add(null);
+                    jar.Add(null!);
                 }
 
                 jar[index] = JToken.FromObject(val);
@@ -686,19 +686,19 @@ namespace Crazor
             var property = segment as string;
             if (obj is IDictionary<string, object> dict)
             {
-                var key = dict.Keys.Where(k => string.Equals(k, property, StringComparison.OrdinalIgnoreCase)).FirstOrDefault() ?? property;
+                var key = dict.Keys.Where(k => string.Equals(k, property, StringComparison.OrdinalIgnoreCase)).FirstOrDefault() ?? property!;
                 dict[key] = val;
                 return;
             }
 
             if (obj is JObject jobj)
             {
-                var key = jobj.Properties().Where(p => string.Equals(p.Name, property, StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Name ?? property;
+                var key = jobj.Properties().Where(p => string.Equals(p.Name, property, StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Name ?? property!;
                 jobj[key] = val != null ? JToken.FromObject(val) : null;
                 return;
             }
 
-            var prop = obj.GetType().GetProperty(property);
+            var prop = obj.GetType().GetProperty(property!);
             if (prop != null)
             {
                 obj.SetTargetProperty(prop, val);
@@ -722,7 +722,7 @@ namespace Crazor
                 }
                 else if (value == null)
                 {
-                    val = null;
+                    val = null!;
                 }
                 else if (value is string || value is byte || value is bool ||
                          value is DateTime || value is DateTimeOffset ||
@@ -734,7 +734,7 @@ namespace Crazor
                 }
                 else
                 {
-                    val = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value, _expressionCaseSettings), new JsonSerializerSettings { MaxDepth = null });
+                    val = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value, _expressionCaseSettings), new JsonSerializerSettings { MaxDepth = null })!;
                 }
             }
             else

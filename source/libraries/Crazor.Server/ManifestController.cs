@@ -43,7 +43,7 @@ namespace Crazor.Server.Controllers
                     {
                         using (var outputStream = entry.Open())
                         {
-                            inputStream.CopyTo(outputStream);
+                            inputStream!.CopyTo(outputStream);
                         }
                     }
 
@@ -52,7 +52,7 @@ namespace Crazor.Server.Controllers
                     {
                         using (var outputStream = entry.Open())
                         {
-                            inputStream.CopyTo(outputStream);
+                            inputStream!.CopyTo(outputStream);
                         }
                     }
                 }
@@ -71,7 +71,7 @@ namespace Crazor.Server.Controllers
                 return System.IO.File.OpenRead(iconPath);
 
             // look for crazor defaults.
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(asm=> !asm.FullName.StartsWith("Crazor.")))
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(asm=> !asm.FullName!.StartsWith("Crazor.")))
             {
                 var resourceName = $"{assembly.GetName().Name}.wwwroot{icon.Replace(Path.DirectorySeparatorChar, '.').Replace(Path.AltDirectorySeparatorChar, '.')}";
                 if (assembly.GetManifestResourceNames().Contains(resourceName))

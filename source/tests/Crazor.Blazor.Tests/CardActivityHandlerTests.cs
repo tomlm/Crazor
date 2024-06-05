@@ -8,8 +8,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Crazor.Blazor.Tests
 {
-
-
+#pragma warning disable CS8602 
+#pragma warning disable CS8604 
 
     [TestClass]
     public class CardActivityHandlerTests : CardTest
@@ -23,7 +23,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestQueryLink()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -41,7 +41,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestActionInvoke()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -70,7 +70,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestTaskModule()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -141,7 +141,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestTaskModulePost()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -213,7 +213,7 @@ namespace Crazor.Blazor.Tests
                 .AssertHasOnlySubmitActions();
 
             // Click Send button
-            var submitAction = card.GetElements<AdaptiveSubmitAction>().FirstOrDefault();
+            var submitAction = card.GetElements<AdaptiveSubmitAction>().FirstOrDefault()!;
             var data = JObject.FromObject(submitAction.Data);
 
             response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
@@ -242,7 +242,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestTaskModulePostEdit()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -315,7 +315,7 @@ namespace Crazor.Blazor.Tests
 
             // Click Edit button
             var submitAction = card.GetElements<AdaptiveSubmitAction>().FirstOrDefault();
-            var data = JObject.FromObject(submitAction.Data);
+            var data = JObject.FromObject(submitAction!.Data);
 
             response = await adapter.Invoke(CreateMessagingExtensionSubmitActionActivity(new MessagingExtensionAction()
             {
@@ -346,7 +346,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestTaskModuleCancel()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -389,7 +389,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestChoiceSetDataQuery()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 
@@ -479,7 +479,7 @@ namespace Crazor.Blazor.Tests
         public async Task TestSearch()
         {
             var bot = Services.GetRequiredService<IBot>();
-            var configuration = Services.GetService<IConfiguration>();
+            var configuration = Services.GetRequiredService<IConfiguration>();
             var hostUri = configuration.GetValue<string>("HostUri");
             var adapter = new CardTestAdapter(bot);
 

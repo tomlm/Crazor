@@ -154,7 +154,7 @@ namespace Crazor
         /// <param name="subject">An optional field for the meeting subject.</param>  
         /// <param name="content">An optional field for the meeting details field.</param>  
         /// <returns>url</returns>
-        public static string CreateTeamsSchedulingDialogLink(string[]? attendees = null, DateTime? startTime = null, DateTime? endTime = null, string? subject = null, string content = null)
+        public static string CreateTeamsSchedulingDialogLink(string[]? attendees = null, DateTime? startTime = null, DateTime? endTime = null, string? subject = null, string? content = null)
         {
             QueryBuilder qb = new QueryBuilder();
             if (attendees != null)

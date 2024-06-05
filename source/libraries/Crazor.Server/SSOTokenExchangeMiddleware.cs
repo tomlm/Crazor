@@ -62,7 +62,7 @@ namespace Crazor.Server
             // if string.Equals(Channels.Msteams, turnContext.Activity.ChannelId, StringComparison.OrdinalIgnoreCase)
             if (turnContext.Activity.Type == ActivityTypes.Invoke || turnContext.Activity.Type == ActivityTypes.Event)
             {
-                TokenExchangeInvokeRequest tokenExchangeRequest = null;
+                TokenExchangeInvokeRequest? tokenExchangeRequest = null;
 
                 if (string.Equals(turnContext.Activity.Name, SignInConstants.TokenExchangeOperationName, StringComparison.OrdinalIgnoreCase))
                 {
@@ -99,7 +99,7 @@ namespace Crazor.Server
             // Create a StoreItem with Etag of the unique 'signin/tokenExchange' request
             var storeItem = new TokenStoreItem
             {
-                ETag = (turnContext.Activity.Value as JObject).Value<string>("id")
+                ETag = (turnContext.Activity.Value as JObject)?.Value<string>("id")!
             };
 
             var storeItems = new Dictionary<string, object> { { TokenStoreItem.GetStorageKey(turnContext), storeItem } };
@@ -124,7 +124,7 @@ namespace Crazor.Server
             return true;
         }
 
-        private async Task SendInvokeResponseAsync(ITurnContext turnContext, object body = null, HttpStatusCode httpStatusCode = HttpStatusCode.OK, CancellationToken cancellationToken = default)
+        private async Task SendInvokeResponseAsync(ITurnContext turnContext, object? body = null, HttpStatusCode httpStatusCode = HttpStatusCode.OK, CancellationToken cancellationToken = default)
         {
             await turnContext.SendActivityAsync(
                 new Activity
@@ -142,7 +142,7 @@ namespace Crazor.Server
         {
             var botId = _configuration.GetValue<string>("MicrosoftAppId");
             var hostUri = _configuration.GetValue<string>("HostUri");
-            TokenResponse tokenExchangeResponse = null;
+            TokenResponse? tokenExchangeResponse = null;
             string message = "The bot is unable to exchange token. Proceed with regular login.";
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
             try
@@ -153,6 +153,7 @@ namespace Crazor.Server
                     // Uri = $"api://{new Uri(hostUri).Host}/BotId-{botId}"
                 };
 
+#pragma warning disable CS0618 // Type or member is obsolete
                 if (userTokenClient != null)
                 {
                     tokenExchangeResponse = await userTokenClient.ExchangeTokenAsync(
@@ -175,6 +176,7 @@ namespace Crazor.Server
                 {
                     throw new NotSupportedException("Token Exchange is not supported by the current adapter.");
                 }
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 #pragma warning disable CA1031 // Do not catch general exception types (ignoring, see comment below)
             catch (Exception err)

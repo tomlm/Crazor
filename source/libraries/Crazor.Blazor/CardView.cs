@@ -26,7 +26,7 @@ namespace Crazor.Blazor
         /// </summary>
         public string Name => this.GetType().Name;
 
-        public ClaimsPrincipal? User => App.Context.User!;
+        public ClaimsPrincipal User => App.Context.User;
 
         /// <summary>
         /// App for this CardView
@@ -90,7 +90,7 @@ namespace Crazor.Blazor
             try
             {
                 // Create a RenderFragment from the component
-                var ctx = new RenderingContext(ServiceProvider);
+                var ctx = new RenderingContext(ServiceProvider!);
                 var renderer = ctx.RenderComponent(typeof(CardViewWrapper), ComponentParameter.CreateParameter("CardView", this));
 #if XML_SERIALIZATION
                 xml = rendered.Markup;
@@ -302,7 +302,7 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
                     return false;
 
-                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType?.Name!))
                     return false;
 
                 if (propertyInfo.Name == "Model")
@@ -326,7 +326,7 @@ namespace Crazor.Blazor
                 if (propertyInfo.GetCustomAttribute<InjectAttribute>() != null)
                     return false;
 
-                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType.Name!))
+                if (ignorePropertiesOnTypes.Contains(propertyInfo.DeclaringType?.Name!))
                     return false;
 
                 return true;
@@ -388,7 +388,7 @@ namespace Crazor.Blazor
             }
             else
             {
-                Model = model as ModelT ?? JObject.FromObject(model).ToObject<ModelT>();
+                Model = model as ModelT ?? JObject.FromObject(model).ToObject<ModelT>()!;
             }
         }
     }

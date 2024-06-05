@@ -132,16 +132,19 @@ public class ComponentParameterCollection : ICollection<ComponentParameter>, IRe
                 if (group.Length == 1)
                 {
                     var p = group[0];
+#pragma warning disable ASP0006 // Do not use non-literal sequence numbers
                     builder.AddAttribute(
                         attrCount++,
                         p.Name!, // BANG: ComponentParameter does not allow a regular param to be created without a name
                         p.Value);
+#pragma warning restore ASP0006 // Do not use non-literal sequence numbers
 
                     continue;
                 }
 
                 if (groupObject is RenderFragment)
                 {
+#pragma warning disable ASP0006 // Do not use non-literal sequence numbers
                     builder.AddAttribute(
                         attrCount++,
                         group[0].Name!, // BANG: ComponentParameter does not allow a regular param to be created without a name
@@ -153,6 +156,7 @@ public class ComponentParameterCollection : ICollection<ComponentParameter>, IRe
                                     ccBuilder.AddContent(i, rf);
                             }
                         }));
+#pragma warning restore ASP0006 // Do not use non-literal sequence numbers
 
                     continue;
                 }
@@ -161,10 +165,12 @@ public class ComponentParameterCollection : ICollection<ComponentParameter>, IRe
 
                 if (groupType != null && groupType.IsGenericType && groupType.GetGenericTypeDefinition() == typeof(RenderFragment<>))
                 {
+#pragma warning disable ASP0006 // Do not use non-literal sequence numbers
                     builder.AddAttribute(
                         attrCount++,
                         group[0].Name!, // BANG: ComponentParameter does not allow a regular param to be created without a name
                         WrapTemplates(groupType, group));
+#pragma warning restore ASP0006 // Do not use non-literal sequence numbers
 
                     continue;
                 }

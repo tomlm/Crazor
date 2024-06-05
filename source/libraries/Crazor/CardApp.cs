@@ -78,7 +78,7 @@ namespace Crazor
         /// <summary>
         /// The action we are processing.
         /// </summary>
-        public AdaptiveCardInvokeAction? Action { get; set; }
+        public AdaptiveCardInvokeAction Action { get; set; }
 
         /// <summary>
         /// Navigation stack
@@ -114,7 +114,7 @@ namespace Crazor
         /// <summary>
         /// Is the current context running in the web page
         /// </summary>
-        public bool IsWebHost => this.Activity.ChannelId == Context.Configuration.GetValue<Uri>("HostUri").Host;
+        public bool IsWebHost => this.Activity.ChannelId == Context.Configuration.GetValue<Uri>("HostUri")?.Host;
 
         /// <summary>
         /// TaskModuleAction is used to control signal that the taskmodule should be closed and the action to take with the card.
@@ -240,7 +240,7 @@ namespace Crazor
                     SaveCardState();
                 }
             }
-            catch (AdaptiveAuthenticationRequiredException authRequired)
+            catch (AdaptiveAuthenticationRequiredException)
             {
                 SaveCardState();
                 throw;
@@ -271,7 +271,7 @@ namespace Crazor
         {
             if (path.StartsWith("~") || path.StartsWith("/"))
             {
-                var uri = Context.Configuration.GetValue<Uri>("HostUri");
+                var uri = Context.Configuration.GetValue<Uri>("HostUri")!;
                 return new Uri(uri, path.TrimStart('~')).AbsoluteUri;
             }
             return new Uri(path).AbsoluteUri;
@@ -338,7 +338,9 @@ namespace Crazor
             }
             sw.Stop();
 
+#pragma warning disable CS0618 // Type or member is obsolete
             outboundCard.Title = outboundCard.Title ?? this.Name;
+#pragma warning restore CS0618 // Type or member is obsolete
 #if instrument
             var host = this.Context.Configuration.GetValue<Uri>("HostUri").Host.ToLower();
             if (host == "localhost" || host.EndsWith("ngrok.io") || host.EndsWith(".devtunnels.ms"))
@@ -354,7 +356,7 @@ namespace Crazor
                 Context.ServiceOptions.Logger.Response?.Invoke(this.Activity, outboundCard);
             }
 
-            return outboundCard;
+            return outboundCard!;
         }
 
         /// <summary>
@@ -432,7 +434,7 @@ namespace Crazor
                 }
             }
 
-            CurrentView.SetModel(cardState.Model);
+            CurrentView.SetModel(cardState.Model!);
         }
 
         private void SaveCardState()
@@ -546,12 +548,12 @@ namespace Crazor
 
         public Uri GetCurrentCardUri()
         {
-            return new Uri(Context.Configuration.GetValue<Uri>("HostUri"), this.GetCurrentCardRoute());
+            return new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, this.GetCurrentCardRoute());
         }
 
         public Uri GetCardUriForRoute(string route)
         {
-            return new Uri(Context.Configuration.GetValue<Uri>("HostUri"), route);
+            return new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, route);
         }
 
         public virtual string GetCurrentCardRoute()
@@ -628,7 +630,7 @@ namespace Crazor
 
             if (Action?.Verb == Constants.LOAD_VERB)
             {
-                var newRoute = ((JObject)Action.Data)[Constants.ROUTE_KEY].ToString();
+                var newRoute = ((JObject)Action.Data)[Constants.ROUTE_KEY]!.ToString();
 
                 // call stack ALWAYS has default page at root
                 while (CallStack.Count > 1)
@@ -742,7 +744,6 @@ namespace Crazor
                 Data = data
             };
 
-            MethodInfo? verbMethod = null;
             if (action.Verb != Constants.REFRESH_VERB &&
                 action.Verb != Constants.LOAD_VERB)
             {
@@ -822,8 +823,8 @@ namespace Crazor
             // process [FromCardRoute] attributes. This allows [FromCardRoute] to be placed on a property which doesn't match the RouteData.property name
             foreach (var targetProperty in this.CurrentView.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
             {
-                var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>().Name ?? targetProperty.Name;
-                var dataProperty = this.Route.RouteData.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
+                var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>()?.Name ?? targetProperty.Name;
+                var dataProperty = this.Route.RouteData?.Properties().Where(p => p.Name.ToLower() == fromRouteName.ToLower()).SingleOrDefault();
                 if (dataProperty != null)
                 {
                     this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
@@ -831,7 +832,7 @@ namespace Crazor
             }
 
             // Process any Route properties as setters onto current view.
-            foreach (var routeProperty in this.Route.RouteData.Properties().Where(p => !p.Name.StartsWith("App.")))
+            foreach (var routeProperty in this.Route.RouteData!.Properties().Where(p => !p.Name.StartsWith("App.")))
             {
                 ObjectPath.SetPathValue(this.CurrentView, routeProperty.Name, routeProperty.Value.ToString(), false);
             }
@@ -843,7 +844,7 @@ namespace Crazor
                     targetProperty.Name;
                 if (fromQueryName != null)
                 {
-                    var dataProperty = Route.QueryData.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
+                    var dataProperty = Route.QueryData!.Properties().Where(p => p.Name.ToLower() == fromQueryName.ToLower()).SingleOrDefault();
                     if (dataProperty != null)
                     {
                         this.CurrentView.SetTargetProperty(targetProperty, dataProperty.Value);
@@ -961,7 +962,7 @@ namespace Crazor
                 data = job;
             else
             {
-                var text = inObj?.ToString().Trim();
+                var text = inObj?.ToString()!.Trim();
                 if (!String.IsNullOrEmpty(text))
                 {
                     data = JObject.Parse(text);
@@ -1027,7 +1028,7 @@ namespace Crazor
                     try
                     {
                         // we need to add refresh userids
-                        var connectorClient = Context.TurnContext.TurnState?.Get<IConnectorClient>();
+                        var connectorClient = Context.TurnContext.TurnState?.Get<IConnectorClient>()!;
                         var teamsMembers = await connectorClient.Conversations.GetConversationPagedMembersAsync(teamId, 60, cancellationToken: cancellationToken);
                         this.TeamsConversationMembers = teamsMembers.Members.Select(member => $"8:orgid:{member.AadObjectId}").ToList();
                     }
@@ -1324,7 +1325,7 @@ namespace Crazor
             if (Context.User.Identity?.IsAuthenticated == false)
             {
                 var authentication = await GetAdaptiveAuthentication(cancellationToken);
-                throw new AdaptiveAuthenticationRequiredException(authentication, HttpStatusCode.Unauthorized);
+                throw new AdaptiveAuthenticationRequiredException(authentication!, HttpStatusCode.Unauthorized);
             }
         }
 
@@ -1346,6 +1347,8 @@ namespace Crazor
         public async Task LogoutUserAsync(string connectionName, CancellationToken cancellationToken)
         {
             var userTokenClient = Context.TurnContext.TurnState.Get<UserTokenClient>();
+
+#pragma warning disable CS0618 // Type or member is obsolete
             if (userTokenClient != null)
             {
                 await userTokenClient.SignOutUserAsync(Activity.From.Id, connectionName, Activity.ChannelId, cancellationToken);
@@ -1358,6 +1361,8 @@ namespace Crazor
             {
                 throw new NotSupportedException("Logout is not supported by the current adapter.");
             }
+#pragma warning restore CS0618 // Type or member is obsolete
+
             Context.User = new ClaimsPrincipal(new ClaimsIdentity());
             // make sure that user is set into the authenticationStateProvider is initialized
             var isp = this.Context.AuthenticationStateProvider as IHostEnvironmentAuthenticationStateProvider;
@@ -1416,11 +1421,11 @@ namespace Crazor
             if (isPreview == false && authorizeAttributes.Any())
             {
                 // if we are not authenticated and there are Authorize attributes then we just blow out of here.
-                if (Context.User?.Identity.IsAuthenticated == false)
+                if (Context.User?.Identity?.IsAuthenticated == false)
                 {
                     // authentication is required.
                     var authentication = await GetAdaptiveAuthentication(cancellationToken);
-                    throw new AdaptiveAuthenticationRequiredException(authentication, HttpStatusCode.Unauthorized);
+                    throw new AdaptiveAuthenticationRequiredException(authentication!, HttpStatusCode.Unauthorized);
                 }
 
                 foreach (var authorizeAttribute in authorizeAttributes)
@@ -1440,7 +1445,7 @@ namespace Crazor
                     {
                         foreach (var role in authorizeAttribute.Roles.Split(',').Select(r => r.Trim()))
                         {
-                            if (!Context.User.IsInRole(role))
+                            if (!Context.User!.IsInRole(role))
                             {
                                 throw new UnauthorizedAccessException($"User is not in required role [{role}]");
                             }
@@ -1451,7 +1456,7 @@ namespace Crazor
         }
 
 
-        private async Task<AdaptiveAuthentication> GetAdaptiveAuthentication(CancellationToken cancellationToken)
+        private async Task<AdaptiveAuthentication?> GetAdaptiveAuthentication(CancellationToken cancellationToken)
         {
             var oauthAttribute = this.CurrentView.GetType().GetCustomAttribute<OAuthConnectionAttribute>();
             if (oauthAttribute != null && !String.IsNullOrEmpty(Activity.From.Id))
@@ -1480,7 +1485,7 @@ namespace Crazor
                     return authentication;
                 }
             }
-            return null;
+            return null!;
         }
     }
 }

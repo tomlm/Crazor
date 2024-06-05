@@ -10,8 +10,6 @@ namespace Crazor.AI.Recognizers
     public class FormRecognizer : FunctionsRecognizer
     {
 
-        private string _model;
-
         public FormRecognizer(OpenAIClient openAIClient) :
             base(openAIClient)
         {
@@ -46,13 +44,13 @@ namespace Crazor.AI.Recognizers
             if (result.Intents.ContainsKey(FormRecognizer.FUNCTIONS_INTENT))
             {
                 // var lastPrompt = dc.State.GetStringValue(cardView.LASTPROMPT) ?? string.Empty;
-                var commands2 = JToken.FromObject(result.Entities[FormRecognizer.FUNCTIONS_INTENT]).ToObject<List<Function>>();
+                var commands2 = JToken.FromObject(result.Entities[FormRecognizer.FUNCTIONS_INTENT]!).ToObject<List<Function>>()!;
 
                 // cull out hallucination of ASSIGN(prop, null)
                 commands2 = commands2.Where(r =>
                 {
                     var value = r.Args.Skip(1).FirstOrDefault();
-                    if (r.Name == FormFunctions.ASSIGN && (value == null || string.Compare(value?.ToString().Trim(), "null", ignoreCase: true) == 0))
+                    if (r.Name == FormFunctions.ASSIGN && (value == null || string.Compare(value?.ToString()?.Trim(), "null", ignoreCase: true) == 0))
                         return false;
                     return true;
                 }).ToList();

@@ -42,21 +42,22 @@
     public void OnStart()
         => ReplaceView<Refresh>();
 
-    public async Task OnInsert(CancellationToken cancellationToken)
+    public void OnInsert()
     {
         App.Client.Activation = $"TaskModuleAction.{TaskModuleAction.InsertCard}";
         TaskAction = TaskModuleAction.InsertCard;
     }
 
-    public async Task OnPost(CancellationToken cancellationToken)
+    public void OnPost()
     {
         App.Client.Activation = $"TaskModuleAction.{TaskModuleAction.PostCard}";
         TaskAction = TaskModuleAction.PostCard;
     }
 
 
-    public async Task OnOK(CancellationToken cancellationToken)
+    public void OnOK()
     {
-        CloseTaskModule(TaskAction.Value);
+        if (TaskAction != null)
+            CloseTaskModule(TaskAction.Value);
     }
 }

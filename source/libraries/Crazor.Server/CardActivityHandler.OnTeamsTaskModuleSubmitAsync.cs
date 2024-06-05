@@ -22,7 +22,7 @@ namespace Crazor.Server
 
             JObject data = JObject.FromObject(taskModuleRequest.Data);
             if (!data.ContainsKey(Constants.ROUTE_KEY) && data.ContainsKey("commandId"))
-                data[Constants.ROUTE_KEY] = (string)data["commandId"];
+                data[Constants.ROUTE_KEY] = (string)data["commandId"]!;
             CardRoute cardRoute = await CardRoute.FromDataAsync(data, Context.EncryptionProvider, cancellationToken);
 
             AdaptiveCardInvokeValue invokeValue = Utils.TransfromSubmitDataToExecuteAction(data);

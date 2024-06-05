@@ -72,7 +72,7 @@
         if (!String.IsNullOrWhiteSpace(text))
         {
             text = text.Trim();
-            if (!Todos.Any(todo => todo.Title.ToLower() == text.ToLower()))
+            if (!Todos.Any(todo => todo.Title!.ToLower() == text.ToLower()))
                 Todos.Add(new TodoItem() { Title = text.Trim() });
             else
                 AddBannerMessage("Duplicate todo", AdaptiveContainerStyle.Warning);

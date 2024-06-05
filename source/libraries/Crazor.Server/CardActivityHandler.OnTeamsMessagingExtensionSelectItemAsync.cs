@@ -20,7 +20,7 @@ namespace Crazor.Server
         protected async override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject value, CancellationToken cancellationToken)
         {
             string route = (string)value["route"]!;
-            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri"), route);
+            var uri = new Uri(Context.Configuration.GetValue<Uri>("HostUri")!, route);
 
             CardRoute cardRoute = CardRoute.FromUri(uri);
 

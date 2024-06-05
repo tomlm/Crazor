@@ -56,4 +56,13 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Crazor\Crazor.csproj" />
 	</ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;BL0007;CS8616;CS8618;CA1822</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;BL0007;CS8616;CS8618;CA1822</NoWarn>
+  </PropertyGroup>
+
 </Project>

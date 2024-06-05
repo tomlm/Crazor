@@ -56,8 +56,8 @@ namespace Crazor.Blazor.Tests
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View/SubPath", route.Path);
             Assert.AreEqual("View", route.View);
-            Assert.AreEqual(1, (int)route.QueryData["x"]);
-            Assert.AreEqual("test", (string)route.QueryData["y"]);
+            Assert.AreEqual(1, (int)route.QueryData["x"]!);
+            Assert.AreEqual("test", (string)route.QueryData["y"]!);
         }
 
 
@@ -71,8 +71,8 @@ namespace Crazor.Blazor.Tests
             Assert.AreEqual("Test", route.App);
             Assert.AreEqual("View/SubPath", route.Path);
             Assert.AreEqual("View", route.View);
-            Assert.AreEqual(1, (int)route.QueryData["x"]);
-            Assert.AreEqual("test", (string)route.QueryData["y"]);
+            Assert.AreEqual(1, (int)route.QueryData["x"]!);
+            Assert.AreEqual("test", (string)route.QueryData["y"]!);
         }
 
 

@@ -18,7 +18,7 @@ namespace Crazor.Attributes
 
         public override string? GetKey(object obj)
         {
-            CardApp cardApp = obj as CardApp;
+            CardApp? cardApp = obj as CardApp;
             if (cardApp != null)
             {
                 var rootKey = cardApp.Activity?.LocalTimestamp?.ToString(Pattern);

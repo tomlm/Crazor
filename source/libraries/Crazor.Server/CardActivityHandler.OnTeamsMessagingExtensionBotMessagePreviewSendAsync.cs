@@ -41,6 +41,7 @@ namespace Crazor.Server
             var activity = turnContext.Activity.CreateLoadRouteActivity(cardRoute.Route);
 
             var invoke = activity.Value as AdaptiveCardInvokeValue ?? JToken.FromObject(activity.Value ?? new JObject()).ToObject<AdaptiveCardInvokeValue>();
+            ArgumentNullException.ThrowIfNull(invoke);
             invoke.Action.Data = data;
             activity.Value = invoke;
 

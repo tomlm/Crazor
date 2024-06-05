@@ -2,7 +2,7 @@
 @inherits CardView
 
 <Card Version="1.4">
-    @if (User.Identity.IsAuthenticated)
+    @if (User?.Identity?.IsAuthenticated == true)
     {
         <TextBlock>@User.GetDisplayName()</TextBlock>
     }
