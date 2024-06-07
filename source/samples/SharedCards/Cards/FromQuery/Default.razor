@@ -1,6 +1,6 @@
 ﻿
 @inherits CardView
-@attribute [CardRoute("{PersonName ?}")]
+@attribute [CardRoute("{PersonName?}")]
 <Card Version="1.4">
     @if (!String.IsNullOrEmpty(PersonName))
     {
@@ -17,6 +17,7 @@
 @code
 {
     [Required]
+    [FromCardRoute]
     public string PersonName { get; set; }
 
     [FromCardQuery]

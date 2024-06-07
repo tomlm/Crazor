@@ -1,9 +1,7 @@
 using AdaptiveCards;
-using Crazor.Blazor.Components.Adaptive;
 using Crazor.Server;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +9,6 @@ using Microsoft.Identity.Web;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Threading;
 
 namespace Crazor.Blazor.Components
 {
@@ -212,19 +209,29 @@ namespace Crazor.Blazor.Components
             var acResponse = invokeResponse.Body as AdaptiveCardInvokeResponse;
             if (acResponse != null)
             {
-                if (acResponse.Value is AdaptiveCard card)
+                if (acResponse.StatusCode >= 200 && acResponse.StatusCode < 300)
                 {
-                    _card = card;
+                    if (acResponse.Value is AdaptiveCard card)
+                    {
+                        _card = card;
+                    }
+                    else
+                    {
+                        _card = CreateErrorCard(JsonConvert.SerializeObject(invokeResponse));
+                    }
                 }
-                else
-                    throw new Exception(JsonConvert.SerializeObject(acResponse.Value));
             }
             else
-                throw new Exception(JsonConvert.SerializeObject(invokeResponse.Body));
+            {
+                _card = CreateErrorCard(JsonConvert.SerializeObject(invokeResponse));
+            }
 
             // notify host that route is now different
-            this.Route = new Uri(_card.Metadata.WebUrl).PathAndQuery;
-            await OnCardRouteChanged.InvokeAsync(this.Route);
+            if (_card.Metadata?.WebUrl != null)
+            {
+                this.Route = new Uri(_card.Metadata.WebUrl).PathAndQuery;
+                await OnCardRouteChanged.InvokeAsync(this.Route);
+            }
 
             // tell tree to rerender. onrerender the card will be injected back into the html
             StateHasChanged();
@@ -232,5 +239,16 @@ namespace Crazor.Blazor.Components
 
         public void Dispose() => _dotNetObjectRef?.Dispose();
 
+        public AdaptiveCard CreateErrorCard(string message)
+        {
+            return new AdaptiveCard("1.0") 
+            { 
+                Body = new List<AdaptiveElement>() 
+                { 
+                    new AdaptiveTextBlock(this.Route) { Style = AdaptiveTextBlockStyle.Heading },
+                    new AdaptiveTextBlock(message) 
+                } 
+            };
+        }
     }
 }

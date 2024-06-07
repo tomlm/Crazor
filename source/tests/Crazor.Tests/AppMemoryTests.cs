@@ -5,7 +5,7 @@ using Microsoft.Bot.Builder;
 namespace Crazor.Tests
 {
     [TestClass]
-    public class MemoryTests : CardTest
+    public class AppMemoryTests : CardTest
     {
         [TestInitialize]
         public async Task TestInitialize()

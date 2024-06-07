@@ -44,20 +44,13 @@ namespace SharedCards.Cards.Wordle
         public async Task<WordleGame?> LoadGame(string date, string playerId, CancellationToken cancellationToken)
         {
             var gameKey = GetGameKey(date, playerId);
-            var result = await Context.Storage.ReadAsync(new string[] { gameKey }, cancellationToken);
-            if (result.TryGetValue(gameKey, out var val))
-            {
-                return JObject.FromObject(val).ToObject<WordleGame>();
-            }
-            return null;
+            return await Memory.GetObjectAsync<WordleGame>(gameKey, cancellationToken);
         }
 
         public async Task SaveGame(WordleGame wordleGame, CancellationToken cancellationToken)
         {
             var gameKey = GetGameKey(wordleGame.Date.ToString("yyyyMMdd"), wordleGame.Player.Id);
-            var keys = new Dictionary<string, object>();
-            keys[gameKey] = JObject.FromObject(wordleGame);
-            await Context.Storage.WriteAsync(keys, cancellationToken);
+            await Memory.SaveObjectAsync(gameKey, wordleGame, cancellationToken);
         }
 
         public static HashSet<string> Words = new HashSet<string>()

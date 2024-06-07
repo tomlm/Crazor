@@ -14,7 +14,8 @@
     <ActionExecute Title="Start Over" Verb="@nameof(OnStartOver)" />
     <ActionExecute Title="Submit bug" Verb="@nameof(OnSubmitBug)" />
     <ActionExecute Title="Next" Verb="@nameof(OnNext)" />
-
+    <ActionShowView Title="About" Route="@nameof(About)" IconUrl="@App.GetContentUrl("~/images/about.png")"  
+            AssociatedInputs="AdaptiveAssociatedInputs.None" Mode="AdaptiveActionMode.Secondary"/>
 </Card>
 
 @code {

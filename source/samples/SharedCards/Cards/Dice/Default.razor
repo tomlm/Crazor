@@ -6,20 +6,8 @@
 
 
 @code {
-    public void OnShowView()
+    public void OnLoad()
     {
-        if (App.DiceName == null)
-            ShowView("Settings");
-        else
-            ShowView("Dice");
-    }
-
-    public override Task OnResumeViewAsync(CardResult cardResult, CancellationToken cancellationToken)
-    {
-        if (App.DiceName == null)
-            ShowView("Settings");
-        else
-            ShowView("Dice");
-        return Task.CompletedTask;
+        ShowView(Utils.GetNewId());
     }
 }

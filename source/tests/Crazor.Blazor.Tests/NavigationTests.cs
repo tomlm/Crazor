@@ -30,6 +30,32 @@ namespace Crazor.Blazor.Tests
                     .AssertTextBlock("Card1");
         }
 
+        [TestMethod]
+        public async Task TestShowAndBackCodeless()
+        {
+            await LoadCard("/Cards/NavigationCodeless")
+                    .AssertTextBlock("Card1")
+                .ExecuteAction("Card2")
+                    .AssertTextBlock("Card2")
+                .ExecuteAction("Back")
+                    .AssertTextBlock("Card1");
+        }
+
+        [TestMethod]
+        public async Task TestReplaceCodeless()
+        {
+            await LoadCard("/Cards/NavigationCodeless")
+                    .AssertTextBlock("Card1")
+                .ExecuteAction("Card2")
+                    .AssertTextBlock("Card2")
+                .ExecuteAction("Card3")
+                    .AssertTextBlock("Card3")
+                .ExecuteAction("Back")
+                    .AssertTextBlock("Card1");
+        }
+
+
+
 
         [TestMethod]
         public async Task TestShowAndBackT()

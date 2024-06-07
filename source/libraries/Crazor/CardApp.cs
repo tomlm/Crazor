@@ -53,6 +53,8 @@ namespace Crazor
                 this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
             }
             context.App = this;
+            
+            this.Memory = new Memory(Context.Storage, this.Name!);
         }
 
         /// <summary>
@@ -134,6 +136,11 @@ namespace Crazor
         /// CardAppContext.
         /// </summary>
         public CardAppContext Context { get; }
+
+        /// <summary>
+        /// Memory system for the application. This allows you to easily stored memory scoped objects.
+        /// </summary>
+        public Memory Memory { get; set; }
 
         /// <summary>
         /// process the activity
@@ -228,6 +235,9 @@ namespace Crazor
 
                         if (this.Route == currentRoute)
                             break;
+
+                        // if we have a new route, apply the route attributes again.
+                        this.ApplyRouteAttributes(Route);
 
                         this.LastResult = null;
                     }
@@ -608,14 +618,10 @@ namespace Crazor
 
             this.ApplyRouteAttributes(Route);
 
-            // map App. routedata to app
-            foreach (var routeProperty in Route.RouteData.Properties().Where(p => p.Name.StartsWith("App.")))
-            {
-                ObjectPath.SetPathValue(this, routeProperty.Name.Substring(4), routeProperty.Value.ToString(), false);
-            }
-
             // lookup data
             var memoryMap = GetMemoryKeyMap();
+            
+            // NOTE: We use memoryMap and raw storage because we are doing bulk lookup of all of the scoped memories. 
             var state = await Context.Storage.ReadAsync(memoryMap.Keys.ToArray(), cancellationToken);
 
             // assign data to the properties.
@@ -696,7 +702,6 @@ namespace Crazor
             var cardRoute = CardRoute.Parse(cardViewState.Route);
             Context.RouteResolver.ResolveRoute(cardRoute, out var cardViewType);
             ArgumentNullException.ThrowIfNull(cardViewType);
-
             this.CurrentView = CreateCardView(cardViewType);
             ArgumentNullException.ThrowIfNull(this.CurrentView, $"View {cardViewState.Route} not found");
 
@@ -791,18 +796,24 @@ namespace Crazor
                     }
                     break;
 
-                case Constants.ABOUT_VERB:
+                case Constants.SHOWVIEW_VERB:
                     // we call invoke verb so it can be overriden
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
-                        this.ShowView(Constants.ABOUT_VIEW);
+                        if (ObjectPath.TryGetPathValue<string>(action.Data, "Route", out var route))
+                            this.ShowView(route, ObjectPath.GetPathValue<object?>(action.Data, "Model", null));
+                        else
+                            AddBannerMessage($"Route not defined on OnShowView()");
                     }
                     break;
-                case Constants.SETTINGS_VERB:
+                case Constants.REPLACEVIEW_VERB:
                     // we call invoke verb so it can be overriden
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
-                        this.ShowView(Constants.SETTINGS_VIEW);
+                        if (ObjectPath.TryGetPathValue<string>(action.Data, "Route", out var route))
+                            this.ReplaceView(route, ObjectPath.GetPathValue<object?>(action.Data, "Model", null));
+                        else
+                            AddBannerMessage($"Route not defined on OnReplaceView()");
                     }
                     break;
                 default:
@@ -1132,29 +1143,29 @@ namespace Crazor
                 systemMenu.Actions.Add(outboundCard.Refresh.Action);
             }
 
-            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
-            {
-                systemMenu.Actions.Add(new AdaptiveExecuteAction()
-                {
-                    Title = Constants.ABOUT_VIEW,
-                    Verb = Constants.ABOUT_VERB,
-                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
-                    AssociatedInputs = AdaptiveAssociatedInputs.None,
-                    Mode = AdaptiveActionMode.Secondary
-                });
-            }
+            //if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.ABOUT_VIEW}"), out var cardViewType) && this.Route.View != Constants.ABOUT_VIEW)
+            //{
+            //    systemMenu.Actions.Add(new AdaptiveExecuteAction()
+            //    {
+            //        Title = Constants.ABOUT_VIEW,
+            //        Verb = Constants.ABOUT_VERB,
+            //        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("AboutIcon") ?? "/images/about.png").AbsoluteUri,
+            //        AssociatedInputs = AdaptiveAssociatedInputs.None,
+            //        Mode = AdaptiveActionMode.Secondary
+            //    });
+            //}
 
-            if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
-            {
-                systemMenu.Actions.Add(new AdaptiveExecuteAction()
-                {
-                    Title = Constants.SETTINGS_VIEW,
-                    Verb = Constants.SETTINGS_VERB,
-                    IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
-                    AssociatedInputs = AdaptiveAssociatedInputs.None,
-                    Mode = AdaptiveActionMode.Secondary
-                });
-            }
+            //if (Context.RouteResolver.ResolveRoute(CardRoute.Parse($"/Cards/{this.Name}/{Constants.SETTINGS_VIEW}"), out cardViewType) && this.Route.View != Constants.SETTINGS_VIEW)
+            //{
+            //    systemMenu.Actions.Add(new AdaptiveExecuteAction()
+            //    {
+            //        Title = Constants.SETTINGS_VIEW,
+            //        Verb = Constants.SETTINGS_VERB,
+            //        IconUrl = new Uri(currentUri, Context.Configuration.GetValue<string>("SettingsIcon") ?? "/images/settings.png").AbsoluteUri,
+            //        AssociatedInputs = AdaptiveAssociatedInputs.None,
+            //        Mode = AdaptiveActionMode.Secondary
+            //    });
+            //}
 
             if (Diag.Debugger.IsAttached)
             {
@@ -1293,7 +1304,13 @@ namespace Crazor
             }
         }
 
-        protected string? GetKey(string name, string? key) => String.IsNullOrEmpty(key) ? null : $"{this.Name}-{name}-{key}";
+        protected string? GetScopedKey(string scope, string? key)
+        {
+            ArgumentNullException.ThrowIfNull(scope);
+            if (String.IsNullOrEmpty(key))
+                return null;
+            return $"{this.Name}-{scope}-{key ?? "data"}";
+        }
 
         private Dictionary<string, MemoryAttribute> GetMemoryKeyMap()
         {
@@ -1306,7 +1323,7 @@ namespace Crazor
             // add keys to lookup
             foreach (var memoryAttribute in memoryAttributes)
             {
-                var key = GetKey(memoryAttribute.Name, memoryAttribute.GetKey(this));
+                var key = GetScopedKey(memoryAttribute.Name, memoryAttribute.GetKey(this));
                 if (key != null && !attributeMap.ContainsKey(key))
                 {
                     attributeMap.Add(key, memoryAttribute);

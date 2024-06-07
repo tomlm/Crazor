@@ -1,6 +1,8 @@
 using Crazor.Interfaces;
+using Microsoft.Extensions.Azure;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using System.Text;
 
 namespace Crazor
 {
@@ -55,9 +57,26 @@ namespace Crazor
                 Route = pathAndQuery
             };
 
-            var parts = pathAndQuery.Split('?');
-            var local = parts[0];
-            result.Query = parts.Skip(1).FirstOrDefault();
+            StringBuilder sbPath = new StringBuilder();
+            string query = String.Empty;
+            for (int i = 0; i < pathAndQuery.Length; i++)
+            {
+                if (pathAndQuery[i] != '?')
+                {
+                    sbPath.Append(pathAndQuery[i]);
+                }
+                else if (Char.IsLetter(pathAndQuery[i + 1]))
+                {
+                    query = pathAndQuery.Substring(i + 1);
+                    break;
+                }
+                else
+                {
+                    sbPath.Append(pathAndQuery[i]);
+                }
+            }
+            var local = sbPath.ToString();
+            result.Query = query;
             var pathParts = local.Trim('/').Split('/');
             if (pathParts.Length < 2)
                 throw new ArgumentException($"Unknown route {pathAndQuery}");

@@ -1,14 +1,9 @@
 using Crazor;
 using Crazor.Blazor;
 using Crazor.Server;
-using Crazor.Server.Controllers;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure.Blobs;
-using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 

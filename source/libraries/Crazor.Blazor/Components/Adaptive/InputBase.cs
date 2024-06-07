@@ -49,7 +49,7 @@ namespace Crazor.Blazor.Components.Adaptive
             if (!String.IsNullOrEmpty(this.Binding))
             {
                 this.BindingValue = CardView;
-                var parts = this.Binding.Split('.');
+                var parts = this.Binding.Trim().Split('.');
                 foreach (var part in parts)
                 {
                     this.BindingProperty = this.BindingValue?.GetType().GetProperty(part)!;

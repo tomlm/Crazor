@@ -296,6 +296,12 @@ namespace Crazor
         public static void ApplyRouteAttributes(this CardApp app, CardRoute route)
         {
             ApplyRouteAttributesToTarget(app, route);
+
+            // map App. routedata to app
+            foreach (var routeProperty in route.RouteData.Properties().Where(p => p.Name.StartsWith("App.")))
+            {
+                ObjectPath.SetPathValue(app, routeProperty.Name.Substring(4), routeProperty.Value.ToString(), false);
+            }
         }
 
         public static void ApplyRouteAttributes(this ICardView cardView, CardRoute route)
@@ -305,7 +311,7 @@ namespace Crazor
 
         private static void ApplyRouteAttributesToTarget(object target, CardRoute route)
         {
-            // map Route attributes for app
+            // map Route attributes for target
             foreach (var targetProperty in target.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardRouteAttribute>() != null))
             {
                 var fromRouteName = targetProperty.GetCustomAttribute<FromCardRouteAttribute>()?.Name ?? targetProperty.Name;
@@ -319,7 +325,7 @@ namespace Crazor
                 }
             }
 
-            // map query parameters for app.
+            // map query parameters for target
             foreach (var targetProperty in target.GetType().GetProperties().Where(prop => prop.GetCustomAttribute<FromCardQueryAttribute>() != null))
             {
                 var fromQueryName = targetProperty.GetCustomAttribute<FromCardQueryAttribute>()?.Name ??

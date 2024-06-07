@@ -1,14 +1,14 @@
-﻿@attribute [CardRoute("{App.DiceName}")]
+﻿@attribute [CardRoute("{Id}")]
 
 @using SharedCards.Cards.Dice
-@inherits CardView<DiceApp>
+@inherits CardView<DiceApp, DiceModel>
 
 <Card Version="1.4">
-    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder" Style="AdaptiveTextBlockStyle.Heading">@App.DiceName</TextBlock>
-    @if (App.Dice != null)
+    <TextBlock Size="AdaptiveTextSize.Large" Weight="AdaptiveTextWeight.Bolder" Style="AdaptiveTextBlockStyle.Heading">@Model.Name</TextBlock>
+    @if (Model.Values != null)
     {
         <ImageSet>
-            @foreach (var die in App.Dice)
+            @foreach (var die in Model.Values)
             {
                 <Image Url="@App.GetContentUrl($"~/Cards/Dice/dice{die}.png")" Size="AdaptiveImageSize.Medium" />
             }
@@ -16,9 +16,30 @@
     }
     <ActionExecute Verb="@nameof(OnRollDice)" Title="Roll Dice" />
     <ActionExecute Title="Refresh" />
+    <ActionExecute Verb="@nameof(OnSettings)" AssociatedInputs="AdaptiveAssociatedInputs.None" Mode="AdaptiveActionMode.Secondary" Title="Settings" IconUrl="@App.GetContentUrl("~/images/Settings.png")" />
 </Card>
 
 @code {
-    public void OnRollDice() 
-        => App.RollDice();
+    [FromCardRoute]
+    public string Id { get; set; }
+
+    public async override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
+    {
+        this.Model = (await App.Memory.GetObjectAsync<DiceModel>(Id, cancellationToken))!;
+        if (this.Model == null)
+            ShowView($"{Id}/settings");
+        else
+            await base.OnActionAsync(action, cancellationToken);
+    }
+
+    public async Task OnRollDice(CancellationToken cancellationToken)
+    {
+        Model.RollDice();
+        await App.Memory.SaveObjectAsync(Id, Model, cancellationToken);
+    }
+
+    public void OnSettings()
+    {
+        ShowView($"{Id}/settings");
+    }
 }

@@ -37,7 +37,7 @@ namespace Crazor.Server
 
             var card = await cardApp.ProcessInvokeActivity(loadRouteActivity, isPreview: false, cancellationToken);
 
-            return CreateMessagingExtensionActionResponse(messageExtensionAction.CommandContext, cardApp, card);
+            return CreateMessagingExtensionActionResponse(messageExtensionAction.CommandContext, cardApp, card)!;
         }
 
         protected static AdaptiveCard TransformCardNoRefresh(AdaptiveCard card)

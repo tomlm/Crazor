@@ -1,11 +1,13 @@
 ﻿@using Crazor
+@using Microsoft.Bot.Builder
 @using SharedCards.Cards.Dice
 @using System.ComponentModel;
-@inherits CardView<DiceApp>
+@inherits CardView<DiceApp, DiceModel>
+@attribute [CardRoute("{Id}/settings")]
 
 <Card Version="1.4">
-    <InputText Binding="DiceName" />
-    <InputNumber Binding="NumberDice" />
+    <InputText Binding="Model.Name" />
+    <InputNumber Binding="Model.Number" />
 
     @if (IsModelValid)
     {
@@ -15,29 +17,26 @@
 </Card>
 
 @code {
-    [Required]
-    public string? DiceName { get; set; }
+    [FromCardRoute]
+    public string Id { get; set; }
 
-    [Required]
-    [Description("Number of dice")]
-    [Range(1, 50, ErrorMessage = "Dice must be between 1 and 50.")]
-    public int? NumberDice { get; set; }
-
-    protected override void OnInitialized()
+    public async Task OnLoad(CancellationToken cancellationToken)
     {
-        DiceName = App.DiceName;
-        NumberDice = App.NumberDice;
+        this.Model = (await App.Memory.GetScopedObjectAsync<DiceModel>("dice", Id, cancellationToken))!;
+        if (this.Model == null)
+        {
+            this.Model = new DiceModel() { Id = Id };
+        }
     }
 
-    public void OnOK()
+    public async Task OnOK(CancellationToken cancellationToken)
     {
         if (this.IsModelValid)
         {
-            App.DiceName = DiceName;
-            App.NumberDice = NumberDice;
-            App.RollDice();
+            Model.RollDice();
+            await App.Memory.GetScopedObjectAsync("dice", Model.Id, Model, cancellationToken);
             this.CloseTaskModule(TaskModuleAction.Auto);
-            CloseView();
+            CloseView(this.Model);
         }
     }
 }
