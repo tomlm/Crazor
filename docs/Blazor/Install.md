@@ -99,13 +99,12 @@ app.MapControllers();
 @using Newtonsoft.Json;
 ```
 
-## Modify /App.razor 
+## Modify /Routes.razor 
 
 You need to add a reference to **Crazor.Blazor** assembly by setting **AdditionalAssemblies** in your App.Razor file:
 
 ```html
-<Router AppAssembly="@typeof(App).Assembly" 
-        AdditionalAssemblies="@(new[] { typeof(Crazor.Blazor.Pages.Cards).Assembly})">
+<Router ... AdditionalAssemblies="@(new[] { typeof(Crazor.Blazor.Pages.Cards).Assembly})">
 ```
 
 This adds razor pages defined **Crazor.Blazor** package, specifically the page that hosts a card for a given route.
