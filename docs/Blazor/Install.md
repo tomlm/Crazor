@@ -10,36 +10,32 @@ Adding **Crazor.Blazor** is super easy.  Take a stock Blazor Server project and 
 
 ## Add Crazor.Blazor package to Server
 
->  **NOTE: Currently Crazor.Blazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a nuget.config in the root of your project with the following:**
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <clear />
-    <add key="Crazor" value="https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json" />
-  </packageSources>
-</configuration>
-```
-
 Then you can add the **Crazor.Blazor** package
 
 ```shell
-nuget add package Crazor
 nuget add package Crazor.Blazor
-nuget add package Crazor.Server
 ```
 
 And register crazor in your **program.cs** :
 
 ```c#
+// ---- <CRAZOR>
 builder.Services.AddCrazor();
-builder.Services.AddCrazorServer();
+builder.Services.AddCrazorServer((options) =>
+{
+	options.Manifest.Version = "1.0.0";
+	options.Manifest.Developer.Name = "...";
+	options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
+});
 builder.Services.AddCrazorBlazor();
-...
-app.UseCrazorServer();
-```
+// ---- </CRAZOR>
 
+...
+// ---- <CRAZOR>
+app.UseCrazorServer();
+app.UseCrazorBlazor();
+// ---- </CRAZOR>
+```
 
 
 ## Add IStorage provider
@@ -55,9 +51,8 @@ nuget add Microsoft.Bot.Builder.Azure.Blobs
 Adding to your **program.cs**:
 
 ```C#
-var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
-if (storageKey != null)
-	builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "mybot"));
+// register blob storage for state management
+builder.Services.AddSingleton<IStorage>(sp => new BlobsStorage(builder.Configuration.GetValue<string>("AzureStorage"), containerName:"cards"));
 ```
 
 
@@ -84,26 +79,32 @@ app.MapControllers();
 
 2. Create a **Cards/_Imports.razor** file containing default namespaces:
 
-   ```C#
-   @using Crazor
-   @using Crazor.AdaptiveCards
-   @using Crazor.Attributes
-   @using Crazor.Blazor
-   @using Crazor.Blazor.Components.Adaptive;
-   @using Crazor.Exceptions
-   @using Crazor.Teams;
-   @using System.ComponentModel.DataAnnotations;
-   @using System.Threading;
-   @using System.Threading.Tasks;
-   ```
+```C#
+@using AdaptiveCards
+@using Crazor
+@using Crazor.Attributes
+@using Crazor.Blazor
+@using Crazor.Blazor.Components.Adaptive
+@using Crazor.Exceptions
+@using Crazor.Teams
+@using System.ComponentModel.DataAnnotations
+@using System.Threading
+@using System.Threading.Tasks
+@using Microsoft.Identity.Web
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.Bot.Schema
+@using Microsoft.Bot.Connector
+@using Microsoft.Extensions.Hosting
+@using Newtonsoft.Json;
+```
 
-## Modify /App.razor 
+## Modify /Routes.razor 
 
-You need to add a reference to **Crazor.Blazor** assembly by setting **AdditionalAssemblies** in your App.Razor file:
+You need to add a reference to **Crazor.Blazor** assembly by setting **AdditionalAssemblies** in your Routes.razor file:
 
 ```html
-<Router AppAssembly="@typeof(App).Assembly" 
-        AdditionalAssemblies="@(new[] { typeof(Crazor.Blazor.Pages.Cards).Assembly})">
+<Router ... AdditionalAssemblies="@(new[] { typeof(Crazor.Blazor.Pages.Cards).Assembly})">
 ```
 
 This adds razor pages defined **Crazor.Blazor** package, specifically the page that hosts a card for a given route.
@@ -112,13 +113,13 @@ This adds razor pages defined **Crazor.Blazor** package, specifically the page t
 
 (REQUIRED) Look at [Settings](../Settings.md) page for information settings for your project 
 
-## Modify Pages/_Host.cshtml or Pages/_Layout.cshtml
-You need to add adaptive card javascript to the header of either _Host.csthml or _Layout.cshtml
+## Modify App.razor 
+You need to add adaptive card javascript to the header App.razor
 
 ```html
 <head>
 ...
-    <!-- CRAZOR -->
+    <!-- <CRAZOR> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
     <script src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
@@ -144,14 +145,14 @@ You need to add adaptive card javascript to the header of either _Host.csthml or
         }
     </style>
     <link rel="stylesheet" type="text/css" href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
-    <!--CRAZOR -->
+    <!-- </CRAZOR> -->
 ...
 </head>
 ```
 
-# (Optional) Modify index.razor to enumerate your card apps
+# (Optional) Modify Home.razor to enumerate your card apps
 
-Insert this the content of your **Index.razor**
+Insert this the content of your **Home.razor**
 
 ```html
 @page "/"
