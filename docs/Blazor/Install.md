@@ -113,13 +113,13 @@ This adds razor pages defined **Crazor.Blazor** package, specifically the page t
 
 (REQUIRED) Look at [Settings](../Settings.md) page for information settings for your project 
 
-## Modify Pages/_Host.cshtml or Pages/_Layout.cshtml
-You need to add adaptive card javascript to the header of either _Host.csthml or _Layout.cshtml
+## Modify App.razor 
+You need to add adaptive card javascript to the header App.razor
 
 ```html
 <head>
 ...
-    <!-- CRAZOR -->
+    <!-- <CRAZOR> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
     <script src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
@@ -145,14 +145,14 @@ You need to add adaptive card javascript to the header of either _Host.csthml or
         }
     </style>
     <link rel="stylesheet" type="text/css" href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
-    <!--CRAZOR -->
+    <!-- </CRAZOR> -->
 ...
 </head>
 ```
 
-# (Optional) Modify index.razor to enumerate your card apps
+# (Optional) Modify Home.razor to enumerate your card apps
 
-Insert this the content of your **Index.razor**
+Insert this the content of your **Home.razor**
 
 ```html
 @page "/"
