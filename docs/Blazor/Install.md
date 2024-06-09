@@ -101,7 +101,7 @@ app.MapControllers();
 
 ## Modify /Routes.razor 
 
-You need to add a reference to **Crazor.Blazor** assembly by setting **AdditionalAssemblies** in your App.Razor file:
+You need to add a reference to **Crazor.Blazor** assembly by setting **AdditionalAssemblies** in your Routes.razor file:
 
 ```html
 <Router ... AdditionalAssemblies="@(new[] { typeof(Crazor.Blazor.Pages.Cards).Assembly})">
