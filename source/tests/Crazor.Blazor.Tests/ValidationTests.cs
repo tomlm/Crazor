@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Crazor.Blazor.Tests.Validation;
 using Crazor.Test;
 using Crazor.Test.MSTest;

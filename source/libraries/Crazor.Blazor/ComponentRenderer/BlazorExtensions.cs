@@ -7,8 +7,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
-using System.ComponentModel;
-using System.Reflection;
 using System.Text;
 
 namespace Crazor.Blazor.ComponentRenderer;

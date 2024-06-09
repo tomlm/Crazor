@@ -1,5 +1,4 @@
-﻿using AdaptiveCards;
-using Microsoft.Bot.Builder;
+﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 
 namespace Crazor.Server

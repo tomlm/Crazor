@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Crazor.Exceptions;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;

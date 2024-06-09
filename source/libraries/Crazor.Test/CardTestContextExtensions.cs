@@ -1,7 +1,4 @@
-using AdaptiveCards;
 using Crazor.Interfaces;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Bot.Builder.Adapters;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 
@@ -33,9 +30,9 @@ namespace Crazor.Test
             };
             await cardContext.Adapter.ProcessActivityAsync((Activity)activity, async (tc, ct) =>
             {
-                cardContext.App= CardTest.Factory.Create(cardRoute, tc);
+                cardContext.App = CardTest.Factory.Create(cardRoute, tc);
                 await cardContext.App.LoadAppAsync(activity, ct);
-                cardContext.Card = await cardContext.App.ProcessInvokeActivity(tc.Activity, isPreview:false, cancellationToken: ct);
+                cardContext.Card = await cardContext.App.ProcessInvokeActivity(tc.Activity, isPreview: false, cancellationToken: ct);
             }, default);
             return cardContext;
         }

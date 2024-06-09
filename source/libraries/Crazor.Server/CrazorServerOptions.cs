@@ -2,7 +2,7 @@ using Crazor.Teams;
 
 namespace Crazor
 {
-    public class CrazorServerOptions 
+    public class CrazorServerOptions
     {
         /// <summary>
         /// Teams manifest

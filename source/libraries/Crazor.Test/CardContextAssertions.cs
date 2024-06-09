@@ -1,5 +1,3 @@
-using AdaptiveCards;
-
 namespace Crazor.Test.MSTest
 {
     public static class CardContextAssertions

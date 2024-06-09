@@ -1,5 +1,3 @@
-using AdaptiveCards;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using System.Reflection;
 

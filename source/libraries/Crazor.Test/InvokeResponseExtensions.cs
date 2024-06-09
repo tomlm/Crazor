@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;

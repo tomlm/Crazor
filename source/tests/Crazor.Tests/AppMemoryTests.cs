@@ -1,6 +1,5 @@
 using Crazor.Test;
 using Crazor.Tests.Cards.Memory;
-using Microsoft.Bot.Builder;
 
 namespace Crazor.Tests
 {

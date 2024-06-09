@@ -1,8 +1,4 @@
-using AdaptiveCards;
 using Crazor.Attributes;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Crazor.Blazor.Tests.Cards.CodeOnlyView
 {

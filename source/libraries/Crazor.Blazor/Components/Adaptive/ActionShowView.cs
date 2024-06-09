@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
 
 namespace Crazor.Blazor.Components.Adaptive
 {

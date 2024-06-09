@@ -1,8 +1,8 @@
 ﻿using Azure.AI.OpenAI;
-using System.Diagnostics;
-using Newtonsoft.Json.Linq;
-using System.Text;
 using Microsoft.Bot.Builder;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using System.Text;
 
 namespace Crazor.AI.Recognizers
 {
@@ -109,58 +109,58 @@ namespace Crazor.AI.Recognizers
 
                     //if (model.Contains("chat"))
                     //{
-                        var options = new ChatCompletionsOptions()
+                    var options = new ChatCompletionsOptions()
+                    {
+                        DeploymentName = "gpt-3.5-turbo", // Use DeploymentName for "model" with non-Azure clients
+                        Temperature = temp,
+                        MaxTokens = maxTokens,
+                        NucleusSamplingFactor = (float)0.0,
+                        FrequencyPenalty = frequencyPenalty,
+                        PresencePenalty = presencePenalty,
+                        User = Guid.NewGuid().ToString("n")
+                    };
+                    if (stopWords != null)
+                    {
+                        foreach (var stopWord in stopWords)
                         {
-                            DeploymentName = "gpt-3.5-turbo", // Use DeploymentName for "model" with non-Azure clients
-                            Temperature = temp,
-                            MaxTokens = maxTokens,
-                            NucleusSamplingFactor = (float)0.0,
-                            FrequencyPenalty = frequencyPenalty,
-                            PresencePenalty = presencePenalty,
-                            User = Guid.NewGuid().ToString("n")
-                        };
-                        if (stopWords != null)
-                        {
-                            foreach (var stopWord in stopWords)
-                            {
-                                options.StopSequences.Add(stopWord);
-                            }
+                            options.StopSequences.Add(stopWord);
                         }
-                        else
+                    }
+                    else
+                    {
+                        options.StopSequences.Add(STOP);
+                    }
+                    Debug.WriteLine($"---> STOPWORDS: [{string.Join(",", options.StopSequences)}]");
+
+                    ChatRole chatRole = ChatRole.User;
+                    var chatTexts = prompt.Split(IM_START, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                    foreach (var chatText in chatTexts)
+                    {
+                        ChatRequestMessage? message = null;
+                        if (chatText.StartsWith("user"))
                         {
-                            options.StopSequences.Add(STOP);
+                            int iEnd = chatText.IndexOf(IM_END);
+                            message = new ChatRequestUserMessage(chatText.Substring("user".Length, iEnd - "user".Length));
                         }
-                        Debug.WriteLine($"---> STOPWORDS: [{string.Join(",", options.StopSequences)}]");
-
-                        ChatRole chatRole = ChatRole.User;
-                        var chatTexts = prompt.Split(IM_START, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-                        foreach (var chatText in chatTexts)
+                        else if (chatText.StartsWith("assistant"))
                         {
-                            ChatRequestMessage? message = null;
-                            if (chatText.StartsWith("user"))
-                            {
-                                int iEnd = chatText.IndexOf(IM_END);
-                                message = new ChatRequestUserMessage(chatText.Substring("user".Length, iEnd - "user".Length));
-                            }
-                            else if (chatText.StartsWith("assistant"))
-                            {
-                                int iEnd = chatText.IndexOf(IM_END);
-                                if (iEnd > 0)
-                                    message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length, iEnd - "assistant".Length));
-                                else
-                                    message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length));
-                            }
-                            else if (chatText.StartsWith("system"))
-                            {
-                                int iEnd = chatText.IndexOf(IM_END);
-                                message = new ChatRequestSystemMessage(chatText.Substring("system".Length, iEnd - "system".Length));
-                            }
-
-                            options.Messages.Add(message);
+                            int iEnd = chatText.IndexOf(IM_END);
+                            if (iEnd > 0)
+                                message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length, iEnd - "assistant".Length));
+                            else
+                                message = new ChatRequestAssistantMessage(chatText.Substring("assistant".Length));
+                        }
+                        else if (chatText.StartsWith("system"))
+                        {
+                            int iEnd = chatText.IndexOf(IM_END);
+                            message = new ChatRequestSystemMessage(chatText.Substring("system".Length, iEnd - "system".Length));
                         }
 
-                        var response = await openAIClient.GetChatCompletionsAsync(/*model, */options, cts.Token);
-                        return response.Value.Choices.FirstOrDefault()?.Message.Content!;
+                        options.Messages.Add(message);
+                    }
+
+                    var response = await openAIClient.GetChatCompletionsAsync(/*model, */options, cts.Token);
+                    return response.Value.Choices.FirstOrDefault()?.Message.Content!;
                     //}
                     //else
                     //{

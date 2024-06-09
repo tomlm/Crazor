@@ -1,16 +1,5 @@
-using AdaptiveCards;
-using Crazor.Attributes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net;
-using System.Reflection;
-using System.Security.Claims;
 
 namespace Crazor.Server
 {

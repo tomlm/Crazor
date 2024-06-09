@@ -1,7 +1,5 @@
-using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Net.WebSockets;
 
 namespace Crazor.Tests
 {

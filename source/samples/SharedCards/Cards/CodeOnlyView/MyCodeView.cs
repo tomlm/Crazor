@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Crazor;
 using Crazor.Attributes;
 using Microsoft.AspNetCore.Components;

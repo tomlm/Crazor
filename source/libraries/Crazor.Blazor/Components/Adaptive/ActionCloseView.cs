@@ -1,11 +1,4 @@
-﻿using AdaptiveCards;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Crazor.Blazor.Components.Adaptive
+﻿namespace Crazor.Blazor.Components.Adaptive
 {
     /// <summary>
     /// Close the current view and go show caller view

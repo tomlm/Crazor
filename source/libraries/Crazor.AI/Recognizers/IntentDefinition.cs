@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crazor.AI.Recognizers
 {
@@ -16,7 +11,7 @@ namespace Crazor.AI.Recognizers
         public IntentDefinition(string intent, string description, params string[] examples)
         {
             Intent = intent;
-            Description= description;
+            Description = description;
             if (examples != null)
             {
                 Examples = examples.ToList();

@@ -1,7 +1,7 @@
-using AdaptiveCards;
-using AdaptiveCards.Rendering;
+using Crazor.Attributes;
 using Crazor.Encryption;
 using Crazor.Interfaces;
+using Crazor.Rendering;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Diag = System.Diagnostics;
-using Crazor.Attributes;
 
 namespace Crazor
 {
@@ -197,7 +196,7 @@ namespace Crazor
                     action.Data = JObject.Parse(str);
                 }
                 ((JObject)action.Data)[Constants.SUBMIT_VERB] = action.Verb;
-                action.Verb = null;
+                action.Verb = null!;
             }
             var json = JsonConvert.SerializeObject(card);
             json = json.Replace(AdaptiveExecuteAction.TypeName, AdaptiveSubmitAction.TypeName);

@@ -125,7 +125,7 @@ namespace Crazor
                     if (property.GetCustomAttribute<RequiredAttribute>() != null)
                     {
                         cardView.IsModelValid = false;
-                        foreach(var validationResult in validationResults)
+                        foreach (var validationResult in validationResults)
                             cardView.AddValidationResult($"{property.Name}.", validationResult);
                     }
                 }

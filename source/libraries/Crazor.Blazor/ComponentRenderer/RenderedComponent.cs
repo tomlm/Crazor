@@ -3,8 +3,8 @@
 // --------------------------------------------------------------
 
 
-using Microsoft.AspNetCore.Components;
 using Crazor.Blazor.ComponentRenderer.Internals;
+using Microsoft.AspNetCore.Components;
 
 namespace Crazor.Blazor.ComponentRenderer;
 // Adapted from BlazorUnitTestingPrototype (Steve Sanderson)

@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Microsoft.AspNetCore.Components;
 @inherits ItemComponent<AdaptiveMediaSource>
 @implements IChildItem
@@ -11,10 +11,10 @@
 {
 
     [Parameter]
-    public String? MimeType { get => Item.MimeType; set => Item.MimeType = value; }
+    public String? MimeType { get => Item.MimeType; set => Item.MimeType = value!; }
 
     [Parameter]
-    public String? Url { get => Item.Url; set => Item.Url = value; }
+    public String? Url { get => Item.Url; set => Item.Url = value!; }
 
     public virtual void AddToParent()
     {

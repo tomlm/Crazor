@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using System.Net;
 
 namespace Crazor.Exceptions

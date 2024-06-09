@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // --------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using System.Runtime.ExceptionServices;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.ExceptionServices;
 
 namespace Crazor.Blazor.ComponentRenderer.Internals;
 

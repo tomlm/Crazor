@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
@@ -43,7 +42,7 @@ namespace Crazor.Server
 
                         await cardApp.SaveAppAsync(cancellationToken);
 
-                        adaptiveCard.Refresh = null;
+                        adaptiveCard.Refresh = null!;
                         var submitCard = TransformActionExecuteToSubmit(adaptiveCard);
                         // continue taskModule bound to current card view.
                         return new TaskModuleResponse()

@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // --------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Components.RenderTree;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Crazor.Blazor.ComponentRenderer.Internals;
 

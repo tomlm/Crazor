@@ -1,7 +1,5 @@
 using Crazor.Interfaces;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Authentication;
 using System.Reflection;
 
 namespace Crazor

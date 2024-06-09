@@ -1,15 +1,13 @@
-using Crazor;
 using Newtonsoft.Json.Linq;
-using System.Text.Json.Serialization;
 
-namespace AdaptiveCards
+namespace Crazor
 {
     /// <summary>
     /// Helper class for ActionSubmit => Task/fetch with commandId.
     /// </summary>
     public class AdaptiveShowTaskModuleAction : AdaptiveSubmitAction
     {
-        private static JObject fetch = new JObject() { { "type", "task/fetch"} };
+        private static JObject fetch = new JObject() { { "type", "task/fetch" } };
 
         public AdaptiveShowTaskModuleAction()
         {

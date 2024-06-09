@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using static System.Net.Mime.MediaTypeNames;
+using System.Net;
 
 
 namespace Crazor.Server

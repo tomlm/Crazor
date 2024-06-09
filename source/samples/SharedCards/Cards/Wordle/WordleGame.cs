@@ -1,6 +1,4 @@
-using Crazor.Teams;
 using Microsoft.Bot.Schema;
-using System.Text;
 
 namespace SharedCards.Cards.Wordle
 {

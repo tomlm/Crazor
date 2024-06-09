@@ -1,6 +1,4 @@
-using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json.Linq;
@@ -49,7 +47,7 @@ namespace Crazor.Server
 
             await cardApp.LoadAppAsync(activity, cancellationToken);
 
-            var card = await cardApp.ProcessInvokeActivity(activity, isPreview:true, cancellationToken:cancellationToken); 
+            var card = await cardApp.ProcessInvokeActivity(activity, isPreview: true, cancellationToken: cancellationToken);
             // OnActionExecuteAsync(cancellationToken);
             //var card = await cardApp.RenderCardAsync(isPreview: true, cancellationToken);
 

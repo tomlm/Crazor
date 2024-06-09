@@ -1,13 +1,8 @@
-using AdaptiveCards;
 using Crazor.Interfaces;
-using Crazor.Teams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
-using System.ComponentModel;
 using System.Security.Claims;
 
 namespace Crazor
@@ -52,7 +47,7 @@ namespace Crazor
         public ServiceOptions ServiceOptions { get; }
 
         public IAuthorizationService AuthorizationService { get; }
-        
+
         public AuthenticationStateProvider AuthenticationStateProvider { get; }
 
         public CardApp App { get; set; }

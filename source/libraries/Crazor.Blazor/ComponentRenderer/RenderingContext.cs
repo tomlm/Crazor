@@ -2,8 +2,8 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // --------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components;
 using Crazor.Blazor.ComponentRenderer.Internals;
+using Microsoft.AspNetCore.Components;
 
 namespace Crazor.Blazor.ComponentRenderer;
 

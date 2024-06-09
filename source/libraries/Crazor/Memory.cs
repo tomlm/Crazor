@@ -1,6 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Bot.Builder;
+﻿using Microsoft.Bot.Builder;
 using Newtonsoft.Json.Linq;
+using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Crazor.Tests")]
 
 namespace Crazor

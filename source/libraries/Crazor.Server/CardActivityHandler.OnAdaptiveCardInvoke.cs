@@ -1,7 +1,3 @@
-using AdaptiveCards;
-using Azure.Identity;
-using Crazor.Exceptions;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;

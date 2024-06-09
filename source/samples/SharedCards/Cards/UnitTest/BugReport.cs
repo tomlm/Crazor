@@ -31,12 +31,12 @@ namespace SharedCards.Cards.UnitTest
 
         public string Description { get; set; } = String.Empty;
 
-        public Activity LastActivity { get; set; } 
+        public Activity LastActivity { get; set; }
     }
 
     public class ClientDetails
     {
-        public string Activation { get; set; } 
+        public string Activation { get; set; }
 
         public ConversationType ConversationType { get; set; } = ConversationType.Unknown;
 

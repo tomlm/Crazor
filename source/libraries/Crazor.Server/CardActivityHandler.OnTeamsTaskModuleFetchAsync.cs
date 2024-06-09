@@ -1,5 +1,4 @@
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +36,7 @@ namespace Crazor.Server
             {
                 case TaskModuleAction.Continue:
 
-                    card.Refresh = null;
+                    card.Refresh = null!;
                     var submitCard = TransformActionExecuteToSubmit(card);
 
                     // continue taskModule bound to current card view.

@@ -1,6 +1,4 @@
-﻿using AdaptiveCards;
-
-namespace Crazor.Blazor.Components.Adaptive
+﻿namespace Crazor.Blazor.Components.Adaptive
 {
     public class ActionLogout : ActionExecute
     {

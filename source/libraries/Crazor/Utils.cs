@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -74,7 +73,7 @@ namespace Crazor
         /// </summary>
         /// <param name="prefix">optional prefix for assembly</param>
         /// <returns>assemblies which match</returns>
-        public static Assembly[] GetAssemblies(string? prefix=null)
+        public static Assembly[] GetAssemblies(string? prefix = null)
         {
             if (string.IsNullOrEmpty(prefix))
             {

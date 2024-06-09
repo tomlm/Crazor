@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -27,7 +27,7 @@
     public Double? Max { get => Double.IsNaN(Item.Max) ? null : Item.Max; set => Item.Max = value ?? double.NaN; }
 
     [Parameter]
-    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
 
     [Parameter]
     public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }

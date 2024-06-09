@@ -20,8 +20,8 @@
     <VersionSuffix>beta</VersionSuffix>
     <AssemblyVersion>1.0.8.0</AssemblyVersion>
 		<Description>Experimental library for creating Adaptive Cards using ASP.NET Razor tooling.</Description>
-		<Company>Microsoft</Company>
-		<Authors>Microsoft</Authors>
+		<Company>Iciclecreek</Company>
+		<Authors>Iciclecreek</Authors>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/tomlm/crazor</PackageProjectUrl>
 		<PackageIconUrl>https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png</PackageIconUrl>

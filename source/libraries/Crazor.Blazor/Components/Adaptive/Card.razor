@@ -1,4 +1,4 @@
-@using AdaptiveCards;
+@using Crazor;
 @using Microsoft.AspNetCore.Components;
 @using Microsoft.AspNetCore.Components.Rendering;
 @using System.ComponentModel;
@@ -13,10 +13,10 @@
 
 @code {
     [Parameter]
-    public String? FallbackText { get => Item.FallbackText; set => Item.FallbackText = value; }
+    public String? FallbackText { get => Item.FallbackText; set => Item.FallbackText = value!; }
 
     [Parameter]
-    public String? Lang { get => Item.Lang; set => Item.Lang = value; }
+    public String? Lang { get => Item.Lang; set => Item.Lang = value!; }
 
     [Parameter]
     public string MinHeight { get => Item.MinHeight; set => Item.MinHeight = value; }
@@ -25,11 +25,11 @@
     public BoolProperty? Rtl { get => Item.Rtl; set => Item.Rtl = value == true; }
 
     [Parameter]
-    public String? Speak { get => Item.Speak; set => Item.Speak = value; }
+    public String? Speak { get => Item.Speak; set => Item.Speak = value!; }
 
     [Parameter]
 #pragma warning disable CS0618 // AdaptiveCard.Title is obselete
-    public String? Title { get => Item.Title; set => Item.Title = value; }
+    public String? Title { get => Item.Title; set => Item.Title = value!; }
 #pragma warning restore CS0618 // AdaptiveCard.Title is obselete
 
     [Parameter]
@@ -37,10 +37,10 @@
     public AdaptiveVerticalContentAlignment VerticalContentAlignment { get => Item.VerticalContentAlignment; set => Item.VerticalContentAlignment = value; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = value; }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = value!; }
 
     [Parameter]
-    public String? Version { get => Item.Version?.ToString(); set => Item.Version = value; }
+    public String? Version { get => Item.Version?.ToString(); set => Item.Version = value!; }
 
     public virtual void AddToParent()
     {

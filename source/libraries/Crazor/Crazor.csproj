@@ -48,7 +48,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <PackageReference Include="AdaptiveCards" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
@@ -57,10 +56,11 @@
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.4" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="2.18.1" />
 		<PackageReference Include="YamlConvert" Version="2.1.1" />
-	</ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj" />
+    <PackageReference Include="Crazor.AdaptiveCards" Version="1.0.0-beta" />
   </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Crazor.AdaptiveCards\Crazor.AdaptiveCards.csproj" />
+	</ItemGroup>
 
 </Project>

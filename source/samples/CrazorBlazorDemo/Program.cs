@@ -67,7 +67,7 @@ namespace CrazorBlazorDemo
             // ---- <CRAZOR>
             app.UseCrazorServer();
             app.UseCrazorBlazor();
-            // </CRAZOR>
+            // ---- </CRAZOR>
 
             app.UseStaticFiles();
             app.UseRouting();

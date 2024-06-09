@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.Bot.Builder.Adapters;
 
 namespace Crazor.Test

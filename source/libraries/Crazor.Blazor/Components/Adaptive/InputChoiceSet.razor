@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Crazor.Attributes;
 @using Humanizer
 @using Microsoft.AspNetCore.Components;
@@ -33,7 +33,7 @@
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
 
     [Parameter]
     public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
@@ -48,7 +48,7 @@
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String? Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get => Item.Value; set => Item.Value = value!; }
 
     [Parameter]
     public BoolProperty? Wrap { get => Item.Wrap; set => Item.Wrap = value == true; }
@@ -90,15 +90,15 @@
                         // if we find the attribute we can access its values
                         if (descriptionAttribute != null)
                         {
-                            Item.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString() });
+                            Item.Choices.Add(new AdaptiveChoice() { Title = descriptionAttribute.Description, Value = value?.ToString()! });
                         }
                         else if (displayAttribute != null)
                         {
-                            Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute?.DisplayName, Value = value?.ToString() });
+                            Item.Choices.Add(new AdaptiveChoice() { Title = displayNameAttribute?.DisplayName!, Value = value?.ToString()! });
                         }
                         else
                         {
-                            Item.Choices.Add(new AdaptiveChoice() { Title = value.ToString().Humanize(), Value = value.ToString() });
+                            Item.Choices.Add(new AdaptiveChoice() { Title = value.ToString().Humanize(), Value = value.ToString()! });
                         }
                     }
                 }

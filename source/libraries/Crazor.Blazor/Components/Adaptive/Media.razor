@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ElementComponent<AdaptiveMedia>
@@ -11,13 +11,13 @@
 {
 
     [Parameter]
-    public String? AltText { get => Item.AltText; set => Item.AltText = value; }
+    public String? AltText { get => Item.AltText; set => Item.AltText = value!; }
 
     [Parameter]
     public BoolProperty? IsVisible { get => Item.IsVisible; set => Item.IsVisible = value == true; }
 
     [Parameter]
-    public String? Poster { get => Item.Poster; set => Item.Poster = value; }
+    public String? Poster { get => Item.Poster; set => Item.Poster = value!; }
 
     [Parameter]
     public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }

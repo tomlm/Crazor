@@ -1,8 +1,7 @@
-using AdaptiveCards;
-using AdaptiveCards.Rendering;
 using Crazor.Attributes;
 using Crazor.Exceptions;
 using Crazor.Interfaces;
+using Crazor.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -53,7 +52,7 @@ namespace Crazor
                 this.Name = Name.EndsWith("App") ? Name.Substring(0, Name.Length - 3) : Name;
             }
             context.App = this;
-            
+
             this.Memory = new Memory(Context.Storage, this.Name!);
         }
 
@@ -167,7 +166,7 @@ namespace Crazor
 
             var card = await RenderCardAsync(isPreview, cancellationToken);
 
-            card.Authentication = await GetAdaptiveAuthentication(cancellationToken);
+            card.Authentication = (await GetAdaptiveAuthentication(cancellationToken))!;
 
             await SaveAppAsync(cancellationToken);
 
@@ -620,7 +619,7 @@ namespace Crazor
 
             // lookup data
             var memoryMap = GetMemoryKeyMap();
-            
+
             // NOTE: We use memoryMap and raw storage because we are doing bulk lookup of all of the scoped memories. 
             var state = await Context.Storage.ReadAsync(memoryMap.Keys.ToArray(), cancellationToken);
 
@@ -1048,7 +1047,7 @@ namespace Crazor
                         System.Diagnostics.Trace.TraceError($"Failed to get UserIds for conversation.id={teamId}\n{ex.Message}");
                     }
                 }
-                outboundCard.Refresh.UserIds = this.TeamsConversationMembers;
+                outboundCard.Refresh.UserIds = this.TeamsConversationMembers!;
             }
         }
 

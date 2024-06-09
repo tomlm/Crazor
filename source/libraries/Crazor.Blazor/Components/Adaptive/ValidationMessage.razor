@@ -1,5 +1,4 @@
 ﻿@using Crazor.Interfaces;
-@using AC=global::AdaptiveCards;
 @using System.Linq.Expressions;
 @using Microsoft.AspNetCore.Components.Forms;
 
@@ -7,7 +6,7 @@
 {
     @foreach (var error in errors)
     {
-        <TextBlock Spacing="@AC.AdaptiveSpacing.None" Color="@AC.AdaptiveTextColor.Attention">@error</TextBlock>
+        <TextBlock Spacing="@AdaptiveSpacing.None" Color="@AdaptiveTextColor.Attention">@error</TextBlock>
     }
 }
 

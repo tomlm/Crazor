@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.Bot.Schema;
 using System.Reflection;
 
@@ -19,7 +18,7 @@ namespace Crazor.Interfaces
         /// <summary>
         /// Validation errors for the current view.
         /// </summary>
-        Dictionary<string, HashSet<string>> ValidationErrors { get;  }
+        Dictionary<string, HashSet<string>> ValidationErrors { get; }
 
         /// <summary>
         /// Is the current view valid?

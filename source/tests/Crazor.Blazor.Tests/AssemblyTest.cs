@@ -1,9 +1,7 @@
-using Crazor.Blazor.Tests.Cards.CodeOnlyView;
 using Crazor.Server;
 using Crazor.Test;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Security.Claims;
 
 namespace Crazor.Blazor.Tests

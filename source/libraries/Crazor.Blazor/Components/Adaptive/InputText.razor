@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -27,10 +27,10 @@
     public Int32? MaxLength { get => Item.MaxLength; set => Item.MaxLength = value ?? 0; }
 
     [Parameter]
-    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value; }
+    public String? Placeholder { get => Item.Placeholder; set => Item.Placeholder = value!; }
 
     [Parameter]
-    public String? Regex { get => Item.Regex; set => Item.Regex = value; }
+    public String? Regex { get => Item.Regex; set => Item.Regex = value!; }
 
     [Parameter]
     public BoolProperty? Separator { get => Item.Separator; set => Item.Separator = value == true; }
@@ -45,7 +45,7 @@
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String? Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get => Item.Value; set => Item.Value = value!; }
 
     [Parameter]
     public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }

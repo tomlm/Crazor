@@ -1,5 +1,3 @@
-using AdaptiveCards;
-
 namespace Crazor
 {
 
@@ -7,7 +5,7 @@ namespace Crazor
     public enum AuthenticationFlags
     {
         None = 0,
-        
+
         /// <summary>
         /// Supports OAuth cards
         /// </summary>

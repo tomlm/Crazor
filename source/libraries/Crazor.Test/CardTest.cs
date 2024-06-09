@@ -1,10 +1,8 @@
-using AdaptiveCards;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Adapters;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Newtonsoft.Json.Linq;
 using Diag = System.Diagnostics;
 

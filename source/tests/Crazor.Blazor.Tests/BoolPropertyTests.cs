@@ -1,6 +1,4 @@
-using Crazor.Attributes;
 using Crazor.Blazor.Components;
-using Crazor.Test;
 
 namespace Crazor.Blazor.Tests
 {
@@ -25,7 +23,7 @@ namespace Crazor.Blazor.Tests
 
         [TestMethod]
         public void AreNotEquals()
-        { 
+        {
             Assert.AreNotEqual((BoolProperty)true, (BoolProperty)false);
             Assert.AreNotEqual((BoolProperty)false, (BoolProperty)true);
             Assert.AreNotEqual((BoolProperty)"True", (BoolProperty)false);

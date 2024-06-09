@@ -1,22 +1,21 @@
-﻿using AdaptiveCards;
+﻿using Crazor.AI.Attributes;
+using Crazor.AI.Components;
 using Crazor.AI.Recognizers;
+using Crazor.Attributes;
+using Crazor.Blazor;
+using Humanizer;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Recognizers.Text.Choice;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 using Microsoft.Recognizers.Text.DateTime;
 using Microsoft.Recognizers.Text.Number;
 using Newtonsoft.Json.Linq;
-using Crazor.AI.Attributes;
 using System.Collections;
-using Crazor.Attributes;
-using Crazor.Blazor;
-using Microsoft.AspNetCore.Components;
-using Microsoft.Recognizers.Text.Choice;
-using System.Reflection;
 using System.ComponentModel.DataAnnotations;
-using Humanizer;
-using Microsoft.Bot.Schema;
-using Crazor.AI.Components;
+using System.Reflection;
 
 namespace Crazor.AI
 {

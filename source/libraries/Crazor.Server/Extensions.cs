@@ -1,28 +1,15 @@
-using AdaptiveCards;
-using Azure.Core;
-using Crazor.Interfaces;
+using Crazor.Server.Controllers;
 using Crazor.Teams;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Identity.Abstractions;
-using Microsoft.Identity.Web;
 using Newtonsoft.Json;
-using System.Net;
-using System.Reflection;
-using System.Security.Claims;
-using System.Threading;
-using Microsoft.AspNetCore.Components.Authorization;
-using Crazor.Server.Controllers;
 
 namespace Crazor.Server
 {

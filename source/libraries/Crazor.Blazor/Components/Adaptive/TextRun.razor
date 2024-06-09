@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Crazor.Blazor.ComponentRenderer;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -43,7 +43,7 @@
     [DefaultValue(typeof(AdaptiveTextWeight), "Normal")]
     public AdaptiveTextWeight Weight { get => Item.Weight ; set => Item.Weight  = value; }
 
-    public String? Text { get => Item.Text; set => Item.Text = value; }
+    public String? Text { get => Item.Text; set => Item.Text = value!; }
 
     public virtual void AddToParent()
     {

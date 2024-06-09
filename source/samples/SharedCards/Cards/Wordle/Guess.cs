@@ -1,4 +1,4 @@
-using AdaptiveCards;
+using Crazor;
 
 namespace SharedCards.Cards.Wordle
 {

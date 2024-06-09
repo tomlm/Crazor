@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Crazor.Attributes;
 
 namespace Crazor.Tests.Cards.Memory

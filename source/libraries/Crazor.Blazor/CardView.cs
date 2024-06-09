@@ -1,5 +1,4 @@
-﻿using AdaptiveCards;
-using Crazor.Attributes;
+﻿using Crazor.Attributes;
 using Crazor.Blazor.ComponentRenderer;
 using Crazor.Blazor.Components;
 using Crazor.Interfaces;
@@ -256,7 +255,7 @@ namespace Crazor.Blazor
         /// <typeparam name="CardViewT">CardView class to navigate to</typeparam>
         /// <param name="model">model to pass</param>
         public void ReplaceView<CardViewT>(object? model = null)
-            where CardViewT: ICardView
+            where CardViewT : ICardView
         {
             this.App!.ReplaceView(this.GetCardRoute<CardViewT>(), model);
         }

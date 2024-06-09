@@ -6,7 +6,7 @@ namespace Crazor.Blazor.Components.Adaptive
     /// <summary>
     /// ReplaceView(Route) action
     /// </summary>
-    public class ActionReplaceView: ActionExecute
+    public class ActionReplaceView : ActionExecute
     {
         public ActionReplaceView()
         {

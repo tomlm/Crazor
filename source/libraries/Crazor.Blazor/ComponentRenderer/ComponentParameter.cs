@@ -7,7 +7,6 @@
 using Crazor.Interfaces;
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace Crazor.Blazor.ComponentRenderer;
 

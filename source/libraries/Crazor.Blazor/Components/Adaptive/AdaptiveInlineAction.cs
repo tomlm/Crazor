@@ -1,10 +1,4 @@
-using Crazor;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-
-namespace AdaptiveCards
+namespace Crazor
 {
     /// <summary>
     /// Represents an explict AdaptiveInlineAction

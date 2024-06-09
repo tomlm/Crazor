@@ -1,10 +1,7 @@
-using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Crazor.Server
@@ -111,7 +108,7 @@ namespace Crazor.Server
             }
 
             // make sure there is an action (we have to remove Refresh because teams barfs on refresh.
-            card.Refresh = null;
+            card.Refresh = null!;
             if (!card.GetElements<AdaptiveSubmitAction>().Any())
             {
                 if (refreshAction == null)

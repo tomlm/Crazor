@@ -20,7 +20,7 @@ namespace Crazor.Teams
                 PackageName = String.Join(".", hostUri.Host.Split('.').Reverse());
             else
                 PackageName = String.Join(".", AppDomain.CurrentDomain.FriendlyName.Split('.').Reverse());
-            ValidDomains = new List<string> 
+            ValidDomains = new List<string>
             {
                 hostUri.Host,
                 "token.botframework.com"

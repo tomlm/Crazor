@@ -1,15 +1,8 @@
-﻿using AdaptiveCards;
-using AdaptiveCards.Rendering;
-using Crazor;
+﻿using Crazor;
 using Crazor.Attributes;
-using Crazor.Blazor.Components.Adaptive;
-using Crazor.Teams;
-using Microsoft.Bot.Builder;
+using Crazor.Rendering;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
-using Microsoft.Bot.Schema.Teams;
-using Newtonsoft.Json.Linq;
-using System.Threading;
 
 namespace SharedCards.Cards.UnitTest
 {
@@ -28,7 +21,7 @@ namespace SharedCards.Cards.UnitTest
         public async override Task LoadAppAsync(IInvokeActivity activity, CancellationToken cancellationToken)
         {
             await base.LoadAppAsync(activity, cancellationToken);
-         
+
             if (Context.TurnContext != null)
             {
                 if (Context.TurnContext.Activity.Type == ActivityTypes.Message)

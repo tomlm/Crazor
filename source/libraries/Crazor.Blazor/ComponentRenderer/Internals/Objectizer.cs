@@ -2,12 +2,9 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // --------------------------------------------------------------
 
-using AdaptiveCards;
-using Crazor.Blazor.Components.Adaptive;
 using Microsoft.AspNetCore.Components.RenderTree;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Encodings.Web;
 
 namespace Crazor.Blazor.ComponentRenderer.Internals;
 

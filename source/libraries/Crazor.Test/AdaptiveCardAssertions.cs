@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 

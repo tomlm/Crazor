@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using YamlConverter;
-using Azure.AI.OpenAI;
+﻿using Azure.AI.OpenAI;
 using Microsoft.Bot.Builder;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace Crazor.AI.Recognizers
@@ -31,7 +29,7 @@ namespace Crazor.AI.Recognizers
         public async virtual Task<RecognizerResult> RecognizeAsync(object model, string text, CancellationToken cancellationToken = default)
         {
             StringBuilder sb = new StringBuilder();
-            foreach(var property in model.GetType().GetProperties())
+            foreach (var property in model.GetType().GetProperties())
             {
                 sb.AppendLine($"  * {property.PropertyType.Name} {property.Name} - {property.GetPropertyLabel()}");
             }

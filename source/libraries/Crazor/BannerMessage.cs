@@ -1,5 +1,3 @@
-using AdaptiveCards;
-
 namespace Crazor
 {
     public class BannerMessage

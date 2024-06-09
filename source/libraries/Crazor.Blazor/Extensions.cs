@@ -1,12 +1,7 @@
 using Crazor.Interfaces;
-using Crazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Reflection;
 
 namespace Crazor.Blazor
 {

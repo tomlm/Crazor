@@ -9,7 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\AdaptiveCards\source\dotnet\Library\AdaptiveCards\AdaptiveCards.csproj" />
 		<ProjectReference Include="..\..\libraries\Crazor.Blazor\Crazor.Blazor.csproj" />
 		<ProjectReference Include="..\..\libraries\Crazor.Server\Crazor.Server.csproj" />
 		<ProjectReference Include="..\..\libraries\Crazor\Crazor.csproj" />
@@ -18,8 +17,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
-		<PackageReference Include="Azure.Storage.Files.Shares" Version="12.17.1" />
-		<PackageReference Include="Azure.Storage.Queues" Version="12.17.1" />
+		<!--<PackageReference Include="Azure.Storage.Files.Shares" Version="12.17.1" />
+		<PackageReference Include="Azure.Storage.Queues" Version="12.17.1" />-->
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" NoWarn="NU1605" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.4" NoWarn="NU1605" />
 		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.3" />

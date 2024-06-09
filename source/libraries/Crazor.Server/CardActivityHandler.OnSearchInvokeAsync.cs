@@ -1,9 +1,5 @@
-using AdaptiveCards;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Crazor.Server
 {

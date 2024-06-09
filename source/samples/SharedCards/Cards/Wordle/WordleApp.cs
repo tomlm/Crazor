@@ -1,10 +1,7 @@
 using Crazor;
 using Crazor.Attributes;
 using Crazor.Teams;
-using Microsoft.Identity.Client.Extensions.Msal;
-using Newtonsoft.Json.Linq;
 using System.Text;
-using System.Threading;
 
 namespace SharedCards.Cards.Wordle
 {

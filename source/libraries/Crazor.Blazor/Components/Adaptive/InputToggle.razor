@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Crazor.Attributes;
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
@@ -25,23 +25,23 @@
     public AdaptiveSpacing Spacing { get => Item.Spacing; set => Item.Spacing = value; }
 
     [Parameter]
-    public String? Title { get => Item.Title; set => Item.Title = value; }
+    public String? Title { get => Item.Title; set => Item.Title = value!; }
 
     [Parameter]
     [Binding(BindingType.Value)]
-    public String? Value { get => Item.Value; set => Item.Value = value; }
+    public String? Value { get => Item.Value; set => Item.Value = value!; }
 
     [Parameter]
-    public String? ValueOff { get => Item.ValueOff; set => Item.ValueOff = value; }
+    public String? ValueOff { get => Item.ValueOff; set => Item.ValueOff = value!; }
 
     [Parameter]
-    public String? ValueOn { get => Item.ValueOn; set => Item.ValueOn = value; }
+    public String? ValueOn { get => Item.ValueOn; set => Item.ValueOn = value!; }
 
     [Parameter]
     public BoolProperty? Wrap { get => Item.Wrap; set => Item.Wrap = value == true; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }
 
     protected override void OnParametersSet()
     {

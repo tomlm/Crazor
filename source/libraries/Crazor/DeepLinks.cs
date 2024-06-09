@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json;
 

@@ -1,7 +1,5 @@
-using AdaptiveCards;
 using Crazor.Attributes;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
@@ -42,7 +40,7 @@ namespace Crazor.Server
 
         protected static AdaptiveCard TransformCardNoRefresh(AdaptiveCard card)
         {
-            card.Refresh = null;
+            card.Refresh = null!;
             return card;
         }
 
@@ -55,10 +53,10 @@ namespace Crazor.Server
                     action.Data = new JObject();
                 }
                 ((JObject)action.Data)[Constants.SUBMIT_VERB] = action.Verb;
-                action.Verb = null;
+                action.Verb = null!;
             }
             // no refresh if only submit
-            card.Refresh = null;
+            card.Refresh = null!;
 
             var json = JsonConvert.SerializeObject(card, _jsonSettings);
             json = json.Replace($"\"type\": \"{AdaptiveExecuteAction.TypeName}\"", $"\"type\": \"{AdaptiveSubmitAction.TypeName}\"");

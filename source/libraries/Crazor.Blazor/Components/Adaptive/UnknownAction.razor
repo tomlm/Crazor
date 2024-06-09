@@ -1,4 +1,4 @@
-@using AdaptiveCards
+@using Crazor
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
 @inherits ActionComponent<AdaptiveAction>
@@ -11,7 +11,7 @@
 {
 
     [Parameter]
-    public String? IconUrl { get => Item.IconUrl; set => Item.IconUrl = value; }
+    public String? IconUrl { get => Item.IconUrl; set => Item.IconUrl = value!; }
 
     [Parameter]
     public BoolProperty? IsEnabled { get => Item.IsEnabled; set => Item.IsEnabled = value == true; }
@@ -25,8 +25,8 @@
     public string Style { get => Item.Style; set => Item.Style = value; }
 
     [Parameter]
-    public String? Title { get => Item.Title; set => Item.Title = value; }
+    public String? Title { get => Item.Title; set => Item.Title = value!; }
 
     [Parameter]
-    public String? Tooltip { get => Item.Tooltip; set => Item.Tooltip = value; }
+    public String? Tooltip { get => Item.Tooltip; set => Item.Tooltip = value!; }
 }

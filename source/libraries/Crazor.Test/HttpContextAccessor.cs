@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace Crazor.Test
 {
     public class HttpContextAccessor : IHttpContextAccessor

@@ -1,4 +1,3 @@
-using AdaptiveCards;
 using Crazor.Server;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -241,13 +240,13 @@ namespace Crazor.Blazor.Components
 
         public AdaptiveCard CreateErrorCard(string message)
         {
-            return new AdaptiveCard("1.0") 
-            { 
-                Body = new List<AdaptiveElement>() 
-                { 
+            return new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
                     new AdaptiveTextBlock(this.Route) { Style = AdaptiveTextBlockStyle.Heading },
-                    new AdaptiveTextBlock(message) 
-                } 
+                    new AdaptiveTextBlock(message)
+                }
             };
         }
     }

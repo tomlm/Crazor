@@ -1,5 +1,4 @@
-﻿using AdaptiveCards;
-using Microsoft.Bot.Builder;
+﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -23,8 +22,8 @@ namespace Crazor.Server
         {
             turnContext.OnSendActivities(async (ctx, activities, nextSend) =>
             {
-                foreach (var activity in activities.Where(activity => 
-                        activity.ChannelId == ChannelsEx.Email && 
+                foreach (var activity in activities.Where(activity =>
+                        activity.ChannelId == ChannelsEx.Email &&
                         activity.Type == ActivityTypes.Message &&
                         activity.Attachments != null &&
                         activity.Attachments.Any(attachment => attachment.ContentType == AdaptiveCard.ContentType)))

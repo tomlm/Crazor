@@ -1,6 +1,6 @@
 @using Microsoft.AspNetCore.Components;
 @using System.ComponentModel;
-@using AdaptiveCards;
+@using Crazor;
 @using Crazor.Blazor.ComponentRenderer;
 @inherits ElementComponent<AdaptiveTextBlock>
 
@@ -58,10 +58,10 @@
     public BoolProperty? Wrap { get => (BoolProperty)Item.Wrap; set => Item.Wrap = value == true; }
 
     [Parameter]
-    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value); }
+    public String? Height { get => Item.Height?.ToString(); set => Item.Height = AdaptiveHeight.Parse(value!); }
 
     [Parameter]
-    public String? Text { get => Item.Text; set => Item.Text = value; }
+    public String? Text { get => Item.Text; set => Item.Text = value!; }
 
     protected override void OnAfterRender(bool firstRender)
     {
