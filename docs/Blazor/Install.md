@@ -10,36 +10,32 @@ Adding **Crazor.Blazor** is super easy.  Take a stock Blazor Server project and 
 
 ## Add Crazor.Blazor package to Server
 
->  **NOTE: Currently Crazor.Blazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a nuget.config in the root of your project with the following:**
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <clear />
-    <add key="Crazor" value="https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json" />
-  </packageSources>
-</configuration>
-```
-
 Then you can add the **Crazor.Blazor** package
 
 ```shell
-nuget add package Crazor
 nuget add package Crazor.Blazor
-nuget add package Crazor.Server
 ```
 
 And register crazor in your **program.cs** :
 
 ```c#
+// ---- <CRAZOR>
 builder.Services.AddCrazor();
-builder.Services.AddCrazorServer();
+builder.Services.AddCrazorServer((options) =>
+{
+	options.Manifest.Version = "1.0.0";
+	options.Manifest.Developer.Name = "...";
+	options.Manifest.Description.Full = "This is a demo of using Blazor templates for crazor apps.";
+});
 builder.Services.AddCrazorBlazor();
-...
-app.UseCrazorServer();
-```
+// ---- </CRAZOR>
 
+...
+// ---- <CRAZOR>
+app.UseCrazorServer();
+app.UseCrazorBlazor();
+// ---- </CRAZOR>
+```
 
 
 ## Add IStorage provider
@@ -55,9 +51,8 @@ nuget add Microsoft.Bot.Builder.Azure.Blobs
 Adding to your **program.cs**:
 
 ```C#
-var storageKey = builder.Configuration.GetValue<string>("AzureStorage");
-if (storageKey != null)
-	builder.Services.AddSingleton<IStorage, BlobsStorage>(sp => new BlobsStorage(storageKey, "mybot"));
+// register blob storage for state management
+builder.Services.AddSingleton<IStorage>(sp => new BlobsStorage(builder.Configuration.GetValue<string>("AzureStorage"), containerName:"cards"));
 ```
 
 
