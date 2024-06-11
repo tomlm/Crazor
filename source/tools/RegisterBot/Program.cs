@@ -74,6 +74,21 @@ class Script : CShell
             appId = (string)output.appId;
         }
 
+        // === make sure user is owner
+        Console.WriteLine($"\n==== Making sure user is owner for application");
+        var userPrincipalName = await Cmd("az ad signed-in-user show --query userPrincipalName --output tsv").AsString();
+        output = await Cmd($"az ad user show --id {userPrincipalName}").AsJson();
+        var userObjectId = output.id;
+
+        // look at owners
+        JArray owners = await Cmd($"az ad app owner list --id {appId}").AsJson<JArray>();
+        var hasOwner = owners.Any(el => el["id"] ==  userObjectId);
+        if (!hasOwner)
+        {
+            // add owner
+            await Cmd($"az ad app owner add --id {appId} --owner-object-id {userObjectId}").Execute();
+        }
+
         // ==== Setting redirect Uris for {appId};
         Console.WriteLine($"\n==== getting application for {botName}/{appId}");
         dynamic application = await Cmd($"az ad app show --id {appId}").AsJson();
