@@ -18,6 +18,7 @@ This tool will:
 | -e, --endpoint endpoint          | (optional) If not specified the endpoint will stay the same as project settings               | 
 | -n, --name botName               | (optional) If not specified the botname will be pulled from settings or interactively asked   |
 | -g, --resource-group groupName   | (optional) If not specified the groupname will be pulled from settings or interactively asked |
+| -v, --verbose                    | (optional) show all commands as they are executed                                             |
 | -h, --help                       | display help                                                                                  |
 
 If the endpoint host name is:

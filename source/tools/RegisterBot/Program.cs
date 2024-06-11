@@ -4,6 +4,7 @@ using Medallion.Shell;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -63,7 +64,7 @@ class Script : CShell
             uri = new Uri(uri, "/api/cardapps");
         }
 
-        Echo = true;
+        Echo = args.Any(arg => arg == "-v" || arg == "--verbose");
 
         if (appId == null)
         {
@@ -221,20 +222,25 @@ class Script : CShell
 
         Console.WriteLine($"\n==== Enabling MSTeams channel for {botName}/{appId}");
         output = await Cmd($"az bot msteams create --resource-group {groupName} --name {botName}").AsJson();
-        
+
         Console.WriteLine($"\n==== Enabling M365Extensions channel for {botName}/{appId}");
         var batch = Path.GetTempFileName() + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".cmd" : ".sh");
         var properties = JsonConvert.SerializeObject(new JObject() { { "channelName", "M365Extensions" }, { "properties", new JObject() { { "isEnabled", true } } } }, Formatting.None).Replace("\"", "\\\"");
-        var m365Command= $"@az resource create --id /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.BotService/botServices/{botName}/channels/M365Extensions --resource-type Microsoft.BotService/botServices/channel --properties \"{properties}\" --location global";
-        Console.WriteLine(m365Command);
+        var m365Command = $"@az resource create --id /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.BotService/botServices/{botName}/channels/M365Extensions --resource-type Microsoft.BotService/botServices/channel --properties \"{properties}\" --location global";
+        if (Echo)
+            Console.WriteLine(m365Command);
         File.WriteAllText(batch, m365Command);
         cmd = await Cmd(batch).Execute();
         File.Delete(batch);
 
         // refreshing client secret
         Console.WriteLine($"\n==== Refreshing {botName}/{appId} client secret");
-        output = await Cmd($"az ad app credential reset --id {appId}").AsJson();
-        var appPassword = (string)output.password;
+        string appPassword;
+        do
+        {
+            output = await Cmd($"az ad app credential reset --id {appId}").AsJson();
+            appPassword = (string)output.password;
+        } while (appPassword.StartsWith("-")); // password can start with - which messes up cli.
 
         // Update OAuth settings
         Console.WriteLine($"\n==== Updating Bot OAuth/SSO settings");
@@ -258,7 +264,6 @@ class Script : CShell
 
         // Saving settings
         Console.WriteLine($"\n==== Updating project/service settings");
-        Console.WriteLine("Settings:");
         dynamic result = new JObject();
         result.BotName = botName;
         result.HostUri = uri.AbsoluteUri;
@@ -266,7 +271,11 @@ class Script : CShell
         result.MicrosoftAppId = appId;
         result.MicrosoftAppPassword = appPassword;
         result.TeamsAppId = appId;
-        Console.WriteLine(result.ToString());
+        if (Echo)
+        {
+            Console.WriteLine("Settings:");
+            Console.WriteLine(result.ToString());
+        }
 
         if (uri.Host.EndsWith("azurewebsites.net"))
         {
@@ -307,11 +316,18 @@ class Script : CShell
             await Cmd($"dotnet user-secrets set AzureAD:ClientSecret {appPassword}").AsString();
 
             // update profile
-            Console.WriteLine(@"Updating Properties\launchSettings.json");
-            var profile = JObject.Parse(File.ReadAllText(@"Properties\launchSettings.json"));
-            var csproj = dir("*.csproj").FirstOrDefault();
-            profile["profiles"][Path.GetFileNameWithoutExtension(csproj)]["launchUrl"] = endpoint;
-            File.WriteAllText(@"Properties\launchSettings.json", JsonConvert.SerializeObject(profile, Formatting.Indented));
+            Console.WriteLine(@"Updating Properties\launchSettings.json https profile");
+            try
+            {
+                var profile = JObject.Parse(File.ReadAllText(@"Properties\launchSettings.json"));
+                var csproj = dir("*.csproj").FirstOrDefault();
+                profile["profiles"]["https"]["launchUrl"] = endpoint;
+                File.WriteAllText(@"Properties\launchSettings.json", JsonConvert.SerializeObject(profile, Formatting.Indented));
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.ToString());
+            }
         }
 
         Console.WriteLine();
@@ -363,7 +379,12 @@ class Script : CShell
         string secretId = "Unknown";
         if (csproj != null)
         {
-            var secret = File.ReadAllText(csproj).Split('\r', '\f', '\n').Select(t => t.Trim()).First(l => l.StartsWith("<UserSecretsId>"));
+            var secret = File.ReadAllText(csproj).Split('\r', '\f', '\n').Select(t => t.Trim()).FirstOrDefault(l => l.StartsWith("<UserSecretsId>"));
+            if (secret == null)
+            {
+                await Cmd($"dotnet user-secrets init").AsResult();
+                secret = File.ReadAllText(csproj).Split('\r', '\f', '\n').Select(t => t.Trim()).FirstOrDefault(l => l.StartsWith("<UserSecretsId>"));
+            }
             var iStart = secret.IndexOf('>') + 1;
             var iEnd = secret.IndexOf('<', iStart);
             secretId = secret.Substring(iStart, iEnd - iStart);
@@ -433,7 +454,13 @@ class Script : CShell
 
     public async Task<string> CreateGroup(string botName)
     {
-        Console.WriteLine($"What region do you want for your resource group {botName}?");
+        string[] regions = { "eastasia", "southeastasia","australiaeast", "australiasoutheast", "brazilsouth", "canadacentral",
+            "canadaeast", "switzerlandnorth", "germanywestcentral", "eastus2", "eastus", "centralus", "northcentralus",
+            "francecentral", "uksouth", "ukwest", "centralindia", "southindia", "jioindiawest", "italynorth", "japaneast",
+            "japanwest", "koreacentral", "koreasouth", "mexicocentral", "northeurope", "norwayeast", "polandcentral", "qatarcentral",
+            "spaincentral", "swedencentral", "uaenorth", "westcentralus", "westeurope", "westus2", "westus", "southcentralus", "westus3",
+            "southafricanorth", "australiacentral", "australiacentral2", "israelcentral", "westindia" };
+        Console.WriteLine($"What region do you want for your resource group {botName}?\n{String.Join(",", regions)}");
         var region = Console.ReadLine().Trim();
 
         Console.WriteLine($"\n==== Creating resource group in {region}");
