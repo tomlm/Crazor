@@ -44,7 +44,7 @@ jobs:
       - name: dotnet pack Crazor
         run: |
           dotnet pack  --no-build ./Crazor/source/CrazorLibraries.sln -c Debug -o packages --include-symbols --property WarningLevel=0
-          rm packages/Adaptive*
+          # rm packages/Adaptive*
 
       - name: Publish NuGet and symbols
         id: nuget-push
