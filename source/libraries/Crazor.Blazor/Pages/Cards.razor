@@ -1,14 +1,15 @@
-﻿@page "/Cards/{*routeFragment}"
-@inject NavigationManager MyNavigationManager
-@implements IDisposable
-@using Crazor.Blazor.Components
+﻿@using Crazor.Blazor.Components
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Routing;
+@using Microsoft.AspNetCore.Components.Web
+@page "/Cards/{*routeFragment}"
+@rendermode RenderMode.InteractiveServer
+@inject NavigationManager MyNavigationManager
+@implements IDisposable
 
 <CascadingAuthenticationState>
     <CardViewer Route="@Route.Route" OnCardRouteChanged="OnCardRouteChanged" @ref="MyCardViewer" />
 </CascadingAuthenticationState>
-
 
 @code {
     // this is only used to "load the cardview" from the page on initial load.

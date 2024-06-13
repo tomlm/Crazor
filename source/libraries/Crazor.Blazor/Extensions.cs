@@ -8,7 +8,7 @@ namespace Crazor.Blazor
     public static class Extensions
     {
         /// <summary>
-        /// Add Crazor Dependencies.
+        /// Add Crazor.Blazor Dependencies.
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
@@ -26,10 +26,23 @@ namespace Crazor.Blazor
             return services;
         }
 
+        /// <summary>
+        /// Use Crazor.Blazor dependencies
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseCrazorBlazor(this IApplicationBuilder builder)
         {
             return builder;
         }
 
+
+        /// <summary>
+        /// Add Crazor components to Razor Components
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static RazorComponentsEndpointConventionBuilder AddCrazorComponents(this RazorComponentsEndpointConventionBuilder builder)
+            => builder.AddAdditionalAssemblies(typeof(Crazor.Blazor.Pages.Cards).Assembly);
     }
 }
