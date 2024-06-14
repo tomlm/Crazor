@@ -1,0 +1,48 @@
+@using Crazor.Blazor.Components
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="CrazorBlazorApp.styles.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- <CRAZOR> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
+    <script src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
+    <script type="text/javascript" src="/js/hostconfig.js"></script>
+    <style>
+        .cardDiv {
+            width: 640px;
+            margin: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            / text-align: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 4px;
+        }
+
+        .column {
+            flex: 25%;
+            max- width: 33.3%;
+            padding: 0 4px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://adaptivecards.io/node_modules/adaptivecards-designer/dist/containers/teams-container-light.css">
+    <!-- </CRAZOR> -->
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>

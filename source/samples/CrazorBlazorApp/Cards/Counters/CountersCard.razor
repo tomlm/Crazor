@@ -1,0 +1,23 @@
+﻿@using Crazor.Blazor;
+@attribute [CardRoute("/Cards/Counters")]
+@inherits CardView
+
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
+
+    <ActionSet>
+        <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
+        <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
+    </ActionSet>
+</Card>
+
+@code {
+    public int Counter { get; set; }
+
+    public void OnIncrement()
+        => this.Counter++;
+
+    public void OnDecrement()
+        => this.Counter--;
+}
+
