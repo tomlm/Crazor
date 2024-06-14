@@ -23,15 +23,15 @@
     <VersionSuffix>beta</VersionSuffix>
     <AssemblyVersion>1.0.10.0</AssemblyVersion>
 		<Description>Experimental library for hosting Crazor Adaptive Cards on a AspNetCore server.</Description>
-		<Company>Iciclecreek</Company>
-		<Authors>Iciclecreek</Authors>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Company>Iciclecreek</Company>
+    <Authors>Tom Laird-McConnell</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/tomlm/crazor</PackageProjectUrl>
 		<PackageIconUrl>https://user-images.githubusercontent.com/17789481/197238565-e3f895d0-6def-4d41-aba2-721d5432b1ef.png</PackageIconUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>adaptivecards</PackageTags>
+		<PackageTags>crazor;adaptivecards</PackageTags>
 		<RepositoryUrl>https://github.com/tomlm/crazor</RepositoryUrl>
 		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
 		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
