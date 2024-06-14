@@ -82,7 +82,7 @@ class Script : CShell
 
         // look at owners
         JArray owners = await Cmd($"az ad app owner list --id {appId}").AsJson<JArray>();
-        var hasOwner = owners.Any(el => el["id"] ==  userObjectId);
+        var hasOwner = owners.Any(el => el["id"] == userObjectId);
         if (!hasOwner)
         {
             // add owner
@@ -219,10 +219,22 @@ class Script : CShell
         var cmd = await Cmd($"az bot show -g {groupName} --name {botName}").AsResult();
         if (!cmd.Success)
         {
-            // Creating bot registration
-            Console.WriteLine($"\n==== Creating bot registration for {botName}");
-            // output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password} --app-type MultiTenant").AsJson();
-            output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --name {botName} --endpoint {uri.AbsoluteUri} --app-type MultiTenant").AsJson();
+            while (true)
+            {
+                try
+                {
+                    // Creating bot registration
+                    Console.WriteLine($"\n==== Creating bot registration for {botName}");
+                    // output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --kind registration --name {botName} --endpoint {uri.AbsoluteUri} --password {password} --app-type MultiTenant").AsJson();
+                    output = await Cmd($"az bot create --resource-group {groupName} --appid {appId} --name {botName} --endpoint {uri.AbsoluteUri} --app-type MultiTenant").AsJson();
+                    break;
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                    botName = await GetBotName();
+                }
+            }
         }
         else
         {
