@@ -36,7 +36,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedCards", "samples\Shar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.AI", "libraries\Crazor.AI\Crazor.AI.csproj", "{D2C498C3-0A9A-4D29-98D2-65FB5A9E7EC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crazor.AdaptiveCards", "libraries\Crazor.AdaptiveCards\Crazor.AdaptiveCards.csproj", "{88AF99B1-1097-4E5D-9BBF-8C2F78E42029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.AdaptiveCards", "libraries\Crazor.AdaptiveCards\Crazor.AdaptiveCards.csproj", "{88AF99B1-1097-4E5D-9BBF-8C2F78E42029}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorBlazorApp", "samples\CrazorBlazorApp\CrazorBlazorApp.csproj", "{83E86655-7608-41A7-AB46-D2FFA22DB64C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +86,10 @@ Global
 		{88AF99B1-1097-4E5D-9BBF-8C2F78E42029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88AF99B1-1097-4E5D-9BBF-8C2F78E42029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88AF99B1-1097-4E5D-9BBF-8C2F78E42029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83E86655-7608-41A7-AB46-D2FFA22DB64C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83E86655-7608-41A7-AB46-D2FFA22DB64C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83E86655-7608-41A7-AB46-D2FFA22DB64C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83E86655-7608-41A7-AB46-D2FFA22DB64C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{64DC9ADE-7583-4F12-90D7-BA6EAF22FA2C} = {31DF7F00-4530-455D-A982-37E67AA32272}
 		{D2C498C3-0A9A-4D29-98D2-65FB5A9E7EC5} = {8EBC7F5A-9447-4752-B1C1-557852038A90}
 		{88AF99B1-1097-4E5D-9BBF-8C2F78E42029} = {8EBC7F5A-9447-4752-B1C1-557852038A90}
+		{83E86655-7608-41A7-AB46-D2FFA22DB64C} = {31DF7F00-4530-455D-A982-37E67AA32272}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FFA5C14D-3ED6-45A7-8F7C-1D89B077E724}
