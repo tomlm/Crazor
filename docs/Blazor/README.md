@@ -23,7 +23,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 
 # Installation
 
-[Installing Crazor.Blazor](Install.md) - Installing Crazor.Blazor into your project
+[Adding Crazor.Blazor to your project](Install.md) - Installing Crazor.Blazor into your project
 
 * [Settings](../Settings.md) - Settings for Crazor
 
