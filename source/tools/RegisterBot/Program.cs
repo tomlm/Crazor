@@ -26,11 +26,21 @@ class Script : CShell
         }
 
         Echo = false;
-        var cmdResult = await Cmd("az -h").Execute();
+        var cmdResult = await Cmd("az -v").Execute();
         if (!cmdResult.Success)
         {
-            Console.WriteLine("==== You need to install Azure CLI to use RegisterBot!!!!");
-            throw new CommandResultException(cmdResult);
+            Echo = true;
+            Console.WriteLine("installing Microsoft.AzureCLI dependency");
+            cmdResult = await Cmd("winget install Microsoft.AzureCLI").Execute();
+            if (!cmdResult.Success)
+            {
+                Console.WriteLine("==== You need to install Azure CLI to use RegisterBot!!!!");
+                Console.WriteLine("https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli");
+                return;
+            }
+            Echo = false;
+
+            cmdResult = await Cmd("az login").Execute();
         }
 
         string endpoint = args.SkipWhile(arg => arg != "--endpoint" && arg != "-e").Skip(1).FirstOrDefault();
