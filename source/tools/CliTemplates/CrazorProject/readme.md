@@ -1,98 +1,52 @@
-# Configuring your bot
+# Setting up your service as a bot
 
-## 1. Install AZ CLI
+Let's say you have a bot **Jed**. You will want 2 bots:
 
-There are a number ways of installing (see https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows)
+* *(Local)* a bot named **Jed-Dev** which is running locally on your box.
+* *(Production)* a bot named **Jed** which is running in the cloud
 
-To install using winget
-```winget install -e --id Microsoft.AzureCLI```
+# Install registerbot
 
-Make sure to login 
-
-```az login```
-
-## 2. Install registerbot tool
-The **registerbot** tool is a jack of all trades that makes managing bots a walk in the park.
+The **registerbot** tool is a jack of all trades that makes managing bots a walk in the park. To install it simply run:
 
 ```dotnet new install -g registerbot```
 
-## 3. Register your service as a bot
-Let's say you have a bot **Jed**. You will want 2 bots, 
+# Creating development bot 
 
-* (Local) a bot named **Jed-Dev** which is running locally on your box.
-* (Production) a bot named **Jed** which is running in the cloud
+Bots need to be accessible from the cloud, so for local development we will use a tunnel service to create a public endpoint for the local bot.
 
-The **registerbot** tool takes care of all of details of managing the registrations.
+## 1. Create a public tunnel 
 
-## Creating local bot pointing to your local service
+Create a visual studio devtunnel named your bot name with 
 
-Bots need to be accessible from the cloud, so for local development we will use ngrok to create a public endpoint for the local bot.
+* **TunnelType=Persistant** 
+* **Access=Public** 
+* **Use Tunnel Domain=true** (```--host-header unchanged --origin-header unchanged```)
 
-Run this command and copy the ngrok url from the screen.  This creates a publicly addressable URL that is resolved to local aspnet service on port 7232
-```ngrok http --host-header=preserve https://localhost:7232```
+Start the project, the URL it creates will look something like this: ```https://ls13q8g5-7232.usw2.devtunnels.ms```
 
-The URL it creates will look something like this: ```https://1a52-50-35-77-214.ngrok-free.app```
+> (ALTERNATIVE) You can use **ngrok.io** for your tunnel
+>
+> ```ngrok http --host-header=preserve https://localhost:7232```
+> 
+>The URL it creates will look something like this: ```https://1a52-50-35-77-214.ngrok-free.app```
+> 
+
+## 2. Run registerbot to create the bot for local tunnel endpoint
 
 To register your local endpoint as the **Jed-Dev** bot you run **registerbot** in the project folder and associate the **Bot Name** with the **endpoint** like this:
 
 ```
-registerbot --name Jed-Dev --endpoint https://xxxxxxxxxxxxxxx.ngrok-free.app
+registerbot --name Jed-Dev --endpoint {http://PUBLICURLFROMABOVE}
 ```
 **registerbot** will update the local configuration/secrets or the remote service configuration/secrets as appropriate!
 
-# 4. Run the project
+# Creating production bot 
 
-The project is just an ASP.NET Core web project that implements both bot protocols and hosts the cards:
+## 1. Publish your service to Azure
+Simply publish your service to azure cloud.
 
-```dotnet run```
-
-Navigate your browser to ngrok url and you should see a working card!
-
-# 5. Creating a card application
-
-* Create a folder called */cards/Counter*
-
-* Create a file **Default.razor** in that folder
-
-  ```razor
-  @inherits CardView
-  
-  <Card Version="1.4">
-      <TextBlock Size="AdaptiveTextSize.Large">Hello world!</TextBlock>
-      <TextBlock>Counter:@Counter</TextBlock>
-  
-      <ActionSet>
-          <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
-      </ActionSet>
-  </Card>
-  
-  @code {
-      public int Counter { get; set; }
-  
-      public void OnIncrement()
-      => this.Counter++;
-  }
-  ```
-
-  Now go to your website /cards/counter and you should see your card!
-
-
-
-# 6. Installing your bot in teams
-
-To install in teams you need a manifest, but no problem, Crazor creates one for you!
-
-To register your bot with teams
-
-* Go to teams
-* add Apps
-* Upload App and use **https://...ngrok.io/teams.zip** as the url. That's the path to the teams manifest file.
-
-# 7. Publishing
-
-Publish your service to the azure cloud
-
-## Creating production bot pointing to your cloud service
+## 2. Run registerbot to create bot for the cloud endpoint
 
 You need to create and register a bot for that endpoint, which again you can just use **registerbot** to do.
 
@@ -100,4 +54,3 @@ You need to create and register a bot for that endpoint, which again you can jus
 
 **registerbot** will update the deployed services configuration/secrets automatically!
 
-# 

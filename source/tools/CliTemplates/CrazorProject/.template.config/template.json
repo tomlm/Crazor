@@ -3,8 +3,8 @@
   "author": "Tom Laird-McConnell",
   "classifications": [
     "Web",
-    "Blazor",
-    "Crazor"
+    "Crazor",
+    "Blazor"
   ],
   "identity": "Crazor.Blazor.Server",
   "name": "Crazor App Server",
