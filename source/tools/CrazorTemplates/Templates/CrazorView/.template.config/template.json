@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Tom Laird-McConnell",
+  "classifications": [
+    "Web",
+    "Crazor",
+    "Blazor"
+  ],
+  "identity": "Crazor.Blazor.CardView",
+  "name": "Crazor Card View",
+  "description": "Creates a Crazor Card View .razor file.",
+  "shortName": "crazorview",
+  "sourceName": "NewView",
+  "defaultName": "Default",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Tom Laird-McConnell",
+  "classifications": [
+    "Web",
+    "Crazor",
+    "Blazor"
+  ],
+  "identity": "Crazor.Blazor.CardViewModel",
+  "name": "Crazor Card View With Model",
+  "description": "Creates a Crazor Card View .razor file bound to a model.",
+  "shortName": "crazorviewmodel",
+  "defaultName": "Default",
+  "sourceName": "NewView",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": {
+    "DefaultNamespace": {
+      "type": "bind",
+      "binding": "msbuild:RootNamespace",
+      "replaces": "Crazor.ClassLibrary1"
+    }
+  },
+  "constraints": {
+    "csharp-only": {
+      "type": "project-capability",
+      "args": "CSharp"
+    }
+  }
+}

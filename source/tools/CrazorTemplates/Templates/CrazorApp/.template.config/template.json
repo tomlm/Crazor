@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Tom Laird-McConnell",
+  "classifications": [
+    "Web",
+    "Crazor",
+    "Blazor"
+  ],
+  "identity": "Crazor.Blazor.CardApp",
+  "name": "Crazor Card Application",
+  "description": "Creates a Crazor Card Application and default view .razor file.",
+  "shortName": "crazorapp",
+  "sourceName": "AppTemplate",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": {
+    "DefaultNamespace": {
+      "type": "bind",
+      "binding": "msbuild:RootNamespace",
+      "replaces": "Crazor.ClassLibrary1"
+    }
+  },
+  "constraints": {
+    "csharp-only": {
+      "type": "project-capability",
+      "args": "CSharp"
+    }
+  }
+}

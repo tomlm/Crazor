@@ -1,0 +1,15 @@
+﻿@inherits CardView<CardApp, NewViewModel>
+
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.Large">Hello NewView!</TextBlock>
+    <TextBlock>Counter:@Model.Counter</TextBlock>
+
+    <ActionSet>
+        <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
+    </ActionSet>
+</Card>
+
+@code {
+    public void OnIncrement()
+        => Model.Counter++;
+}

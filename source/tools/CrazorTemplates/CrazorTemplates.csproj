@@ -38,6 +38,7 @@
   <ItemGroup>
     <None Include="icon.png" Pack="True" PackagePath="\" />
     <None Include="readme.md" Pack="true" PackagePath="\" />
+    <None Include="templates\CrazorApp\AppTemplateApp.cs" />
   </ItemGroup>
 
 </Project>
