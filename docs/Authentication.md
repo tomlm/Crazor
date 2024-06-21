@@ -46,9 +46,9 @@ Now that you have your service set up you modify you card views to have authenti
 
 Crazor has built in authentication protocols to do Single-Sign-In (SSO) and OAuth authentication flows via Cards in the client (such as Office). 
 
-### Add [Authentication(...)] attribute
+### Add [OAuthConnection(connectionName)] attribute
 
-When you add an **[Authentication(...)]** attribute to your card you pass in the *OAuth Connection Name* you configured in the Azure Bot Portal.  Adding this attribute will trigger the authentication flow for your view using the connection as your authentication flow.
+When you add an **[OAuthConnection(...)]** attribute to your card you pass in the *OAuth Connection Name* you configured in the Azure Bot Portal.  Adding this attribute will trigger the authentication flow for your view using the connection as your authentication flow.
 
 When **user is not authenticated**, then the card will be rendered **anonymously:**
 
@@ -66,7 +66,7 @@ Here is an example with Graph API connection called "Graph".
 
 ```c#
 @inherits CardView
-@attribute [Authentication("Graph")]
+@attribute [OAuthConnection("Graph")]
 <Card Version="1.5">
     @if (User.Identity.IsAuthenticated)
     {
@@ -81,17 +81,17 @@ Here is an example with Graph API connection called "Graph".
 
 ## Authorization 
 
-To authorize users in your CrazorApp you use the **[Authorize]** attribute or the **User** Claims principal for the user against a role or policy.  
+To authorize users in your CrazorApp you use the **[OAuthConnection]** attribute or the **User** Claims principal for the user against a role or policy.  
 
-### Using [Authorize()] attribute
+### Using [OAuth] attribute
 
-If you add a **[Authorize(...)]** attribute the view will throw an exception if the user doesn't meet the required role or policy.  
+If you add a **[OAuthConnection(connectionName)]** attribute the view will throw an exception if the user doesn't meet the required role or policy.  
 
 This example shows a card that will not display anything to the user if they are not authenticated and in the Admin role.
 
 ```c#
 @inherits CardView
-@attribute [Authentication("Graph")]
+@attribute [OAuthConnection("Graph")]
 @attribute [Authorize(Role="Admin")]
 <Card Version="1.5">
     ... Admin only view for card
@@ -106,7 +106,7 @@ You can explicitly add authorization validations by using the **User.IsInRole()*
 
 ```c#
 @inherits CardView
-@attribute [Authentication("Graph")]
+@attribute [OAuthConnection("Graph")]
 <Card Version="1.5">
     @if (User.Identity.IsAuthenticated)
     {
@@ -132,7 +132,7 @@ You can explicitly add authorization validations by using the **User.IsInRole()*
 You can also explicit perform authorization validations by using **IAuthorizationService** interface.
 
 ```c#
-@attribute [Authentication("Graph")]
+@attribute [OAuthConnection("Graph")]
 @inherits CardView
 @inject IAuthorizationService AuthService;
 ...
@@ -151,7 +151,7 @@ You can also explicit perform authorization validations by using **IAuthorizatio
 With Blazor you can use **<CascadingAuthenticationState>** and **<AuthorizeView>** to define anonymous and authorized views for your template.
 
 ```c#
-@attribute [Authentication("Graph")]
+@attribute [OAuthConnection("Graph")]
 @inherits CardView
 @using Microsoft.Graph;
 @inject GraphServiceClient GraphClient;
