@@ -14,9 +14,9 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.10</VersionPrefix>
+		<VersionPrefix>1.0.11</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
-		<AssemblyVersion>1.0.10.0</AssemblyVersion>
+		<AssemblyVersion>1.0.11.0</AssemblyVersion>
 		<Description>Experimental library for creating Adaptive Cards using ASP.NET Blazor component .Razor templates.</Description>
     <Company>Iciclecreek</Company>
     <Authors>Tom Laird-McConnell</Authors>
