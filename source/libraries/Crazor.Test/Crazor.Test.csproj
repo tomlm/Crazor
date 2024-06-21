@@ -30,7 +30,6 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>adaptivecards</PackageTags>
 		<RepositoryUrl>https://github.com/tomlm/crazor</RepositoryUrl>
-		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
 		<RootNamespace>Crazor.Test</RootNamespace>
 		<ContentTargetFolders>content</ContentTargetFolders>
 	</PropertyGroup>

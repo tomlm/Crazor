@@ -28,7 +28,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>crazor;adaptivecards</PackageTags>
     <RepositoryUrl>https://github.com/microsoft/crazor</RepositoryUrl>
-    <Copyright>© Microsoft Corporation. All rights reserved</Copyright>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <ContentTargetFolders>content</ContentTargetFolders>
   </PropertyGroup>

@@ -29,7 +29,6 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>crazor;adaptivecards</PackageTags>
 		<RepositoryUrl>https://github.com/tomlm/crazor</RepositoryUrl>
-		<Copyright>© Microsoft Corporation. All rights reserved</Copyright>
 		<RootNamespace>Crazor</RootNamespace>
 		<ContentTargetFolders>content</ContentTargetFolders>
 	</PropertyGroup>

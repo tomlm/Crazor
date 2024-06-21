@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.Test", "libraries\Cr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.AdaptiveCards", "libraries\Crazor.AdaptiveCards\Crazor.AdaptiveCards.csproj", "{44B41F9A-DD6B-4481-A35B-8217298EE323}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazorTemplates", "tools\CrazorTemplates\CrazorTemplates.csproj", "{12391BA5-DCB7-4168-95E4-1C3CE84C1D21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crazor.AI", "libraries\Crazor.AI\Crazor.AI.csproj", "{C2B56126-BD2A-4407-9016-67EAFD71E5FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{44B41F9A-DD6B-4481-A35B-8217298EE323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44B41F9A-DD6B-4481-A35B-8217298EE323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44B41F9A-DD6B-4481-A35B-8217298EE323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12391BA5-DCB7-4168-95E4-1C3CE84C1D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12391BA5-DCB7-4168-95E4-1C3CE84C1D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12391BA5-DCB7-4168-95E4-1C3CE84C1D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12391BA5-DCB7-4168-95E4-1C3CE84C1D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2B56126-BD2A-4407-9016-67EAFD71E5FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2B56126-BD2A-4407-9016-67EAFD71E5FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2B56126-BD2A-4407-9016-67EAFD71E5FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2B56126-BD2A-4407-9016-67EAFD71E5FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
