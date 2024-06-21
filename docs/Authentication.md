@@ -46,9 +46,9 @@ Now that you have your service set up you modify you card views to have authenti
 
 Crazor has built in authentication protocols to do Single-Sign-In (SSO) and OAuth authentication flows via Cards in the client (such as Office). 
 
-### Add [Authentication(...)] attribute
+### Add [OAuthConnection(connectionName)] attribute
 
-When you add an **[Authentication(...)]** attribute to your card you pass in the *OAuth Connection Name* you configured in the Azure Bot Portal.  Adding this attribute will trigger the authentication flow for your view using the connection as your authentication flow.
+When you add an **[OAuthConnection(...)]** attribute to your card you pass in the *OAuth Connection Name* you configured in the Azure Bot Portal.  Adding this attribute will trigger the authentication flow for your view using the connection as your authentication flow.
 
 When **user is not authenticated**, then the card will be rendered **anonymously:**
 
@@ -66,7 +66,7 @@ Here is an example with Graph API connection called "Graph".
 
 ```c#
 @inherits CardView
-@attribute [Authentication("Graph")]
+@attribute [OAuthConnection("Graph")]
 <Card Version="1.5">
     @if (User.Identity.IsAuthenticated)
     {
