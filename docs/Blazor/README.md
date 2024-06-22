@@ -21,11 +21,9 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 * **CardViewer component** - CardViewer component for embedding Crazor cards into your blazor layout.
 * **Authentication** and **Authorization** - Giving you ability to show per user views and make delegated calls on behalf of the user.
 
-# Installation
+# Quick Start
 
-[Adding Crazor.Blazor to your project](Install.md) - Installing Crazor.Blazor into your project
-
-* [Settings](../Settings.md) - Settings for Crazor
+* [Quick Start](QuickStart.md) - create a fully functional Crazor Card bot in 5 minutes.
 
 # Walkthroughs
 
@@ -41,7 +39,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 * [Card Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Authentication](../Authentication.md) - Authenticating users and Authorizing access to create per-user secure views
 * [Writing Unit tests](../UnitTests.md) - Writing unit tests for your cards.
-* [Components (Advanced)](Components.md) - How to define reusuable components via Blazor Components
+* [Components (Advanced)](Components.md) - How to define reusable components via Blazor Components
 
 # Sample Card Apps
 | | |Description|
@@ -74,26 +72,7 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 
 [Installing your card applications into teams](../Teams.md) 
 
-# Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-# Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)

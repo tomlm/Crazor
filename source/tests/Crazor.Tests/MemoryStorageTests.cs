@@ -12,16 +12,16 @@ namespace Crazor.Tests
             var storage = new MemoryStorage();
             Memory memory = new Memory(storage, "app");
             var scopedKey = memory.GetScopedKey(String.Empty, "key");
-            Assert.AreEqual("app--key", scopedKey);
+            Assert.AreEqual("app//key", scopedKey);
 
             scopedKey = memory.GetScopedKey("test", "key");
-            Assert.AreEqual("app-test-key", scopedKey);
+            Assert.AreEqual("app/test/key", scopedKey);
             //var unscopedKey = memory.ReverseKey("test", scopedKey!);
             //Assert.AreEqual("key", unscopedKey);
 
             memory = new Memory(storage, "app2");
             scopedKey = memory.GetScopedKey("test2", "key2");
-            Assert.AreEqual("app2-test2-key2", scopedKey);
+            Assert.AreEqual("app2/test2/key2", scopedKey);
             //unscopedKey = memory.ReverseKey("test2", scopedKey!);
             //Assert.AreEqual("key2", unscopedKey);
         }

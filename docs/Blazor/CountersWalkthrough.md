@@ -47,7 +47,7 @@ Things to notice:
 * The local property **Counter** is automatically persisted with session scope as part of the card view. 
 * We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
 
-That's it.  Now run the application and go to http://localhost:{yourport}/Cards/Counters 
+That's it.  Now run the application and go to the Counters app.
 
 You should see something like this:
 
@@ -81,7 +81,9 @@ Create  **/Cards/Counters/CountersApp.cs** and define **CountersApp**
     }
 ```
 
-The values defined on the **CountersApp** class are shared by all CardView templates in the folder, and their persistence scope is defined by the attributes we put on it [(go to Memory documentation for more details)](/docs/Memory.md)
+The SharedCounter property defined on the **CountersApp** has a attribute **[AppMemory]** to signify that this value is shared by all users of the app. [(go to Memory documentation for more details)](/docs/Memory.md)
+
+This illustrates the intelligent memory system that Crazor supports. Instead of dealing with the logic of loading various objects based on the keys you can simply put attributes on your properties to define the scope of the persistence for the value.
 
 ## 2. Update the Default.razor file to know about CountersApp
 
@@ -122,3 +124,19 @@ Things to notice:
 You should see something like this:
 
 ![image-20221103120318266](../assets/image-20221103120318266.png)
+
+
+
+# Next Steps
+
+* [Create an app with actions](CountersWalkthrough.md)
+
+# More information
+
+* [CardView with Blazor](CardView.md) - details on how to use Crazor.Blazor to author CardViews
+
+
+
+
+![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
+

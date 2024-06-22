@@ -353,7 +353,7 @@ class Script : CShell
             await Cmd($"dotnet user-secrets set AzureAD:ClientSecret {appPassword}").AsString();
 
             // update profile
-            Console.WriteLine(@"Updating Properties\launchSettings.json https profile");
+            Console.WriteLine(@"==== Updating Properties\launchSettings.json https profile");
             try
             {
                 var profile = JObject.Parse(File.ReadAllText(@"Properties\launchSettings.json"));

@@ -12,12 +12,13 @@ Core service settings:
 
 | Name                     | Required                               | Default Value                             | Example                                 | Description                                                  |
 | ------------------------ | -------------------------------------- | ----------------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| **BotName**              | Yes                                    | *none*                                    | Billy Bob's Bot                         | This is used for the header of the cards                     |
 | **HostUri**              | Yes                                    | *none*                                    | https://crazordemobot.azurewebsites.net | The path to the web service                                  |
 | **MicrosoftAppType**     | Yes                                    | *none*                                    | MultiTenant                             | One of:[MultiTenant, SingleTenant, UserManagedIdentity]      |
 | **MicrosoftAppId**       | Yes                                    | *none*                                    | {GUID}                                  | AppId of your bot                                            |
 | **MicrosoftAppPassword** | if **MultiTenant** or **SingleTenant** | *none*                                    | *password*                              | The AD Password for your bot. If you use **UserManagedIdentity** this is ignored. |
 | **TeamsAppId**           | No                                     | MicrosoftAppId will be default if not set | {Guid}                                  | The Teams AppID registration from manifest.json              |
-| **BotName**              | Yes                                    | *none*                                    | Billy Bob's Bot                         | This is used for the header of the cards                     |
+
 
 
 

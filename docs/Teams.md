@@ -107,24 +107,6 @@ To control the look and feel of the task module window you add the **[TaskInfo]*
 | **Width**  | The desired width of the dialog either ["small" \| "medium" \| "large"] or px | "medium"     | "600px"       |
 | **Height** | The desired height of the dialog either ["small" \| "medium" \| "large"] or px | "medium"     | "600px"       |
 
-## To pin a card as a Static Tab
-
-To pin a card to as a static Tab you add the **TabInfo** attribute to your Card View template.
-
-```asp
-@attribute [TabInfo("Addresses")]
-
-<Card Version="1.5" >
-...
-</Card>
-```
-
-![image-20230112134723796](assets/image-20230112134723796.png)
-
-| Property  | Description      | Default      | Example     |
-| --------- | ---------------- | ------------ | ----------- |
-| **Title** | The title of tab | Name of card | "Addresses" |
-
 
 # Side-loading your teams manifest
 

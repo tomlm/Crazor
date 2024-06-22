@@ -12,7 +12,7 @@ namespace Crazor
     /// Name => overall segment, for example name of the application
     /// Scope => sub-set of the segment
     /// Essentially each object stored in storage has key composed of
-    /// "{name}-{scope}-{key}" 
+    /// "{name}/{scope}/{key}" 
     /// </remarks>
     public class Memory
     {
@@ -247,7 +247,7 @@ namespace Crazor
             ArgumentNullException.ThrowIfNull(scope);
             if (String.IsNullOrEmpty(key))
                 return null;
-            return $"{this.Name}-{scope}-{key ?? "data"}";
+            return $"{this.Name}/{scope}/{key ?? "data"}";
         }
 
         //internal string ReverseKey(string scope, string key)

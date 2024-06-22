@@ -1,7 +1,8 @@
 @using Crazor.Blazor.ComponentRenderer;
 @using Newtonsoft.Json
 @using Newtonsoft.Json.Linq
-@inherits ActionSubmit
+@using System.ComponentModel
+@inherits ActionComponent<AdaptiveShowTaskModuleAction>
 
 <ac:Action.ShowTaskModule @attributes="@GetAttributes()">
     <CascadingValue Name="ParentItem" Value="@Item">@ChildContent</CascadingValue>
@@ -15,23 +16,29 @@
     /// The Card Route to show in a taskmodule, if not in teams this will be equivelent of navigating to a view.
     /// </summary>
     [Parameter]
-    public string? Route { get; set; }
+    public string? Route { get => Item.Route; set => Item.Route = value!; }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveAssociatedInputs), "Auto")]
+    public AdaptiveAssociatedInputs AssociatedInputs { get => Item.AssociatedInputs; set => Item.AssociatedInputs = value; }
 
-        if (Route != null)
-        {
-            if (this.Item.Data == null)
-                this.Item.Data = new JObject();
+    [Parameter]
+    public String? IconUrl { get => Item.IconUrl; set => Item.IconUrl = value!; }
 
-            var data = this.Item.Data as JObject;
-            if (data != null)
-            {
-                data["msteams"] = fetch;
-                data["commandId"] = Route;
-            }
-        }
-    }
+    [Parameter]
+    public BoolProperty? IsEnabled { get => Item.IsEnabled; set => Item.IsEnabled = value == true; }
+
+    [Parameter]
+    [DefaultValue(typeof(AdaptiveActionMode), "Primary")]
+    public AdaptiveActionMode Mode { get => Item.Mode; set => Item.Mode = value; }
+
+    [Parameter]
+    [DefaultValue(typeof(string), "Default")]
+    public string Style { get => Item.Style; set => Item.Style = value; }
+
+    [Parameter]
+    public String? Title { get => Item.Title; set => Item.Title = value!; }
+
+    [Parameter]
+    public String? Tooltip { get => Item.Tooltip; set => Item.Tooltip = value!; }
 }

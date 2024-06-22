@@ -66,37 +66,6 @@ public class MyApp : CardApp
 }
 ```
 
-## Custom Storage
-...TBD...
-
-## Hooking Custom State
-
-To manage your own state from your own data base all you need to do is override **OnLoadAppAsync()** and **OnSaveAppAsync()**.  
-
-```C#
-public SomeData MyData {get;set;}
-
-public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
-{
-    // all attribute values are loaded by base.LoadAppAsync()
-    await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
- 
-    MyData = await myDB.Load(...);
-}
-
-public async virtual Task SaveAppAsync(CancellationToken cancellationToken)
-{
-    await myDB.Save(...);
-
-    // all memory attribute values are persisted by base.SaveAppAsync()
-    await base.SaveAppAsync(cancellationToken);
-}
-```
-
->  NOTE 1: If you want **[Memory] attributes** to continue to work you need to call the **base** implementation when overriding these methods.
-
->  NOTE 2: You should not put **[Memory] attributes** on properties which are backed by external data sources as that will cause the data be persisted twice, once to the custom database and once to the key value store.
-
 ## Loading data based on route
 
 Let's say you have a Edit.cshtml file which edits a resource route **/Cards/MyApp/{id}/Edit**
@@ -126,6 +95,52 @@ Let's say you have a Edit.cshtml file which edits a resource route **/Cards/MyAp
 ```
 
 Now when someone copies the Url the value in the Url contains the resourceId, and when it is copied into a new environment the OnLoadRoute() method is able to bind to the appropriate data for the url.
+
+## Custom Memory
+
+The memory attributes are annotations which take care of the mechanics of talking to memory, but the underlying key/value storage for the memory is accessible directly.
+
+**Memory** supports the following methods for looking up, saving and deleting an objects:
+
+| Name                             | Description                                                  |
+| -------------------------------- | ------------------------------------------------------------ |
+| **GetObjectAsync(key)**          | Lookup an object by unique key for the object within the application |
+| **GetObjectAsync<T>(key)**       | Lookup an object T by unique key for the object within the application |
+| **GetObjectsAsync(keys)**                          | Lookup multiple objects by unique keys within the application |
+| **GetObjectsAsync<T>(key)**                        | Lookup multiple objects of type T by unique keys within the application |
+| **SaveObjectAsync(key, object)** | Save an object as key                                        |
+| **SaveObjectsAsync(IDictionary<string, object> )** | Save multiple objects                                        |
+| **DeleteObjectAsync(key)**       | Delete an object by unique key for the object within the application. |
+| **DeleteObjectsAsync(keys)**                       | Delete multiple objects by unique key within the application. |
+
+## Override OnLoadAppAsync/OnSaveAppAsync()
+
+A convenient place to manage your own state from your own data base all you need to do is override **OnLoadAppAsync()** and **OnSaveAppAsync()** methods on the **CardApp** class. 
+
+```C#
+[TempMemory]
+public SomeData MyData {get;set;}
+
+public async virtual Task LoadAppAsync(string? sharedId, string? sessionId, Activity activity, CancellationToken cancellationToken)
+{
+    // all attribute values are loaded by base.LoadAppAsync()
+    await base.LoadAppAsync(sharedId, sessionId, activity, cancellationToken);
+ 
+    MyData = await Memory.GetObjectAsync<SomeData>(key)
+}
+
+public async virtual Task SaveAppAsync(CancellationToken cancellationToken)
+{
+    await Memory.SaveObjectAsync(key, MyData);
+
+    // all memory attribute values are persisted by base.SaveAppAsync()
+    await base.SaveAppAsync(cancellationToken);
+}
+```
+
+>  NOTE1: If you taking over the loading and saving of data into a property you should put a **[TempMemory] attribute** on it so that it is not persisted to session memory, or you will store the data twice.
+
+> NOTE 2: You can make Memory calls from any place, in a CardView or CardApp. It does not need to be in OnLoadAppAsync/OnSaveAppAsync
 
 
 

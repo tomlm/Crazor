@@ -4,15 +4,15 @@
 
 # Conceptual Model
 
-The web services hosts multiple **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
+The web services hosts **multiple** **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
 
 ## Card Applications
 
-Your service can host 1:N **Card Applications**.  A card application is a mini application which is based on AdaptiveCards, using Razor as the templating engine. 
+ A card application is a mini application which is based on AdaptiveCards, using Razor as the templating engine. 
 
 ## Card Views
 
-Each card application is made up of 1:N **Card Views**. A card view is a razor template, binding the data and logic to create a "screen" in the application. 
+Each card application is made up of one or more multiple **Card Views**. A card view is a class that defines the UX by binding the data and logic into an Adaptive Card to create a "screen" in the application. 
 
 # The CardApp Class
 
@@ -60,7 +60,7 @@ public class ExampleApp : CardApp
     
     public IConfiguration Configuration {get;set;}
 
-    [SharedMemory]
+    [SessionMemory]
     public Entity Entity { get; set;}
     
     public async Task LookUpEntity(String id)
@@ -71,136 +71,6 @@ public class ExampleApp : CardApp
 ```
 
 
-
-
-
-# Verb handlers
-
-![image](https://user-images.githubusercontent.com/17789481/190311953-6cdb8a4d-eebf-4833-af58-915220a4d838.png)
-
-Adaptive cards **Action.Execute** define a ***verb*** which is a unique string identifying the action to take.  **Crazor** automatically hooks 
-the verb up to a method on the **CardView**.  This method is called an ***Action Handler*** or ***Verb Handler***
-
-For example:
-
-```xml
-<ActionExecute Title="Do some stuff" Verb="OnDoSomeStuff"/>
-```
-
-You write the code to respond to it by defining a method with the same name.
-
-```cs
-@functions {
-	public void OnDoSomeStuff()
-	{  
-		Model.Counters++;
-	}
-}
-```
-
->  **Recommendation ** is good practive to use @nameof so that your verb and method names stay in sync and you get a build break when you change one without the other.
-
-```xml
-<ActionExecute Title="Do some stuff" Verb="@nameof(OnDoSomeStuff)"/>
-```
-
-
-
-> NOTE 1 : Any handler can be async by using a return type of **Task**
-
-> NOTE 2: If the **verb does not match** and it **matches the name of a view**  => it will navigate to that view...aka ShowView(verb)
-
-## Verb handler parameter binding
-
-![image](https://user-images.githubusercontent.com/17789481/190312008-c0c144ad-4387-4d84-a883-62b793e1a8c3.png)
-
-Any **input** or **Action.Execute Data** payloads will to be automatically bound to verb handler arguments.
-
-
-
-For example:
-
-```xml
-<InputText Id="Name" .../>
-```
-
-You can get the value for **"name"** by simply adding **string name** as an argument.
-
-```C#
-public void OnClick(string name)
-{
-
-}
-```
-
-Parameters are bound from
-
-* **Id of the Input control** 
-* **Action.Execute data** for the action clicked on
-
-## Two-way data binding
-
-If you want an input control to be bound so that the value round-trips you need **two-way data binding**. 
-
-This is accomplished by:
-
-* The input control having the **Id** with the **name** of the property and the **Value** with the **value** of the property
-
-* Defining a property with **[BindProperty]** attribute on it with the same **name**  as the **Id**
-
-![image](https://user-images.githubusercontent.com/17789481/190312063-0de73827-cd0d-4236-98bc-4ab829802a73.png)
-
-## Easier Two-way binding
-
-The input controls all support smart two-way binding via the **Binding** property. The **Binding** property defines a shortcut for Id and Value binding on the input control. 
-
-Example:
-
-```xml
-<InputText Binding="Model.Name"  .../>
-```
-
-***Binding="Model.Name"*** is a shortcut for ***Id="Model.Name"*** and ***Value="@Model.Name"*** 
-
-# Data Validation
-
-![image](https://user-images.githubusercontent.com/17789481/190312095-542518e7-f9bd-4526-86e1-0e014bd0e4bc.png)
-
-You can apply **data validation attributes** to get validation computed on each action handler invocation.
-
-```C#
-	[BindProperty]
-	[Required]
-	[StringLength(50)]
-	public string Name {get;set;}
-```
-
-The property **IsModelValid** will be true if all validation attributes are valid. The **ValidationErrors** will contain a map of property name to an array of error messages for that property.
-
-The typical pattern is to only commit and close the data if the validation passes.
-
-```C#
-@functions {
-    public void OnOK()
-    {
-        if (IsModelValid)
-        {
-            App.UpdateAddress(Model);
-            CloseView(Model);
-        }
-    }
-}
-```
-
-## Adaptive.Input Controls and validation 
-
-Input controls do 2 things automatically related to validation:
-
-1. They **map validation attributes to client side validation** properties to get client side validation as appropriate.
-2. They **validate server side as well** (because server side validation is richer than what Adaptive Cards provides)
-3. If there are validation errors they will **automatically display the error message** next to the input control that has incorrect ddata.
-
-> NOTE: You can disable this validation errors on an input control by setting **ShowErrors="false"**
 
 # Navigation 
 
@@ -223,7 +93,7 @@ Input controls do 2 things automatically related to validation:
 
 ## Search extensions
 
-To implement a search extension like this:
+To implement a teams search extension like this:
 
 ![image-20221116110720258](assets/image-20221116110720258.png)
 

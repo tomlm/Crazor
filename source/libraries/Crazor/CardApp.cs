@@ -757,6 +757,14 @@ namespace Crazor
 
             switch (action.Verb)
             {
+                case Constants.CLOSEVIEW_VERB:
+                    // close verb closes the window without returning any data.
+                    // we call invoke verb so it can be overriden
+                    if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
+                    {
+                        this.CloseView();
+                    }
+                    break;
                 case Constants.CANCEL_VERB:
                     // cancel verb cancels the window
                     // we call invoke verb so it can be overriden
@@ -1007,7 +1015,7 @@ namespace Crazor
                     {
                         Title = "Refresh",
                         Verb = Constants.LOAD_VERB,
-                        IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
+                        IconUrl = new Uri(uri, Context.Configuration.GetValue<string>("RefreshIcon") ?? "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = new JObject()
                         {
@@ -1022,7 +1030,7 @@ namespace Crazor
                     {
                         Title = "Refresh",
                         Verb = Constants.REFRESH_VERB,
-                        IconUrl = new Uri(uri, "/images/refresh.png").AbsoluteUri,
+                        IconUrl = new Uri(uri, Context.Configuration.GetValue<string>("RefreshIcon") ?? "/images/refresh.png").AbsoluteUri,
                         AssociatedInputs = AdaptiveAssociatedInputs.None,
                         Data = new JObject()
                         {

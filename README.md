@@ -5,7 +5,7 @@
 
 # Crazor
 **Crazor** is a library which marries **Razor Templating** with **Adaptive Cards** to create a super productive 
-coding environment focused 100% on building the micro card based applications.
+coding environment focused 100% on building Adaptive Card based experiences.
 
 All of the bot logic is implemented for you, all you do is make templates bound to your data and write
 the code behind.  Really. 
@@ -31,13 +31,26 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 # Documentation
 
+## Quick Start
+
+* [Quick Start](docs/Blazor/QuickStart.md) - Quick start to creating a new Crazor.Blazor App Server 
+* [Crazor.Blazor](docs/Blazor/README.md) - templating using **.razor** files using **Blazor** semantics.
+
+## Archicture
+
 * [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
-* [Crazor.Blazor](docs/Blazor/README.md) - Implements templating using **.razor** files using **Blazor** semantics.
+
+## Concepts
+
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-  * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
-* [ICard View](docs/ICardView.md) - Information on **ICardView** interface
+* [Card Views](CardView.md) - General information about Card Views
+* [Card App Memory](docs/Memory.md) - Information on persistence and memory 
 * [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
+
+## Advanced topics
+
+* [ICard View](docs/ICardView.md) - Information on **ICardView** interface
 
 # Setting up your service
 

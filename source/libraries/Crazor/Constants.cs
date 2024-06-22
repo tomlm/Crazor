@@ -18,6 +18,7 @@ namespace Crazor
         public const string DEBUGGER_VERB = "OnDebugger";
         public const string LOGIN_VERB = "OnLogin";
         public const string LOGOUT_VERB = "OnLogout";
+        public const string CLOSEVIEW_VERB = "OnCloseView";
         public const string SHOWVIEW_VERB = "OnShowView";
         public const string REPLACEVIEW_VERB = "OnReplaceView";
 

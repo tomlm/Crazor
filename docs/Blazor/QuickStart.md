@@ -4,7 +4,11 @@
 
 # QuickStart
 
->  Make sure to [Install Prerequisite tools](InstallTools.md).
+This will walk you through creating a Crazor App Project using Blazor.
+
+# Prerequisites 
+
+[Install Prerequisite tools](InstallTools.md)
 
 # Creating a bot project from Visual Studio
 
@@ -12,7 +16,7 @@ Create a **Crazor App Server** project
 
 ![image-20240621213410771](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621213410771.png)
 
-> NOTE: you can create the project from the cli by using
+> NOTE: you can alternatively create the project from the cli by using
 >
 > ```cmd
 > dotnet new crazorserver
@@ -21,12 +25,12 @@ Create a **Crazor App Server** project
 
 # Add a dev tunnel for local development
 
-Use 
+For bots to work with Teams and other apps they need a public addressable endpoint. Dev tunnels does exactly that, so we will create a dev tunnel with the following options:
 
 * **TunnelType=Persistant** 
 * **Access=Public** 
 
-![image-20240621213541534](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621213541534.png)
+![image-20240621213541534](assets/image-20240621213541534.png)
 
 Run the project. You will be launched a on page like https://jx4wclpb-7232.usw2.devtunnels.ms/. You will have an error, but that's OK. We just want to get the url for your project. Copy that and save it off someplace.
 
@@ -34,11 +38,11 @@ Run the project. You will be launched a on page like https://jx4wclpb-7232.usw2.
 
 Click on your devtunnel settings  to manage the tunnel:
 
-![image-20240621213914448](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621213914448.png)
+![image-20240621213914448](assets/image-20240621213914448.png)
 
 Make sure that **Use Tunnnel Domain** is turned on:
 
-![image-20240621214005832](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621214005832.png)
+![image-20240621214005832](assets/image-20240621214005832.png)
 
 > **(ALTERNATIVE) Create a public tunnel using ngrok.io** 
 >
@@ -60,11 +64,22 @@ registerbot --name MyBot-Dev --endpoint https://jx4wclpb-7232.usw2.devtunnels.ms
 
 You should see this:
 
-![image-20240621214750538](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621214750538.png)
+![image-20240621214750538](assets/image-20240621214750538-1719090917549-6.png)
 
 And if you click on the card you should see this:
 
-![image-20240621214806458](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621214806458.png)
+![image-20240621214806458](assets/image-20240621214806458.png)
 
+# Next Steps
 
+* [Create your own Hello World app](HelloWorldWalkthrough.md)
+* [Create an app with actions](CountersWalkthrough.md)
+
+# More information
+
+* [CardView with Blazor](CardView.md) - details on how to use Crazor.Blazor to author CardViews
+
+![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
+
+  
 

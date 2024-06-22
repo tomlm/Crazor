@@ -4,7 +4,7 @@
 
 # Bot Registration
 
-A **Bot** is nothing more than **registered service** which maps a **contact name** to deployed **web service endpoint**.
+A **Bot** is a **registered service** which maps a **name** that a user interacts with to deployed **web service endpoint**.
 
 Each deployed service needs a bot registration so that users can interact with it.
 

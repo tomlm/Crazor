@@ -11,16 +11,12 @@ namespace Crazor
 
         public AdaptiveShowTaskModuleAction()
         {
-            Data = new JObject();
-        }
-
-        public AdaptiveShowTaskModuleAction(string commandId)
-        {
             Data = new JObject()
             {
-                new JProperty("msteams", fetch),
-                new JProperty("commandId", commandId)
+                new JProperty("msteams", fetch)
             };
         }
+
+        public string Route { get => ObjectPath.GetPathValue<string>(Data, "commandId"); set => ObjectPath.SetPathValue(Data, "commandId", value); }
     }
 }

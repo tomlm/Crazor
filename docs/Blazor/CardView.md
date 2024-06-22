@@ -4,316 +4,138 @@
 
 # The Blazor CardView Class
 
-The **Blazor CardView** defines a view for the **CardApp** application as a razor template **.razor** file.
+The **Blazor CardView** Implements **ICardView** using a razor template **.razor** file.
 
-The .razor file should use  the **@inherits CardView** directive defining that **Crazor.Blazor.CardView** is the base class for the view.
+There are 3 base classes
 
-## @inherits CardView
+## CardView class
 
-The **@inherits CardView** defines a **Crazor CardView** template which does not have a **Model** defined and an untyped **App**.
+The **CardView** defines a **Crazor CardView** template which does not have a **Model** defined and an untyped **App**.
 
 * It has **App** property of **CardApp**.
 * **Model** is not defined.
 
+## CardView<AppT> class
 
-
-## @inherits CardView<AppT>
-
-The **@inherits CardView<AppT>** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
+The **CardView<AppT>** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
 
 * It has **App** property of **AppT**.
+* **Model** is not defined.
 
 This allows you to get intellisense and strong type binding over **App** property giving access to custom methods and memory defined on a custom **CardApp** class.
 
-## @inherits CardView<AppT, ModelT>
+## CardView<AppT, ModelT> class
 
-The **@inherits CardView<AppT,ModelT>** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
+The **CardView<AppT,ModelT>** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
 
 * It has a strongly typed **App** property of **AppT**.
 * It has a strongly typed **Model** property of **ModelT**
 
 This allows you to get intellisense and strong type binding to the **CardApp** for your application and intellisense and strong type binding to a **ModelT** data model.
 
-Example razor template binding to the model and app properties.
+# Example 
+
+An example .razor template binding to the model and app properties.
+
 ```xml
 @inherits CardView<CountersApp, MyModel>
     
 <Card Version="1.5">
-    <TextBlock>The @App.Name Counter is: @Model.Counter</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large">The @App.Name Counter is: @Model.Counter</TextBlock>
 </Card>
 ```
 
-# Action Verb handlers
-
-![image](https://user-images.githubusercontent.com/17789481/190311953-6cdb8a4d-eebf-4833-af58-915220a4d838.png)
-
-Adaptive cards **Action.Execute** define a ***verb*** which is a unique string identifying the action to take.  **Crazor** automatically hooks 
-the verb up to a method on the **CardView**.  This method is called an ***Action Handler*** or ***Verb Handler***
-
-For example:
-```xml
-<ActionExecute Title="Do some stuff" Verb="OnDoSomeStuff"/>
-```
-
-You write the code to respond to it by defining a method with the same name.
-```cs
-@functions {
-	public void OnDoSomeStuff()
-	{  
-		Model.Counters++;
-	}
-}
-```
->  **Recommendation ** is good practive to use @nameof so that your verb and method names stay in sync and you get a build break when you change one without the other.
-
-```xml
-<ActionExecute Title="Do some stuff" Verb="@nameof(OnDoSomeStuff)"/>
-```
 
 
+# Blazor Components for Adaptive Cards
 
-> NOTE 1 : Any handler can be async by using a return type of **Task**
->
-> example: ```public async Task OnFoo(CancellationToken ct) {...}```
+The Crazor.Blazor package defines Blazor components for defining Adaptive Card layouts.
 
-## Verb handler parameter binding
+## Containers
 
-![image](https://user-images.githubusercontent.com/17789481/190312008-c0c144ad-4387-4d84-a883-62b793e1a8c3.png)
+| Name        | Description                           |
+| ----------- | ------------------------------------- |
+| <Card>      | Defines an Card Adaptive Element      |
+| <Container> | Defines an Container Adaptive Element |
+| <ColumnSet> | Defines a ColumnSet Adaptive Element  |
+| <Column>    | Defines a Column Adaptive Element     |
+| <ActionSet> | Defines an ActionSet Adaptive Element |
+| <ImageSet>  | Defines an ImageSet Adaptive Element  |
 
-Any **input** or **Action.Execute Data** payloads will to be automatically bound to verb handler arguments.
+## Elements
 
-For example:
-```xml
-<InputText Id="Name" .../>
-```
-You can get the value for **"name"** by simply adding **string name** as an argument.
+| Name                              | Description                              |
+| --------------------------------- | ---------------------------------------- |
+| <TextBlock/>                      | Defines a TextBlock Adaptive Element     |
+| <Image />                         | Defines an Image Adaptive Element        |
+| <Media />                         | Defines a Media Adaptive Element         |
+| <Table /> <TableRow/><TableCell/> | Defines a Table Adaptive Element         |
+| <RichTextBlock/>                  | Defines a RichTextBlock Adaptive Element |
+| <Factset/>                        | Defines a FactSet Adaptive Element       |
 
-```C#
-public void OnClick(string name)
-{
+## Inputs
 
-}
-```
-Parameters are bound from
-* **Id of the Input control** 
-* **Action.Execute data** for the action clicked on
-
-## Two-way data binding
-
-If you want an input control to be bound so that the value round-trips you need **two-way data binding**. 
-
-This is accomplished by:
-
-* The input control having the **Id** with the **name** of the property and the **Value** with the **value** of the property
-
-* Defining a property with **[Parameter]** attribute on it 
-
-
-![image](https://user-images.githubusercontent.com/17789481/190312063-0de73827-cd0d-4236-98bc-4ab829802a73.png)
-
-## Easier Two-way binding
-
-The input controls all support smart two-way binding via the **Binding** property. The **Binding** property defines a shortcut for Id and Value binding on the input control. 
-
-Example:
-
-```xml
-<InputText Binding="Model.Name"  .../>
-```
-
-***Binding="Model.Name"*** is a shortcut for ***Id="Model.Name"*** and ***Value="@Model.Name"***  
-*(or to say another way, The **Id** of the property is the NAME of the property, and the **Value** of the property is the VALUE of the property)*
-
-# Data Validation
-
-![image](https://user-images.githubusercontent.com/17789481/190312095-542518e7-f9bd-4526-86e1-0e014bd0e4bc.png)
-
-You can apply **data validation attributes** to get validation computed on each action handler invocation.
-```C#
-	[BindProperty]
-	[Required]
-	[StringLength(50)]
-	public string Name {get;set;}
-```
-The property **IsModelValid** will be true if all validation attributes are valid. The **ValidationErrors** will contain a map of property name to an array of error messages for that property.
-
-The typical pattern is to only commit and close the data if the validation passes.
-
-```C#
-@functions {
-    public void OnOK()
-    {
-        if (IsModelValid)
-        {
-            App.UpdateAddress(Model);
-            CloseView(Model);
-        }
-    }
-}
-```
-
-## Adaptive.Input Controls and validation 
-
-Input controls do 2 things automatically related to validation:
-
-1. They **map validation attributes to client side validation** properties to get client side validation as appropriate.
-2. They **validate server side as well** (because server side validation is richer than what Adaptive Cards provides)
-3. If there are validation errors they will **automatically display the error message** next to the input control that has incorrect ddata.
-
-> NOTE: You can disable this validation errors on an input control by setting **ShowErrors="false"**
-
-[See **Validation** for more info on validation errors](docs/Validation.md)
-
-# Navigation 
-
-![image](https://user-images.githubusercontent.com/17789481/190312126-9db0ffa6-27ae-4c7a-a311-52df7f4aaaa5.png)
-
-**Crazor** maintains a session based **CallStack** which is a call stack of cards that have been called. The **CardView** class has methods for controlling the call stack.
-
-* **ShowView(cardname, model)** This will push the current card on to the stack and load the next card, passing the model as the model for the card.
-* **CancelView(message)** This will pop the current card off the stack, and the calling card OnXXXXCanceled() will be called with "message" telling you why it was canceled.
-* **CloseView(result)** This will pop the current card off the stack and the calling cards OnXXXCompleted() will be called with the result of the card.
-* **ReplaceView(cardname, model)** This will replace the current card on to the stack with the named card, passing model as the model for the card.
-
-# Helper functions
-
-* **AddBannerMessage(message, style)** - gives you ability to add a banner message with background style.  
-
-![image](https://user-images.githubusercontent.com/17789481/190333148-9cebaef6-978c-4b13-b964-d1092df8bd95.png)
+| Name              | Description                                 |
+| ----------------- | ------------------------------------------- |
+| <InputText/>      | Defines a Input.Text Adaptive Element       |
+| <InputChoiceSet/> | Defines an Input.ChoiceSet Adaptive Element |
+| <InputDate/>      | Defines an Input.Date Adaptive Element      |
+| <InputTime/>      | Defines an Input.Time Adaptive Element      |
+| <InputNumber/>    | Defines an Input.Number Adaptive Element    |
+| <InputToggle/>    | Defines an Input.Toggle Adaptive Element    |
 
 
 
-# Life cycle handlers
+## Actions
 
-In addition to the verb based handlers there are a couple of additional of life cycle handlers which are useful.
-
-## OnInitializedAsync()
-
-When a card state is new the **OnInitializedAsync()** method will be called giving you the opportunity to inspect incoming model and/or route to a different cardview. It will only be called once for the lifetime of that view.
-
-```C#
-    public override async Task OnInitialized(CancellationToken ct) 
-    {
-        if (App.Dice == null)
-            ShowView("Settings");
-        
-        await base.OnInitialized(ct);
-    }
-```
-
-## RenderCardAsync()
-
-This virtual method is called to turn the ICardView internal state into an AdaptiveCard object. IsPreview is passed when the card that is being rendered should be a anonymous preview card (aka, you are sending a card to a recipient and you want to send a preview of the card so that it can be rendered for them base on THEIR credentials). 
-
-```C#
-/// <summary>
-/// Render the card 
-/// </summary>
-/// <param name="isPreview">IsPreview is signal that anonymous preview card should be returned.</param>
-/// <param name="cancellationToken"></param>
-/// <returns>Task AdaptiveCard</returns>
-Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
-```
+| Name                       | Description                                                  |
+| -------------------------- | ------------------------------------------------------------ |
+| <ActionExecute />          | Creates an **Action.Execute** Action                         |
+| <ActionShowCard />         | Creates an **Action.ShowCard** Action                        |
+| <ActionOpenUrl />          | Creates an **Action.OpenUrl** action                         |
+| <ActionSubmit />           | Creates an **Action.Submit** action (NOTE: you should use Action.Execute unless you really know what you are doing.) |
+| <ActionToggleVisibility /> | Creates an **Action.ToggleVisibility** action                |
 
 
-## OnValidateModelAsync()
 
-The OnValidateModelAsync method is called to validate that the model is valid.  The default implementation uses reflection and data annotations (like [Required] attribute) to validate the model. It should set IsModelValid and ValidationErrors based on the state of the model.
+### Action Templates
+In addition to the standard AdaptiveCard actions Crazor.Blazor defines razor components for a number of frequently defined actions.
 
-## OnActionAsync()
+| Name                     | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| <ActionOK/>              | Action.Execute with **OnOK** verb which by default will call **CloseView(Model)** if the model is valid. |
+| <ActionCancel />         | Action.Execute with **OnCancel** verb which by default will call **CancelView(Message)** |
+| <ActionCloseView>        | Action.Execute with **OnCloseView** verb which by default will call **CloseView()** regardless of state of model. |
+| <ActionShowView />       | Action.Execute with **OnShowView** verb which by default will call **ShowView(Route)** |
+| <ActionReplaceView />    | Action.Execute with **OnReplaceView** verb which by default will call **ReplaceView(Route)** |
+| <ActionShowTaskModule /> | Action.Execute which show a Teams TaskModule window for the Route |
+| <ActionLogin />          | Action.Execute with **OnLogin** verb which by default will force an SSO OAuth flow if the user is not authenticated. |
+| <ActionLogout />         | Action.Execute with **OnLogout** verb which by default will log the user out, clearing SSO Credentials. |
 
-OnActionAsync() is called to process a incoming verb. The default implementation uses reflection to look for action verb handler methods that match the incoming action verb.  So if the action.Verb = "OnFoo" it will look for a method called OnFoo. The method can be synchronous or async. 
 
-The ids of input fields will automatically be passed as arguments.  
 
-So if you have a **Input.Text with Id="name"** both signatures are valid:
+# Example
 
 ```c#
-public void OnFoo(string name /* from the input.text id='name'*/ )
-{
-    ...
-}
+@using Crazor.Blazor;
+@inherits CardView
 
-public async Task OnFoo(string name /* from the input.text id='name'*/, CancellationToken ct)
-{
-    ...
-}
-```
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
 
-### Built in verb action handlers
+    <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
+    <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
+</Card>
 
-| Verb              | Description                                                  |
-| ----------------- | ------------------------------------------------------------ |
-| **OnRefresh**     | A **Refresh** secondary action is automatically added to all outbound cards with a verb of **OnRefresh**. There is no default handler, but as simply processing this action creates a refreshed view. |
-| **OnOK**          | If a Action has a verb of **OnOK**, and the model is valid the default behavior is to call **CloseView(this.Model)**. The <ActionOK/> component is a action with this verb. |
-| **OnCancel**      | If a action has a verb of **OnCancel**, the default behavior is to call **CancelView()** The <ActionCancel/> component is a action with this verb. |
-| **OnLogin**       | If an action has a verb of **OnLogin** the default behavior is to force a SSO Oauth card flow. The <ActionLogin/> component is an action with this verb. |
-| **OnLogout**      | If an action has a verb of **OnLogout** the default behavior is to sign the user out. The <ActionLogout/> component is an action with this verb. |
-| **OnShowView**    | If an action has a verb of **OnShowView** the default behavior is to call **ShowView(data.Route)**. The <ActionShowView Route="xxx"/> sends this verb with route |
-| **OnReplaceView** | If an action has a verb of **OnReplaceView** the defeault behavarior is to call **ReplaceView(data.Route)**. The <ActionReplaceView Route="xxx"/>  sends this verb with route. |
-| **OnLoad**        | There are paths where cards are initialized based on a route (for example link unfurling). In this case there is a **OnLoad** verb which represents that action. The default behavior is to load that card. |
+@code {
+    public int Counter { get; set; }
 
-## OnResumeView()
+    public void OnIncrement()
+        => this.Counter++;
 
-When a **child** card calls **CloseView()** the **parent** card 's **OnResumeView()** will be called with the **CardResult** object:
-
-| Property    | Type   | Description                                                  |
-| ----------- | ------ | ------------------------------------------------------------ |
-| **Name**    | String | Name of the card that completed                              |
-| **Success** | Bool   | True if CloseView() was called, False if CancelView() was called |
-| **Result**  | Object | the result passed to CloseView()                             |
-| **Message** | String | The message passed to CancelView()                           |
-
-Example:
-
-```C#
-        /// <summary>
-        /// OnResumeView() - Called when a CardResult has returned back to this view
-        /// </summary>
-        /// <remarks>
-        /// Override this to handle the result that is returned to the card from a child view.
-        /// When a view is resumed because a child view has completed this method will
-        /// be called giving you an opportunity to do something with the result of the child view.
-        /// </remarks>
-        /// <param name="cardResult">the card result</param>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns>task</returns>
-        public async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
-        {
-            if (cardResult.Success)
-            {
-                // do something with cardResult.Result.
-            }
-        }
-
-```
-
-## OnSearchChoices()
-
-**OnSearchChoices()** will be called when a **Input.ChoiceSet** defines a dynamic filted query
-
-Example Markup:
-
-```xml
-    <InputChoiceSet Binding="Number" Style="Filtered">
-        <Choice Title="1" Value="1" />
-        <Choice Title="2" Value="2" />
-        <Choice Title="3" Value="3" />
-        <Choice Title="4" Value="4" />
-        <DataQuery Dataset="Numbers" />
-    </Input.ChoiceSet>
-```
-
-And method
-
-```c#
-public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
-{
-    if (search.Dataset == "Numbers")
-    {
-        return await myDb.GetNumbersAsnc(...);
-    }
-    return Array.Empty<AdaptiveChoice>();
+    public void OnDecrement()
+        => this.Counter--;
 }
 ```
 
+![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)

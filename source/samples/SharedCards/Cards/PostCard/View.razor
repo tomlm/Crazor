@@ -26,11 +26,12 @@
 
                 // Add ShowTaskModuleAction in teams
                 if (App.Activity.ChannelId == Channels.Msteams)
-                    card.Actions.Add(new AdaptiveShowTaskModuleAction($"/Cards/PostCard/{CardId}/Edit")
-                    {
-                        Title = "Edit Json", 
-                        Mode = AdaptiveActionMode.Secondary 
-                    });
+                    card.Actions.Add(new AdaptiveShowTaskModuleAction()
+                        {
+                            Route = $"/Cards/PostCard/{CardId}/Edit",
+                            Title = "Edit Json",
+                            Mode = AdaptiveActionMode.Secondary
+                        });
                 else
                     card.Actions.Add(new AdaptiveExecuteAction()
                         {
@@ -48,12 +49,12 @@
 
     public void OnEdit()
     {
-        ReplaceView($"{CardId}/Edit");   
+        ReplaceView($"{CardId}/Edit");
     }
 
     public override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
     {
-        if (action.Verb != Crazor.Constants.LOAD_VERB && 
+        if (action.Verb != Crazor.Constants.LOAD_VERB &&
             action.Verb != Crazor.Constants.REFRESH_VERB &&
             action.Verb != nameof(OnEdit))
             // show verb to user with a banner message.
