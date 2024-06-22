@@ -6,7 +6,7 @@
 
 The **Blazor CardView** defines a view for the **CardApp** application as a razor template **.razor** file.
 
-To make the .razor template a **Crazor template** you insert the **@inherits CardView** directive defining that CardView is the base class for the view.
+The .razor file should use  the **@inherits CardView** directive defining that **Crazor.Blazor.CardView** is the base class for the view.
 
 ## @inherits CardView
 
@@ -43,7 +43,7 @@ Example razor template binding to the model and app properties.
 </Card>
 ```
 
-# Verb handlers
+# Action Verb handlers
 
 ![image](https://user-images.githubusercontent.com/17789481/190311953-6cdb8a4d-eebf-4833-af58-915220a4d838.png)
 
@@ -73,16 +73,14 @@ You write the code to respond to it by defining a method with the same name.
 
 
 > NOTE 1 : Any handler can be async by using a return type of **Task**
-
-> NOTE 2: If the **verb does not match** and it **matches the name of a view**  => it will navigate to that view...aka ShowView(verb)
+>
+> example: ```public async Task OnFoo(CancellationToken ct) {...}```
 
 ## Verb handler parameter binding
 
 ![image](https://user-images.githubusercontent.com/17789481/190312008-c0c144ad-4387-4d84-a883-62b793e1a8c3.png)
 
 Any **input** or **Action.Execute Data** payloads will to be automatically bound to verb handler arguments.
-
-
 
 For example:
 ```xml
@@ -110,7 +108,6 @@ This is accomplished by:
 
 * Defining a property with **[Parameter]** attribute on it 
 
-  > NOTE: For MVC tempaltes the attribute is [BindProperty] for Blazor it's [Parameter]
 
 ![image](https://user-images.githubusercontent.com/17789481/190312063-0de73827-cd0d-4236-98bc-4ab829802a73.png)
 
@@ -124,7 +121,8 @@ Example:
 <InputText Binding="Model.Name"  .../>
 ```
 
-***Binding="Model.Name"*** is a shortcut for ***Id="Model.Name"*** and ***Value="@Model.Name"*** 
+***Binding="Model.Name"*** is a shortcut for ***Id="Model.Name"*** and ***Value="@Model.Name"***  
+*(or to say another way, The **Id** of the property is the NAME of the property, and the **Value** of the property is the VALUE of the property)*
 
 # Data Validation
 
@@ -189,42 +187,71 @@ Input controls do 2 things automatically related to validation:
 
 In addition to the verb based handlers there are a couple of additional of life cycle handlers which are useful.
 
-## OnInitialized()
+## OnInitializedAsync()
 
-When a card state is new the **OnInitialized()** method will be called giving you the opportunity to inspect incoming model and/or route to a different cardview. It will only be called once for the lifetime of that view.
+When a card state is new the **OnInitializedAsync()** method will be called giving you the opportunity to inspect incoming model and/or route to a different cardview. It will only be called once for the lifetime of that view.
 
 ```C#
-    public void OnInitialized() 
+    public override async Task OnInitialized(CancellationToken ct) 
     {
         if (App.Dice == null)
             ShowView("Settings");
+        
+        await base.OnInitialized(ct);
     }
 ```
 
-> NOTE: **OnInitialized()** is only **synchronous**, there is no async version of this method, because it is called in a synchronous part of the code.
+## RenderCardAsync()
 
-## OnShowView()
-
-**OnShowView()** is invoked when someone calls **ShowView()** with your card view, or on as the **Refresh** verb or when an unknown verb is processed, effectively treating those situations as a request to bind the data fresh (Aka show a refreshed screen).
-
-A common way to use this is to load fresh data into a view for a given card.
+This virtual method is called to turn the ICardView internal state into an AdaptiveCard object. IsPreview is passed when the card that is being rendered should be a anonymous preview card (aka, you are sending a card to a recipient and you want to send a preview of the card so that it can be rendered for them base on THEIR credentials). 
 
 ```C#
-        /// <summary>
-        /// OnShowView() - Called when a your view is started because someon called ShowView()
-        /// </summary>
-        /// <remarks>
-        /// Override this to handle the being shown
-        /// </remarks>
-        /// <param name="cancellationToken">cancellation token</param>
-        /// <returns>task</returns>
-        public async Task OnShowView(CancellationToken cancellationToken)
-        {
-            ...
-        }
+/// <summary>
+/// Render the card 
+/// </summary>
+/// <param name="isPreview">IsPreview is signal that anonymous preview card should be returned.</param>
+/// <param name="cancellationToken"></param>
+/// <returns>Task AdaptiveCard</returns>
+Task<AdaptiveCard?> RenderCardAsync(bool isPreview, CancellationToken cancellationToken);
 ```
 
-> NOTE: OnShowView()  is like any verb handler and supports **parameter binding**, aka you can add parameters to your OnShowView
+
+## OnValidateModelAsync()
+
+The OnValidateModelAsync method is called to validate that the model is valid.  The default implementation uses reflection and data annotations (like [Required] attribute) to validate the model. It should set IsModelValid and ValidationErrors based on the state of the model.
+
+## OnActionAsync()
+
+OnActionAsync() is called to process a incoming verb. The default implementation uses reflection to look for action verb handler methods that match the incoming action verb.  So if the action.Verb = "OnFoo" it will look for a method called OnFoo. The method can be synchronous or async. 
+
+The ids of input fields will automatically be passed as arguments.  
+
+So if you have a **Input.Text with Id="name"** both signatures are valid:
+
+```c#
+public void OnFoo(string name /* from the input.text id='name'*/ )
+{
+    ...
+}
+
+public async Task OnFoo(string name /* from the input.text id='name'*/, CancellationToken ct)
+{
+    ...
+}
+```
+
+### Built in verb action handlers
+
+| Verb              | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| **OnRefresh**     | A **Refresh** secondary action is automatically added to all outbound cards with a verb of **OnRefresh**. There is no default handler, but as simply processing this action creates a refreshed view. |
+| **OnOK**          | If a Action has a verb of **OnOK**, and the model is valid the default behavior is to call **CloseView(this.Model)**. The <ActionOK/> component is a action with this verb. |
+| **OnCancel**      | If a action has a verb of **OnCancel**, the default behavior is to call **CancelView()** The <ActionCancel/> component is a action with this verb. |
+| **OnLogin**       | If an action has a verb of **OnLogin** the default behavior is to force a SSO Oauth card flow. The <ActionLogin/> component is an action with this verb. |
+| **OnLogout**      | If an action has a verb of **OnLogout** the default behavior is to sign the user out. The <ActionLogout/> component is an action with this verb. |
+| **OnShowView**    | If an action has a verb of **OnShowView** the default behavior is to call **ShowView(data.Route)**. The <ActionShowView Route="xxx"/> sends this verb with route |
+| **OnReplaceView** | If an action has a verb of **OnReplaceView** the defeault behavarior is to call **ReplaceView(data.Route)**. The <ActionReplaceView Route="xxx"/>  sends this verb with route. |
+| **OnLoad**        | There are paths where cards are initialized based on a route (for example link unfurling). In this case there is a **OnLoad** verb which represents that action. The default behavior is to load that card. |
 
 ## OnResumeView()
 
@@ -252,6 +279,12 @@ Example:
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>task</returns>
         public async Task OnResumeView(CardResult cardResult, CancellationToken cancellationToken)
+        {
+            if (cardResult.Success)
+            {
+                // do something with cardResult.Result.
+            }
+        }
 
 ```
 

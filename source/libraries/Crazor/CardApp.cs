@@ -763,7 +763,14 @@ namespace Crazor
                     if (await this.CurrentView.InvokeVerbAsync(action, cancellationToken) == false)
                     {
                         // default implementation 
-                        this.CancelView();
+                        if (ObjectPath.TryGetPathValue<string?>(action.Data, "Message", out var message))
+                        {
+                            this.CancelView(message);
+                        }
+                        else
+                        {
+                            this.CancelView();
+                        }
                     }
                     break;
 

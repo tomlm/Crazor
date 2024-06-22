@@ -29,18 +29,13 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Teams integrations** - Your card application can be **unfurled via a link**, pop up as a **Task Module**, a **Tab** etc. Just register your app with teams and it just works.
 * **Built-in Card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can view and interact with the card.
 
-# Crazor.Blazor templating engine
-
-The current templating engine for Crazor uses Blazor.
-
-* [Crazor.Blazor](docs/Blazor/README.md) - Implements templating using **.razor** files using **Blazor** semantics.
-
 # Documentation
 
-* [Architecture](docs/Architecture.md) - Describes overall structure of a Crazor hosting environment.
+* [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
+* [Crazor.Blazor](docs/Blazor/README.md) - Implements templating using **.razor** files using **Blazor** semantics.
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
   * [Card App Memory](docs/Memory.md) - Information on persistence and memory model
-  * [ICard View](docs/ICardView.md) - Information on **ICardView** interface
+* [ICard View](docs/ICardView.md) - Information on **ICardView** interface
 * [Card Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Writing Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
 

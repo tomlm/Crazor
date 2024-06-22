@@ -10,21 +10,9 @@ To start you create a MSTest test project
 
 ![image-20221130143300942](assets/image-20221130143300942.png)
 
-## Add Crazor package
+## Add Crazor packages
 
->  NOTE: Currently Crazor is only published to an internal Microsoft devops nuget feed.  To connect to this feed, add a **nuget.config** in the root of your project with the following:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <clear />
-    <add key="Crazor" value="https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json" />
-  </packageSources>
-</configuration>
-```
-
-Then you can add the **crazor.test** package, and either **Crazor.Blazor** or **Crazor.MVC** package.
+Add **Crazor.Test** and **Crazor.Blazor** nuget libraries..
 
 ```shell
 nuget add package Crazor.Test
@@ -41,27 +29,7 @@ nuget add package Crazor.Blazor
 
 2. add a **Cards** folder (should be a peer to **Pages** folder)
 
-   ### For MVC Tests
-
-   add  **Cards/_ViewImports.cshtml** file containing this:
-
-   ```C#
-   @using AdaptiveCards
-   @using Crazor
-   @using Crazor.Exceptions
-   @using Crazor.Attributes
-   @using System.Threading;
-   @using System.Threading.Tasks;
-   @using System.ComponentModel.DataAnnotations
-   @removeTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-   @removeTagHelper *, Microsoft.AspNetCore.Mvc.Razor
-   @addTagHelper *, Crazor
-   @addTagHelper *, {YOUR ASSEMBLY NAME HERE}
-   ```
-
-   ### For Blazor Tests
-
-   add **Cards/_Imports.razor** file containing this:
+3. add **Cards/_Imports.razor** file containing this:
 
    ```c#
    @using System.ComponentModel.DataAnnotations;
@@ -85,23 +53,7 @@ Now we will create a card and write a unit tests against the card.
 
 1. Create a test card folder in **cards/Foo**
 
-2. Create Card
-   **(MVC)** - Create a **Default.cshtml** file in it
-
-   ```html
-   @inherits CardView
-   <Card Version="1.5">
-   	<TextBlock>Counter=@Counter</TextBlock>
-       <ActionExecute Verb="@nameof(OnSubmit)"/>
-   </Card>
-   
-   @functions {
-   	public int Counter {get;set;}
-   
-   	public void OnSubmit() => Counter++;
-   }
-   ```
-
+2. Create Card View
    **(Blazor)** - Create a **Default.razor** file in it
 
    ```html
@@ -150,7 +102,7 @@ Now we will create a card and write a unit tests against the card.
 
 That's it! The pattern is essentially that you 
 
-* use **LoadCard(route)** to instantiate a card.  
+* use base class method **LoadCard(route)** to instantiate a card.  
   * You write assertions against the card 
 * call **ExecuteAction()** to send input into the card.
   * You write assertions against the card 

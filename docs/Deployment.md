@@ -30,7 +30,7 @@ Update your service to have AzureStorage configuration key:
 
 ## Create Bot Registration
 
-To deploy you will need register a bot for your service,  see [Register Bot](RegisterBot.md) for details.
+To deploy you will need register a bot for your service,  see [Bot Registration](BotRegistration.md) for details.
 
 ## Publish Web Service
 

@@ -128,5 +128,16 @@ namespace Crazor.Blazor.Tests
                     .AssertTextBlock(nameof(InputsModel.FavoritePet), "Dogs")
                     .AssertTextBlock(nameof(InputsModel.IsCool), "True");
         }
+
+        [TestMethod]
+        public async Task TestCancel()
+        {
+            await LoadCard("/Cards/Validation")
+                    .AssertNoTextBlock("Cancel please")
+                .ExecuteAction(Constants.EDIT_VERB)
+                    .AssertNoTextBlock("Cancel please")
+                .ExecuteAction(Constants.CANCEL_VERB)
+                    .AssertTextBlock("Cancel please");
+        }
     }
 }

@@ -12,7 +12,6 @@ Crazor is made up of 5 libraries
 
 * **Crazor** - Defines the CardApp application programming model independent of hosting.  It needs ICardView implementations to create Cards.
 * **Crazor.Server** - Defines a Controller and IBot which implements all of the hosting infrastructure for serving up a Crazor App in Teams/Outlook.
-* **Crazor.Mvc** - Defines a implementation of ICardView which uses **.cshtml** template files to define cards.
 * **Crazor.Blazor** - Defines a implementation of ICardView which uses **.razor** template files to define cards.
 * **Crazor.Test** - Defines infrastructure for you to write unit tests for your cards.
 

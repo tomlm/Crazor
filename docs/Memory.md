@@ -22,16 +22,14 @@ Every time a an interaction happens with your application the following process 
 
 When you put a memory attribute on a property you are defining the **"scope"** of the value...meaning who will have access to that value. Essentially you are defining the key that is used to persist the value...all properties with a given memory attribute on it will be swept up and stored on a record in the key-value store with the key that is behind the attribute.
 
-| Attribute                          | Scope                                                | Description                                                  |
-| ---------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| **[AppMemory]**                    | Bound to the **App.Name**                            | Using **[AppName]** scopes the property to be shared for all users interacting with the app. |
-| **[SessionMemory]**                | Bound to the value of **Route.SessionId**            | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **Route.SessionId**. It is managed directly by Crazor. |
-| **[TempMemory]**                   | Not bound                                            | Using **[TempMemory]** makes the property not persist at all, it will be reset to default value on each action. |
-| **[UserMemory]**                   | Bound to the value of **Activity.From.Id**           | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
-| **[ConversationMemory]**           | Bound to the value of **Activity.Conversation.Id**   | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
-| **[TimeMemory(pattern)]**          | Bound to the **current date** using **pattern**      | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to the pattern 20221108, effectively the day as a key. |
-| **[PathMemory(*propertyPath*)]**   | Bound to the value of the **property path**          | Using **[PathMemory]** will scope the property to be persisted using the value of another named property. |
-| *Coming soon* **[IdentityMemory]** | Bound to the **current authenticated user identity** | When using an authorized SSO application this will be scoped to the user who is logged in...shared across all applications that have the same user identity. |
+| Attribute                 | Scope                                              | Description                                                  |
+| ------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
+| **[AppMemory]**           | Bound to the **App.Name**                          | Using **[AppName]** scopes the property to be shared for all users interacting with the app. |
+| **[SessionMemory]**       | Bound to the value of **Route.SessionId**          | Using **[SessionMemory]** scopes the property to be for the current window the user is interacting with, which is accessible on **Route.SessionId**. It is managed directly by Crazor. |
+| **[TempMemory]**          | Not bound                                          | Using **[TempMemory]** makes the property not persist at all, it will be reset to default value on each action. |
+| **[UserMemory]**          | Bound to the value of **Activity.From.Id**         | Using **[UserMemory]** will scope the property to be the same across all conversations for that application (aka teams) |
+| **[ConversationMemory]**  | Bound to the value of **Activity.Conversation.Id** | Using **[ConversationMemory]** will scope the property to be the same for everyone who is in the same conversation. |
+| **[TimeMemory(pattern)]** | Bound to the **current date** using **pattern**    | Using **[TimedMemory(pattern)]** will scope the property to be persisted given the current time.  For example **[TimedMemory("yyyyMMdd")]** will scope the property to the pattern 20221108, effectively the day as a key. |
 
 **App.SessionId** is automatically managed by Crazor by default. You should probably not muck with it directly
 
@@ -39,7 +37,7 @@ When you put a memory attribute on a property you are defining the **"scope"** o
 >
 > * **CardApp** supports all **Memory** attributes
 >
-> * **CardView** the default for properties is **[SessionMemory]**.  You can disable persistence for temporary properties by applying **[TempMemory]** attribute. No other memory attributes are supported on the card view properties.
+> * **CardView** has a default for all properties of **[SessionMemory]**.  You can disable persistence for temporary properties by applying **[TempMemory]** attribute. No other memory attributes are supported on the card view properties.
 
 
 
@@ -68,7 +66,10 @@ public class MyApp : CardApp
 }
 ```
 
-## Custom State
+## Custom Storage
+...TBD...
+
+## Hooking Custom State
 
 To manage your own state from your own data base all you need to do is override **OnLoadAppAsync()** and **OnSaveAppAsync()**.  
 

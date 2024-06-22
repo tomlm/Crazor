@@ -33,6 +33,10 @@
             // when it comes back successfully, update our property.
             Data = cardResult.AsResult<InputsModel>()!;
         }
+        else if (!String.IsNullOrEmpty(cardResult.Message))
+        {
+            AddBannerMessage(cardResult.Message, AdaptiveContainerStyle.Attention);
+        }
     }
 }
 

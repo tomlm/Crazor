@@ -34,9 +34,9 @@ Follow instructions here to create a Azure AD SSO app
 
 **Notes**
 
-> 1. You should give the OAuth **connection** a **name** that you want to refer to from your cards 
+> You should give the OAuth a **connection** **name** that you want to refer to from your cards 
 
-Make sure to test your connection to validate it's configured correclty.
+Make sure to test your connection to validate it's configured correctly.
 
 # Update your card views
 

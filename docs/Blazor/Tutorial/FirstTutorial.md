@@ -5,29 +5,16 @@
 In this article, we will create a Microsoft Teams Bot developed in C#,
 using a Blazor Server project with Crazor.Blazor library to generate Adaptive Cards.
 
-## Prerequisites
-
-  1. Install the latest version of Visual Studio 2022 with the **ASP.NET and web development workload**.
-  2. Go to https://fuselabs.visualstudio.com to create a new *Personal Access Token* (PAT) with **Packaging Read** access rights.
-  3. Add a new **NuGet Package Source**, called *FuseLabs*, using this PAT:
-     ```
-	 dotnet nuget add source "https://fuselabs.pkgs.visualstudio.com/c861868a-1061-43d1-8232-ed9ab373867c/_packaging/Crazor/nuget/v3/index.json" 
-                  --name FuseLabs
-                  --username <YOUT_EMAIL_ADDESS>
-                  --password <GENERATED_PAT>
-     ```
-
 ## 1. Creating Adaptive Cards in a Blazor Server project
 
   1. Open **Visual Studio** and create a **new project** named *"MyBlazorAdaptiveProject"*.
   2. Choose the **Blazor Server App Empty** template and keep the Configure for HTTPS option checked.
-  3. Add these **NuGet packages**, using the *FuseLabs* source and with the **Include prerelease** checked:
+  3. Add these **NuGet packages**, with the **Include prerelease** checked:
      - Microsoft.Bot.Builder.Azure.Blobs
-     - Crazor.Server
      - Crazor.Blazor
-
-     ![Project References](./Projects-References.png)
-
+     
+     
+     
   4. Open the **Program.cs** file and add this code before `builder.build()` command.
      ```csharp
 	 // To activate api/cardapps
