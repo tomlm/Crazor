@@ -32,7 +32,6 @@ All steps together:
 ```cmd
 winget install Microsoft.AzureCLI
 az login
-dotnet tool install -g microsoft.dotnet-msidentity
 dotnet tool install -g registerbot
 ```
 
