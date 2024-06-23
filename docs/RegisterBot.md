@@ -15,26 +15,9 @@ Let's say you have a bot named **Gronk**. You will want to create 2 bots:
 
 The **RegisterBot** tool is a jack of all trades that makes managing bots a walk in the park. 
 
-# Install RegisterBot
+# Prerequisites 
 
-1. Install AZ CLI [How to install the Azure CLI | Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
-
-2. run ```az login```
-
-3. Install dotnet msidentity 
-   ``` dotnet tool install -g microsoft.dotnet-msidentity```
-
-4. Install the **RegisterBot** CLI tool by running
-   ```dotnet tool install -g registerbot```
-
-All steps together:
-
-```cmd
-winget install Microsoft.AzureCLI
-az login
-dotnet new install Crazor.Templates
-dotnet tool install -g registerbot
-```
+[Install Prerequisite tools](InstallTools.md)
 
 ## Usage
 
