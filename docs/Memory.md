@@ -110,9 +110,9 @@ The memory attributes are annotations which take care of the mechanics of talkin
 | Name                             | Description                                                  |
 | -------------------------------- | ------------------------------------------------------------ |
 | **GetObjectAsync(key)**          | Lookup an object by unique key for the object within the application |
-| **GetObjectAsync<T>(key)**       | Lookup an object T by unique key for the object within the application |
+| **GetObjectAsync&lt;T&gt;(key)**       | Lookup an object T by unique key for the object within the application |
 | **GetObjectsAsync(keys)**                          | Lookup multiple objects by unique keys within the application |
-| **GetObjectsAsync<T>(key)**                        | Lookup multiple objects of type T by unique keys within the application |
+| **GetObjectsAsync&lt;T&gt;(key)**                        | Lookup multiple objects of type T by unique keys within the application |
 | **SaveObjectAsync(key, object)** | Save an object as key                                        |
 | **SaveObjectsAsync(IDictionary<string, object> )** | Save multiple objects                                        |
 | **DeleteObjectAsync(key)**       | Delete an object by unique key for the object within the application. |
