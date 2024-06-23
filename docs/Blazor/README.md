@@ -44,25 +44,25 @@ coding environment focused 100% on building the **Adaptive Card** based applicat
 # Sample Card Apps
 | | |Description|
 |---|---|---|
-|[HelloWorld](https://crazorblazordemo.azurewebsites.net/Cards/HelloWorld) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/HelloWorld)| Hello world |
-|[MultiScreen](https://crazorblazordemo.azurewebsites.net/Cards/MultiScreen) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/MultiScreen)| Shows **ShowView(),** **CloseView(),** **CancelView()** to navigate between multiple screens |
-|[Counters](https://crazorblazordemo.azurewebsites.net/Cards/Counters) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Counters)| Shows **memory** attributes and **verb handlers** |
-|[Quiz](https://crazorblazordemo.azurewebsites.net/Cards/Quiz) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Quiz)| Shows **Paramater** binding to **verb handlers** |
-|[Binding](https://crazorblazordemo.azurewebsites.net/Cards/Binding) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Binding)| Shows 2-way data binding |
-|[Inputs](https://crazorblazordemo.azurewebsites.net/Cards/Inputs) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Inputs)| Shows using **inputs** with **validation** and **passing models** between screens |
-|[Dice](https://crazorblazordemo.azurewebsites.net/Cards/Dice) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Dice)| Shows **settings** |
-|[Addresses](https://crazorblazordemo.azurewebsites.net/Cards/Addresses) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Addresses)| **Full multipage sample** that shows editing a list of addresses |
-|[BingSearch](https://crazorblazordemo.azurewebsites.net/Cards/BingSearch) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/BingSearch)| Implements bing search, shows calling **3rd party API** and **paging** |
-|[CodeOnlyView](https://crazorblazordemo.azurewebsites.net/Cards/CodeOnlyView) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/CodeOnlyView)| Sample showing that you can make templates with code only |
-|[DataQuery](https://crazorblazordemo.azurewebsites.net/Cards/DataQuery) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/DataQuery)| Shows how to implement **OnSearchChoices** for dynamic **ChoiceSet** |
-|[ProductCatalog](https://crazorblazordemo.azurewebsites.net/Cards/ProductCatalog) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/ProductCatalog)| Shows **calling an external database** for your data |
-|[Components](https://crazorblazordemo.azurewebsites.net/Cards/Components) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Components) | Shows how you can use blazor to create **custom card components** |
-|[TaskModule](https://crazorblazordemo.azurewebsites.net/Cards/TaskModule) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/TaskModule) | ***TEAMS*** A teams **taskmodule** that lets you experiment with the **CloseTaskModule**() function. |
-|[Nuget](https://crazorblazordemo.azurewebsites.net/Cards/Nuget) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Nuget)| ***TEAMS*** Shows **search message extension** |
-|[Wordle](https://crazorblazordemo.azurewebsites.net/Cards/Wordle) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Wordle)| Wordle game, shows leveraging TaskModule and sharing to make shared ux. |
-|[Table](https://crazorblazordemo.azurewebsites.net/Cards/Table) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Table)| Shows Table support |
-|[RichText](https://crazorblazordemo.azurewebsites.net/Cards/RichText) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/RichText)| Shows RichText support |
-|[Auth](https://crazorblazordemo.azurewebsites.net/Cards/Auth) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Auth) | Authentication sample |
+|[HelloWorld](https://crazordemo.azurewebsites.net/Cards/HelloWorld) | [Source](https://github.com/tomlm/crazor/tree/main/source/samples/SharedCards/Cards/HelloWorld) | Hello world |
+|[MultiScreen](https://crazordemo.azurewebsites.net/Cards/MultiScreen) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/MultiScreen)| Shows **ShowView(),** **CloseView(),** **CancelView()** to navigate between multiple screens |
+|[Counters](https://crazordemo.azurewebsites.net/Cards/Counters) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Counters)| Shows **memory** attributes and **verb handlers** |
+|[Quiz](https://crazordemo.azurewebsites.net/Cards/Quiz) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Quiz)| Shows **Paramater** binding to **verb handlers** |
+|[Binding](https://crazordemo.azurewebsites.net/Cards/Binding) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Binding)| Shows 2-way data binding |
+|[Inputs](https://crazordemo.azurewebsites.net/Cards/Inputs) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Inputs)| Shows using **inputs** with **validation** and **passing models** between screens |
+|[Dice](https://crazordemo.azurewebsites.net/Cards/Dice) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Dice)| Shows **settings** |
+|[Addresses](https://crazordemo.azurewebsites.net/Cards/Addresses) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Addresses)| **Full multipage sample** that shows editing a list of addresses |
+|[BingSearch](https://crazordemo.azurewebsites.net/Cards/BingSearch) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/BingSearch)| Implements bing search, shows calling **3rd party API** and **paging** |
+|[CodeOnlyView](https://crazordemo.azurewebsites.net/Cards/CodeOnlyView) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/CodeOnlyView)| Sample showing that you can make templates with code only |
+|[DataQuery](https://crazordemo.azurewebsites.net/Cards/DataQuery) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/DataQuery)| Shows how to implement **OnSearchChoices** for dynamic **ChoiceSet** |
+|[ProductCatalog](https://crazordemo.azurewebsites.net/Cards/ProductCatalog) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/ProductCatalog)| Shows **calling an external database** for your data |
+|[Components](https://crazordemo.azurewebsites.net/Cards/Components) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Components) | Shows how you can use blazor to create **custom card components** |
+|[TaskModule](https://crazordemo.azurewebsites.net/Cards/TaskModule) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/TaskModule) | ***TEAMS*** A teams **taskmodule** that lets you experiment with the **CloseTaskModule**() function. |
+|[Nuget](https://crazordemo.azurewebsites.net/Cards/Nuget) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Nuget)| ***TEAMS*** Shows **search message extension** |
+|[Wordle](https://crazordemo.azurewebsites.net/Cards/Wordle) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Wordle)| Wordle game, shows leveraging TaskModule and sharing to make shared ux. |
+|[Table](https://crazordemo.azurewebsites.net/Cards/Table) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Table)| Shows Table support |
+|[RichText](https://crazordemo.azurewebsites.net/Cards/RichText) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/RichText)| Shows RichText support |
+|[Auth](https://crazordemo.azurewebsites.net/Cards/Auth) | [Source](https://github.com/microsoft/crazor/tree/main/source/samples/SharedCards/Cards/Auth) | Authentication sample |
 
 # Setting up Azure
 
