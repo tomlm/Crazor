@@ -86,7 +86,7 @@ Let's say you have a Edit.cshtml file which edits a resource route **/Cards/MyAp
    <TextBlock>@Resource.Name</TextBlock>
 </Card>
 
-@functions {
+@code {
 	public string ResourceId {Get;set;}
 
     public ResourceModel Resource {get;set;}
