@@ -39,22 +39,32 @@ It will create all necessary resources as needed and update the settings for the
 
 For your local bot to be accessible from teams you will need to use tunnelling service to create a public endpoint for the local bot.
 
-## 1. Create a public tunnel using VS devtunnels
+## 1. Add a dev tunnel for local development
 
-Create a visual studio devtunnel named your bot name with 
+For bots to work with Teams and other apps they need a public addressable endpoint. Dev tunnels does exactly that, so we will create a dev tunnel with the following options:
 
 * **TunnelType=Persistant** 
 * **Access=Public** 
-* **Use Tunnel Domain=true** (```--host-header unchanged --origin-header unchanged```)
 
-Start the project, the URL it creates will look something like this: ```https://ls13q8g5-7232.usw2.devtunnels.ms```
+![image-20240621213541534](Blazor/assets/image-20240621213541534.png)
+
+Run the project. You will be launched a on page like https://jx4wclpb-7232.usw2.devtunnels.ms/. You will have an error, but that's OK. We just want to get the url for your project. Copy that and save it off someplace.
+
+### Configure tunnel
+
+Click on your devtunnel settings  to manage the tunnel:
+
+![image-20240621213914448](Blazor/assets/image-20240621213914448.png)
+
+Make sure that **Use Tunnnel Domain** is turned on:
+
+![image-20240621214005832](Blazor/assets/image-20240621214005832.png)
 
 > **(ALTERNATIVE) Create a public tunnel using ngrok.io** 
 >
 > ```ngrok http --host-header=preserve https://localhost:7232```
 >
 > The URL it creates will look something like this: ```https://1a52-50-35-77-214.ngrok-free.app```
->
 
 ## 2. Run RegisterBot to create a bot for the local endpoint
 
