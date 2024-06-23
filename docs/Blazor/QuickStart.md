@@ -14,7 +14,7 @@ This will walk you through creating a Crazor App Project using Blazor.
 
 Create a **Crazor App Server** project
 
-![image-20240621213410771](C:/Users/therm/AppData/Roaming/Typora/typora-user-images/image-20240621213410771.png)
+![image-20240621213410771](assets/image-20240621213410771.png)
 
 > NOTE: you can alternatively create the project from the cli by using
 >

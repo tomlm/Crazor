@@ -27,18 +27,18 @@ The **CardView** defines a **Crazor CardView** template which does not have a **
 * It has **App** property of **CardApp**.
 * **Model** is not defined.
 
-## CardView<AppT> class
+## CardView&lt;AppT&gt; class
 
-The **CardView<AppT>** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
+The **CardView&lt;AppT&gt;** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
 
 * It has **App** property of **AppT**.
 * **Model** is not defined.
 
 This allows you to get intellisense and strong type binding over **App** property giving access to custom methods and memory defined on a custom **CardApp** class.
 
-## CardView<AppT, ModelT> class
+## CardView&lt;AppT, ModelT&gt; class
 
-The **CardView<AppT,ModelT>** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
+The **CardView&lt;AppT,ModelT&gt;** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
 
 * It has a strongly typed **App** property of **AppT**.
 * It has a strongly typed **Model** property of **ModelT**
@@ -141,7 +141,7 @@ The property **IsModelValid** will be true if all validation attributes are vali
 The typical pattern is to only commit and close the data if the validation passes.
 
 ```C#
-@functions {
+@code {
     public void OnOK()
     {
         if (IsModelValid)
@@ -203,7 +203,7 @@ When a **child** card calls **CloseView()** or **CancelView()** the **parent** c
 Example Markup:
 
 ```xml
-    <InputChoiceSet Binding="Number" Style="Filtered">
+    <InputChoiceSet Binding="Number" Style="Filtered"/>
         <Choice Title="1" Value="1" />
         <Choice Title="2" Value="2" />
         <Choice Title="3" Value="3" />
@@ -215,7 +215,7 @@ Example Markup:
 And method
 
 ```c#
-public override async Task<AdaptiveChoice[]> OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
+public override async Task&lt;AdaptiveChoice[]&gt; OnSearchChoicesAsync(SearchInvoke search, CancellationToken cancellationToken)
 {
     if (search.Dataset == "Numbers")
     {
