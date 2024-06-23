@@ -32,6 +32,7 @@ All steps together:
 ```cmd
 winget install Microsoft.AzureCLI
 az login
+dotnet new install Crazor.Templates
 dotnet tool install -g registerbot
 ```
 
