@@ -38,7 +38,7 @@ This allows you to get intellisense and strong type binding to the **CardApp** f
 An example .razor template binding to the model and app properties.
 
 ```xml
-@inherits CardView&lt;CountersApp, MyModel&gt;
+@inherits CardView<CountersApp, MyModel>;
     
 <Card Version="1.5">
     <TextBlock Size="AdaptiveTextSize.Large">The @App.Name Counter is: @Model.Counter</TextBlock>
