@@ -10,8 +10,8 @@ Each deployed service needs a bot registration so that users can interact with i
 
 Let's say you have a bot named **Gronk**. You will want to create 2 bots:
 
-* [Create a local bot](#Register a development Bot) named **Gronk-Dev** which is running locally on your box for debugging.
-* [Create a production bot](#Register a production bot) named **Gronk** which is running in the cloud for production.
+* **Register a development bot** named **Gronk-Dev** which is running locally on your box for debugging.
+* **Register a production bot** named **Gronk** which is running in the cloud for production.
 
 The **RegisterBot** tool is a jack of all trades that makes managing bots a walk in the park. 
 
