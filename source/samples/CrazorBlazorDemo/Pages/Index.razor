@@ -11,6 +11,6 @@
     @foreach (var cardAppType in CardAppFactory.GetNames().OrderBy(n => n))
     {
         var appName = cardAppType.Replace("App", String.Empty);
-        <li><a href="/Cards/@appName">@appName Card</a></li>
+        <li><a href="/Cards/@appName">@appName Card</a> (<a href="https://github.com/tomlm/Crazor/tree/main/source/samples/SharedCards/Cards/@appName">Source</a>)</li>
     }
 </ul>
