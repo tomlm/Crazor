@@ -49,18 +49,23 @@ public class MyApp : CardApp
     public MyApp(IServiceProvider services)
         : base(services)        {        }
 
+    // Value is the same for everyone 
     [AppMemory]
     public string A { get; set; }
 
+    // Value is unique for each interactive session
     [SessionMemory]
     public int B { get; set; }
 
+    // value is different for each user
     [UserMemory]
     public int C { get; set; }
-    
+
+    // value is shared by everyone in the same day
     [TimeMemory("yyyyMMdd")]
     public Game D {get;set;}
 
+    // value is shared by everyone in the conversation
     [ConversationMemory]
     public Game E {get;set;}
 }
