@@ -10,12 +10,12 @@ Each deployed service needs a bot registration so that users can interact with i
 
 There are 2 ways to create this registration:
 
-## (Option 1) Create a Bot Registration using [RegisterBot](RegisterBot.md) (DO THIS)
+## (Option 1) Create a Bot Registration using [RegisterBot](RegisterBot.md) (RECOMENDED)
 
 This is **highly highly recommended** way to create the bot registration.  Seriously, you will hate your life if you try to do this by hand.
 
 
-## (Option 2) Create a Bot Registration by hand (DON'T DO THIS)
+## (Option 2) Create a Bot Registration by hand (NOT RECOMMENDED)
 
 If you don't want to use the CLI or are just a glutton for punishment you can manually create a bot registration by hand. This is NOT recommended unless you like rolling in broken glass and then jumping in salt water.
 
