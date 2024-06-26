@@ -28,13 +28,5 @@ The Crazor is running on a server and servicing any of the CardApps defined ther
 
 This is true regardless of the ICardView implementation that is being used to turn templates into cards.
 
-## Blazor Boxology
 
-If you are using Blazor purely server side it's the exact same boxology, only you are using **Crazor.Blazor** to define your templates.
-
-If you are using Blazor as WASM/SPA client then it looks like this:
-
-![image-20230107140822813](assets/image-20230107140822813.png)
-
-Your card templates (razor files) are in a shared assembly which are consumed by the server when servicing calls from Teams/Outlook and are consumed and run **locally in the browser** via the magic of WASM.  ***Without changing a line of code!***
 
