@@ -51,15 +51,8 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 ## Advanced topics
 
 * [ICard View](docs/ICardView.md) - Information on **ICardView** interface
-
-# Setting up your service
-
-* [Setting up your azure web deployment](docs/Deployment.md)  
 * [Installing your card applications into teams](docs/Teams.md) 
 
-# Visual Studio Extension 
-
-[Installing an extension for Visual Studio](docs/VSIX.md) 
 
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
