@@ -26,7 +26,6 @@ The Crazor is running on a server and servicing any of the CardApps defined ther
 * **CardAppController** - When the card is running a s teams/outlook/office integration, the card UI is delivered via the CardAppController to the client. All rendering is client side and all logic is running server side.
 * **Card Host Page** - When someone navigates to the card app host page the card is is hosted via HTML, with all rendering client side and all logic running server side.
 
-This is true regardless of the ICardView implementation that is being used to turn templates into cards.
 
 ## Concepts
 
