@@ -6,7 +6,7 @@
 
 The **Crazor.Blazor CardView** Implements **ICardView** as a **.razor** template.
 
-For example this markup:
+For example this .razor file:
 ```xml
 @inherits CardView
 
