@@ -7,16 +7,14 @@
 The **Crazor.Blazor CardView** Implements **ICardView** as a **.razor** template.
 
 For example this .razor file:
-```xml
+```c#
 @inherits CardView
 
-<Card Version="1.4">
-    <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
+<Card Version="1.4"&gt;
+    <TextBlock Size="AdaptiveTextSize.Large"&gt;Session Counter:@Counter</TextBlock>
 
-    <ActionSet>
-        <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
-        <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
-    </ActionSet>
+    <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
+    <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
 </Card>
 
 @code {
@@ -102,30 +100,6 @@ In addition to the standard AdaptiveCard actions Crazor.Blazor defines razor com
 | &lt;ActionLogout /&gt;         | Action.Execute with **OnLogout** verb which by default will log the user out, clearing SSO Credentials. |
 
 
-
-# Example
-
-```c#
-@using Crazor.Blazor;
-@inherits CardView
-
-<Card Version="1.4"&gt;
-    <TextBlock Size="AdaptiveTextSize.Large"&gt;Session Counter:@Counter</TextBlock>
-
-    <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
-    <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
-</Card>
-
-@code {
-    public int Counter { get; set; }
-
-    public void OnIncrement()
-        => this.Counter++;
-
-    public void OnDecrement()
-        => this.Counter--;
-}
-```
 
 # More information
 
