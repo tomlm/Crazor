@@ -4,7 +4,7 @@
 
 # Conceptual Model
 
-The web services hosts **multiple** **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
+The crazor service hosts **multiple** **Card applications**.  Each card application represents a micro-app experience that can be used independently and is made up of a views that are defined using Adaptive Cards.
 
 ## Card Applications
 
