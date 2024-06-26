@@ -6,46 +6,35 @@
 
 The **Blazor CardView** Implements **ICardView** using a razor template **.razor** file.
 
-There are 3 base classes
-
-## CardView class
-
-The **CardView** defines a **Crazor CardView** template which does not have a **Model** defined and an untyped **App**.
-
-* It has **App** property of **CardApp**.
-* **Model** is not defined.
-
-## CardView&lt;AppT&gt; class
-
-The **CardView&lt;AppT&gt;** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
-
-* It has **App** property of **AppT**.
-* **Model** is not defined.
-
-This allows you to get intellisense and strong type binding over **App** property giving access to custom methods and memory defined on a custom **CardApp** class.
-
-## CardView&lt;AppT, ModelT&gt; class
-
-The **CardView&lt;AppT,ModelT&gt;** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
-
-* It has a strongly typed **App** property of **AppT**.
-* It has a strongly typed **Model** property of **ModelT**
-
-This allows you to get intellisense and strong type binding to the **CardApp** for your application and intellisense and strong type binding to a **ModelT** data model.
-
-# Example 
-
-An example .razor template binding to the model and app properties.
-
+For example this markup:
 ```xml
-@inherits CardView<CountersApp, MyModel>;
-    
-<Card Version="1.5">
-    <TextBlock Size="AdaptiveTextSize.Large">The @App.Name Counter is: @Model.Counter</TextBlock>
+@inherits CardView
+
+<Card Version="1.4">
+    <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
+
+    <ActionSet>
+        <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
+        <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
+    </ActionSet>
 </Card>
+
+@code {
+    public int Counter { get; set; }
+
+    public void OnIncrement()
+        => this.Counter++;
+
+    public void OnDecrement()
+        => this.Counter--;
+}
 ```
+defines a card with 2 buttons that increment and decrement the value of the card.
 
-
+There are 3 base classes for Crazor.Blazor card views
+* **CardView** - The **CardView** template has an untyped **Model** and an untyped **App**.
+* **CardView&lt;AppT&gt;** - The **CardView** template has an typed **ModelT** and an untyped **App**.
+* **CardView&lt;AppT, ModelT&gt; class** - The **CardView** template has an typed **ModelT** and an typed **AppT**.
 
 # Blazor Components for Adaptive Cards
 
