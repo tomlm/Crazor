@@ -14,7 +14,7 @@ The crazor service hosts **multiple** **Card applications**.  Each card applicat
 
 Each card application is made up of one or more multiple **Card Views**. A **card view** is a class that implements ICardView interface to create an Adaptive card based view in the application. 
 
-# CardView classes
+# CardView base classes
 
 Crazor implementations of **ICardView** use **reflection**, **annotations** and **conventions** to define the card which is produced.
 
