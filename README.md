@@ -36,12 +36,9 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * [Quick Start](docs/Blazor/QuickStart.md) - Quick start to creating a new Crazor.Blazor App Server 
 * [Crazor.Blazor](docs/Blazor/README.md) - templating using **.razor** files using **Blazor** semantics.
 
-## Archicture
-
-* [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
-
 ## Concepts
 
+* [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
 * [Card Views](docs/CardView.md) - General information about Card Views
 * [Memory](docs/Memory.md) - Information on persistence and memory 
