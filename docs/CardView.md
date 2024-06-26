@@ -14,36 +14,12 @@ The crazor service hosts **multiple** **Card applications**.  Each card applicat
 
 Each card application is made up of one or more multiple **Card Views**. A **card view** is a class that implements ICardView interface to create an Adaptive card based view in the application. 
 
-# CardView base classes
-
 Crazor implementations of **ICardView** use **reflection**, **annotations** and **conventions** to define the card which is produced.
 
 There are 3 classes in a CardView implementation which reflect typing of the **App** and **Model** properties.
-
-## CardView class
-
-The **CardView** defines a **Crazor CardView** template which does not have a **Model** defined and an untyped **App**.
-
-* It has **App** property of **CardApp**.
-* **Model** is not defined.
-
-## CardView&lt;AppT&gt; class
-
-The **CardView&lt;AppT&gt;** defines a **Crazor CardView** template which does not have a **Model** defined but it has a strongly typed **CardApp**
-
-* It has **App** property of **AppT**.
-* **Model** is not defined.
-
-This allows you to get intellisense and strong type binding over **App** property giving access to custom methods and memory defined on a custom **CardApp** class.
-
-## CardView&lt;AppT, ModelT&gt; class
-
-The **CardView&lt;AppT,ModelT&gt;** defines a **Crazor CardView** template with a **Model** defined and a strongly typed **CardApp**.
-
-* It has a strongly typed **App** property of **AppT**.
-* It has a strongly typed **Model** property of **ModelT**
-
-This allows you to get intellisense and strong type binding to the **CardApp** for your application and intellisense and strong type binding to a **ModelT** data model.
+* **CardView** - The **CardView** template has an untyped **Model** and an untyped **App**.
+* **CardView&lt;AppT&gt;** - The **CardView** template has an typed **ModelT** and an untyped **App**.
+* **CardView&lt;AppT, ModelT&gt; class** - The **CardView** template has an typed **ModelT** and an typed **AppT**.
 
 # Action Verb handlers
 
