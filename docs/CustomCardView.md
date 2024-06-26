@@ -9,6 +9,8 @@
 Any class can implement **ICardView**, but typically all you want to do is have an alternate way of defining the rendering of the view with all of the same functionality of other CardView implementations. (validation, action reflection, data binding etc.)
 To do this you can simply derive from **CustomCardView** and override **RenderViewAsync**.
 
+> NOTE: These views are 100% interchangable with other CardView implementations (aka your card application can mix and match them)
+
 ## Example
 In this example we are using the object model to create a card using C# code to bind our values into the adaptive card.
 
