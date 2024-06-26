@@ -9,38 +9,9 @@ To create per-user authenticated views you need to
 * **Authenticate** - get credentials for the user to identify the user
 * **Authorize** - validate the the user has is authorized to perform the action.
 
-# Setting up your service
-
-To enable SSO auth flows you need to do two tasks:
-
-* **Update Azure AD Application** - define an Azure application with appropriate auth flows
-* **Update Bot** - You need to configure your bot to add the OAuth connection.
-
-## Configure your Azure AD App to support SSO
-
-Follow instructions here to create a Azure AD SSO app
-
-[Configure your app in Azure AD - Teams | Microsoft Learn](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-register-aad?tabs=botid)
-
-**Notes**
-
-> 1. enter the application ID URI as ```api://botid-{BotAppId}```. Here, {BotAppId} is your Azure AD application ID.
-> 2. Add ```https://token.botframework.com/.auth/web/redirect``` as your redirect UR (see [Supported OAuth URLs - Bot Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/bot-service/ref-oauth-redirect-urls?view=azure-bot-service-4.0) for list of other redirect uris)
-> 3. Add ```https://{YOURDOMAIN}/
-
-## Configure your bot OAuth Connection 
-
-[Configure your app in Azure AD - Teams | Microsoft Learn](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-register-aad?tabs=botid#configure-oauth-connection)
-
-**Notes**
-
-> You should give the OAuth a **connection** **name** that you want to refer to from your cards 
-
-Make sure to test your connection to validate it's configured correctly.
-
 # Update your card views
 
-Now that you have your service set up you modify you card views to have authenticate the user and authorize their access.
+You need to modify you card views to have authenticate the user and authorize their access.
 
 ## Authentication
 
