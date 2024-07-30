@@ -11,7 +11,7 @@ For example this .razor file:
 @inherits CardView
 
 <Card Version="1.4"&gt;
-    <TextBlock Size="AdaptiveTextSize.Large"&gt;Session Counter:@Counter</TextBlock>
+    <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
 
     <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
     <ActionExecute Title="Decrement" Verb="@nameof(OnDecrement)" />
