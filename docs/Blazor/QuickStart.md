@@ -10,7 +10,8 @@ This will walk you through creating a Crazor App Project using Blazor.
 
 [Install Prerequisite tools](../InstallTools.md)
 
-# Creating a new project
+# Creating a new project service for hosting card applications
+Cards are part of card applications and they are hosted in a ASP.NET web service. There are two easy ways of creating a new hosting service.
 
 ## Option 1: Creating from Visual Studio
 
