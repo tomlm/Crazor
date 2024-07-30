@@ -10,18 +10,20 @@ This will walk you through creating a Crazor App Project using Blazor.
 
 [Install Prerequisite tools](../InstallTools.md)
 
-# Creating a bot project from Visual Studio
+# Creating a new project
+
+## Option 1: Creating from Visual Studio
 
 Create a **Crazor App Server** project
 
 ![image-20240621213410771](assets/image-20240621213410771.png)
 
-> NOTE: you can alternatively create the project from the cli by using
->
-> ```cmd
-> dotnet new crazorserver
-> ```
->
+## Option 2: Creating from CLI
+
+NOTE: you can alternatively create the project from the cli by using
+```cmd
+dotnet new crazorserver
+```
 
 # Add a dev tunnel for local development
 
