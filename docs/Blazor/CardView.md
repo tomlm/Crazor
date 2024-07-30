@@ -10,7 +10,7 @@ For example this .razor file:
 ```c#
 @inherits CardView
 
-<Card Version="1.4"&gt;
+<Card Version="1.4">
     <TextBlock Size="AdaptiveTextSize.Large">Session Counter:@Counter</TextBlock>
 
     <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
