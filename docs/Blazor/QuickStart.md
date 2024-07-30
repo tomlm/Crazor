@@ -8,7 +8,7 @@ This will walk you through creating a Crazor App Project using Blazor.
 
 # Prerequisites 
 
-[Install Prerequisite tools](InstallTools.md)
+[Install Prerequisite tools](../InstallTools.md)
 
 # Creating a bot project from Visual Studio
 
