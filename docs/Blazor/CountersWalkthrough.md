@@ -92,7 +92,7 @@ This illustrates the intelligent memory system that Crazor supports. Instead of 
 
 Now we will modify the **Default.razor** to interact with the **CountersApp.**
 
-* Change the **default.razor** inherits statement to **@inherits CardView<CountersApp>** .  This tells the CardView that the **App** property is of type **CountersApp**
+* Change the **default.razor** inherits statement to **@inherits CardView&lt;CountersApp&gt;** .  This tells the CardView that the **App** property is of type **CountersApp**
 
 * Update to bind to **App.SharedCounter** and add a verb handler to increment it.
 
