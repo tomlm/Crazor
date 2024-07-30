@@ -56,12 +56,14 @@ You should see something like this:
 
 As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the session values are per window.
 
-# Adding a CardApp 
+# Adding a custom CardApp 
 
-Now we will are going to modify the app to have a counter which is shared among all viewers of the card.
+By default we have a CardApp which does all of the bookkeeping for managing the card views. 
 
-* **Counter** => Is a value which each person who interacts with the card sees.
-* **SharedCounter** => will be a value that all people who interact with the card see and share.
+Now we will are going to create a custom CardApp which will have a shared counter which is shared among all viewers of the card.
+
+* **View.Counter** => Is a value which each person who interacts with the card sees.
+* **App.SharedCounter** => will be a value that all people who interact with the card see and share.
 
 ## 1. Create a CountersApp.cs file
 
