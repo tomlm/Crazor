@@ -44,8 +44,9 @@ Create **/Cards/Counters/Default.razor**
 
 Things to notice:
 
+* ```@inherits CardView``` defines that our card view is a Crazor CardView class.
 * The local property **Counter** is automatically persisted with session scope as part of the card view. 
-* We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
+* We have OnIncrement() method hooked up to the ActionExecute verb.  
 
 That's it.  Now run the application and go to the Counters app.
 
