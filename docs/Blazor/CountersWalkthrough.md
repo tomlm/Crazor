@@ -130,12 +130,13 @@ You should see something like this:
 
 
 
-# More information
+# More Crazor.Blazor information
 
 * [Card Views](CardView.md) - How to define views with **CardView** with **Blazor**
 * [Authentication](../Authentication.md) - Authenticating users and Authorizing access to create per-user secure views
-
-## Concepts
+* [Components (Advanced)](Components.md) - How to define reusable components via Blazor Components
+* 
+## Crazor Concepts
 
 * [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
@@ -143,7 +144,6 @@ You should see something like this:
 * [Memory](docs/Memory.md) - Information on persistence and memory 
 * [Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
-* [Components (Advanced)](Components.md) - How to define reusable components via Blazor Components
 
 ## Advanced topics
 
