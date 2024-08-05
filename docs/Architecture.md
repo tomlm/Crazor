@@ -26,14 +26,13 @@ The Crazor is running on a server and servicing any of the CardApps defined ther
 * **CardAppController** - When the card is running a s teams/outlook/office integration, the card UI is delivered via the CardAppController to the client. All rendering is client side and all logic is running server side.
 * **Card Host Page** - When someone navigates to the card app host page the card is is hosted via HTML, with all rendering client side and all logic running server side.
 
-
 ## Concepts
 
-* [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
-* [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-* [Card Views](docs/CardView.md) - General information about Card Views
-* [Memory](docs/Memory.md) - Information on persistence and memory 
-* [Validation](docs/Validation.md) - Model validation
-* [Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
-* [Authentication](docs/authentication.md) - Authentication
-* [Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
+* [Architecture](Architecture.md) - Describes overall structure of  **Crazor** **application**
+* [Card Apps](CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+* [Card Views](CardView.md) - General information about Card Views
+* [Memory](Memory.md) - Information on persistence and memory 
+* [Validation](Validation.md) - Model validation
+* [Routing](RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Authentication](authentication.md) - Authentication
+* [Unit tests](UnitTests.md) - Writing unit tests for your cards.
