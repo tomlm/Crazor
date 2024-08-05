@@ -38,13 +38,13 @@ To process Validation errors directly you simply write binding code which looks 
 
 ## Concepts
 
-* [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
-* [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-* [Card Views](docs/CardView.md) - General information about Card Views
-* [Memory](docs/Memory.md) - Information on persistence and memory 
-* [Validation](docs/Validation.md) - Model validation
-* [Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
-* [Authentication](docs/authentication.md) - Authentication
-* [Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
+* [Architecture](Architecture.md) - Describes overall structure of  **Crazor** **application**
+* [Card Apps](CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+* [Card Views](CardView.md) - General information about Card Views
+* [Memory](Memory.md) - Information on persistence and memory 
+* [Validation](Validation.md) - Model validation
+* [Routing](RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Authentication](authentication.md) - Authentication
+* [Unit tests](UnitTests.md) - Writing unit tests for your cards.
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
