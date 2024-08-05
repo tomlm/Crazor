@@ -128,7 +128,8 @@ You should see something like this:
 
 ![image-20221103120318266](../assets/image-20221103120318266.png)
 
-
+# Next Steps
+* [Installing your card applications into teams](../Teams.md) 
 
 # More Crazor.Blazor information
 
@@ -148,7 +149,7 @@ You should see something like this:
 ## Advanced topics
 
 * [ICard View](docs/ICardView.md) - Information on **ICardView** interface
-* [Installing your card applications into teams](docs/Teams.md) 
+
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
 
