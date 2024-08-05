@@ -126,14 +126,14 @@ You should now be able to do link unfurling and commands for your crazor based p
 
 ## Concepts
 
-* [Architecture](../Architecture.md) - Describes overall structure of  **Crazor** **application**
-* [Card Apps](../CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-* [Card Views](../CardView.md) - General information about Card Views
-* [Memory](../Memory.md) - Information on persistence and memory 
-* [Validation](../Validation.md) - Model validation
-* [Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
-* [Authentication](../authentication.md) - Authentication
-* [Unit tests](../UnitTests.md) - Writing unit tests for your cards.
+* [Architecture](Architecture.md) - Describes overall structure of  **Crazor** **application**
+* [Card Apps](CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+* [Card Views](CardView.md) - General information about Card Views
+* [Memory](Memory.md) - Information on persistence and memory 
+* [Validation](Validation.md) - Model validation
+* [Routing](RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Authentication](Authentication.md) - Authentication
+* [Unit tests](UnitTests.md) - Writing unit tests for your cards.
 
 
 
