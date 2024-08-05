@@ -55,7 +55,7 @@ Make sure that **Use Tunnnel Domain** is turned on:
 
 # Register your bot 
 
-In the same folder as your csproj, run **RegisterBot** tool to create a development bot called **MyBot-Dev**. 
+In the same folder as your csproj, run [RegisterBot](../RegisterBot.md) tool to create a development bot called **MyBot-Dev**. 
 
 ```cmd
 registerbot --name MyBot-Dev --endpoint https://jx4wclpb-7232.usw2.devtunnels.ms/
