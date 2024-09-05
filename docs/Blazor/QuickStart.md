@@ -8,20 +8,23 @@ This will walk you through creating a Crazor App Project using Blazor.
 
 # Prerequisites 
 
-[Install Prerequisite tools](InstallTools.md)
+[Install Prerequisite tools](../InstallTools.md)
 
-# Creating a bot project from Visual Studio
+# Creating a new project service for hosting card applications
+Cards are part of card applications and they are hosted in a ASP.NET web service. There are two easy ways of creating a new hosting service.
+
+## Option 1: Creating from Visual Studio
 
 Create a **Crazor App Server** project
 
 ![image-20240621213410771](assets/image-20240621213410771.png)
 
-> NOTE: you can alternatively create the project from the cli by using
->
-> ```cmd
-> dotnet new crazorserver
-> ```
->
+## Option 2: Creating from CLI
+
+NOTE: you can alternatively create the project from the cli by using
+```cmd
+dotnet new crazorserver
+```
 
 # Add a dev tunnel for local development
 
@@ -52,13 +55,13 @@ Make sure that **Use Tunnnel Domain** is turned on:
 
 # Register your bot 
 
-In the same folder as your csproj, run **RegisterBot** tool to create a development bot called **MyBot-Dev**. 
+In the same folder as your csproj, run [RegisterBot](../RegisterBot.md) tool to create a development bot called **MyBot-Dev**. 
 
 ```cmd
 registerbot --name MyBot-Dev --endpoint https://jx4wclpb-7232.usw2.devtunnels.ms/
 ```
 
-> NOTE: By convention we use **MyBot-Dev** because when we publish to production we want to register **MyBot** as the production bot
+> NOTE: By convention we use **{BOTNNAME}-Dev** because when we publish to production we want to register **{BOTNAME}** as the production bot
 
 # Run project
 

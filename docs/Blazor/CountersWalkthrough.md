@@ -44,8 +44,9 @@ Create **/Cards/Counters/Default.razor**
 
 Things to notice:
 
+* ```@inherits CardView``` defines that our card view is a Crazor CardView class.
 * The local property **Counter** is automatically persisted with session scope as part of the card view. 
-* We have methods hooked up to the verbs which are simply the methods to call to change the properties.  
+* We have OnIncrement() method hooked up to the ActionExecute verb.  
 
 That's it.  Now run the application and go to the Counters app.
 
@@ -55,12 +56,14 @@ You should see something like this:
 
 As you click on it, the card is refreshing itself and updating the values.  If you copy and paste the link to another browser window you will see that the session values are per window.
 
-# Adding a CardApp 
+# Adding a custom CardApp 
 
-Now we will are going to modify the app to have a counter which is shared among all viewers of the card.
+By default we have a CardApp which does all of the bookkeeping for managing the card views. 
 
-* **Counter** => Is a value which each person who interacts with the card sees.
-* **SharedCounter** => will be a value that all people who interact with the card see and share.
+Now we will are going to create a custom CardApp which will have a shared counter which is shared among all viewers of the card.
+
+* **View.Counter** => Is a value which each person who interacts with the card sees.
+* **App.SharedCounter** => will be a value that all people who interact with the card see and share.
 
 ## 1. Create a CountersApp.cs file
 
@@ -89,7 +92,7 @@ This illustrates the intelligent memory system that Crazor supports. Instead of 
 
 Now we will modify the **Default.razor** to interact with the **CountersApp.**
 
-* Change the **default.razor** inherits statement to **@inherits CardView<CountersApp>** .  This tells the CardView that the **App** property is of type **CountersApp**
+* Change the **default.razor** inherits statement to **@inherits CardView&lt;CountersApp&gt;** .  This tells the CardView that the **App** property is of type **CountersApp**
 
 * Update to bind to **App.SharedCounter** and add a verb handler to increment it.
 
@@ -125,21 +128,27 @@ You should see something like this:
 
 ![image-20221103120318266](../assets/image-20221103120318266.png)
 
-
-
 # Next Steps
+* [Installing your card applications into teams](../Teams.md) 
 
-* [Create an app with actions](CountersWalkthrough.md)
-
-# More information
+# More Crazor.Blazor information
 
 * [Card Views](CardView.md) - How to define views with **CardView** with **Blazor**
-* [Card Apps](../CardApp.md) - How to create a **CardApp** class to define state and operations against state.
-  * [Card App Memory](../Memory.md) - Information on persistence and memory model
-* [Card Routing](../RoutingCards.md) - Information on customizing urls to support deep linking into cards
 * [Authentication](../Authentication.md) - Authenticating users and Authorizing access to create per-user secure views
-* [Writing Unit tests](../UnitTests.md) - Writing unit tests for your cards.
 * [Components (Advanced)](Components.md) - How to define reusable components via Blazor Components
+* 
+## Crazor Concepts
+
+* [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
+* [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
+* [Card Views](docs/CardView.md) - General information about Card Views
+* [Memory](docs/Memory.md) - Information on persistence and memory 
+* [Routing](docs/RoutingCards.md) - Information on customizing urls to support deep linking into cards
+* [Unit tests](docs/UnitTests.md) - Writing unit tests for your cards.
+
+## Advanced topics
+
+* [ICard View](docs/ICardView.md) - Information on **ICardView** interface
 
 
 ![image](https://user-images.githubusercontent.com/17789481/197365048-6a74c3d5-85cd-4c04-a07a-eef2a46e0ddf.png)
