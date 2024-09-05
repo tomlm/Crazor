@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SharedCards.Cards.Inputs
@@ -36,7 +37,7 @@ namespace SharedCards.Cards.Inputs
         [Range(minimum: 0, maximum: 100, ErrorMessage = "Attendees must be between 0 and 100.")]
         public int? Attendees { get; set; }
 
-        [System.ComponentModel.Description("Cool")]
+        [Description("Cool")]
         public bool? IsCool { get; set; }
 
         [Required(ErrorMessage = "Phone number is required")]

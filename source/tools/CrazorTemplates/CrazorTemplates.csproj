@@ -7,12 +7,12 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.0.2</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
     <PackageId>Crazor.Templates</PackageId>
     <Title>Crazor Project Templates</Title>
     <Authors>Tom Laird-McConnell</Authors>
-    <Description>Templates for creating Crazor resources.</Description>
+    <Description>Templates for creating Crazor projects and resources.</Description>
     <PackageTags>dotnet-new;templates;crazor</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/tomlm/crazor</PackageProjectUrl>
@@ -37,7 +37,6 @@
   <ItemGroup>
     <None Include="icon.png" Pack="True" PackagePath="\" />
     <None Include="readme.md" Pack="true" PackagePath="\" />
-    <None Include="templates\CrazorApp\AppTemplateApp.cs" />
   </ItemGroup>
 
 </Project>

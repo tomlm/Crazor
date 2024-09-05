@@ -2,7 +2,7 @@
 
 namespace Crazor.Teams
 {
-    public class Description
+    public class AppDescription
     {
         /// <summary>
         /// A short description of the app used when space is limited. Maximum length is 80 characters.

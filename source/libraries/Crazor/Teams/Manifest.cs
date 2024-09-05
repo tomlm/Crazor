@@ -163,13 +163,13 @@ namespace Crazor.Teams
         public LocalizationInfo LocalizationInfo { get; set; }
 
         [JsonProperty("developer", Required = Required.Always)]
-        public Developer Developer { get; set; } = new Developer();
+        public AppDeveloper Developer { get; set; } = new AppDeveloper();
 
         [JsonProperty("name", Required = Required.Always)]
-        public Name Name { get; set; } = new Name();
+        public AppName Name { get; set; } = new AppName();
 
         [JsonProperty("description", Required = Required.Always)]
-        public Description Description { get; set; } = new Description();
+        public AppDescription Description { get; set; } = new AppDescription();
 
         [JsonProperty("icons", Required = Required.Always)]
         public Icons Icons { get; set; } = new Icons();

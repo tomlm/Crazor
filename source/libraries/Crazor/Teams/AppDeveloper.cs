@@ -2,7 +2,7 @@
 
 namespace Crazor.Teams
 {
-    public class Developer
+    public class AppDeveloper
     {
         /// <summary>
         /// The display name for the developer.

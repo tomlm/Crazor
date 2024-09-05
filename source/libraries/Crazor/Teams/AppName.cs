@@ -2,7 +2,7 @@
 
 namespace Crazor.Teams
 {
-    public class Name
+    public class AppName
     {
         /// <summary>
         /// A short display name for the app.
