@@ -39,6 +39,8 @@
             container.BackgroundImage = this.Item;
         }
         else
-            throw new Exception($"{ParentItem.GetType().Name} is not a valid parent for BackgroundImage");
+        {
+            throw new InvalidParentException(this.ParentItem.GetType(), this.Item.GetType());
+        }
     }
 }

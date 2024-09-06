@@ -19,7 +19,7 @@ namespace SharedCards.Cards.Inputs
     {
         [Required]
         [DataType(DataType.Date)]
-        [System.ComponentModel.Description("Your birthday")]
+        [Description("Your birthday")]
         [Range(typeof(DateTime), minimum: "01-01-1900", maximum: "01-01-2100", ErrorMessage = "Birthday has to be between 1900 and 2022")]
         public DateTime? Birthday { get; set; }
 
@@ -29,7 +29,7 @@ namespace SharedCards.Cards.Inputs
         public DateTime? ArrivalTime { get; set; }
 
         [Required]
-        [System.ComponentModel.Description("Percentage")]
+        [Description("Percentage")]
         [Range(minimum: 0f, maximum: 100.0f, ErrorMessage = "Percentage must be between 0 and 100.")]
         public Double? Percent { get; set; }
 

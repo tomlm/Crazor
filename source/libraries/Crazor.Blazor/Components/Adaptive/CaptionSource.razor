@@ -26,5 +26,9 @@
         {
             media.CaptionSources.Add(Item);
         }
+        else
+        {
+            throw new InvalidParentException(this.ParentItem.GetType(), this.Item.GetType());
+        }
     }
 }

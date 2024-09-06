@@ -22,5 +22,10 @@
         {
             choiceSet.Choices.Add(Item);
         }
+        // For some reason this fails when enumerating choices using reflection.
+        // else
+        // {
+        //     throw new InvalidParentException(this.ParentItem.GetType(), this.Item.GetType());
+        // }
     }
 }

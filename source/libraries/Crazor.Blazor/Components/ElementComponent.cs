@@ -84,9 +84,8 @@ namespace Crazor.Blazor.Components
             }
             else
             {
-                throw new Exception($"{ParentItem.GetType().Name} is not a known element container type");
+                throw new InvalidParentException(this.ParentItem.GetType(), this.Item.GetType());
             }
-
         }
     }
 }

@@ -55,7 +55,7 @@
         }
         else
         {
-            throw new Exception("Unknown parent type");
+            throw new InvalidParentException(this.ParentItem.GetType(), this.Item.GetType());
         }
     }
 
