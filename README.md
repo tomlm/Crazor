@@ -30,7 +30,7 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can view and interact with the card.
 
 # Documentation
-* ([owerpoint presentation](https://1drv.ms/p/s!AhIvzvgnUciNo-FmpYvku_aA5yiV7w?e=dox5rs)
+* [Powerpoint presentation](https://1drv.ms/p/s!AhIvzvgnUciNo-FmpYvku_aA5yiV7w?e=dox5rs)
 
 ## Quick Start
 
