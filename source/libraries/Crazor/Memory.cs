@@ -112,7 +112,7 @@ namespace Crazor
         /// <param name="value">object</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task GetScopedObjectAsync(string scope, string key, object value, CancellationToken cancellationToken = default)
+        public Task SaveScopedObjectAsync(string scope, string key, object value, CancellationToken cancellationToken = default)
             => SaveScopedObjectsAsync(scope, new Dictionary<string, object>() { { key, value } }, cancellationToken);
 
         /// <summary>

@@ -34,7 +34,7 @@
         if (this.IsModelValid)
         {
             Model.RollDice();
-            await App.Memory.GetScopedObjectAsync("dice", Model.Id, Model, cancellationToken);
+            await App.Memory.SaveScopedObjectAsync("dice", Model.Id, Model, cancellationToken);
             this.CloseTaskModule(TaskModuleAction.Auto);
             CloseView(this.Model);
         }

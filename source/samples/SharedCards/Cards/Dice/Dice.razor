@@ -25,7 +25,7 @@
 
     public async override Task OnActionAsync(AdaptiveCardInvokeAction action, CancellationToken cancellationToken)
     {
-        this.Model = (await App.Memory.GetObjectAsync<DiceModel>(Id, cancellationToken))!;
+        this.Model = (await App.Memory.GetScopedObjectAsync<DiceModel>("dice", Id, cancellationToken))!;
         if (this.Model == null)
             ShowView($"{Id}/settings");
         else
@@ -35,7 +35,7 @@
     public async Task OnRollDice(CancellationToken cancellationToken)
     {
         Model.RollDice();
-        await App.Memory.SaveObjectAsync(Id, Model, cancellationToken);
+        await App.Memory.SaveScopedObjectAsync("dice", Id, Model, cancellationToken);
     }
 
     public void OnSettings()
