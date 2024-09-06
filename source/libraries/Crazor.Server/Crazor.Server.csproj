@@ -19,9 +19,9 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.11</VersionPrefix>
+		<VersionPrefix>1.0.12</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
-    <AssemblyVersion>1.0.11.0</AssemblyVersion>
+    <AssemblyVersion>1.0.12.0</AssemblyVersion>
 		<Description>Experimental library for hosting Crazor Adaptive Cards on a AspNetCore server.</Description>
     <Company>Iciclecreek</Company>
     <Authors>Tom Laird-McConnell</Authors>
