@@ -33,7 +33,7 @@ jobs:
         uses: vers-one/dotnet-project-version-updater@v1.5
         with:
           files: |
-            "**/libraries/**/Crazor*.csproj", "**/tools/CrazorTemplates/**/*.csproj"
+            "**/libraries/**/Crazor*.csproj",  "**/tools/CrazorTemplates/CrazorTemplates.csproj"
           version: bump-build
   
       - name: Restore dependencies
