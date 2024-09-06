@@ -30,7 +30,8 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 * **Built-in Card hosting** - Your **card application** is also hosted automatically in your web site, giving people a normal HTTP link they can view and interact with the card.
 
 # Documentation
-
+* [Demo site](https://crazordemo.azurewebsites.net)
+  
 ## Quick Start
 
 * [Quick Start](docs/Blazor/QuickStart.md) - Quick start to creating a new Crazor.Blazor App Server 
@@ -38,6 +39,7 @@ If you know ASP.NET then Crazor will feel crazy familiar and powerful to you.
 
 ## Concepts
 
+* [Powerpoint presentation](https://1drv.ms/p/s!AhIvzvgnUciNo-FmpYvku_aA5yiV7w?e=dox5rs)
 * [Architecture](docs/Architecture.md) - Describes overall structure of  **Crazor** **application**
 * [Card Apps](docs/CardApp.md) - How to create a **CardApp** class to define state and operations against state.
 * [Card Views](docs/CardView.md) - General information about Card Views
