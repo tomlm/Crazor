@@ -4,14 +4,12 @@
     <TextBlock Size="AdaptiveTextSize.Large">Hello NewView!</TextBlock>
     <TextBlock>Counter:@Counter</TextBlock>
 
-    <ActionSet>
-        <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
-    </ActionSet>
+    <ActionExecute Title="Increment" Verb="@nameof(OnIncrement)" />
 </Card>
 
 @code {
     public int Counter { get; set; }
 
     public void OnIncrement()
-    => this.Counter++;
+        => this.Counter++;
 }
