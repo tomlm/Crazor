@@ -46,7 +46,7 @@ jobs:
         run: dotnet publish Crazor/source/samples/CrazorBlazorDemo --configuration Release -o Crazor/source/samples/CrazorBlazorDemo/published 
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: .net-app
           path: Crazor/source/samples/CrazorBlazorDemo/published
