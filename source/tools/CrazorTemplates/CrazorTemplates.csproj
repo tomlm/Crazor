@@ -7,7 +7,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <VersionPrefix>1.0.3</VersionPrefix>
+    <VersionPrefix>1.0.4</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
     <PackageId>Crazor.Templates</PackageId>
     <Title>Crazor Project Templates</Title>
